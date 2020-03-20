@@ -1,4 +1,6 @@
-// color
+/*
+//  Color
+*/
 $blue-primary: #048CE8;
 $blue-secondary: #24A4FB;
 $accent-orange: #E86004;
@@ -18,10 +20,14 @@ $blue-primary-50: rgba(4, 140, 232, 0.50);
 $blue-secondary-50: rgba(36, 164, 251, 0.50);
 $blue-secondary-38: rgba(36, 164, 251, 0.38);
 
+$blue-gradient: linear-gradient(180deg, $blue-primary, $blue-secondary);
+$blue-gradient-50: linear-gradient(180deg, $blue-primary-50, $blue-secondary-50);
+
 $yellow: #FFD500;
 $red: #FF0000;
-$black: #000000;
-$white: #FFFFFF;
 
 $border-gray: #B7B7B7;
 $map-green: #19B869;
+
+// shadow
+$box-shadow: 0px 3px 6px $black-16-shadow;

@@ -1,0 +1,47 @@
+@mixin button-bg($bg) {
+  background: $bg;
+}
+
+.btn {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+}
+
+.btn-rounded {
+  border-radius: 50%;
+}
+
+.btn-outline {
+  border: 1px solid $border-gray;
+  color: $border-gray;
+}
+
+.btn-secondary {
+  @include button-bg(white);
+  color: $blue-primary;
+}
+
+.btn-primary {
+  @include button-bg($blue-gradient);
+}
+
+.btn-blue {
+  @include button-bg($blue-primary);
+}
+
+.btn-red {
+  @include button-bg($red);
+}
+
+.btn-accent-orange {
+  @include button-bg($accent-orange);
+}
+
+.btn-accent-purple {
+  @include button-bg($accent-purple);
+}
+
+.btn-accent-green {
+  @include button-bg($accent-green);
+}
