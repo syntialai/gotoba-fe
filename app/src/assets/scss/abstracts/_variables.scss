@@ -25,9 +25,51 @@ $blue-gradient-50: linear-gradient(180deg, $blue-primary-50, $blue-secondary-50)
 
 $yellow: #FFD500;
 $red: #FF0000;
+$gray: #B7B7B7;
+$green: #19B869;
 
-$border-gray: #B7B7B7;
-$map-green: #19B869;
+$border-gray: $gray;
+$map-green: $green;
 
+$colors: (
+  primary: $blue-gradient,
+  secondary: white,
+  blue-primary: $blue-primary,
+  blue-secondary: $blue-secondary,
+  red: $red,
+  accent-green: $accent-green,
+  accent-orange: $accent-orange,
+  accent-purple: $accent-purple,
+  gray: $gray,
+  yellow: $yellow,
+  black: black,
+  black-87: $black-87,
+  black-60: $black-60,
+  black-38: $black-38,
+  black-16-shadow: $black-16-shadow,
+  black-10: $black-10,
+);
+
+/*
 // shadow
+*/
 $box-shadow: 0px 3px 6px $black-16-shadow;
+
+/*
+// border
+*/
+$border-px: 1;
+$border-radius: (
+  square: 0,
+  square-5: 5,
+  square-10: 10,
+  square-15: 15,
+  square-20: 20,
+  square-30: 30,
+  circle: 50%,
+);
+
+/*
+// font-size
+*/
+$font-size-all: 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 48, 56;

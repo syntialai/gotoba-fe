@@ -4,8 +4,8 @@
       <fieldset>
         <fieldset class="form-group">
           <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input id="login-username" type="email" class="form-control" name="usernameOrEmail" placeholder="Username or email">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user icon icon-gradient"></i></span>
+            <input id="login-username" type="email" class="form-control " name="usernameOrEmail" placeholder="Username or email">
           </div>
         </fieldset>
         <fieldset class="form-group">
