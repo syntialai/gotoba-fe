@@ -11,16 +11,16 @@
 @import
   'base/base',
   'base/fonts',
-  'base/typography',
   'base/helpers';
 
 @import
-  'layout/header',
-  'layout/footer';
+  'layout/footer',
+  'layout/border';
 
 @import
   'components/button',
-  'components/icon';
+  'components/icon',
+  'components/form';
 
 @import
   'pages/home';
@@ -29,3 +29,5 @@
   'themes/default',
   'themes/dark';
   
+// @import '~node_modules/bootstrap/scss/bootstrap';
+// @import '~node_modules/bootstrap-vue/src/index.scss';

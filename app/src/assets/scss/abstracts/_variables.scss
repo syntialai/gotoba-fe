@@ -1,5 +1,5 @@
 /*
-//  Color
+// Color
 */
 $blue-primary: #048CE8;
 $blue-secondary: #24A4FB;
@@ -32,22 +32,22 @@ $border-gray: $gray;
 $map-green: $green;
 
 $colors: (
-  primary: $blue-gradient,
-  secondary: white,
-  blue-primary: $blue-primary,
-  blue-secondary: $blue-secondary,
-  red: $red,
-  accent-green: $accent-green,
-  accent-orange: $accent-orange,
-  accent-purple: $accent-purple,
-  gray: $gray,
-  yellow: $yellow,
-  black: black,
-  black-87: $black-87,
-  black-60: $black-60,
-  black-38: $black-38,
-  black-16-shadow: $black-16-shadow,
-  black-10: $black-10,
+  "primary": $blue-gradient,
+  "secondary": white,
+  "blue-primary": $blue-primary,
+  "blue-secondary": $blue-secondary,
+  "red": $red,
+  "accent-green": $accent-green,
+  "accent-orange": $accent-orange,
+  "accent-purple": $accent-purple,
+  "gray": $gray,
+  "yellow": $yellow,
+  "black": black,
+  "black-87": $black-87,
+  "black-60": $black-60,
+  "black-38": $black-38,
+  "black-16-shadow": $black-16-shadow,
+  "black-10": $black-10,
 );
 
 /*
@@ -58,15 +58,14 @@ $box-shadow: 0px 3px 6px $black-16-shadow;
 /*
 // border
 */
-$border-px: 1;
 $border-radius: (
-  square: 0,
-  square-5: 5,
-  square-10: 10,
-  square-15: 15,
-  square-20: 20,
-  square-30: 30,
-  circle: 50%,
+  "square": 0,
+  "square-5": 5,
+  "square-10": 10,
+  "square-15": 15,
+  "square-20": 20,
+  "square-30": 30,
+  "circle": 50%,
 );
 
 /*

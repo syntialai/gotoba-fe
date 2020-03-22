@@ -34,4 +34,16 @@ h6 {
   font-size: 16px;
 }
 
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
 @include font-size();
