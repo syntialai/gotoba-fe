@@ -11,12 +11,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.(s*)css$/, 
         use: [
-          'vue-style-loader',
-          'css-loader',
+          'style-loader',
+          'css-loader', 
           'sass-loader'
-        ]
+        ],
       },
     ],
   },
