@@ -22,11 +22,9 @@
 
       <router-link class="text-right" id="login-forgot-password"
         to="/forgot-password">Forgot password?</router-link>
-      <br>
-      <button class="btn btn-primary border-blue-primary d-block w-100"
+      <button class="btn btn-blue-primary d-block w-100"
         type="submit">LOG IN</button>
 
-      <br>
       <span class="d-block text-center">Don't have an account?
         <router-link to="/sign-up">Sign up</router-link>
       </span>
