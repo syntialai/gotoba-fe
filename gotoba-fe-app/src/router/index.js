@@ -17,6 +17,11 @@ const routes = [
     component: Pages.LOGIN,
   },
   {
+    path: '/sign-up',
+    name: 'Sign Up',
+    component: Pages.SIGN_UP,
+  },
+  {
     path: '/about',
     name: 'About',
     component: Pages.ABOUT,

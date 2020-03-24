@@ -1,15 +1,19 @@
 module.exports = {
-  test: /\.scss$/,
-  use: [
-    'vue-style-loader',
-    'css-loader',
-    {
-      loader: 'sass-loader',
-      options: {
-        data: `
-          @import "@/assets/scss/index.scss";
-        `
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              webpackImporter: false,
+            },
+          },
+        ],
       },
-    },
-  ],
-}
+    ],
+  },
+};
