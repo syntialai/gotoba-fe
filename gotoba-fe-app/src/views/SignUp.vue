@@ -1,5 +1,11 @@
 <template>
-  <SignUp />
+  <div class="page-signup">
+    <SignUp />
+    <div>
+      Already have an account?
+      <router-link to="/login">Log in</router-link>
+    </div>
+  </div>
 </template>
 
 <script>

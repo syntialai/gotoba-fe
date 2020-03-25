@@ -81,24 +81,17 @@
         label="Register as"
         label-for="input-role"
       >
-        <b-dropdown id="input-role" variant="secondary">
-          <template v-slot:button-content>
-            <b-icon icon="person-fill" aria-hidden="true"></b-icon> User
-          </template>
-          <b-dropdown-item-button>
-            <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-            Merchant <span class="sr-only">(Not Selected)</span>
-          </b-dropdown-item-button>
-          <b-dropdown-item-button>
-            <b-icon icon="person-fill" aria-hidden="true"></b-icon>
-            User <span class="sr-only">(Selected)</span>
-          </b-dropdown-item-button>
-        </b-dropdown>
+        <b-form-select
+          id="input-role"
+          v-model="form.role"
+          :options="roleOptions"
+          required
+        ></b-form-select>
       </b-form-group>
 
       <b-form-group id="input-group-checkbox-agree">
         <b-form-checkbox-group v-model="form.checked" id="checkbox-agree">
-          <b-form-checkbox value="true" unchecked-value="false">
+          <b-form-checkbox value="true" unchecked-value="false" required>
             I Agree to gotoba
             <router-link to="">Terms and Conditions</router-link> and
             <router-link to="">Privacy Policy</router-link>
@@ -114,5 +107,28 @@
 <script>
 export default {
   name: 'SignUp',
+  data() {
+    return {
+      form: {
+        nickname: '',
+        username: '',
+        email: '',
+        password: '',
+        retypePassword: '',
+        role: 'User',
+        checked: '',
+      },
+      roleOptions: [{
+        text: 'User',
+        value: 'User',
+      }, 'Merchant'],
+    };
+  },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault();
+      JSON.stringify(this.form);
+    },
+  },
 };
 </script>

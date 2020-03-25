@@ -10,7 +10,7 @@
         </b-input-group-prepend>
         <b-form-input
           id="input-email"
-          v-model="form.email"
+          v-model="form.usernameOrEmail"
           type="email"
           required
           placeholder="Username / email"
@@ -19,6 +19,7 @@
       <b-form-group
         id="input-group-password"
         label-for="input-password"
+        inline
       >
         <b-input-group-prepend>
           <b-icon icon="lock-fill"></b-icon>
@@ -32,7 +33,9 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">LOG IN</b-button>
+      <router-link to="/forgot-password">Forgot Password?</router-link>
+
+      <b-button id="button-submit" class="btn btn-red" type="submit">LOG IN</b-button>
     </b-form>
   </div>
 </template>
@@ -40,9 +43,19 @@
 <script>
 export default {
   name: 'Login',
+  data() {
+    return {
+      form: {
+        usernameOrEmail: '',
+        password: '',
+      },
+    };
+  },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault();
+      JSON.stringify(this.form);
+    },
+  },
 };
 </script>
-
-<style lang="scss">
-// @import '~@assets/scss/index';
-</style>
