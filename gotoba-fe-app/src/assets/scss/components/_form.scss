@@ -1,10 +1,13 @@
-.form-group {
-  border: $gray;
-  padding: 8px 16px;
+.input-group-text {
+  border: none;
+  background-color: white;
+}
+
+.input-group {
+  border: $border-gray;
   border-radius: 5px;
 }
 
-input {
+.form-control {
   border: none;
-  background-color: white;
 }

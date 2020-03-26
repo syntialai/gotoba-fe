@@ -1,8 +1,8 @@
 <template>
-  <div class="page-login">
+  <div class="page-login mt-3">
     <Login />
-    <div>
-      Don't have an account?
+    <div class="align-center">
+      <span class="font-color-black-60">Don't have an account? </span>
       <router-link to="/sign-up">Sign up</router-link>
     </div>
   </div>

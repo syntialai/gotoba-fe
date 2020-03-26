@@ -26,9 +26,10 @@ $blue-gradient-50: linear-gradient(180deg, $blue-primary-50, $blue-secondary-50)
 $yellow: #FFD500;
 $red: #FF0000;
 $gray: #B7B7B7;
+$gray-young: #E9E9E9;
 $green: #19B869;
 
-$border-gray: $gray;
+$border-gray: 1px solid $gray-young;
 $map-green: $green;
 
 $colors: (

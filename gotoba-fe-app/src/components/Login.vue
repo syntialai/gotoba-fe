@@ -5,37 +5,48 @@
         id="input-group-email"
         label-for="input-email"
       >
-        <b-input-group-prepend>
-          <b-icon icon="person-fill"></b-icon>
-        </b-input-group-prepend>
-        <b-form-input
-          id="input-email"
-          v-model="form.usernameOrEmail"
-          type="email"
-          required
-          placeholder="Username / email"
-        ></b-form-input>
+        <b-input-group>
+          <b-input-group-prepend is-text>
+            <b-icon icon="person-fill" class="icon-gradient"></b-icon>
+          </b-input-group-prepend>
+          <b-form-input
+            id="input-email"
+            v-model="form.usernameOrEmail"
+            type="email"
+            required
+            placeholder="Username / email"
+          ></b-form-input>
+        </b-input-group>
       </b-form-group>
       <b-form-group
         id="input-group-password"
         label-for="input-password"
-        inline
       >
-        <b-input-group-prepend>
-          <b-icon icon="lock-fill"></b-icon>
-        </b-input-group-prepend>
-        <b-form-input
-          id="input-password"
-          v-model="form.password"
-          type="password"
-          required
-          placeholder="Password"
-        ></b-form-input>
+        <b-input-group>
+          <b-input-group-prepend is-text>
+            <b-icon icon="lock-fill" class="icon-gradient"></b-icon>
+          </b-input-group-prepend>
+          <b-form-input
+            id="input-password"
+            v-model="form.password"
+            type="password"
+            required
+            placeholder="Password"
+          ></b-form-input>
+        </b-input-group>
       </b-form-group>
 
-      <router-link to="/forgot-password">Forgot Password?</router-link>
+      <span class="align-right d-block mb-3">
+        <router-link to="/forgot-password">Forgot Password?</router-link>
+      </span>
 
-      <b-button id="button-submit" class="btn btn-red" type="submit">LOG IN</b-button>
+      <b-button
+        id="button-submit"
+        class="btn custom-btn-primary w-100 d-block mb-3"
+        type="submit"
+      >
+        LOG IN
+      </b-button>
     </b-form>
   </div>
 </template>

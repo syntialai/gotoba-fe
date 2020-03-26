@@ -1,9 +1,13 @@
 @mixin font-size {
-  @each $size in $font-size-all {
-    .font-size-#{$size} {
-      font-size: #{$size}px;
+  @each $value in $font-size-all {
+    .font-size-#{$value} {
+      font-size: #{$value}px;
     }
   }
+}
+
+@mixin font-color {
+  @include map-looping(map-remove($colors, "primary"), "font-color", "color");
 }
 
 body {
@@ -47,3 +51,4 @@ h6 {
 }
 
 @include font-size();
+@include font-color();
