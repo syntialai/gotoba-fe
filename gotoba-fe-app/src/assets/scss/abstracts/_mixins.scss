@@ -1,0 +1,15 @@
+@mixin map-looping($map, $class, $property) {
+  @each $key, $value in $map {
+    .#{$class}-#{$key} {
+      #{$property}: #{$value};
+    }
+  }
+}
+
+@mixin set-text-color-gradient($color, $color2) {
+  color: $color;
+  background: -webkit-linear-gradient($color, $color2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
