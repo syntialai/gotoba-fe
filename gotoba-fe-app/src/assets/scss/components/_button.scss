@@ -1,0 +1,24 @@
+@mixin button {
+  @include map-looping($colors, "custom-btn", "background");
+}
+
+.btn {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 8px 16px;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+}
+
+.btn-rounded {
+  border-radius: 50%;
+}
+
+.btn-outline {
+  border: 1px solid $border-gray;
+  color: $border-gray;
+}
+
+@include button;

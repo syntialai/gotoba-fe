@@ -1,0 +1,54 @@
+@mixin font-size {
+  @each $value in $font-size-all {
+    .font-size-#{$value} {
+      font-size: #{$value}px;
+    }
+  }
+}
+
+@mixin font-color {
+  @include map-looping(map-remove($colors, "primary"), "font-color", "color");
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+@include font-size();
+@include font-color();
