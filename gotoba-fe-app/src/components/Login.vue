@@ -37,7 +37,7 @@
       </b-form-group>
 
       <span class="align-right d-block mb-3">
-        <router-link to="/forgot-password">Forgot Password?</router-link>
+        <a href="/forgot-password">Forgot Password?</a>
       </span>
 
       <b-button

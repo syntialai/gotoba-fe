@@ -3,7 +3,7 @@
     <SignUp />
     <div class="align-center">
       <span class="font-color-black-60">Already have an account? </span>
-      <router-link to="/login">Log in</router-link>
+      <a href="/login">Log in</a>
     </div>
   </div>
 </template>

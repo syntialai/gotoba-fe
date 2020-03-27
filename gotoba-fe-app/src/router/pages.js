@@ -1,9 +1,7 @@
-const ABOUT = () => import('../views/About.vue');
 const LOGIN = () => import('../views/Login.vue');
 const SIGN_UP = () => import('../views/SignUp.vue');
 
 const Pages = {
-  ABOUT,
   LOGIN,
   SIGN_UP,
 };
