@@ -1,5 +1,5 @@
 <template>
-  <b-navbar id="bottom-nav" class="fixed-bottom">
+  <b-navbar id="bottom-nav" class="fixed-bottom" :height="[navHeight]">
     <b-nav-item
       v-for="item of navItems"
         :key="item.id"
@@ -19,7 +19,10 @@
 
 <script>
 export default {
-  name: 'BottomNavUser',
+  name: "BottomNavUser",
+  props: {    
+    navHeight,
+  },
   data() {
     return {
       navItems: [
