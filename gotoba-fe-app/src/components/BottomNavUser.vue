@@ -1,5 +1,9 @@
 <template>
-  <b-navbar id="bottom-nav" class="fixed-bottom" :height="[navHeight]">
+  <b-navbar
+    id="bottom-nav"
+    class="fixed-bottom d-flex justify-content-around"
+    :height="[navHeight]"
+  >
     <b-nav-item
       v-for="item of navItems"
         :key="item.id"

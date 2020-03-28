@@ -1,13 +1,13 @@
 <template>
   <div class="rating">
     <full-star
-      v-for="i in parseInt(ratingCount)"
+      v-for="i in parseInt(rate)"
         :key="i"
         :color="$yellow"
     ></full-star>
-    <half-star v-if="ratingCount - parseInt(ratingCount) > 0"></half-star>
+    <half-star v-if="rate - parseInt(rate) > 0"></half-star>
     <full-star
-      v-for="i in (5 - parseInt(ratingCount))"
+      v-for="i in (5 - parseInt(rate))"
         :key="i"
         :color="$gray"
     ></full-star>
@@ -18,7 +18,7 @@
 export default {
   name: "Rating",
   props: {
-    ratingCount,
+    rate,
     fontSize
   },
   components: {
