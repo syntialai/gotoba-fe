@@ -77,7 +77,7 @@
     </div>
     <div class="align-center">
       <span class="font-color-black-60">Don't have an account? </span>
-      <router-link to="/sign-up">Sign up</router-link>
+      <a href="/sign-up">Sign up</a>
     </div>
   </div>
 </template>
