@@ -1,5 +1,6 @@
 <template>
   <div class="page-login mt-3 p-3">
+    <navigation-close></navigation-close>
     <div id="form-login">
       <ValidationObserver v-slot="{ handleInput }">
         <b-form @submit.prevent="handleInput(login)">
@@ -25,10 +26,10 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-email-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-email-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-email-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -54,10 +55,10 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-password-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-password-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-password-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -84,6 +85,7 @@
 
 <script>
 import api from '../api/api';
+import NavigationClose from '../components/NavigationClose.vue';
 
 export default {
   name: 'LoginPage',
@@ -120,5 +122,12 @@ export default {
         });
     },
   },
+  components: {
+    NavigationClose,
+  },
 };
 </script>
+
+<style lang="scss">
+@import "~@/assets/scss/index";
+</style>

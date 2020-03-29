@@ -39,6 +39,9 @@ export function fetchGet(url, param) {
 
 export default {
   Login(params) {
-    return fetchPost('', params);
+    return fetchPost('/auth/login', params);
+  },
+  Signup(params) {
+    return fetchPost('/auth/signup', params);
   },
 };

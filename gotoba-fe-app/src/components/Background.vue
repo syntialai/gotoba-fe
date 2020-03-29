@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-curve position-fixed">
+  <div class="bg-curve position-absolute">
     <svg id="curve-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400.13 238.04">
       <path id="Path_59" data-name="Path 59"
         d="M32.87-1013.173s363.277-239.759,
@@ -19,9 +19,22 @@ body, .bg-curve {
 
 .bg-curve {
   position: relative;
+  top: 0;
   background: $blue-gradient;
-  width: 100%;
-  height: 50vh;
+  width: 768px;
+  height: 205px;
+}
+
+@media screen and (max-width: 768px) {
+  .bg-curve {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .bg-curve {
+    margin: 0 auto;
+  }
 }
 
 #curve-svg {
@@ -31,6 +44,6 @@ body, .bg-curve {
 }
 
 #curve-svg path {
-  fill: #efefef;
+  fill: white;
 }
 </style>

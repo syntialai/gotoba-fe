@@ -1,5 +1,6 @@
 <template>
-  <div class="page-signup mt-3 p-3">
+  <div class="page-signup mt-3 p-1">
+    <navigation-close></navigation-close>
     <div id="form-sign-up">
       <ValidationObserver v-slot="{ handleInput }">
         <b-form @submit.prevent="handleInput(signup)">
@@ -110,7 +111,7 @@
                   type="password"
                   required
                   placeholder="Password"
-                  :state="validationContext.errors[0]"
+                  :state="getValidationState(validationContext)"
                   aria-describedby="input-password-feedback-msg"
                 ></b-form-input>
               </b-input-group>
@@ -222,6 +223,7 @@
 
 <script>
 import api from '../api/api';
+import NavigationClose from '../components/NavigationClose.vue';
 
 export default {
   name: 'SignUpPage',
@@ -231,7 +233,7 @@ export default {
       username: '',
       email: '',
       password: '',
-      retypePassword: '',
+      confirmPassword: '',
       role: 'user',
       checked: [],
     };
@@ -246,7 +248,7 @@ export default {
         || !this.username
         || !this.email
         || !this.password
-        || !this.retypePassword
+        || !this.confirmPassword
         || !this.checked[0]
       ) {
         return;
@@ -257,7 +259,7 @@ export default {
         username: this.username,
         email: this.email,
         password: this.password,
-        retypePassword: this.retypePassword,
+        confirmPassword: this.confirmPassword,
         role: this.role,
         checked: this.checked[0],
       };
@@ -274,5 +276,12 @@ export default {
         });
     },
   },
+  components: {
+    NavigationClose,
+  },
 };
 </script>
+
+<style lang="scss">
+@import "~@/assets/scss/index";
+</style>
