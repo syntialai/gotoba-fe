@@ -2,7 +2,6 @@
   <b-navbar
     id="bottom-nav"
     class="fixed-bottom d-flex justify-content-around"
-    :height="[navHeight]"
   >
     <b-nav-item
       v-for="item of navItems"
@@ -23,31 +22,30 @@
 
 <script>
 export default {
-  name: "BottomNavUser",
-  props: {    
-    navHeight,
-  },
+  name: 'BottomNavUser',
   data() {
     return {
       navItems: [
-        { id: 1, name: "Home", icon: "home" },
-        { id: 2, name: "Itinerary", icon: "route" },
-        { id: 3, name: "My tickets", icon: "qrcode" },
-        { id: 4, name: "Cart", icon: "shopping-cart" },
-        { id: 5, name: "Profile", icon: "user" },
+        { id: 1, name: 'Home', icon: 'home' },
+        { id: 2, name: 'Itinerary', icon: 'route' },
+        { id: 3, name: 'My tickets', icon: 'qrcode' },
+        { id: 4, name: 'Cart', icon: 'shopping-cart' },
+        { id: 5, name: 'Profile', icon: 'user' },
       ],
       isActive: [1, 0, 0, 0, 0],
     };
   },
-}
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '~@/assets/scss/abstracts/variables';
+
 b-nav-item {
   color: $gray;
 }
 
-.active {
+b-nav-item .active {
   color: $blue-primary;
 }
 </style>

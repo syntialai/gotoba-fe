@@ -6,6 +6,7 @@ import store from './store';
 
 import './plugins/bootstrap-vue';
 import './plugins/icons';
+import './plugins/validate';
 
 Vue.config.productionTip = false;
 

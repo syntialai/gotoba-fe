@@ -1,18 +1,23 @@
 <template>
-  <section class="curve-section">
+  <div class="bg-curve position-fixed">
     <svg id="curve-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400.13 238.04">
-      <path id="Path_59" data-name="Path 59" d="M32.87-1013.173s363.277-239.759,756.827,0,643.3,0,643.3,0v131.481H32.87Z" transform="translate(-32.87 1119.733)" fill="#23cce6"/>
+      <path id="Path_59" data-name="Path 59"
+        d="M32.87-1013.173s363.277-239.759,
+        756.827,0,643.3,0,643.3,0v131.481H32.87Z"
+        transform="translate(-32.87 1119.733)" fill="#23cce6" />
     </svg>
-  </section>
+  </div>
 </template>
 
-<style lang="scss" scoped>
-body, section {
+<style lang="scss">
+@import "~@/assets/scss/abstracts/variables";
+
+body, .bg-curve {
   margin: 0;
   padding: 0;
 }
 
-.curve-section {
+.bg-curve {
   position: relative;
   background: $blue-gradient;
   width: 100%;

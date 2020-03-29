@@ -21,18 +21,18 @@
 </template>
 
 <script>
-import Rating from 'Rating.vue';
+import Rating from '@/components/Rating.vue';
 
 export default {
-  name: "CardHome",
+  name: 'CardHome',
   props: {
-    name,
-    image,
-    location,
-    rating
+    name: String,
+    image: String,
+    location: String,
+    rating: Number,
   },
   components: {
     Rating,
-  }
-}
+  },
+};
 </script>

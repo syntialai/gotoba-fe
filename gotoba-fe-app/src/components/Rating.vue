@@ -16,10 +16,10 @@
 
 <script>
 export default {
-  name: "Rating",
+  name: 'Rating',
   props: {
     rate,
-    fontSize
+    fontSize,
   },
   components: {
     'half-star': {
@@ -47,5 +47,5 @@ export default {
       `,
     },
   },
-}
+};
 </script>
