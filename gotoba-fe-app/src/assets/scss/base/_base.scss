@@ -1,11 +1,18 @@
-body, .container {
+body {
   margin: 0 auto;
+  padding: 0;
+  background-color: $bg-color;
 }
 
 .container {
+  margin: 0 auto;
   max-width: 768px;
 }
 
 a {
   color: $blue-primary;
+}
+
+li {
+  list-style-type: none;
 }
