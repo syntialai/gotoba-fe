@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <Background />
-    <div class="container">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -21,11 +19,8 @@ export default {
 <style lang="scss">
 @import "~@/assets/scss/index";
 
-.container {
-  background-color: white;
-}
-
 #app {
   margin-top: 0;
+  background-color: $bg-color;
 }
 </style>

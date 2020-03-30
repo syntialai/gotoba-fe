@@ -1,27 +1,197 @@
 <template>
   <div class="home">
-    <!-- <Background />
     <Navigation />
     <BottomNavUser />
-    <Footer /> -->
+    <div class="container">
+      <div id="category" class="m-3">
+        <b-button-group
+          class="d-flex justify-content-around box-shadow bg-white border-square-10"
+        >
+          <b-button
+            v-for="menu in mainMenus"
+            :key="menu.name"
+            :href="menu.link"
+            class="bg-white border-square-10 p-3"
+          >
+            <div class="menu-icon">
+              <!-- <font-awesome-layers class="fa">
+                <font-awesome-icon
+                  icon="circle"
+                  :class="['font-color-accent' + menu.color]"
+                />
+                <font-awesome-icon
+                  :icon="menu.icon"
+                  transform="shrink-1 left-20"
+                />
+              </font-awesome-layers> -->
+              <font-awesome-icon
+                :icon="menu.icon"
+                :class="['fa-2x font-color-accent-' + menu.color]"
+              ></font-awesome-icon>
+            </div>
+            <div class="pt-2 menu-name font-color-black-60">{{ menu.name }}</div>
+          </b-button>
+        </b-button-group>
+      </div>
+
+      <div class="ongoing-promo content-group">
+        <div class="title font-color-blue-primary">
+          <span class="title-icon pr-2">
+            <OngoingPromoIcon />
+          </span>
+          <span class="title-text font-weight-bold">Ongoing Promos</span>
+        </div>
+        <div class="d-flex justify-content-between mt-2 mb-2">
+          <span class="title-description semibold">Sale Ticket Price!</span>
+          <span class="show-all font-size-14">
+            <a href="">See all</a>
+          </span>
+        </div>
+        <div class="d-flex content-card overflow-auto mt-1">
+          <CardHome
+            name="Syntia"
+            image="../assets/img/logo.png"
+            location="Vue js"
+            rating=5.0
+          />
+        </div>
+      </div>
+
+      <div class="nearby-place content-group">
+        <div class="title font-color-blue-primary">
+          <span class="title-icon pr-2">
+            <NearbyPlaceIcon />
+          </span>
+          <span class="title-text font-weight-bold">Recommended Nearby Places</span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span class="title-description semibold mt-2 mb-2">
+            Best Journey of Lake Toba
+          </span>
+          <span class="show-all font-size-14">
+            <a href="">See all</a>
+          </span>
+        </div>
+        <div class="d-flex content-card overflow-auto mt-1">
+          <CardHome
+            name="Syntia"
+            image="../assets/img/logo.png"
+            location="Vue js"
+            :rating="5"
+          />
+        </div>
+      </div>
+
+      <div class="nearby-resto content-group">
+        <div class="title font-color-blue-primary">
+          <span class="title-icon pr-2">
+            <NearbyRestoIcon />
+          </span>
+          <span class="title-text font-weight-bold">Find Eats near Danau Toba</span>
+        </div>
+        <div class="d-flex justify-content-between mt-2 mb-2">
+          <span class="title-description semibold">
+            Best Restaurant near Lake Toba
+          </span>
+          <span class="show-all font-size-14">
+            <a href="">See all</a>
+          </span>
+        </div>
+        <div class="d-flex content-card overflow-auto mt-1">
+          <CardHome
+            name="Syntia"
+            image="../assets/img/logo.png"
+            location="Vue js"
+            rating=5.0
+          />
+        </div>
+      </div>
+
+      <div class="nearby-hotel content-group">
+        <div class="title font-color-blue-primary">
+          <span class="title-icon pr-2">
+            <NearbyHotelIcon />
+          </span>
+          <span class="title-text font-weight-bold">Where to Stay</span>
+        </div>
+        <div class="d-flex justify-content-between mt-2 mb-2">
+          <span class="title-description semibold">
+            Best Hotel/Homestay near Lake Toba
+          </span>
+          <span class="show-all font-size-14">
+            <a href="">See all</a>
+          </span>
+        </div>
+        <div class="d-flex content-card overflow-auto mt-1">
+          <CardHome
+            name="Syntia"
+            image="../assets/img/logo.png"
+            location="Vue js"
+            rating=5.0
+          />
+        </div>
+      </div>
+    </div>
+
+    <Footer />
   </div>
 </template>
 
 <script>
-// import Background from '@/components/Background.vue';
-// import Navigation from '@/components/Navigation.vue';
-// import BottomNavUser from '@/components/BottomNavUser.vue';
-// import CardHome from '@/components/CardHome.vue';
-// import Footer from '@/components/Footer.vue';
+import Navigation from '@/components/Navigation.vue';
+import BottomNavUser from '@/components/BottomNavUser.vue';
+import CardHome from '@/components/CardHome.vue';
+import Footer from '@/components/Footer.vue';
+import {
+  OngoingPromoIcon, NearbyPlaceIcon, NearbyRestoIcon, NearbyHotelIcon,
+} from '@/components/IconsCustom.vue';
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      mainMenus: [
+        {
+          name: 'Journey',
+          link: '/',
+          icon: 'map-marked-alt',
+          color: 'green',
+        },
+        {
+          name: 'Bistro',
+          link: '/',
+          icon: 'utensils',
+          color: 'orange',
+        },
+        {
+          name: 'Homestay',
+          link: '/',
+          icon: 'hotel',
+          color: 'purple',
+        },
+      ],
+    };
+  },
   components: {
-    // Background,
-    // Navigation,
-    // BottomNavUser,
-    // CardHome,
-    // Footer,
+    Navigation,
+    BottomNavUser,
+    CardHome,
+    Footer,
+    // AboutIcon,
+    OngoingPromoIcon,
+    NearbyPlaceIcon,
+    NearbyRestoIcon,
+    NearbyHotelIcon,
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.btn-secondary {
+  border: none;
+}
+
+.content-group {
+  margin-top: 32px;
+}
+</style>

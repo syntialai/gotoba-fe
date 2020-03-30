@@ -1,5 +1,5 @@
 <template>
-  <div class="page-signup mt-3 p-1">
+  <div class="page-signup mt-3">
     <navigation-close></navigation-close>
     <div id="form-sign-up">
       <ValidationObserver v-slot="{ handleInput }">

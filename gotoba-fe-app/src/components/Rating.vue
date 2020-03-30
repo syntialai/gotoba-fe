@@ -5,11 +5,11 @@
         :key="i"
         :color="$yellow"
     ></full-star>
-    <half-star v-if="rate - parseInt(rate) > 0"></half-star>
+    <half-star v-if="parseFloat(rate) - parseInt(rate) > 0"></half-star>
     <full-star
       v-for="i in (5 - parseInt(rate))"
         :key="i"
-        :color="$gray"
+        :color="$gray-young"
     ></full-star>
   </div>
 </template>
@@ -18,8 +18,8 @@
 export default {
   name: 'Rating',
   props: {
-    rate,
-    fontSize,
+    rate: String,
+    fontSize: String,
   },
   components: {
     'half-star': {
@@ -37,7 +37,7 @@ export default {
     'full-star': {
       name: 'fullStar',
       props: {
-        color,
+        color: '',
       },
       template: `
         <font-awesome-icon 

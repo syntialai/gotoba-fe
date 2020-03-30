@@ -29,7 +29,7 @@ export default {
     name: String,
     image: String,
     location: String,
-    rating: Number,
+    rating: String,
   },
   components: {
     Rating,

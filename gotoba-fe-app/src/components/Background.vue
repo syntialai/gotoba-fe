@@ -22,7 +22,7 @@ body, .bg-curve {
   top: 0;
   background: $blue-gradient;
   width: 768px;
-  height: 205px;
+  height: 170px;
 }
 
 @media screen and (max-width: 768px) {
@@ -37,6 +37,12 @@ body, .bg-curve {
   }
 }
 
+@media screen and (min-width: 426px) {
+  .bg-curve {
+    height: 200px;
+  }
+}
+
 #curve-svg {
   position: absolute;
   bottom: 0;
@@ -44,6 +50,6 @@ body, .bg-curve {
 }
 
 #curve-svg path {
-  fill: white;
+  fill: $bg-color;
 }
 </style>

@@ -1,6 +1,7 @@
 body {
   margin: 0 auto;
   padding: 0;
+  background-color: $bg-color;
 }
 
 .container {
@@ -10,4 +11,8 @@ body {
 
 a {
   color: $blue-primary;
+}
+
+li {
+  list-style-type: none;
 }
