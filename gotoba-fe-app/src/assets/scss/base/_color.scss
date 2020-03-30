@@ -1,0 +1,10 @@
+@mixin font-color {
+  @include map-looping(map-remove($colors, "primary"), "font-color", "color");
+}
+
+@mixin bg-color {
+  @include map-looping($colors, "bg-color", "background");
+}
+
+@include font-color();
+@include bg-color();

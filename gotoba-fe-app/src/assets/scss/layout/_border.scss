@@ -23,4 +23,8 @@
   border: none;
 }
 
+.box-shadow {
+  box-shadow: $box-shadow;
+}
+
 @include border;
