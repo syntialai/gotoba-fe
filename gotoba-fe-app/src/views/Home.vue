@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Background />
     <Navigation />
     <BottomNavUser />
     <div class="container">
