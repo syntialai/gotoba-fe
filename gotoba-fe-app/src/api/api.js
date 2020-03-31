@@ -44,4 +44,7 @@ export default {
   Signup(params) {
     return fetchPost('/auth/signup', params);
   },
+  UpdateProfile(params) {
+    return fetchPost('/user', params);
+  },
 };
