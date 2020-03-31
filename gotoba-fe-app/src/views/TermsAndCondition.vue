@@ -115,6 +115,11 @@
       <p>The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.</p>
       <br>
       <p>As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>
+
+      <div class="options mt-4">
+        <b-button disabled class="w-100" variant="primary">I AGREED</b-button>
+        <b-button href="#" class="w-100">BACK TO TOP</b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -133,5 +138,9 @@ export default {
 <style lang="scss" scoped>
 h5, h6 {
   margin-top: 20px;
+}
+
+li {
+  list-style-type: disc;
 }
 </style>
