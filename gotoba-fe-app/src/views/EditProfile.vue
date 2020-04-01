@@ -1,7 +1,7 @@
 <template>
   <div class="edit-profile">
     <NavigationBack title="Edit Profile" />
-    <div class="container">
+    <div class="container pt-4 mb-5">
       <b-form @submit="updateProfile">
         <b-form-group id="edit-img">
           <img src="" alt="" class="border-rounded">
@@ -75,17 +75,6 @@
           ></b-form-input>
         </b-form-group>
         <b-form-group
-          id="edit-location"
-          label="Location"
-          label-for="input-edit-location"
-        >
-          <b-form-input
-            id="input-edit-location"
-            v-model="location"
-            type="text"
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
           id="edit-birth-date"
           label="Birthdate"
           label-for="input-birth-date"
@@ -98,7 +87,7 @@
         </b-form-group>
 
         <b-button
-          class="btn custom-btn-primary"
+          class="btn custom-btn-primary w-100 mt-4 border-none"
           type="submit"
         >
           UPDATE PROFILE
@@ -110,6 +99,7 @@
 
 <script>
 import NavigationBack from '@/components/NavigationBack.vue';
+import api from '../api/api';
 
 export default {
   name: 'EditProfile',
@@ -128,9 +118,9 @@ export default {
   },
   method: {
     updateProfile() {
-      if ( !this.nickname
+      if (!this.nickname
         || !this.username
-        || !this.email ) {
+        || !this.email) {
         return;
       }
 

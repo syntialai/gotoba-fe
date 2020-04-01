@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+// import Home from '../views/Home.vue';
 import Pages from './pages';
 
 Vue.use(VueRouter);
@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    // component: Home,
   },
   {
     path: '/login',
@@ -22,9 +22,19 @@ const routes = [
     component: Pages.SIGN_UP,
   },
   {
-    path: '/about',
-    name: 'About',
-    component: Pages.ABOUT,
+    path: '/terms-and-condition',
+    name: 'Terms and Condition',
+    component: Pages.TERMS_AND_CONDITION,
+  },
+  {
+    path: '/privacy-policy',
+    name: 'Privacy Policy',
+    component: Pages.PRIVACY_POLICY,
+  },
+  {
+    path: '/edit-profile',
+    name: 'Edit Profile',
+    component: Pages.EDIT_PROFILE,
   },
   // {
   //   path: '/itinerary',
