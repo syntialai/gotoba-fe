@@ -19,10 +19,10 @@
               <span
                 :class="['normal-price font-color-black-60 ' + { strikethrough: discount }]"
               >
-                {{ price }}
+                {{ format(price) }}
               </span>
               <span v-if="discount" class="discount-price font-color-red semibold">
-                {{ discountPrice }}
+                {{ format(discountPrice) }}
               </span>
             </b-card-text>
           </b-card-body>
@@ -45,6 +45,11 @@ export default {
     return {
       discount: discountPrice != '0',
     };
+  },
+  method: {
+    format(price) {
+      return new Intl.NumberFormat('id').format(parseInt(price));
+    },
   },
 };
 </script>
