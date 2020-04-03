@@ -190,6 +190,6 @@ export default {
 }
 
 .content-group {
-  margin-top: 32px;
+  margin-top: 40px;
 }
 </style>

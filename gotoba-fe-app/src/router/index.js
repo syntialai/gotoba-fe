@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 // import Home from '../views/Home.vue';
-import Pages from './pages';
+import { Components, Pages } from './pages';
 
 Vue.use(VueRouter);
 
@@ -35,6 +35,21 @@ const routes = [
     path: '/edit-profile',
     name: 'Edit Profile',
     component: Pages.EDIT_PROFILE,
+  },
+  {
+    path: '/history/:id',
+    name: 'History',
+    component: Pages.HISTORY,
+    children: [
+      {
+        path: 'pending',
+        component: Components.HISTORY_PENDING,
+      },
+      {
+        path: 'cancelled',
+        component: Components.HISTORY_CANCELLED,
+      },
+    ],
   },
   // {
   //   path: '/itinerary',
