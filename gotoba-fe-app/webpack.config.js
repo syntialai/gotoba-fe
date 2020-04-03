@@ -4,8 +4,8 @@ module.exports = {
       sass: {
         prependData: `
           @import "@/assets/scss/index.scss";
-        `
-      }
-    }
-  }
+        `,
+      },
+    },
+  },
 };

@@ -1,9 +1,20 @@
 <template>
-  <div id="app" class="container">
-    <router-view/>
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+};
+</script>
+
 <style lang="scss">
-@import '~@/assets/scss/index';
+@import "~@/assets/scss/index";
+
+#app {
+  margin-top: 0;
+  background-color: $bg-color;
+}
 </style>
