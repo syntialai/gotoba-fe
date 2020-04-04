@@ -3,7 +3,7 @@
     <NavigationBack title="Notification" />
 
     <div class="notification-group">
-      <CardNotification 
+      <CardNotification
         v-for="item in notifications"
         :key="item.title.match(/^[\w\s]/g).join('').substring(1,10)"
         :title="item.title"
@@ -28,9 +28,8 @@ export default {
     return {
       notifications: [
         {
-          title: 'E-ticket', image: 'image-notif-1',
-        
-        }
+          title: 'E-ticket', image: 'image-notif-1', info: 'ini notifikasi',
+        },
       ],
     };
   },

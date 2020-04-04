@@ -51,6 +51,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/notification',
+    name: 'Notification',
+    component: Pages.NOTIFICATION,
+  },
   // {
   //   path: '/itinerary',
   //   name: 'Itinerary',
