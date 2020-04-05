@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Navigation />
-    <BottomNavUser />
+    <Navigation title="Main" />
+
     <div class="container">
       <div id="category" class="m-3">
         <b-button-group
@@ -139,7 +139,6 @@
 
 <script>
 import Navigation from '@/components/Navigation.vue';
-import BottomNavUser from '@/components/BottomNavUser.vue';
 import CardHome from '@/components/CardHome.vue';
 import Footer from '@/components/Footer.vue';
 import {
@@ -173,8 +172,7 @@ export default {
     };
   },
   components: {
-    Navigation,
-    BottomNavUser,
+    Navigation,    
     CardHome,
     Footer,
     // AboutIcon,
@@ -192,6 +190,6 @@ export default {
 }
 
 .content-group {
-  margin-top: 32px;
+  margin-top: 40px;
 }
 </style>

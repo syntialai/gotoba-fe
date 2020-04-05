@@ -50,4 +50,8 @@ h6 {
   font-weight: 600;
 }
 
+.strikethrough {
+  text-decoration: line-through;
+}
+
 @include font-size();

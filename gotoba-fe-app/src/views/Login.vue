@@ -1,5 +1,6 @@
 <template>
   <div class="page-login mt-3">
+    <Background />
     <navigation-close></navigation-close>
     <div id="form-login">
       <ValidationObserver v-slot="{ handleInput }">

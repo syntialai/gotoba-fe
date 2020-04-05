@@ -2,11 +2,11 @@
   <div id="nav">
     <b-navbar variant="faded" class="bg-transparent text-white pr-1">
       <b-navbar-brand href="/">
-        <img src="https://placekitten.com/g/30/30"
+        <img v-if="title === 'Main'" src="https://placekitten.com/g/30/30"
           class="d-inline-block align-top"
           alt="gotoba"
         >
-        gotoba
+        <h4 v-else>{{ title }}</h4>
       </b-navbar-brand>
       <b-navbar-nav right class="ml-auto">
         <b-nav-item href="/search">
@@ -23,5 +23,8 @@
 <script>
 export default {
   name: 'Navigation',
+  props: {
+    title: String,
+  },
 };
 </script>
