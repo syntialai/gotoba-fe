@@ -4,6 +4,8 @@ const TERMS_AND_CONDITION = () => import('../views/TermsAndCondition.vue');
 const PRIVACY_POLICY = () => import('../views/PrivacyPolicy.vue');
 const EDIT_PROFILE = () => import('../views/EditProfile.vue');
 const HISTORY = () => import('../views/History.vue');
+const NOTIFICATION = () => import('../views/Notification.vue');
+const NOTIFICATION_DETAIL = () => import('../views/NotificationDetail.vue');
 
 const HISTORY_PENDING = () => import('../components/HistoryPending.vue');
 const HISTORY_CANCELLED = () => import('../components/HistoryCancelled.vue');
@@ -15,12 +17,14 @@ const Pages = {
   PRIVACY_POLICY,
   EDIT_PROFILE,
   HISTORY,
+  NOTIFICATION,
+  NOTIFICATION_DETAIL,
 };
 
 const Components = {
   HISTORY_PENDING,
   HISTORY_CANCELLED,
-}
+};
 
 export { Components, Pages };
 export default Pages;

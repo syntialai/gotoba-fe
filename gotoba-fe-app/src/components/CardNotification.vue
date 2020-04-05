@@ -1,5 +1,5 @@
 <template>
-  <div class="items">
+  <div class="card-notification">
     <b-card no-body
       class="overflow-hidden d-flex"
       style="max-width: 768px;"
@@ -12,17 +12,10 @@
       </b-card-img>
       <b-card-body>
         <b-card-title class="font-color-black-87">
-          {{ name }}
+          {{ title }}
         </b-card-title>
-        <b-card-text>
-          <span
-            :class="['normal-price font-color-black-60 ' + { strikethrough: discount }]"
-          >
-            {{ format(price) }}
-          </span>
-          <span v-if="discount" class="discount-price font-color-red semibold">
-            {{ format(discountPrice) }}
-          </span>
+        <b-card-text class="font-color-black-60">
+          {{ info }}
         </b-card-text>
       </b-card-body>
     </b-card>
@@ -31,22 +24,11 @@
 
 <script>
 export default {
-  name: 'Order Items',
+  name: 'CardNotification',
   props: {
-    name: String,
+    title: String,
     image: String,
-    price: String,
-    discountPrice: '0',
-  },
-  data() {
-    return {
-      discount: discountPrice != '0',
-    };
-  },
-  method: {
-    format(price) {
-      return new Intl.NumberFormat('id').format(parseInt(price));
-    },
+    info: String,
   },
 };
 </script>

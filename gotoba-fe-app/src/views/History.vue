@@ -3,7 +3,7 @@
     <b-card no-body>
       <b-card-header header-tag="nav" class="box-shadow">
         <b-nav card-header tabs>
-          <b-nav-item 
+          <b-nav-item
             to="/history" exact
             exact-active-class="active"
           >
