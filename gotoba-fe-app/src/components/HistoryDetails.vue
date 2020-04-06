@@ -23,6 +23,8 @@
     <div class="order-items">
       <div class="title w-100 border-bottom-gray-young">
         <h6>Order Item(s)</h6>
+      </div>
+      <div class="order-items-group">
         <OrderItems
           v-for="item in items"
           :key="item.name.toLowerCase().replace(' ','-')"
@@ -32,7 +34,6 @@
           :discountPrice="item.discountPrice"
         />
       </div>
-      
     </div>
 
     <div class="payment-details">
