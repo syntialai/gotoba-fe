@@ -3,25 +3,27 @@
     <div class="d-flex justify-content-between">
       <div class="details-name">Price (estimated)</div>
       <div class="details-value semibold">
-        {{ format(price) }}
+        {{ formatPrice(price, true) }}
       </div>
     </div>
     <div class="d-flex justify-content-between">
       <div class="details-name">Promo discount</div>
       <div class="details-value semibold">
-        {{ format(discount) }}
+        {{ formatPrice(discount, true) }}
       </div>
     </div>
     <div class="d-flex justify-content-between bold border-top-gray-young">
       <div class="details-name">Total Payment</div>
       <div class="details-value font-color-blue-secondary">
-        {{ format(price - discount) }}
+        {{ formatPrice(price - discount, true) }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import formatPrice from '@/utils/filter';
+
 export default {
   name: 'PaymentDetail',
   props: {
@@ -29,9 +31,7 @@ export default {
     discount: String,    
   },
   method: {
-    format(price) {
-      return new Intl.NumberFormat('id').format(parseInt(price)) + '.00';
-    },
+    formatPrice,
   },
 };
 </script>

@@ -30,7 +30,7 @@
                 <b-button @click="addItem">+</b-button>
               </b-button-group>
             </div>
-          </b-form-checkbox>          
+          </b-form-checkbox>
         </div>
       </div>
     </div>

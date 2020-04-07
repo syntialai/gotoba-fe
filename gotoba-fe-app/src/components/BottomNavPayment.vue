@@ -5,7 +5,7 @@
         {{ totalItem }} item
       </b-navbar-item>
       <b-navbar-item class="">
-        {{ format(totalPrice) }}
+        {{ formatPrice(totalPrice, true, true) }}
       </b-navbar-item>
     </b-navbar-nav>
     <b-navbar-nav right class="ml-auto">
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import formatPrice from '@/utils/filter';
+
 export default {
   name: 'BottomNavPayment',
   props: {
@@ -25,9 +27,7 @@ export default {
     innerButton: String,
   },
   method: {
-    format(price) {
-      return `Rp${new Intl.NumberFormat('id').format(parseInt(price))}.00`;
-    },
+    formatPrice,
   },
 };
 </script>
