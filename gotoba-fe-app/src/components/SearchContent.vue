@@ -1,7 +1,7 @@
 <template>
   <div class="search-content">
     <div class="p-3">
-      <div class="title font-color-blue-primary mb-2">
+      <div class="title font-color-blue-primary mb-3">
         <h6>{{ title }}</h6>
       </div>
       <div class="mt-1">
@@ -9,8 +9,8 @@
           variant="outline-secondary"
           v-for="item in keywords"
           :key="item.match(/[^\s]/g).join('')"
-          :href="['/search?q=' + item.join('+')]"
-          class="border-rounded"
+          :href="'/search?q=' + item.toString().replace(' ', '+')"
+          class="mr-3 bg-white border-rounded"
         >
           {{ item }}
         </b-button>
