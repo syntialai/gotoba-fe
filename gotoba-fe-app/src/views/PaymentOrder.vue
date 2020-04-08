@@ -18,7 +18,8 @@
           {{ paymentTime }}
         </div>
         <div class="complete-payment mb-1">
-          Have you completed the payment? Check your payment status at
+          Have you completed the payment? Upload your payment bill or
+          Check your payment status at
           <a :href="['/history/' + paymentId]">History</a>
         </div>
       </div>
@@ -41,31 +42,32 @@
           </div>
         </div>
       </div>
-      <div class="price-info">
-        <div class="price-label">Total payment:</div>
-        <div class="d-flex justify-content-between">
-          <div class="price-number">{{ formatPrice(totalPayment, true, true) }}</div>
-          <div class="show-order">
-            <a :href="['/history/' + paymentId]">Show Order Details</a>
-          </div>
-        </div>
+      <div class="how-to-pay">
+        <a href="">How to Pay?</a>
       </div>
     </div>
 
-    <div class="payment-guide">
-      
+    <div class="payment-details">
+      <div class="title w-100 border-bottom-gray-young">
+        <span class="font-color-black-87">Payment details:</span>
+      </div>
+      <PaymentDetail price="" discount="" />
     </div>
+
+    <b-button class="w-100 btn custom-btn-primary">SHOW ORDER DETAILS</b-button>
+    <b-button class="w-100 btn btn-light">BACK TO HOME</b-button>
   </div>
 </template>
 
 <script>
-import NavigationBack from '@/components/NavigationBack.vue';
 import formatPrice from '@/utils/filter';
+import NavigationBack from '@/components/NavigationBack.vue';
 
 export default {
   name: 'PaymentOrder',
   component: {
     NavigationBack,
+    PaymentGuide,
   },
   props: {
     paymentId: String,
