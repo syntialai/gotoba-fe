@@ -3,7 +3,7 @@
     <div class="category-title">
       <font-awesome-icon
         :icon="categoryIcon"
-        class="font-color-accent-"
+        :class="'font-color-accent-' + categoryColor"
       ></font-awesome-icon>
       <div class="title pl-1">{{ categoryTitle }}</div>
     </div>
@@ -30,6 +30,7 @@ export default {
     searchResults: Array,
     categoryIcon: String,
     categoryTitle: String,
+    categoryColor: String,
   },
   data() {
     return {
