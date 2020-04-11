@@ -7,7 +7,7 @@
         </p>
       </b-nav-item>
       <b-nav-form class="w-100 pr-3">
-        <b-input-group class="w-100 border-rounded">
+        <b-input-group class="w-100 border-circle">
           <b-input-group-prepend is-text>
             <b-icon icon="search"></b-icon>
           </b-input-group-prepend>
@@ -27,20 +27,35 @@
 <script>
 export default {
   name: 'SearchNavigation',
-  data() {
-    return {
-      keywords: '',
-    };
+  computed: {
+    keywords: {
+      get() {
+        return this.$store.state.searchKeywords;
+      },
+      set(value) {
+        this.$store.dispatch('setSearchKeywords', value);
+      },
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/scss/index";
+
 .nav-search {
   height: 56px;
 }
 
 form {
   width: 100%;
+}
+
+.input-group-text {
+  border-radius: 50px 0 0 50px;
+}
+
+#input-search {
+  border-radius: 0 50px 50px 0;
 }
 </style>

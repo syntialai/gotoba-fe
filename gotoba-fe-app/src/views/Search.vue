@@ -2,6 +2,10 @@
   <div class="search">
     <SearchNavigation class="mb-1" />
 
+    <SearchAutocomplete
+      :show="keywords.length > 0"
+    ></SearchAutocomplete>
+
     <SearchContent
       title="Your History"
       :keywords='history'
@@ -12,6 +16,7 @@
     <SearchContent
       title="Recommendation"
       :keywords='recommendation'
+      v-if="recommendation.length > 0"
       class="mt-3"
     />
   </div>
@@ -20,18 +25,41 @@
 <script>
 import SearchNavigation from '@/components/SearchNavigation.vue';
 import SearchContent from '@/components/SearchContent.vue';
+import SearchAutocomplete from '@/components/SearchAutocomplete.vue';
 
 export default {
   name: 'Search',
   components: {
     SearchNavigation,
     SearchContent,
+    SearchAutocomplete,
   },
   data() {
     return {
       history: [],
-      recommendation: ['Toba', 'Lake Toba'],
+      recommendation: [],
+      cities: [
+        'Bangalore',
+        'Chennai',
+        'Cochin',
+        'Delhi',
+        'Kolkata',
+        'Mumbai',
+      ],
     };
+  },
+  computed: {
+    keywords() {
+      return this.$store.getters.searchKeywords;
+    },
+    suggestions: {
+      get() {
+        return this.$store.state.searchSuggestions;
+      },
+      set(value) {
+        this.$store.dispatch('setSearchSuggestions', value);
+      },
+    },
   },
 };
 </script>
