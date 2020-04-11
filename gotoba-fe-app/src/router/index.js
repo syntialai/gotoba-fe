@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import Home from '../views/Home.vue';
+import PrivacyPolicy from '../views/PrivacyPolicy.vue';
 import { Components, Pages } from './pages';
 
 Vue.use(VueRouter);
@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    // component: Home,
+    component: PrivacyPolicy,
   },
   {
     path: '/login',
@@ -61,6 +61,11 @@ const routes = [
     name: 'Notification Detail',
     component: Pages.NOTIFICATION_DETAIL,
     props: true,
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Pages.SEARCH,
   },
   // {
   //   path: '/itinerary',
