@@ -37,7 +37,7 @@ const routes = [
     component: Pages.EDIT_PROFILE,
   },
   {
-    path: '/history/:id',
+    path: '/history/',
     name: 'History',
     component: Pages.HISTORY,
     children: [
@@ -61,6 +61,11 @@ const routes = [
     name: 'Notification Detail',
     component: Pages.NOTIFICATION_DETAIL,
     props: true,
+  },
+  {
+    path: '/faq/payment/transfer',
+    name: 'Payment Guide',
+    component: Pages.PAYMENT_GUIDE,
   },
   {
     path: '/search',

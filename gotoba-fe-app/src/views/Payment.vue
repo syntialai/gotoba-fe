@@ -1,0 +1,70 @@
+<template>
+  <div class="payment">
+    <NavigationBack title="Payment" />
+
+    <div class="order-items p-2">
+      <div class="title w-100 border-bottom-gray-young">
+        <h6>Order Item(s)</h6>
+      </div>
+      <div class="order-items-group">
+        <div class="order-item-detail"
+          v-for="item in items"
+          :key="item.name.toLowerCase().replace(' ','-')"
+        >
+          <div class="order-item-info">
+            <OrderItems
+              :name="item.name"
+              :image="item.image"
+              :price="item.price"
+              :discountPrice="item.discountPrice"
+            />
+            <b-button-group size="sm">
+              <b-button @click="subItem">-</b-button>
+              <b-button :class="['item-'+item.name+'-count']">1</b-button>
+              <b-button @click="addItem">+</b-button>
+            </b-button-group>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-details">
+      <div class="title w-100 border-bottom-gray-young">
+        <h6>Payment Details</h6>
+      </div>
+      <PaymentDetail price="" discount="" />
+    </div>
+
+    <div class="payment-method">
+      <div class="title w-100 border-bottom-gray-young">
+        <h6>Payment Method</h6>
+      </div>
+      <PaymentMethod />
+    </div>
+
+    <BottomNavPayment
+      totalItem="1"
+      totalPrice="100000"
+      innerButton="BUY NOW"
+    />
+  </div>
+</template>
+
+<script>
+import NavigationBack from '@/components/NavigationBack.vue';
+import OrderItems from '@/components/OrderItems.vue';
+import PaymentDetail from '@/components/PaymentDetail.vue';
+import PaymentMethod from '@/components/PaymentMethod.vue';
+import BottomNavPayment from '@/components/BottomNavPayment.vue';
+
+export default {
+  name: 'Payment',
+  component: {
+    NavigationBack,
+    OrderItems,
+    PaymentDetail,
+    PaymentMethod,
+    BottomNavPayment,
+  },
+};
+</script>

@@ -186,19 +186,18 @@
               id="input-group-checkbox-agree"
               class="mb-4"
             >
-              <b-form-checkbox-group v-model="checked" id="checkbox-agree">
-                <b-form-checkbox
-                  class="font-size-12"
-                  value="true"
-                  unchecked-value="false"
-                  :state="getValidationState(validationContext)"
-                  aria-describedby="rules-feedback-msg"
-                  required>
-                  I Agree to gotoba
-                  <router-link to="">Terms and Conditions</router-link> and
-                  <router-link to="">Privacy Policy</router-link>
-                </b-form-checkbox>
-              </b-form-checkbox-group>
+              <b-form-checkbox
+                class="font-size-12"
+                v-model="checked"
+                value="true"
+                unchecked-value="false"
+                :state="getValidationState(validationContext)"
+                aria-describedby="rules-feedback-msg"
+                required>
+                I Agree to gotoba
+                <router-link to="/terms-and-condition">Terms and Conditions</router-link> and
+                <router-link to="/privacy-policy">Privacy Policy</router-link>
+              </b-form-checkbox>
               <b-form-invalid-feedback id="rules-feedback-msg">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
@@ -236,7 +235,7 @@ export default {
       password: '',
       confirmPassword: '',
       role: 'user',
-      checked: [],
+      checked: 'false',
     };
   },
   methods: {

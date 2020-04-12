@@ -18,10 +18,10 @@
           <span
             :class="['normal-price font-color-black-60 ' + { strikethrough: discount }]"
           >
-            {{ format(price) }}
+            {{ formatPrice(price) }}
           </span>
           <span v-if="discount" class="discount-price font-color-red semibold">
-            {{ format(discountPrice) }}
+            {{ formatPrice(discountPrice) }}
           </span>
         </b-card-text>
       </b-card-body>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import formatPrice from '@/utils/filter';
+
 export default {
   name: 'Order Items',
   props: {
@@ -44,9 +46,7 @@ export default {
     };
   },
   method: {
-    format(price) {
-      return new Intl.NumberFormat('id').format(parseInt(price));
-    },
+    formatPrice,
   },
 };
 </script>
