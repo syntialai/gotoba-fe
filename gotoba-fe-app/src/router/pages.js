@@ -6,6 +6,7 @@ const EDIT_PROFILE = () => import('../views/EditProfile.vue');
 const HISTORY = () => import('../views/History.vue');
 const NOTIFICATION = () => import('../views/Notification.vue');
 const NOTIFICATION_DETAIL = () => import('../views/NotificationDetail.vue');
+const PAYMENT_GUIDE = () => import('../views/PaymentGuide.vue');
 
 const HISTORY_PENDING = () => import('../components/HistoryPending.vue');
 const HISTORY_CANCELLED = () => import('../components/HistoryCancelled.vue');
@@ -19,6 +20,7 @@ const Pages = {
   HISTORY,
   NOTIFICATION,
   NOTIFICATION_DETAIL,
+  PAYMENT_GUIDE,
 };
 
 const Components = {

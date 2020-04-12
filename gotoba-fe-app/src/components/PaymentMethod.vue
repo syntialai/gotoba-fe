@@ -46,25 +46,10 @@ export default {
     return {
       selectedMethod: '',
       paymentMethods: [
-        {
-          name: 'Bank Transfer',
-          value: 'bank-transfer',
-          detail: [
-            { text: 'Bank BCA', value: 'bca', },
-            { text: 'Bank BRI', value: 'bri', },
-            { text: 'Bank Mandiri', value: 'mandiri', },
-            { text: 'Others', value: 'other', },
-          ],
-        },
-        {
-          name: 'Bank Virtual Account Transfer',
-          value: 'bank-va-transfer',
-          detail: [
-            { text: 'Bank BCA', value: 'va-bca', },
-            { text: 'Bank BRI', value: 'va-bri', },
-            { text: 'Bank Mandiri', value: 'va-mandiri', },
-          ],
-        },
+        { text: 'Bank BCA', value: 'bca', },
+        { text: 'Bank BRI', value: 'bri', },
+        { text: 'Bank Mandiri', value: 'mandiri', },
+        { text: 'Others', value: 'other', },
       ],
     };
   },

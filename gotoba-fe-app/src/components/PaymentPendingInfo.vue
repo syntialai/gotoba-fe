@@ -7,7 +7,7 @@
       <div class="bold">{{ time }}</div>
     </div>
     <div class="payment-info border-top-gray-young p-3">
-      Payment via {{ paymentMethod }} {{ bankName }}
+      Payment via transfer bank {{ bankName }}
     </div>
     <div class="d-flex justify-content-between font-color-black-60">
       <div class="account-label">{{accountLabel}} Number</div>

@@ -28,7 +28,7 @@
     <div class="order-bank font-color-black-60 p-2">
       <div class="transfer-info">
         <div class="transfer-label">
-          Transfer to {{ paymentMethod }} number:
+          Transfer to bank account:
         </div>
         <div class="d-flex justify-content-between">
           <div class="bank-number">
