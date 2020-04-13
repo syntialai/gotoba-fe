@@ -1,5 +1,5 @@
 <template>
-  <div class="card-profile bg-white p-3">
+  <div class="card-profile-detail bg-white p-3">
     <b-card
       :img-src="image"
       img-alt="Card image"
@@ -18,7 +18,7 @@
 import Rating from '@/components/Rating.vue';
 
 export default {
-  name: 'CardProfile',
+  name: 'CardProfileDetail',
   props: {
     name: String,
     location: String,

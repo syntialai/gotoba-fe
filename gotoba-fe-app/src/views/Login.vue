@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import api from '../api/api';
 import NavigationClose from '../components/NavigationClose.vue';
 
@@ -97,6 +98,8 @@ export default {
     };
   },
   methods: {
+    ...mapActions({ setUserInfo: 'setUserInfo' }),
+
     getValidationState({ error, validated, valid = null }) {
       return error || validated ? valid : null;
     },

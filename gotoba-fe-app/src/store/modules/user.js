@@ -1,14 +1,15 @@
+/* eslint-disable no-shadow */
 import { User } from '../types';
 
 const state = {
-  loginStatus: JSON.parse(localStorage.getItem('loginStatus')) || false,
+  userLoginStatus: JSON.parse(localStorage.getItem('userLoginStatus')) || false,
   userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
 };
 
 const actions = {
   setUserInfo({ commit }, res) {
     localStorage.setItem('userInfo', JSON.stringify(res));
-    localStorage.setItem('loginStatus', true);
+    localStorage.setItem('userLoginStatus', true);
 
     commit(User.SET_INFO, res);
     commit(User.SET_LOGIN_STATUS, true);
@@ -16,7 +17,7 @@ const actions = {
 
   setLogOut({ commit }) {
     localStorage.removeItem('userInfo');
-    localStorage.removeItem('loginStatus');
+    localStorage.removeItem('userLoginStatus');
 
     commit(User.SET_INFO, {});
     commit(User.SET_LOGIN_STATUS, false);
@@ -24,17 +25,18 @@ const actions = {
 };
 
 const getters = {
-  loginStatus: state => state.loginStatus,
+  userLoginStatus: state => state.userLoginStatus,
 	userInfo: state => state.userInfo,
 };
 
 const mutations = {
+  // eslint-disable-next-line space-before-function-paren
   [types.SET_INFO](state, res) {
 		state.userInfo = res
 	},
 
 	[types.SET_LOGIN_STATUS](state, status) {
-		state.loginStatus = status
+		state.userLoginStatus = status
 	},
 };
 
