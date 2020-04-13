@@ -3,7 +3,7 @@
     <NavigationBack title="Tranfer Bank Payment" />
 
     <div class="article-content p-3">
-      <h5>How to Pay with Bank Transfer</h5>
+      <h2>How to Pay with Bank Transfer</h2>
       <div class="font-size-14">
         Berikut panduan melakukan pembayaran dengan Transfer Bank:
         <b-list-group>

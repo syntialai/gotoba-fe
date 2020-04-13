@@ -2,7 +2,7 @@
   <div class="search-content">
     <div class="p-3">
       <div class="title font-color-blue-primary mb-3">
-        <h6>{{ title }}</h6>
+        <h3>{{ title }}</h3>
       </div>
       <div class="mt-1">
         <b-button
