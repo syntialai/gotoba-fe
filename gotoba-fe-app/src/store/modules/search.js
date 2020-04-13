@@ -9,13 +9,13 @@ const state = {
 
 const actions = {
   setSearchKeywords: ({ commit }, value) => {
-    commit(Search.NAV_KEYWORDS_VALUE, value);
+    commit(Search.SET_NAV_KEYWORDS_VALUE, value);
   },
   setSearchSuggestions: ({ commit }, value) => {
-    commit(Search.SUGGESTIONS_VALUE, value);
+    commit(Search.SET_SUGGESTIONS_VALUE, value);
   },
   setSearchShowStatus: ({ commit }, value) => {
-    commit(Search.SUGGESTIONS_SHOW_STATUS, value);
+    commit(Search.SET_SUGGESTIONS_SHOW_STATUS, value);
   },
 };
 
@@ -27,13 +27,13 @@ const getters = {
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
-  [Search.NAV_KEYWORDS_VALUE](state, value) {
+  [Search.SET_NAV_KEYWORDS_VALUE](state, value) {
     state.searchKeywords = value;
   },
-  [Search.SUGGESTIONS_VALUE](state, value) {
+  [Search.SET_SUGGESTIONS_VALUE](state, value) {
     state.searchSuggestions = value;
   },
-  [Search.SUGGESTIONS_SHOW_STATUS](state, value) {
+  [Search.SET_SUGGESTIONS_SHOW_STATUS](state, value) {
     state.searchSuggestionShow = value;
   },
 };
