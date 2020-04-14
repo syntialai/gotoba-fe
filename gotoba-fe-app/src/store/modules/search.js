@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import { Search } from '../types';
+import * as Types from '../types';
 
 const state = {
   searchKeywords: '',
@@ -9,13 +9,13 @@ const state = {
 
 const actions = {
   setSearchKeywords: ({ commit }, value) => {
-    commit(Search.SET_NAV_KEYWORDS_VALUE, value);
+    commit(Types.SET_SEARCH_NAV_KEYWORDS_VALUE, value);
   },
   setSearchSuggestions: ({ commit }, value) => {
-    commit(Search.SET_SUGGESTIONS_VALUE, value);
+    commit(Types.SET_SEARCH_SUGGESTIONS_VALUE, value);
   },
   setSearchShowStatus: ({ commit }, value) => {
-    commit(Search.SET_SUGGESTIONS_SHOW_STATUS, value);
+    commit(Types.SET_SEARCH_SUGGESTIONS_SHOW_STATUS, value);
   },
 };
 
@@ -27,13 +27,13 @@ const getters = {
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
-  [Search.SET_NAV_KEYWORDS_VALUE](state, value) {
+  [Types.SET_SEARCH_NAV_KEYWORDS_VALUE](state, value) {
     state.searchKeywords = value;
   },
-  [Search.SET_SUGGESTIONS_VALUE](state, value) {
+  [Types.SET_SEARCH_SUGGESTIONS_VALUE](state, value) {
     state.searchSuggestions = value;
   },
-  [Search.SET_SUGGESTIONS_SHOW_STATUS](state, value) {
+  [Types.SET_SEARCH_SUGGESTIONS_SHOW_STATUS](state, value) {
     state.searchSuggestionShow = value;
   },
 };

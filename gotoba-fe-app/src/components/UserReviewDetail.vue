@@ -23,7 +23,7 @@
 import Rating from '@/components/Rating.vue';
 
 export default {
-  name: 'CardReviewDetail',
+  name: 'UserReviewDetail',
   data() {
     return {
       review: {

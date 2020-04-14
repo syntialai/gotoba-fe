@@ -222,7 +222,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 import api from '../api/api';
 import NavigationClose from '../components/NavigationClose.vue';
 
