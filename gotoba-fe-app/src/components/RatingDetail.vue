@@ -3,19 +3,26 @@
     <div
       class="title d-flex w-100 border-bottom-gray-young justify-content-between"
     >
-      <h3>About</h3>
+      <h3>Ratings and Reviews</h3>
+      <b-icon
+        icon="arrow-right-short"
+        class="icon-black-60"
+        href=""
+      ></b-icon>
     </div>
     <div class="d-flex m-3">
       <div class="ratings-big align-center">
-        <span class="font-size-48 font-color-blue-primary">{{ rating }}</span>
+        <span class="font-size-48 font-color-blue-primary">
+          {{ averageOfRatings(ratingBars) }}
+        </span>
         <Rating :rate="rating" font-size=16 />
         <span class="font-size-12">{{ totalReviewer }}</span>
       </div>
       <div class="rating-details-group">
-        <div v-for="bar in ratingBars" :key="bar.rate">
-          <span>{{ bar.rate }}</span>
+        <div v-for="(rate, index) in ratingBars.reverse()" :key="rate">
+          <span>{{ 5 - index }}</span>
           <b-progress
-            :value="bar.reviewerCount"
+            :value="rate"
             :max="totalReviewer"
             variant="pimary"
           ></b-progress>
@@ -27,11 +34,25 @@
 
 <script>
 import Rating from '@/components/Rating.vue';
+import averageOfRatings from '@/utils/rating';
 
 export default {
   name: 'RatingDetail',
   components: {
     Rating,
+  },
+  data() {
+    return {
+      ratingBars: [ 60, 50, 2, 10, 500 ],
+    };
+  },
+  computed: {
+    averageOfRatings,
+    totalReviewer() {
+      let sumOfRatings = 0;
+      ratingBars.forEach((rate) => sumOfRatings += rate);
+      return sumOfRatings;
+    },
   },
 };
 </script>
