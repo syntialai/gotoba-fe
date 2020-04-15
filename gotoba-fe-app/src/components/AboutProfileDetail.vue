@@ -13,17 +13,18 @@
 <script>
 export default {
   name: 'AboutProfileDetail',
-  data() {
-    return {
-      items: [
-        {
-          description: '',
-          full_address: '',
-          hours_open: '',
-          telephone: '',
-        }
-      ],
-    };
+  props: {
+    data: Object,
+  },
+  computed: {
+    items() {
+      return {
+        description: data.description,
+        full_address: data.fullAddress,
+        hours_open: data.hoursOpen,
+        telephone: data.telephone,
+      };
+    },
   },
 };
 </script>

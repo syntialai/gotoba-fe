@@ -1,32 +1,20 @@
 <template>
-  <div class="rating-detail m-3">
-    <div
-      class="title d-flex w-100 border-bottom-gray-young justify-content-between"
-    >
-      <h3>Ratings and Reviews</h3>
-      <b-icon
-        icon="arrow-right-short"
-        class="icon-black-60"
-        href=""
-      ></b-icon>
+  <div class="rating-detail d-flex m-3">
+    <div class="ratings-big align-center">
+      <span class="font-size-48 font-color-blue-primary">
+        {{ averageOfRatings(ratingBars) }}
+      </span>
+      <Rating :rate="rating" font-size=16 />
+      <span class="font-size-12">{{ totalReviewer }}</span>
     </div>
-    <div class="d-flex m-3">
-      <div class="ratings-big align-center">
-        <span class="font-size-48 font-color-blue-primary">
-          {{ averageOfRatings(ratingBars) }}
-        </span>
-        <Rating :rate="rating" font-size=16 />
-        <span class="font-size-12">{{ totalReviewer }}</span>
-      </div>
-      <div class="rating-details-group">
-        <div v-for="(rate, index) in ratingBars.reverse()" :key="rate">
-          <span>{{ 5 - index }}</span>
-          <b-progress
-            :value="rate"
-            :max="totalReviewer"
-            variant="pimary"
-          ></b-progress>
-        </div>
+    <div class="rating-details-group">
+      <div v-for="(rate, index) in ratingBars.reverse()" :key="rate">
+        <span>{{ 5 - index }}</span>
+        <b-progress
+          :value="rate"
+          :max="totalReviewer"
+          variant="pimary"
+        ></b-progress>
       </div>
     </div>
   </div>

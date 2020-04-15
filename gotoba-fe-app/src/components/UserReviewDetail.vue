@@ -24,16 +24,8 @@ import Rating from '@/components/Rating.vue';
 
 export default {
   name: 'UserReviewDetail',
-  data() {
-    return {
-      review: {
-        userName: '',
-        userImg: '',
-        dateReviewed: '',
-        rating: '',
-        comment: '',
-      },
-    };
+  props: {
+    review: Object,
   },
 };
 </script>
