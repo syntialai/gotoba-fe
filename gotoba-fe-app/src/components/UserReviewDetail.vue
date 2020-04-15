@@ -1,5 +1,5 @@
 <template>
-  <div class="review-detail">
+  <div class="user-review-detail">
     <div class="profile d-flex mb-2">
       <img
         :src="review.userImg"
