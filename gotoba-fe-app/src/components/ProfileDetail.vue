@@ -2,10 +2,10 @@
   <div class="profile-detail">
     <CardProfileDetail
       class="mb-2 mt-2"
-      v-bind="restaurantData"
+      v-bind="data"
     />
 
-    <AboutProfileDetail class="mb-2" data="restaurantData" />
+    <AboutProfileDetail class="mb-2" :data="data" />
 
     <div class="rating-and-reviews mb-2">
       <div
@@ -71,12 +71,12 @@ export default {
     UserReviewDetail,
     CardPromotion,
   },
+  props: {
+    data: Object,
+  },
   computed: {
-    restaurantData() {
-      return this.$store.getters.restaurantData;
-    },
     recentReviews() {
-      let reviews = this.$store.getters.restaurantData.reviews.slice(0);
+      let reviews = data.reviews.slice(0);
       reviews.sort((a, b) => b.createdAt - a.createdAt);
       return reviews.slice(0, 3);
     },
