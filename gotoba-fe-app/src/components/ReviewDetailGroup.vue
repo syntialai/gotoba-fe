@@ -20,7 +20,7 @@
 
     <div id="user-review-group">
       <UserReviewDetail
-        v-for="review in reviews"
+        v-for="review in data.reviews"
         :key="review.userName"
         v-bind="review"
       />
@@ -43,7 +43,6 @@ export default {
   name: 'ReviewDetailGroup',
   props: {
     data: Object,
-    reviews: Object,
   },
   components: {
     CardProfileDetail,
