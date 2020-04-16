@@ -6,7 +6,7 @@
       <div
         class="w-100 border-bottom-gray-young d-flex justify-content-between"
       >
-        <div class="title"><h6>Order Item(s)</h6></div>
+        <div class="title"><h3>Order Item(s)</h3></div>
         <div class="select-all font-color-black-60">
           <a href="">Select all</a>
         </div>

@@ -27,15 +27,14 @@ export default {
     CardSearchResult,
   },
   props: {
-    searchResults: Array,
     categoryIcon: String,
     categoryTitle: String,
     categoryColor: String,
   },
-  data() {
-    return {
-      searchResults: this.searchResults,
-    };
+  computed: {
+    searchResults() {
+      return this.$store.getters.searchResults;
+    },
   },
 };
 </script>

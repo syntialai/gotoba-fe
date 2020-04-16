@@ -11,7 +11,7 @@
     </div>
 
     <div class="menus account bg-white">
-      <h5 class="bold">Account</h5>
+      <h2 class="bold">Account</h2>
       <b-list-group>
         <b-list-group-item
           v-for="menu in menuAccount"
@@ -36,7 +36,7 @@
     </div>
 
     <div class="menus about bg-white">
-      <h5 class="bold">About</h5>
+      <h2 class="bold">About</h2>
       <b-list-group>
         <b-list-group-item
           v-for="menu in menuAbout"

@@ -2,7 +2,7 @@
   <div class="privacy-policy">
     <NavigationBack title="Privacy Policy" />
     <div class="container pl-2 pr-2">
-      <h5 class="font-color-blue-secondary">Privacy Policy</h5>
+      <h2 class="font-color-blue-secondary">Privacy Policy</h2>
       <p>
         At gotoba, accessible from gotoba.surge,sh, one of our main
         priorities is the privacy of our visitors. This Privacy Policy
@@ -23,15 +23,15 @@
         than this website.
       </p>
 
-      <h6 class="font-color-blue-secondary semibold">Consent</h6>
+      <h3 class="font-color-blue-secondary semibold">Consent</h3>
       <p>
         By using our website, you hereby consent to our Privacy Policy
         and agree to its terms.
       </p>
 
-      <h6 class="font-color-blue-secondary semibold">
+      <h3 class="font-color-blue-secondary semibold">
         Information we collect
-      </h6>
+      </h3>
       <p>
         The personal information that you are asked to provide, and the
         reasons why you are asked to provide it, will be made clear to you
@@ -51,9 +51,9 @@
         email address, and telephone number.
       </p>
 
-      <h6 class="font-color-blue-secondary semibold">
+      <h3 class="font-color-blue-secondary semibold">
         How we use your information
-      </h6>
+      </h3>
       <p>
         We use the information we collect in various ways, including to:
       </p>
@@ -73,7 +73,7 @@
         <li>Find and prevent fraud</li>
       </ul>
 
-      <h6 class="font-color-blue-secondary semibold">Log Files</h6>
+      <h3 class="font-color-blue-secondary semibold">Log Files</h3>
       <p>
         gotoba follows a standard procedure of using log files. These files
         log visitors when they visit websites. All hosting companies do this
@@ -93,9 +93,9 @@
         </a>.
       </p>
 
-      <h6 class="font-color-blue-secondary semibold">
+      <h3 class="font-color-blue-secondary semibold">
         Cookies and Web Beacons
-      </h6>
+      </h3>
       <p>
         Like any other website, gotoba uses 'cookies'. These cookies are used
         to store information including visitors' preferences, and the pages
@@ -111,9 +111,9 @@
         </a>.
       </p>
 
-      <h6 class="font-color-blue-secondary semibold">
+      <h3 class="font-color-blue-secondary semibold">
         Advertising Partners Privacy Policies
-      </h6>
+      </h3>
       <p>
         You may consult this list to find the Privacy Policy for each of the
         advertising partners of gotoba.
@@ -134,9 +134,9 @@
         are used by third-party advertisers.
       </p>
 
-      <h6 class="font-color-blue-secondary semibold">
+      <h3 class="font-color-blue-secondary semibold">
         Third Party Privacy Policies
-      </h6>
+      </h3>
       <p>
         gotoba's Privacy Policy does not apply to other advertisers or
         websites. Thus, we are advising you to consult the respective
@@ -153,9 +153,9 @@
         respective websites. What Are Cookies?
       </p>
 
-      <h6 class="font-color-blue-secondary semibold">
+      <h3 class="font-color-blue-secondary semibold">
         CCPA Privacy Rights (Do Not Sell My Personal Information)
-      </h6>
+      </h3>
       <p>
         Under the CCPA, among other rights, California consumers have the
         right to:
@@ -182,9 +182,9 @@
         would like to exercise any of these rights, please contact us.
       </p>
 
-      <h6 class="font-color-blue-secondary semibold">
+      <h3 class="font-color-blue-secondary semibold">
         GDPR Data Protection Rights
-      </h6>
+      </h3>
       <p>
         We would like to make sure you are fully aware of all of your data
         protection rights. Every user is entitled to the following:
@@ -224,9 +224,9 @@
         would like to exercise any of these rights, please contact us.
       </p>
 
-      <h6 class="font-color-blue-secondary semibold">
+      <h3 class="font-color-blue-secondary semibold">
         Children's Information
-      </h6>
+      </h3>
       <p>
         Another part of our priority is adding protection for children while
         using the internet. We encourage parents and guardians to observe,
@@ -261,7 +261,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h5, h6 {
+h2, h3 {
   margin-top: 20px;
 }
 

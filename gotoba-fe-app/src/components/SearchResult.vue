@@ -33,12 +33,19 @@ import SearchResultCategory from '@/components/SearchResultCategory.vue';
 
 export default {
   name: 'SearchResult',
-  props: {
-    searchKeyword: String,
-    searchResultTotal: Number,
-  },
   components: {
     SearchResultCategory,
+  },
+  computed: {
+    searchKeywords() {
+      return this.$store.getters.searchKeywords;
+    },
+    searchResults() {
+      return this.$store.getters.searchResults;
+    },
+    searchResultTotal() {
+      return this.$store.getters.searchResults.length;
+    }
   },
   data() {
     return {

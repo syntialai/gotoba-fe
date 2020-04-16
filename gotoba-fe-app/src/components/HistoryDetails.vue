@@ -2,7 +2,7 @@
   <div class="history-details">
     <div class="order-details bg-white p-2">
       <div class="title w-100 border-bottom-gray-young">
-        <h6>Order Details</h6>
+        <h3>Order Details</h3>
       </div>
       <div class="details">
         <div
@@ -22,7 +22,7 @@
 
     <div class="order-items">
       <div class="title w-100 border-bottom-gray-young">
-        <h6>Order Item(s)</h6>
+        <h3>Order Item(s)</h3>
       </div>
       <div class="order-items-group">
         <OrderItems
@@ -38,7 +38,7 @@
 
     <div class="payment-details">
       <div class="title w-100 border-bottom-gray-young">
-        <h6>Payment Details</h6>
+        <h3>Payment Details</h3>
       </div>
       <PaymentDetail price="" discount="" />
     </div>

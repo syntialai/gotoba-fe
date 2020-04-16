@@ -4,7 +4,7 @@
 
     <div class="order-items p-2">
       <div class="title w-100 border-bottom-gray-young">
-        <h6>Order Item(s)</h6>
+        <h3>Order Item(s)</h3>
       </div>
       <div class="order-items-group">
         <div class="order-item-detail"
@@ -30,14 +30,14 @@
 
     <div class="payment-details">
       <div class="title w-100 border-bottom-gray-young">
-        <h6>Payment Details</h6>
+        <h3>Payment Details</h3>
       </div>
       <PaymentDetail price="" discount="" />
     </div>
 
     <div class="payment-method">
       <div class="title w-100 border-bottom-gray-young">
-        <h6>Payment Method</h6>
+        <h3>Payment Method</h3>
       </div>
       <PaymentMethod />
     </div>

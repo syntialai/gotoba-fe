@@ -4,7 +4,7 @@
  * @param {String} price
  * @param {Bool} comma
  * @param {Bool} idr
- * @returns 
+ * @returns Price in Rupiah Format
  */
 export const formatPrice = (price, comma = false, idr = false) => {
   return (idr? 'Rp' : '') +
