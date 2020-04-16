@@ -1,8 +1,8 @@
 <template>
-  <div class="notification-detail">
-    <NavigationBack title="Notification Detail" />
+  <div class="promotion-detail">
+    <NavigationBack title="Promotion Detail" />
 
-    <div class="notification-card">
+    <div class="promotion-card">
       <CardInfoDetail v-bind="detail" />
     </div>
   </div>
@@ -13,7 +13,7 @@ import NavigationBack from '@/components/NavigationBack.vue';
 import CardInfoDetail from '@/components/CardInfoDetail.vue';
 
 export default {
-  name: 'NotificationDetail',
+  name: 'PromotionDetail',
   components: {
     NavigationBack,
     CardInfoDetail,
