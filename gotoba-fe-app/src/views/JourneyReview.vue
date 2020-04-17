@@ -1,8 +1,8 @@
 <template>
-  <div class="restaurant-review">
+  <div class="journey-review">
     <NavigationBack title="Reviews" />
 
-    <ReviewDetailGroup :data="restaurantData" />
+    <ReviewDetailGroup :data="journeyData" />
   </div>
 </template>
 
@@ -11,10 +11,10 @@ import NavigationBack from '@/components/NavigationBack.vue';
 import ReviewDetailGroup from '@/components/ReviewDetailGroup.vue';
 
 export default {
-  name: 'RestaurantReview',
+  name: 'JourneyReview',
   computed: {
-    restaurantData() {
-      return this.$store.getters.restaurantData;
+    journeyData() {
+      return this.$store.getters.journeyData;
     },
   },
 };

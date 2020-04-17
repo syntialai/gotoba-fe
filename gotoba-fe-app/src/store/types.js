@@ -22,3 +22,8 @@ export const GET_REVIEW_DATA = 'GET_REVIEW_DATA';
  * Restaurant
  */
 export const GET_RESTAURANT_DATA = 'GET_RESTAURANT_DATA';
+
+/**
+ * Journey
+ */
+export const GET_JOURNEY_DATA = 'GET_JOURNEY_DATA';
