@@ -18,8 +18,8 @@ const getters = {
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.GET_RESTAURANT_DATA](state, res) {
-		state.restaurantData = res
-	},
+    state.restaurantData = res;
+  },
 };
 
 export default {

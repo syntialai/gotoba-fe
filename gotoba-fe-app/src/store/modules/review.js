@@ -12,14 +12,14 @@ const actions = {
 };
 
 const getters = {
-  reviewData: state => state.reviewData,
+  reviewData: (state) => state.reviewData,
 };
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.GET_REVIEW_DATA](state, res) {
-		state.reviewData = res
-	},
+    state.reviewData = res;
+  },
 };
 
 export default {

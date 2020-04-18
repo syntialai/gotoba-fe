@@ -12,7 +12,7 @@
       <b-card-text>
         {{ info }}
       </b-card-text>
-    </b-card>    
+    </b-card>
   </div>
 </template>
 

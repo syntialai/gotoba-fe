@@ -24,7 +24,7 @@ export default {
         title: 'String',
         image: 'String',
         info: 'String',
-      }
+      },
     };
   },
 };
