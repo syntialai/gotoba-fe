@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import PrivacyPolicy from '../views/PrivacyPolicy.vue';
+import PrivacyPolicy from '../views/User/PrivacyPolicy.vue';
 import { Components, Pages } from './pages';
 
 Vue.use(VueRouter);
