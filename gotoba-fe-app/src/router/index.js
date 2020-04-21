@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import PrivacyPolicy from '../views/PrivacyPolicy.vue';
+import PrivacyPolicy from '../views/User/PrivacyPolicy.vue';
 import { Components, Pages } from './pages';
 
 Vue.use(VueRouter);
@@ -72,15 +72,21 @@ const routes = [
     name: 'Search',
     component: Pages.SEARCH,
   },
+  {
+    path: '/my-tickets/',
+    name: 'My Tickets',
+    component: Pages.MY_TICKETS,
+    children: [
+      {
+        path: 'expired',
+        component: Components.TICKET_EXPIRED,
+      },
+    ],
+  },
   // {
   //   path: '/itinerary',
   //   name: 'Itinerary',
   //   component: ITINERARY,
-  // },
-  // {
-  //   path: '/ticket',
-  //   name: 'My Ticket',
-  //   component: MY_TICKET,
   // },
   // {
   //   path: '/cart',

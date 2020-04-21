@@ -2,23 +2,23 @@
 import * as Types from '../types';
 
 const state = {
-  restaurantData: {},
+  ticketData: {},
 };
 
 const actions = {
-  getRestaurantData({ commit }, res) {
-    commit(Types.GET_RESTAURANT_DATA, res);
+  getTicketData({ commit }, res) {
+    commit(Types.GET_TICKET_DATA, res);
   },
 };
 
 const getters = {
-  restaurantData: (state) => state.restaurantData,
+  ticketData: (state) => state.ticketData,
 };
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
-  [Types.GET_RESTAURANT_DATA](state, res) {
-    state.restaurantData = res;
+  [Types.GET_TICKET_DATA](state, res) {
+    state.ticketData = res;
   },
 };
 

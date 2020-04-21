@@ -27,3 +27,8 @@ export const GET_RESTAURANT_DATA = 'GET_RESTAURANT_DATA';
  * Journey
  */
 export const GET_JOURNEY_DATA = 'GET_JOURNEY_DATA';
+
+/**
+ * Ticket
+ */
+export const GET_TICKET_DATA = 'GET_TICKET_DATA';
