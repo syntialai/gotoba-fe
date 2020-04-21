@@ -72,15 +72,21 @@ const routes = [
     name: 'Search',
     component: Pages.SEARCH,
   },
+  {
+    path: '/my-tickets/',
+    name: 'My Tickets',
+    component: Pages.MY_TICKETS,
+    children: [
+      {
+        path: 'expired',
+        component: Components.TICKET_EXPIRED,
+      },
+    ],
+  },
   // {
   //   path: '/itinerary',
   //   name: 'Itinerary',
   //   component: ITINERARY,
-  // },
-  // {
-  //   path: '/ticket',
-  //   name: 'My Ticket',
-  //   component: MY_TICKET,
   // },
   // {
   //   path: '/cart',
