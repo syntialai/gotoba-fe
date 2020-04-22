@@ -83,6 +83,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: Components.GALLERY,
+  },
   // {
   //   path: '/itinerary',
   //   name: 'Itinerary',
