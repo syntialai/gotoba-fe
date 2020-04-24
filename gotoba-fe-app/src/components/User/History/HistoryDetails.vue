@@ -25,7 +25,7 @@
         <h3>Order Item(s)</h3>
       </div>
       <div class="order-items-group">
-        <OrderItems
+        <order-items
           v-for="item in items"
           :key="item.name.toLowerCase().replace(' ','-')"
           :name="item.name"
@@ -40,14 +40,14 @@
       <div class="title w-100 border-bottom-gray-young">
         <h3>Payment Details</h3>
       </div>
-      <PaymentDetail price="" discount="" />
+      <payment-detail price="" discount="" />
     </div>
   </div>  
 </template>
 
 <script>
-import PaymentDetail from '@/components/User/Payment/PaymentDetail.vue';
-import OrderItems from '@/components/User/OrderItems.vue';
+import PaymentDetail from '../Payment/PaymentDetail.vue';
+import OrderItems from '../OrderItems.vue';
 
 export default {
   name: 'HistoryDetails',

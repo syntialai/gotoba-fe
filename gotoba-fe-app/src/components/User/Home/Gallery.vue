@@ -12,7 +12,7 @@
       Show every moment captured around Lake Toba
     </div>
 
-    <VueGallery :images="images" :index="index" @close="index = null" />
+    <vue-gallery :images="images" :index="index" @close="index = null" />
     <div class="image-group d-flex justify-content-between flex-wrap">
       <div
         class="responsive-image"

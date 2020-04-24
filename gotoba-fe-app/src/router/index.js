@@ -88,11 +88,11 @@ const routes = [
     name: 'Gallery',
     component: Components.GALLERY,
   },
-  // {
-  //   path: '/itinerary',
-  //   name: 'Itinerary',
-  //   component: ITINERARY,
-  // },
+  {
+    path: '/itinerary',
+    name: 'Itinerary',
+    component: Components.ITINERARY,
+  },
   // {
   //   path: '/cart',
   //   name: 'Cart',

@@ -24,11 +24,9 @@
   'components/form';
 
 @import
-  'pages/home';
+  'pages/home',
+  'pages/timeline';
 
 @import
   'themes/default',
   'themes/dark';
-  
-// @import '~node_modules/bootstrap/scss/bootstrap';
-// @import '~node_modules/bootstrap-vue/src/index.scss';

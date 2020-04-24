@@ -1,27 +1,22 @@
 <template>
   <div class="itinerary-plan bg-white border-square-20 p-3">
-    <VTimelinePro updates="updates" />
+    <Timeline :timelines="timelines" />
   </div>
 </template>
 
 <script>
-import VTimelinePro from 'vue-timeline-pro';
+import Timeline from '../../Partial/Timeline.vue';
 
 export default {
   name: 'ItineraryPlan',
   components: {
-    VTimelinePro,
+    Timeline,
   },
   data() {
     return {
-      updates: [
-        {
-          icon: '/awesomeimage.png',
-          title: 'My awesome title',
-          description: 'Lorem ...',
-          date: new Date(),
-          url: 'https://wakeupyouneedtomakemoney...',
-        },
+      timelines: [
+        { place: 'Danau Toba', time: '9.30am' },
+        { place: 'Jenny\'s Restaurant', time: '12.30pm' },
       ],
     };
   },

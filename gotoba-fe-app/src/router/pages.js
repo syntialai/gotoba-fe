@@ -14,6 +14,7 @@ const HISTORY_PENDING = () => import('../components/User/History/HistoryPending.
 const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancelled.vue');
 const TICKET_EXPIRED = () => import('../components/User/Ticket/ExpiredTicket.vue');
 const GALLERY = () => import('../components/User/Home/GalleryHome.vue');
+const ITINERARY = () => import('../components/User/Itinerary/ItineraryPlan.vue');
 
 const Pages = {
   LOGIN,
@@ -34,6 +35,7 @@ const Components = {
   HISTORY_CANCELLED,
   TICKET_EXPIRED,
   GALLERY,
+  ITINERARY,
 };
 
 export { Components, Pages };
