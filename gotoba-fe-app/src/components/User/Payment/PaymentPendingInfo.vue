@@ -35,7 +35,7 @@ import formatPrice from '@/utils/filter';
 
 export default {
   name: 'PaymentPendingInfo',
-  method: {
+  methods: {
     formatPrice,
   },
 };

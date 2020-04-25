@@ -45,7 +45,7 @@ export default {
       discount: discountPrice != '0',
     };
   },
-  method: {
+  methods: {
     formatPrice,
   },
 };

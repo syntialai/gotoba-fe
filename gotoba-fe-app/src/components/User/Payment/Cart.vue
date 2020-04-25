@@ -55,7 +55,7 @@ export default {
     OrderItems,
     BottomNavPayment,
   },
-  method: {
+  methods: {
     addItem() {
 
     },
