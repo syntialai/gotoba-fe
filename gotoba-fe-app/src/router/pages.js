@@ -13,6 +13,8 @@ const MY_TICKETS = () => import('../views/User/MyTickets.vue');
 const HISTORY_PENDING = () => import('../components/User/History/HistoryPending.vue');
 const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancelled.vue');
 const TICKET_EXPIRED = () => import('../components/User/Ticket/ExpiredTicket.vue');
+const GALLERY = () => import('../components/User/Home/GalleryHome.vue');
+const ITINERARY = () => import('../components/User/Itinerary/ChooseDateCalendar.vue');
 
 const Pages = {
   LOGIN,
@@ -32,13 +34,9 @@ const Components = {
   HISTORY_PENDING,
   HISTORY_CANCELLED,
   TICKET_EXPIRED,
+  GALLERY,
+  ITINERARY,
 };
 
 export { Components, Pages };
 export default Pages;
-
-// verified user
-// const ITINERARY = () => import('');
-// const PROFILE = () => import('');
-// const MY_TICKET = () => import('');
-// const CART = () => import('');

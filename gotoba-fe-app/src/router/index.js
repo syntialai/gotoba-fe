@@ -83,11 +83,16 @@ const routes = [
       },
     ],
   },
-  // {
-  //   path: '/itinerary',
-  //   name: 'Itinerary',
-  //   component: ITINERARY,
-  // },
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: Components.GALLERY,
+  },
+  {
+    path: '/itinerary',
+    name: 'Itinerary',
+    component: Components.ITINERARY,
+  },
   // {
   //   path: '/cart',
   //   name: 'Cart',

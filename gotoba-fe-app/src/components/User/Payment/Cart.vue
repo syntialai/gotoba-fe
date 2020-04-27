@@ -1,6 +1,6 @@
 <template>
   <div class="cart">
-    <Navigation title="Cart" />
+    <navigation title="Cart" />
 
     <div class="order-items p-2">
       <div
@@ -18,7 +18,7 @@
         >
           <b-form-checkbox>
             <div class="order-item-info">
-              <OrderItems
+              <order-items
                 :name="item.name"
                 :image="item.image"
                 :price="item.price"
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <BottomNavPayment
+    <bottom-nav-payment
       totalItem="1"
       totalPrice="100000"
       innerButton="CHECKOUT"
@@ -44,17 +44,18 @@
 </template>
 
 <script>
-import Navigation from '@/components/Partial/Navigation.vue';
-import OrderItems from '@/components/User/OrderItems.vue';
-import BottomNavPayment from '@/components/User/Payment/BottomNavPayment.vue';
+import Navigation from '../../Partial/Navigation.vue';
+import OrderItems from '../OrderItems.vue';
+import BottomNavPayment from './BottomNavPayment.vue';
 
 export default {
   name: 'Cart',
   component: {
     Navigation,
+    OrderItems,
     BottomNavPayment,
   },
-  method: {
+  methods: {
     addItem() {
 
     },

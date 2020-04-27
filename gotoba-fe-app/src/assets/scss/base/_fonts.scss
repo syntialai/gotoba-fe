@@ -1,7 +1,7 @@
 @mixin font-size {
   @each $value in $font-size-all {
     .font-size-#{$value} {
-      font-size: #{$value}px;
+      font-size: #{$value}px!important;
     }
   }
 }

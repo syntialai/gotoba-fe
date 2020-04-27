@@ -1,19 +1,19 @@
 @mixin border {
   @each $name, $value in $colors {
     .border-#{$name} {
-      border: 1px solid #{$value};
+      border: 1px solid #{$value}!important;
     }
     .border-top-#{$name} {
-      border-top: 1px solid #{$value};
+      border-top: 1px solid #{$value}!important;
     }
     .border-bottom-#{$name} {
-      border-bottom: 1px solid #{$value};
+      border-bottom: 1px solid #{$value}!important;
     }
     .border-left-#{$name} {
-      border-left: 1px solid #{$value};
+      border-left: 1px solid #{$value}!important;
     }
     .border-right-#{$name} {
-      border-right: 1px solid #{$value};
+      border-right: 1px solid #{$value}!important;
     }
   }
   @include map-looping($border-radius, "border", "border-radius");

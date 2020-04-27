@@ -32,7 +32,7 @@ export default {
     date: Date,
     qrCodeValue: String,
   },
-  method: {
+  methods: {
     formatDate,
   },
 };
