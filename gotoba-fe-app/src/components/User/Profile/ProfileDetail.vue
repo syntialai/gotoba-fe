@@ -56,11 +56,11 @@
 </template>
 
 <script>
-import CardProfileDetail from '@/components/User/Profile/CardProfileDetail.vue';
-import AboutProfileDetail from '@/components/User/Profile/AboutProfileDetail.vue';
-import RatingProfileDetail from '@/components/User/Profile/RatingProfileDetail.vue';
-import UserReviewDetail from '@/components/User/UserReviewDetail.vue';
-import CardPromotion from '@/components/User/CardPromotion.vue';
+import CardProfileDetail from './CardProfileDetail.vue';
+import AboutProfileDetail from './AboutProfileDetail.vue';
+import RatingProfileDetail from './RatingProfileDetail.vue';
+import UserReviewDetail from '../UserReviewDetail.vue';
+import CardPromotion from '../CardPromotion.vue';
 
 export default {
   name: 'ProfileDetail',

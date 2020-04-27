@@ -26,7 +26,7 @@ export default {
     totalPrice: String,
     innerButton: String,
   },
-  method: {
+  methods: {
     formatPrice,
   },
 };

@@ -86,8 +86,8 @@ export default {
     };
   },
   mounted() {
-    this.asNavFor1.push(this.$refs.thumbnails);
-    this.asNavFor2.push(this.$refs.main);
+    this.asNavForMain.push(this.$refs.thumbnails);
+    this.asNavForThumbnails.push(this.$refs.main);
   },
 };
 </script>

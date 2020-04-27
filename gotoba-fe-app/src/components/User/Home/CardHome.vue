@@ -12,7 +12,7 @@
       {{ location }}
     </b-card-text>
     <b-card-text class="pl-2 font-size-8 text-muted">
-      <Rating :rate="[rating]" fontSize="8" />
+      <rating :rate="[rating]" fontSize="8" />
       <span class="font-color-black-87 semibold pl-1">
         ({{ rating }})
       </span>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Rating from '@/components/Partial/Rating.vue';
+import Rating from '../../Partial/Rating.vue';
 
 export default {
   name: 'CardHome',

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Navigation title="Main" />
+    <navigation title="Main" />
 
     <div class="container">
       <div id="category" class="m-3">
@@ -37,7 +37,7 @@
       <div class="ongoing-promo content-group">
         <div class="title font-color-blue-primary">
           <span class="title-icon pr-2">
-            <OngoingPromoIcon />
+            <ongoing-promo-icon />
           </span>
           <span class="title-text font-weight-bold">Ongoing Promos</span>
         </div>
@@ -48,7 +48,7 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <CardHome
+          <card-home
             name="Syntia"
             image="../assets/img/logo.png"
             location="Vue js"
@@ -60,7 +60,7 @@
       <div class="nearby-place content-group">
         <div class="title font-color-blue-primary">
           <span class="title-icon pr-2">
-            <NearbyPlaceIcon />
+            <nearby-place-icon />
           </span>
           <span class="title-text font-weight-bold">Recommended Nearby Places</span>
         </div>
@@ -73,7 +73,7 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <CardHome
+          <card-home
             name="Syntia"
             image="../assets/img/logo.png"
             location="Vue js"
@@ -85,7 +85,7 @@
       <div class="nearby-resto content-group">
         <div class="title font-color-blue-primary">
           <span class="title-icon pr-2">
-            <NearbyRestoIcon />
+            <nearby-resto-icon />
           </span>
           <span class="title-text font-weight-bold">Find Eats near Danau Toba</span>
         </div>
@@ -98,7 +98,7 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <CardHome
+          <card-home
             name="Syntia"
             image="../assets/img/logo.png"
             location="Vue js"
@@ -110,7 +110,7 @@
       <div class="nearby-hotel content-group">
         <div class="title font-color-blue-primary">
           <span class="title-icon pr-2">
-            <NearbyHotelIcon />
+            <nearby-hotel-icon />
           </span>
           <span class="title-text font-weight-bold">Where to Stay</span>
         </div>
@@ -123,7 +123,7 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <CardHome
+          <card-home
             name="Syntia"
             image="../assets/img/logo.png"
             location="Vue js"
@@ -133,17 +133,17 @@
       </div>
     </div>
 
-    <Footer />
+    <footer />
   </div>
 </template>
 
 <script>
-import Navigation from '@/components/Partial/Navigation.vue';
-import CardHome from '@/components/User/Home/CardHome.vue';
-import Footer from '@/components/Partial/Footer.vue';
+import Navigation from '../../Partial/Navigation.vue';
+import CardHome from './CardHome.vue';
+import Footer from '../../Partial/Footer.vue';
 import {
   OngoingPromoIcon, NearbyPlaceIcon, NearbyRestoIcon, NearbyHotelIcon,
-} from '@/components/Partial/IconsCustom.vue';
+} from '../../Partial/IconsCustom.vue';
 
 export default {
   name: 'Home',

@@ -30,7 +30,7 @@ export default {
     price: String,
     discount: String,    
   },
-  method: {
+  methods: {
     formatPrice,
   },
 };
