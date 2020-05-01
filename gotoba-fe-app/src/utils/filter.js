@@ -1,20 +1,23 @@
+import { months, days } from './date';
+
 /**
  * Format Rupiah price function
- * 
+ *
  * @param {String} price
  * @param {Bool} comma
  * @param {Bool} idr
  * @returns Price in Rupiah Format
  */
 export const formatPrice = (price, comma = false, idr = false) => {
-  return (idr? 'Rp' : '') +
-    new Intl.NumberFormat('id').format(parseInt(price)) +
-    (comma? '.00' : '');
+  const formattedPrice = (idr ? 'Rp' : '')
+                  + new Intl.NumberFormat('id').format(parseInt(price, 10))
+                  + (comma ? '.00' : '');
+  return formattedPrice;
 };
 
 /**
  * Format Date function
- * 
+ *
  * @param {Date} currentDate
  * @returns Date in custom format
  */
@@ -25,30 +28,20 @@ export const formatDate = (currentDate) => {
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
 
-  return `${days[day]}, ${date} ${months[month].substr(0,3)} ${year}`;
+  return `${days[day]}, ${date} ${months[month].substr(0, 3)} ${year}`;
 };
 
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-const days = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
+/**
+ * Format String function
+ *
+ * @param {String} sentence
+ * @returns String of Capitalized sentence
+ */
+export const toCapitalize = (sentence) => {
+  const capitalized = sentence
+    .toLowerCase()
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+  return capitalized;
+};

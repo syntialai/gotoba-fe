@@ -1,35 +1,41 @@
 <template>
-  <b-breadcrumb :items="menus"></b-breadcrumb>
+  <b-breadcrumb :items="breadcrumbs"></b-breadcrumb>
 </template>
 
 <script>
+import { toCapitalize } from '../../../../utils/filter';
+
 export default {
   name: 'Breadcrumb',
   computed: {
-    menus() {
-      const path = this.$route.path.slice(6);
-      const pathArrays = path.split('/');
-      const active = pathArrays.slice(-1);
-      pathArrays.splice(-1);
+    breadcrumbs() {
+      const pathArray = this.$route.path.split('/');
+      pathArray.shift();
 
-      let menu = [];
-      let link = '/admin'
-      for (item in pathArrays) {
-        link += `/${item}`;
+      const active = pathArray.slice(-1);
+      pathArray.splice(-1);
 
-        menu.push({
-          text: item,
-          to: link,
+      const breadcrumb = pathArray.reduce((array, path, index) => {
+        array.push({
+          text: toCapitalize(path), // this.$route.matched[index].meta.breadcrumb || path
+          to: array[index - 1]
+            ? `/${array[index - 1].path}/${path}`
+            : `/admin/${path}`,
         });
-      }
 
-      menu.push({
-        text: active,
+        return array;
+      }, []);
+
+      breadcrumb.push({
+        text: toCapitalize(active[0]),
         active: true,
       });
 
-      return menu;
+      return breadcrumb;
     },
+  },
+  methods: {
+    toCapitalize,
   },
 };
 </script>
