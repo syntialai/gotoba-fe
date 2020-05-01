@@ -1,15 +1,15 @@
 <template>
   <div class="valid-ticket pt-2 pb-2">
-    <CardTicket
+    <card-ticket
       v-for="ticket in validTickets"
       :key="ticket.title"
       v-bind="ticket"
     />
-  </div>  
+  </div>
 </template>
 
 <script>
-import CardTicket from '@/components/User/Ticket/ValidTicket.vue';
+import CardTicket from './CardTicket.vue';
 
 export default {
   name: 'ValidTicket',
@@ -17,7 +17,7 @@ export default {
     CardTicket,
   },
   computed: {
-    validTickets: ,
-  }
+    validTickets: {},
+  },
 };
 </script>
