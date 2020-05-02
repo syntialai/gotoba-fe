@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import PrivacyPolicy from '../views/User/PrivacyPolicy.vue';
-import { Components, Pages } from './pages';
+import { Components, Pages, Admin } from './pages';
 
 Vue.use(VueRouter);
 
@@ -83,21 +83,17 @@ const routes = [
       },
     ],
   },
-  // {
-  //   path: '/itinerary',
-  //   name: 'Itinerary',
-  //   component: ITINERARY,
-  // },
-  // {
-  //   path: '/cart',
-  //   name: 'Cart',
-  //   component: CART,
-  // },
-  // {
-  //   path: '/profile',
-  //   name: 'Profile',
-  //   component: PROFILE,
-  // },
+  {
+    path: '/admin/',
+    name: 'Admin',
+    component: Admin.USER_DATA,
+    children: [
+      {
+        path: 'user',
+        component: Admin.USER_DATA,
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

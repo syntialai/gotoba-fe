@@ -14,7 +14,9 @@ const HISTORY_PENDING = () => import('../components/User/History/HistoryPending.
 const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancelled.vue');
 const TICKET_EXPIRED = () => import('../components/User/Ticket/ExpiredTicket.vue');
 
-const Pages = {
+const USER_DATA = () => import('../views/Admin/UserData.vue');
+
+export const Pages = {
   LOGIN,
   SIGN_UP,
   TERMS_AND_CONDITION,
@@ -28,17 +30,12 @@ const Pages = {
   MY_TICKETS,
 };
 
-const Components = {
+export const Components = {
   HISTORY_PENDING,
   HISTORY_CANCELLED,
   TICKET_EXPIRED,
 };
 
-export { Components, Pages };
-export default Pages;
-
-// verified user
-// const ITINERARY = () => import('');
-// const PROFILE = () => import('');
-// const MY_TICKET = () => import('');
-// const CART = () => import('');
+export const Admin = {
+  USER_DATA,
+};

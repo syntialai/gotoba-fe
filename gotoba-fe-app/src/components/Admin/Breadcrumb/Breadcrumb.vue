@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { toCapitalize } from '../../../../utils/filter';
+import { toCapitalize } from '../../../utils/filter';
 
 export default {
   name: 'Breadcrumb',
