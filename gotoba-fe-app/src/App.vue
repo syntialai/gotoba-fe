@@ -16,10 +16,10 @@ export default {
     Admin,
     Default,
   },
-  data() {
-    return {
-      layout: 'admin',
-    };
+  computed: {
+    layout() {
+      return `${(this.$route.meta.layout || 'default')}`;
+    },
   },
 };
 </script>

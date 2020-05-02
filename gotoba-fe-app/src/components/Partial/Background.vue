@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-curve position-absolute">
+  <div class="background position-absolute">
     <svg id="curve-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400.13 238.04">
       <path id="Path_59" data-name="Path 59"
         d="M32.87-1013.173s363.277-239.759,
@@ -9,15 +9,21 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'Background',
+};
+</script>
+
 <style lang="scss">
 @import "~@/assets/scss/abstracts/variables";
 
-body, .bg-curve {
+body, .background {
   margin: 0;
   padding: 0;
 }
 
-.bg-curve {
+.background {
   position: relative;
   top: 0;
   background: $blue-gradient;
@@ -26,19 +32,19 @@ body, .bg-curve {
 }
 
 @media screen and (max-width: 768px) {
-  .bg-curve {
+  .background {
     width: 100%;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .bg-curve {
+  .background {
     margin: 0 auto;
   }
 }
 
 @media screen and (min-width: 426px) {
-  .bg-curve {
+  .background {
     height: 200px;
   }
 }
