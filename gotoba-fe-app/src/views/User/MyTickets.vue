@@ -27,6 +27,6 @@
 
 <script>
 export default {
-  name: 'MyTickets'
+  name: 'MyTickets',
 };
 </script>

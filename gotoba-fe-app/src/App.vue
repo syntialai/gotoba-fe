@@ -1,12 +1,26 @@
 <template>
   <div id="app">
-    <router-view />
+    <component :is="layout">
+      <router-view />
+    </component>
   </div>
 </template>
 
 <script>
+import Admin from './layouts/Admin.vue';
+import Default from './layouts/Default.vue';
+
 export default {
   name: 'App',
+  components: {
+    Admin,
+    Default,
+  },
+  data() {
+    return {
+      layout: 'admin',
+    };
+  },
 };
 </script>
 

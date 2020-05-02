@@ -5,7 +5,7 @@
       :key="ticket.title"
       v-bind="ticket"
     />
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
     CardTicket,
   },
   computed: {
-    expiredTickets: ,
-  }
+    expiredTickets: {},
+  },
 };
 </script>
