@@ -8,15 +8,17 @@
       <menu-info class="pt-2 ml-5" />
 
       <breadcrumb class="mt-2 ml-5 mb-4 p-0" />
+
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import Breadcrumb from '../components/Admin/Partial/Breadcrumb/Breadcrumb.vue';
-import MenuInfo from '../components/Admin/Partial/MenuInfo/MenuInfo.vue';
-import Search from '../components/Admin/Partial/Search/Search.vue';
-import Sidebar from '../components/Admin/Partial/Sidebar/Sidebar.vue';
+import Breadcrumb from '../components/Admin/Breadcrumb/Breadcrumb.vue';
+import MenuInfo from '../components/Admin/MenuInfo/MenuInfo.vue';
+import Search from '../components/Admin/Search/Search.vue';
+import Sidebar from '../components/Admin/Sidebar/Sidebar.vue';
 
 export default {
   name: 'Admin',

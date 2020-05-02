@@ -15,8 +15,14 @@
 export default {
   name: 'Pagination',
   props: {
-    currentPage: Number,
-    perPage: Number,
+    currentPage: {
+      type: Number,
+      default: 1,
+    },
+    perPage: {
+      type: Number,
+      default: 10,
+    },
     idControls: String,
   },
 };
