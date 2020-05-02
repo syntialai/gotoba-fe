@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar overflow-auto z1 box-shadow">
+  <div class="sidebar h-100 position-fixed z1 box-shadow">
     <b-button
       variant="light"
       class="p-3"
@@ -12,7 +12,7 @@
     </b-button>
     <transition name="width">
       <aside id="sidebar-admin" class="bg-white" shadow>
-        <div class="sidebar__profile">
+        <div class="sidebar__profile py-3">
           <img src=""
             alt="admin-profile-pict"
             :width="pictSize + 'px'"
