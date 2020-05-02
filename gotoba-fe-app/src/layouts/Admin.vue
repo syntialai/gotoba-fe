@@ -2,14 +2,14 @@
   <div class="admin">
     <sidebar />
 
-    <div class="mx-5 my-0">
-      <search class="ml-5 py-3 mb-4" />
+    <div style="margin: 0 20px 0 80px">
+      <search class="py-3 mb-4" />
 
-      <menu-info class="pt-2 ml-5" />
+      <menu-info class="pt-2" />
 
-      <breadcrumb class="mt-2 ml-5 mb-4 p-0" />
+      <breadcrumb class="mt-2 mb-4 p-0" />
 
-      <router-view />
+      <slot />
     </div>
   </div>
 </template>

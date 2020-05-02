@@ -1,10 +1,11 @@
 <template>
-  <div class="show-data-count d-flex">
+  <div class="show-data-count d-flex align-items-center">
     <div>Show</div>
     <b-form-select
       v-model="selected"
       :options="options"
-      class="mb-3"
+      class="mx-2"
+      style="width: 72px"
     ></b-form-select>
     <div>entries</div>
   </div>

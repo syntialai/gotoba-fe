@@ -86,6 +86,7 @@ const routes = [
   {
     path: '/admin/',
     name: 'Admin',
+    component: Admin.USER_DATA,
     children: [
       {
         path: 'user',

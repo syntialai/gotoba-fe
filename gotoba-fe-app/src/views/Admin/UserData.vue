@@ -1,25 +1,26 @@
 <template>
   <div class="user-data">
     <show-data-count
-      :perPage="10"
-      class="my-2"
+      :perPage="perPage"
+      class="my-3"
     />
 
     <user-table-data
       id="data-table"
       class="my-2"
-      :perPage="10"
+      :perPage="perPage"
     />
 
     <div class="info">
-      Showing {{ currentPage * perPage }} to
-      {{ currentPage * (perPage + 1) }} of
-      {{ users.length }} entries
+      Showing {{ (currentPage - 1) * perPage + 1 }} to
+      {{ currentPage * perPage }} of
+      50 entries
+      <!-- {{ users.length }} entries -->
     </div>
 
     <pagination
-      :currentPage="1"
-      :perPage="10"
+      :currentPage="currentPage"
+      :perPage="perPage"
       class="my-3"
       idControls="data-table"
     />
@@ -37,6 +38,12 @@ export default {
     Pagination,
     ShowDataCount,
     UserTableData,
+  },
+  data() {
+    return {
+      currentPage: 1,
+      perPage: 10,
+    };
   },
 };
 </script>
