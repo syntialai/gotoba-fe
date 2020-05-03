@@ -1,7 +1,5 @@
 <template>
   <div class="payment-guide bg-white">
-    <NavigationBack title="Tranfer Bank Payment" />
-
     <div class="article-content p-3">
       <h2>How to Pay with Bank Transfer</h2>
       <div class="font-size-14">
@@ -90,13 +88,8 @@
 </template>
 
 <script>
-import NavigationBack from '@/components/Partial/NavigationBack.vue';
-
 export default {
   name: 'PaymentGuide',
-  components: {
-    NavigationBack,
-  },
 };
 </script>
 

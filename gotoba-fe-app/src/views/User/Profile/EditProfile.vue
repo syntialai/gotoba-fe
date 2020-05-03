@@ -1,7 +1,5 @@
 <template>
   <div class="edit-profile">
-    <NavigationBack title="Edit Profile" />
-
     <div class="container pt-4 mb-5">
       <b-form @submit="updateProfile">
         <b-form-group id="edit-img">
@@ -99,14 +97,10 @@
 </template>
 
 <script>
-import NavigationBack from '@/components/Partial/NavigationBack.vue';
 import api from '@/api/api';
 
 export default {
   name: 'EditProfile',
-  components: {
-    NavigationBack,
-  },
   data() {
     return {
       nickname: '',
