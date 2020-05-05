@@ -1,7 +1,5 @@
 <template>
   <div class="cart">
-    <navigation title="Cart" />
-
     <div class="order-items p-2">
       <div
         class="w-100 border-bottom-gray-young d-flex justify-content-between"
@@ -24,11 +22,7 @@
                 :price="item.price"
                 :discountPrice="item.discountPrice"
               />
-              <b-button-group size="sm">
-                <b-button @click="subItem">-</b-button>
-                <b-button :class="['item-'+item.name+'-count']">1</b-button>
-                <b-button @click="addItem">+</b-button>
-              </b-button-group>
+              <b-form-spinbutton id="item" v-model="itemCount" min="1" max="100" />
             </div>
           </b-form-checkbox>
         </div>
@@ -44,24 +38,19 @@
 </template>
 
 <script>
-import Navigation from '../../Partial/Navigation.vue';
-import OrderItems from '../OrderItems.vue';
-import BottomNavPayment from './BottomNavPayment.vue';
+import OrderItems from '../../../components/User/OrderItems.vue';
+import BottomNavPayment from '../../../components/User/Payment/BottomNavPayment.vue';
 
 export default {
   name: 'Cart',
   component: {
-    Navigation,
     OrderItems,
     BottomNavPayment,
   },
-  methods: {
-    addItem() {
-
-    },
-    subItem() {
-
-    },
-  }
+  data() {
+    return {
+      itemCount: 1,
+    };
+  },
 };
 </script>

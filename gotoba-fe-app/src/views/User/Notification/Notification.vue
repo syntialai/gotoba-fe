@@ -1,9 +1,7 @@
 <template>
   <div class="notification">
-    <NavigationBack title="Notification" />
-
     <div class="notification-group">
-      <CardNotification
+      <card-notification
         v-for="item in notifications"
         :key="item.title.match(/^[\w\s]/g).join('').substring(1,10)"
         :title="item.title"
@@ -15,13 +13,11 @@
 </template>
 
 <script>
-import NavigationBack from '@/components/Partial/NavigationBack.vue';
-import CardNotification from '@/components/User/Notification/CardNotification.vue';
+import CardNotification from '../../../components/User/Notification/CardNotification.vue';
 
 export default {
   name: 'Notification',
   components: {
-    NavigationBack,
     CardNotification,
   },
   data() {

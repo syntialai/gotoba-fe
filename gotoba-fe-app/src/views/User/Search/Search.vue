@@ -1,19 +1,19 @@
 <template>
   <div class="search">
-    <SearchNavigation class="mb-1" />
+    <search-navigation class="mb-1" />
 
-    <SearchAutocomplete
+    <search-autocomplete
       :show="keywords.length > 0"
-    ></SearchAutocomplete>
+    ></search-autocomplete>
 
-    <SearchContent
+    <search-content
       title="Your History"
       :keywords='history'
       v-if="history.length > 0"
       class="mt-3 mb-3"
     />
 
-    <SearchContent
+    <search-content
       title="Recommendation"
       :keywords='recommendation'
       v-if="recommendation.length > 0"
@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import SearchNavigation from '@/components/User/Search/SearchNavigation.vue';
-import SearchContent from '@/components/User/Search/SearchContent.vue';
-import SearchAutocomplete from '@/components/User/Search/SearchAutocomplete.vue';
+import SearchNavigation from '../../../components/User/Search/SearchNavigation.vue';
+import SearchContent from '../../../components/User/Search/SearchContent.vue';
+import SearchAutocomplete from '../../../components/User/Search/SearchAutocomplete.vue';
 
 export default {
   name: 'Search',

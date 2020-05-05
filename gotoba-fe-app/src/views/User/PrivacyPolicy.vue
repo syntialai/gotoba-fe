@@ -1,6 +1,5 @@
 <template>
   <div class="privacy-policy">
-    <NavigationBack title="Privacy Policy" />
     <div class="container pl-2 pr-2">
       <h2 class="font-color-blue-secondary">Privacy Policy</h2>
       <p>
@@ -250,13 +249,8 @@
 </template>
 
 <script>
-import NavigationBack from '@/components/Partial/NavigationBack.vue';
-
 export default {
   name: 'PrivacyPolicy',
-  components: {
-    NavigationBack,
-  },
 };
 </script>
 

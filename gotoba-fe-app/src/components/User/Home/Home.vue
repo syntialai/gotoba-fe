@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <navigation title="Main" />
-
     <div class="container">
       <div id="category" class="m-3">
         <b-button-group
@@ -138,9 +136,8 @@
 </template>
 
 <script>
-import Navigation from '../../Partial/Navigation.vue';
 import CardHome from './CardHome.vue';
-import Footer from '../../Partial/Footer.vue';
+import Footer from '../../Footer.vue';
 import {
   OngoingPromoIcon, NearbyPlaceIcon, NearbyRestoIcon, NearbyHotelIcon,
 } from '../../Partial/IconsCustom.vue';
@@ -171,8 +168,7 @@ export default {
       ],
     };
   },
-  components: {
-    Navigation,    
+  components: {   
     CardHome,
     Footer,
     // AboutIcon,

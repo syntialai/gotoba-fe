@@ -1,7 +1,5 @@
 <template>
   <div class="payment-order">
-    <NavigationBack title="Payment" />
-
     <div class="information p-2">
       <div class="image-waiting p-4 w-100">
         <img src="@/assets/Waiting.png" alt="Waiting">
@@ -51,7 +49,7 @@
       <div class="title w-100 border-bottom-gray-young">
         <span class="font-color-black-87">Payment details:</span>
       </div>
-      <PaymentDetail price="" discount="" />
+      <payment-detail price="" discount="" />
     </div>
 
     <b-button class="w-100 btn custom-btn-primary">SHOW ORDER DETAILS</b-button>
@@ -61,13 +59,12 @@
 
 <script>
 import formatPrice from '@/utils/filter';
-import NavigationBack from '@/components/Partial/NavigationBack.vue';
+import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
 
 export default {
   name: 'PaymentOrder',
   component: {
-    NavigationBack,
-    PaymentGuide,
+    PaymentDetail,
   },
   props: {
     paymentId: String,

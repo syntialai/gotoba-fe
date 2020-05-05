@@ -1,27 +1,4 @@
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-const days = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
+import { months, days } from './date';
 
 /**
  * Format Rupiah price function
@@ -32,11 +9,10 @@ const days = [
  * @returns Price in Rupiah Format
  */
 export const formatPrice = (price, comma = false, idr = false) => {
-  const rupiahFormat = idr ? 'Rp' : '';
-  const priceFormatted = new Intl.NumberFormat('id').format(price);
-  const commaFormat = comma ? '.00' : '';
-
-  return rupiahFormat + priceFormatted + commaFormat;
+  const formattedPrice = (idr ? 'Rp' : '')
+                  + new Intl.NumberFormat('id').format(parseInt(price, 10))
+                  + (comma ? '.00' : '');
+  return formattedPrice;
 };
 
 /**
@@ -69,3 +45,18 @@ export const toFullMonth = (month) => months[month];
  * @returns String of Day
  */
 export const toFullDay = (day) => days[day];
+
+/**
+ * Format String function
+ *
+ * @param {String} sentence
+ * @returns String of Capitalized sentence
+ */
+export const toCapitalize = (sentence) => {
+  const capitalized = sentence
+    .toLowerCase()
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+  return capitalized;
+};

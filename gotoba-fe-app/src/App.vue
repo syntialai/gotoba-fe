@@ -1,12 +1,34 @@
 <template>
   <div id="app">
-    <router-view />
+    <component :is="layout">
+      <router-view />
+    </component>
   </div>
 </template>
 
 <script>
+import Admin from './layouts/Admin.vue';
+import Auth from './layouts/Auth.vue';
+import Default from './layouts/Default.vue';
+import Details from './layouts/Details.vue';
+import Empty from './layouts/Empty.vue';
+import NotFound from './layouts/NotFound.vue';
+
 export default {
   name: 'App',
+  components: {
+    Admin,
+    Auth,
+    Default,
+    Details,
+    Empty,
+    NotFound,
+  },
+  computed: {
+    layout() {
+      return `${(this.$route.meta.layout || 'default')}`;
+    },
+  },
 };
 </script>
 

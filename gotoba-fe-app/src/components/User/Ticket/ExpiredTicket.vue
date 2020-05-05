@@ -1,6 +1,6 @@
 <template>
   <div class="expired-ticket pt-2 pb-2">
-    <CardTicket
+    <card-ticket
       v-for="ticket in expiredTickets"
       :key="ticket.title"
       v-bind="ticket"
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import CardTicket from '@/components/User/Ticket/CardTicket.vue';
+import CardTicket from './CardTicket.vue';
 
 export default {
   name: 'ExpiredTicket',
@@ -17,7 +17,7 @@ export default {
     CardTicket,
   },
   computed: {
-    expiredTickets: [],
+    expiredTickets: {},
   },
 };
 </script>
