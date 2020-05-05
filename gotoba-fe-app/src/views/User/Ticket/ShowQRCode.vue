@@ -5,7 +5,7 @@
   >
     <div class="title text-white bold font-size-32">QR Code</div>
 
-    <QRCodeInfo v-bind="ticketInfo" />
+    <q-r-code-info v-bind="ticketInfo" />
 
     <div class="close">
       <b-button
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import QRCodeInfo from '@/components/User/Ticket/QRCodeInfo.vue';
+import QRCodeInfo from '../../../components/User/Ticket/QRCodeInfo.vue';
 
 export default {
   name: 'ShowQRCode',

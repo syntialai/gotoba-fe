@@ -1,11 +1,11 @@
 <template>
   <div class="profile-detail">
-    <CardProfileDetail
+    <card-profile-detail
       class="mb-2 mt-2"
       v-bind="data"
     />
 
-    <AboutProfileDetail class="mb-2" :data="data" />
+    <about-profile-detail class="mb-2" :data="data" />
 
     <div class="rating-and-reviews mb-2">
       <div
@@ -19,12 +19,12 @@
         ></b-icon>
       </div>
       
-      <RatingProfileDetail />
+      <rating-profile-detail />
 
       <div class="recent-reviews mt-3">
         <div class="title bold font-color-blue-secondary">Recent reviews</div>
         <div class="recent-reviews-group mt-3" v-if="recentReviews > 0">
-          <UserReviewDetail
+          <user-review-detail
             v-for="review in recentReviews"
             :key="review.userName"
             v-bind="review"
@@ -45,7 +45,7 @@
         ></b-icon>
       </div>
       <div class="promotion-group">
-        <CardPromotion
+        <card-promotion
           v-for="promo in promotions"
           :key="promo.sku"
           v-bind="promo"
@@ -56,11 +56,11 @@
 </template>
 
 <script>
-import CardProfileDetail from '@/components/User/Profile/CardProfileDetail.vue';
-import AboutProfileDetail from '@/components/User/Profile/AboutProfileDetail.vue';
-import RatingProfileDetail from '@/components/User/Profile/RatingProfileDetail.vue';
-import UserReviewDetail from '@/components/User/UserReviewDetail.vue';
-import CardPromotion from '@/components/User/CardPromotion.vue';
+import CardProfileDetail from './CardProfileDetail.vue';
+import AboutProfileDetail from './AboutProfileDetail.vue';
+import RatingProfileDetail from './RatingProfileDetail.vue';
+import UserReviewDetail from '../UserReviewDetail.vue';
+import CardPromotion from '../CardPromotion.vue';
 
 export default {
   name: 'ProfileDetail',

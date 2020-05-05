@@ -1,6 +1,5 @@
 <template>
   <div class="terms-and-condition">
-    <NavigationBack title="Terms and Condition" />
     <div class="container pl-2 pr-2">
       <h2 class="font-color-blue-secondary">
         <strong>Terms and Conditions</strong>
@@ -309,13 +308,8 @@
 </template>
 
 <script>
-import NavigationBack from '@/components/Partial/NavigationBack.vue';
-
 export default {
   name: 'TermsAndCondition',
-  components: {
-    NavigationBack,
-  },
 };
 </script>
 

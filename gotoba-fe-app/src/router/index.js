@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import PrivacyPolicy from '../views/User/PrivacyPolicy.vue';
+import Home from '../views/User/Home/Home.vue';
 import { Components, Pages, Admin } from './pages';
 
 Vue.use(VueRouter);
@@ -9,32 +9,151 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: PrivacyPolicy,
+    component: Home,
+  },
+  {
+    path: '/itinerary',
+    name: 'My Itinerary',
+    component: Pages.ITINERARY,
+  },
+  {
+    path: '/my-tickets/',
+    name: 'My Tickets',
+    component: Pages.MY_TICKETS,
+    children: [
+      {
+        path: 'expired',
+        component: Components.TICKET_EXPIRED,
+      },
+    ],
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Pages.CART,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Pages.PROFILE,
   },
   {
     path: '/login',
     name: 'Login',
     component: Pages.LOGIN,
+    meta: {
+      layout: 'auth',
+    },
   },
   {
     path: '/sign-up',
     name: 'Sign Up',
     component: Pages.SIGN_UP,
+    meta: {
+      layout: 'auth',
+    },
   },
   {
-    path: '/terms-and-condition',
-    name: 'Terms and Condition',
-    component: Pages.TERMS_AND_CONDITION,
+    path: '/notification',
+    name: 'Notification',
+    component: Pages.NOTIFICATION,
   },
   {
-    path: '/privacy-policy',
-    name: 'Privacy Policy',
-    component: Pages.PRIVACY_POLICY,
+    path: '/notification/:title',
+    name: 'Notification Detail',
+    component: Pages.NOTIFICATION_DETAIL,
+    props: true,
+    meta: {
+      layout: 'details',
+    },
   },
   {
-    path: '/edit-profile',
+    path: '/search',
+    name: 'Search',
+    component: Pages.SEARCH,
+    meta: {
+      layout: 'empty',
+    },
+  },
+  {
+    path: '/restaurant/:sku',
+    name: 'Restaurant',
+    component: Pages.RESTAURANT_PROFILE,
+    meta: {
+      layout: 'details',
+    },
+  },
+  {
+    path: '/restaurant/:sku/review',
+    name: 'Restaurant Review',
+    component: Pages.RESTAURANT_REVIEW,
+    meta: {
+      layout: 'details',
+    },
+  },
+  {
+    path: '/journey/:sku',
+    name: 'Journey',
+    component: Pages.JOURNEY_PROFILE,
+    meta: {
+      layout: 'details',
+    },
+  },
+  {
+    path: '/journey/:sku/review',
+    name: 'Journey Review',
+    component: Pages.JOURNEY_REVIEW,
+    meta: {
+      layout: 'details',
+    },
+  },
+  {
+    path: '/promotion/:sku',
+    name: 'Promotion Detail',
+    component: Pages.PROMOTION_DETAIL,
+    meta: {
+      layout: 'details',
+    },
+  },
+  {
+    path: '/itinerary/add',
+    name: 'Add Itinerary',
+    component: Pages.ITINERARY_ADD,
+    meta: {
+      layout: 'details',
+    },
+  },
+  {
+    path: '/my-tickets/:sku',
+    name: 'QR Code Ticket',
+    component: Pages.SHOW_QR_CODE,
+    meta: {
+      layout: 'empty',
+    },
+  },
+  {
+    path: '/payment/:sku',
+    name: 'Payment',
+    component: Pages.PAYMENT,
+    meta: {
+      layout: 'details',
+    },
+  },
+  {
+    path: '/order/thankyou/:sku',
+    name: 'Payment',
+    component: Pages.PAYMENT_ORDER,
+    meta: {
+      layout: 'details',
+    },
+  },
+  {
+    path: '/profile/edit',
     name: 'Edit Profile',
     component: Pages.EDIT_PROFILE,
+    meta: {
+      layout: 'details',
+    },
   },
   {
     path: '/history/',
@@ -50,38 +169,33 @@ const routes = [
         component: Components.HISTORY_CANCELLED,
       },
     ],
+    meta: {
+      layout: 'details',
+    },
   },
   {
-    path: '/notification',
-    name: 'Notification',
-    component: Pages.NOTIFICATION,
+    path: '/terms-and-condition',
+    name: 'Terms and Condition',
+    component: Pages.TERMS_AND_CONDITION,
+    meta: {
+      layout: 'details',
+    },
   },
   {
-    path: '/notification/:title',
-    name: 'Notification Detail',
-    component: Pages.NOTIFICATION_DETAIL,
-    props: true,
+    path: '/privacy-policy',
+    name: 'Privacy Policy',
+    component: Pages.PRIVACY_POLICY,
+    meta: {
+      layout: 'details',
+    },
   },
   {
     path: '/faq/payment/transfer',
     name: 'Payment Guide',
     component: Pages.PAYMENT_GUIDE,
-  },
-  {
-    path: '/search',
-    name: 'Search',
-    component: Pages.SEARCH,
-  },
-  {
-    path: '/my-tickets/',
-    name: 'My Tickets',
-    component: Pages.MY_TICKETS,
-    children: [
-      {
-        path: 'expired',
-        component: Components.TICKET_EXPIRED,
-      },
-    ],
+    meta: {
+      layout: 'details',
+    },
   },
   {
     path: '/admin/',
@@ -93,6 +207,9 @@ const routes = [
         component: Admin.USER_DATA,
       },
     ],
+    meta: {
+      layout: 'admin',
+    },
   },
 ];
 
