@@ -11,22 +11,22 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-  {
-    path: '/itinerary',
-    name: 'My Itinerary',
-    component: Pages.ITINERARY,
-  },
-  {
-    path: '/my-tickets/',
-    name: 'My Tickets',
-    component: Pages.MY_TICKETS,
-    children: [
-      {
-        path: 'expired',
-        component: Components.TICKET_EXPIRED,
-      },
-    ],
-  },
+  // {
+  //   path: '/itinerary',
+  //   name: 'My Itinerary',
+  //   component: Pages.ITINERARY,
+  // },
+  // {
+  //   path: '/my-tickets/',
+  //   name: 'My Tickets',
+  //   component: Pages.MY_TICKETS,
+  //   children: [
+  //     {
+  //       path: 'expired',
+  //       component: Components.TICKET_EXPIRED,
+  //     },
+  //   ],
+  // },
   {
     path: '/cart',
     name: 'Cart',
@@ -115,22 +115,22 @@ const routes = [
       layout: 'details',
     },
   },
-  {
-    path: '/itinerary/add',
-    name: 'Add Itinerary',
-    component: Pages.ITINERARY_ADD,
-    meta: {
-      layout: 'details',
-    },
-  },
-  {
-    path: '/my-tickets/:sku',
-    name: 'QR Code Ticket',
-    component: Pages.SHOW_QR_CODE,
-    meta: {
-      layout: 'empty',
-    },
-  },
+  // {
+  //   path: '/itinerary/add',
+  //   name: 'Add Itinerary',
+  //   component: Pages.ITINERARY_ADD,
+  //   meta: {
+  //     layout: 'details',
+  //   },
+  // },
+  // {
+  //   path: '/my-tickets/:sku',
+  //   name: 'QR Code Ticket',
+  //   component: Pages.SHOW_QR_CODE,
+  //   meta: {
+  //     layout: 'empty',
+  //   },
+  // },
   {
     path: '/payment/:sku',
     name: 'Payment',

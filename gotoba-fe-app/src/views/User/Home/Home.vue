@@ -136,11 +136,11 @@
 </template>
 
 <script>
-import CardHome from './CardHome.vue';
-import Footer from '../../Footer.vue';
+import CardHome from '../../../components/User/Home/CardHome.vue';
+// import Footer from '../../../components/Partial/Footer.vue';
 import {
   OngoingPromoIcon, NearbyPlaceIcon, NearbyRestoIcon, NearbyHotelIcon,
-} from '../../Partial/IconsCustom.vue';
+} from '../../../components/Partial/IconsCustom.vue';
 
 export default {
   name: 'Home',
@@ -168,9 +168,9 @@ export default {
       ],
     };
   },
-  components: {   
+  components: {
     CardHome,
-    Footer,
+    // Footer,
     // AboutIcon,
     OngoingPromoIcon,
     NearbyPlaceIcon,

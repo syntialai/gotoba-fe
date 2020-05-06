@@ -1,7 +1,7 @@
 <template>
   <b-navbar
     id="bottom-nav"
-    class="fixed-bottom d-flex pl-0 pr-0"
+    class="bg-white box-shadow fixed-bottom d-flex pl-0 pr-0"
     variant="light"
   >
     <b-nav-item

@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import formatPrice from '@/utils/filter';
+import { formatPrice } from '@/utils/filter';
 
 export default {
   name: 'PaymentDetail',
   props: {
     price: String,
-    discount: String,    
+    discount: String,
   },
   methods: {
     formatPrice,

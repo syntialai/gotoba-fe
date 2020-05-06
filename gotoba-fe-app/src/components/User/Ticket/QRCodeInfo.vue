@@ -7,7 +7,7 @@
       {{ formatDate(date) }}
     </div>
     
-    <QRCode
+    <q-r-code
       :qrCodeValue="qrCodeValue"
       class="d-flex justify-content-center m-4"
     />
@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import QRCode from '@/components/User/Ticket/QRCode.vue';
-import formatDate from '@/utils/filter';
+import QRCode from './QRCode.vue';
+import { formatDate } from '../../../utils/filter';
 
 export default {
   name: 'QRCodeInfo',

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import formatPrice from '@/utils/filter';
+import { formatPrice } from '@/utils/filter';
 
 export default {
   name: 'Order Items',
@@ -38,11 +38,14 @@ export default {
     name: String,
     image: String,
     price: String,
-    discountPrice: '0',
+    discountPrice: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
-      discount: discountPrice != '0',
+      discount: this.discountPrice !== 0,
     };
   },
   methods: {
