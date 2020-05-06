@@ -57,6 +57,9 @@ const routes = [
     path: '/notification',
     name: 'Notification',
     component: Pages.NOTIFICATION,
+    meta: {
+      layout: 'details',
+    },
   },
   {
     path: '/notification/:title',
