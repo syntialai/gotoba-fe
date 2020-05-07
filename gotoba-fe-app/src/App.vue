@@ -10,7 +10,7 @@
 import Admin from './layouts/Admin.vue';
 import Auth from './layouts/Auth.vue';
 import Default from './layouts/Default.vue';
-import Details from './layouts/Details.vue';
+import DefaultBack from './layouts/DefaultBack.vue';
 import Empty from './layouts/Empty.vue';
 import NotFound from './layouts/NotFound.vue';
 
@@ -20,7 +20,7 @@ export default {
     Admin,
     Auth,
     Default,
-    Details,
+    DefaultBack,
     Empty,
     NotFound,
   },

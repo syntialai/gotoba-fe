@@ -14,6 +14,7 @@ const RESTAURANT_REVIEW = () => import('../views/User/Home/RestaurantReview.vue'
 const JOURNEY_PROFILE = () => import('../views/User/Home/JourneyProfile.vue');
 const JOURNEY_REVIEW = () => import('../views/User/Home/JourneyReview.vue');
 const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
+// const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
 // const ITINERARY_ADD = () => import('../views/User/');
 // const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
 const PAYMENT = () => import('../views/User/Payment/Payment.vue');
@@ -27,7 +28,6 @@ const PAYMENT_GUIDE = () => import('../views/User/Payment/PaymentGuide.vue');
 const HISTORY_PENDING = () => import('../components/User/History/HistoryPending.vue');
 const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancelled.vue');
 const TICKET_EXPIRED = () => import('../components/User/Ticket/ExpiredTicket.vue');
-// const GALLERY = () => import('../components/User/Home/GalleryHome.vue');
 
 const USER_DATA = () => import('../views/Admin/UserData.vue');
 
@@ -46,6 +46,7 @@ export const Pages = {
   JOURNEY_PROFILE,
   JOURNEY_REVIEW,
   PROMOTION_DETAIL,
+  // GALLERY,
   // ITINERARY_ADD,
   // SHOW_QR_CODE,
   PAYMENT,

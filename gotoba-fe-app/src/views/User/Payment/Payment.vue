@@ -7,7 +7,7 @@
       <div class="order-items-group">
         <div class="order-item-detail"
           v-for="item in items"
-          :key="item.name.toLowerCase().replace(' ','-')"
+          :key="item.name"
         >
           <div class="order-item-info">
             <order-items
@@ -37,8 +37,8 @@
     </div>
 
     <bottom-nav-payment
-      totalItem="1"
-      totalPrice="100000"
+      :totalItem="1"
+      :totalPrice="100000"
       innerButton="BUY NOW"
     />
   </div>
@@ -57,6 +57,11 @@ export default {
     PaymentDetail,
     PaymentMethod,
     BottomNavPayment,
+  },
+  data() {
+    return {
+      items: {},
+    };
   },
 };
 </script>

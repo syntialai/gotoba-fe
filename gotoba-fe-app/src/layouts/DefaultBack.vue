@@ -1,5 +1,5 @@
 <template>
-  <div class="details">
+  <div class="default-back">
     <navigation-back :title="currentRouteName" />
 
     <slot />
@@ -10,7 +10,7 @@
 import NavigationBack from '../components/Partial/NavigationBack.vue';
 
 export default {
-  name: 'Details',
+  name: 'DefaultBack',
   components: {
     NavigationBack,
   },

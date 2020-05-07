@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import formatPrice from '@/utils/filter';
+import formatPrice from '../../../utils/filter';
 
 export default {
   name: 'PaymentPendingInfo',
