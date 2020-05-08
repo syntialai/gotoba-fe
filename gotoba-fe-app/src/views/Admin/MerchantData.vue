@@ -45,5 +45,10 @@ export default {
       perPage: 10,
     };
   },
+  computed: {
+    merchantData() {
+      return this.$store.getters.merchantData;
+    },
+  },
 };
 </script>

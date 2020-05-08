@@ -45,5 +45,10 @@ export default {
       perPage: 10,
     };
   },
+  computed: {
+    userData() {
+      return this.$store.getters.userData;
+    },
+  },
 };
 </script>

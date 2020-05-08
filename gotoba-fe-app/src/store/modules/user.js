@@ -4,6 +4,8 @@ import * as Types from '../types';
 const state = {
   userLoginStatus: JSON.parse(localStorage.getItem('userLoginStatus')) || false,
   userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
+  merchantData: [],
+  userData: [],
 };
 
 const actions = {
@@ -22,9 +24,19 @@ const actions = {
     commit(Types.SET_USER_INFO, {});
     commit(Types.SET_USER_LOGIN_STATUS, false);
   },
+
+  getMerchantData({ commit }, res) {
+    commit(Types.GET_MERCHANT_DATA, res);
+  },
+
+  getUserData({ commit }, res) {
+    commit(Types.GET_USER_DATA, res);
+  },
 };
 
 const getters = {
+  merchantData: (state) => state.merchantData,
+  userData: (state) => state.userData,
   userLoginStatus: (state) => state.userLoginStatus,
   userInfo: (state) => state.userInfo,
 };
@@ -37,6 +49,14 @@ const mutations = {
 
   [Types.SET_USER_LOGIN_STATUS](state, status) {
     state.userLoginStatus = status;
+  },
+
+  [Types.GET_MERCHANT_DATA](state, res) {
+    state.merchantData = res;
+  },
+
+  [Types.GET_USER_DATA](state, res) {
+    state.userData = res;
   },
 };
 
