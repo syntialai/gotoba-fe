@@ -217,6 +217,10 @@ const routes = [
         path: 'user',
         component: Admin.USER_DATA,
       },
+      {
+        path: 'merchant',
+        component: Admin.MERCHANT_DATA,
+      },
     ],
     meta: {
       layout: 'admin',
