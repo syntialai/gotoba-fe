@@ -1,12 +1,12 @@
 <template>
-  <div class="user-data">
+  <div class="merchant-data">
     <show-data-count
       :perPage="perPage"
       class="my-3"
     />
 
     <user-table-data
-      id="user-data-table"
+      id="merchant-data-table"
       class="my-2"
       :perPage="perPage"
     />
@@ -22,7 +22,7 @@
       :currentPage="currentPage"
       :perPage="perPage"
       class="my-3"
-      idControls="user-data-table"
+      idControls="merchant-data-table"
     />
   </div>
 </template>
@@ -33,7 +33,7 @@ import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
 import UserTableData from '../../components/Admin/Data/UserTableData.vue';
 
 export default {
-  name: 'UserData',
+  name: 'MerchantData',
   components: {
     Pagination,
     ShowDataCount,

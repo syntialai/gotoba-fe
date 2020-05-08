@@ -30,6 +30,7 @@ const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancel
 const TICKET_EXPIRED = () => import('../components/User/Ticket/ExpiredTicket.vue');
 
 const USER_DATA = () => import('../views/Admin/UserData.vue');
+const MERCHANT_DATA = () => import('../views/Admin/MerchantData.vue');
 
 export const Pages = {
   LOGIN,
@@ -66,4 +67,5 @@ export const Components = {
 
 export const Admin = {
   USER_DATA,
+  MERCHANT_DATA,
 };
