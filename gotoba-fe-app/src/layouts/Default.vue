@@ -4,7 +4,7 @@
 
     <navigation :title="currentRouteName" />
 
-    <slot />
+    <slot class="z4" />
 
     <bottom-nav-user />
   </div>

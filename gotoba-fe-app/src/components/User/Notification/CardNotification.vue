@@ -1,16 +1,13 @@
 <template>
   <div class="card-notification">
-    <b-card no-body
-      class="overflow-hidden d-flex"
+    <b-card
+      class="d-flex"
       style="max-width: 768px;"
+      :img-src="image"
+      :img-alt="name"
+      img-left
     >
-      <b-card-img
-        :src="image"
-        class="border-rounded pr-2"
-        :alt="['IMG-'+name.replace(' ', '-')]"
-      >
-      </b-card-img>
-      <b-card-body>
+      <b-card-body class="py-0">
         <b-card-title class="font-color-black-87">
           {{ title }}
         </b-card-title>

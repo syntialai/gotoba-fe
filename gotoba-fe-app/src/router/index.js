@@ -11,22 +11,22 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-  {
-    path: '/itinerary',
-    name: 'My Itinerary',
-    component: Pages.ITINERARY,
-  },
-  {
-    path: '/my-tickets/',
-    name: 'My Tickets',
-    component: Pages.MY_TICKETS,
-    children: [
-      {
-        path: 'expired',
-        component: Components.TICKET_EXPIRED,
-      },
-    ],
-  },
+  // {
+  //   path: '/itinerary',
+  //   name: 'My Itinerary',
+  //   component: Pages.ITINERARY,
+  // },
+  // {
+  //   path: '/my-tickets/',
+  //   name: 'My Tickets',
+  //   component: Pages.MY_TICKETS,
+  //   children: [
+  //     {
+  //       path: 'expired',
+  //       component: Components.TICKET_EXPIRED,
+  //     },
+  //   ],
+  // },
   {
     path: '/cart',
     name: 'Cart',
@@ -57,6 +57,9 @@ const routes = [
     path: '/notification',
     name: 'Notification',
     component: Pages.NOTIFICATION,
+    meta: {
+      layout: 'default-back',
+    },
   },
   {
     path: '/notification/:title',
@@ -64,7 +67,7 @@ const routes = [
     component: Pages.NOTIFICATION_DETAIL,
     props: true,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -80,7 +83,7 @@ const routes = [
     name: 'Restaurant',
     component: Pages.RESTAURANT_PROFILE,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -88,7 +91,7 @@ const routes = [
     name: 'Restaurant Review',
     component: Pages.RESTAURANT_REVIEW,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -96,7 +99,7 @@ const routes = [
     name: 'Journey',
     component: Pages.JOURNEY_PROFILE,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -104,7 +107,7 @@ const routes = [
     name: 'Journey Review',
     component: Pages.JOURNEY_REVIEW,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -112,39 +115,47 @@ const routes = [
     name: 'Promotion Detail',
     component: Pages.PROMOTION_DETAIL,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
-  {
-    path: '/itinerary/add',
-    name: 'Add Itinerary',
-    component: Pages.ITINERARY_ADD,
-    meta: {
-      layout: 'details',
-    },
-  },
-  {
-    path: '/my-tickets/:sku',
-    name: 'QR Code Ticket',
-    component: Pages.SHOW_QR_CODE,
-    meta: {
-      layout: 'empty',
-    },
-  },
+  // {
+  //   path: '/gallery',
+  //   name: 'Gallery',
+  //   component: Pages.GALLERY,
+  //   meta: {
+  //     layout: 'default-back',
+  //   },
+  // },
+  // {
+  //   path: '/itinerary/add',
+  //   name: 'Add Itinerary',
+  //   component: Pages.ITINERARY_ADD,
+  //   meta: {
+  //     layout: 'default-back',
+  //   },
+  // },
+  // {
+  //   path: '/my-tickets/:sku',
+  //   name: 'QR Code Ticket',
+  //   component: Pages.SHOW_QR_CODE,
+  //   meta: {
+  //     layout: 'empty',
+  //   },
+  // },
   {
     path: '/payment/:sku',
     name: 'Payment',
     component: Pages.PAYMENT,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
     path: '/order/thankyou/:sku',
-    name: 'Payment',
+    name: 'Payment Order',
     component: Pages.PAYMENT_ORDER,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -152,7 +163,7 @@ const routes = [
     name: 'Edit Profile',
     component: Pages.EDIT_PROFILE,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -170,7 +181,7 @@ const routes = [
       },
     ],
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -178,7 +189,7 @@ const routes = [
     name: 'Terms and Condition',
     component: Pages.TERMS_AND_CONDITION,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -186,7 +197,7 @@ const routes = [
     name: 'Privacy Policy',
     component: Pages.PRIVACY_POLICY,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {
@@ -194,7 +205,7 @@ const routes = [
     name: 'Payment Guide',
     component: Pages.PAYMENT_GUIDE,
     meta: {
-      layout: 'details',
+      layout: 'default-back',
     },
   },
   {

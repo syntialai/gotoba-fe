@@ -2,7 +2,7 @@
   <div class="profile">
     <div class="user-profile d-flex w-100 m-4 bg-white box-shadow">
       <div class="user-img">
-        <img :src="image" :alt="['image-' + name.toLowerCase().replace(' ', '-')]">
+        <img :src="image" :alt="name">
       </div>
       <div class="user-info">
         <div class="user-name bold font-size-20">{{ name }}</div>
@@ -10,64 +10,27 @@
       </div>
     </div>
 
-    <div class="menus account bg-white">
-      <h2 class="bold">Account</h2>
-      <b-list-group>
-        <b-list-group-item
-          v-for="menu in menuAccount"
-          :key="menu.name.toLowerCase().replace(' ', '-')"
-          :href="menu.link"
-        >
-          <div class="menu-info">
-            <font-awesome-icon :icon="menu.icon" class="icon icon-gradient"
-            ></font-awesome-icon>
-            <span class="font-size-20 font-color-black-60">
-              {{ menu.name }}
-            </span>
-          </div>
-          <div class="go-to-menu-icon">
-            <font-awesome-icon
-              icon="chevron-right"
-              class="icon icon-black-87"
-            ></font-awesome-icon>
-          </div>
-        </b-list-group-item>
-      </b-list-group>
-    </div>
+    <profile-menu-group
+      title="Account"
+      :menus="menuAccount"
+    />
 
-    <div class="menus about bg-white">
-      <h2 class="bold">About</h2>
-      <b-list-group>
-        <b-list-group-item
-          v-for="menu in menuAbout"
-          :key="menu.name.toLowerCase().replace(' ', '-')"
-          :href="menu.link"
-        >
-          <div class="menu-info">
-            <font-awesome-icon :icon="menu.icon" class="icon icon-gradient"
-            ></font-awesome-icon>
-            <span class="font-size-20 font-color-black-60">
-              {{ menu.name }}
-            </span>
-          </div>
-          <div class="go-to-menu-icon">
-            <font-awesome-icon
-              icon="chevron-right"
-              class="icon icon-black-87"
-            ></font-awesome-icon>
-          </div>
-        </b-list-group-item>
-      </b-list-group>
-    </div>
+    <profile-menu-group
+      title="About"
+      :menus="menuAbout"
+      class="my-3"
+    />
 
     <b-button class="bg-color-primary border-square-15 border-none">
-      <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
+      <font-awesome-icon icon="sign-out-alt" />
       <span class="pl-2 bold">LOG OUT</span>
     </b-button>
   </div>
 </template>
 
 <script>
+import ProfileMenuGroup from '../../../components/User/Profile/ProfileMenuGroup.vue';
+
 export default {
   name: 'Profile',
   props: {
@@ -75,11 +38,14 @@ export default {
     name: String,
     location: String,
   },
+  components: {
+    ProfileMenuGroup,
+  },
   data() {
     return {
       menuAccount: [
         {
-          name: 'Edit Profile', icon: 'user-edit', link: '/edit-profile',
+          name: 'Edit Profile', icon: 'user-edit', link: '/profile/edit',
         },
         {
           name: 'History', icon: 'history', link: '/history',
@@ -93,10 +59,13 @@ export default {
           name: 'Terms and Condition', icon: 'list-alt', link: '/terms-and-condition',
         },
         {
-          name: 'Privacy Policy', icon: 'shield', link: '/privacy-policy',
+          name: 'Privacy Policy', icon: 'file-signature', link: '/privacy-policy',
         },
         {
-          name: 'Help Centre', icon: 'question-circle', link: '/',
+          name: 'Help Centre', icon: 'question-circle', link: '/faq',
+        },
+        {
+          name: 'Log Out', icon: 'sign-out-alt', link: '/log-out',
         },
       ],
     };

@@ -24,7 +24,7 @@
               </font-awesome-layers> -->
               <font-awesome-icon
                 :icon="menu.icon"
-                :class="['fa-2x font-color-accent-' + menu.color]"
+                :class="'fa-2x font-color-accent-' + menu.color"
               ></font-awesome-icon>
             </div>
             <div class="pt-2 menu-name font-color-black-60">{{ menu.name }}</div>
@@ -50,7 +50,7 @@
             name="Syntia"
             image="../assets/img/logo.png"
             location="Vue js"
-            rating=5.0
+            :rating="5.0"
           />
         </div>
       </div>
@@ -75,7 +75,7 @@
             name="Syntia"
             image="../assets/img/logo.png"
             location="Vue js"
-            :rating="5"
+            :rating="5.0"
           />
         </div>
       </div>
@@ -100,7 +100,7 @@
             name="Syntia"
             image="../assets/img/logo.png"
             location="Vue js"
-            rating=5.0
+            :rating="5.0"
           />
         </div>
       </div>
@@ -125,22 +125,22 @@
             name="Syntia"
             image="../assets/img/logo.png"
             location="Vue js"
-            rating=5.0
+            :rating="5.0"
           />
         </div>
       </div>
     </div>
 
-    <footer />
+    <the-footer />
   </div>
 </template>
 
 <script>
-import CardHome from './CardHome.vue';
-import Footer from '../../Footer.vue';
+import CardHome from '../../../components/User/Home/CardHome.vue';
+import TheFooter from '../../../components/Partial/TheFooter.vue';
 import {
   OngoingPromoIcon, NearbyPlaceIcon, NearbyRestoIcon, NearbyHotelIcon,
-} from '../../Partial/IconsCustom.vue';
+} from '../../../components/Partial/IconsCustom.vue';
 
 export default {
   name: 'Home',
@@ -168,9 +168,9 @@ export default {
       ],
     };
   },
-  components: {   
+  components: {
     CardHome,
-    Footer,
+    TheFooter,
     // AboutIcon,
     OngoingPromoIcon,
     NearbyPlaceIcon,

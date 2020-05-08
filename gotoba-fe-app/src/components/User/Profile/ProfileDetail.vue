@@ -18,7 +18,7 @@
           href=""
         ></b-icon>
       </div>
-      
+
       <rating-profile-detail />
 
       <div class="recent-reviews mt-3">
@@ -76,12 +76,12 @@ export default {
   },
   computed: {
     recentReviews() {
-      let reviews = data.reviews.slice(0);
+      const reviews = this.data.reviews.slice(0);
       reviews.sort((a, b) => b.createdAt - a.createdAt);
       return reviews.slice(0, 3);
     },
     promotions() {
-
+      return [];
     },
   },
 };

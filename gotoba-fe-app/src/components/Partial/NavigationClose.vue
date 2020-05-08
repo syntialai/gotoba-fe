@@ -1,7 +1,7 @@
 <template>
   <div class="nav-close">
     <b-navbar variant="faded" class="text-white p-0">
-      <b-navbar-nav class="ml-auto">
+      <b-navbar-nav class="ml-auto m-3">
         <b-nav-item href="/">
           <font-awesome-icon
             icon="times"

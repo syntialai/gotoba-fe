@@ -1,12 +1,12 @@
 <template>
   <div id="nav">
     <b-navbar variant="faded" class="bg-transparent text-white pr-1">
-      <b-navbar-brand href="/">
-        <img v-if="title === 'Main'" src="https://placekitten.com/g/30/30"
-          class="d-inline-block align-top"
+      <b-navbar-brand href="/" class="d-flex align-items-center">
+        <img v-if="title === 'Home'" src="https://placekitten.com/g/30/30"
+          class="d-inline-block align-top mr-2"
           alt="gotoba"
         >
-        <h4 v-else>{{ title }}</h4>
+        <h5 class="text-white m-0">{{ title }}</h5>
       </b-navbar-brand>
       <b-navbar-nav right class="ml-auto">
         <b-nav-item href="/search">
