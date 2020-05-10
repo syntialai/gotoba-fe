@@ -52,37 +52,37 @@ export default {
         {
           icon: 'tachometer-alt',
           title: 'Dashboard',
-          link: '/',
+          link: '/admin/',
         },
         {
           icon: 'users',
           title: 'User',
-          link: '/user',
+          link: '/admin/user',
         },
         {
           icon: 'store',
           title: 'Merchant',
-          link: '/merchant',
+          link: '/admin/merchant',
         },
         {
           icon: 'image',
           title: 'Gallery',
-          link: '/gallery',
+          link: '/admin/gallery',
         },
         {
           icon: 'route',
           title: 'Itinerary',
-          link: '/itinerary',
+          link: '/admin/itinerary',
         },
         {
           icon: 'utensils',
           title: 'Restaurant',
-          link: '/restaurant',
+          link: '/admin/restaurant',
         },
         {
           icon: 'store',
           title: 'Settings',
-          link: '/settings',
+          link: '/admin/settings',
         },
       ],
     };
