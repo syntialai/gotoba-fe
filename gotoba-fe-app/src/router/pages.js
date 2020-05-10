@@ -29,8 +29,10 @@ const HISTORY_PENDING = () => import('../components/User/History/HistoryPending.
 const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancelled.vue');
 const TICKET_EXPIRED = () => import('../components/User/Ticket/ExpiredTicket.vue');
 
+const ADMIN_VIEW = () => import('../views/Admin/Admin.vue');
 const USER_DATA = () => import('../views/Admin/UserData.vue');
 const MERCHANT_DATA = () => import('../views/Admin/MerchantData.vue');
+const GALLERY_DATA = () => import('../views/Admin/GalleryData.vue');
 
 export const Pages = {
   LOGIN,
@@ -66,6 +68,8 @@ export const Components = {
 };
 
 export const Admin = {
+  ADMIN_VIEW,
   USER_DATA,
   MERCHANT_DATA,
+  GALLERY_DATA,
 };

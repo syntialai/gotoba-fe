@@ -7,22 +7,18 @@
 </template>
 
 <script>
-import Admin from './layouts/Admin.vue';
 import Auth from './layouts/Auth.vue';
+import BackgroundBlue from './layouts/BackgroundBlue.vue';
 import Default from './layouts/Default.vue';
 import DefaultBack from './layouts/DefaultBack.vue';
-import Empty from './layouts/Empty.vue';
-import NotFound from './layouts/NotFound.vue';
 
 export default {
   name: 'App',
   components: {
-    Admin,
     Auth,
+    BackgroundBlue,
     Default,
     DefaultBack,
-    Empty,
-    NotFound,
   },
   computed: {
     layout() {

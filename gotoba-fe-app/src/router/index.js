@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Main from '../views/User/Main.vue';
 import Home from '../views/User/Home/Home.vue';
 import { Components, Pages, Admin } from './pages';
 
@@ -8,34 +9,63 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  // {
-  //   path: '/itinerary',
-  //   name: 'My Itinerary',
-  //   component: Pages.ITINERARY,
-  // },
-  // {
-  //   path: '/my-tickets/',
-  //   name: 'My Tickets',
-  //   component: Pages.MY_TICKETS,
-  //   children: [
-  //     {
-  //       path: 'expired',
-  //       component: Components.TICKET_EXPIRED,
-  //     },
-  //   ],
-  // },
-  {
-    path: '/cart',
-    name: 'Cart',
-    component: Pages.CART,
-  },
-  {
-    path: '/profile',
-    name: 'Profile',
-    component: Pages.PROFILE,
+    name: 'Main',
+    component: Main,
+    children: [
+      {
+        path: '/',
+        name: 'Home',
+        component: Home,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+      {
+        path: '/itinerary',
+        name: 'Itinerary',
+        component: Pages.ITINERARY,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+      {
+        path: '/my-tickets',
+        name: 'My Tickets',
+        component: Pages.MY_TICKETS,
+        children: [
+          {
+            path: '',
+            component: Components.TICKET_VALID,
+          },
+          {
+            path: 'expired',
+            component: Components.TICKET_EXPIRED,
+          },
+        ],
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+      {
+        path: 'cart',
+        name: 'Cart',
+        component: Pages.CART,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: Pages.PROFILE,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+    ],
+    meta: {
+      layout: 'background-blue',
+    },
   },
   {
     path: '/login',
@@ -74,9 +104,6 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: Pages.SEARCH,
-    meta: {
-      layout: 'empty',
-    },
   },
   {
     path: '/restaurant/:sku',
@@ -138,9 +165,6 @@ const routes = [
   //   path: '/my-tickets/:sku',
   //   name: 'QR Code Ticket',
   //   component: Pages.SHOW_QR_CODE,
-  //   meta: {
-  //     layout: 'empty',
-  //   },
   // },
   {
     path: '/payment/:sku',
@@ -209,22 +233,26 @@ const routes = [
     },
   },
   {
-    path: '/admin/',
+    path: '/admin',
     name: 'Admin',
-    component: Admin.USER_DATA,
+    component: Admin.ADMIN_VIEW,
     children: [
       {
         path: 'user',
+        name: 'User',
         component: Admin.USER_DATA,
       },
       {
         path: 'merchant',
+        name: 'Merchant',
         component: Admin.MERCHANT_DATA,
       },
+      {
+        path: 'gallery',
+        name: 'Gallery',
+        component: Admin.GALLERY_DATA,
+      },
     ],
-    meta: {
-      layout: 'admin',
-    },
   },
 ];
 
