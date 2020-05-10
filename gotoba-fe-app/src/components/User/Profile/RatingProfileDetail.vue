@@ -31,14 +31,16 @@ export default {
   },
   data() {
     return {
-      ratingBars: [ 60, 50, 2, 10, 500 ],
+      ratingBars: [60, 50, 2, 10, 500],
     };
   },
   computed: {
     averageOfRatings,
     totalReviewer() {
       let sumOfRatings = 0;
-      ratingBars.forEach((rate) => sumOfRatings += rate);
+      this.ratingBars.forEach((rate) => {
+        sumOfRatings += rate;
+      });
       return sumOfRatings;
     },
   },

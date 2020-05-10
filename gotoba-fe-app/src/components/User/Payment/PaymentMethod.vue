@@ -22,7 +22,7 @@
               ></b-icon>
             </b-badge>
           </div>
-          
+
           <b-form-radio-group
             :id="['btn-radios-' + method.value]"
             buttons
@@ -46,10 +46,10 @@ export default {
     return {
       selectedMethod: '',
       paymentMethods: [
-        { text: 'Bank BCA', value: 'bca', },
-        { text: 'Bank BRI', value: 'bri', },
-        { text: 'Bank Mandiri', value: 'mandiri', },
-        { text: 'Others', value: 'other', },
+        { text: 'Bank BCA', value: 'bca' },
+        { text: 'Bank BRI', value: 'bri' },
+        { text: 'Bank Mandiri', value: 'mandiri' },
+        { text: 'Others', value: 'other' },
       ],
     };
   },

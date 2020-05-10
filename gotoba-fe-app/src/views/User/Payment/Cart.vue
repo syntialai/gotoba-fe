@@ -12,7 +12,7 @@
       <div class="order-items-group">
         <div class="order-item-detail"
           v-for="item in items"
-          :key="item.name.toLowerCase().replace(' ','-')"
+          :key="item.name"
         >
           <b-form-checkbox>
             <div class="order-item-info">
@@ -30,8 +30,8 @@
     </div>
 
     <bottom-nav-payment
-      totalItem="1"
-      totalPrice="100000"
+      :totalItem="1"
+      :totalPrice="100000"
       innerButton="CHECKOUT"
     />
   </div>
@@ -50,6 +50,7 @@ export default {
   data() {
     return {
       itemCount: 1,
+      items: {},
     };
   },
 };

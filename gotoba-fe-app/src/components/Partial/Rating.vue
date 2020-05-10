@@ -1,15 +1,16 @@
 <template>
   <div class="rating">
     <full-star
-      v-for="i in parseInt(rate)"
+      v-for="i in rate"
         :key="i"
-        :color="$yellow"
+        color="yellow"
+        :fontSize="fontSize"
     ></full-star>
-    <half-star v-if="parseFloat(rate) - parseInt(rate) > 0"></half-star>
+    <half-star v-if="rate - parseInt(rate) > 0"></half-star>
     <full-star
-      v-for="i in (5 - parseInt(rate))"
+      v-for="i in (5 - rate)"
         :key="i"
-        :color="$gray-young"
+        color="gray-young"
     ></full-star>
   </div>
 </template>
@@ -18,8 +19,11 @@
 export default {
   name: 'Rating',
   props: {
-    rate: String,
-    fontSize: String,
+    rate: Number,
+    fontSize: {
+      type: Number,
+      default: 16,
+    },
   },
   components: {
     'half-star': {
@@ -37,7 +41,11 @@ export default {
     'full-star': {
       name: 'fullStar',
       props: {
-        color: '',
+        color: String,
+        fontSize: {
+          type: Number,
+          default: 16,
+        },
       },
       template: `
         <font-awesome-icon 
@@ -49,3 +57,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import '@/assets/scss/index';
+</style>

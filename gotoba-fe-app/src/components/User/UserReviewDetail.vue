@@ -10,7 +10,7 @@
       <span class="pl-1 semibold font-size-12">{{ review.userName }}</span>
     </div>
     <div class="ratings d-flex align-items-center mb-1">
-      <Rating :rate="review.rating" font-size="16" />
+      <rating :rate="review.rating" font-size="16" />
       <span class="date-reviewed font-size-10">{{ review.dateReviewed }}</span>
     </div>
     <div class="comment">
@@ -26,6 +26,9 @@ export default {
   name: 'UserReviewDetail',
   props: {
     review: Object,
+  },
+  components: {
+    Rating,
   },
 };
 </script>

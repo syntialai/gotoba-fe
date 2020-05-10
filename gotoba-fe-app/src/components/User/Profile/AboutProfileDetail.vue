@@ -19,10 +19,10 @@ export default {
   computed: {
     items() {
       return {
-        description: data.description,
-        full_address: data.fullAddress,
-        hours_open: data.hoursOpen,
-        telephone: data.telephone,
+        description: this.data.description,
+        full_address: this.data.fullAddress,
+        hours_open: this.data.hoursOpen,
+        telephone: this.data.telephone,
       };
     },
   },

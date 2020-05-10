@@ -2,7 +2,7 @@
   <div class="payment-order">
     <div class="information p-2">
       <div class="image-waiting p-4 w-100">
-        <img src="@/assets/Waiting.png" alt="Waiting">
+        <img src="@/assets/img/Waiting.png" alt="Waiting" :width="imageWidth">
       </div>
 
       <div class="align-center font-color-black-60">
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import formatPrice from '@/utils/filter';
+import { formatPrice } from '../../../utils/filter';
 import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
 
 export default {
@@ -73,6 +73,11 @@ export default {
     bankImg: String,
     bankNumber: String,
     totalPayment: String,
+  },
+  computed: {
+    imageWidth() {
+      return window.innerWidth - 64;
+    },
   },
   method: {
     formatPrice,

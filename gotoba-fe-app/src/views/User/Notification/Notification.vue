@@ -1,9 +1,9 @@
 <template>
   <div class="notification">
-    <div class="notification-group">
+    <div class="notification-group p-3">
       <card-notification
         v-for="item in notifications"
-        :key="item.title.match(/^[\w\s]/g).join('').substring(1,10)"
+        :key="item.title"
         :title="item.title"
         :image="item.image"
         :info="item.info"

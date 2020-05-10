@@ -1,17 +1,17 @@
 <template>
   <div class="restaurant-review">
-    <NavigationBack title="Reviews" />
-
-    <ReviewDetailGroup :data="restaurantData" />
+    <review-detail-group :data="restaurantData" />
   </div>
 </template>
 
 <script>
-import NavigationBack from '@/components/Partial/NavigationBack.vue';
-import ReviewDetailGroup from '@/components/User/ReviewDetailGroup.vue';
+import ReviewDetailGroup from '../../../components/User/ReviewDetailGroup.vue';
 
 export default {
   name: 'RestaurantReview',
+  components: {
+    ReviewDetailGroup,
+  },
   computed: {
     restaurantData() {
       return this.$store.getters.restaurantData;

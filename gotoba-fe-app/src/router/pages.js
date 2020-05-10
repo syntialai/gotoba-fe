@@ -1,7 +1,7 @@
-const LOGIN = () => import('../views/User/Login.vue');
-const SIGN_UP = () => import('../views/User/SignUp.vue');
+const LOGIN = () => import('../views/Auth/Login.vue');
+const SIGN_UP = () => import('../views/Auth/SignUp.vue');
 
-const ITINERARY = () => import('../views/User/');
+// const ITINERARY = () => import('../views/User/');
 const MY_TICKETS = () => import('../views/User/Ticket/MyTickets.vue');
 const CART = () => import('../views/User/Payment/Cart.vue');
 const PROFILE = () => import('../views/User/Profile/Profile.vue');
@@ -14,8 +14,9 @@ const RESTAURANT_REVIEW = () => import('../views/User/Home/RestaurantReview.vue'
 const JOURNEY_PROFILE = () => import('../views/User/Home/JourneyProfile.vue');
 const JOURNEY_REVIEW = () => import('../views/User/Home/JourneyReview.vue');
 const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
-const ITINERARY_ADD = () => import('../views/User/');
-const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
+// const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
+// const ITINERARY_ADD = () => import('../views/User/');
+// const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
 const PAYMENT = () => import('../views/User/Payment/Payment.vue');
 const PAYMENT_ORDER = () => import('../views/User/Payment/PaymentOrder.vue');
 const EDIT_PROFILE = () => import('../views/User/Profile/EditProfile.vue');
@@ -27,15 +28,16 @@ const PAYMENT_GUIDE = () => import('../views/User/Payment/PaymentGuide.vue');
 const HISTORY_PENDING = () => import('../components/User/History/HistoryPending.vue');
 const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancelled.vue');
 const TICKET_EXPIRED = () => import('../components/User/Ticket/ExpiredTicket.vue');
-const GALLERY = () => import('../components/User/Home/GalleryHome.vue');
-const ITINERARY = () => import('../components/User/Itinerary/ChooseDateCalendar.vue');
 
+const ADMIN_VIEW = () => import('../views/Admin/Admin.vue');
 const USER_DATA = () => import('../views/Admin/UserData.vue');
+const MERCHANT_DATA = () => import('../views/Admin/MerchantData.vue');
+const GALLERY_DATA = () => import('../views/Admin/GalleryData.vue');
 
 export const Pages = {
   LOGIN,
   SIGN_UP,
-  ITINERARY,
+  // ITINERARY,
   MY_TICKETS,
   CART,
   PROFILE,
@@ -47,8 +49,9 @@ export const Pages = {
   JOURNEY_PROFILE,
   JOURNEY_REVIEW,
   PROMOTION_DETAIL,
-  ITINERARY_ADD,
-  SHOW_QR_CODE,
+  // GALLERY,
+  // ITINERARY_ADD,
+  // SHOW_QR_CODE,
   PAYMENT,
   PAYMENT_ORDER,
   EDIT_PROFILE,
@@ -62,10 +65,11 @@ export const Components = {
   HISTORY_PENDING,
   HISTORY_CANCELLED,
   TICKET_EXPIRED,
-  GALLERY,
-  ITINERARY,
 };
 
 export const Admin = {
+  ADMIN_VIEW,
   USER_DATA,
+  MERCHANT_DATA,
+  GALLERY_DATA,
 };

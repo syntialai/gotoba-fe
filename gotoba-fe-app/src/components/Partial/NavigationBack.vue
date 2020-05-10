@@ -1,16 +1,18 @@
 <template>
-  <b-navbar class="nav-back bg-color-primary text-white">
-    <b-navbar-nav class="d-flex align-center">
-      <b-navbar-item class="icon p-0 m-0" @click="router.go(-1)">
-        <p class="font-size-24 m-0">
-          <b-icon icon="arrow-left-short" class="mr-3" />
-        </p>
-      </b-navbar-item>
-      <b-navbar-item class="nav-title semibold font-size-24 p-0 m-0">
-        {{ title }}
-      </b-navbar-item>
-    </b-navbar-nav>
-  </b-navbar>
+  <div class="nav-back">
+    <b-navbar type="dark" class="bg-color-primary">
+      <b-navbar-nav class="d-flex align-center">
+        <b-nav-item class="icon p-0 m-0" @click="router.go(-1)">
+          <div class="mr-1">
+            <font-awesome-icon icon="arrow-left" />
+          </div>
+        </b-nav-item>
+        <b-nav-item class="nav-title semibold font-size-24 p-0 m-0">
+          {{ title }}
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-navbar>
+  </div>
 </template>
 
 <script>
@@ -23,7 +25,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nav-back {
+.navbar-dark {
   height: 56px;
+
+  .navbar-nav .nav-link {
+    color: white;
+  }
 }
 </style>

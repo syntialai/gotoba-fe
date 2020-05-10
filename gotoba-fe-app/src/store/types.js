@@ -12,6 +12,7 @@ export const GET_SEARCH_RESULTS = 'GET_SEARCH_RESULTS';
 export const SET_USER_INFO = 'SET_USER_INFO';
 export const SET_USER_LOGIN_STATUS = 'SET_USER_LOGIN_STATUS';
 export const GET_USER_DATA = 'GET_USER_DATA';
+export const GET_MERCHANT_DATA = 'GET_MERCHANT_DATA';
 
 /**
  * Review

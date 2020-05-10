@@ -1,7 +1,7 @@
 <template>
   <b-card
-    :img-src="[image]"
-    :img-alt="['Image-' + name]"
+    :img-src="image"
+    :img-alt="'Image-' + name"
     img-top
     class="box-shadow"
   >
@@ -12,7 +12,7 @@
       {{ location }}
     </b-card-text>
     <b-card-text class="pl-2 font-size-8 text-muted">
-      <rating :rate="[rating]" fontSize="8" />
+      <rating :rate="rating" :fontSize="8" />
       <span class="font-color-black-87 semibold pl-1">
         ({{ rating }})
       </span>
@@ -29,7 +29,7 @@ export default {
     name: String,
     image: String,
     location: String,
-    rating: String,
+    rating: Number,
   },
   components: {
     Rating,
