@@ -252,6 +252,11 @@ const routes = [
         name: 'Gallery',
         component: Admin.GALLERY_DATA,
       },
+      {
+        path: 'itinerary',
+        name: 'Itinerary',
+        component: Admin.ITINERARY_DATA,
+      },
     ],
   },
 ];
