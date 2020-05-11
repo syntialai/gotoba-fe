@@ -33,6 +33,7 @@ const ADMIN_VIEW = () => import('../views/Admin/Admin.vue');
 const USER_DATA = () => import('../views/Admin/UserData.vue');
 const MERCHANT_DATA = () => import('../views/Admin/MerchantData.vue');
 const GALLERY_DATA = () => import('../views/Admin/GalleryData.vue');
+const ITINERARY_DATA = () => import('../views/Admin/ItineraryData.vue');
 
 export const Pages = {
   LOGIN,
@@ -72,4 +73,5 @@ export const Admin = {
   USER_DATA,
   MERCHANT_DATA,
   GALLERY_DATA,
+  ITINERARY_DATA,
 };

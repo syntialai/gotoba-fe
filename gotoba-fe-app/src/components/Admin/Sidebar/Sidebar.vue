@@ -13,11 +13,11 @@
     <transition name="width">
       <aside id="sidebar-admin" class="bg-white" shadow>
         <div class="sidebar__profile py-3">
-          <img src=""
-            alt="admin-profile-pict"
-            :width="pictSize + 'px'"
-            :height="pictSize + 'px'"
-          >
+          <b-avatar
+            src=""
+            :size="pictSize + 'px'"
+            class="ml-2"
+          ></b-avatar>
         </div>
         <ul class="sidebar__menu px-2 m-0">
           <li class="sidebar-link-group">
