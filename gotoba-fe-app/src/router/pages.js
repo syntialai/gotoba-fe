@@ -34,6 +34,8 @@ const USER_DATA = () => import('../views/Admin/UserData.vue');
 const MERCHANT_DATA = () => import('../views/Admin/MerchantData.vue');
 const GALLERY_DATA = () => import('../views/Admin/GalleryData.vue');
 const ITINERARY_DATA = () => import('../views/Admin/ItineraryData.vue');
+const RESTAURANT_DATA = () => import('../views/Admin/RestaurantData.vue');
+const RESTAURANT_DETAIL = () => import('../views/Admin/RestaurantDetail.vue');
 
 export const Pages = {
   LOGIN,
@@ -74,4 +76,6 @@ export const Admin = {
   MERCHANT_DATA,
   GALLERY_DATA,
   ITINERARY_DATA,
+  RESTAURANT_DATA,
+  RESTAURANT_DETAIL,
 };

@@ -3,7 +3,7 @@
     <b-card-group>
       <itinerary-card
         v-for="itinerary of itineraries"
-        :key="itinerary.location"
+        :key="itinerary.sku"
         :itinerary="itinerary"
       />
     </b-card-group>
