@@ -59,7 +59,7 @@ export default {
           name: 'Terms and Condition', icon: 'list-alt', link: '/terms-and-condition',
         },
         {
-          name: 'Privacy Policy', icon: 'file-signature', link: '/privacy-policy',
+          name: 'Privacy Policy', icon: 'user-shield', link: '/privacy-policy',
         },
         {
           name: 'Help Centre', icon: 'question-circle', link: '/faq',
