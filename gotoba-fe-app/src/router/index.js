@@ -267,6 +267,16 @@ const routes = [
         name: 'Restaurant Detail',
         component: Admin.RESTAURANT_DETAIL,
       },
+      {
+        path: 'tour-guide',
+        name: 'Tour Guide',
+        component: Admin.TOUR_GUIDE_DATA,
+      },
+      {
+        path: 'tour-guide/:sku',
+        name: 'Tour Guide Detail',
+        component: Admin.TOUR_GUIDE_DETAIL,
+      },
     ],
   },
 ];
