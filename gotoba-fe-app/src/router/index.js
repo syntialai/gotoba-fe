@@ -272,6 +272,11 @@ const routes = [
         name: 'Tour Guide',
         component: Admin.TOUR_GUIDE_DATA,
       },
+      {
+        path: 'tour-guide/:sku',
+        name: 'Tour Guide Detail',
+        component: Admin.TOUR_GUIDE_DETAIL,
+      },
     ],
   },
 ];
