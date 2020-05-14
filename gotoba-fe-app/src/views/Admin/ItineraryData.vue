@@ -1,9 +1,18 @@
 <template>
   <div class="itinerary-data">
-    <show-data-count
-      :perPage="perPage"
-      class="my-3"
-    />
+    <div class="d-flex justify-content-between align-items-center">
+      <show-data-count
+        :perPage="perPage"
+        class="my-3"
+      />
+
+      <b-button
+        class="custom-btn-primary"
+        v-b-modal.add-itinerary-modal
+      >ADD</b-button>
+    </div>
+
+    <add-itinerary-modal />
 
     <itinerary-card-group id="itinerary-data-group" :itineraries="itineraries" />
 
@@ -24,6 +33,7 @@
 </template>
 
 <script>
+import AddItineraryModal from '../../components/Admin/Modal/AddItineraryModal.vue';
 import ItineraryCardGroup from '../../components/Admin/Data/ItineraryCardGroup.vue';
 import Pagination from '../../components/Partial/Pagination.vue';
 import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
@@ -31,6 +41,7 @@ import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
 export default {
   name: 'ItineraryData',
   components: {
+    AddItineraryModal,
     ItineraryCardGroup,
     Pagination,
     ShowDataCount,

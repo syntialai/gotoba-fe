@@ -5,6 +5,7 @@
       title="Add Photo"
       title-class="font-size-24"
       centered
+      size="sm"
       ok-title="SUBMIT"
       cancel-title="CANCEL"
     >
