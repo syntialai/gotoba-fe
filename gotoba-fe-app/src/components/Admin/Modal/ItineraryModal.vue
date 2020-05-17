@@ -2,7 +2,7 @@
   <div class="add-itinerary">
     <b-modal
       id="add-itinerary-modal"
-      title="Add Itinerary"
+      :title="title + ' Itinerary'"
       title-class="font-size-24"
       centered
       size="sm"
@@ -88,7 +88,7 @@
 import { formatPrice } from '../../../utils/filter';
 
 export default {
-  name: 'AddItineraryModal',
+  name: 'ItineraryModal',
   data() {
     return {
       itinerary: {
@@ -99,6 +99,12 @@ export default {
         description: '',
       },
     };
+  },
+  props: {
+    title: {
+      type: String,
+      default: 'Add',
+    },
   },
   methods: {
     formatPrice,

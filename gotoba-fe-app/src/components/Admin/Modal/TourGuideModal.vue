@@ -2,7 +2,7 @@
   <div class="add-tour-guide">
     <b-modal
       id="add-tour-guide-modal"
-      title="Add Tour Guide"
+      :title="title + ' Tour Guide'"
       title-class="font-size-24"
       centered
       size="sm"
@@ -191,7 +191,7 @@
 
 <script>
 export default {
-  name: 'AddTourGuideModal',
+  name: 'TourGuideModal',
   data() {
     return {
       tourGuide: {
@@ -209,6 +209,12 @@ export default {
         description: '',
       },
     };
+  },
+  props: {
+    title: {
+      type: String,
+      default: 'Add',
+    },
   },
   methods: {
     submitTourGuide() {

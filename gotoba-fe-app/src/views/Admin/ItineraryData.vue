@@ -12,7 +12,7 @@
       >ADD</b-button>
     </div>
 
-    <add-itinerary-modal />
+    <itinerary-modal />
 
     <itinerary-card-group id="itinerary-data-group" :itineraries="itineraries" />
 
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import AddItineraryModal from '../../components/Admin/Modal/AddItineraryModal.vue';
+import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
 import ItineraryCardGroup from '../../components/Admin/Data/ItineraryCardGroup.vue';
 import Pagination from '../../components/Partial/Pagination.vue';
 import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
@@ -41,7 +41,7 @@ import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
 export default {
   name: 'ItineraryData',
   components: {
-    AddItineraryModal,
+    ItineraryModal,
     ItineraryCardGroup,
     Pagination,
     ShowDataCount,

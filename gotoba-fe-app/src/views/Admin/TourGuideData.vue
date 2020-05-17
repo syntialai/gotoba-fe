@@ -8,11 +8,11 @@
 
       <b-button
         class="custom-btn-primary"
-        v-b-modal="'add-tour-guide-modal'"
+        v-b-modal.add-tour-guide-modal
       >ADD</b-button>
     </div>
 
-    <add-tour-guide-modal />
+    <tour-guide-modal />
 
     <tour-guide-card-group id="tour-guide-data-group" :tourGuides="tourGuides" />
 
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import AddTourGuideModal from '../../components/Admin/Modal/AddTourGuideModal.vue';
+import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';
 import TourGuideCardGroup from '../../components/Admin/Data/TourGuideCardGroup.vue';
 import Pagination from '../../components/Partial/Pagination.vue';
 import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
@@ -41,7 +41,7 @@ import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
 export default {
   name: 'TourGuideData',
   components: {
-    AddTourGuideModal,
+    TourGuideModal,
     TourGuideCardGroup,
     Pagination,
     ShowDataCount,

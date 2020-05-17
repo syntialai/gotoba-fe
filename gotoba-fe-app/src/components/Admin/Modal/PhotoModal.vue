@@ -2,7 +2,7 @@
   <div class="add-photo">
     <b-modal
       id="add-photo-modal"
-      title="Add Photo"
+      :title="title + ' Photo'"
       title-class="font-size-24"
       centered
       size="sm"
@@ -57,7 +57,7 @@
 
 <script>
 export default {
-  name: 'AddPhotoModal',
+  name: 'PhotoModal',
   data() {
     return {
       photo: {
@@ -66,6 +66,12 @@ export default {
         description: '',
       },
     };
+  },
+  props: {
+    title: {
+      type: String,
+      default: 'Add',
+    },
   },
   methods: {
     submitPhoto() {
