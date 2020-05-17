@@ -4,12 +4,15 @@
       <b-button
         class="custom-btn-primary"
         @click="this.$route.push('edit')"
+        v-b-modal.add-tour-guide-modal
       >EDIT</b-button>
       <b-button
         class="custom-btn-red"
         @click="this.$route.push('delete')"
       >DELETE</b-button>
     </div>
+
+    <tour-guide-modal title="Edit" />
 
     <tour-guide-card :tourGuide="tourGuide" />
 
@@ -82,11 +85,13 @@
 
 <script>
 import TourGuideCard from '../../components/Admin/Card/TourGuideCard.vue';
+import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';
 
 export default {
   name: 'TourGuideDetail',
   components: {
     TourGuideCard,
+    TourGuideModal,
   },
   data() {
     return {

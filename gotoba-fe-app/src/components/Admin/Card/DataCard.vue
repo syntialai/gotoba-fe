@@ -7,9 +7,9 @@
       class="p-2"
     >
       <b-card-body>
-        <b-card-subtitle class="bold font-color-blue-secondary">
+        <b-card-sub-title class="bold font-color-blue-secondary">
           {{ data.location }}
-        </b-card-subtitle>
+        </b-card-sub-title>
 
         <div class="other d-flex align-items-center">
           <div class="other-icon icon-gradient">
@@ -47,6 +47,7 @@ export default {
   name: 'DataCard',
   props: {
     data: Object,
+    otherIcon: String,
   },
   components: {
     Rating,

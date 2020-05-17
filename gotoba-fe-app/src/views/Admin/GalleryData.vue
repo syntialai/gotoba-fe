@@ -1,9 +1,18 @@
 <template>
   <div class="gallery-data">
-    <show-data-count
-      :perPage="perPage"
-      class="my-3"
-    />
+    <div class="d-flex align-items-center justify-content-between">
+      <show-data-count
+        :perPage="perPage"
+        class="my-3"
+      />
+
+      <b-button
+        class="custom-btn-primary"
+        v-b-modal.add-photo-modal
+      >ADD</b-button>
+    </div>
+
+    <photo-modal />
 
     <gallery-card-group id="gallery-data-group" :photos="photos" />
 
@@ -24,6 +33,7 @@
 </template>
 
 <script>
+import PhotoModal from '../../components/Admin/Modal/PhotoModal.vue';
 import GalleryCardGroup from '../../components/Admin/Data/GalleryCardGroup.vue';
 import Pagination from '../../components/Partial/Pagination.vue';
 import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
@@ -31,6 +41,7 @@ import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
 export default {
   name: 'GalleryData',
   components: {
+    PhotoModal,
     GalleryCardGroup,
     Pagination,
     ShowDataCount,
