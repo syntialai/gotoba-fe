@@ -1,6 +1,6 @@
 <template>
   <div class="gallery-data">
-    <b-card-group deck>
+    <b-card-group column>
       <gallery-card
         v-for="photo of photos"
         :key="photo.title"
