@@ -13,7 +13,7 @@ import BottomNav from '../../components/Partial/BottomNav.vue';
 import Navigation from '../../components/Partial/Navigation.vue';
 
 export default {
-  name: 'Main',
+  name: 'Merchant',
   components: {
     BottomNav,
     Navigation,
@@ -25,19 +25,16 @@ export default {
     navItems() {
       return [
         {
-          id: 1, name: 'Home', icon: 'home', link: '/',
+          id: 1, name: 'Order List', icon: 'clipboard-list', link: '/merchant/order-list',
         },
         {
-          id: 2, name: 'Itinerary', icon: 'route', link: '/my-itinerary',
+          id: 2, name: 'My Bistro', icon: 'utensil', link: '/merchant/restaurant',
         },
         {
-          id: 3, name: 'My tickets', icon: 'qrcode', link: '/my-tickets',
+          id: 3, name: 'My Spot', icon: 'route', link: '/merchant/itinerary',
         },
         {
-          id: 4, name: 'Cart', icon: 'shopping-cart', link: '/cart',
-        },
-        {
-          id: 5, name: 'Profile', icon: 'user', link: '/profile',
+          id: 4, name: 'Profile', icon: 'user', link: '/merchant/profile',
         },
       ];
     },

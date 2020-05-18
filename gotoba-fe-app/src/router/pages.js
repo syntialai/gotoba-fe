@@ -39,6 +39,10 @@ const RESTAURANT_DETAIL = () => import('../views/Admin/RestaurantDetail.vue');
 const TOUR_GUIDE_DATA = () => import('../views/Admin/TourGuideData.vue');
 const TOUR_GUIDE_DETAIL = () => import('../views/Admin/TourGuideDetail.vue');
 
+const MERCHANT_VIEW = () => import('../views/Merchant/Merchant.vue');
+const MERCHANT_ORDER_LIST = () => import('../views/Merchant/Order/OrderList.vue');
+const MERCHANT_PROFILE = () => import('../views/Merchant/Profile/Profile.vue');
+
 export const Pages = {
   LOGIN,
   SIGN_UP,
@@ -82,4 +86,10 @@ export const Admin = {
   RESTAURANT_DETAIL,
   TOUR_GUIDE_DATA,
   TOUR_GUIDE_DETAIL,
+};
+
+export const Merchant = {
+  MERCHANT_VIEW,
+  MERCHANT_ORDER_LIST,
+  MERCHANT_PROFILE,
 };
