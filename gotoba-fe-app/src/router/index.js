@@ -2,7 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Main from '../views/User/Main.vue';
 import Home from '../views/User/Home/Home.vue';
-import { Components, Pages, Admin } from './pages';
+import {
+  Components, Pages, Admin, Merchant,
+} from './pages';
 
 Vue.use(VueRouter);
 
@@ -278,6 +280,32 @@ const routes = [
         component: Admin.TOUR_GUIDE_DETAIL,
       },
     ],
+  },
+  {
+    path: '/merchant',
+    name: 'Merchant',
+    component: Merchant.MERCHANT_VIEW,
+    children: [
+      {
+        path: 'order-list',
+        name: 'Order List',
+        component: Merchant.MERCHANT_ORDER_LIST,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: Merchant.MERCHANT_PROFILE,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+    ],
+    meta: {
+      layout: 'background-blue',
+    },
   },
 ];
 
