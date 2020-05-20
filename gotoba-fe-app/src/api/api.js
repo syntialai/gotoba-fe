@@ -47,4 +47,7 @@ export default {
   UpdateProfile(params) {
     return fetchPost('/user', params);
   },
+  getGalleryPhotos(params) {
+    return fetchGet('/gallery', params);
+  },
 };

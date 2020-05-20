@@ -147,14 +147,14 @@ const routes = [
       layout: 'default-back',
     },
   },
-  // {
-  //   path: '/gallery',
-  //   name: 'Gallery',
-  //   component: Pages.GALLERY,
-  //   meta: {
-  //     layout: 'default-back',
-  //   },
-  // },
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: Pages.GALLERY,
+    meta: {
+      layout: 'default-back',
+    },
+  },
   // {
   //   path: '/itinerary/add',
   //   name: 'Add Itinerary',

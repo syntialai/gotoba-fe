@@ -14,7 +14,7 @@ const RESTAURANT_REVIEW = () => import('../views/User/Home/RestaurantReview.vue'
 const JOURNEY_PROFILE = () => import('../views/User/Home/JourneyProfile.vue');
 const JOURNEY_REVIEW = () => import('../views/User/Home/JourneyReview.vue');
 const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
-// const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
+const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
 // const ITINERARY_ADD = () => import('../views/User/');
 // const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
 const PAYMENT = () => import('../views/User/Payment/Payment.vue');
@@ -58,7 +58,7 @@ export const Pages = {
   JOURNEY_PROFILE,
   JOURNEY_REVIEW,
   PROMOTION_DETAIL,
-  // GALLERY,
+  GALLERY,
   // ITINERARY_ADD,
   // SHOW_QR_CODE,
   PAYMENT,
