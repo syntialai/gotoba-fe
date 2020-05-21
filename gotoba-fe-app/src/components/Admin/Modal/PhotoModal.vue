@@ -56,6 +56,8 @@
 </template>
 
 <script>
+import api from '../../../api/api';
+
 export default {
   name: 'PhotoModal',
   data() {
@@ -75,8 +77,25 @@ export default {
   },
   methods: {
     submitPhoto() {
-      this.$store.commit('addPhoto', this.photo);
+      let data = {
+        name: this.title,
+        title: this.title,
+        description: this.description,
+        image: this.file,
+        show: true,
+      };
+
+      api.PostGalleryPhoto(data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
+  },
+  mounted() {
+    this.submitPhoto();
   },
 };
 </script>

@@ -3,14 +3,14 @@ import api from '../../api/api';
 import * as Types from '../types';
 
 const state = {
-  galleryData: {},
+  galleryData: [],
 };
 
 const actions = {
   getGalleryData({ commit }) {
     commit(Types.GET_GALLERY_DATA);
 
-    api.getGalleryPhotos()
+    api.GetGalleryPhotos()
       .then((res) => {
         commit(Types.GET_GALLERY_DATA, res);
       });
