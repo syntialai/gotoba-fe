@@ -6,6 +6,7 @@
         :key="photo.title"
         :image="photo.image"
         :info="photo.title"
+        :sku="photo.sku"
       />
     </b-card-group>
   </div>

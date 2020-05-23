@@ -255,6 +255,11 @@ const routes = [
         component: Admin.GALLERY_DATA,
       },
       {
+        path: 'gallery/:sku',
+        name: 'Gallery Detail',
+        component: Admin.GALLERY_DETAIL,
+      },
+      {
         path: 'itinerary',
         name: 'Itinerary',
         component: Admin.ITINERARY_DATA,

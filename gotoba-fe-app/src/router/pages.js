@@ -33,6 +33,7 @@ const ADMIN_VIEW = () => import('../views/Admin/Admin.vue');
 const USER_DATA = () => import('../views/Admin/UserData.vue');
 const MERCHANT_DATA = () => import('../views/Admin/MerchantData.vue');
 const GALLERY_DATA = () => import('../views/Admin/GalleryData.vue');
+const GALLERY_DETAIL = () => import('../views/Admin/GalleryDetail.vue');
 const ITINERARY_DATA = () => import('../views/Admin/ItineraryData.vue');
 const RESTAURANT_DATA = () => import('../views/Admin/RestaurantData.vue');
 const RESTAURANT_DETAIL = () => import('../views/Admin/RestaurantDetail.vue');
@@ -81,6 +82,7 @@ export const Admin = {
   USER_DATA,
   MERCHANT_DATA,
   GALLERY_DATA,
+  GALLERY_DETAIL,
   ITINERARY_DATA,
   RESTAURANT_DATA,
   RESTAURANT_DETAIL,
