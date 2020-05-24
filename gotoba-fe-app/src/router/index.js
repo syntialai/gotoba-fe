@@ -147,14 +147,14 @@ const routes = [
       layout: 'default-back',
     },
   },
-  // {
-  //   path: '/gallery',
-  //   name: 'Gallery',
-  //   component: Pages.GALLERY,
-  //   meta: {
-  //     layout: 'default-back',
-  //   },
-  // },
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: Pages.GALLERY,
+    meta: {
+      layout: 'default-back',
+    },
+  },
   // {
   //   path: '/itinerary/add',
   //   name: 'Add Itinerary',
@@ -253,6 +253,11 @@ const routes = [
         path: 'gallery',
         name: 'Gallery',
         component: Admin.GALLERY_DATA,
+      },
+      {
+        path: 'gallery/:sku',
+        name: 'Gallery Detail',
+        component: Admin.GALLERY_DETAIL,
       },
       {
         path: 'itinerary',

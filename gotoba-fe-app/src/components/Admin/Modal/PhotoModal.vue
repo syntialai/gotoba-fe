@@ -25,16 +25,25 @@
         </b-form-group>
 
         <b-form-group
-          id="photo-file-group"
+          id="photo-image-group"
           label="Photo"
-          label-for="photo-file"
+          label-for="photo-image"
         >
-          <b-form-file
-            id="photo-file"
-            v-model="photo.file"
-            required
-            plain
-          ></b-form-file>
+          <div v-if="photo.image === null">
+            <b-form-file
+              id="photo-image"
+              v-model="photo.image"
+              required
+              plain
+            ></b-form-file>
+          </div>
+          <div v-else>
+            <img :src="photo.image">
+            <b-button
+              class="custom-btn-gray-young"
+              @click="photo.image = null"
+            >Remove photo</b-button>
+          </div>
         </b-form-group>
 
         <b-form-group
@@ -51,19 +60,26 @@
           ></b-form-textarea>
         </b-form-group>
       </b-form>
+
+      <alert v-bind="alert" />
     </b-modal>
   </div>
 </template>
 
 <script>
+import Alert from '../../Partial/Alert.vue';
+import previewImage from '../../../utils/fileHelper';
+import api from '../../../api/api';
+
 export default {
   name: 'PhotoModal',
   data() {
     return {
-      photo: {
-        title: '',
-        file: null,
-        description: '',
+      photo: this.photos,
+      alert: {
+        success: false,
+        show: false,
+        message: '',
       },
     };
   },
@@ -72,11 +88,49 @@ export default {
       type: String,
       default: 'Add',
     },
+    photos: {
+      type: Object,
+      default: () => (
+        {
+          title: '',
+          image: null,
+          description: '',
+        }
+      ),
+    },
+  },
+  components: {
+    Alert,
   },
   methods: {
     submitPhoto() {
-      this.$store.commit('addPhoto', this.photo);
+      const data = {
+        name: this.photo.title,
+        title: this.photo.title,
+        description: this.photo.description,
+        image: this.photo.file,
+        show: true,
+      };
+
+      api.PostGalleryPhoto(data)
+        .then((res) => {
+          console.log(res);
+          this.alert = {
+            success: true,
+            show: true,
+            message: 'added the photo to Gallery',
+          };
+          this.$router.push({ path: '/admin/gallery' });
+        })
+        .catch((error) => {
+          console.log(error);
+          this.alert.message = 'to added photo to Gallery';
+        });
     },
+    previewImage,
+  },
+  mounted() {
+    this.submitPhoto();
   },
 };
 </script>
