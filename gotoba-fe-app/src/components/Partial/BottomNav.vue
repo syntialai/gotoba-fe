@@ -1,7 +1,7 @@
 <template>
   <b-navbar
     id="bottom-nav"
-    class="bg-white box-shadow fixed-bottom d-flex pl-0 pr-0"
+    class="bg-white box-shadow fixed-bottom d-flex justify-content-around px-0"
     variant="light"
   >
     <b-nav-item
@@ -9,8 +9,7 @@
         :key="item.id"
         :class="{active: isActive[item.id-1]}"
         @click="Array.from(isActive, () => 0); isActive[key-1] = 1;"
-        :style="['width: ' + item.width + '%;']"
-      href="/"
+        :href="item.link"
     >
       <div class="align-center">
         <font-awesome-icon :icon="item.icon" class="font-size-24" />
@@ -26,26 +25,12 @@
 
 <script>
 export default {
-  name: 'BottomNavUser',
+  name: 'BottomNav',
+  props: {
+    navItems: Array,
+  },
   data() {
     return {
-      navItems: [
-        {
-          id: 1, name: 'Home', icon: 'home', width: 18,
-        },
-        {
-          id: 2, name: 'Itinerary', icon: 'route', width: 18,
-        },
-        {
-          id: 3, name: 'My tickets', icon: 'qrcode', width: 28,
-        },
-        {
-          id: 4, name: 'Cart', icon: 'shopping-cart', width: 18,
-        },
-        {
-          id: 5, name: 'Profile', icon: 'user', width: 18,
-        },
-      ],
       isActive: [1, 0, 0, 0, 0],
     };
   },

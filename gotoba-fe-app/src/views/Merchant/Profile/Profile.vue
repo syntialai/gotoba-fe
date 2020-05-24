@@ -1,12 +1,12 @@
 <template>
   <div class="profile">
-    <div class="user-profile d-flex w-100 m-4 bg-white box-shadow">
-      <div class="user-img">
+    <div class="merchant-profile d-flex w-100 m-4 bg-white box-shadow">
+      <div class="merchant-img">
         <b-avatar :src="image"></b-avatar>
       </div>
-      <div class="user-info">
-        <div class="user-name bold font-size-20">{{ name }}</div>
-        <div class="user-location font-color-black-60">{{ location }}</div>
+      <div class="merchant-info">
+        <div class="merchant-name bold font-size-20">{{ name }}</div>
+        <div class="merchant-location font-color-black-60">{{ location }}</div>
       </div>
     </div>
 
@@ -41,12 +41,6 @@ export default {
       menuAccount: [
         {
           name: 'Edit Profile', icon: 'user-edit', link: '/profile/edit',
-        },
-        {
-          name: 'History', icon: 'history', link: '/history',
-        },
-        {
-          name: 'My Itinerary', icon: 'route', link: '/my-itinerary',
         },
       ],
       menuAbout: [

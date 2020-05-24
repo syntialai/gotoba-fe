@@ -33,3 +33,8 @@ export const GET_JOURNEY_DATA = 'GET_JOURNEY_DATA';
  * Ticket
  */
 export const GET_TICKET_DATA = 'GET_TICKET_DATA';
+
+/**
+ * Gallery
+ */
+export const GET_GALLERY_DATA = 'GET_GALLERY_DATA';

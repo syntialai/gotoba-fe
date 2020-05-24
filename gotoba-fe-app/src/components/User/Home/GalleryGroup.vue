@@ -1,18 +1,7 @@
 <template>
   <div class="gallery-group m-3">
-    <div class="title mb-1 d-flex align-items-center">
-      <font-awesome-icon
-          :icon="['far', 'images']"
-          class="icon-gradient font-size-24 pr-2"
-        />
-      <h6 class="font-color-blue-primary m-0">Our Gallery</h6>
-    </div>
-
-    <div class="info font-color-black-60 font-size-14 mb-3">
-      Show every moment captured around Lake Toba
-    </div>
-
     <vue-gallery :images="images" :index="index" @close="index = null" />
+
     <div class="image-group d-flex justify-content-between flex-wrap">
       <div
         class="responsive-image"
@@ -36,25 +25,28 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import VueGallery from 'vue-gallery';
 
 export default {
-  name: 'Gallery',
+  name: 'GalleryGroup',
   components: {
     VueGallery,
   },
   data() {
     return {
-      images: [
-        'https://indonesiatatler.com/images/i/story-20160819151207-maritim.go.id_resized_773x457.jpg',
-        'https://www.indonesia.travel/content/dam/indtravelrevamp/en/destinations/revision-2019/all-revision-destination/sumatra/Lake_Toba.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg',
-        'https://dummyimage.com/1280/000000/ffffff',
-        'https://dummyimage.com/400/000000/ffffff',
-      ],
+      // images: [
+      //   'https://indonesiatatler.com/images/i/story-20160819151207-maritim.go.id_resized_773x457.jpg',
+      //   'https://www.indonesia.travel/content/dam/indtravelrevamp/en/destinations/revision-2019/all-revision-destination/sumatra/Lake_Toba.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg',
+      //   'https://dummyimage.com/1280/000000/ffffff',
+      //   'https://dummyimage.com/400/000000/ffffff',
+      // ],
       index: null,
     };
   },
   computed: {
+    ...mapGetters(['galleryData']),
+
     getHeight() {
       const width = window.innerWidth - 32;
       const margin = 8;

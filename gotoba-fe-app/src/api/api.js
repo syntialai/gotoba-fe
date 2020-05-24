@@ -37,6 +37,20 @@ export function fetchGet(url, param) {
   });
 }
 
+export function fetchDelete(url, params) {
+  return new Promise((resolve, reject) => {
+    axios.delete(url, params)
+      .then((response) => {
+        resolve(response.data);
+      }, (err) => {
+        reject(err);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
 export default {
   Login(params) {
     return fetchPost('/auth/login', params);
@@ -46,5 +60,21 @@ export default {
   },
   UpdateProfile(params) {
     return fetchPost('/user', params);
+  },
+
+  /**
+   * Gallery
+   */
+  GetGalleryPhotos() {
+    return fetchGet('/gallery/');
+  },
+  PostGalleryPhoto(params) {
+    return fetchPost('/gallery/add', params);
+  },
+  EditGalleryPhoto(sku, params) {
+    return fetchPost(`/gallery/update/${sku}`, params);
+  },
+  RemoveGalleryPhoto(sku, params) {
+    return fetchDelete(`/gallery/delete/${sku}`, params);
   },
 };
