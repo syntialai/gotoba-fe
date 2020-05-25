@@ -155,22 +155,14 @@ const routes = [
       layout: 'default-back',
     },
   },
-  // {
-  //   path: '/itinerary/add',
-  //   name: 'Add Itinerary',
-  //   component: Pages.ITINERARY_ADD,
-  //   meta: {
-  //     layout: 'default-back',
-  //   },
-  // },
-  // {
-  //   path: '/my-tickets/:sku',
-  //   name: 'QR Code Ticket',
-  //   component: Pages.SHOW_QR_CODE,
-  // },
+  {
+    path: '/itinerary/add/show-on-map',
+    name: 'Set Destination',
+    component: Pages.ADD_DESTINATION,
+  },
   {
     path: '/payment/:sku',
-    name: 'Payment',
+    name: 'Payment Process',
     component: Pages.PAYMENT,
     meta: {
       layout: 'default-back',
