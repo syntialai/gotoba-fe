@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <div class="user-profile d-flex w-100 m-4 bg-white box-shadow">
+    <div class="user-profile d-flex w-100 m-4 bg-white box-shadow position-relative">
       <div class="user-img">
         <b-avatar :src="image"></b-avatar>
       </div>

@@ -292,6 +292,14 @@ const routes = [
         },
       },
       {
+        path: 'spot',
+        name: 'My Spot',
+        component: Merchant.MERCHANT_SPOT,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+      {
         path: 'profile',
         name: 'Profile',
         component: Merchant.MERCHANT_PROFILE,
