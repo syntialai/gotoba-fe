@@ -1,7 +1,7 @@
 <template>
   <div class="alert">
     <b-alert
-      v-model="show"
+      v-model="showAlert"
       class="position-fixed fixed-top m-0 rounded-0"
       style="z-index: 2000;"
       :variant="success? 'success' : 'danger'"
@@ -15,12 +15,15 @@
 <script>
 export default {
   name: 'Alert',
-  props: {
-    message: String,
-    success: Boolean,
-    show: {
-      type: Boolean,
-      default: false,
+  computed: {
+    showAlert() {
+      return this.$store.state.showAlert;
+    },
+    message() {
+      return this.$store.state.alertMessage;
+    },
+    success() {
+      return this.$store.state.alertSuccess;
     },
   },
 };
