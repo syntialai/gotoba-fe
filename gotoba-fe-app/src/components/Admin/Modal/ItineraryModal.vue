@@ -25,13 +25,13 @@
         </b-form-group>
 
         <b-form-group
-          id="itinerary-file-group"
+          id="itinerary-image-group"
           label="Photo"
-          label-for="itinerary-file"
+          label-for="itinerary-image"
         >
           <b-form-file
-            id="itinerary-file"
-            v-model="itinerary.file"
+            id="itinerary-image"
+            v-model="itinerary.image"
             required
             plain
           ></b-form-file>
@@ -86,6 +86,7 @@
 
 <script>
 import { formatPrice } from '../../../utils/filter';
+import api from '../../../api/api';
 
 export default {
   name: 'ItineraryModal',
@@ -93,7 +94,7 @@ export default {
     return {
       itinerary: {
         title: '',
-        file: null,
+        image: null,
         location: '',
         price: 0.0,
         description: '',
@@ -109,7 +110,31 @@ export default {
   methods: {
     formatPrice,
     submitItinerary() {
-      this.$store.commit('addItinerary', this.itinerary);
+      const itinerary = {
+        title: title,
+        image: image,
+        description: description,
+      };
+
+      if (title === 'Add') {
+        api.PostItinerary(itinerary)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        
+        return;
+      }
+
+      api.EditItinerary(sku, itinerary)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

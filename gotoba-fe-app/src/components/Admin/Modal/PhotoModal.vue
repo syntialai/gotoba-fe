@@ -101,13 +101,23 @@ export default {
         show: true,
       };
 
-      api.PostGalleryPhoto(data)
+      if (title === 'Add') {
+        api.PostGalleryPhoto(data)
+          .then((res) => {
+            console.log(res);
+            this.$router.push({ path: '/admin/gallery' });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        return;
+      }
+      api.EditGalleryPhoto(sku, data)
         .then((res) => {
           console.log(res);
-          this.$router.push({ path: '/admin/gallery' });
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
         });
     },
     previewImage,

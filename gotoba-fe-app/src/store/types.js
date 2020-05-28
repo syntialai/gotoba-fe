@@ -34,9 +34,10 @@ export const GET_REVIEW_DATA = 'GET_REVIEW_DATA';
 export const GET_RESTAURANT_DATA = 'GET_RESTAURANT_DATA';
 
 /**
- * Journey
+ * Journey / Itinerary
  */
 export const GET_JOURNEY_DATA = 'GET_JOURNEY_DATA';
+export const REMOVE_ITINERARY = 'REMOVE_ITINERARY';
 
 /**
  * Ticket
