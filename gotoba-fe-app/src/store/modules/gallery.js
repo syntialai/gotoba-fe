@@ -15,6 +15,18 @@ const actions = {
         commit(Types.GET_GALLERY_DATA, res);
       });
   },
+  removeGalleryPhoto({ commit }, sku) {
+    commit(Types.REMOVE_GALLERY_PHOTO);
+
+    api.RemoveGalleryPhoto(sku)
+      .then((res) => {
+        commit(Types.REMOVE_GALLERY_PHOTO, res);
+        console.log(`Successfully delete photo with sku: ${sku}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 const getters = {

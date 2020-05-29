@@ -2,8 +2,8 @@
   <div class="gallery-detail">
     <div class="d-flex justify-content-between">
       <b-button
-        v-b-modal.confirm-modal
         class="custom-btn-red"
+        @click="deleteGalleryPhoto"
       >DELETE</b-button>
       <b-button
         v-b-modal.add-photo-modal
@@ -11,7 +11,6 @@
       >EDIT</b-button>
     </div>
 
-    <confirm-modal :object="photo.title" />
     <photo-modal title="Edit" :photo="photo" />
 
     <div class="photo-detail">
@@ -25,19 +24,29 @@
 </template>
 
 <script>
-import ConfirmModal from '../../components/Partial/ConfirmModal.vue';
+import { mapActions } from 'vuex';
+import confirmModal from '../../utils/tool';
 import PhotoModal from '../../components/Admin/Modal/PhotoModal.vue';
 
 export default {
   name: 'GalleryDetail',
   components: {
-    ConfirmModal,
     PhotoModal,
   },
   data() {
     return {
       photo: {},
     };
+  },
+  methods: {
+    ...mapActions.removeGalleryPhoto,
+    deleteGalleryPhoto() {
+      const confirmModalValue = confirmModal(this.photo.title);
+
+      if (confirmModalValue) {
+        this.removeGalleryPhoto(this.photo.sku);
+      }
+    },
   },
 };
 </script>

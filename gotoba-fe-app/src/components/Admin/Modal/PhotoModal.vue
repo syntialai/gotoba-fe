@@ -60,14 +60,11 @@
           ></b-form-textarea>
         </b-form-group>
       </b-form>
-
-      <alert v-bind="alert" />
     </b-modal>
   </div>
 </template>
 
 <script>
-import Alert from '../../Partial/Alert.vue';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
 
@@ -76,11 +73,6 @@ export default {
   data() {
     return {
       photo: this.photos,
-      alert: {
-        success: false,
-        show: false,
-        message: '',
-      },
     };
   },
   props: {
@@ -99,9 +91,6 @@ export default {
       ),
     },
   },
-  components: {
-    Alert,
-  },
   methods: {
     submitPhoto() {
       const data = {
@@ -112,19 +101,23 @@ export default {
         show: true,
       };
 
-      api.PostGalleryPhoto(data)
+      if (this.title === 'Add') {
+        api.PostGalleryPhoto(data)
+          .then((res) => {
+            console.log(res);
+            this.$router.push({ path: '/admin/gallery' });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        return;
+      }
+      api.EditGalleryPhoto(this.photo.sku, data)
         .then((res) => {
           console.log(res);
-          this.alert = {
-            success: true,
-            show: true,
-            message: 'added the photo to Gallery',
-          };
-          this.$router.push({ path: '/admin/gallery' });
         })
-        .catch((error) => {
-          console.log(error);
-          this.alert.message = 'to added photo to Gallery';
+        .catch((err) => {
+          console.log(err);
         });
     },
     previewImage,

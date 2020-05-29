@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <alert />
+    <toast />
+
     <component :is="layout">
       <router-view />
     </component>
@@ -11,6 +14,8 @@ import Auth from './layouts/Auth.vue';
 import BackgroundBlue from './layouts/BackgroundBlue.vue';
 import Default from './layouts/Default.vue';
 import DefaultBack from './layouts/DefaultBack.vue';
+import Alert from './components/Partial/Alert.vue';
+import Toast from './components/Partial/Toast.vue';
 
 export default {
   name: 'App',
@@ -19,6 +24,8 @@ export default {
     BackgroundBlue,
     Default,
     DefaultBack,
+    Alert,
+    Toast,
   },
   computed: {
     layout() {
