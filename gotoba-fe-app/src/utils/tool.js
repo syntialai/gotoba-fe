@@ -5,7 +5,7 @@
  * @returns Value of Modal
  */
 const confirmModal = (object) => {
-  this.$bvModal.msgBoxConfirm(` will be removed permanently from this system.`, {
+  this.$bvModal.msgBoxConfirm(`${object} will be removed permanently from this system.`, {
     title: 'Are you sure?',
     size: 'sm',
     okVariant: 'danger',
@@ -14,14 +14,12 @@ const confirmModal = (object) => {
     cancelTitle: 'NO',
     footerClass: 'p-2',
     hideHeaderClose: false,
-    centered: true
+    centered: true,
   })
-    .then((value) => {
-      return value;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    .then((value) => value)
+    .catch(
+      (err) => console.log(err),
+    );
 };
 
 export default confirmModal;

@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between">
       <b-button
         class="custom-btn-red"
-        @click="confirmModal(itinerary.title)"
+        @click="deleteItinerary"
       >DELETE</b-button>
       <b-button
         v-b-modal.add-itinerary-modal
@@ -24,23 +24,27 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
 import confirmModal from '../../utils/tool';
-
-import { mapActions } from 'vuex';
 
 export default {
   name: 'ItineraryDetail',
   components: {
     ItineraryModal,
   },
+  data() {
+    return {
+      itinerary: {},
+    };
+  },
   methods: {
-    ...mapActions(['removeItinerary']),
-    deleteItinerary(object) {
-      const confirmModalValue = confirmModal(object);
+    ...mapActions.removeItinerary,
+    deleteItinerary() {
+      const confirmModalValue = confirmModal(this.itinerary.title);
 
       if (confirmModalValue) {
-        this.removeItinerary();
+        this.removeItinerary(this.itinerary.sku);
       }
     },
   },

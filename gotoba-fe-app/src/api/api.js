@@ -7,17 +7,15 @@ axios.defaults.timeout = 10000;
 axios.defaults.headers.common.Authorization = AUTH_TOKEN;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
-axios.interceptors.request.use((config) => {
-  return config;
-}, (err) => {
-  return Promise.reject(err);
-});
+axios.interceptors.request.use(
+  (config) => config,
+  (err) => Promise.reject(err),
+);
 
-axios.interceptors.response.use((res) => {
-  return res;
-}, (err) => {
-  return Promise.reject(err);
-});
+axios.interceptors.response.use(
+  (res) => res,
+  (err) => Promise.reject(err),
+);
 
 export function fetchPost(url, params) {
   return new Promise((resolve, reject) => {
@@ -60,7 +58,7 @@ export function fetchPut(url, params) {
       .catch((error) => {
         reject(error);
       });
-  })
+  });
 }
 
 export function fetchDelete(url) {

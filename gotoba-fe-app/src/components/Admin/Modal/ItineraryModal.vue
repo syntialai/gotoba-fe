@@ -110,25 +110,25 @@ export default {
   methods: {
     formatPrice,
     submitItinerary() {
-      const itinerary = {
-        title: title,
-        image: image,
-        description: description,
+      const data = {
+        title: this.itinerary.title,
+        image: this.itinerary.image,
+        description: this.itinerary.description,
       };
 
-      if (title === 'Add') {
-        api.PostItinerary(itinerary)
+      if (this.title === 'Add') {
+        api.PostItinerary(data)
           .then((res) => {
             console.log(res);
           })
           .catch((err) => {
             console.log(err);
           });
-        
+
         return;
       }
 
-      api.EditItinerary(sku, itinerary)
+      api.EditItinerary(this.itinerary.sku, data)
         .then((res) => {
           console.log(res);
         })

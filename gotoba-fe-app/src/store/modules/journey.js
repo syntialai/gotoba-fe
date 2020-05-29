@@ -15,8 +15,8 @@ const actions = {
 
     api.RemoveItinerary(sku)
       .then((res) => {
-        commit(Types.REMOVE_ITINERARY);
-        console.log('Successfully delete itinerary');
+        commit(Types.REMOVE_ITINERARY, res);
+        console.log(`Successfully delete itinerary with sku: ${sku}`);
       })
       .catch((err) => {
         console.log(err);

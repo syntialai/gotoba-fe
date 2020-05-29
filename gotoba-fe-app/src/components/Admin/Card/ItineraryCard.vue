@@ -7,12 +7,6 @@
       <div class="description-detail font-size-14">
         {{ itinerary.description }}
       </div>
-      <div class="edit-button w-100 d-flex justify-content-end">
-        <b-button
-          class="custom-btn-primary"
-          @click="this.$router.push(id)"
-        >EDIT</b-button>
-      </div>
     </div>
   </div>
 </template>

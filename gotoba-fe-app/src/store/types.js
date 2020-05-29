@@ -48,3 +48,4 @@ export const GET_TICKET_DATA = 'GET_TICKET_DATA';
  * Gallery
  */
 export const GET_GALLERY_DATA = 'GET_GALLERY_DATA';
+export const REMOVE_GALLERY_PHOTO = 'REMOVE_GALLERY_PHOTO';

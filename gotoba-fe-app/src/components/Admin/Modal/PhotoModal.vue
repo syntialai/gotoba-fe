@@ -101,7 +101,7 @@ export default {
         show: true,
       };
 
-      if (title === 'Add') {
+      if (this.title === 'Add') {
         api.PostGalleryPhoto(data)
           .then((res) => {
             console.log(res);
@@ -112,7 +112,7 @@ export default {
           });
         return;
       }
-      api.EditGalleryPhoto(sku, data)
+      api.EditGalleryPhoto(this.photo.sku, data)
         .then((res) => {
           console.log(res);
         })

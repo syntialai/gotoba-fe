@@ -257,6 +257,11 @@ const routes = [
         component: Admin.ITINERARY_DATA,
       },
       {
+        path: 'itinerary/:sku',
+        name: 'Itinerary Detail',
+        component: Admin.ITINERARY_DETAIL,
+      },
+      {
         path: 'restaurant',
         name: 'Restaurant',
         component: Admin.RESTAURANT_DATA,
