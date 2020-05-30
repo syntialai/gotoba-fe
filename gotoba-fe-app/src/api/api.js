@@ -99,7 +99,7 @@ export default {
     return fetchPost('/gallery/add', params);
   },
   EditGalleryPhoto(sku, params) {
-    return fetchPut(`/gallery/update/${sku}`, params);
+    return fetchPut(`/gallery/edit/${sku}`, params);
   },
   RemoveGalleryPhoto(sku) {
     return fetchDelete(`/gallery/delete/${sku}`);
@@ -153,5 +153,5 @@ export default {
   },
   RemoveRestaurantMenu(sku, id) {
     return fetchDelete(`/restaurant/${sku}/menu/delete/${id}`);
-  }
+  },
 };
