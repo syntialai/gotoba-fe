@@ -26,7 +26,7 @@
           Phone Number
         </div>
         <div class="phone-number-value font-color-black-87 semibold pl-4">
-          {{ restaurant.phoneNumber }}
+          {{ restaurant.phone }}
         </div>
       </div>
     </div>
