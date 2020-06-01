@@ -297,6 +297,14 @@ const routes = [
         },
       },
       {
+        path: 'bistro',
+        name: 'My Bistro',
+        component: Merchant.MERCHANT_BISTRO,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+      {
         path: 'spot',
         name: 'My Spot',
         component: Merchant.MERCHANT_SPOT,
@@ -312,10 +320,15 @@ const routes = [
           layout: 'background-blue',
         },
       },
+      {
+        path: 'bistro/review',
+        name: 'Bistro Review',
+        component: Merchant.MERCHANT_BISTRO_REVIEW,
+        meta: {
+          layout: 'default-back',
+        },
+      },
     ],
-    meta: {
-      layout: 'background-blue',
-    },
   },
 ];
 

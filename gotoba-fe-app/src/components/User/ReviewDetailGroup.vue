@@ -1,6 +1,6 @@
 <template>
   <div class="review-detail">
-    <CardProfileDetail
+    <card-profile-detail
       class="mb-2 mt-2"
       v-bind="data"
     />
@@ -19,14 +19,14 @@
     </div>
 
     <div id="user-review-group">
-      <UserReviewDetail
+      <user-review-detail
         v-for="review in data.reviews"
         :key="review.userName"
         v-bind="review"
       />
     </div>
 
-    <Pagination
+    <pagination
       idControls="user-review-group"
       :currentPage="1"
       :perPage="5"
@@ -35,9 +35,9 @@
 </template>
 
 <script>
-import CardProfileDetail from '@/components/User/Profile/CardProfileDetail.vue';
-import Pagination from '@/components/Partial/Pagination.vue';
-import UserReviewDetail from '@/components/User/UserReviewDetail.vue';
+import CardProfileDetail from './Profile/CardProfileDetail.vue';
+import Pagination from '../Partial/Pagination.vue';
+import UserReviewDetail from './UserReviewDetail.vue';
 
 export default {
   name: 'ReviewDetailGroup',

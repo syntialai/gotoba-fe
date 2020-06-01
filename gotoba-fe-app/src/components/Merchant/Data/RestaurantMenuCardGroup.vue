@@ -1,7 +1,7 @@
 <template>
   <div class="restaurant-menu-card-group d-flex overflow-auto">
     <card-restaurant-menu
-      v-for="menu of restaurantMenus"
+      v-for="menu of restaurantMenu"
       :key="menu.id"
       :menu="menu"
     />
@@ -15,6 +15,9 @@ export default {
   name: 'RestaurantMenuCardGroup',
   components: {
     CardRestaurantMenu,
+  },
+  props: {
+    restaurantMenu: Array,
   },
 };
 </script>

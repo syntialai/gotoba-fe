@@ -46,6 +46,8 @@ const MERCHANT_VIEW = () => import('../views/Merchant/Merchant.vue');
 const MERCHANT_ORDER_LIST = () => import('../views/Merchant/Order/OrderList.vue');
 const MERCHANT_PROFILE = () => import('../views/Merchant/Profile/Profile.vue');
 const MERCHANT_SPOT = () => import('../views/Merchant/Spot/Spot.vue');
+const MERCHANT_BISTRO = () => import('../views/Merchant/Bistro/Bistro.vue');
+const MERCHANT_BISTRO_REVIEW = () => import('../views/Merchant/Bistro/BistroReview.vue');
 
 export const Pages = {
   LOGIN,
@@ -100,4 +102,6 @@ export const Merchant = {
   MERCHANT_ORDER_LIST,
   MERCHANT_PROFILE,
   MERCHANT_SPOT,
+  MERCHANT_BISTRO,
+  MERCHANT_BISTRO_REVIEW,
 };
