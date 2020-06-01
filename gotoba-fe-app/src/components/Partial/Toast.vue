@@ -1,13 +1,13 @@
 <template>
   <div class="toast">
-    <b-toaster-bottom-center
+    <b-toast
       v-model="showToast"
       variant="dark"
       no-close-button
-      class="border-circle"
+      class="b-toaster-bottom-center border-circle"
     >
       {{ message }}
-    </b-toaster-bottom-center>
+    </b-toast>
   </div>
 </template>
 

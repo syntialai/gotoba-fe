@@ -4,7 +4,7 @@
     <toast />
 
     <component :is="layout">
-      <router-view />
+      <router-view class="container" />
     </component>
   </div>
 </template>
@@ -39,7 +39,6 @@ export default {
 @import "~@/assets/scss/index";
 
 #app {
-  margin-top: 0;
   background-color: $bg-color;
 }
 </style>

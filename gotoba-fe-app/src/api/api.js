@@ -99,7 +99,7 @@ export default {
     return fetchPost('/gallery/add', params);
   },
   EditGalleryPhoto(sku, params) {
-    return fetchPut(`/gallery/update/${sku}`, params);
+    return fetchPut(`/gallery/edit/${sku}`, params);
   },
   RemoveGalleryPhoto(sku) {
     return fetchDelete(`/gallery/delete/${sku}`);
@@ -122,5 +122,36 @@ export default {
   },
   RemoveItinerary(sku) {
     return fetchDelete(`/wisata/delete/${sku}`);
+  },
+
+  /**
+   * Restaurant
+   */
+  GetRestaurants() {
+    return fetchGet('/restaurant');
+  },
+  GetRestaurantBySku(sku) {
+    return fetchGet(`/restaurant/${sku}`);
+  },
+  PostRestaurant(params) {
+    return fetchPost('/restaurant/add', params);
+  },
+  EditRestaurant(sku, params) {
+    return fetchPut(`/restaurant/edit/${sku}`, params);
+  },
+  GetRestaurantMenus(sku) {
+    return fetchGet(`/restaurant/${sku}/menu/`);
+  },
+  GetRestaurantMenuById(id) {
+    return fetchGet(`/restaurant/menu/${id}`);
+  },
+  AddRestaurantMenu(sku, params) {
+    return fetchPost(`/restaurant/${sku}/menu/add`, params);
+  },
+  EditRestaurantMenu(sku, id, params) {
+    return fetchPut(`/restaurant/${sku}/menu/edit/${id}`, params);
+  },
+  RemoveRestaurantMenu(sku, id) {
+    return fetchDelete(`/restaurant/${sku}/menu/delete/${id}`);
   },
 };
