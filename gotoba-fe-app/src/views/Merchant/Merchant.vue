@@ -28,10 +28,10 @@ export default {
           id: 1, name: 'Order List', icon: 'clipboard-list', link: '/merchant/order-list',
         },
         {
-          id: 2, name: 'My Bistro', icon: 'utensil', link: '/merchant/restaurant',
+          id: 2, name: 'My Bistro', icon: 'utensil', link: '/merchant/bistro',
         },
         {
-          id: 3, name: 'My Spot', icon: 'route', link: '/merchant/itinerary',
+          id: 3, name: 'My Spot', icon: 'route', link: '/merchant/spot',
         },
         {
           id: 4, name: 'Profile', icon: 'user', link: '/merchant/profile',
@@ -41,3 +41,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.main {
+  max-width: 768px;
+}
+</style>

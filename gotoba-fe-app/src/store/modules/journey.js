@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 import * as Types from '../types';
+import api from '../../api/api';
 
 const state = {
   journeyData: {},
@@ -8,6 +9,18 @@ const state = {
 const actions = {
   getJourneyData({ commit }, res) {
     commit(Types.GET_JOURNEY_DATA, res);
+  },
+  removeItinerary({ commit }, sku) {
+    commit(Types.REMOVE_ITINERARY);
+
+    api.RemoveItinerary(sku)
+      .then((res) => {
+        commit(Types.REMOVE_ITINERARY, res);
+        console.log(`Successfully delete itinerary with sku: ${sku}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 

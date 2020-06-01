@@ -1,14 +1,6 @@
 <template>
   <div class="profile">
-    <div class="user-profile d-flex w-100 m-4 bg-white box-shadow">
-      <div class="user-img">
-        <b-avatar :src="image"></b-avatar>
-      </div>
-      <div class="user-info">
-        <div class="user-name bold font-size-20">{{ name }}</div>
-        <div class="user-location font-color-black-60">{{ location }}</div>
-      </div>
-    </div>
+    <card-profile-user :user="user" />
 
     <profile-menu-group
       title="Account"
@@ -24,20 +16,22 @@
 </template>
 
 <script>
+import CardProfileUser from '../../../components/User/Profile/CardProfileUser.vue';
 import ProfileMenuGroup from '../../../components/User/Profile/ProfileMenuGroup.vue';
 
 export default {
   name: 'Profile',
-  props: {
-    image: String,
-    name: String,
-    location: String,
-  },
   components: {
+    CardProfileUser,
     ProfileMenuGroup,
   },
   data() {
     return {
+      user: {
+        image: '',
+        name: '',
+        location: '',
+      },
       menuAccount: [
         {
           name: 'Edit Profile', icon: 'user-edit', link: '/profile/edit',

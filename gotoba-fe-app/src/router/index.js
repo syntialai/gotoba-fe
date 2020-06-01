@@ -155,22 +155,14 @@ const routes = [
       layout: 'default-back',
     },
   },
-  // {
-  //   path: '/itinerary/add',
-  //   name: 'Add Itinerary',
-  //   component: Pages.ITINERARY_ADD,
-  //   meta: {
-  //     layout: 'default-back',
-  //   },
-  // },
-  // {
-  //   path: '/my-tickets/:sku',
-  //   name: 'QR Code Ticket',
-  //   component: Pages.SHOW_QR_CODE,
-  // },
+  {
+    path: '/itinerary/add/show-on-map',
+    name: 'Set Destination',
+    component: Pages.ADD_DESTINATION,
+  },
   {
     path: '/payment/:sku',
-    name: 'Payment',
+    name: 'Payment Process',
     component: Pages.PAYMENT,
     meta: {
       layout: 'default-back',
@@ -265,6 +257,11 @@ const routes = [
         component: Admin.ITINERARY_DATA,
       },
       {
+        path: 'itinerary/:sku',
+        name: 'Itinerary Detail',
+        component: Admin.ITINERARY_DETAIL,
+      },
+      {
         path: 'restaurant',
         name: 'Restaurant',
         component: Admin.RESTAURANT_DATA,
@@ -300,6 +297,22 @@ const routes = [
         },
       },
       {
+        path: 'bistro',
+        name: 'My Bistro',
+        component: Merchant.MERCHANT_BISTRO,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+      {
+        path: 'spot',
+        name: 'My Spot',
+        component: Merchant.MERCHANT_SPOT,
+        meta: {
+          layout: 'background-blue',
+        },
+      },
+      {
         path: 'profile',
         name: 'Profile',
         component: Merchant.MERCHANT_PROFILE,
@@ -307,10 +320,15 @@ const routes = [
           layout: 'background-blue',
         },
       },
+      {
+        path: 'bistro/review',
+        name: 'Bistro Review',
+        component: Merchant.MERCHANT_BISTRO_REVIEW,
+        meta: {
+          layout: 'default-back',
+        },
+      },
     ],
-    meta: {
-      layout: 'background-blue',
-    },
   },
 ];
 
