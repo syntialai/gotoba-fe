@@ -18,7 +18,8 @@ export default {
   },
   computed: {
     restaurantData() {
-      return this.$store.getters.restaurantData;
+      // return this.$store.getters.restaurantData;
+      return [];
     },
     restaurantMenu() {
       return this.$store.getters.restaurantMenu;
