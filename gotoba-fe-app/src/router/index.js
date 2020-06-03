@@ -323,6 +323,14 @@ const routes = [
     ],
   },
   {
+    path: '/merchant/bistro/edit',
+    name: 'Edit Bistro',
+    component: Merchant.MERCHANT_BISTRO_EDIT,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
     path: '/merchant/bistro/review',
     name: 'Bistro Review',
     component: Merchant.MERCHANT_BISTRO_REVIEW,
