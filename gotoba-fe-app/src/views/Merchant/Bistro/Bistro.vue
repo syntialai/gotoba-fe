@@ -19,10 +19,18 @@ export default {
   computed: {
     restaurantData() {
       // return this.$store.getters.restaurantData;
-      return [];
+      return {
+        reviews: [{
+          userImg: '',
+          userName: 'Syntia',
+          rating: 5.0,
+          comment: 'Good',
+          createdAt: Date('12-2-2019'),
+        }],
+      };
     },
     restaurantMenu() {
-      return this.$store.getters.restaurantMenu;
+      return this.$store.getters.restaurantMenus;
     },
   },
 };

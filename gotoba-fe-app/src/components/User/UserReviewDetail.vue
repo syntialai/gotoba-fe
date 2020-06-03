@@ -11,7 +11,7 @@
     </div>
     <div class="ratings d-flex align-items-center mb-1">
       <rating :rate="review.rating" font-size="16" />
-      <span class="date-reviewed font-size-10">{{ review.dateReviewed }}</span>
+      <span class="date-reviewed font-size-10">{{ review.createdAt }}</span>
     </div>
     <div class="comment">
       {{ review.comment }}
