@@ -41,10 +41,10 @@ export default {
   components: {
     RestaurantCard,
   },
-  data() {
-    return {
-      restaurant: {},
-    };
+  computed: {
+    restaurant() {
+      return this.$store.getters.restaurantData;
+    },
   },
 };
 </script>

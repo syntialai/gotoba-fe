@@ -113,6 +113,8 @@
 </template>
 
 <script>
+import api from '../../../api/api';
+
 export default {
   name: 'EditBistro',
   data() {
@@ -137,7 +139,30 @@ export default {
     };
   },
   methods: {
-    updateBistro() {},
+    updateBistro() {
+      const data = this.bistro;
+
+      if (data.sku) {
+        api.EditRestaurant(data.sku, data)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        return;
+      }
+
+      api.PostRestaurant(data)
+        .then((res) => {
+          console.log(res);
+          this.$route.push('/merchant/bistro');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>
