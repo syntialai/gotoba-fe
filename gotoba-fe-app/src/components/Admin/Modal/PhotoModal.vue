@@ -105,7 +105,7 @@ export default {
         api.PostGalleryPhoto(data)
           .then((res) => {
             console.log(res);
-            this.$route.push({ path: '/admin/gallery' });
+            this.$router.push({ path: '/admin/gallery' });
           })
           .catch((err) => {
             console.log(err);

@@ -32,6 +32,18 @@ const actions = {
         console.log(err);
       });
   },
+  removeTourGuide({ commit }, sku) {
+    commit(Types.REMOVE_TOUR_GUIDE);
+
+    api.RemoveTourGuide(sku)
+      .then((res) => {
+        commit(Types.REMOVE_TOUR_GUIDE, res);
+        console.log(`Successfully delete tour guide with sku: ${sku}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 };
 
 const getters = {

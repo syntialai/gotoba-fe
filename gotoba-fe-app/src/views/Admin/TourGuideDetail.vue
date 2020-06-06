@@ -3,12 +3,11 @@
     <div class="btn d-flex justify-content-between my-3">
       <b-button
         class="custom-btn-primary"
-        @click="this.$route.push('edit')"
         v-b-modal.add-tour-guide-modal
       >EDIT</b-button>
       <b-button
         class="custom-btn-red"
-        @click="this.$route.push('delete')"
+        @click="deleteTourGuide"
       >DELETE</b-button>
     </div>
 
@@ -84,7 +83,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+import confirmModal from '../../utils/tool';
 import TourGuideCard from '../../components/Admin/Card/TourGuideCard.vue';
 import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';
 
@@ -98,8 +98,17 @@ export default {
     ...mapGetters(['tourGuideData']),
   },
   method: {
+    ...mapActions.removeTourGuide,
     tourGuide(sku) {
       return tourGuideData(sku);
+    },
+    deleteTourGuide() {
+      const confirmModalValue = confirmModal(this.tourGuide.name);
+
+      if (confirmModalValue) {
+        this.removeTourGuide(this.tourGuide.sku);
+        this.$router.go(-1);
+      }
     },
   },
   mounted() {

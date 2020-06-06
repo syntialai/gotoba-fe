@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     layout() {
-      return `${(this.$route.meta.layout || 'default')}`;
+      return `${(this.$router.meta.layout || 'default')}`;
     },
   },
 };

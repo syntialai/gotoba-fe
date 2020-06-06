@@ -118,7 +118,7 @@ export default {
         .then((res) => {
           if (res.success) {
             this.setUserInfo(res.data);
-            this.$route.replace('/');
+            this.$router.replace('/');
           }
         })
         .catch((err) => {

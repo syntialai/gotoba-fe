@@ -170,4 +170,7 @@ export default {
   EditTourGuide(sku, params) {
     return fetchPut(`/tour-guide/edit/${sku}`, params);
   },
+  RemoveTourGuide(sku) {
+    return fetchDelete(`/tour-guide/delete/${sku}`);
+  },
 };

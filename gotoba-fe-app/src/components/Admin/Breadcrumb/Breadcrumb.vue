@@ -9,7 +9,7 @@ export default {
   name: 'Breadcrumb',
   computed: {
     breadcrumbs() {
-      const pathArray = this.$route.path.split('/');
+      const pathArray = this.$router.path.split('/');
       pathArray.shift();
 
       const active = pathArray.slice(-1);
@@ -17,7 +17,7 @@ export default {
 
       const breadcrumb = pathArray.reduce((array, path, index) => {
         array.push({
-          text: toCapitalize(path), // this.$route.matched[index].meta.breadcrumb || path
+          text: toCapitalize(path), // this.$router.matched[index].meta.breadcrumb || path
           to: array[index - 1]
             ? `/${array[index - 1].path}/${path}`
             : `/admin/${path}`,
