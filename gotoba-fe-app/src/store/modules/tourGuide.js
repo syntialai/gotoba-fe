@@ -3,7 +3,7 @@ import api from '../../api/api';
 import * as Types from '../types';
 
 const state = {
-  tourGuideDatas: {},
+  tourGuideDatas: [],
   tourGuideData: {},
 };
 

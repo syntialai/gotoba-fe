@@ -9,10 +9,12 @@ const PROFILE = () => import('../views/User/Profile/Profile.vue');
 const NOTIFICATION = () => import('../views/User/Notification/Notification.vue');
 const NOTIFICATION_DETAIL = () => import('../views/User/Notification/NotificationDetail.vue');
 const SEARCH = () => import('../views/User/Search/Search.vue');
-const RESTAURANT_PROFILE = () => import('../views/User/Home/RestaurantProfile.vue');
-const RESTAURANT_REVIEW = () => import('../views/User/Home/RestaurantReview.vue');
-const JOURNEY_PROFILE = () => import('../views/User/Home/JourneyProfile.vue');
-const JOURNEY_REVIEW = () => import('../views/User/Home/JourneyReview.vue');
+const RESTAURANT_PROFILE = () => import('../views/User/Restaurant/RestaurantProfile.vue');
+const RESTAURANT_REVIEW = () => import('../views/User/Restaurant/RestaurantReview.vue');
+const JOURNEY_PROFILE = () => import('../views/User/Journey/JourneyProfile.vue');
+const JOURNEY_REVIEW = () => import('../views/User/Journey/JourneyReview.vue');
+const TOUR_GUIDE_PROFILE = () => import('../views/User/TourGuide/TourGuideProfile.vue');
+const TOUR_GUIDE_REVIEW = () => import('../views/User/TourGuide/TourGuideReview.vue');
 const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
 const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
 // const ITINERARY_ADD = () => import('../views/User/');
@@ -63,6 +65,8 @@ export const Pages = {
   RESTAURANT_REVIEW,
   JOURNEY_PROFILE,
   JOURNEY_REVIEW,
+  TOUR_GUIDE_PROFILE,
+  TOUR_GUIDE_REVIEW,
   PROMOTION_DETAIL,
   GALLERY,
   // ITINERARY_ADD,

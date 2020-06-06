@@ -271,7 +271,7 @@ export default {
         .then((res) => {
           if (res.success) {
             this.setUserInfo(res.data);
-            this.$router.replace('/');
+            this.$route.replace('/');
           }
         })
         .catch((err) => {

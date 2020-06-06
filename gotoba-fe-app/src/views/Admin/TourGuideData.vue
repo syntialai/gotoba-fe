@@ -46,10 +46,10 @@ export default {
     Pagination,
     ShowDataCount,
   },
-  data() {
-    return {
-      tourGuides: [],
-    };
+  computed: {
+    tourGuides() {
+      return this.$store.getters.tourGuideDatas;
+    },
   },
 };
 </script>

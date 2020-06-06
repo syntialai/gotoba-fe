@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import TourGuideCard from '../../components/Admin/Card/TourGuideCard.vue';
 import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';
 
@@ -93,10 +94,16 @@ export default {
     TourGuideCard,
     TourGuideModal,
   },
-  data() {
-    return {
-      tourGuide: {},
-    };
+  computed: {
+    ...mapGetters(['tourGuideData']),
+  },
+  method: {
+    tourGuide(sku) {
+      return tourGuideData(sku);
+    },
+  },
+  mounted() {
+    tourGuide(sku);
   },
 };
 </script>
