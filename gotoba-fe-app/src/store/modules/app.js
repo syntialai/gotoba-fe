@@ -5,7 +5,7 @@ const state = {
   showAlert: false,
   showToast: false,
   alertMessage: '',
-  alertSuccess: true,
+  alertSuccess: false,
   toastMessage: '',
 };
 

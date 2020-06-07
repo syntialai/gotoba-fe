@@ -320,15 +320,39 @@ const routes = [
           layout: 'background-blue',
         },
       },
-      {
-        path: 'bistro/review',
-        name: 'Bistro Review',
-        component: Merchant.MERCHANT_BISTRO_REVIEW,
-        meta: {
-          layout: 'default-back',
-        },
-      },
     ],
+  },
+  {
+    path: '/merchant/bistro/edit',
+    name: 'Edit Bistro',
+    component: Merchant.MERCHANT_BISTRO_EDIT,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/merchant/bistro/review',
+    name: 'Bistro Review',
+    component: Merchant.MERCHANT_BISTRO_REVIEW,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/merchant/bistro/promotion/:sku',
+    name: 'Bistro Promotion',
+    component: Merchant.MERCHANT_BISTRO_PROMOTION,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/merchant/spot/promotion/:sku',
+    name: 'Spot Promotion',
+    component: Merchant.MERCHANT_SPOT_PROMOTION,
+    meta: {
+      layout: 'default-back',
+    },
   },
 ];
 
