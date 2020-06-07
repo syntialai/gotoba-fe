@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <alert />
-    <toast />
+    <alert class="m-0 p-0" />
+    <toast class="m-0 p-0" />
 
     <component :is="layout">
       <router-view class="container" />
@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     layout() {
-      return `${(this.$route.meta.layout || 'default')}`;
+      return `${(this.$router.meta.layout || 'default')}`;
     },
   },
 };

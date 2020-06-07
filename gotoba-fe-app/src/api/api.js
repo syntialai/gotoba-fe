@@ -154,4 +154,23 @@ export default {
   RemoveRestaurantMenu(sku, id) {
     return fetchDelete(`/restaurant/${sku}/menu/delete/${id}`);
   },
+
+  /**
+   * Tour Guide
+   */
+  GetTourGuides() {
+    return fetchGet('/tour-guide');
+  },
+  GetTourGuideBySku(sku) {
+    return fetchGet(`/tour-guide/${sku}`);
+  },
+  PostTourGuide(params) {
+    return fetchPost(`/tour-guide/add`, params);
+  },
+  EditTourGuide(sku, params) {
+    return fetchPut(`/tour-guide/edit/${sku}`, params);
+  },
+  RemoveTourGuide(sku) {
+    return fetchDelete(`/tour-guide/delete/${sku}`);
+  },
 };

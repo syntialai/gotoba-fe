@@ -1,11 +1,14 @@
 <template>
   <div class="card-info-detail">
-    <b-card
-      :img-src="image"
-      :img-alt="['Image-' + title]"
-      class="w-100"
-      img-top
-    >
+    <b-card class="w-100">
+      <b-aspect aspect="16:9">
+        <b-card-img
+          :src="image"
+          :alt="'Image-' + title"
+          class="w-100"
+          top
+        ></b-card-img>
+      </b-aspect>
       <b-card-title>
         {{ title }}
       </b-card-title>

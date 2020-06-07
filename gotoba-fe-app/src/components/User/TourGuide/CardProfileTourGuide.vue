@@ -1,0 +1,22 @@
+<template>
+  <div class="card-profile-tour-guide p-3 bg-white">
+    <b-media vertical-align="center">
+      <template v-slot:aside>
+        <b-avatar :src="tourGuide.image"></b-avatar>
+      </template>
+      <div class="user-info">
+        <div class="user-name bold font-size-20">{{ tourGuide.nickname }}</div>
+        <div class="user-location font-color-black-60">{{ tourGuide.address }}</div>
+      </div>
+    </b-media>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'CardProfileTourGuide',
+  props: {
+    tourGuide: Object,
+  },
+};
+</script>
