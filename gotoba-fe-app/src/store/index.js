@@ -8,6 +8,7 @@ import restaurant from './modules/restaurant';
 import review from './modules/review';
 import search from './modules/search';
 import ticket from './modules/ticket';
+import tourGuide from './modules/tourGuide';
 import user from './modules/user';
 
 Vue.use(Vuex);
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     review,
     search,
     ticket,
+    tourGuide,
     user,
   },
 });

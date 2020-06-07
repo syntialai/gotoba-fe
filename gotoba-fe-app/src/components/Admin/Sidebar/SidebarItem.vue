@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     updateActiveState() {
-      this.isActive = (this.$route.name
+      this.isActive = (this.$router.name
         === this.to.name)
         || this.activeByDefault;
     },

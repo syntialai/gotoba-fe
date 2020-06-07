@@ -140,6 +140,22 @@ const routes = [
     },
   },
   {
+    path: '/tour-guide/:sku',
+    name: 'Tour Guide',
+    component: Pages.TOUR_GUIDE_PROFILE,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/tour-guide/:sku/review',
+    name: 'Tour Guide Review',
+    component: Pages.TOUR_GUIDE_REVIEW,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
     path: '/promotion/:sku',
     name: 'Promotion Detail',
     component: Pages.PROMOTION_DETAIL,

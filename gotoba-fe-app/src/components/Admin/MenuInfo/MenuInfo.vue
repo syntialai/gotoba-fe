@@ -14,7 +14,7 @@ export default {
   name: 'MenuInfo',
   computed: {
     menu() {
-      return this.$route.path.slice(7).split('/')[0];
+      return this.$router.path.slice(7).split('/')[0];
     },
   },
 };

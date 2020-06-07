@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     currentRouteName() {
-      return this.$route.name;
+      return this.$router.name;
     },
     navItems() {
       return [
