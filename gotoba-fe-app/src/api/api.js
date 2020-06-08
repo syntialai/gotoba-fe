@@ -173,4 +173,20 @@ export default {
   RemoveTourGuide(sku) {
     return fetchDelete(`/tour-guide/delete/${sku}`);
   },
+
+  /**
+   * Review
+   */
+  GetReviewBySku(sku) {
+    return fetchGet(`/review/${sku}`);
+  },
+  GetReviewBySkuAndRating(sku, rate) {
+    return fetchGet(`/review/${sku}/${rate}`);
+  },
+  GetReviewById(id) {
+    return fetchGet(`/review/${id}`);
+  },
+  PostReview(sku, params) {
+    return fetchPost(`/review/${sku}/add`, params);
+  },
 };
