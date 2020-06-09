@@ -165,7 +165,7 @@ export default {
     return fetchGet(`/tour-guide/${sku}`);
   },
   PostTourGuide(params) {
-    return fetchPost(`/tour-guide/add`, params);
+    return fetchPost('/tour-guide/add', params);
   },
   EditTourGuide(sku, params) {
     return fetchPut(`/tour-guide/edit/${sku}`, params);

@@ -49,14 +49,9 @@ export default {
   },
   computed: {
     ...mapGetters(['tourGuideData']),
-  },
-  method: {
     tourGuide(sku) {
-      return tourGuideData(sku);
+      return this.tourGuideData(sku);
     },
-  },
-  mounted() {
-    tourGuide(sku);
   },
 };
 </script>

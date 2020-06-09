@@ -1,10 +1,13 @@
 <template>
   <div class="review">
     <div class="info p-4">
-      How would you rate this {{ category }} experience?
+      How would you rate this {{ info.category }} experience?
     </div>
 
-    <card-review-product name="" image="" />
+    <card-review-product
+      :name="info.name"
+      :image="info.image"
+    />
 
     <b-form-rating
       v-model="rating"

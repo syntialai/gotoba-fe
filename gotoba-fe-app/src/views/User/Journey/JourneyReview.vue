@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ReviewDetailGroup from '../../../components/User/Review/ReviewDetailGroup.vue';
 
 export default {
@@ -13,8 +14,12 @@ export default {
     ReviewDetailGroup,
   },
   computed: {
-    journeyData() {
-      return this.$store.getters.journeyData;
+    ...mapGetters(['journeyData', 'journeyReview']),
+    journeyData(sku) {
+      const data = this.journeyData(sku);
+      const review = this.journeyReview(sku);
+
+      return Object.assign(data, review);
     },
   },
 };
