@@ -37,7 +37,7 @@
 <script>
 import CardProfileDetail from './Profile/CardProfileDetail.vue';
 import Pagination from '../Partial/Pagination.vue';
-import UserReviewDetail from './UserReviewDetail.vue';
+import UserReviewDetail from '../Review/UserReviewDetail.vue';
 
 export default {
   name: 'ReviewDetailGroup',

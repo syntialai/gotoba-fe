@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Rating from '@/components/Partial/Rating.vue';
+import Rating from '../../Partial/Rating.vue';
 
 export default {
   name: 'UserReviewDetail',

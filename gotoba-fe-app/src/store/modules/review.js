@@ -3,6 +3,11 @@ import * as Types from '../types';
 
 const state = {
   reviewData: {},
+  reviewInfo: {
+    name: '',
+    image: '',
+    category: '',
+  },
 };
 
 const actions = {
@@ -13,6 +18,7 @@ const actions = {
 
 const getters = {
   reviewData: (state) => state.reviewData,
+  reviewInfo: (state) => state.reviewInfo,
 };
 
 const mutations = {
