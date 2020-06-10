@@ -96,12 +96,12 @@ export default {
   },
   computed: {
     ...mapGetters(['tourGuideData']),
+    tourGuide(sku) {
+      return this.tourGuideData(sku);
+    },
   },
   method: {
     ...mapActions.removeTourGuide,
-    tourGuide(sku) {
-      return tourGuideData(sku);
-    },
     deleteTourGuide() {
       const confirmModalValue = confirmModal(this.tourGuide.name);
 
@@ -110,9 +110,6 @@ export default {
         this.$router.go(-1);
       }
     },
-  },
-  mounted() {
-    tourGuide(sku);
   },
 };
 </script>

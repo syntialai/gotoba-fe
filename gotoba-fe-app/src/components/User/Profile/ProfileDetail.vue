@@ -59,7 +59,7 @@
 import CardProfileDetail from './CardProfileDetail.vue';
 import AboutProfileDetail from './AboutProfileDetail.vue';
 import RatingProfileDetail from './RatingProfileDetail.vue';
-import UserReviewDetail from '../UserReviewDetail.vue';
+import UserReviewDetail from '../Review/UserReviewDetail.vue';
 import CardPromotion from '../CardPromotion.vue';
 
 export default {

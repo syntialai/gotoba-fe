@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import ReviewDetailGroup from '../../../components/User/ReviewDetailGroup.vue';
+import { mapGetters } from 'vuex';
+import ReviewDetailGroup from '../../../components/User/Review/ReviewDetailGroup.vue';
 
 export default {
   name: 'RestaurantReview',
@@ -13,8 +14,12 @@ export default {
     ReviewDetailGroup,
   },
   computed: {
-    restaurantData() {
-      return this.$store.getters.restaurantData;
+    ...mapGetters(['restaurantData', 'restaurantReview']),
+    restaurantData(sku) {
+      const data = this.restaurantData(sku);
+      const review = this.restaurantReview(sku);
+
+      return Object.assign(data, review);
     },
   },
 };

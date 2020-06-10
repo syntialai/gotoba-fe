@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ReviewDetailGroup from '../../../components/User/ReviewDetailGroup.vue';
+import ReviewDetailGroup from '../../../components/User/Review/ReviewDetailGroup.vue';
 
 export default {
   name: 'TourGuideReview',

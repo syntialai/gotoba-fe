@@ -165,12 +165,28 @@ export default {
     return fetchGet(`/tour-guide/${sku}`);
   },
   PostTourGuide(params) {
-    return fetchPost(`/tour-guide/add`, params);
+    return fetchPost('/tour-guide/add', params);
   },
   EditTourGuide(sku, params) {
     return fetchPut(`/tour-guide/edit/${sku}`, params);
   },
   RemoveTourGuide(sku) {
     return fetchDelete(`/tour-guide/delete/${sku}`);
+  },
+
+  /**
+   * Review
+   */
+  GetReviewBySku(sku) {
+    return fetchGet(`/review/${sku}`);
+  },
+  GetReviewBySkuAndRating(sku, rate) {
+    return fetchGet(`/review/${sku}/${rate}`);
+  },
+  GetReviewById(id) {
+    return fetchGet(`/review/${id}`);
+  },
+  PostReview(sku, params) {
+    return fetchPost(`/review/${sku}/add`, params);
   },
 };
