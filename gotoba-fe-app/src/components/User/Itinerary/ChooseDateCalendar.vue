@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { toFullMonth, toFullDay } from '@/utils/filter';
+import { toFullMonth, toFullDay } from '../../../utils/filter';
 import CardDate from './CardDate.vue';
 
 export default {

@@ -1,7 +1,7 @@
 const LOGIN = () => import('../views/Auth/Login.vue');
 const SIGN_UP = () => import('../views/Auth/SignUp.vue');
 
-// const ITINERARY = () => import('../views/User/');
+const ITINERARY = () => import('../views/User/Itinerary/Itinerary.vue');
 const MY_TICKETS = () => import('../views/User/Ticket/MyTickets.vue');
 const CART = () => import('../views/User/Payment/Cart.vue');
 const PROFILE = () => import('../views/User/Profile/Profile.vue');
@@ -17,7 +17,7 @@ const TOUR_GUIDE_PROFILE = () => import('../views/User/TourGuide/TourGuideProfil
 const TOUR_GUIDE_REVIEW = () => import('../views/User/TourGuide/TourGuideReview.vue');
 const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
 const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
-// const ITINERARY_ADD = () => import('../views/User/');
+const ITINERARY_ADD = () => import('../views/User/Itinerary/AddItinerary.vue');
 const ADD_DESTINATION = () => import('../views/User/Itinerary/AddDestination.vue');
 // const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
 // const PAYMENT = () => import('../views/User/Payment/Payment.vue');
@@ -57,7 +57,7 @@ const MERCHANT_BISTRO_PROMOTION = () => import('../views/Merchant/Bistro/BistroP
 export const Pages = {
   LOGIN,
   SIGN_UP,
-  // ITINERARY,
+  ITINERARY,
   MY_TICKETS,
   CART,
   PROFILE,
@@ -72,7 +72,7 @@ export const Pages = {
   TOUR_GUIDE_REVIEW,
   PROMOTION_DETAIL,
   GALLERY,
-  // ITINERARY_ADD,
+  ITINERARY_ADD,
   ADD_DESTINATION,
   // SHOW_QR_CODE,
   // PAYMENT,
