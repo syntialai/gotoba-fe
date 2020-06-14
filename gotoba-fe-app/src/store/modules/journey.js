@@ -4,11 +4,33 @@ import api from '../../api/api';
 
 const state = {
   journeyData: {},
+  journeyReview: [],
 };
 
 const actions = {
-  getJourneyData({ commit }, res) {
+  getJourneyData({ commit }, sku, res) {
     commit(Types.GET_JOURNEY_DATA, res);
+
+    api.GetItineraryBySku(sku)
+      .then((res) => {
+        console.log(res);
+        commit(Types.GET_JOURNEY_DATA, res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  getJourneyReview({ commit }, sku, res) {
+    commit(Types.GET_JOURNEY_REVIEW, res);
+
+    api.GetReviewBySku(sku)
+      .then((res) => {
+        console.log(res);
+        commit(Types.GET_JOURNEY_REVIEW, res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   removeItinerary({ commit }, sku) {
     commit(Types.REMOVE_ITINERARY);
@@ -26,12 +48,16 @@ const actions = {
 
 const getters = {
   journeyData: (state) => state.journeyData,
+  journeyReview: (state) => state.journeyReview,
 };
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.GET_JOURNEY_DATA](state, res) {
     state.journeyData = res;
+  },
+  [Types.GET_JOURNEY_REVIEW](state, res) {
+    state.journeyReview = res;
   },
 };
 

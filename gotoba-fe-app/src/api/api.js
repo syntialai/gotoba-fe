@@ -165,12 +165,47 @@ export default {
     return fetchGet(`/tour-guide/${sku}`);
   },
   PostTourGuide(params) {
-    return fetchPost(`/tour-guide/add`, params);
+    return fetchPost('/tour-guide/add', params);
   },
   EditTourGuide(sku, params) {
     return fetchPut(`/tour-guide/edit/${sku}`, params);
   },
   RemoveTourGuide(sku) {
     return fetchDelete(`/tour-guide/delete/${sku}`);
+  },
+
+  /**
+   * Review
+   */
+  GetReviewBySku(sku) {
+    return fetchGet(`/review/${sku}`);
+  },
+  GetReviewBySkuAndRating(sku, rate) {
+    return fetchGet(`/review/${sku}/${rate}`);
+  },
+  GetReviewById(id) {
+    return fetchGet(`/review/${id}`);
+  },
+  PostReview(sku, params) {
+    return fetchPost(`/review/${sku}/add`, params);
+  },
+
+  /**
+   * Travelling Schedule
+   */
+  GetTravellingSchedule(sku) {
+    return fetchGet(`/schedule/${sku}`);
+  },
+  GetTravellingScheduleById(id) {
+    return fetchGet(`/schedule/detail/${id}`);
+  },
+  PostTravellingSchedule(sku, params) {
+    return fetchPost(`/schedule/${sku}/add/`, params);
+  },
+  EditTravellingSchedule(id, params) {
+    return fetchPut(`/schedule/edit/${id}`, params);
+  },
+  RemoveTravellingSchedule(id) {
+    return fetchPut(`/schedule/delete/${id}`);
   },
 };

@@ -37,7 +37,7 @@ import { mapGetters } from 'vuex';
 import AboutTourGuideDetail from '../../../components/User/TourGuide/AboutTourGuideDetail.vue';
 import CardProfileTourGuide from '../../../components/User/TourGuide/CardProfileTourGuide.vue';
 import RatingProfileDetail from '../../../components/User/Profile/RatingProfileDetail.vue';
-import UserReviewDetail from '../../../components/User/UserReviewDetail.vue';
+import UserReviewDetail from '../../../components/User/Review/UserReviewDetail.vue';
 
 export default {
   name: 'TourGuideProfile',
@@ -49,14 +49,9 @@ export default {
   },
   computed: {
     ...mapGetters(['tourGuideData']),
-  },
-  method: {
     tourGuide(sku) {
-      return tourGuideData(sku);
+      return this.tourGuideData(sku);
     },
-  },
-  mounted() {
-    tourGuide(sku);
   },
 };
 </script>

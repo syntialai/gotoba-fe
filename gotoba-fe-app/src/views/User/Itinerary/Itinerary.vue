@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import ItineraryPlan from './ItineraryPlan.vue';
-import ThisWeekCalendar from './ThisWeekCalendar.vue';
+import ItineraryPlan from '../../../components/User/Itinerary/ItineraryPlan.vue';
+import ThisWeekCalendar from '../../../components/User/Itinerary/ThisWeekCalendar.vue';
 
 export default {
   name: 'Itinerary',
