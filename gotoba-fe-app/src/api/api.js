@@ -238,5 +238,24 @@ export default {
   },
   DeleteTicket(sku) {
     return fetchDelete(`/ticket/delete/${sku}`);
-  }
+  },
+
+  /**
+   * Order Detail
+   */
+  GetOrderDetail(sku) {
+    return fetchGet(`/order/${sku}`);
+  },
+  GetOrderDetailByMerchant(merchantSku) {
+    return fetchGet(`/order/merchant/${merchantSku}`);
+  },
+  GetOrderDetailByUser(userSku) {
+    return fetchGet(`/order/user/${userSku}`);
+  },
+  PostOrderDetail(userSku, params) {
+    return fetchPost(`/order/user/${userSku}/add`, params);
+  },
+  EditOrderDetail(sku, params) {
+    return fetchPut(`/order/edit/${sku}`, params);
+  },
 };
