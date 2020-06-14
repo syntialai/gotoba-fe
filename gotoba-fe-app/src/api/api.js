@@ -189,4 +189,23 @@ export default {
   PostReview(sku, params) {
     return fetchPost(`/review/${sku}/add`, params);
   },
+
+  /**
+   * Travelling Schedule
+   */
+  GetTravellingSchedule(sku) {
+    return fetchGet(`/schedule/${sku}`);
+  },
+  GetTravellingScheduleById(id) {
+    return fetchGet(`/schedule/detail/${id}`);
+  },
+  PostTravellingSchedule(sku, params) {
+    return fetchPost(`/schedule/${sku}/add/`, params);
+  },
+  EditTravellingSchedule(id, params) {
+    return fetchPut(`/schedule/edit/${id}`, params);
+  },
+  RemoveTravellingSchedule(id) {
+    return fetchPut(`/schedule/delete/${id}`);
+  },
 };
