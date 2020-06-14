@@ -208,4 +208,35 @@ export default {
   RemoveTravellingSchedule(id) {
     return fetchPut(`/schedule/delete/${id}`);
   },
+
+  /**
+   * Ticket
+   */
+  GetTicketByMerchant(merchantSku) {
+    return fetchGet(`/ticket/merchant/${merchantSku}`);
+  },
+  GetRestaurantTicket() {
+    return fetchGet(`/ticket/category/restaurant`);
+  },
+  GetJourneyTicket() {
+    return fetchGet(`/ticket/category/journey`);
+  },
+  GetHotelTicket() {
+    return fetchGet(`/ticket/category/hotel`);
+  },
+  GetTicketBySku(sku) {
+    return fetchGet(`/ticket/${sku}`);
+  },
+  GetTicketByUser(userSku) {
+    return fetchGet(`/ticket/user/${userSku}`);
+  },
+  PostTicket(merchantSku, params) {
+    return fetchPost(`/ticket/merchant/${merchantSku}/add`, params);
+  },
+  EditTicket(sku, params) {
+    return fetchPut(`/ticket/edit/${sku}`, params);
+  },
+  DeleteTicket(sku) {
+    return fetchDelete(`/ticket/delete/${sku}`);
+  }
 };
