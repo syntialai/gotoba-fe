@@ -28,7 +28,9 @@ export default {
     QRCodeInfo,
   },
   computed: {
-    ticketInfo: {},
+    ticketInfo() {
+      return this.$store.getters.ticketData;
+    },
   },
 };
 </script>

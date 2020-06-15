@@ -19,7 +19,7 @@ const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
 const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
 const ITINERARY_ADD = () => import('../views/User/Itinerary/AddItinerary.vue');
 const ADD_DESTINATION = () => import('../views/User/Itinerary/AddDestination.vue');
-// const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
+const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
 // const PAYMENT = () => import('../views/User/Payment/Payment.vue');
 const PAYMENT_ORDER = () => import('../views/User/Payment/PaymentOrder.vue');
 const EDIT_PROFILE = () => import('../views/User/Profile/EditProfile.vue');
@@ -74,7 +74,7 @@ export const Pages = {
   GALLERY,
   ITINERARY_ADD,
   ADD_DESTINATION,
-  // SHOW_QR_CODE,
+  SHOW_QR_CODE,
   // PAYMENT,
   PAYMENT_ORDER,
   EDIT_PROFILE,

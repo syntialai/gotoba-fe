@@ -236,7 +236,7 @@ export default {
   EditTicket(sku, params) {
     return fetchPut(`/ticket/edit/${sku}`, params);
   },
-  DeleteTicket(sku) {
+  RemoveTicket(sku) {
     return fetchDelete(`/ticket/delete/${sku}`);
   },
 
