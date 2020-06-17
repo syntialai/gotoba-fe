@@ -35,13 +35,19 @@ const routes = [
         name: 'My Tickets',
         component: Pages.MY_TICKETS,
         children: [
-          {
-            path: '',
-            component: Components.TICKET_VALID,
-          },
+          // {
+          //   path: '',
+          //   component: Components.TICKET_VALID,
+          //   meta: {
+          //     layout: 'background-blue',
+          //   },
+          // },
           {
             path: 'expired',
             component: Components.TICKET_EXPIRED,
+            meta: {
+              layout: 'background-blue',
+            },
           },
         ],
         meta: {

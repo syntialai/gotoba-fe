@@ -3,7 +3,7 @@
     <card-ticket
       v-for="ticket in expiredTickets"
       :key="ticket.title"
-      v-bind="ticket"
+      :ticket="ticket"
     />
   </div>
 </template>
@@ -17,7 +17,9 @@ export default {
     CardTicket,
   },
   computed: {
-    expiredTickets: {},
+    expiredTickets() {
+      return [];
+    },
   },
 };
 </script>

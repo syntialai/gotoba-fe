@@ -216,13 +216,13 @@ export default {
     return fetchGet(`/ticket/merchant/${merchantSku}`);
   },
   GetRestaurantTicket() {
-    return fetchGet(`/ticket/category/restaurant`);
+    return fetchGet('ticket/category/restaurant');
   },
   GetJourneyTicket() {
-    return fetchGet(`/ticket/category/journey`);
+    return fetchGet('/ticket/category/journey');
   },
   GetHotelTicket() {
-    return fetchGet(`/ticket/category/hotel`);
+    return fetchGet('/ticket/category/hotel');
   },
   GetTicketBySku(sku) {
     return fetchGet(`/ticket/${sku}`);

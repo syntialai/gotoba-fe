@@ -2,23 +2,23 @@
   <div class="card-ticket bg-white w-100">
     <b-card class="m-2 d-flex">
       <b-card-img
-        :src="image"
-        :alt="'image-' + title"
+        :src="ticket.image"
+        :alt="'image-' + ticket.title"
         class="ml-1 mr-3 border-circle"
       ></b-card-img>
       <b-card-text class="font-size-12">
         <div class="title semibold mb-1">
-          {{ title }}
+          {{ ticket.title }}
         </div>
         <div class="merchant font-color-blue-secondary mb-2">
-          <a href="">{{ merchant }}</a>
+          <a href="">{{ ticket.merchant }}</a>
         </div>
         <div class="valid">
-          <div v-if="expiredDate <= Date.now" class="font-color-red">
-            Expired on {{ expiredDate }}
+          <div v-if="ticket.expiredDate <= Date.now" class="font-color-red">
+            Expired on {{ ticket.expiredDate }}
           </div>
           <div else class="font-color-gray">
-            Valid until {{ expiredDate }}
+            Valid until {{ ticket.expiredDate }}
           </div>
         </div>
       </b-card-text>
@@ -30,10 +30,7 @@
 export default {
   name: 'CardTicket',
   props: {
-    title: String,
-    image: String,
-    merchant: String,
-    expiredDate: Date,
+    ticket: Object,
   },
 };
 </script>

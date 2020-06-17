@@ -6,7 +6,7 @@
     <div class="qr-code-valid-date">
       {{ formatDate(date) }}
     </div>
-    
+
     <q-r-code
       :qrCodeValue="qrCodeValue"
       class="d-flex justify-content-center m-4"

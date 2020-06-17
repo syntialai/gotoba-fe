@@ -4,7 +4,7 @@
     <toast class="m-0 p-0" />
 
     <component :is="layout">
-      <router-view class="container" />
+      <router-view class="h-100" />
     </component>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     layout() {
-      return `${(this.$router.meta.layout || 'default')}`;
+      return `${(this.$route.meta.layout || 'default')}`;
     },
   },
 };
