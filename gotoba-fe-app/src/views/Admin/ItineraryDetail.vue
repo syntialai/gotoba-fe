@@ -26,7 +26,7 @@
 <script>
 import { mapActions } from 'vuex';
 import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
-import confirmModal from '../../utils/tool';
+import { confirmModal } from '../../utils/tool';
 
 export default {
   name: 'ItineraryDetail',

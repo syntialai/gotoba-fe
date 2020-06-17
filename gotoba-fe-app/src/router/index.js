@@ -35,13 +35,13 @@ const routes = [
         name: 'My Tickets',
         component: Pages.MY_TICKETS,
         children: [
-          // {
-          //   path: '',
-          //   component: Components.TICKET_VALID,
-          //   meta: {
-          //     layout: 'background-blue',
-          //   },
-          // },
+          {
+            path: '',
+            component: Components.TICKET_VALID,
+            meta: {
+              layout: 'background-blue',
+            },
+          },
           {
             path: 'expired',
             component: Components.TICKET_EXPIRED,
@@ -181,6 +181,11 @@ const routes = [
     path: '/itinerary/add/show-on-map',
     name: 'Set Destination',
     component: Pages.ADD_DESTINATION,
+  },
+  {
+    path: '/my-tickets/:sku',
+    name: 'QR Code',
+    component: Pages.SHOW_QR_CODE,
   },
   {
     path: '/payment/:sku',

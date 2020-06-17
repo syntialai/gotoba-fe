@@ -1,0 +1,13 @@
+@import '../abstracts/variables';
+
+.nav-tabs .nav-link {
+  color: $black-60!important;
+  border: none!important;
+  box-shadow: $box-shadow;
+
+  &.active {
+    color: $blue-secondary!important;
+    font-weight: bold;
+    border-bottom: 2px solid #24A4FB!important;
+  }
+}

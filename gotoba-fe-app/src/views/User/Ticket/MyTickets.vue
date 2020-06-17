@@ -5,13 +5,13 @@
         to="/my-tickets" exact
         exact-active-class="active"
       >
-        <span class="tab-title">PENDING</span>
+        VALID
       </b-nav-item>
       <b-nav-item
         to="/my-tickets/expired" exact
         exact-active-class="active"
       >
-        <span class="tab-title">EXPIRED</span>
+        EXPIRED
       </b-nav-item>
     </b-nav>
 

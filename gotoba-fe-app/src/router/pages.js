@@ -30,6 +30,7 @@ const PAYMENT_GUIDE = () => import('../views/User/Payment/PaymentGuide.vue');
 
 const HISTORY_PENDING = () => import('../components/User/History/HistoryPending.vue');
 const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancelled.vue');
+const TICKET_VALID = () => import('../components/User/Ticket/ValidTicket.vue');
 const TICKET_EXPIRED = () => import('../components/User/Ticket/ExpiredTicket.vue');
 
 const ADMIN_VIEW = () => import('../views/Admin/Admin.vue');
@@ -87,6 +88,7 @@ export const Pages = {
 export const Components = {
   HISTORY_PENDING,
   HISTORY_CANCELLED,
+  TICKET_VALID,
   TICKET_EXPIRED,
 };
 
