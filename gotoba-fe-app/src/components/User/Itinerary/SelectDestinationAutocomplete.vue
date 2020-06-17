@@ -45,7 +45,7 @@ export default {
       matches: [],
     };
   },
-  method: {
+  methods: {
     suggestionClick(suggestion) {
       this.$router.push(`${this.$route.path}/${suggestion.name}`);
     },

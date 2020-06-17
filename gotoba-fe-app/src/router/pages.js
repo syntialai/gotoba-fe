@@ -54,6 +54,7 @@ const MERCHANT_BISTRO = () => import('../views/Merchant/Bistro/Bistro.vue');
 const MERCHANT_BISTRO_EDIT = () => import('../views/Merchant/Bistro/EditBistro.vue');
 const MERCHANT_BISTRO_REVIEW = () => import('../views/Merchant/Bistro/BistroReview.vue');
 const MERCHANT_BISTRO_PROMOTION = () => import('../views/Merchant/Bistro/BistroPromotion.vue');
+const MERCHANT_SCANNER = () => import('../views/Merchant/Scanner/QrScanner.vue');
 
 export const Pages = {
   LOGIN,
@@ -116,4 +117,5 @@ export const Merchant = {
   MERCHANT_BISTRO_EDIT,
   MERCHANT_BISTRO_REVIEW,
   MERCHANT_BISTRO_PROMOTION,
+  MERCHANT_SCANNER,
 };

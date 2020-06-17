@@ -12,7 +12,10 @@
         :href="item.link"
     >
       <div class="align-center">
-        <font-awesome-icon :icon="item.icon" class="font-size-24" />
+        <font-awesome-icon
+          :icon="item.icon"
+          class="font-size-24"
+        />
         <div :id="['bottom-nav-' + item.id]"
           class="font-size-12"
         >

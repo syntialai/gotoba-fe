@@ -100,7 +100,7 @@ export default {
       return this.tourGuideData(sku);
     },
   },
-  method: {
+  methods: {
     ...mapActions.removeTourGuide,
     deleteTourGuide() {
       const confirmModalValue = confirmModal(this.tourGuide.name);

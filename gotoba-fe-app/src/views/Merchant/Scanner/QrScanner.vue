@@ -11,7 +11,7 @@
 <script>
 import { QrcodeStream } from 'vue-qrcode-reader';
 import { requestFullScreen, exitFullScreen } from '../../../utils/tool';
- 
+
 export default {
   name: 'QrScanner',
   components: {
@@ -23,23 +23,21 @@ export default {
       qrcodeResult: '',
     };
   },
-  computed: {
-    init() {
-      fullscreen(true);
-    },
-  },
   methods: {
+    fullscreen(enterFullScreen) {
+      if (enterFullScreen) {
+        requestFullScreen();
+      } else {
+        exitFullScreen();
+      }
+    },
+    init() {
+      this.fullscreen(true);
+    },
     onDecode(result) {
       this.qrcodeResult = result;
-      fullscreen(false);
+      this.fullscreen(false);
       this.showScanner = false;
-    },
-    fullscreen(enterFullScreen) {
-      if (enterFullscreen) {
-        requestFullScreen()
-      } else {
-        exitFullScreen()
-      }
     },
   },
   watch: {

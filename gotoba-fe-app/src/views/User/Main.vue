@@ -2,7 +2,7 @@
   <div class="main">
     <navigation :title="currentRouteName" />
 
-    <router-view></router-view>
+    <router-view class="position-relative"></router-view>
 
     <bottom-nav :navItems="navItems" />
   </div>
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     currentRouteName() {
-      return this.$router.name;
+      return this.$route.name;
     },
     navItems() {
       return [

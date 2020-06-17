@@ -111,7 +111,7 @@ export default {
       birthDate: '', // return value YYYY-MM-DD
     };
   },
-  method: {
+  methods: {
     updateProfile() {
       if (!this.nickname
         || !this.username

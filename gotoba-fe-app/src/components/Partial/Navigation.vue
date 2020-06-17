@@ -6,7 +6,7 @@
           class="d-inline-block align-top mr-2"
           alt="gotoba"
         >
-        <h5 class="text-white m-0">{{ title }}</h5>
+        <p class="text-white font-size-20 m-0">{{ title }}</p>
       </b-navbar-brand>
       <b-navbar-nav right class="ml-auto">
         <b-nav-item href="/search">

@@ -23,7 +23,7 @@ const routes = [
         },
       },
       {
-        path: '/itinerary',
+        path: '/my-itinerary',
         name: 'Itinerary',
         component: Pages.ITINERARY,
         meta: {
@@ -369,6 +369,14 @@ const routes = [
     path: '/merchant/bistro/promotion/:sku',
     name: 'Bistro Promotion',
     component: Merchant.MERCHANT_BISTRO_PROMOTION,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/merchant/scan',
+    name: 'Scan',
+    component: Merchant.MERCHANT_SCANNER,
     meta: {
       layout: 'default-back',
     },

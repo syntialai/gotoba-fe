@@ -1,6 +1,6 @@
 <template>
-  <div class="my-tickets position-relative bg-white m-0">
-    <b-nav tabs class="position-relative" justified>
+  <div class="my-tickets bg-white m-0">
+    <b-nav tabs justified>
       <b-nav-item
         to="/my-tickets" exact
         exact-active-class="active"

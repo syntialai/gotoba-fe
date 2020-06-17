@@ -64,7 +64,7 @@ export default {
       schedules: [],
     };
   },
-  method: {
+  methods: {
     addSchedule() {
       const data = this.schedule;
 

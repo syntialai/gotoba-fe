@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     currentRouteName() {
-      return this.$router.name;
+      return this.$route.name;
     },
     navItems() {
       return [
@@ -28,13 +28,16 @@ export default {
           id: 1, name: 'Order List', icon: 'clipboard-list', link: '/merchant/order-list',
         },
         {
-          id: 2, name: 'My Bistro', icon: 'utensil', link: '/merchant/bistro',
+          id: 2, name: 'My Bistro', icon: 'utensils', link: '/merchant/bistro',
         },
         {
-          id: 3, name: 'My Spot', icon: 'route', link: '/merchant/spot',
+          id: 3, name: 'Scan', icon: 'qrcode', link: '/merchant/scan',
         },
         {
-          id: 4, name: 'Profile', icon: 'user', link: '/merchant/profile',
+          id: 4, name: 'My Spot', icon: 'route', link: '/merchant/spot',
+        },
+        {
+          id: 5, name: 'Profile', icon: 'user', link: '/merchant/profile',
         },
       ];
     },

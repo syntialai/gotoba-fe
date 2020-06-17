@@ -59,7 +59,7 @@ export default {
       comment: '',
     };
   },
-  method: {
+  methods: {
     submitMethod() {
       const data = {
         rating: this.rating,
