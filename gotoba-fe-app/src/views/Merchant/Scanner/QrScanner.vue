@@ -23,6 +23,9 @@ export default {
       qrcodeResult: '',
     };
   },
+  computed: {
+
+  },
   methods: {
     fullscreen(enterFullScreen) {
       if (enterFullScreen) {

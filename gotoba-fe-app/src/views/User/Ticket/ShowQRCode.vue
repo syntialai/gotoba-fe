@@ -8,7 +8,7 @@
       QR Code
     </div>
 
-    <q-r-code-info v-bind="ticketInfo" />
+    <q-r-code-info v-bind="ticketData" />
 
     <div class="close">
       <b-button
@@ -25,6 +25,8 @@
 
 <script>
 import QRCodeInfo from '../../../components/User/Ticket/QRCodeInfo.vue';
+import { mapGetters } from 'vuex';
+import api from '../../../api/api';
 
 export default {
   name: 'ShowQRCode',
@@ -32,13 +34,19 @@ export default {
     QRCodeInfo,
   },
   computed: {
-    ticketInfo() {
-      // return this.$store.getters.ticketData;
-      return {
-        title: 'QR Code',
-        date: new Date(2000, 3, 12),
-        qrCodeValue: 'Test',
-      };
+    ...mapGetters(['ticketData']),
+    ticketData(sku) {
+      return this.ticketData(sku);
+      // return {
+      //   title: 'QR Code',
+      //   date: new Date(2000, 3, 12),
+      //   qrCodeValue: 'Test',
+      // };
+    },
+  },
+  methods: {
+    setTicketStatus() {
+
     },
   },
 };

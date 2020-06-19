@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import CardTicket from './CardTicket.vue';
+import { mapGetters } from 'vuex';
+import CardTicket from '../../../components/User/Ticket/CardTicket.vue';
 
 export default {
   name: 'ExpiredTicket',
@@ -17,8 +18,9 @@ export default {
     CardTicket,
   },
   computed: {
+    ...mapGetters(['ticketDatas']),
     expiredTickets() {
-      return [];
+      return this.ticketDatas(sku);
     },
   },
 };
