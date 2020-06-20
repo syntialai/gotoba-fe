@@ -9,7 +9,7 @@ export default {
   name: 'Breadcrumb',
   computed: {
     breadcrumbs() {
-      const pathArray = this.$router.path.split('/');
+      const pathArray = this.$route.path.split('/');
       pathArray.shift();
 
       const active = pathArray.slice(-1);

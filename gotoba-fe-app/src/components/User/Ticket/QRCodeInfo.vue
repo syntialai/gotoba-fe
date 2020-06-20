@@ -1,12 +1,14 @@
 <template>
-  <div class="qr-code-info bg-white box-shadow border-square-30 m-4">
-    <div class="qr-code-title font-color-blue-primary">
-      {{ title }}
+  <div class="qr-code-info bg-white box-shadow border-square-30 m-4 p-4">
+    <div class="d-block align-center">
+      <div class="qr-code-title font-color-blue-primary bold">
+        {{ title }}
+      </div>
+      <div class="qr-code-valid-date font-color-black-60">
+        {{ formatDate(date) }}
+      </div>
     </div>
-    <div class="qr-code-valid-date">
-      {{ formatDate(date) }}
-    </div>
-    
+
     <q-r-code
       :qrCodeValue="qrCodeValue"
       class="d-flex justify-content-center m-4"

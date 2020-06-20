@@ -1,6 +1,6 @@
 <template>
   <div class="qr-code">
-    <vue-qrcode :value="qrCodeValue" width="200" />
+    <vue-qrcode :value="qrCodeValue" :width="200" />
   </div>
 </template>
 

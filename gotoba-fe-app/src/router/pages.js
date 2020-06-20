@@ -19,7 +19,9 @@ const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
 const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
 const ITINERARY_ADD = () => import('../views/User/Itinerary/AddItinerary.vue');
 const ADD_DESTINATION = () => import('../views/User/Itinerary/AddDestination.vue');
-// const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
+const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
+const TICKET_VALID = () => import('../views/User/Ticket/ValidTicket.vue');
+const TICKET_EXPIRED = () => import('../views/User/Ticket/ExpiredTicket.vue');
 // const PAYMENT = () => import('../views/User/Payment/Payment.vue');
 const PAYMENT_ORDER = () => import('../views/User/Payment/PaymentOrder.vue');
 const EDIT_PROFILE = () => import('../views/User/Profile/EditProfile.vue');
@@ -30,7 +32,6 @@ const PAYMENT_GUIDE = () => import('../views/User/Payment/PaymentGuide.vue');
 
 const HISTORY_PENDING = () => import('../components/User/History/HistoryPending.vue');
 const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancelled.vue');
-const TICKET_EXPIRED = () => import('../components/User/Ticket/ExpiredTicket.vue');
 
 const ADMIN_VIEW = () => import('../views/Admin/Admin.vue');
 const USER_DATA = () => import('../views/Admin/UserData.vue');
@@ -53,6 +54,7 @@ const MERCHANT_BISTRO = () => import('../views/Merchant/Bistro/Bistro.vue');
 const MERCHANT_BISTRO_EDIT = () => import('../views/Merchant/Bistro/EditBistro.vue');
 const MERCHANT_BISTRO_REVIEW = () => import('../views/Merchant/Bistro/BistroReview.vue');
 const MERCHANT_BISTRO_PROMOTION = () => import('../views/Merchant/Bistro/BistroPromotion.vue');
+const MERCHANT_SCANNER = () => import('../views/Merchant/Scanner/QrScanner.vue');
 
 export const Pages = {
   LOGIN,
@@ -74,7 +76,9 @@ export const Pages = {
   GALLERY,
   ITINERARY_ADD,
   ADD_DESTINATION,
-  // SHOW_QR_CODE,
+  SHOW_QR_CODE,
+  TICKET_VALID,
+  TICKET_EXPIRED,
   // PAYMENT,
   PAYMENT_ORDER,
   EDIT_PROFILE,
@@ -87,7 +91,6 @@ export const Pages = {
 export const Components = {
   HISTORY_PENDING,
   HISTORY_CANCELLED,
-  TICKET_EXPIRED,
 };
 
 export const Admin = {
@@ -114,4 +117,5 @@ export const Merchant = {
   MERCHANT_BISTRO_EDIT,
   MERCHANT_BISTRO_REVIEW,
   MERCHANT_BISTRO_PROMOTION,
+  MERCHANT_SCANNER,
 };

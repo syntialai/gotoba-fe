@@ -1,5 +1,5 @@
 <template>
-  <div class="cart">
+  <div class="cart min-vh-100">
     <div class="order-items p-2">
       <div
         class="w-100 border-bottom-gray-young d-flex justify-content-between"

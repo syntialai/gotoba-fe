@@ -208,4 +208,54 @@ export default {
   RemoveTravellingSchedule(id) {
     return fetchPut(`/schedule/delete/${id}`);
   },
+
+  /**
+   * Ticket
+   */
+  GetTicketByMerchant(merchantSku) {
+    return fetchGet(`/ticket/merchant/${merchantSku}`);
+  },
+  GetRestaurantTicket() {
+    return fetchGet('ticket/category/restaurant');
+  },
+  GetJourneyTicket() {
+    return fetchGet('/ticket/category/journey');
+  },
+  GetHotelTicket() {
+    return fetchGet('/ticket/category/hotel');
+  },
+  GetTicketBySku(sku) {
+    return fetchGet(`/ticket/${sku}`);
+  },
+  GetTicketByUser(userSku) {
+    return fetchGet(`/ticket/user/${userSku}`);
+  },
+  PostTicket(merchantSku, params) {
+    return fetchPost(`/ticket/merchant/${merchantSku}/add`, params);
+  },
+  EditTicket(sku, params) {
+    return fetchPut(`/ticket/edit/${sku}`, params);
+  },
+  RemoveTicket(sku) {
+    return fetchDelete(`/ticket/delete/${sku}`);
+  },
+
+  /**
+   * Order Detail
+   */
+  GetOrderDetail(sku) {
+    return fetchGet(`/order/${sku}`);
+  },
+  GetOrderDetailByMerchant(merchantSku) {
+    return fetchGet(`/order/merchant/${merchantSku}`);
+  },
+  GetOrderDetailByUser(userSku) {
+    return fetchGet(`/order/user/${userSku}`);
+  },
+  PostOrderDetail(userSku, params) {
+    return fetchPost(`/order/user/${userSku}/add`, params);
+  },
+  EditOrderDetail(sku, params) {
+    return fetchPut(`/order/edit/${sku}`, params);
+  },
 };

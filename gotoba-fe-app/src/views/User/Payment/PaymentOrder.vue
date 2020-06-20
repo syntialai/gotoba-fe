@@ -79,7 +79,7 @@ export default {
       return window.innerWidth - 64;
     },
   },
-  method: {
+  methods: {
     formatPrice,
   },
 };

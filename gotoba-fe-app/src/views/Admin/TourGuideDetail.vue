@@ -84,7 +84,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import confirmModal from '../../utils/tool';
+import { confirmModal } from '../../utils/tool';
 import TourGuideCard from '../../components/Admin/Card/TourGuideCard.vue';
 import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';
 
@@ -100,7 +100,7 @@ export default {
       return this.tourGuideData(sku);
     },
   },
-  method: {
+  methods: {
     ...mapActions.removeTourGuide,
     deleteTourGuide() {
       const confirmModalValue = confirmModal(this.tourGuide.name);

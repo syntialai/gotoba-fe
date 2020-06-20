@@ -45,9 +45,9 @@ export default {
       matches: [],
     };
   },
-  method: {
+  methods: {
     suggestionClick(suggestion) {
-      return;
+      this.$router.push(`${this.$route.path}/${suggestion.name}`);
     },
   },
 };
