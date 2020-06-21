@@ -258,4 +258,38 @@ export default {
   EditOrderDetail(sku, params) {
     return fetchPut(`/order/edit/${sku}`, params);
   },
+
+  /**
+   * Payment
+   */
+  GetPayment(sku) {
+    return fetchGet(`/pay/${sku}`);
+  },
+  GetPaymentByMerchant(merchantSku) {
+    return fetchGet(`/pay/merchant/${merchantSku}`);
+  },
+  GetRestaurantPaymentByMerchant(merchantSku) {
+    return fetchGet(`/pay/merchant/${merchantSku}/category/restaurant`);
+  },
+  GetJourneyPaymentByMerchant(merchantSku) {
+    return fetchGet(`/pay/merchant/${merchantSku}/category/journey`);
+  },
+  GetHotelPaymentByMerchant(merchantSku) {
+    return fetchGet(`/pay/merchant/${merchantSku}/category/hotel`);
+  },
+  GetAcceptedPaymentByUser(userSku) {
+    return fetchGet(`/pay/user/${userSku}/status/ACCEPTED`);
+  },
+  GetWaitingPaymentByUser(userSku) {
+    return fetchGet(`/pay/user/${userSku}/status/WAITING`);
+  },
+  GetCancelledPaymentByUser(userSku) {
+    return fetchGet(`/pay/user/${userSku}/status/CANCELLED`);
+  },
+  PostPayment(userSku, params) {
+    return fetchPost(`/pay/add/${userSku}`, params);
+  },
+  EditPayment(sku, params) {
+    return fetchPut(`/pay/edit/${sku}`, params);
+  },
 };
