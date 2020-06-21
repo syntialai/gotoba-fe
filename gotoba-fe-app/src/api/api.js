@@ -109,6 +109,19 @@ export default {
   },
 
   /**
+   * Merchant
+   */
+  GetMerchants() {
+    return fetchGet('/merchant');
+  },
+  GetMerchantBySku(sku) {
+    return fetchGet(`/merchant/${sku}`);
+  },
+  EditMerchant(sku, params) {
+    return fetchPut(`/merchant/edit/${sku}`);
+  },
+
+  /**
    * Gallery
    */
   GetGalleryPhotos() {
