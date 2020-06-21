@@ -17,9 +17,11 @@ axios.interceptors.response.use(
   (err) => Promise.reject(err),
 );
 
-export function fetchPost(url, params) {
+export function fetchGet(url, param) {
   return new Promise((resolve, reject) => {
-    axios.post(url, params)
+    axios.get(url, {
+      params: param,
+    })
       .then((response) => {
         resolve(response.data);
       }, (err) => {
@@ -31,11 +33,9 @@ export function fetchPost(url, params) {
   });
 }
 
-export function fetchGet(url, param) {
+export function fetchPost(url, params) {
   return new Promise((resolve, reject) => {
-    axios.get(url, {
-      params: param,
-    })
+    axios.post(url, params)
       .then((response) => {
         resolve(response.data);
       }, (err) => {
@@ -84,6 +84,28 @@ export default {
   },
   UpdateProfile(params) {
     return fetchPost('/user', params);
+  },
+
+  /**
+   * User
+   */
+  GetUsers() {
+    return fetchGet('/user');
+  },
+  GetActiveUsers() {
+    return fetchGet(`/user/active`);
+  },
+  GetBlockedUsers() {
+    return fetchGet(`/user/blocked`);
+  },
+  GetUserBySku(sku) {
+    return fetchGet(`/user/${sku}`);
+  },
+  GetUserByUsername(username) {
+    return fetchGet(`/user/username/${username}`);
+  },
+  EditUser(sku, params) {
+    return fetchPut(`/user/edit/${sku}`, params);
   },
 
   /**
