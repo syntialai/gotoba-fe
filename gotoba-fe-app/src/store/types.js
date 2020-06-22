@@ -22,6 +22,8 @@ export const SET_USER_INFO = 'SET_USER_INFO';
 export const SET_USER_LOGIN_STATUS = 'SET_USER_LOGIN_STATUS';
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const GET_MERCHANT_DATA = 'GET_MERCHANT_DATA';
+export const GET_USER_ACTIVE = 'GET_USER_ACTIVE';
+export const GET_USER_BLOCKED = 'GET_USER_BLOCKED';
 
 /**
  * Review
