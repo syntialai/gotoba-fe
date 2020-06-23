@@ -71,3 +71,11 @@ export const REMOVE_GALLERY_PHOTO = 'REMOVE_GALLERY_PHOTO';
 export const GET_TOUR_GUIDE_DATA = 'GET_TOUR_GUIDE_DATA';
 export const GET_TOUR_GUIDE_DATA_BY_SKU = 'GET_TOUR_GUIDE_DATA_BY_SKU';
 export const REMOVE_TOUR_GUIDE = 'REMOVE_TOUR_GUIDE';
+
+/**
+ * Order
+ */
+export const GET_ORDER_DATA = 'GET_ORDER_DATA';
+export const SET_ORDER_DATA = 'SET_ORDER_DATA';
+export const GET_CART_DATA = 'GET_CART_DATA';
+export const SET_CART_DATA = 'SET_CART_DATA';
