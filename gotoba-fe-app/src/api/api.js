@@ -93,10 +93,10 @@ export default {
     return fetchGet('/user');
   },
   GetActiveUsers() {
-    return fetchGet(`/user/active`);
+    return fetchGet('/user/active');
   },
   GetBlockedUsers() {
-    return fetchGet(`/user/blocked`);
+    return fetchGet('/user/blocked');
   },
   GetUserBySku(sku) {
     return fetchGet(`/user/${sku}`);
@@ -118,7 +118,7 @@ export default {
     return fetchGet(`/merchant/${sku}`);
   },
   EditMerchant(sku, params) {
-    return fetchPut(`/merchant/edit/${sku}`);
+    return fetchPut(`/merchant/edit/${sku}`, params);
   },
 
   /**

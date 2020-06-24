@@ -1,10 +1,10 @@
 <template>
-  <div class="cart min-vh-100">
-    <div class="order-items p-2">
+  <div class="cart min-vh-100 position-relative bg-color-main">
+    <div class="order-items p-2 bg-white">
       <div
-        class="w-100 border-bottom-gray-young d-flex justify-content-between"
+        class="w-100 border-bottom-gray-young d-flex justify-content-between p-3"
       >
-        <div class="title"><h3>Order Item(s)</h3></div>
+        <div class="title font-size-20 bold">Order Item(s)</div>
         <div class="select-all font-color-black-60">
           <a href="">Select all</a>
         </div>
@@ -43,7 +43,7 @@ import BottomNavPayment from '../../../components/User/Payment/BottomNavPayment.
 
 export default {
   name: 'Cart',
-  component: {
+  components: {
     OrderItems,
     BottomNavPayment,
   },

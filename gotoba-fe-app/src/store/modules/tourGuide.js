@@ -9,11 +9,11 @@ const state = {
 
 const actions = {
   getTourGuideData({ commit }, res) {
-    commit(Types.GET_TOUR_GUIDE_DATA, res);
+    commit(Types.SET_TOUR_GUIDE_DATA, res);
 
     api.GetTourGuides()
       .then((res) => {
-        commit(Types.GET_TOUR_GUIDE_DATA, res);
+        commit(Types.SET_TOUR_GUIDE_DATA, res);
         console.log(res);
       })
       .catch((err) => {
@@ -21,11 +21,11 @@ const actions = {
       });
   },
   getTourGuideBySku({ commit }, sku, res) {
-    commit(Types.GET_TOUR_GUIDE_DATA_BY_SKU, res);
+    commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res);
 
     api.GetTourGuideBySku(sku)
       .then((res) => {
-        commit(Types.GET_TOUR_GUIDE_DATA_BY_SKU, res);
+        commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res);
         console.log(res);
       })
       .catch((err) => {
@@ -53,10 +53,10 @@ const getters = {
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
-  [Types.GET_TOUR_GUIDE_DATA](state, res) {
+  [Types.SET_TOUR_GUIDE_DATA](state, res) {
     state.tourGuideDatas = res;
   },
-  [Types.GET_TOUR_GUIDE_DATA_BY_SKU](state, res) {
+  [Types.SET_TOUR_GUIDE_DATA_BY_SKU](state, res) {
     state.tourGuideData = res;
   },
 };

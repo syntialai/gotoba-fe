@@ -29,11 +29,11 @@ const actions = {
   },
 
   getMerchantData({ commit }, res) {
-    commit(Types.GET_MERCHANT_DATA, res);
+    commit(Types.SET_MERCHANT_DATA, res);
 
     api.GetMerchants()
       .then((res) => {
-        ommit(Types.GET_MERCHANT_DATA, res);
+        commit(Types.SET_MERCHANT_DATA, res);
         console.log(res);
       })
       .catch((err) => {
@@ -42,11 +42,11 @@ const actions = {
   },
 
   getUserData({ commit }, res) {
-    commit(Types.GET_USER_DATA, res);
+    commit(Types.SET_USER_DATA, res);
 
     api.GetUsers()
       .then((res) => {
-        ommit(Types.GET_USER_DATA, res);
+        commit(Types.SET_USER_DATA, res);
         console.log(res);
       })
       .catch((err) => {
@@ -55,11 +55,11 @@ const actions = {
   },
 
   getActiveUsers({ commit }, res) {
-    commit(Types.GET_USER_ACTIVE, res);
+    commit(Types.SET_USER_ACTIVE, res);
 
     api.GetActiveUsers()
       .then((res) => {
-        ommit(Types.GET_USER_ACTIVE, res);
+        commit(Types.SET_USER_ACTIVE, res);
         console.log(res);
       })
       .catch((err) => {
@@ -68,17 +68,17 @@ const actions = {
   },
 
   getBlockedUsers({ commit }, res) {
-    commit(Types.GET_USER_BLOCKED, res);
+    commit(Types.SET_USER_BLOCKED, res);
 
     api.GetBlockedUsers()
       .then((res) => {
-        ommit(Types.GET_USER_BLOCKED, res);
+        commit(Types.SET_USER_BLOCKED, res);
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  },
 };
 
 const getters = {
@@ -100,19 +100,19 @@ const mutations = {
     state.userLoginStatus = status;
   },
 
-  [Types.GET_MERCHANT_DATA](state, res) {
+  [Types.SET_MERCHANT_DATA](state, res) {
     state.merchantData = res;
   },
 
-  [Types.GET_USER_DATA](state, res) {
+  [Types.SET_USER_DATA](state, res) {
     state.userData = res;
   },
 
-  [Types.GET_USER_ACTIVE](state, res) {
+  [Types.SET_USER_ACTIVE](state, res) {
     state.userActiveData = res;
   },
 
-  [Types.GET_USER_BLOCKED](state, res) {
+  [Types.SET_USER_BLOCKED](state, res) {
     state.userBlockedData = res;
   },
 };

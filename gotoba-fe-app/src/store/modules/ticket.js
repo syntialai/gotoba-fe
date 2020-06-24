@@ -13,72 +13,72 @@ const state = {
 
 const actions = {
   getTicketData({ commit }, userSku, res) {
-    commit(Types.GET_TICKET_DATA, res);
+    commit(Types.SET_TICKET_DATA, res);
 
     api.GetTicketByUser(userSku)
       .then((res) => {
         console.log(res);
-        commit(Types.GET_TICKET_DATA, res);
+        commit(Types.SET_TICKET_DATA, res);
       })
       .catch((err) => {
         console.log(err);
       });
   },
   getTicketBySku({ commit }, sku, res) {
-    commit(Types.GET_TICKET_BY_SKU, res);
+    commit(Types.SET_TICKET_BY_SKU, res);
 
     api.GetTicketBySku(sku)
       .then((res) => {
         console.log(res);
-        commit(Types.GET_TICKET_BY_SKU, res);
+        commit(Types.SET_TICKET_BY_SKU, res);
       })
       .catch((err) => {
         console.log(err);
       });
   },
   getTicketByMerchant({ commit }, merchantSku, res) {
-    commit(Types.GET_TICKET_BY_MERCHANT, res);
+    commit(Types.SET_TICKET_BY_MERCHANT, res);
 
     api.GetTicketByMerchant(merchantSku)
       .then((res) => {
         console.log(res);
-        commit(Types.GET_TICKET_BY_MERCHANT, res);
+        commit(Types.SET_TICKET_BY_MERCHANT, res);
       })
       .catch((err) => {
         console.log(err);
       });
   },
   getTicketRestaurant({ commit }, res) {
-    commit(Types.GET_TICKET_RESTAURANT, res);
+    commit(Types.SET_TICKET_RESTAURANT, res);
 
     api.GetRestaurantTicket()
       .then((res) => {
         console.log(res);
-        commit(Types.GET_TICKET_RESTAURANT, res);
+        commit(Types.SET_TICKET_RESTAURANT, res);
       })
       .catch((err) => {
         console.log(err);
       });
   },
   getTicketJourney({ commit }, res) {
-    commit(Types.GET_TICKET_JOURNEY, res);
+    commit(Types.SET_TICKET_JOURNEY, res);
 
     api.GetJourneyTicket()
       .then((res) => {
         console.log(res);
-        commit(Types.GET_TICKET_JOURNEY, res);
+        commit(Types.SET_TICKET_JOURNEY, res);
       })
       .catch((err) => {
         console.log(err);
       });
   },
   getTicketHotel({ commit }, res) {
-    commit(Types.GET_TICKET_HOTEL, res);
+    commit(Types.SET_TICKET_HOTEL, res);
 
     api.GetHotelTicket()
       .then((res) => {
         console.log(res);
-        commit(Types.GET_TICKET_HOTEL, res);
+        commit(Types.SET_TICKET_HOTEL, res);
       })
       .catch((err) => {
         console.log(err);
@@ -109,22 +109,22 @@ const getters = {
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
-  [Types.GET_TICKET_DATA](state, res) {
+  [Types.SET_TICKET_DATA](state, res) {
     state.ticketDatas = res;
   },
-  [Types.GET_TICKET_BY_SKU](state, res) {
+  [Types.SET_TICKET_BY_SKU](state, res) {
     state.ticketData = res;
   },
-  [Types.GET_TICKET_BY_MERCHANT](state, res) {
+  [Types.SET_TICKET_BY_MERCHANT](state, res) {
     state.ticketByMerchant = res;
   },
-  [Types.GET_TICKET_RESTAURANT](state, res) {
+  [Types.SET_TICKET_RESTAURANT](state, res) {
     state.ticketRestaurant = res;
   },
-  [Types.GET_TICKET_JOURNEY](state, res) {
+  [Types.SET_TICKET_JOURNEY](state, res) {
     state.ticketJourney = res;
   },
-  [Types.GET_TICKET_HOTEL](state, res) {
+  [Types.SET_TICKET_HOTEL](state, res) {
     state.ticketHotel = res;
   },
 };

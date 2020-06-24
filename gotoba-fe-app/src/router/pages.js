@@ -22,7 +22,7 @@ const ADD_DESTINATION = () => import('../views/User/Itinerary/AddDestination.vue
 const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
 const TICKET_VALID = () => import('../views/User/Ticket/ValidTicket.vue');
 const TICKET_EXPIRED = () => import('../views/User/Ticket/ExpiredTicket.vue');
-// const PAYMENT = () => import('../views/User/Payment/Payment.vue');
+const PAYMENT = () => import('../views/User/Payment/Payment.vue');
 const PAYMENT_ORDER = () => import('../views/User/Payment/PaymentOrder.vue');
 const EDIT_PROFILE = () => import('../views/User/Profile/EditProfile.vue');
 const HISTORY = () => import('../views/User/History/History.vue');
@@ -79,7 +79,7 @@ export const Pages = {
   SHOW_QR_CODE,
   TICKET_VALID,
   TICKET_EXPIRED,
-  // PAYMENT,
+  PAYMENT,
   PAYMENT_ORDER,
   EDIT_PROFILE,
   HISTORY,
