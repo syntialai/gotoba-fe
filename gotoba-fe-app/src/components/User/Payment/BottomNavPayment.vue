@@ -5,7 +5,7 @@
         <b-nav-item class="semibold font-color-black-87 p-0">
           {{ totalItem }} item
         </b-nav-item>
-        <b-nav-item class="p-0">
+        <b-nav-item class="p-0 font-color-blue-primary">
           {{ formatPrice(totalPrice, true, true) }}
         </b-nav-item>
       </b-navbar-nav>

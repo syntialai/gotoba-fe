@@ -56,6 +56,8 @@ const MERCHANT_BISTRO_REVIEW = () => import('../views/Merchant/Bistro/BistroRevi
 const MERCHANT_BISTRO_PROMOTION = () => import('../views/Merchant/Bistro/BistroPromotion.vue');
 const MERCHANT_SCANNER = () => import('../views/Merchant/Scanner/QrScanner.vue');
 
+export const NOT_FOUND = () => import('../views/Error/NotFound.vue');
+
 export const Pages = {
   LOGIN,
   SIGN_UP,

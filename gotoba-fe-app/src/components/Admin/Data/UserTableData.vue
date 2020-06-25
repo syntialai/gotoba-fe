@@ -41,49 +41,51 @@ export default {
       type: Number,
       default: 10,
     },
+    fields: Array,
+    items: Array,
   },
-  data() {
-    return {
-      fields: [
-        {
-          key: 'user',
-          sortable: true,
-        },
-        {
-          key: 'sku',
-          sortable: true,
-        },
-        {
-          key: 'email',
-          sortable: false,
-        },
-        {
-          key: 'status',
-          sortable: true,
-        },
-      ],
-      items: [
-        {
-          user: {
-            image: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-            name: 'user one',
-          },
-          status: 'active',
-          sku: 'USER_0001_0001',
-          email: 'user_one@gmail.com',
-        },
-        {
-          user: {
-            image: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
-            name: 'user two',
-          },
-          status: 'blocked',
-          sku: 'USER_0001_0002',
-          email: 'user_two@gmail.com',
-        },
-      ],
-    };
-  },
+  // data() {
+  //   return {
+  //     fields: [
+  //       {
+  //         key: 'user',
+  //         sortable: true,
+  //       },
+  //       {
+  //         key: 'sku',
+  //         sortable: true,
+  //       },
+  //       {
+  //         key: 'email',
+  //         sortable: false,
+  //       },
+  //       {
+  //         key: 'status',
+  //         sortable: true,
+  //       },
+  //     ],
+  //     items: [
+  //       {
+  //         user: {
+  //           image: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+  //           name: 'user one',
+  //         },
+  //         status: 'active',
+  //         sku: 'USER_0001_0001',
+  //         email: 'user_one@gmail.com',
+  //       },
+  //       {
+  //         user: {
+  //           image: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+  //           name: 'user two',
+  //         },
+  //         status: 'blocked',
+  //         sku: 'USER_0001_0002',
+  //         email: 'user_two@gmail.com',
+  //       },
+  //     ],
+  //   };
+  // },
   methods: {
     toCapitalize,
   },

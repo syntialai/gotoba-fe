@@ -9,6 +9,8 @@
       id="user-data-table"
       class="my-2"
       :perPage="perPage"
+      :fields="fields"
+      :items="userData"
     />
 
     <div class="info">
@@ -28,6 +30,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import Pagination from '../../components/Partial/Pagination.vue';
 import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
 import UserTableData from '../../components/Admin/Data/UserTableData.vue';
@@ -39,16 +42,38 @@ export default {
     ShowDataCount,
     UserTableData,
   },
+  computed: {
+    ...mapGetters(['userData']),
+  },
+  created() {
+    this.getUserData();
+  },
   data() {
     return {
       currentPage: 1,
       perPage: 10,
+      fields: [
+        {
+          key: 'user',
+          sortable: true,
+        },
+        {
+          key: 'sku',
+          sortable: true,
+        },
+        {
+          key: 'email',
+          sortable: false,
+        },
+        {
+          key: 'status',
+          sortable: true,
+        },
+      ],
     };
   },
-  computed: {
-    userData() {
-      return this.$store.getters.userData;
-    },
+  methods: {
+    ...mapActions(['getUserData']),
   },
 };
 </script>
