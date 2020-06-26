@@ -110,9 +110,10 @@ export default {
           .catch((err) => {
             console.log(err);
           });
+
         return;
       }
-      api.EditGalleryPhoto(this.photo.sku, data)
+      api.EditGalleryPhoto(this.$route.params.sku, data)
         .then((res) => {
           console.log(res);
         })

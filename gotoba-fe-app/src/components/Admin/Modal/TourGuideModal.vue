@@ -190,6 +190,8 @@
 </template>
 
 <script>
+import api from '../../../api/api';
+
 export default {
   name: 'TourGuideModal',
   data() {
@@ -218,7 +220,28 @@ export default {
   },
   methods: {
     submitTourGuide() {
-      this.$store.commit('addTourGuide', this.tourGuide);
+      const data = this.tourGuide;
+
+      if (this.title === 'Add') {
+        api.PostTourGuide(data)
+          .then((res) => {
+            console.log(res);
+            this.$router.push({ path: '/admin/tour-guide' });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        return;
+      }
+
+      api.EditTourGuide(this.$route.params.sku, data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

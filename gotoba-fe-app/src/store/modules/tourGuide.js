@@ -8,8 +8,8 @@ const state = {
 };
 
 const actions = {
-  getTourGuideData({ commit }, res) {
-    commit(Types.SET_TOUR_GUIDE_DATA, res);
+  getTourGuideData({ commit }) {
+    commit(Types.SET_TOUR_GUIDE_DATA);
 
     api.GetTourGuides()
       .then((res) => {
@@ -20,8 +20,8 @@ const actions = {
         console.log(err);
       });
   },
-  getTourGuideBySku({ commit }, sku, res) {
-    commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res);
+  getTourGuideBySku({ commit }, sku) {
+    commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU);
 
     api.GetTourGuideBySku(sku)
       .then((res) => {

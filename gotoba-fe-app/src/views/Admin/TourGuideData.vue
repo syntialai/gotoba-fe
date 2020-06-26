@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';
 import TourGuideCardGroup from '../../components/Admin/Data/TourGuideCardGroup.vue';
 import Pagination from '../../components/Partial/Pagination.vue';
@@ -50,6 +51,12 @@ export default {
     tourGuides() {
       return this.$store.getters.tourGuideDatas;
     },
+  },
+  created() {
+    this.getTourGuideData();
+  },
+  methods: {
+    ...mapActions(['getTourGuideData']),
   },
 };
 </script>
