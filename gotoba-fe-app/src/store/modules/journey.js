@@ -35,8 +35,8 @@ const actions = {
       });
   },
 
-  getJourneyReview({ commit }, sku, res) {
-    commit(Types.SET_JOURNEY_REVIEW, res);
+  getJourneyReview({ commit }, sku) {
+    commit(Types.SET_JOURNEY_REVIEW);
 
     api.GetReviewBySku(sku)
       .then((res) => {
