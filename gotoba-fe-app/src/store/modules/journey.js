@@ -3,15 +3,16 @@ import * as Types from '../types';
 import api from '../../api/api';
 
 const state = {
-  journeyData: {},
+  journeyData: [],
+  journeyDataBySku: {},
   journeyReview: [],
 };
 
 const actions = {
-  getJourneyData({ commit }, sku, res) {
-    commit(Types.SET_JOURNEY_DATA, res);
+  getJourneyData({ commit }) {
+    commit(Types.SET_JOURNEY_DATA);
 
-    api.GetItineraryBySku(sku)
+    api.GetItineraries()
       .then((res) => {
         console.log(res);
         commit(Types.SET_JOURNEY_DATA, res);
@@ -20,6 +21,20 @@ const actions = {
         console.log(err);
       });
   },
+
+  getJourneyDataBySku({ commit }, sku) {
+    commit(Types.SET_JOURNEY_DATA_BY_SKU);
+
+    api.GetItineraryBySku(sku)
+      .then((res) => {
+        console.log(res);
+        commit(Types.SET_JOURNEY_DATA_BY_SKU, res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
   getJourneyReview({ commit }, sku, res) {
     commit(Types.SET_JOURNEY_REVIEW, res);
 
@@ -32,6 +47,7 @@ const actions = {
         console.log(err);
       });
   },
+
   removeItinerary({ commit }, sku) {
     commit(Types.REMOVE_ITINERARY);
 
@@ -48,6 +64,7 @@ const actions = {
 
 const getters = {
   journeyData: (state) => state.journeyData,
+  journeyDataBySku: (state) => state.journeyDataBySku,
   journeyReview: (state) => state.journeyReview,
 };
 
@@ -55,6 +72,9 @@ const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.SET_JOURNEY_DATA](state, res) {
     state.journeyData = res;
+  },
+  [Types.SET_JOURNEY_DATA_BY_SKU](state, res) {
+    state.journeyDataBySku = res;
   },
   [Types.SET_JOURNEY_REVIEW](state, res) {
     state.journeyReview = res;
