@@ -22,7 +22,7 @@ const ADD_DESTINATION = () => import('../views/User/Itinerary/AddDestination.vue
 const SHOW_QR_CODE = () => import('../views/User/Ticket/ShowQRCode.vue');
 const TICKET_VALID = () => import('../views/User/Ticket/ValidTicket.vue');
 const TICKET_EXPIRED = () => import('../views/User/Ticket/ExpiredTicket.vue');
-// const PAYMENT = () => import('../views/User/Payment/Payment.vue');
+const PAYMENT = () => import('../views/User/Payment/Payment.vue');
 const PAYMENT_ORDER = () => import('../views/User/Payment/PaymentOrder.vue');
 const EDIT_PROFILE = () => import('../views/User/Profile/EditProfile.vue');
 const HISTORY = () => import('../views/User/History/History.vue');
@@ -56,6 +56,8 @@ const MERCHANT_BISTRO_REVIEW = () => import('../views/Merchant/Bistro/BistroRevi
 const MERCHANT_BISTRO_PROMOTION = () => import('../views/Merchant/Bistro/BistroPromotion.vue');
 const MERCHANT_SCANNER = () => import('../views/Merchant/Scanner/QrScanner.vue');
 
+export const NOT_FOUND = () => import('../views/Error/NotFound.vue');
+
 export const Pages = {
   LOGIN,
   SIGN_UP,
@@ -79,7 +81,7 @@ export const Pages = {
   SHOW_QR_CODE,
   TICKET_VALID,
   TICKET_EXPIRED,
-  // PAYMENT,
+  PAYMENT,
   PAYMENT_ORDER,
   EDIT_PROFILE,
   HISTORY,

@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     ...mapGetters(['ticketDatas']),
-    expiredTickets() {
+    expiredTickets(sku) {
       return this.ticketDatas(sku);
     },
   },

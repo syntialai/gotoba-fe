@@ -1,10 +1,7 @@
 import axios from 'axios';
 
-const AUTH_TOKEN = '';
-
-axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
+axios.defaults.baseURL = 'http://localhost:8800/';
 axios.defaults.timeout = 10000;
-axios.defaults.headers.common.Authorization = AUTH_TOKEN;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
 axios.interceptors.request.use(
@@ -17,9 +14,11 @@ axios.interceptors.response.use(
   (err) => Promise.reject(err),
 );
 
-export function fetchPost(url, params) {
+export function fetchGet(url, param) {
   return new Promise((resolve, reject) => {
-    axios.post(url, params)
+    axios.get(url, {
+      params: param,
+    })
       .then((response) => {
         resolve(response.data);
       }, (err) => {
@@ -31,11 +30,9 @@ export function fetchPost(url, params) {
   });
 }
 
-export function fetchGet(url, param) {
+export function fetchPost(url, params) {
   return new Promise((resolve, reject) => {
-    axios.get(url, {
-      params: param,
-    })
+    axios.post(url, params)
       .then((response) => {
         resolve(response.data);
       }, (err) => {
@@ -84,6 +81,41 @@ export default {
   },
   UpdateProfile(params) {
     return fetchPost('/user', params);
+  },
+
+  /**
+   * User
+   */
+  GetUsers() {
+    return fetchGet('/user');
+  },
+  GetActiveUsers() {
+    return fetchGet('/user/active');
+  },
+  GetBlockedUsers() {
+    return fetchGet('/user/blocked');
+  },
+  GetUserBySku(sku) {
+    return fetchGet(`/user/${sku}`);
+  },
+  GetUserByUsername(username) {
+    return fetchGet(`/user/username/${username}`);
+  },
+  EditUser(sku, params) {
+    return fetchPut(`/user/edit/${sku}`, params);
+  },
+
+  /**
+   * Merchant
+   */
+  GetMerchants() {
+    return fetchGet('/merchant');
+  },
+  GetMerchantBySku(sku) {
+    return fetchGet(`/merchant/${sku}`);
+  },
+  EditMerchant(sku, params) {
+    return fetchPut(`/merchant/edit/${sku}`, params);
   },
 
   /**
@@ -257,5 +289,39 @@ export default {
   },
   EditOrderDetail(sku, params) {
     return fetchPut(`/order/edit/${sku}`, params);
+  },
+
+  /**
+   * Payment
+   */
+  GetPayment(sku) {
+    return fetchGet(`/pay/${sku}`);
+  },
+  GetPaymentByMerchant(merchantSku) {
+    return fetchGet(`/pay/merchant/${merchantSku}`);
+  },
+  GetRestaurantPaymentByMerchant(merchantSku) {
+    return fetchGet(`/pay/merchant/${merchantSku}/category/restaurant`);
+  },
+  GetJourneyPaymentByMerchant(merchantSku) {
+    return fetchGet(`/pay/merchant/${merchantSku}/category/journey`);
+  },
+  GetHotelPaymentByMerchant(merchantSku) {
+    return fetchGet(`/pay/merchant/${merchantSku}/category/hotel`);
+  },
+  GetAcceptedPaymentByUser(userSku) {
+    return fetchGet(`/pay/user/${userSku}/status/ACCEPTED`);
+  },
+  GetWaitingPaymentByUser(userSku) {
+    return fetchGet(`/pay/user/${userSku}/status/WAITING`);
+  },
+  GetCancelledPaymentByUser(userSku) {
+    return fetchGet(`/pay/user/${userSku}/status/CANCELLED`);
+  },
+  PostPayment(userSku, params) {
+    return fetchPost(`/pay/add/${userSku}`, params);
+  },
+  EditPayment(sku, params) {
+    return fetchPut(`/pay/edit/${sku}`, params);
   },
 };

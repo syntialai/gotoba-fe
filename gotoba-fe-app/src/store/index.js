@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import app from './modules/app';
 import gallery from './modules/gallery';
 import journey from './modules/journey';
+import order from './modules/order';
 import restaurant from './modules/restaurant';
 import review from './modules/review';
 import search from './modules/search';
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     app,
     gallery,
     journey,
+    order,
     restaurant,
     review,
     search,

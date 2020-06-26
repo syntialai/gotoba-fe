@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Main from '../views/User/Main.vue';
 import Home from '../views/User/Home/Home.vue';
 import {
-  Components, Pages, Admin, Merchant,
+  Components, Pages, Admin, Merchant, NOT_FOUND,
 } from './pages';
 
 Vue.use(VueRouter);
@@ -387,6 +387,14 @@ const routes = [
     component: Merchant.MERCHANT_SPOT_PROMOTION,
     meta: {
       layout: 'default-back',
+    },
+  },
+  {
+    path: '*',
+    name: 'Not Found',
+    component: NOT_FOUND,
+    meta: {
+      layout: 'not-found',
     },
   },
 ];

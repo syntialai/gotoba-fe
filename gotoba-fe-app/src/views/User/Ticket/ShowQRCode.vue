@@ -24,9 +24,8 @@
 </template>
 
 <script>
-import QRCodeInfo from '../../../components/User/Ticket/QRCodeInfo.vue';
 import { mapGetters } from 'vuex';
-import api from '../../../api/api';
+import QRCodeInfo from '../../../components/User/Ticket/QRCodeInfo.vue';
 
 export default {
   name: 'ShowQRCode',

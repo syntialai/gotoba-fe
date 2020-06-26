@@ -1,10 +1,8 @@
 <template>
   <div class="page-signup mt-3">
-    <Background />
-    <navigation-close></navigation-close>
     <div id="form-sign-up">
-      <ValidationObserver v-slot="{ handleInput }">
-        <b-form @submit.prevent="handleInput(signup)">
+      <ValidationObserver>
+        <b-form @submit="signup">
           <ValidationProvider
             name="Nickname"
             rules="required"
@@ -223,8 +221,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import api from '@/api/api';
-import NavigationClose from '@/components/Partial/NavigationClose.vue';
+import api from '../../api/api';
 
 export default {
   name: 'SignUpPage',
@@ -271,16 +268,14 @@ export default {
         .then((res) => {
           if (res.success) {
             this.setUserInfo(res.data);
-            this.$router.replace('/');
+            console.log(res);
+            this.$router.push('/');
           }
         })
         .catch((err) => {
           console.log(err);
         });
     },
-  },
-  components: {
-    NavigationClose,
   },
 };
 </script>

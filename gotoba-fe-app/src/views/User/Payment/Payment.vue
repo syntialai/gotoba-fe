@@ -52,7 +52,7 @@ import BottomNavPayment from '../../../components/User/Payment/BottomNavPayment.
 
 export default {
   name: 'Payment',
-  component: {
+  components: {
     OrderItems,
     PaymentDetail,
     PaymentMethod,
