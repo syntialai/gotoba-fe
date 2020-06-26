@@ -20,7 +20,7 @@ export function fetchGet(url, param) {
       params: param,
     })
       .then((response) => {
-        resolve(response.data);
+        resolve(response.data.data);
       }, (err) => {
         reject(err);
       })
@@ -34,7 +34,7 @@ export function fetchPost(url, params) {
   return new Promise((resolve, reject) => {
     axios.post(url, params)
       .then((response) => {
-        resolve(response.data);
+        resolve(response.data.data);
       }, (err) => {
         reject(err);
       })
@@ -48,7 +48,7 @@ export function fetchPut(url, params) {
   return new Promise((resolve, reject) => {
     axios.put(url, params)
       .then((response) => {
-        resolve(response.data);
+        resolve(response.data.data);
       }, (err) => {
         reject(err);
       })
@@ -62,7 +62,7 @@ export function fetchDelete(url) {
   return new Promise((resolve, reject) => {
     axios.delete(url)
       .then((response) => {
-        resolve(response.data);
+        resolve(response.data.data);
       }, (err) => {
         reject(err);
       })
@@ -87,7 +87,7 @@ export default {
    * User
    */
   GetUsers() {
-    return fetchGet('/user');
+    return fetchGet('/user/');
   },
   GetActiveUsers() {
     return fetchGet('/user/active');

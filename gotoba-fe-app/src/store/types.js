@@ -63,6 +63,7 @@ export const REMOVE_TICKET = 'REMOVE_TICKET';
  * Gallery
  */
 export const SET_GALLERY_DATA = 'SET_GALLERY_DATA';
+export const SET_GALLERY_PHOTO = 'SET_GALLERY_PHOTO';
 export const REMOVE_GALLERY_PHOTO = 'REMOVE_GALLERY_PHOTO';
 
 /**

@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import PhotoModal from '../../components/Admin/Modal/PhotoModal.vue';
 import GalleryCardGroup from '../../components/Admin/Data/GalleryCardGroup.vue';
 import Pagination from '../../components/Partial/Pagination.vue';
@@ -45,6 +46,12 @@ export default {
     GalleryCardGroup,
     Pagination,
     ShowDataCount,
+  },
+  computed: {
+    ...mapGetters(['galleryData']),
+  },
+  created() {
+    this.getGalleryData();
   },
   data() {
     return {
@@ -63,6 +70,9 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    ...mapActions(['getGalleryData']),
   },
 };
 </script>

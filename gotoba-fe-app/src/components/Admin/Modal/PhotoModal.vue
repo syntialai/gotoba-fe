@@ -40,7 +40,7 @@
           <div v-else>
             <img :src="photo.image">
             <b-button
-              class="custom-btn-gray-young"
+              class="custom-btn-gray"
               @click="photo.image = null"
             >Remove photo</b-button>
           </div>
@@ -121,9 +121,6 @@ export default {
         });
     },
     previewImage,
-  },
-  mounted() {
-    this.submitPhoto();
   },
 };
 </script>
