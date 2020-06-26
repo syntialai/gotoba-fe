@@ -15,9 +15,9 @@ export default {
   },
   computed: {
     ...mapGetters(['restaurantData', 'restaurantReview']),
-    restaurantData(sku) {
-      const data = this.restaurantData(sku);
-      const review = this.restaurantReview(sku);
+    restaurantData() {
+      const data = this.restaurantData(this.$route.params.sku);
+      const review = this.restaurantReview(this.$route.params.sku);
 
       return Object.assign(data, review);
     },

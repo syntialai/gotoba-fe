@@ -97,10 +97,12 @@
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
           <card-home
-            name="Syntia"
-            image="../assets/img/logo.png"
-            location="Vue js"
-            :rating="5.0"
+            v-for="restaurant in restaurantDatas"
+            :key="restaurant.sku"
+            :name="restaurant.name"
+            :image="restaurant.image"
+            :location="restaurant.location"
+            :rating="restaurant.rating"
           />
         </div>
       </div>
@@ -136,6 +138,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import CardHome from '../../../components/User/Home/CardHome.vue';
 import TheFooter from '../../../components/Partial/TheFooter.vue';
 import {
@@ -144,6 +147,20 @@ import {
 
 export default {
   name: 'Home',
+  components: {
+    CardHome,
+    TheFooter,
+    OngoingPromoIcon,
+    NearbyPlaceIcon,
+    NearbyRestoIcon,
+    NearbyHotelIcon,
+  },
+  computed: {
+    ...mapGetters(['restaurantDatas']),
+  },
+  created() {
+    this.getRestaurantData();
+  },
   data() {
     return {
       mainMenus: [
@@ -168,23 +185,13 @@ export default {
       ],
     };
   },
-  components: {
-    CardHome,
-    TheFooter,
-    // AboutIcon,
-    OngoingPromoIcon,
-    NearbyPlaceIcon,
-    NearbyRestoIcon,
-    NearbyHotelIcon,
+  methods: {
+    ...mapActions(['getRestaurantData']),
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.btn-secondary {
-  border: none;
-}
-
 .content-group {
   margin-top: 40px;
 }
