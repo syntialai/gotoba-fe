@@ -72,10 +72,12 @@
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
           <card-home
-            name="Syntia"
-            image="../assets/img/logo.png"
-            location="Vue js"
-            :rating="5.0"
+          v-for="journey in journeyData"
+            :key="journey.sku"
+            :name="journey.name"
+            :image="journey.image"
+            :location="journey.location"
+            :rating="journey.rating"
           />
         </div>
       </div>
@@ -156,10 +158,11 @@ export default {
     NearbyHotelIcon,
   },
   computed: {
-    ...mapGetters(['restaurantDatas']),
+    ...mapGetters(['restaurantDatas', 'journeyData']),
   },
   created() {
     this.getRestaurantData();
+    this.getJourneyData();
   },
   data() {
     return {
@@ -186,7 +189,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getRestaurantData']),
+    ...mapActions(['getRestaurantData', 'getJourneyData']),
   },
 };
 </script>
