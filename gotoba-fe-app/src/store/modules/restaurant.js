@@ -11,8 +11,8 @@ const state = {
 };
 
 const actions = {
-  getRestaurantData({ commit }, res) {
-    commit(Types.SET_RESTAURANT_DATA, res);
+  getRestaurantData({ commit }) {
+    commit(Types.SET_RESTAURANT_DATA);
 
     api.GetRestaurants()
       .then((res) => {
@@ -24,8 +24,8 @@ const actions = {
       });
   },
 
-  getRestaurantDataBySku({ commit }, sku, res) {
-    commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+  getRestaurantDataBySku({ commit }, sku) {
+    commit(Types.SET_RESTAURANT_DATA_BY_SKU);
 
     api.GetRestaurantBySku(sku)
       .then((res) => {
@@ -37,8 +37,8 @@ const actions = {
       });
   },
 
-  getRestaurantMenu({ commit }, sku, res) {
-    commit(Types.SET_RESTAURANT_MENU, res);
+  getRestaurantMenu({ commit }, sku) {
+    commit(Types.SET_RESTAURANT_MENU);
 
     api.GetRestaurantMenus(sku)
       .then((res) => {
@@ -50,8 +50,8 @@ const actions = {
       });
   },
 
-  getRestaurantMenuById({ commit }, id, res) {
-    commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
+  getRestaurantMenuById({ commit }, id) {
+    commit(Types.SET_RESTAURANT_MENU_BY_ID);
 
     api.GetRestaurantMenus(id)
       .then((res) => {
@@ -63,8 +63,8 @@ const actions = {
       });
   },
 
-  getRestaurantReview({ commit }, sku, res) {
-    commit(Types.SET_RESTAURANT_REVIEW, res);
+  getRestaurantReview({ commit }, sku) {
+    commit(Types.SET_RESTAURANT_REVIEW);
 
     api.GetRestaurantMenus(sku)
       .then((res) => {
