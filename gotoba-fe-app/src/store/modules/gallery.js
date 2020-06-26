@@ -8,11 +8,11 @@ const state = {
 
 const actions = {
   getGalleryData({ commit }) {
-    commit(Types.GET_GALLERY_DATA);
+    commit(Types.SET_GALLERY_DATA);
 
     api.GetGalleryPhotos()
       .then((res) => {
-        commit(Types.GET_GALLERY_DATA, res);
+        commit(Types.SET_GALLERY_DATA, res);
       });
   },
   removeGalleryPhoto({ commit }, sku) {
@@ -35,7 +35,7 @@ const getters = {
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
-  [Types.GET_GALLERY_DATA](state, res) {
+  [Types.SET_GALLERY_DATA](state, res) {
     state.galleryData = res.data;
   },
 };

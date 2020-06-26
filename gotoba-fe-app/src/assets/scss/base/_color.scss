@@ -1,3 +1,5 @@
+@import '../abstracts/variables';
+
 @mixin font-color {
   @include map-looping(map-remove($colors, "primary"), "font-color", "color");
 }
@@ -8,3 +10,7 @@
 
 @include font-color();
 @include bg-color();
+
+.bg-color-main {
+  background-color: $bg-color;
+}

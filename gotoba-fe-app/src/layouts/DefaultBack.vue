@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     currentRouteName() {
-      return this.$router.name;
+      return this.$route.name;
     },
   },
 };

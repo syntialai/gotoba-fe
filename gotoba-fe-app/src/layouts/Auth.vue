@@ -2,9 +2,18 @@
   <div class="auth">
     <background />
 
-    <navigation-close />
+    <navigation-close class="position-relative" />
 
-    <slot />
+    <div class="logo my-4 position-relative">
+      <b-img
+        center
+        src="@/assets/img/logo/gotoba-logo-full.png"
+        alt="gotoba"
+        width="250"
+      ></b-img>
+    </div>
+
+    <slot class="position-relative" />
   </div>
 </template>
 

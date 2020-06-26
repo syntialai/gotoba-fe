@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Main from '../views/User/Main.vue';
 import Home from '../views/User/Home/Home.vue';
 import {
-  Components, Pages, Admin, Merchant,
+  Components, Pages, Admin, Merchant, NOT_FOUND,
 } from './pages';
 
 Vue.use(VueRouter);
@@ -23,7 +23,7 @@ const routes = [
         },
       },
       {
-        path: '/itinerary',
+        path: '/my-itinerary',
         name: 'Itinerary',
         component: Pages.ITINERARY,
         meta: {
@@ -38,10 +38,16 @@ const routes = [
           {
             path: '',
             component: Components.TICKET_VALID,
+            meta: {
+              layout: 'background-blue',
+            },
           },
           {
             path: 'expired',
             component: Components.TICKET_EXPIRED,
+            meta: {
+              layout: 'background-blue',
+            },
           },
         ],
         meta: {
@@ -175,6 +181,11 @@ const routes = [
     path: '/itinerary/add/show-on-map',
     name: 'Set Destination',
     component: Pages.ADD_DESTINATION,
+  },
+  {
+    path: '/my-tickets/:sku',
+    name: 'QR Code',
+    component: Pages.SHOW_QR_CODE,
   },
   {
     path: '/payment/:sku',
@@ -363,11 +374,27 @@ const routes = [
     },
   },
   {
+    path: '/merchant/scan',
+    name: 'Scan',
+    component: Merchant.MERCHANT_SCANNER,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
     path: '/merchant/spot/promotion/:sku',
     name: 'Spot Promotion',
     component: Merchant.MERCHANT_SPOT_PROMOTION,
     meta: {
       layout: 'default-back',
+    },
+  },
+  {
+    path: '*',
+    name: 'Not Found',
+    component: NOT_FOUND,
+    meta: {
+      layout: 'not-found',
     },
   },
 ];

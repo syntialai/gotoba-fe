@@ -63,7 +63,7 @@ import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
 
 export default {
   name: 'PaymentOrder',
-  component: {
+  components: {
     PaymentDetail,
   },
   props: {
@@ -79,7 +79,7 @@ export default {
       return window.innerWidth - 64;
     },
   },
-  method: {
+  methods: {
     formatPrice,
   },
 };

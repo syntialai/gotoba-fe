@@ -1,8 +1,8 @@
 <template>
   <div class="itinerary p-3">
-    <itinerary-plan />
+    <this-week-calendar class="mb-3" />
 
-    <this-week-calendar />
+    <itinerary-plan class="box-shadow" />
   </div>
 </template>
 

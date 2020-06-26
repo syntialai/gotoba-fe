@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-close">
+  <div class="nav-close mb-5">
     <b-navbar variant="faded" class="text-white p-0">
       <b-navbar-nav class="ml-auto m-3">
         <b-nav-item href="/">
@@ -26,6 +26,5 @@ export default {
 
 .nav-close {
   max-width: 768px;
-  margin-bottom: 200px;
 }
 </style>

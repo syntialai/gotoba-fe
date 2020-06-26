@@ -11,7 +11,7 @@
         <b-button
           block
           class="bg-white font-color-blue-primary"
-          @click="this.$router.go(-1)"
+          @click="goBack"
         >CANCEL</b-button>
       </div>
       <div class="w-50">
@@ -44,7 +44,7 @@ export default {
       showAutocomplete: false,
     };
   },
-  method: {
+  methods: {
     submitTravellingSchedule() {
       const data = {};
 
@@ -56,6 +56,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };

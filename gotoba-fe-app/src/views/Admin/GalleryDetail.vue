@@ -25,7 +25,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import confirmModal from '../../utils/tool';
+import { confirmModal } from '../../utils/tool';
 import PhotoModal from '../../components/Admin/Modal/PhotoModal.vue';
 
 export default {

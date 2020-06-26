@@ -9,24 +9,24 @@ const state = {
 
 const actions = {
   getJourneyData({ commit }, sku, res) {
-    commit(Types.GET_JOURNEY_DATA, res);
+    commit(Types.SET_JOURNEY_DATA, res);
 
     api.GetItineraryBySku(sku)
       .then((res) => {
         console.log(res);
-        commit(Types.GET_JOURNEY_DATA, res);
+        commit(Types.SET_JOURNEY_DATA, res);
       })
       .catch((err) => {
         console.log(err);
       });
   },
   getJourneyReview({ commit }, sku, res) {
-    commit(Types.GET_JOURNEY_REVIEW, res);
+    commit(Types.SET_JOURNEY_REVIEW, res);
 
     api.GetReviewBySku(sku)
       .then((res) => {
         console.log(res);
-        commit(Types.GET_JOURNEY_REVIEW, res);
+        commit(Types.SET_JOURNEY_REVIEW, res);
       })
       .catch((err) => {
         console.log(err);
@@ -53,10 +53,10 @@ const getters = {
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
-  [Types.GET_JOURNEY_DATA](state, res) {
+  [Types.SET_JOURNEY_DATA](state, res) {
     state.journeyData = res;
   },
-  [Types.GET_JOURNEY_REVIEW](state, res) {
+  [Types.SET_JOURNEY_REVIEW](state, res) {
     state.journeyReview = res;
   },
 };

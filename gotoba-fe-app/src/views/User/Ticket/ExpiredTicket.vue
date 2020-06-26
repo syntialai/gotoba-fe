@@ -3,13 +3,14 @@
     <card-ticket
       v-for="ticket in expiredTickets"
       :key="ticket.title"
-      v-bind="ticket"
+      :ticket="ticket"
     />
   </div>
 </template>
 
 <script>
-import CardTicket from './CardTicket.vue';
+import { mapGetters } from 'vuex';
+import CardTicket from '../../../components/User/Ticket/CardTicket.vue';
 
 export default {
   name: 'ExpiredTicket',
@@ -17,7 +18,10 @@ export default {
     CardTicket,
   },
   computed: {
-    expiredTickets: {},
+    ...mapGetters(['ticketDatas']),
+    expiredTickets(sku) {
+      return this.ticketDatas(sku);
+    },
   },
 };
 </script>

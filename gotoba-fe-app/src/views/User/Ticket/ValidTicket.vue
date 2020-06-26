@@ -3,13 +3,14 @@
     <card-ticket
       v-for="ticket in validTickets"
       :key="ticket.title"
-      v-bind="ticket"
+      :ticket="ticket"
     />
   </div>
 </template>
 
 <script>
-import CardTicket from './CardTicket.vue';
+import { mapGetters } from 'vuex';
+import CardTicket from '../../../components/User/Ticket/CardTicket.vue';
 
 export default {
   name: 'ValidTicket',
@@ -17,7 +18,11 @@ export default {
     CardTicket,
   },
   computed: {
-    validTickets: {},
+    ...mapGetters(['ticketDatas']),
+    validTickets(sku) {
+      // return [];
+      return this.ticketDatas(sku);
+    },
   },
 };
 </script>

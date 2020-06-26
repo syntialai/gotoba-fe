@@ -1,10 +1,8 @@
 <template>
-  <div class="page-login mt-3">
-    <Background />
-    <navigation-close></navigation-close>
+  <div class="page-login position-relative">
     <div id="form-login">
-      <ValidationObserver v-slot="{ handleInput }">
-        <b-form @submit.prevent="handleInput(login)">
+      <ValidationObserver>
+        <b-form @submit="login">
           <ValidationProvider
             name="Username / email"
             :rules="{required: true, min: 6}"
@@ -86,8 +84,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import api from '@/api/api';
-import NavigationClose from '@/components/Partial/NavigationClose.vue';
+import api from '../../api/api';
 
 export default {
   name: 'LoginPage',
@@ -118,16 +115,13 @@ export default {
         .then((res) => {
           if (res.success) {
             this.setUserInfo(res.data);
-            this.$router.replace('/');
+            this.$router.push('');
           }
         })
         .catch((err) => {
           console.log(err);
         });
     },
-  },
-  components: {
-    NavigationClose,
   },
 };
 </script>
