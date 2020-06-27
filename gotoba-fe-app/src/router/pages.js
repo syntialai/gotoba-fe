@@ -29,9 +29,10 @@ const HISTORY = () => import('../views/User/History/History.vue');
 const TERMS_AND_CONDITION = () => import('../views/User/TermsAndCondition.vue');
 const PRIVACY_POLICY = () => import('../views/User/PrivacyPolicy.vue');
 const PAYMENT_GUIDE = () => import('../views/User/Payment/PaymentGuide.vue');
-
-const HISTORY_PENDING = () => import('../components/User/History/HistoryPending.vue');
-const HISTORY_CANCELLED = () => import('../components/User/History/HistoryCancelled.vue');
+const HISTORY_SUCCESS = () => import('../views/User/History/HistorySuccess.vue');
+const HISTORY_PENDING = () => import('../views/User/History/HistoryPending.vue');
+const HISTORY_CANCELLED = () => import('../views/User/History/HistoryCancelled.vue');
+const HISTORY_DETAILS = () => import('../views/User/History/HistoryDetails.vue');
 
 const ADMIN_VIEW = () => import('../views/Admin/Admin.vue');
 const USER_DATA = () => import('../views/Admin/UserData.vue');
@@ -88,11 +89,10 @@ export const Pages = {
   TERMS_AND_CONDITION,
   PRIVACY_POLICY,
   PAYMENT_GUIDE,
-};
-
-export const Components = {
+  HISTORY_SUCCESS,
   HISTORY_PENDING,
   HISTORY_CANCELLED,
+  HISTORY_DETAILS,
 };
 
 export const Admin = {

@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Main from '../views/User/Main.vue';
 import Home from '../views/User/Home/Home.vue';
 import {
-  Components, Pages, Admin, Merchant, NOT_FOUND,
+  Pages, Admin, Merchant, NOT_FOUND,
 } from './pages';
 
 Vue.use(VueRouter);
@@ -15,7 +15,7 @@ const routes = [
     component: Main,
     children: [
       {
-        path: '/',
+        path: '',
         name: 'Home',
         component: Home,
         meta: {
@@ -23,7 +23,7 @@ const routes = [
         },
       },
       {
-        path: '/my-itinerary',
+        path: 'my-itinerary',
         name: 'Itinerary',
         component: Pages.ITINERARY,
         meta: {
@@ -31,7 +31,7 @@ const routes = [
         },
       },
       {
-        path: '/my-tickets',
+        path: 'my-tickets',
         name: 'My Tickets',
         component: Pages.MY_TICKETS,
         children: [
@@ -212,19 +212,31 @@ const routes = [
     },
   },
   {
-    path: '/history/',
+    path: '/history',
     name: 'History',
     component: Pages.HISTORY,
     children: [
       {
+        path: '',
+        component: Pages.HISTORY_SUCCESS,
+      },
+      {
         path: 'pending',
-        component: Components.HISTORY_PENDING,
+        component: Pages.HISTORY_PENDING,
       },
       {
         path: 'cancelled',
-        component: Components.HISTORY_CANCELLED,
+        component: Pages.HISTORY_CANCELLED,
       },
     ],
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/history/details/:sku',
+    name: 'History Details',
+    component: Pages.HISTORY_DETAILS,
     meta: {
       layout: 'default-back',
     },
