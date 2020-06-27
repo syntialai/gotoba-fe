@@ -3,34 +3,22 @@ import * as Types from '../types';
 
 const state = {
   reviewData: {},
-  reviewInfo: {
-    name: '',
-    image: '',
-    category: '',
-  },
 };
 
 const actions = {
-  getReviewData({ commit }, res) {
-    commit(Types.SET_REVIEW_DATA, res);
-  },
-  getReviewInfo({ commit }, res) {
-    commit(Types.SET_REVIEW_INFO, res);
+  getReviewData({ commit }) {
+    commit(Types.SET_REVIEW_DATA);
   },
 };
 
 const getters = {
   reviewData: (state) => state.reviewData,
-  reviewInfo: (state) => state.reviewInfo,
 };
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.SET_REVIEW_DATA](state, res) {
     state.reviewData = res;
-  },
-  [Types.SET_REVIEW_INFO](state, res) {
-    state.reviewInfo = res;
   },
 };
 
