@@ -31,6 +31,19 @@ export const formatDate = (currentDate) => {
 };
 
 /**
+ * Check a Date object is today function
+ *
+ * @param {Date} date
+ * @returns true or false
+ */
+export const isToday = (date) => {
+  const today = new Date();
+  return date.getDate === today.getDate
+    && date.getMonth === today.getMonth
+    && date.getFullYear === today.getFullYear;
+};
+
+/**
  * Month in Number Format to Full Format
  *
  * @param {Number} month

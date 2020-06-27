@@ -12,8 +12,8 @@ const state = {
 };
 
 const actions = {
-  getTicketData({ commit }, userSku, res) {
-    commit(Types.SET_TICKET_DATA, res);
+  getTicketData({ commit }, userSku) {
+    commit(Types.SET_TICKET_DATA);
 
     api.GetTicketByUser(userSku)
       .then((res) => {
@@ -24,8 +24,9 @@ const actions = {
         console.log(err);
       });
   },
-  getTicketBySku({ commit }, sku, res) {
-    commit(Types.SET_TICKET_BY_SKU, res);
+
+  getTicketBySku({ commit }, sku) {
+    commit(Types.SET_TICKET_BY_SKU);
 
     api.GetTicketBySku(sku)
       .then((res) => {
@@ -36,8 +37,9 @@ const actions = {
         console.log(err);
       });
   },
-  getTicketByMerchant({ commit }, merchantSku, res) {
-    commit(Types.SET_TICKET_BY_MERCHANT, res);
+
+  getTicketByMerchant({ commit }, merchantSku) {
+    commit(Types.SET_TICKET_BY_MERCHANT);
 
     api.GetTicketByMerchant(merchantSku)
       .then((res) => {
@@ -48,8 +50,9 @@ const actions = {
         console.log(err);
       });
   },
-  getTicketRestaurant({ commit }, res) {
-    commit(Types.SET_TICKET_RESTAURANT, res);
+
+  getTicketRestaurant({ commit }) {
+    commit(Types.SET_TICKET_RESTAURANT);
 
     api.GetRestaurantTicket()
       .then((res) => {
@@ -60,8 +63,9 @@ const actions = {
         console.log(err);
       });
   },
-  getTicketJourney({ commit }, res) {
-    commit(Types.SET_TICKET_JOURNEY, res);
+
+  getTicketJourney({ commit }) {
+    commit(Types.SET_TICKET_JOURNEY);
 
     api.GetJourneyTicket()
       .then((res) => {
@@ -72,8 +76,9 @@ const actions = {
         console.log(err);
       });
   },
-  getTicketHotel({ commit }, res) {
-    commit(Types.SET_TICKET_HOTEL, res);
+
+  getTicketHotel({ commit }) {
+    commit(Types.SET_TICKET_HOTEL);
 
     api.GetHotelTicket()
       .then((res) => {
@@ -84,6 +89,7 @@ const actions = {
         console.log(err);
       });
   },
+
   removeTicket({ commit }, sku) {
     commit(Types.REMOVE_TICKET);
 

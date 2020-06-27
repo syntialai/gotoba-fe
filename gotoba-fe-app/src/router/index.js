@@ -37,14 +37,14 @@ const routes = [
         children: [
           {
             path: '',
-            component: Components.TICKET_VALID,
+            component: Pages.TICKET_VALID,
             meta: {
               layout: 'background-blue',
             },
           },
           {
             path: 'expired',
-            component: Components.TICKET_EXPIRED,
+            component: Pages.TICKET_EXPIRED,
             meta: {
               layout: 'background-blue',
             },

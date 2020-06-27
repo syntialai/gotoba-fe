@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+import { isToday } from '../../../utils/filter';
 import CardTicket from '../../../components/User/Ticket/CardTicket.vue';
 
 export default {
@@ -18,11 +19,16 @@ export default {
     CardTicket,
   },
   computed: {
-    ...mapGetters(['ticketDatas']),
-    validTickets(sku) {
-      // return [];
-      return this.ticketDatas(sku);
+    ...mapGetters(['ticketDatas', 'userInfo']),
+    validTickets() {
+      return this.ticketDatas.map((ticket) => isToday(ticket.expiredDate));
     },
+  },
+  created() {
+    this.getTicketData(this.userInfo.sku);
+  },
+  methods: {
+    ...mapActions(['getTicketData']),
   },
 };
 </script>
