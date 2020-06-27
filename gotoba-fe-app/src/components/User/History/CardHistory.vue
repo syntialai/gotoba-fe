@@ -1,5 +1,8 @@
 <template>
-  <div class="card-history">
+  <div
+    class="card-history"
+    @click="openDetails"
+  >
     <div class="date semibold font-color-black-87">{{ history.date }}</div>
     <div class="history-by-day-group bg-white p-2">
       <div
@@ -22,6 +25,11 @@ export default {
   name: 'CardHistory',
   props: {
     history: Object,
+  },
+  methods: {
+    openDetails() {
+      this.$router.push(`${this.$route.path}/${this.history.orderSku}`);
+    },
   },
 };
 </script>
