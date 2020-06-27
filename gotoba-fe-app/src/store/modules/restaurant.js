@@ -24,12 +24,12 @@ const actions = {
       });
   },
 
-  getRestaurantDataBySku({ commit }, sku) {
-    commit(Types.SET_RESTAURANT_DATA_BY_SKU);
+  getRestaurantDataByMerchantSku({ commit }, merchantSku) {
+    commit(Types.SET_RESTAURANT_DATA_BY_MERCHANT_SKU);
 
-    api.GetRestaurantBySku(sku)
+    api.GetRestaurantByMerchantSku(merchantSku)
       .then((res) => {
-        commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+        commit(Types.SET_RESTAURANT_DATA_BY_MERCHANT_SKU, res);
         console.log(res);
       })
       .catch((err) => {
@@ -101,10 +101,10 @@ const getters = {
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.SET_RESTAURANT_DATA](state, res) {
-    state.restaurantData = res;
-  },
-  [Types.SET_RESTAURANT_DATA_BY_SKU](state, res) {
     state.restaurantDatas = res;
+  },
+  [Types.SET_RESTAURANT_DATA_BY_MERCHANT_SKU](state, res) {
+    state.restaurantData = res;
   },
   [Types.SET_RESTAURANT_MENU](state, res) {
     state.restaurantMenus = res;

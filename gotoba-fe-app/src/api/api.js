@@ -162,8 +162,8 @@ export default {
   GetRestaurants() {
     return fetchGet('/restaurant');
   },
-  GetRestaurantBySku(sku) {
-    return fetchGet(`/restaurant/${sku}`);
+  GetRestaurantByMerchantSku(merchantSku) {
+    return fetchGet(`/restaurant/${merchantSku}`);
   },
   PostRestaurant(params) {
     return fetchPost('/restaurant/add', params);

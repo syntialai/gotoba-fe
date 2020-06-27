@@ -17,10 +17,10 @@ export default {
     ...mapGetters(['restaurantData']),
   },
   created() {
-    this.getRestaurantDataBySku(this.$route.params.sku);
+    this.getRestaurantDataByMerchantSku(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getRestaurantDataBySku']),
+    ...mapActions(['getRestaurantDataByMerchantSku']),
   },
 };
 </script>

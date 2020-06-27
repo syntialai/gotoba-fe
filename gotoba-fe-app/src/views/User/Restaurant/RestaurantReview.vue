@@ -17,11 +17,11 @@ export default {
     ...mapGetters(['restaurantData', 'restaurantReview']),
   },
   created() {
-    this.getRestaurantDataBySku(this.$route.params.sku);
+    this.getRestaurantDataByMerchantSku(this.$route.params.sku);
     this.getRestaurantReview(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getRestaurantDataBySku', 'getRestaurantReview']),
+    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantReview']),
     restaurant() {
       const data = this.restaurantData;
       const review = this.restaurantReview;

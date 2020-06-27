@@ -46,11 +46,11 @@ export default {
     ...mapGetters(['restaurantData', 'restaurantMenu']),
   },
   created() {
-    this.getRestaurantDataBySku(this.$route.params.sku);
+    this.getRestaurantDataByMerchantSku(this.$route.params.sku);
     this.getRestaurantMenus(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getRestaurantDataBySku', 'getRestaurantMenus']),
+    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantMenus']),
   },
 };
 </script>
