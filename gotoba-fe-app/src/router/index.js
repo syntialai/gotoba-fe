@@ -218,15 +218,27 @@ const routes = [
     children: [
       {
         path: '',
+        name: 'History Success',
         component: Pages.HISTORY_SUCCESS,
+        meta: {
+          layout: 'default-back',
+        },
       },
       {
         path: 'pending',
+        name: 'History Pending',
         component: Pages.HISTORY_PENDING,
+        meta: {
+          layout: 'default-back',
+        },
       },
       {
         path: 'cancelled',
+        name: 'History Cancelled',
         component: Pages.HISTORY_CANCELLED,
+        meta: {
+          layout: 'default-back',
+        },
       },
     ],
     meta: {
