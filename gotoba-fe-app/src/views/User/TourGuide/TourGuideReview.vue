@@ -27,7 +27,7 @@ export default {
       const review = this.tourGuideReview;
 
       return Object.assign(data, review);
-    }
+    },
   },
 };
 </script>

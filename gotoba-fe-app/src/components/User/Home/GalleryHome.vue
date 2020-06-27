@@ -35,12 +35,22 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import { VueAgile } from 'vue-agile';
 
 export default {
   name: 'GalleryHome',
   components: {
     agile: VueAgile,
+  },
+  computed: {
+    ...mapGetters(['galleryData']),
+    slides() {
+      return this.galleryData.map((data) => data.image);
+    },
+  },
+  created() {
+    this.getGalleryData();
   },
   data() {
     return {
@@ -84,6 +94,9 @@ export default {
         'https://images.unsplash.com/photo-1497534547324-0ebb3f052e88?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
       ],
     };
+  },
+  methods: {
+    ...mapActions(['getGalleryData']),
   },
   mounted() {
     this.asNavForMain.push(this.$refs.thumbnails);

@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import VueGallery from 'vue-gallery';
 
 export default {
@@ -33,20 +32,7 @@ export default {
   components: {
     VueGallery,
   },
-  data() {
-    return {
-      // images: [
-      //   'https://indonesiatatler.com/images/i/story-20160819151207-maritim.go.id_resized_773x457.jpg',
-      //   'https://www.indonesia.travel/content/dam/indtravelrevamp/en/destinations/revision-2019/all-revision-destination/sumatra/Lake_Toba.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg',
-      //   'https://dummyimage.com/1280/000000/ffffff',
-      //   'https://dummyimage.com/400/000000/ffffff',
-      // ],
-      index: null,
-    };
-  },
   computed: {
-    ...mapGetters(['galleryData']),
-
     getHeight() {
       const width = window.innerWidth - 32;
       const margin = 8;
@@ -59,6 +45,23 @@ export default {
       }
       return (width - margin * 2) / 3;
     },
+    images() {
+      return this.galleryData.map((data) => data.image);
+    },
+  },
+  data() {
+    return {
+      // images: [
+      //   'https://indonesiatatler.com/images/i/story-20160819151207-maritim.go.id_resized_773x457.jpg',
+      //   'https://www.indonesia.travel/content/dam/indtravelrevamp/en/destinations/revision-2019/all-revision-destination/sumatra/Lake_Toba.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg',
+      //   'https://dummyimage.com/1280/000000/ffffff',
+      //   'https://dummyimage.com/400/000000/ffffff',
+      // ],
+      index: null,
+    };
+  },
+  props: {
+    data: Array,
   },
 };
 </script>
