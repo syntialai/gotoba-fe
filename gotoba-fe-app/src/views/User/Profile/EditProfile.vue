@@ -13,7 +13,7 @@
         >
           <b-form-input
             id="input-edit-nick-name"
-            v-model="nickname"
+            v-model="userInfo.nickname"
             type="text"
           ></b-form-input>
         </b-form-group>
@@ -24,7 +24,7 @@
         >
           <b-form-input
             id="input-edit-username"
-            v-model="username"
+            v-model="userInfo.username"
             type="text"
           ></b-form-input>
         </b-form-group>
@@ -35,7 +35,7 @@
         >
           <b-form-input
             id="input-edit-email"
-            v-model="email"
+            v-model="userInfo.email"
             type="email"
           ></b-form-input>
         </b-form-group>
@@ -46,7 +46,7 @@
         >
           <b-form-input
             id="input-edit-password"
-            v-model="password"
+            v-model="userInfo.password"
             type="password"
             readonly
           ></b-form-input>
@@ -58,7 +58,7 @@
         >
           <b-form-input
             id="input-edit-phone-number"
-            v-model="phoneNumber"
+            v-model="userInfo.phoneNumber"
             type="text"
           ></b-form-input>
         </b-form-group>
@@ -69,7 +69,7 @@
         >
           <b-form-input
             id="input-edit-location"
-            v-model="location"
+            v-model="userInfo.location"
             type="text"
           ></b-form-input>
         </b-form-group>
@@ -97,21 +97,34 @@
 </template>
 
 <script>
-import api from '@/api/api';
+import { mapActions, mapGetters, mapState } from 'vuex';
+import api from '../../../api/api';
 
 export default {
   name: 'EditProfile',
+  computed: {
+    ...mapGetters(['userLoginStatus']),
+    ...mapState(['userInfo']),
+  },
+  created() {
+    if (!this.userLoginStatus) {
+      this.$router.push('/login');
+    }
+  },
   data() {
     return {
-      nickname: '',
-      username: '',
-      email: '',
-      phoneNumber: '',
-      location: '',
-      birthDate: '', // return value YYYY-MM-DD
+      user: {
+        nickname: '',
+        username: '',
+        email: '',
+        phoneNumber: '',
+        location: '',
+        birthDate: '', // return value YYYY-MM-DD
+      },
     };
   },
   methods: {
+    ...mapActions(['setUserInfo']),
     updateProfile() {
       if (!this.nickname
         || !this.username
@@ -131,13 +144,16 @@ export default {
       api.UpdateProfile(data)
         .then((res) => {
           if (res.success) {
-            this.setUserInfo(res.data);
+            this.setUserInfo(res);
           }
         })
         .catch((err) => {
           console.log(err);
         });
     },
+  },
+  mounted() {
+    this.user = this.userInfo;
   },
 };
 </script>

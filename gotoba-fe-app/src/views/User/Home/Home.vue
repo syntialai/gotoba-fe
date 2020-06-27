@@ -135,6 +135,8 @@
       </div>
     </div>
 
+    <gallery-home />
+
     <the-footer />
   </div>
 </template>
@@ -142,6 +144,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import CardHome from '../../../components/User/Home/CardHome.vue';
+import GalleryHome from '../../../components/User/Home/GalleryHome.vue';
 import TheFooter from '../../../components/Partial/TheFooter.vue';
 import {
   OngoingPromoIcon, NearbyPlaceIcon, NearbyRestoIcon, NearbyHotelIcon,
@@ -151,6 +154,7 @@ export default {
   name: 'Home',
   components: {
     CardHome,
+    GalleryHome,
     TheFooter,
     OngoingPromoIcon,
     NearbyPlaceIcon,
