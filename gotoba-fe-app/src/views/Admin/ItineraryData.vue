@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
 import ItineraryCardGroup from '../../components/Admin/Data/ItineraryCardGroup.vue';
 import Pagination from '../../components/Partial/Pagination.vue';
@@ -46,6 +47,12 @@ export default {
     Pagination,
     ShowDataCount,
   },
+  computed: {
+    ...mapGetters(['journeyData']),
+  },
+  created() {
+    this.getJourneyData();
+  },
   data() {
     return {
       currentPage: 1,
@@ -57,6 +64,9 @@ export default {
         },
       ],
     };
+  },
+  method: {
+    ...mapActions(['getJourneyData']),
   },
 };
 </script>

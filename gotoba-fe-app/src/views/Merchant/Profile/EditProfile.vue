@@ -3,7 +3,11 @@
     <div class="container pt-4 mb-5">
       <b-form @submit="updateProfile">
         <b-form-group id="edit-img">
-          <img src="" alt="" class="border-rounded">
+          <img
+            :src="userInfo.image || ''"
+            alt="profile"
+            class="border-rounded"
+          >
           <b-form-file accept="image/*"></b-form-file>
         </b-form-group>
         <b-form-group

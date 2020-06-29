@@ -1,8 +1,8 @@
 <template>
   <div class="tour-guide-profile">
-    <card-profile-tour-guide :tourGuide="tourGuide" class="my-2" />
+    <card-profile-tour-guide :tourGuide="tourGuideData" class="my-2" />
 
-    <about-tour-guide-detail :data="tourGuide" class="mt-1 mb-2" />
+    <about-tour-guide-detail :data="tourGuideData" class="mt-1 mb-2" />
 
     <div class="rating-and-reviews mt-1 mb-2">
       <div
@@ -20,9 +20,9 @@
 
       <div class="recent-reviews mt-3">
         <div class="title bold font-color-blue-secondary">Recent reviews</div>
-        <div class="recent-reviews-group mt-3" v-if="tourGuide.reviews > 0">
+        <div class="recent-reviews-group mt-3" v-if="tourGuideReview > 0">
           <user-review-detail
-            v-for="review in tourGuide.reviews"
+            v-for="review in tourGuideReview"
             :key="review.userName"
             v-bind="review"
           />
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import AboutTourGuideDetail from '../../../components/User/TourGuide/AboutTourGuideDetail.vue';
 import CardProfileTourGuide from '../../../components/User/TourGuide/CardProfileTourGuide.vue';
 import RatingProfileDetail from '../../../components/User/Profile/RatingProfileDetail.vue';
@@ -48,10 +48,14 @@ export default {
     UserReviewDetail,
   },
   computed: {
-    ...mapGetters(['tourGuideData']),
-    tourGuide(sku) {
-      return this.tourGuideData(sku);
-    },
+    ...mapGetters(['tourGuideData', 'tourGuideReview']),
+  },
+  created() {
+    this.getTourGuideBySku(this.$route.params.sku);
+    this.getTourGuideReview(this.$route.params.sku);
+  },
+  methods: {
+    ...mapActions(['getTourGuideBySku', 'getTourGuideReview']),
   },
 };
 </script>

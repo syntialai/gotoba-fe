@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import ProfileDetail from '../../../components/User/Profile/ProfileDetail.vue';
 import RestaurantMenuCardGroup from '../../../components/Merchant/Data/RestaurantMenuCardGroup.vue';
 
@@ -17,21 +18,14 @@ export default {
     RestaurantMenuCardGroup,
   },
   computed: {
-    restaurantData() {
-      return this.$store.getters.restaurantData;
-      // return {
-      //   reviews: [{
-      //     userImg: '',
-      //     userName: 'Syntia',
-      //     rating: 5.0,
-      //     comment: 'Good',
-      //     createdAt: Date('12-2-2019'),
-      //   }],
-      // };
-    },
-    restaurantMenu() {
-      return this.$store.getters.restaurantMenus;
-    },
+    ...mapGetters(['restaurantData', 'restaurantMenu', 'userInfo']),
+  },
+  created() {
+    this.getRestaurantDataByMerchantSku(this.userInfo.sku);
+    this.getRestaurantMenu(this.userInfo.sku);
+  },
+  methods: {
+    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantMenus']),
   },
 };
 </script>

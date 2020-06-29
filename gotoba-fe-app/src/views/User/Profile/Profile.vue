@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <card-profile-user :user="user" />
+    <card-profile-user :user="userInfo" />
 
     <profile-menu-group
       title="Account"
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { alert } from '../../../utils/tool';
 import CardProfileUser from '../../../components/User/Profile/CardProfileUser.vue';
 import ProfileMenuGroup from '../../../components/User/Profile/ProfileMenuGroup.vue';
 
@@ -25,13 +27,17 @@ export default {
     CardProfileUser,
     ProfileMenuGroup,
   },
+  computed: {
+    ...mapGetters(['userInfo', 'userLoginStatus']),
+  },
+  created() {
+    if (!this.userLoginStatus) {
+      alert('You should log in first', false);
+      this.$router.push('/login');
+    }
+  },
   data() {
     return {
-      user: {
-        image: '',
-        name: '',
-        location: '',
-      },
       menuAccount: [
         {
           name: 'Edit Profile', icon: 'user-edit', link: '/profile/edit',

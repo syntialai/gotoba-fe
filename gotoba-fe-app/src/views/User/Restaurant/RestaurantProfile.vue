@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import ProfileDetail from '../../../components/User/Profile/ProfileDetail.vue';
 
 export default {
@@ -13,9 +14,13 @@ export default {
     ProfileDetail,
   },
   computed: {
-    restaurantData() {
-      return this.$store.getters.restaurantData;
-    },
+    ...mapGetters(['restaurantData']),
+  },
+  created() {
+    this.getRestaurantDataByMerchantSku(this.$route.params.sku);
+  },
+  methods: {
+    ...mapActions(['getRestaurantDataByMerchantSku']),
   },
 };
 </script>

@@ -1,11 +1,11 @@
 <template>
   <div class="restaurant-review">
-    <review-detail-group :data="restaurantData" />
+    <review-detail-group :data="restaurant" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import ReviewDetailGroup from '../../../components/User/Review/ReviewDetailGroup.vue';
 
 export default {
@@ -15,9 +15,16 @@ export default {
   },
   computed: {
     ...mapGetters(['restaurantData', 'restaurantReview']),
-    restaurantData(sku) {
-      const data = this.restaurantData(sku);
-      const review = this.restaurantReview(sku);
+  },
+  created() {
+    this.getRestaurantDataByMerchantSku(this.$route.params.sku);
+    this.getRestaurantReview(this.$route.params.sku);
+  },
+  methods: {
+    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantReview']),
+    restaurant() {
+      const data = this.restaurantData;
+      const review = this.restaurantReview;
 
       return Object.assign(data, review);
     },

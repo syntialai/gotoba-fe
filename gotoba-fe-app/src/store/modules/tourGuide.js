@@ -5,11 +5,12 @@ import * as Types from '../types';
 const state = {
   tourGuideDatas: [],
   tourGuideData: {},
+  tourGuideReview: [],
 };
 
 const actions = {
-  getTourGuideData({ commit }, res) {
-    commit(Types.SET_TOUR_GUIDE_DATA, res);
+  getTourGuideData({ commit }) {
+    commit(Types.SET_TOUR_GUIDE_DATA);
 
     api.GetTourGuides()
       .then((res) => {
@@ -20,8 +21,9 @@ const actions = {
         console.log(err);
       });
   },
-  getTourGuideBySku({ commit }, sku, res) {
-    commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res);
+
+  getTourGuideBySku({ commit }, sku) {
+    commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU);
 
     api.GetTourGuideBySku(sku)
       .then((res) => {
@@ -32,6 +34,20 @@ const actions = {
         console.log(err);
       });
   },
+
+  getTourGuideReview({ commit }, sku) {
+    commit(Types.SET_TOUR_GUIDE_REVIEW);
+
+    api.GetReviewBySku(sku)
+      .then((res) => {
+        commit(Types.SET_TOUR_GUIDE_REVIEW, res);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
   removeTourGuide({ commit }, sku) {
     commit(Types.REMOVE_TOUR_GUIDE);
 
@@ -49,6 +65,7 @@ const actions = {
 const getters = {
   tourGuideDatas: (state) => state.tourGuideDatas,
   tourGuideData: (state) => state.tourGuideData,
+  tourGuideReview: (state) => state.tourGuideReview,
 };
 
 const mutations = {
@@ -58,6 +75,9 @@ const mutations = {
   },
   [Types.SET_TOUR_GUIDE_DATA_BY_SKU](state, res) {
     state.tourGuideData = res;
+  },
+  [Types.SET_TOUR_GUIDE_REVIEW](state, res) {
+    state.tourGuideReview = res;
   },
 };
 

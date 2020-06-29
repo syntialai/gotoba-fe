@@ -1,11 +1,11 @@
 <template>
   <div class="journey-review">
-    <review-detail-group :data="journeyData" />
+    <review-detail-group :data="journey" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import ReviewDetailGroup from '../../../components/User/Review/ReviewDetailGroup.vue';
 
 export default {
@@ -14,10 +14,17 @@ export default {
     ReviewDetailGroup,
   },
   computed: {
-    ...mapGetters(['journeyData', 'journeyReview']),
-    journeyData(sku) {
-      const data = this.journeyData(sku);
-      const review = this.journeyReview(sku);
+    ...mapGetters(['journeyDataBySku', 'journeyReview']),
+  },
+  created() {
+    this.getJourneyDataBySku(this.$route.params.sku);
+    this.getJourneyReview(this.$route.params.sku);
+  },
+  methods: {
+    ...mapActions(['getJourneyDataBySku', 'getJourneyReview']),
+    journey() {
+      const data = this.journeyDataBySku;
+      const review = this.journeyReview;
 
       return Object.assign(data, review);
     },

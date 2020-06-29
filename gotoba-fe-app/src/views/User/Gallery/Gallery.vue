@@ -12,17 +12,27 @@
       Show every moment captured around Lake Toba
     </div>
 
-    <gallery-group />
+    <gallery-group :data="galleryData" />
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import GalleryGroup from '../../../components/User/Home/GalleryGroup.vue';
 
 export default {
   name: 'Gallery',
   components: {
     GalleryGroup,
+  },
+  computed: {
+    ...mapGetters(['galleryData']),
+  },
+  created() {
+    this.getGalleryData();
+  },
+  methods: {
+    ...mapActions(['getGalleryData']),
   },
 };
 </script>

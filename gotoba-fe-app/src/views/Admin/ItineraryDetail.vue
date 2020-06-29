@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
 import { confirmModal } from '../../utils/tool';
 
@@ -33,13 +33,19 @@ export default {
   components: {
     ItineraryModal,
   },
+  computed: {
+    ...mapGetters(['journeyDataBySku']),
+  },
+  created() {
+    this.getJourneyDataBySku(this.$route.params.sku);
+  },
   data() {
     return {
       itinerary: {},
     };
   },
   methods: {
-    ...mapActions.removeItinerary,
+    ...mapActions(['getJourneyDataBySku', 'removeItinerary']),
     deleteItinerary() {
       const confirmModalValue = confirmModal(this.itinerary.title);
 

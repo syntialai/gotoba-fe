@@ -40,7 +40,7 @@
           <div v-else>
             <img :src="photo.image">
             <b-button
-              class="custom-btn-gray-young"
+              class="custom-btn-gray"
               @click="photo.image = null"
             >Remove photo</b-button>
           </div>
@@ -110,9 +110,10 @@ export default {
           .catch((err) => {
             console.log(err);
           });
+
         return;
       }
-      api.EditGalleryPhoto(this.photo.sku, data)
+      api.EditGalleryPhoto(this.$route.params.sku, data)
         .then((res) => {
           console.log(res);
         })
@@ -121,9 +122,6 @@ export default {
         });
     },
     previewImage,
-  },
-  mounted() {
-    this.submitPhoto();
   },
 };
 </script>
