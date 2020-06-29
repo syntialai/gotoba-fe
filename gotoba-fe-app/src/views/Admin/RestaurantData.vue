@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import RestaurantCardGroup from '../../components/Admin/Data/RestaurantCardGroup.vue';
 import Pagination from '../../components/Partial/Pagination.vue';
 import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
@@ -35,16 +36,20 @@ export default {
     Pagination,
     ShowDataCount,
   },
+  computed: {
+    ...mapGetters(['restaurantDatas']),
+  },
+  created() {
+    this.getRestaurantData();
+  },
   data() {
     return {
       currentPage: 1,
       perPage: 1,
     };
   },
-  computed: {
-    restaurants() {
-      return this.$store.getters.restaurantDatas;
-    },
+  methods: {
+    ...mapActions(['getRestaurantData']),
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="restaurant-detail">
-    <restaurant-card :restaurant="restaurant" />
+    <restaurant-card :restaurant="restaurantData" />
 
     <div class="more-restaurant-info">
       <div class="full-address d-flex justify-content-between">
@@ -8,7 +8,7 @@
           Full Address
         </div>
         <div class="full-address-value font-color-black-87 semibold pl-4">
-          {{ restaurant.address }}
+          {{ restaurantData.address }}
         </div>
       </div>
 
@@ -17,7 +17,7 @@
           Hours
         </div>
         <div class="hours-open-value font-color-black-87 semibold pl-4">
-          {{ restaurant.hoursOpen }}
+          {{ restaurantData.hoursOpen }}
         </div>
       </div>
 
@@ -26,7 +26,7 @@
           Phone Number
         </div>
         <div class="phone-number-value font-color-black-87 semibold pl-4">
-          {{ restaurant.phone }}
+          {{ restaurantData.phone }}
         </div>
       </div>
     </div>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import RestaurantCard from '../../components/Admin/Card/RestaurantCard.vue';
 
 export default {
@@ -42,9 +43,14 @@ export default {
     RestaurantCard,
   },
   computed: {
-    restaurant() {
-      return this.$store.getters.restaurantData;
-    },
+    ...mapGetters(['restaurantData', 'restaurantMenu']),
+  },
+  created() {
+    this.getRestaurantDataByMerchantSku(this.$route.params.sku);
+    this.getRestaurantMenus(this.$route.params.sku);
+  },
+  methods: {
+    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantMenus']),
   },
 };
 </script>

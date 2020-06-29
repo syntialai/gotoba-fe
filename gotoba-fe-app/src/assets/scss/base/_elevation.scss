@@ -1,0 +1,11 @@
+@import '../abstracts/variables';
+
+@mixin elevation {
+  @each $key, $value in map-remove($colors, "black-16") {
+    .box-shadow-#{$key} {
+      box-shadow: 1px 2px 10px #{$value}33!important;
+    }
+  }
+}
+
+@include elevation();

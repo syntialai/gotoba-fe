@@ -1,3 +1,5 @@
+import index from '../store/index';
+
 /**
  * Create Confirm Modal
  *
@@ -21,6 +23,28 @@ export const confirmModal = (object) => {
       (err) => console.log(err),
     );
 };
+
+/**
+ * Show Alert
+ *
+ * @param {String} message
+ * @param {Boolean} success
+ */
+export function alert(message, success) {
+  index.dispatch('showAlert', true);
+  index.dispatch('setAlertSuccess', success);
+  index.dispatch('setAlertMessage', message);
+}
+
+/**
+ * Show Toast
+ *
+ * @param {String} message
+ */
+export function toast(message) {
+  index.dispatch('showToast', true);
+  index.dispatch('setToastMessage', message);
+}
 
 /**
  * Request Web to Full Screen

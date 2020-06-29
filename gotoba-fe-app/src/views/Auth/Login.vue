@@ -95,7 +95,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions({ setUserInfo: 'setUserInfo' }),
+    ...mapActions(['setUserInfo']),
 
     getValidationState({ error, validated, valid = null }) {
       return error || validated ? valid : null;
@@ -114,7 +114,7 @@ export default {
       api.Login(data)
         .then((res) => {
           if (res.success) {
-            this.setUserInfo(res.data);
+            this.setUserInfo(res);
             this.$router.push('');
           }
         })
@@ -125,7 +125,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-@import "~@/assets/scss/index";
-</style>

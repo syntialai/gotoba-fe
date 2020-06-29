@@ -96,12 +96,12 @@ export default {
   },
   computed: {
     ...mapGetters(['tourGuideData']),
-    tourGuide(sku) {
-      return this.tourGuideData(sku);
-    },
+  },
+  created() {
+    this.getTourGuideBySku(this.$route.params.sku);
   },
   methods: {
-    ...mapActions.removeTourGuide,
+    ...mapActions(['getTourGuideBySku', 'removeTourGuide']),
     deleteTourGuide() {
       const confirmModalValue = confirmModal(this.tourGuide.name);
 

@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Main from '../views/User/Main.vue';
 import Home from '../views/User/Home/Home.vue';
 import {
-  Components, Pages, Admin, Merchant, NOT_FOUND,
+  Pages, Admin, Merchant, NOT_FOUND,
 } from './pages';
 
 Vue.use(VueRouter);
@@ -15,7 +15,7 @@ const routes = [
     component: Main,
     children: [
       {
-        path: '/',
+        path: '',
         name: 'Home',
         component: Home,
         meta: {
@@ -23,7 +23,7 @@ const routes = [
         },
       },
       {
-        path: '/my-itinerary',
+        path: 'my-itinerary',
         name: 'Itinerary',
         component: Pages.ITINERARY,
         meta: {
@@ -31,20 +31,20 @@ const routes = [
         },
       },
       {
-        path: '/my-tickets',
+        path: 'my-tickets',
         name: 'My Tickets',
         component: Pages.MY_TICKETS,
         children: [
           {
             path: '',
-            component: Components.TICKET_VALID,
+            component: Pages.TICKET_VALID,
             meta: {
               layout: 'background-blue',
             },
           },
           {
             path: 'expired',
-            component: Components.TICKET_EXPIRED,
+            component: Pages.TICKET_EXPIRED,
             meta: {
               layout: 'background-blue',
             },
@@ -212,19 +212,43 @@ const routes = [
     },
   },
   {
-    path: '/history/',
+    path: '/history',
     name: 'History',
     component: Pages.HISTORY,
     children: [
       {
+        path: '',
+        name: 'History Success',
+        component: Pages.HISTORY_SUCCESS,
+        meta: {
+          layout: 'default-back',
+        },
+      },
+      {
         path: 'pending',
-        component: Components.HISTORY_PENDING,
+        name: 'History Pending',
+        component: Pages.HISTORY_PENDING,
+        meta: {
+          layout: 'default-back',
+        },
       },
       {
         path: 'cancelled',
-        component: Components.HISTORY_CANCELLED,
+        name: 'History Cancelled',
+        component: Pages.HISTORY_CANCELLED,
+        meta: {
+          layout: 'default-back',
+        },
       },
     ],
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/history/details/:sku',
+    name: 'History Details',
+    component: Pages.HISTORY_DETAILS,
     meta: {
       layout: 'default-back',
     },

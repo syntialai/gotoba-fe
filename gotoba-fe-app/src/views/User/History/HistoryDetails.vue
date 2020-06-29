@@ -8,7 +8,7 @@
         <div
           class="d-flex justify-content-between font-size-14 font-color-black-60"
           v-for="info in orderInfo"
-          :key="info.name.toLowerCase().replace(' ','-')"
+          :key="info.name"
         >
           <div class="details-name">
             {{ info.name }}
@@ -42,12 +42,12 @@
       </div>
       <payment-detail price="" discount="" />
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
-import PaymentDetail from '../Payment/PaymentDetail.vue';
-import OrderItems from '../OrderItems.vue';
+import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
+import OrderItems from '../../../components/User/OrderItems.vue';
 
 export default {
   name: 'HistoryDetails',

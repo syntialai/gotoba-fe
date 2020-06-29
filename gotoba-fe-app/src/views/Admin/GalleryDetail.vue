@@ -11,12 +11,12 @@
       >EDIT</b-button>
     </div>
 
-    <photo-modal title="Edit" :photo="photo" />
+    <photo-modal title="Edit" :photo="galleryPhoto" />
 
     <div class="photo-detail">
-      <img :src="photo.image" :alt="photo.title">
+      <img :src="galleryPhoto.image" :alt="galleryPhoto.title">
 
-      <h2 class="mt-3">{{ photo.title }}</h2>
+      <h2 class="mt-3">{{ galleryPhoto.title }}</h2>
 
       <p>{{ photo.description }}</p>
     </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { confirmModal } from '../../utils/tool';
 import PhotoModal from '../../components/Admin/Modal/PhotoModal.vue';
 
@@ -33,13 +33,14 @@ export default {
   components: {
     PhotoModal,
   },
-  data() {
-    return {
-      photo: {},
-    };
+  computed: {
+    ...mapGetters(['galleryPhoto']),
+  },
+  created() {
+    this.getGalleryPhoto(this.$route.params.sku);
   },
   methods: {
-    ...mapActions.removeGalleryPhoto,
+    ...mapActions(['getGalleryPhoto', 'removeGalleryPhoto']),
     deleteGalleryPhoto() {
       const confirmModalValue = confirmModal(this.photo.title);
 

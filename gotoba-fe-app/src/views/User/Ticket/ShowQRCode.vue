@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import QRCodeInfo from '../../../components/User/Ticket/QRCodeInfo.vue';
 
 export default {
@@ -34,19 +34,19 @@ export default {
   },
   computed: {
     ...mapGetters(['ticketData']),
-    ticketData(sku) {
-      return this.ticketData(sku);
-      // return {
-      //   title: 'QR Code',
-      //   date: new Date(2000, 3, 12),
-      //   qrCodeValue: 'Test',
-      // };
-    },
+    // ticket() {
+    //   return {
+    //     title: 'QR Code',
+    //     date: new Date(2000, 3, 12),
+    //     qrCodeValue: 'Test',
+    //   };
+    // },
+  },
+  created() {
+    this.getTicketBySku(this.$route.params.sku);
   },
   methods: {
-    setTicketStatus() {
-
-    },
+    ...mapActions(['getTicketBySku']),
   },
 };
 </script>

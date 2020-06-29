@@ -1,16 +1,16 @@
 <template>
   <div class="review">
     <div class="info p-4">
-      How would you rate this {{ info.category }} experience?
+      How would you rate this {{ ticketData.category }} experience?
     </div>
 
     <card-review-product
-      :name="info.name"
-      :image="info.image"
+      :name="ticketData.name"
+      :image="ticketData.image"
     />
 
     <b-form-rating
-      v-model="rating"
+      v-model="reviewData.rating"
       variant="warning"
       class="p-3"
       required
@@ -25,7 +25,7 @@
     >
       <b-form-textarea
         id="input-review-comment"
-        v-model="comment"
+        v-model="reviewData.comment"
       ></b-form-textarea>
     </b-form-group>
 
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapState } from 'vuex';
 import CardReviewProduct from '../../../components/User/Review/CardReviewProduct.vue';
 import api from '../../../api/api';
 
@@ -49,24 +50,21 @@ export default {
     CardReviewProduct,
   },
   computed: {
-    info() {
-      return this.$store.getters.reviewInfo;
-    },
+    ...mapGetters(['ticketData']),
+    ...mapState(['reviewData']),
   },
-  data() {
-    return {
-      rating: 0,
-      comment: '',
-    };
+  created() {
+    this.getTicketBySku(this.$route.params.sku);
   },
   methods: {
+    ...mapActions(['getTicketBySku']),
     submitMethod() {
       const data = {
-        rating: this.rating,
-        comment: this.comment,
+        rating: this.reviewData.rating,
+        comment: this.reviewData.comment,
       };
 
-      api.PostReview(sku, data)
+      api.PostReview(this.$route.params.sku, data)
         .then((res) => {
           console.log(res);
           this.$route.push('/review/thankyou');
