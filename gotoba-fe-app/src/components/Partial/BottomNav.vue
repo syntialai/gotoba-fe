@@ -9,19 +9,20 @@
         :key="item.id"
         :class="{active: isActive[item.id-1]}"
         @click="Array.from(isActive, () => 0); isActive[key-1] = 1;"
-        :href="item.link"
     >
-      <div class="align-center">
-        <font-awesome-icon
-          :icon="item.icon"
-          class="font-size-24"
-        />
-        <div :id="['bottom-nav-' + item.id]"
-          class="font-size-12"
-        >
-          {{ item.name }}
+      <router-link :to="item.link">
+        <div class="align-center">
+          <font-awesome-icon
+            :icon="item.icon"
+            class="font-size-24"
+          />
+          <div :id="['bottom-nav-' + item.id]"
+            class="font-size-12"
+          >
+            {{ item.name }}
+          </div>
         </div>
-      </div>
+      </router-link>
     </b-nav-item>
   </b-navbar>
 </template>
@@ -44,7 +45,6 @@ export default {
 @import '~@/assets/scss/abstracts/variables';
 
 #bottom-nav {
-  max-width: 768px;
   margin: 0 auto;
 }
 

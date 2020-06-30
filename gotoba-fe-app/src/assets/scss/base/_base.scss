@@ -1,13 +1,12 @@
 body {
   margin: 0 auto;
   padding: 0;
-  background-color: $bg-color;
-  color: $black-60;
+  background-color: $bg-color!important;
+  color: $black-60!important;
 }
 
 .container {
   margin: 0 auto;
-  max-width: 768px;
 }
 
 a {

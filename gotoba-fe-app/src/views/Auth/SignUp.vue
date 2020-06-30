@@ -1,5 +1,5 @@
 <template>
-  <div class="page-signup mt-3">
+  <div class="page-signup p-3">
     <div id="form-sign-up">
       <ValidationObserver>
         <b-form @submit="signup">

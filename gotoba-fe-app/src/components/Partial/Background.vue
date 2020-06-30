@@ -27,25 +27,19 @@ body, .background {
   position: relative;
   top: 0;
   background: $blue-gradient;
-  width: 768px;
+  width: 100%;
   height: 170px;
-}
-
-@media screen and (max-width: 768px) {
-  .background {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .background {
-    margin: 0 auto;
-  }
 }
 
 @media screen and (min-width: 426px) {
   .background {
     height: 200px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .background {
+    height: 230px;
   }
 }
 

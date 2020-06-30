@@ -1,5 +1,5 @@
 <template>
-  <div class="page-login position-relative">
+  <div class="page-login position-relative p-3">
     <div id="form-login">
       <ValidationObserver>
         <b-form @submit="login">

@@ -7,6 +7,9 @@ export default {
   data() {
     return {
       options: {
+        layout: {
+          padding: 16,
+        },
         legend: {
           display: true,
           position: 'bottom',

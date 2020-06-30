@@ -23,8 +23,4 @@ export default {
 .navbar-expand .navbar-nav .nav-link {
     padding-right: 0;
 }
-
-.nav-close {
-  max-width: 768px;
-}
 </style>

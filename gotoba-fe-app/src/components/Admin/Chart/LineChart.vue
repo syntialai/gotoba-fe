@@ -7,6 +7,9 @@ export default {
   data() {
     return {
       options: {
+        layout: {
+          padding: 16,
+        },
         scales: {
           yAxes: [{
             ticks: { beginAtZero: true },
