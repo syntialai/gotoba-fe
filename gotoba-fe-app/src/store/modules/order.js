@@ -8,10 +8,12 @@ const state = {
   waitingPaymentData: [],
   orderData: [],
   cartData: [],
+  merchantRestaurantOrder: [],
+  merchantItineraryOrder: [],
 };
 
 const actions = {
-  getCartData({ commit }, res) {
+  setCartData({ commit }, res) {
     commit(Types.SET_CART_DATA, res);
   },
 
@@ -66,6 +68,32 @@ const actions = {
         console.log(err);
       });
   },
+
+  getMerchantItineraryOrder({ commit }, merchantSku) {
+    commit(Types.SET_MERCHANT_ITINERARY_ORDER);
+
+    api.GetJourneyPaymentByMerchant(merchantSku)
+      .then((res) => {
+        commit(Types.SET_MERCHANT_ITINERARY_ORDER, res);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getMerchantRestaurantOrder({ commit }, merchantSku) {
+    commit(Types.SET_MERCHANT_RESTAURANT_ORDER);
+
+    api.GetRestaurantPaymentByMerchant(merchantSku)
+      .then((res) => {
+        commit(Types.SET_MERCHANT_RESTAURANT_ORDER, res);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 const getters = {
@@ -74,6 +102,8 @@ const getters = {
   acceptedPaymentData: (state) => state.acceptedPaymentData,
   waitingPaymentData: (state) => state.waitingPaymentData,
   cancelledPaymentData: (state) => state.cancelledPaymentData,
+  merchantItineraryOrder: (state) => state.merchantItineraryOrder,
+  merchantRestaurantOrder: (state) => state.merchantRestaurantOrder,
 };
 
 const mutations = {
@@ -96,6 +126,14 @@ const mutations = {
 
   [Types.SET_CANCELLED_PAYMENT_DATA](state, res) {
     state.cancelledPaymentData = res;
+  },
+
+  [Types.SET_MERCHANT_ITINERARY_ORDER](state, res) {
+    state.merchantItineraryOrder = res;
+  },
+
+  [Types.SET_MERCHANT_RESTAURANT_ORDER](state, res) {
+    state.merchantRestaurantOrder = res;
   },
 };
 
