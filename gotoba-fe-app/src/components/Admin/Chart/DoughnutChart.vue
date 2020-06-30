@@ -1,23 +1,15 @@
 <script>
-import { Line, mixins } from 'vue-chartjs';
+import { Doughnut, mixins } from 'vue-chartjs';
 
 export default {
-  extends: Line,
-  name: 'LineChart',
+  extends: Doughnut,
+  name: 'DoughnutChart',
   data() {
     return {
       options: {
-        scales: {
-          yAxes: [{
-            ticks: { beginAtZero: true },
-            gridlines: { display: true },
-          }],
-          xAxes: [{
-            gridlines: { display: false },
-          }],
-        },
         legend: {
           display: true,
+          position: 'bottom',
         },
         maintainAspectRatio: false,
       },
@@ -36,12 +28,12 @@ export default {
     },
   },
   methods: {
-    renderLineChart() {
+    renderDoughnutChart() {
       this.renderChart(this.computedData, this.options);
     },
   },
   mounted() {
-    this.renderLineChart();
+    this.renderDoughnutChart();
   },
 };
 </script>

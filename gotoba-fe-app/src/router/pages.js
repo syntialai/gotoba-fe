@@ -35,6 +35,7 @@ const HISTORY_CANCELLED = () => import('../views/User/History/HistoryCancelled.v
 const HISTORY_DETAILS = () => import('../views/User/History/HistoryDetails.vue');
 
 const ADMIN_VIEW = () => import('../views/Admin/Admin.vue');
+const DASHBOARD = () => import('../views/Admin/Dashboard.vue');
 const USER_DATA = () => import('../views/Admin/UserData.vue');
 const MERCHANT_DATA = () => import('../views/Admin/MerchantData.vue');
 const GALLERY_DATA = () => import('../views/Admin/GalleryData.vue');
@@ -97,6 +98,7 @@ export const Pages = {
 
 export const Admin = {
   ADMIN_VIEW,
+  DASHBOARD,
   USER_DATA,
   MERCHANT_DATA,
   GALLERY_DATA,

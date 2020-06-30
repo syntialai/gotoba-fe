@@ -4,7 +4,7 @@
   >
     <div class="d-flex align-items-center text-white">
       <div class="info-icon m-2">
-        <font-awesome-icon class="icon" :icon="info.icon"></font-awesome-icon>
+        <font-awesome-icon class="fa-2x" :icon="info.icon"></font-awesome-icon>
       </div>
       <div class="info-content mr-2">
         <div class="info-title semibold font-size-20">{{ info.title }}</div>

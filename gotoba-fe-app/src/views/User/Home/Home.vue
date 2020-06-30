@@ -48,7 +48,7 @@
         <div class="d-flex content-card overflow-auto mt-1">
           <card-home
             name="Syntia"
-            image="../assets/img/logo.png"
+            image="@/assets/img/logo.png"
             location="Vue js"
             :rating="5.0"
           />
@@ -127,7 +127,7 @@
         <div class="d-flex content-card overflow-auto mt-1">
           <card-home
             name="Syntia"
-            image="../assets/img/logo.png"
+            image="@/assets/img/logo.png"
             location="Vue js"
             :rating="5.0"
           />
