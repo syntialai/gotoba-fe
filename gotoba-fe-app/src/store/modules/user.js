@@ -3,7 +3,7 @@ import * as Types from '../types';
 import api from '../../api/api';
 
 const state = {
-  userLoginStatus: JSON.parse(localStorage.getItem('userLoginStatus')) || false,
+  userLoginStatus: localStorage.getItem('userLoginStatus') || false,
   userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
   merchantData: [],
   userData: [],

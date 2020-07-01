@@ -280,6 +280,7 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
+    redirect: '/admin/dashboard',
     component: Admin.ADMIN_VIEW,
     children: [
       {
@@ -342,6 +343,7 @@ const routes = [
   {
     path: '/merchant',
     name: 'Merchant',
+    redirect: '/merchant/order-list',
     component: Merchant.MERCHANT_VIEW,
     children: [
       {
@@ -409,6 +411,11 @@ const routes = [
     meta: {
       layout: 'default-back',
     },
+  },
+  {
+    path: '/merchant/scan/result',
+    name: 'Scan Result',
+    component: Merchant.MERCHANT_SCAN_RESULT,
   },
   {
     path: '/merchant/spot/promotion/:sku',

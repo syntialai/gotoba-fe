@@ -57,6 +57,7 @@ const MERCHANT_BISTRO_EDIT = () => import('../views/Merchant/Bistro/EditBistro.v
 const MERCHANT_BISTRO_REVIEW = () => import('../views/Merchant/Bistro/BistroReview.vue');
 const MERCHANT_BISTRO_PROMOTION = () => import('../views/Merchant/Bistro/BistroPromotion.vue');
 const MERCHANT_SCANNER = () => import('../views/Merchant/Scanner/QrScanner.vue');
+const MERCHANT_SCAN_RESULT = () => import('../views/Merchant/Scanner/ScanResult.vue');
 
 export const NOT_FOUND = () => import('../views/Error/NotFound.vue');
 
@@ -122,4 +123,5 @@ export const Merchant = {
   MERCHANT_BISTRO_REVIEW,
   MERCHANT_BISTRO_PROMOTION,
   MERCHANT_SCANNER,
+  MERCHANT_SCAN_RESULT,
 };
