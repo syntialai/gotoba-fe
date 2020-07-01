@@ -1,33 +1,31 @@
 <template>
-  <div
-    id="scan-result"
-    class="bg-color-primary d-flex flex-column justify-content-around
-    align-content-center py-4 min-vh-100"
-  >
-    <div class="title text-white bold font-size-32 d-block align-center">
-      QR Code Result
-    </div>
+  <div class="scan-result">
+    <card-scan-result class="mt-3" :result="ticketData" />
 
-    <div class="close">
-      <b-button
-        block
-        variant="link"
-        class="text-white font-size-32"
-        href="/my-tickets"
-      >
-        <p><b-icon icon="x"></b-icon></p>
-      </b-button>
-    </div>
+    <b-button
+      block
+      :disabled="ticketData.status !== 'Available'"
+      class="m-3"
+    >
+      USE TICKET
+    </b-button>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+import CardScanResult from '../../../components/Merchant/Card/CardScanResult.vue';
 
 export default {
   name: 'ScanResult',
+  components: {
+    CardScanResult,
+  },
   computed: {
     ...mapGetters(['ticketData']),
+  },
+  methods: {
+    ...mapActions([]),
   },
 };
 </script>
