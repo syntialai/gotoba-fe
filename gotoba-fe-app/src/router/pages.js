@@ -52,6 +52,7 @@ const MERCHANT_ORDER_LIST = () => import('../views/Merchant/Order/OrderList.vue'
 const MERCHANT_PROFILE = () => import('../views/Merchant/Profile/Profile.vue');
 const MERCHANT_SPOT = () => import('../views/Merchant/Spot/Spot.vue');
 const MERCHANT_SPOT_DETAIL = () => import('../views/Merchant/Spot/SpotDetail.vue');
+const MERCHANT_SPOT_EDIT = () => import('../views/Merchant/Spot/EditSpot.vue');
 const MERCHANT_SPOT_PROMOTION = () => import('../views/Merchant/Spot/SpotPromotion.vue');
 const MERCHANT_BISTRO = () => import('../views/Merchant/Bistro/Bistro.vue');
 const MERCHANT_BISTRO_EDIT = () => import('../views/Merchant/Bistro/EditBistro.vue');
@@ -119,6 +120,7 @@ export const Merchant = {
   MERCHANT_PROFILE,
   MERCHANT_SPOT,
   MERCHANT_SPOT_DETAIL,
+  MERCHANT_SPOT_EDIT,
   MERCHANT_SPOT_PROMOTION,
   MERCHANT_BISTRO,
   MERCHANT_BISTRO_EDIT,

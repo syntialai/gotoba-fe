@@ -426,6 +426,14 @@ const routes = [
     },
   },
   {
+    path: '/merchant/spot/:sku/edit',
+    name: 'Edit Spot',
+    component: Merchant.MERCHANT_SPOT_EDIT,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
     path: '/merchant/spot/promotion/:sku',
     name: 'Spot Promotion',
     component: Merchant.MERCHANT_SPOT_PROMOTION,
