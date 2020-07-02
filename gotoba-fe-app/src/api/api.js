@@ -79,8 +79,11 @@ export default {
   Signup(params) {
     return fetchPost('/auth/signup', params);
   },
-  UpdateProfile(params) {
-    return fetchPost('/user', params);
+  Logout() {
+    return fetchPost('/logout');
+  },
+  GetImage(imageName) {
+    return fetchGet(`/image/${imageName}`);
   },
 
   /**
@@ -116,6 +119,13 @@ export default {
   },
   EditMerchant(sku, params) {
     return fetchPut(`/merchant/edit/${sku}`, params);
+  },
+
+  /**
+   * Admin
+   */
+  GetAdmin(sku) {
+    return fetchGet(`/admin/${sku}`);
   },
 
   /**
@@ -196,6 +206,9 @@ export default {
   GetTourGuideBySku(sku) {
     return fetchGet(`/tour-guide/${sku}`);
   },
+  GetTourGuideByName(name) {
+    return fetchGet(`/tour-guide/name/${name}`);
+  },
   PostTourGuide(params) {
     return fetchPost('/tour-guide/add', params);
   },
@@ -215,30 +228,40 @@ export default {
   GetReviewBySkuAndRating(sku, rate) {
     return fetchGet(`/review/${sku}/${rate}`);
   },
-  GetReviewById(id) {
-    return fetchGet(`/review/${id}`);
+  GetReviewBySkuAndId(sku, id) {
+    return fetchGet(`/review/${sku}/id/${id}`);
   },
-  PostReview(sku, params) {
-    return fetchPost(`/review/${sku}/add`, params);
+  PostItineraryReview(sku, userSku, params) {
+    return fetchPost(`/review/${sku}/user/${userSku}/add/wisata`, params);
+  },
+  PostRestaurantReview(sku, userSku, params) {
+    return fetchPost(`/review/${sku}/user/${userSku}/add/restaurant`, params);
   },
 
   /**
    * Travelling Schedule
    */
-  GetTravellingSchedule(sku) {
-    return fetchGet(`/schedule/${sku}`);
+  GetTravellingSchedule(userSku) {
+    return fetchGet(`/schedule/${userSku}`);
   },
   GetTravellingScheduleById(id) {
     return fetchGet(`/schedule/detail/${id}`);
   },
-  PostTravellingSchedule(sku, params) {
-    return fetchPost(`/schedule/${sku}/add/`, params);
+  PostTravellingSchedule(userSku, params) {
+    return fetchPost(`/schedule/${userSku}/add/`, params);
   },
   EditTravellingSchedule(id, params) {
     return fetchPut(`/schedule/edit/${id}`, params);
   },
   RemoveTravellingSchedule(id) {
     return fetchPut(`/schedule/delete/${id}`);
+  },
+
+  /**
+   * Location
+   */
+  GetNearByLocation(long, lat) {
+    return fetchGet(`/nearBy/${long}/${lat}`);
   },
 
   /**
