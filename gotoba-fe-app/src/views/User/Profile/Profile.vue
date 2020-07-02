@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { alert } from '../../../utils/tool';
 import CardProfileUser from '../../../components/User/Profile/CardProfileUser.vue';
 import ProfileMenuGroup from '../../../components/User/Profile/ProfileMenuGroup.vue';
@@ -64,6 +64,9 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    ...mapActions(['setLogOut']),
   },
 };
 </script>

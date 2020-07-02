@@ -2,11 +2,50 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Main from '../views/User/Main.vue';
 import Home from '../views/User/Home/Home.vue';
+import index from '../store/index';
 import {
   Pages, Admin, Merchant, NOT_FOUND,
 } from './pages';
 
 Vue.use(VueRouter);
+
+function checkAdminRole(to, from, next) {
+  const role = index.getters('userRole');
+
+  if (role === 'admin') {
+    next();
+  } else if (role === 'merchant') {
+    next('/merchant');
+  } else {
+    next('/');
+  }
+}
+
+function checkMerchantRole(to, from, next) {
+  const role = index.getters('userRole');
+
+  if (role === 'merchant') {
+    next();
+  } else if (role === 'admin') {
+    next('/admin');
+  } else {
+    next('/');
+  }
+}
+
+function checkUserRole(to, from, next) {
+  const role = index.getters('userRole');
+
+  if (role === 'user') {
+    next();
+  } else if (role === 'merchant') {
+    next('/merchant');
+  } else if (role === 'admin') {
+    next('/admin');
+  } else {
+    next('/login');
+  }
+}
 
 const routes = [
   {
@@ -33,6 +72,7 @@ const routes = [
       {
         path: 'my-tickets',
         name: 'My Tickets',
+        beforeEnter: checkUserRole,
         component: Pages.MY_TICKETS,
         children: [
           {
@@ -65,6 +105,7 @@ const routes = [
       {
         path: 'profile',
         name: 'Profile',
+        beforeEnter: checkUserRole,
         component: Pages.PROFILE,
         meta: {
           layout: 'background-blue',
@@ -180,16 +221,19 @@ const routes = [
   {
     path: '/itinerary/add/show-on-map',
     name: 'Set Destination',
+    beforeEnter: checkUserRole,
     component: Pages.ADD_DESTINATION,
   },
   {
     path: '/my-tickets/:sku',
     name: 'QR Code',
+    beforeEnter: checkUserRole,
     component: Pages.SHOW_QR_CODE,
   },
   {
     path: '/payment/:sku',
     name: 'Payment Process',
+    beforeEnter: checkUserRole,
     component: Pages.PAYMENT,
     meta: {
       layout: 'default-back',
@@ -198,6 +242,7 @@ const routes = [
   {
     path: '/order/thankyou/:sku',
     name: 'Payment Order',
+    beforeEnter: checkUserRole,
     component: Pages.PAYMENT_ORDER,
     meta: {
       layout: 'default-back',
@@ -206,6 +251,7 @@ const routes = [
   {
     path: '/profile/edit',
     name: 'Edit Profile',
+    beforeEnter: checkUserRole,
     component: Pages.EDIT_PROFILE,
     meta: {
       layout: 'default-back',
@@ -214,6 +260,7 @@ const routes = [
   {
     path: '/history',
     name: 'History',
+    beforeEnter: checkUserRole,
     component: Pages.HISTORY,
     children: [
       {
@@ -248,6 +295,7 @@ const routes = [
   {
     path: '/history/details/:sku',
     name: 'History Details',
+    beforeEnter: checkUserRole,
     component: Pages.HISTORY_DETAILS,
     meta: {
       layout: 'default-back',
@@ -280,6 +328,7 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
+    beforeEnter: checkAdminRole,
     redirect: '/admin/dashboard',
     component: Admin.ADMIN_VIEW,
     children: [
@@ -343,6 +392,7 @@ const routes = [
   {
     path: '/merchant',
     name: 'Merchant',
+    beforeEnter: checkMerchantRole,
     redirect: '/merchant/order-list',
     component: Merchant.MERCHANT_VIEW,
     children: [
@@ -383,6 +433,7 @@ const routes = [
   {
     path: '/merchant/bistro/edit',
     name: 'Edit Bistro',
+    beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_BISTRO_EDIT,
     meta: {
       layout: 'default-back',
@@ -391,6 +442,7 @@ const routes = [
   {
     path: '/merchant/bistro/review',
     name: 'Bistro Review',
+    beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_BISTRO_REVIEW,
     meta: {
       layout: 'default-back',
@@ -399,6 +451,7 @@ const routes = [
   {
     path: '/merchant/bistro/promotion/:sku',
     name: 'Bistro Promotion',
+    beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_BISTRO_PROMOTION,
     meta: {
       layout: 'default-back',
@@ -407,6 +460,7 @@ const routes = [
   {
     path: '/merchant/scan',
     name: 'Scan',
+    beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_SCANNER,
     meta: {
       layout: 'default-back',
@@ -415,11 +469,13 @@ const routes = [
   {
     path: '/merchant/scan/result',
     name: 'Scan Result',
+    beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_SCAN_RESULT,
   },
   {
     path: '/merchant/spot/:sku',
     name: 'Spot Profile',
+    beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_SPOT_DETAIL,
     meta: {
       layout: 'default-back',
@@ -428,6 +484,7 @@ const routes = [
   {
     path: '/merchant/spot/:sku/edit',
     name: 'Edit Spot',
+    beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_SPOT_EDIT,
     meta: {
       layout: 'default-back',
@@ -436,6 +493,7 @@ const routes = [
   {
     path: '/merchant/spot/promotion/:sku',
     name: 'Spot Promotion',
+    beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_SPOT_PROMOTION,
     meta: {
       layout: 'default-back',

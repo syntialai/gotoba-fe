@@ -83,11 +83,14 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import api from '../../api/api';
 
 export default {
   name: 'LoginPage',
+  computed: {
+    ...mapGetters(['userRole']),
+  },
   data() {
     return {
       usernameOrEmail: '',
@@ -115,6 +118,13 @@ export default {
         .then((res) => {
           if (res.success) {
             this.setUserInfo(res);
+
+            if (this.userRole === 'admin') {
+              this.$router.push('/admin');
+            }
+            if (this.userRole === 'merchant') {
+              this.$router.push('/merchant');
+            }
             this.$router.push('');
           }
         })

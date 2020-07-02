@@ -261,7 +261,6 @@ export default {
         password: this.password,
         confirmPassword: this.confirmPassword,
         role: this.role,
-        checked: this.checked[0],
       };
 
       api.Signup(data)
@@ -269,7 +268,11 @@ export default {
           if (res.success) {
             this.setUserInfo(res);
             console.log(res);
-            this.$router.push('/');
+
+            if (this.userRole === 'merchant') {
+              this.$router.push('/merchant');
+            }
+            this.$router.push('');
           }
         })
         .catch((err) => {
