@@ -29,12 +29,24 @@
           label="Photo"
           label-for="itinerary-image"
         >
-          <b-form-file
-            id="itinerary-image"
-            v-model="itinerary.image"
-            required
-            plain
-          ></b-form-file>
+          <div v-if="itinerary.image === null">
+            <b-form-file
+              id="itinerary-image"
+              v-model="itinerary.image"
+              @change="loadImage"
+              accept="image/jpeg, image/jpg, image/png"
+              required
+              plain
+            ></b-form-file>
+          </div>
+          <div v-else>
+            <b-img :src="itinerary.image" center :width="100"></b-img>
+            <b-button
+              size="sm"
+              class="custom-btn-gray mt-2"
+              @click="removePhoto"
+            >Remove photo</b-button>
+          </div>
         </b-form-group>
 
         <b-form-group
@@ -59,9 +71,9 @@
           <b-form-input
             id="itinerary-price"
             v-model="itinerary.price"
+            @input="formatPrice(itinerary.price)"
             type="text"
             class="border-gray"
-            @input="formatPrice(itinerary.price)"
             required
           ></b-form-input>
         </b-form-group>
@@ -85,16 +97,21 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import { formatPrice } from '../../../utils/filter';
+import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
 
 export default {
   name: 'ItineraryModal',
+  computed: {
+    ...mapGetters(['imagePreview']),
+  },
   data() {
     return {
       itinerary: {
         title: '',
-        image: null,
+        image: this.imagePreview,
         location: '',
         price: 0.0,
         description: '',
@@ -108,6 +125,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setImagePreview']),
     formatPrice,
     submitItinerary() {
       const data = {
@@ -115,6 +133,8 @@ export default {
         image: this.itinerary.image,
         description: this.itinerary.description,
       };
+
+      this.setImagePreview(null);
 
       if (this.title === 'Add') {
         api.PostItinerary(data)
@@ -135,6 +155,16 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    loadImage(event) {
+      const { files } = event.target;
+
+      if (files && files[0]) {
+        previewImage(files[0]);
+      }
+    },
+    removePhoto() {
+      this.setImagePreview(null);
     },
   },
 };

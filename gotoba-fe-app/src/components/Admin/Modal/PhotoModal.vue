@@ -33,15 +33,18 @@
             <b-form-file
               id="photo-image"
               v-model="photo.image"
+              @change="loadImage"
+              accept="image/jpeg, image/jpg, image/png"
               required
               plain
             ></b-form-file>
           </div>
           <div v-else>
-            <img :src="photo.image">
+            <b-img :src="imagePreview" center :width="100"></b-img>
             <b-button
-              class="custom-btn-gray"
-              @click="photo.image = null"
+              size="sm"
+              class="custom-btn-gray mt-2"
+              @click="removePhoto"
             >Remove photo</b-button>
           </div>
         </b-form-group>
@@ -65,6 +68,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
 
@@ -74,6 +78,9 @@ export default {
     return {
       photo: this.photos,
     };
+  },
+  computed: {
+    ...mapGetters(['imagePreview']),
   },
   props: {
     title: {
@@ -92,14 +99,17 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setImagePreview']),
     submitPhoto() {
       const data = {
         name: this.photo.title,
         title: this.photo.title,
         description: this.photo.description,
-        image: this.photo.file,
+        image: this.imagePreview,
         show: true,
       };
+
+      this.setImagePreview(null);
 
       if (this.title === 'Add') {
         api.PostGalleryPhoto(data)
@@ -121,7 +131,17 @@ export default {
           console.log(err);
         });
     },
-    previewImage,
+    loadImage(event) {
+      const { files } = event.target;
+
+      if (files && files[0]) {
+        previewImage(files[0]);
+      }
+    },
+    removePhoto() {
+      this.photo.image = null;
+      this.setImagePreview(null);
+    },
   },
 };
 </script>

@@ -29,12 +29,24 @@
           label="Photo"
           label-for="promotion-image"
         >
-          <b-form-file
-            id="promotion-image"
-            v-model="promotion.image"
-            required
-            plain
-          ></b-form-file>
+          <div v-if="promotion.image === null">
+            <b-form-file
+              id="promotion-image"
+              v-model="promotion.image"
+              @change="loadImage"
+              accept="image/jpeg, image/jpg, image/png"
+              required
+              plain
+            ></b-form-file>
+          </div>
+          <div v-else>
+            <b-img :src="promotion.image" center :width="100"></b-img>
+            <b-button
+              size="sm"
+              class="custom-btn-gray mt-2"
+              @click="removePhoto"
+            >Remove photo</b-button>
+          </div>
         </b-form-group>
 
         <b-form-group
@@ -56,13 +68,19 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+import previewImage from '../../../utils/fileHelper';
+
 export default {
   name: 'PromotionModal',
+  computed: {
+    ...mapGetters(['imagePreview']),
+  },
   data() {
     return {
       promotion: {
         title: '',
-        image: null,
+        image: this.imagePreview,
         description: '',
       },
     };
@@ -74,7 +92,24 @@ export default {
     },
   },
   methods: {
-    submitPromotion() {},
+    ...mapActions(['setImagePreview']),
+    submitPromotion() {
+      const data = this.promotion;
+
+      this.setImagePreview(null);
+
+      console.log(data);
+    },
+    loadImage(event) {
+      const { files } = event.target;
+
+      if (files && files[0]) {
+        previewImage(files[0]);
+      }
+    },
+    removePhoto() {
+      this.setImagePreview(null);
+    },
   },
 };
 </script>

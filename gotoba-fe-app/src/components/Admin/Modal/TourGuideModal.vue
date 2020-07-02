@@ -25,6 +25,31 @@
         </b-form-group>
 
         <b-form-group
+          id="tour-guide-image-group"
+          label="Photo"
+          label-for="tour-guide-image"
+        >
+          <div v-if="tourGuide.image === null">
+            <b-form-file
+              id="photo-image"
+              v-model="tourGuide.image"
+              @change="loadImage"
+              accept="image/jpeg, image/jpg, image/png"
+              required
+              plain
+            ></b-form-file>
+          </div>
+          <div v-else>
+            <b-img :src="tourGuide.image" center :width="100"></b-img>
+            <b-button
+              size="sm"
+              class="custom-btn-gray mt-2"
+              @click="removePhoto"
+            >Remove photo</b-button>
+          </div>
+        </b-form-group>
+
+        <b-form-group
           id="tour-guide-born-date-group"
           label="Born Date"
           label-for="tour-guide-born-date"
@@ -190,14 +215,20 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
 
 export default {
   name: 'TourGuideModal',
+  computed: {
+    ...mapGetters(['imagePreview']),
+  },
   data() {
     return {
       tourGuide: {
         name: '',
+        image: this.imagePreview,
         bornDate: Date(),
         gender: '',
         occupation: '',
@@ -219,6 +250,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setImagePreview']),
     submitTourGuide() {
       const data = this.tourGuide;
 
@@ -242,6 +274,16 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    loadImage(event) {
+      const { files } = event.target;
+
+      if (files && files[0]) {
+        previewImage(files[0]);
+      }
+    },
+    removePhoto() {
+      this.setImagePreview(null);
     },
   },
 };

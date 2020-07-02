@@ -6,6 +6,7 @@ export const SHOW_TOAST = 'SHOW_TOAST';
 export const SET_ALERT_MESSAGE = 'SET_ALERT_MESSAGE';
 export const SET_ALERT_SUCCESS = 'SET_ALERT_SUCCESS';
 export const SET_TOAST_MESSAGE = 'SET_TOAST_MESSAGE';
+export const SET_IMAGE_PREVIEW = 'SET_IMAGE_PREVIEW';
 
 /**
  * Search

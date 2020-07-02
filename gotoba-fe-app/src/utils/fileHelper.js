@@ -1,17 +1,16 @@
+import index from '../store/index';
+
 /**
  * Preview Image procedure from input file
  *
  * @param {File} file
+ * @returns image in base64 format
  */
 function previewImage(file) {
-  // const files = event.target.files || event.dataTransfer.files;
-  if (!file.length) {
-    return;
-  }
-
   const reader = new FileReader();
+
   reader.onload = (e) => {
-    this.image = e.target.result;
+    index.dispatch('setImagePreview', e.target.result);
   };
 
   reader.readAsDataURL(file);
