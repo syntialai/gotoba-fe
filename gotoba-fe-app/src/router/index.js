@@ -418,6 +418,14 @@ const routes = [
     component: Merchant.MERCHANT_SCAN_RESULT,
   },
   {
+    path: '/merchant/spot/:sku',
+    name: 'Spot Profile',
+    component: Merchant.MERCHANT_SPOT_DETAIL,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
     path: '/merchant/spot/promotion/:sku',
     name: 'Spot Promotion',
     component: Merchant.MERCHANT_SPOT_PROMOTION,
