@@ -328,7 +328,7 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
-    beforeEnter: checkAdminRole,
+    // beforeEnter: checkAdminRole,
     redirect: '/admin/dashboard',
     component: Admin.ADMIN_VIEW,
     children: [

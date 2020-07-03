@@ -28,18 +28,18 @@ body, .background {
   top: 0;
   background: $blue-gradient;
   width: 100%;
-  height: 170px;
+  height: 150px;
 }
 
 @media screen and (min-width: 426px) {
   .background {
-    height: 200px;
+    height: 13%;
   }
 }
 
 @media screen and (min-width: 768px) {
   .background {
-    height: 230px;
+    height: 16%;
   }
 }
 

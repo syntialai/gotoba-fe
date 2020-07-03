@@ -1,0 +1,23 @@
+@import '../abstracts/variables';
+
+.sidebar {
+  z-index: 500;
+}
+
+a.sidebar-link {
+  border: none;
+  background-color: white;
+  color: $gray!important;
+  text-decoration: none!important;
+
+  &.active {
+    background-color: $bg-color!important;
+    color: $blue-primary!important;
+    font-weight: bold;
+
+    .sidebar-border {
+      border-left: 3px solid $blue-primary!important;
+      padding-left: 5px!important;
+    }
+  }
+}

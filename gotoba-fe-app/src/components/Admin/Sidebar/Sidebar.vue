@@ -1,38 +1,37 @@
 <template>
-  <div class="sidebar h-100 position-fixed z1 box-shadow">
-    <b-button
-      variant="light"
-      class="p-3"
-      @click="minimized = !minimized; pictSize = 50 + minimized * 50"
-    >
-      <font-awesome-icon
-        icon="bars"
-        class="icon-blue-primary fa-2x"
-      />
-    </b-button>
-    <transition name="width">
-      <aside id="sidebar-admin" class="bg-white" shadow>
-        <div class="sidebar__profile py-3">
-          <b-avatar
-            src=""
-            :size="pictSize + 'px'"
-            class="ml-2"
-          ></b-avatar>
-        </div>
-        <ul class="sidebar__menu px-2 m-0">
-          <li class="sidebar-link-group">
-            <sidebar-item
-              v-for="(menu, key) in menus"
-              :key="key"
-              :minimized="minimized"
-              :icon="menu.icon"
-              :title="menu.title"
-              :to="menu.link"
-            />
-          </li>
-        </ul>
-      </aside>
-    </transition>
+  <div class="sidebar h-100 position-fixed box-shadow">
+    <aside id="sidebar-admin" class="bg-white" shadow>
+      <b-button
+        variant="link"
+        class="pt-3 py-3 pb-0 bg-white"
+        @click="setPictSize"
+      >
+        <font-awesome-icon
+          icon="bars"
+          class="icon-blue-primary font-size-24"
+        />
+      </b-button>
+
+      <div class="sidebar__profile d-flex justify-content-center">
+        <b-avatar
+          src=""
+          :size="pictSize + 'px'"
+          class="my-3"
+        ></b-avatar>
+      </div>
+      <ul class="sidebar__menu p-0 mt-2">
+        <li class="sidebar-link-group">
+          <sidebar-item
+            v-for="(menu, key) in menus"
+            :key="key"
+            :minimized="minimized"
+            :icon="menu.icon"
+            :title="menu.title"
+            :to="menu.link"
+          />
+        </li>
+      </ul>
+    </aside>
   </div>
 </template>
 
@@ -47,12 +46,12 @@ export default {
   data() {
     return {
       minimized: true,
-      pictSize: 50,
+      pictSize: 40,
       menus: [
         {
           icon: 'tachometer-alt',
           title: 'Dashboard',
-          link: '/admin/',
+          link: '/admin/dashboard',
         },
         {
           icon: 'users',
@@ -80,33 +79,18 @@ export default {
           link: '/admin/restaurant',
         },
         {
-          icon: 'store',
+          icon: 'user-cog',
           title: 'Settings',
           link: '/admin/settings',
         },
       ],
     };
   },
+  methods: {
+    setPictSize() {
+      this.pictSize = 40 + this.minimized * 40;
+      this.minimized = !this.minimized;
+    },
+  },
 };
 </script>
-
-<style lang="scss" scoped>
-.width-enter-active, .width-leave-active {
-  transition: width 0.5s;
-  z-index: 1;
-}
-
-.width-enter {
-  &-active {
-    width: 25%;
-  }
-
-  &-leave {
-    width: 64px;
-  }
-}
-
-#sidebar-admin {
-  width: 64px;
-}
-</style>

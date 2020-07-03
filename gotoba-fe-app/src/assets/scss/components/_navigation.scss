@@ -3,6 +3,7 @@
 .nav-tabs .nav-link {
   color: $black-60!important;
   border: none!important;
+  text-decoration: none!important;
 
   &.active {
     color: $blue-secondary!important;
