@@ -7,6 +7,7 @@ const state = {
   cancelledPaymentData: [],
   waitingPaymentData: [],
   orderData: [],
+  orderTotal: { item: 0, price: 0 },
   cartData: [],
   merchantRestaurantOrder: [],
   merchantItineraryOrder: [],
@@ -15,6 +16,12 @@ const state = {
 const actions = {
   setCartData({ commit }, res) {
     commit(Types.SET_CART_DATA, res);
+    commit(Types.SET_ORDER_TOTAL);
+  },
+
+  selectAllCartData({ commit }, select) {
+    commit(Types.SET_CART_DATA_ALL_CHECKED_OR_UNCHECKED, select);
+    commit(Types.SET_ORDER_TOTAL);
   },
 
   getOrderData({ commit }, sku) {
@@ -98,6 +105,7 @@ const actions = {
 
 const getters = {
   orderData: (state) => state.orderData,
+  orderTotal: (state) => state.orderTotal,
   cartData: (state) => state.cartData,
   acceptedPaymentData: (state) => state.acceptedPaymentData,
   waitingPaymentData: (state) => state.waitingPaymentData,
@@ -110,6 +118,30 @@ const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.SET_CART_DATA](state, res) {
     state.cartData = res;
+  },
+
+  [Types.SET_CART_DATA_ALL_CHECKED_OR_UNCHECKED](state, select) {
+    const newCartData = state.cartData.map((item) => {
+      const cartTmp = { ...item };
+      cartTmp.selected = select;
+
+      return cartTmp;
+    });
+
+    state.cartData = newCartData;
+  },
+
+  [Types.SET_ORDER_TOTAL](state) {
+    let totalItem = 0;
+    let totalPrice = 0;
+
+    state.cartData.forEach((data) => {
+      totalItem += data.quantity * data.selected;
+      totalPrice += data.price * data.quantity * data.selected;
+    });
+
+    state.orderTotal.item = totalItem;
+    state.orderTotal.price = totalPrice;
   },
 
   [Types.SET_ORDER_DATA](state, res) {

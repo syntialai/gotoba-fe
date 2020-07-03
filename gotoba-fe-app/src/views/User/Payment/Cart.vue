@@ -1,57 +1,80 @@
 <template>
   <div class="cart min-vh-100 position-relative bg-color-main">
-    <div class="order-items p-2 bg-white">
+    <div class="order-items px-3 bg-white">
       <div
-        class="w-100 border-bottom-gray-young d-flex justify-content-between p-3"
+        class="border-bottom-gray-young d-flex justify-content-between py-2"
       >
         <div class="title font-size-20 bold">Order Item(s)</div>
         <div class="select-all font-color-black-60">
-          <a href="">Select all</a>
+          <b-button
+            variant="link"
+            class="font-color-blue-primary py-0"
+            @click="checkAll"
+          >
+            Select all
+          </b-button>
         </div>
       </div>
-      <div class="order-items-group">
+      <div class="order-items-group w-100 py-3">
         <div class="order-item-detail"
-          v-for="item in items"
+          v-for="item in cartData"
           :key="item.name"
         >
-          <b-form-checkbox>
-            <div class="order-item-info">
-              <order-items
-                :name="item.name"
-                :image="item.image"
-                :price="item.price"
-                :discountPrice="item.discountPrice"
-              />
-              <b-form-spinbutton id="item" v-model="itemCount" min="1" max="100" />
-            </div>
+          <b-form-checkbox
+            class="w-100"
+            v-model="item.selected"
+          >
+            <cart-item
+              :name="item.name"
+              :image="item.image"
+              :price="item.price"
+              :discountPrice="item.discountPrice"
+              :quantity.sync="item.quantity"
+            />
           </b-form-checkbox>
         </div>
       </div>
     </div>
 
     <bottom-nav-payment
-      :totalItem="1"
-      :totalPrice="100000"
+      :totalItem="orderTotal.item"
+      :totalPrice="orderTotal.price"
       innerButton="CHECKOUT"
     />
   </div>
 </template>
 
 <script>
-import OrderItems from '../../../components/User/OrderItems.vue';
+import { mapActions, mapGetters } from 'vuex';
+import CartItem from '../../../components/User/Payment/CartItem.vue';
 import BottomNavPayment from '../../../components/User/Payment/BottomNavPayment.vue';
 
 export default {
   name: 'Cart',
   components: {
-    OrderItems,
+    CartItem,
     BottomNavPayment,
+  },
+  computed: {
+    ...mapGetters(['cartData', 'orderTotal']),
   },
   data() {
     return {
-      itemCount: 1,
-      items: {},
+      select: false,
     };
+  },
+  methods: {
+    ...mapActions(['setOrderData', 'selectAllCartData']),
+    checkAll() {
+      this.select = !this.select;
+      this.selectAllCartData(this.select);
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.custom-control-label {
+  width: 100%!important;
+}
+</style>
