@@ -40,7 +40,11 @@
             ></b-form-file>
           </div>
           <div v-else>
-            <b-img :src="imagePreview" center :width="100"></b-img>
+            <b-img
+              :src="imagePreview"
+              center
+              :width="100"
+            ></b-img>
             <b-button
               size="sm"
               class="custom-btn-gray mt-2"

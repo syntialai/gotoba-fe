@@ -3,12 +3,11 @@
 .nav-tabs .nav-link {
   color: $black-60!important;
   border: none!important;
-  text-decoration: none!important;
 
   &.active {
     color: $blue-secondary!important;
     font-weight: bold;
-    border-bottom: 2px solid $blue-secondary!important;
+    border-bottom: 2px solid #24A4FB!important;
     box-shadow: $box-shadow;
   }
 }
@@ -31,9 +30,9 @@
 
   & a {
     color: $gray!important;
+  }
 
-    &.active {
-      color: $blue-primary!important;
-    }
+  &.active {
+    color: $blue-primary!important;
   }
 }

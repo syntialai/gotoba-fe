@@ -7,7 +7,7 @@ const state = {
   cancelledPaymentData: [],
   waitingPaymentData: [],
   orderData: [],
-  orderTotal: { item: 0, price: 0 },
+  orderTotal: { item: 0, price: 0, discount: 0 },
   cartData: [],
   merchantRestaurantOrder: [],
   merchantItineraryOrder: [],
@@ -134,14 +134,17 @@ const mutations = {
   [Types.SET_ORDER_TOTAL](state) {
     let totalItem = 0;
     let totalPrice = 0;
+    let totalDiscount = 0;
 
     state.cartData.forEach((data) => {
       totalItem += data.quantity * data.selected;
       totalPrice += data.price * data.quantity * data.selected;
+      totalDiscount += data.discount * data.quantity * data.selected;
     });
 
     state.orderTotal.item = totalItem;
     state.orderTotal.price = totalPrice;
+    state.orderTotal.discount = totalDiscount;
   },
 
   [Types.SET_ORDER_DATA](state, res) {

@@ -38,7 +38,7 @@
 
     <bottom-nav-payment
       :totalItem="orderTotal.item"
-      :totalPrice="orderTotal.price"
+      :totalPrice="orderTotal.price - orderTotal.discount"
       innerButton="CHECKOUT"
     />
   </div>
