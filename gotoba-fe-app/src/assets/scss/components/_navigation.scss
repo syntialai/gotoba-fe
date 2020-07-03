@@ -7,7 +7,7 @@
   &.active {
     color: $blue-secondary!important;
     font-weight: bold;
-    border-bottom: 2px solid #24A4FB!important;
+    border-bottom: 2px solid $blue-secondary!important;
     box-shadow: $box-shadow;
   }
 }
@@ -23,4 +23,16 @@
 
 .bottom-nav-payment__navbar {
   margin-bottom: 80px!important;
+}
+
+#bottom-nav {
+  margin: 0 auto;
+
+  & a {
+    color: $gray!important;
+
+    &.active {
+      color: $blue-primary!important;
+    }
+  }
 }
