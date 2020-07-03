@@ -9,17 +9,17 @@ import {
 
 Vue.use(VueRouter);
 
-function checkAdminRole(to, from, next) {
-  const role = index.getters('userRole');
+// function checkAdminRole(to, from, next) {
+//   const role = index.getters('userRole');
 
-  if (role === 'admin') {
-    next();
-  } else if (role === 'merchant') {
-    next('/merchant');
-  } else {
-    next('/');
-  }
-}
+//   if (role === 'admin') {
+//     next();
+//   } else if (role === 'merchant') {
+//     next('/merchant');
+//   } else {
+//     next('/');
+//   }
+// }
 
 function checkMerchantRole(to, from, next) {
   const role = index.getters('userRole');

@@ -29,7 +29,7 @@
           label="Photo"
           label-for="photo-image"
         >
-          <div v-if="photo.image === null">
+          <div v-if="image === null">
             <b-form-file
               id="photo-image"
               v-model="photo.image"
@@ -41,7 +41,7 @@
           </div>
           <div v-else>
             <b-img
-              :src="imagePreview"
+              :src="image"
               center
               :width="100"
             ></b-img>
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
 
@@ -81,10 +81,11 @@ export default {
   data() {
     return {
       photo: this.photos,
+      image: null,
     };
   },
   computed: {
-    ...mapGetters(['imagePreview']),
+    ...mapGetters(['galleryPhoto']),
   },
   props: {
     title: {
@@ -103,17 +104,14 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setImagePreview']),
     submitPhoto() {
       const data = {
         name: this.photo.title,
         title: this.photo.title,
         description: this.photo.description,
-        image: this.imagePreview,
+        image: this.image,
         show: true,
       };
-
-      this.setImagePreview(null);
 
       if (this.title === 'Add') {
         api.PostGalleryPhoto(data)
@@ -135,16 +133,22 @@ export default {
           console.log(err);
         });
     },
+
     loadImage(event) {
       const { files } = event.target;
 
       if (files && files[0]) {
-        previewImage(files[0]);
+        previewImage(files[0])
+          .then((res) => {
+            this.image = res;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
     removePhoto() {
       this.photo.image = null;
-      this.setImagePreview(null);
     },
   },
 };

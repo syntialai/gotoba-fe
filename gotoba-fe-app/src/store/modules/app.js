@@ -7,7 +7,6 @@ const state = {
   alertMessage: '',
   alertSuccess: false,
   toastMessage: '',
-  imagePreview: null,
 };
 
 const actions = {
@@ -26,15 +25,11 @@ const actions = {
   setToastMessage({ commit }, message) {
     commit(Types.SET_TOAST_MESSAGE, message);
   },
-  setImagePreview({ commit }, image) {
-    commit(Types.SET_IMAGE_PREVIEW, image);
-  },
 };
 
 const getters = {
   showToast: (state) => state.showToast,
   showAlert: (state) => state.showAlert,
-  imagePreview: (state) => state.imagePreview,
 };
 
 const mutations = {
@@ -52,9 +47,6 @@ const mutations = {
   },
   [Types.SET_TOAST_MESSAGE](state, res) {
     state.toastMessage = res;
-  },
-  [Types.SET_IMAGE_PREVIEW](state, res) {
-    state.imagePreview = res;
   },
 };
 

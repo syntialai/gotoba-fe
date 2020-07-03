@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import { formatPrice } from '../../../utils/filter';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
@@ -105,13 +105,13 @@ import api from '../../../api/api';
 export default {
   name: 'ItineraryModal',
   computed: {
-    ...mapGetters(['imagePreview']),
+    ...mapGetters(['journeyData']),
   },
   data() {
     return {
       itinerary: {
         title: '',
-        image: this.imagePreview,
+        image: null,
         location: '',
         price: 0.0,
         description: '',
@@ -125,7 +125,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setImagePreview']),
     formatPrice,
     submitItinerary() {
       const data = {
@@ -133,8 +132,6 @@ export default {
         image: this.itinerary.image,
         description: this.itinerary.description,
       };
-
-      this.setImagePreview(null);
 
       if (this.title === 'Add') {
         api.PostItinerary(data)
@@ -160,11 +157,17 @@ export default {
       const { files } = event.target;
 
       if (files && files[0]) {
-        previewImage(files[0]);
+        previewImage(files[0])
+          .then((res) => {
+            this.itinerary.image = res;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
     removePhoto() {
-      this.setImagePreview(null);
+      this.itinerary.image = null;
     },
   },
 };

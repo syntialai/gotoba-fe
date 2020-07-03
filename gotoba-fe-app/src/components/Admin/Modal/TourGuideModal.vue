@@ -215,20 +215,20 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
 
 export default {
   name: 'TourGuideModal',
   computed: {
-    ...mapGetters(['imagePreview']),
+    ...mapGetters(['tourGuideData']),
   },
   data() {
     return {
       tourGuide: {
         name: '',
-        image: this.imagePreview,
+        image: null,
         bornDate: Date(),
         gender: '',
         occupation: '',
@@ -250,9 +250,8 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setImagePreview']),
     submitTourGuide() {
-      const data = this.tourGuide;
+      const data = { ...this.tourGuide };
 
       if (this.title === 'Add') {
         api.PostTourGuide(data)
@@ -279,11 +278,17 @@ export default {
       const { files } = event.target;
 
       if (files && files[0]) {
-        previewImage(files[0]);
+        previewImage(files[0])
+          .then((res) => {
+            this.tourGuide.image = res;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
     removePhoto() {
-      this.setImagePreview(null);
+      this.tourGuide.image = null;
     },
   },
 };

@@ -1,19 +1,23 @@
-import index from '../store/index';
-
 /**
- * Preview Image procedure from input file
+ * Preview Image function from input file
  *
  * @param {File} file
- * @returns image in base64 format
+ * @returns Promise to get image in base64 format
  */
 function previewImage(file) {
-  const reader = new FileReader();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
 
-  reader.onload = (e) => {
-    index.dispatch('setImagePreview', e.target.result);
-  };
+    reader.onload = (e) => {
+      resolve(e.target.result);
+    };
 
-  reader.readAsDataURL(file);
+    reader.onerror = () => {
+      reject(reader.err);
+    };
+
+    reader.readAsDataURL(file);
+  });
 }
 
 export default previewImage;

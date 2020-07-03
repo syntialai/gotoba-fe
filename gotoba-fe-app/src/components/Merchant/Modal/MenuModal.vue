@@ -79,14 +79,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
 
 export default {
   name: 'MenuModal',
   computed: {
-    ...mapGetters(['imagePreview']),
+    ...mapGetters(['restaurantMenu']),
   },
   props: {
     title: {
@@ -99,14 +99,13 @@ export default {
       menu: {
         id: '',
         name: '',
-        image: this.imagePreview,
+        image: null,
         category: '',
         price: 0.0,
       },
     };
   },
   methods: {
-    ...mapActions(['setImagePreview']),
     submitMenu() {
       const data = {
         name,
@@ -137,15 +136,23 @@ export default {
           console.log(err);
         });
     },
+
     loadImage(event) {
       const { files } = event.target;
 
       if (files && files[0]) {
-        previewImage(files[0]);
+        previewImage(files[0])
+          .then((res) => {
+            this.menu.image = res;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
+
     removePhoto() {
-      this.setImagePreview(null);
+      this.menu.image = null;
     },
   },
 };

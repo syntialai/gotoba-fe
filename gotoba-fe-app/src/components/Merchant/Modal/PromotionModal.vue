@@ -68,19 +68,15 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
 import previewImage from '../../../utils/fileHelper';
 
 export default {
   name: 'PromotionModal',
-  computed: {
-    ...mapGetters(['imagePreview']),
-  },
   data() {
     return {
       promotion: {
         title: '',
-        image: this.imagePreview,
+        image: null,
         description: '',
       },
     };
@@ -92,23 +88,27 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setImagePreview']),
     submitPromotion() {
-      const data = this.promotion;
-
-      this.setImagePreview(null);
+      const data = { ...this.promotion };
 
       console.log(data);
     },
+
     loadImage(event) {
       const { files } = event.target;
 
       if (files && files[0]) {
-        previewImage(files[0]);
+        previewImage(files[0])
+          .then((res) => {
+            this.promotion.image = res;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
     removePhoto() {
-      this.setImagePreview(null);
+      this.promotion.image = null;
     },
   },
 };
