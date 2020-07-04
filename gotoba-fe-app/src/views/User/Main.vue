@@ -28,7 +28,7 @@ export default {
           id: 1, name: 'Home', icon: 'home', link: '/',
         },
         {
-          id: 2, name: 'Itinerary', icon: 'route', link: '/my-itinerary',
+          id: 2, name: 'Itinerary', icon: 'route', link: '/itinerary',
         },
         {
           id: 3, name: 'My tickets', icon: 'qrcode', link: '/my-tickets',

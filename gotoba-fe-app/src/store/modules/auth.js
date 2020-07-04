@@ -4,13 +4,13 @@ import api from '../../api/api';
 
 const state = {
   userLoginStatus: localStorage.getItem('userLoginStatus') || false,
-  userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
+  userInfo: localStorage.getItem('userInfo') || {},
   userRole: localStorage.getItem('userRole') || '',
 };
 
 const actions = {
   setUserInfo({ commit }, res) {
-    localStorage.setItem('userInfo', JSON.stringify(res));
+    localStorage.setItem('userInfo', res);
     localStorage.setItem('userLoginStatus', true);
     localStorage.setItem('userRole', res.role);
 
@@ -51,6 +51,10 @@ const mutations = {
 
   [Types.SET_USER_LOGIN_STATUS](state, status) {
     state.userLoginStatus = status;
+  },
+
+  [Types.SET_USER_ROLE](state, role) {
+    state.userRole = role;
   },
 };
 

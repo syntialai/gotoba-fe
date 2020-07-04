@@ -77,7 +77,7 @@
     </div>
     <div class="align-center">
       <span class="font-color-black-60">Don't have an account? </span>
-      <a href="/sign-up">Sign up</a>
+      <router-link to="/sign-up">Sign up</router-link>
     </div>
   </div>
 </template>
@@ -110,22 +110,23 @@ export default {
       }
 
       const data = {
-        usernameOrEmail: this.usernameOrEmail,
+        username: this.usernameOrEmail,
         password: this.password,
       };
 
       api.Login(data)
         .then((res) => {
-          if (res.success) {
+          if (res) {
             this.setUserInfo(res);
 
-            if (this.userRole === 'admin') {
+            if (this.userRole === 'ROLE_ADMIN') {
               this.$router.push('/admin');
             }
-            if (this.userRole === 'merchant') {
+            if (this.userRole === 'ROLE_MERCHANT') {
               this.$router.push('/merchant');
             }
-            this.$router.push('');
+            this.$router.push('/');
+            console.log(res);
           }
         })
         .catch((err) => {

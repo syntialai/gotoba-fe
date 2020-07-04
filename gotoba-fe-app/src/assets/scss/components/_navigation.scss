@@ -30,9 +30,9 @@
 
   & a {
     color: $gray!important;
-  }
 
-  &.active {
-    color: $blue-primary!important;
+    &.active {
+      color: $blue-primary!important;
+    }
   }
 }

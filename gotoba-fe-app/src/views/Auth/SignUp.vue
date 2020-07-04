@@ -214,17 +214,20 @@
     </div>
     <div class="align-center">
       <span class="font-color-black-60">Already have an account? </span>
-      <a href="/login">Log in</a>
+      <router-link to="/login">Log in</router-link>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import api from '../../api/api';
 
 export default {
   name: 'SignUpPage',
+  computed: {
+    ...mapGetters(['userRole']),
+  },
   data() {
     return {
       nickname: '',
@@ -263,17 +266,27 @@ export default {
         role: this.role,
       };
 
+      const dataLogin = {
+        username: this.username,
+        password: this.password,
+      };
+
       api.Signup(data)
         .then((res) => {
-          if (res.success) {
-            this.setUserInfo(res);
-            console.log(res);
+          console.log(res);
 
-            if (this.userRole === 'merchant') {
-              this.$router.push('/merchant');
-            }
-            this.$router.push('');
-          }
+          api.Login(dataLogin)
+            .then((result) => {
+              this.setUserInfo(result);
+
+              if (this.userRole === 'ROLE_MERCHANT') {
+                this.$router.push('/merchant');
+              }
+              this.$router.push('/');
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);

@@ -52,6 +52,12 @@
             location="Vue js"
             :rating="5.0"
           />
+          <card-home
+            name="Syntia"
+            image="@/assets/img/logo.png"
+            location="Vue js"
+            :rating="5.0"
+          />
         </div>
       </div>
 
