@@ -169,19 +169,19 @@ export default {
       mainMenus: [
         {
           name: 'Journey',
-          link: '/',
+          link: '/more/journey',
           icon: 'map-marked-alt',
           color: 'green',
         },
         {
           name: 'Bistro',
-          link: '/',
+          link: '/more/restaurant',
           icon: 'utensils',
           color: 'orange',
         },
         {
           name: 'Tour Guide',
-          link: '/',
+          link: '/more/tour-guide',
           icon: 'user-tie',
           color: 'purple',
         },

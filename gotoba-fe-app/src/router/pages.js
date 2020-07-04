@@ -9,6 +9,7 @@ const PROFILE = () => import('../views/User/Profile/Profile.vue');
 const NOTIFICATION = () => import('../views/User/Notification/Notification.vue');
 const NOTIFICATION_DETAIL = () => import('../views/User/Notification/NotificationDetail.vue');
 const SEARCH = () => import('../views/User/Search/Search.vue');
+const HOME_MORE = () => import('../views/User/Home/HomeMore.vue');
 const RESTAURANT = () => import('../views/User/Restaurant/Restaurant.vue');
 const RESTAURANT_PROFILE = () => import('../views/User/Restaurant/RestaurantProfile.vue');
 const RESTAURANT_REVIEW = () => import('../views/User/Restaurant/RestaurantReview.vue');
@@ -18,6 +19,7 @@ const JOURNEY_REVIEW = () => import('../views/User/Journey/JourneyReview.vue');
 const TOUR_GUIDE = () => import('../views/User/TourGuide/TourGuide.vue');
 const TOUR_GUIDE_PROFILE = () => import('../views/User/TourGuide/TourGuideProfile.vue');
 const TOUR_GUIDE_REVIEW = () => import('../views/User/TourGuide/TourGuideReview.vue');
+const PROMOTION = () => import('../views/User/Home/Promotion.vue');
 const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
 const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
 const ITINERARY_ADD = () => import('../views/User/Itinerary/AddItinerary.vue');
@@ -76,6 +78,7 @@ export const Pages = {
   NOTIFICATION,
   NOTIFICATION_DETAIL,
   SEARCH,
+  HOME_MORE,
   RESTAURANT,
   RESTAURANT_PROFILE,
   RESTAURANT_REVIEW,
@@ -85,6 +88,7 @@ export const Pages = {
   TOUR_GUIDE,
   TOUR_GUIDE_PROFILE,
   TOUR_GUIDE_REVIEW,
+  PROMOTION,
   PROMOTION_DETAIL,
   GALLERY,
   ITINERARY_ADD,

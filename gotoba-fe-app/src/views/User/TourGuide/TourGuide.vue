@@ -16,13 +16,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import CardHome from '../../../components/User/Home/CardHome.vue';
 import CardHomeLong from '../../../components/User/Home/CardHomeLong.vue';
 
 export default {
   name: 'TourGuide',
   components: {
-    CardHome,
     CardHomeLong,
   },
   computed: {

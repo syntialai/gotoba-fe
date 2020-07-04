@@ -144,7 +144,6 @@ const routes = [
     path: '/notification/:title',
     name: 'Notification Detail',
     component: Pages.NOTIFICATION_DETAIL,
-    props: true,
     meta: {
       layout: 'default-back',
     },
@@ -153,6 +152,47 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: Pages.SEARCH,
+  },
+  {
+    path: '/more',
+    component: Pages.HOME_MORE,
+    children: [
+      {
+        path: '',
+        name: 'More',
+        component: Pages.PROMOTION,
+        meta: {
+          layout: 'default-back',
+        },
+      },
+      {
+        path: 'restaurant',
+        name: 'Restaurant',
+        component: Pages.RESTAURANT,
+        meta: {
+          layout: 'default-back',
+        },
+      },
+      {
+        path: 'journey',
+        name: 'Journey',
+        component: Pages.JOURNEY,
+        meta: {
+          layout: 'default-back',
+        },
+      },
+      {
+        path: 'tour-guide',
+        name: 'Tour Guide',
+        component: Pages.TOUR_GUIDE,
+        meta: {
+          layout: 'default-back',
+        },
+      },
+    ],
+    meta: {
+      layout: 'default-back',
+    },
   },
   {
     path: '/restaurant/:sku',

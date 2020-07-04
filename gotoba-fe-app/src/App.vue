@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <alert class="m-0 p-0" />
-    <toast class="m-0 p-0" />
+    <alert class="m-0 p-0" v-if="showAlert" />
+    <toast class="m-0 p-0" v-if="showToast" />
 
     <component :is="layout">
       <router-view class="h-100" />
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Auth from './layouts/Auth.vue';
 import BackgroundBlue from './layouts/BackgroundBlue.vue';
 import Default from './layouts/Default.vue';
@@ -30,6 +31,7 @@ export default {
     Toast,
   },
   computed: {
+    ...mapGetters(['showAlert', 'showToast']),
     layout() {
       return `${(this.$route.meta.layout || 'default')}`;
     },
