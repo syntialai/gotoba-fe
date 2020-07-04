@@ -156,7 +156,7 @@ const routes = [
   },
   {
     path: '/restaurant/:sku',
-    name: 'Restaurant',
+    name: 'Restaurant Profile',
     component: Pages.RESTAURANT_PROFILE,
     meta: {
       layout: 'default-back',
@@ -172,7 +172,7 @@ const routes = [
   },
   {
     path: '/journey/:sku',
-    name: 'Journey',
+    name: 'Journey Profile',
     component: Pages.JOURNEY_PROFILE,
     meta: {
       layout: 'default-back',
@@ -188,7 +188,7 @@ const routes = [
   },
   {
     path: '/tour-guide/:sku',
-    name: 'Tour Guide',
+    name: 'Tour Guide Profile',
     component: Pages.TOUR_GUIDE_PROFILE,
     meta: {
       layout: 'default-back',

@@ -12,16 +12,6 @@
             class="bg-white border-square-10 p-3"
           >
             <div class="menu-icon">
-              <!-- <font-awesome-layers class="fa">
-                <font-awesome-icon
-                  icon="circle"
-                  :class="['font-color-accent' + menu.color]"
-                />
-                <font-awesome-icon
-                  :icon="menu.icon"
-                  transform="shrink-1 left-20"
-                />
-              </font-awesome-layers> -->
               <font-awesome-icon
                 :icon="menu.icon"
                 :class="'fa-2x font-color-accent-' + menu.color"
@@ -190,9 +180,9 @@ export default {
           color: 'orange',
         },
         {
-          name: 'Homestay',
+          name: 'Tour Guide',
           link: '/',
-          icon: 'hotel',
+          icon: 'user-tie',
           color: 'purple',
         },
       ],

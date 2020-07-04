@@ -1,22 +1,22 @@
 <template>
-  <div class="journey">
-    <div class="journey-profiles bg-white p-3">
-      <h6>Nearby Places</h6>
-      <div class="journey-group d-flex flex-wrap">
+  <div class="restaurant">
+    <div class="restaurant-profiles bg-white p-3">
+      <h6>Nearby Eats</h6>
+      <div class="restaurant-group d-flex flex-wrap">
         <card-home
-          v-for="journey in journeyData"
-          :key="journey.sku"
-          v-bind="journey"
-          @click="goToProfile(journey.sku)"
+          v-for="restaurant in restaurantDatas"
+          :key="restaurant.sku"
+          v-bind="restaurant"
+          @click="goToProfile(restaurant.sku)"
         />
       </div>
     </div>
 
-    <div class="journey-ticket bg-white p-3 my-3">
-      <h6>Ticket for Journey</h6>
+    <div class="restaurant-ticket bg-white p-3 my-3">
+      <h6>Ticket for Restaurant</h6>
       <div class="ticket-group">
         <card-home-long
-          v-for="ticket in ticketJourney"
+          v-for="ticket in ticketRestaurant"
           :key="ticket.sku"
           :data="ticket"
           @click="goToDetails(ticket.sku)"
@@ -32,17 +32,17 @@ import CardHome from '../../../components/User/Home/CardHome.vue';
 import CardHomeLong from '../../../components/User/Home/CardHomeLong.vue';
 
 export default {
-  name: 'Journey',
+  name: 'Restaurant',
   components: {
     CardHome,
     CardHomeLong,
   },
   computed: {
-    ...mapGetters(['journeyData', 'ticketJourney']),
+    ...mapGetters(['restaurantDatas', 'ticketRestaurant']),
   },
   methods: {
-    goToProfile(journeySku) {
-      this.$router.push(`/journey/${journeySku}`);
+    goToProfile(restaurantSku) {
+      this.$router.push(`/restaurant/${restaurantSku}`);
     },
     goToDetails(ticketSku) {
       this.$router.push(`/promotion/${ticketSku}`);

@@ -9,10 +9,13 @@ const PROFILE = () => import('../views/User/Profile/Profile.vue');
 const NOTIFICATION = () => import('../views/User/Notification/Notification.vue');
 const NOTIFICATION_DETAIL = () => import('../views/User/Notification/NotificationDetail.vue');
 const SEARCH = () => import('../views/User/Search/Search.vue');
+const RESTAURANT = () => import('../views/User/Restaurant/Restaurant.vue');
 const RESTAURANT_PROFILE = () => import('../views/User/Restaurant/RestaurantProfile.vue');
 const RESTAURANT_REVIEW = () => import('../views/User/Restaurant/RestaurantReview.vue');
+const JOURNEY = () => import('../views/User/Journey/Journey.vue');
 const JOURNEY_PROFILE = () => import('../views/User/Journey/JourneyProfile.vue');
 const JOURNEY_REVIEW = () => import('../views/User/Journey/JourneyReview.vue');
+const TOUR_GUIDE = () => import('../views/User/TourGuide/TourGuide.vue');
 const TOUR_GUIDE_PROFILE = () => import('../views/User/TourGuide/TourGuideProfile.vue');
 const TOUR_GUIDE_REVIEW = () => import('../views/User/TourGuide/TourGuideReview.vue');
 const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
@@ -73,10 +76,13 @@ export const Pages = {
   NOTIFICATION,
   NOTIFICATION_DETAIL,
   SEARCH,
+  RESTAURANT,
   RESTAURANT_PROFILE,
   RESTAURANT_REVIEW,
+  JOURNEY,
   JOURNEY_PROFILE,
   JOURNEY_REVIEW,
+  TOUR_GUIDE,
   TOUR_GUIDE_PROFILE,
   TOUR_GUIDE_REVIEW,
   PROMOTION_DETAIL,

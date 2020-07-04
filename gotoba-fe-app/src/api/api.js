@@ -276,9 +276,6 @@ export default {
   GetJourneyTicket() {
     return fetchGet('/ticket/category/journey');
   },
-  GetHotelTicket() {
-    return fetchGet('/ticket/category/hotel');
-  },
   GetTicketBySku(sku) {
     return fetchGet(`/ticket/${sku}`);
   },
