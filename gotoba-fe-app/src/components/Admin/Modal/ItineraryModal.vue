@@ -13,6 +13,31 @@
       <ValidationObserver>
         <b-form @submit.stop.prevent="submitItinerary">
           <ValidationProvider
+            name="Name"
+            rules="required|alpha_dash"
+            v-slot="validationContext"
+          >
+            <b-form-group
+              id="itinerary-name-group"
+              label="Name"
+              label-for="itinerary-name"
+            >
+              <b-form-input
+                id="itinerary-name"
+                v-model="itinerary.name"
+                type="text"
+                class="border-gray"
+                required
+                :state="getValidationState(validationContext)"
+                aria-describedby="itinerary-name-feedback-msg"
+              ></b-form-input>
+              <b-form-invalid-feedback id="itinerary-name-feedback-msg">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </ValidationProvider>
+
+          <ValidationProvider
             name="Title"
             rules="required"
             v-slot="validationContext"
@@ -125,6 +150,31 @@
           </ValidationProvider>
 
           <ValidationProvider
+            name="Address"
+            rules="required|alpha_dash"
+            v-slot="validationContext"
+          >
+            <b-form-group
+              id="itinerary-address-group"
+              label="Address"
+              label-for="itinerary-address"
+            >
+              <b-form-textarea
+                id="itinerary-address"
+                v-model="itinerary.address"
+                rows="5"
+                max-rows="6"
+                class="border-gray"
+                :state="getValidationState(validationContext)"
+                aria-describedby="itinerary-address-feedback-msg"
+              ></b-form-textarea>
+              <b-form-invalid-feedback id="itinerary-address-feedback-msg">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </ValidationProvider>
+
+          <ValidationProvider
             name="Description"
             rules="required"
             v-slot="validationContext"
@@ -172,7 +222,8 @@ export default {
         title: '',
         image: null,
         location: '',
-        price: 0.0,
+        price: 0,
+        address: '',
         description: '',
       },
     };
