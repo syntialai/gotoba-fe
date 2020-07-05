@@ -5,7 +5,7 @@
         <b-form @submit="signup">
           <ValidationProvider
             name="Nickname"
-            rules="required"
+            :rules="{ required: true, min: 3 }"
             v-slot="validationContext"
           >
             <b-form-group
@@ -34,7 +34,7 @@
 
           <ValidationProvider
             name="Username"
-            rules="required"
+            rules="required|alpha_dash"
             v-slot="validationContext"
           >
             <b-form-group
@@ -222,6 +222,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import api from '../../api/api';
+import getValidationState from '../../utils/validation';
 
 export default {
   name: 'SignUpPage',
@@ -242,9 +243,7 @@ export default {
   methods: {
     ...mapActions(['setUserInfo']),
 
-    getValidationState({ error, validated, valid = null }) {
-      return error || validated ? valid : null;
-    },
+    getValidationState,
 
     signup() {
       if (!this.nickname

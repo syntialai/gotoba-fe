@@ -267,6 +267,9 @@ const routes = [
     name: 'Add Itinerary',
     // beforeEnter: checkUserRole,
     component: Pages.ITINERARY_ADD,
+    meta: {
+      layout: 'default-back',
+    },
   },
   {
     path: '/itinerary/add/show-on-map',

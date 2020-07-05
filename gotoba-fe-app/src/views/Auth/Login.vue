@@ -2,7 +2,7 @@
   <div class="page-login position-relative p-3">
     <div id="form-login">
       <ValidationObserver>
-        <b-form @submit="login">
+        <b-form @submit.stop.prevent="login">
           <ValidationProvider
             name="Username / email"
             :rules="{required: true, min: 6}"
@@ -85,6 +85,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import api from '../../api/api';
+import getValidationState from '../../utils/validation';
 
 export default {
   name: 'LoginPage',
@@ -100,9 +101,7 @@ export default {
   methods: {
     ...mapActions(['setUserInfo']),
 
-    getValidationState({ error, validated, valid = null }) {
-      return error || validated ? valid : null;
-    },
+    getValidationState,
 
     login() {
       if (!this.usernameOrEmail || !this.password || this.usernameOrEmail.length < 6) {
