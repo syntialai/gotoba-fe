@@ -6,10 +6,11 @@
       title-class="font-size-24"
       centered
       size="sm"
+      @ok="submitTourGuide"
       ok-title="SUBMIT"
       cancel-title="CANCEL"
     >
-      <b-form @submit="submitTourGuide">
+      <b-form @submit.stop.prevent="submitTourGuide">
         <b-form-group
           id="tour-guide-name-group"
           label="Name"

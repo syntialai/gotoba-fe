@@ -6,10 +6,11 @@
       title-class="font-size-24"
       centered
       size="sm"
+      @ok="submitPromotion"
       ok-title="SUBMIT"
       cancel-title="CANCEL"
     >
-      <b-form @submit="submitPromotion">
+      <b-form @submit.stop.prevent="submitPromotion">
         <b-form-group
           id="promotion-title-group"
           label="Title"

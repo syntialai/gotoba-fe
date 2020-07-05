@@ -9,7 +9,7 @@
       ok-title="SUBMIT"
       cancel-title="CANCEL"
     >
-      <b-form @submit="submitMenu">
+      <b-form @submit.stop.prevent="submitMenu">
         <b-form-group
           id="menu-name-group"
           label="Name"
@@ -113,6 +113,15 @@ export default {
         category,
         price,
       };
+
+      if (
+        data.name === ''
+        || data.image === null
+        || data.category === ''
+        || data.price === 0.0
+      ) {
+        return;
+      }
 
       if (this.title === 'Add') {
         api.AddRestaurantMenu(this.$route.params.sku, data)

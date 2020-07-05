@@ -8,7 +8,7 @@
           <b-button
             v-for="menu in mainMenus"
             :key="menu.name"
-            :href="menu.link"
+            :to="menu.link"
             class="bg-white border-square-10 p-3"
           >
             <div class="menu-icon">
@@ -32,21 +32,15 @@
         <div class="d-flex justify-content-between mt-2 mb-2">
           <span class="title-description semibold">Sale Ticket Price!</span>
           <span class="show-all font-size-14">
-            <a href="">See all</a>
+            <router-link to="/more">See all</router-link>
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
           <card-home
-            name="Syntia"
-            image="@/assets/img/logo.png"
-            location="Vue js"
-            :rating="5.0"
-          />
-          <card-home
-            name="Syntia"
-            image="@/assets/img/logo.png"
-            location="Vue js"
-            :rating="5.0"
+            v-for="ticket in promotions"
+            :key="ticket.sku"
+            v-bind="ticket"
+            @click="goToDetails('promotion', ticket.sku)"
           />
         </div>
       </div>
@@ -63,17 +57,18 @@
             Best Journey of Lake Toba
           </span>
           <span class="show-all font-size-14">
-            <a href="">See all</a>
+            <router-link to="/more/journey">See all</router-link>
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
           <card-home
-          v-for="journey in journeyData"
+            v-for="journey in journeyData"
             :key="journey.sku"
             :name="journey.name"
             :image="journey.image"
             :location="journey.location"
             :rating="journey.rating"
+            @click="goToDetails('journey', journey.sku)"
           />
         </div>
       </div>
@@ -90,7 +85,7 @@
             Best Restaurant near Lake Toba
           </span>
           <span class="show-all font-size-14">
-            <a href="">See all</a>
+            <router-link to="/more/restaurant">See all</router-link>
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
@@ -101,31 +96,7 @@
             :image="restaurant.image"
             :location="restaurant.location"
             :rating="restaurant.rating"
-          />
-        </div>
-      </div>
-
-      <div class="nearby-hotel content-group">
-        <div class="title font-color-blue-primary">
-          <span class="title-icon pr-2">
-            <nearby-hotel-icon />
-          </span>
-          <span class="title-text font-weight-bold">Where to Stay</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2 mb-2">
-          <span class="title-description semibold">
-            Best Hotel/Homestay near Lake Toba
-          </span>
-          <span class="show-all font-size-14">
-            <a href="">See all</a>
-          </span>
-        </div>
-        <div class="d-flex content-card overflow-auto mt-1">
-          <card-home
-            name="Syntia"
-            image="@/assets/img/logo.png"
-            location="Vue js"
-            :rating="5.0"
+            @click="goToDetails('restaurant', restaurant.sku)"
           />
         </div>
       </div>
@@ -139,11 +110,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { isPassed } from '../../../utils/filter';
 import CardHome from '../../../components/User/Home/CardHome.vue';
 import GalleryHome from '../../../components/User/Home/GalleryHome.vue';
 import TheFooter from '../../../components/Partial/TheFooter.vue';
 import {
-  OngoingPromoIcon, NearbyPlaceIcon, NearbyRestoIcon, NearbyHotelIcon,
+  OngoingPromoIcon, NearbyPlaceIcon, NearbyRestoIcon,
 } from '../../../components/Partial/IconsCustom.vue';
 
 export default {
@@ -155,14 +127,21 @@ export default {
     OngoingPromoIcon,
     NearbyPlaceIcon,
     NearbyRestoIcon,
-    NearbyHotelIcon,
   },
   computed: {
-    ...mapGetters(['restaurantDatas', 'journeyData']),
+    ...mapGetters(['restaurantDatas', 'journeyData', 'ticketDatas']),
+    promotions() {
+      const promotion = [...this.ticketDatas];
+
+      return promotion
+        .filter((ticket) => !isPassed(ticket.expiredDate))
+        .sort((a, b) => b.expiredDate - a.expiredDate);
+    },
   },
   created() {
     this.getRestaurantData();
     this.getJourneyData();
+    this.getTicketData();
   },
   data() {
     return {
@@ -189,7 +168,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getRestaurantData', 'getJourneyData']),
+    ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData']),
+    goToDetails(category, sku) {
+      this.$router.push(`/${category}/${sku}`);
+    },
   },
 };
 </script>

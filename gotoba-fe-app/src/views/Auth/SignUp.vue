@@ -25,10 +25,10 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-nick-name-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-nick-name-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-nick-name-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -54,10 +54,10 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-username-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-username-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-username-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -83,10 +83,10 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-email-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-email-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-email-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -113,10 +113,10 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-password-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-password-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-password-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -142,12 +142,12 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-confirm-password-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                  id="input-confirm-password-feedback-msg"
+                >
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback
-                id="input-confirm-password-feedback-msg"
-              >
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -295,3 +295,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#form-sign-up {
+  max-width: 768px;
+  margin: auto;
+}
+</style>

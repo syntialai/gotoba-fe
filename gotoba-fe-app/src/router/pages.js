@@ -29,6 +29,7 @@ const TICKET_VALID = () => import('../views/User/Ticket/ValidTicket.vue');
 const TICKET_EXPIRED = () => import('../views/User/Ticket/ExpiredTicket.vue');
 const PAYMENT = () => import('../views/User/Payment/Payment.vue');
 const PAYMENT_ORDER = () => import('../views/User/Payment/PaymentOrder.vue');
+const REVIEW = () => import('../views/User/Review/Review.vue');
 const EDIT_PROFILE = () => import('../views/User/Profile/EditProfile.vue');
 const HISTORY = () => import('../views/User/History/History.vue');
 const TERMS_AND_CONDITION = () => import('../views/User/TermsAndCondition.vue');
@@ -98,6 +99,7 @@ export const Pages = {
   TICKET_EXPIRED,
   PAYMENT,
   PAYMENT_ORDER,
+  REVIEW,
   EDIT_PROFILE,
   HISTORY,
   TERMS_AND_CONDITION,

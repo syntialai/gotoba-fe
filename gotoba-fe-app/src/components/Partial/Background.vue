@@ -31,15 +31,21 @@ body, .background {
   height: 150px;
 }
 
-@media screen and (min-width: 426px) {
+@media screen and (min-width: 425px) {
   .background {
-    height: 13%;
+    height: 180px;
+  }
+}
+
+@media screen and (min-width: 630px) {
+  .background {
+    height: 210px;
   }
 }
 
 @media screen and (min-width: 768px) {
   .background {
-    height: 16%;
+    height: 240px;
   }
 }
 

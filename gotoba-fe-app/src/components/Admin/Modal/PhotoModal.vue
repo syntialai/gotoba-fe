@@ -6,10 +6,11 @@
       title-class="font-size-24"
       centered
       size="sm"
+      @ok="submitPhoto"
       ok-title="SUBMIT"
       cancel-title="CANCEL"
     >
-      <b-form @submit="submitPhoto">
+      <b-form @submit.stop.prevent="submitPhoto">
         <b-form-group
           id="photo-title-group"
           label="Title"
@@ -112,6 +113,10 @@ export default {
         image: this.image,
         show: true,
       };
+
+      if (data.name === '' || data.title === '' || data.image === null) {
+        return;
+      }
 
       if (this.title === 'Add') {
         api.PostGalleryPhoto(data)

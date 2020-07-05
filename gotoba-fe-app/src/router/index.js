@@ -16,8 +16,10 @@ function checkAdminRole(to, from, next) {
     next();
   } else if (role === 'ROLE_MERCHANT') {
     next('/merchant');
-  } else {
+  } else if (role === 'ROLE_USER') {
     next('/');
+  } else {
+    next('/login');
   }
 }
 
@@ -28,8 +30,10 @@ function checkMerchantRole(to, from, next) {
     next();
   } else if (role === 'ROLE_ADMIN') {
     next('/admin');
-  } else {
+  } else if (role === 'ROLE_USER') {
     next('/');
+  } else {
+    next('/login');
   }
 }
 
@@ -290,6 +294,15 @@ const routes = [
     name: 'Payment Order',
     beforeEnter: checkUserRole,
     component: Pages.PAYMENT_ORDER,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/review/:sku',
+    name: 'Review',
+    // beforeEnter: checkUserRole,
+    component: Pages.REVIEW,
     meta: {
       layout: 'default-back',
     },

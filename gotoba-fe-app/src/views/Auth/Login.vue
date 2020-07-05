@@ -136,3 +136,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#form-login {
+  max-width: 768px;
+  margin: auto;
+}
+</style>

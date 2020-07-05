@@ -6,10 +6,11 @@
       title-class="font-size-24"
       centered
       size="sm"
+      @ok="submitItinerary"
       ok-title="SUBMIT"
       cancel-title="CANCEL"
     >
-      <b-form @submit="submitItinerary">
+      <b-form @submit.stop.prevent="submitItinerary">
         <b-form-group
           id="itinerary-title-group"
           label="Title"
@@ -132,6 +133,10 @@ export default {
         image: this.itinerary.image,
         description: this.itinerary.description,
       };
+
+      if (data.title === '' || data.image === null || data.description === '') {
+        return;
+      }
 
       if (this.title === 'Add') {
         api.PostItinerary(data)
