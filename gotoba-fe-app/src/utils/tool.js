@@ -49,8 +49,8 @@ export function toast(message) {
 /**
  * Request Web to Full Screen
  */
-export function requestFullScreen() {
-  const elem = this.$refs.wrapper;
+export function requestFullScreen(refs) {
+  const elem = refs.wrapper;
 
   if (elem.requestFullscreen) {
     elem.requestFullscreen();

@@ -14,19 +14,20 @@
           target="show-date"
           triggers="click"
           placement="bottomleft"
+          class="p-2"
         >
           <b-calendar
-            class="m-auto pt-2"
+            class="m-0 p-0 w-100"
             v-model="value"
             :hide-header="true"
-            :min="Date()"
+            :min="new Date()"
             v-if="showCalendar"
           ></b-calendar>
         </b-popover>
       </div>
     </div>
 
-    <div class="date-choose d-flex justify-content-around overflow-auto mt-3">
+    <div class="date-choose d-flex overflow-auto mt-3">
       <card-date
         v-for="date in 29"
         :key="date"
@@ -46,7 +47,7 @@ export default {
   name: 'ChooseDateCalendar',
   data() {
     return {
-      value: Date(),
+      value: new Date(),
       showCalendar: false,
     };
   },

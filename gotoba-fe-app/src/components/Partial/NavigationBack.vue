@@ -4,10 +4,10 @@
       <b-navbar-nav class="d-flex align-center">
         <b-nav-item class="icon p-0 m-0" @click="goBack">
           <div class="mr-1">
-            <font-awesome-icon icon="arrow-left" />
+            <font-awesome-icon icon="arrow-left" class="font-size-20" />
           </div>
         </b-nav-item>
-        <b-nav-item class="nav-title semibold font-size-24 p-0 m-0">
+        <b-nav-item class="nav-title semibold font-size-20 p-1 m-0">
           {{ title }}
         </b-nav-item>
       </b-navbar-nav>

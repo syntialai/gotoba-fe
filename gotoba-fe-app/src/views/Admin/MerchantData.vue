@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import Pagination from '../../components/Partial/Pagination.vue';
 import ShowDataCount from '../../components/Admin/Data/ShowDataCount.vue';
 import UserTableData from '../../components/Admin/Data/UserTableData.vue';
@@ -39,16 +40,20 @@ export default {
     ShowDataCount,
     UserTableData,
   },
+  computed: {
+    ...mapGetters(['merchantData']),
+  },
+  created() {
+    this.getMerchantData();
+  },
   data() {
     return {
       currentPage: 1,
       perPage: 10,
     };
   },
-  computed: {
-    merchantData() {
-      return this.$store.getters.merchantData;
-    },
+  methods: {
+    ...mapActions(['getMerchantData']),
   },
 };
 </script>

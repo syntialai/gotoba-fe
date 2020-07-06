@@ -1,8 +1,8 @@
 <template>
-  <div class="page-login position-relative">
+  <div class="page-login position-relative p-3">
     <div id="form-login">
       <ValidationObserver>
-        <b-form @submit="login">
+        <b-form @submit.stop.prevent="login">
           <ValidationProvider
             name="Username / email"
             :rules="{required: true, min: 6}"
@@ -77,17 +77,21 @@
     </div>
     <div class="align-center">
       <span class="font-color-black-60">Don't have an account? </span>
-      <a href="/sign-up">Sign up</a>
+      <router-link to="/sign-up">Sign up</router-link>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import api from '../../api/api';
+import getValidationState from '../../utils/validation';
 
 export default {
   name: 'LoginPage',
+  computed: {
+    ...mapGetters(['userRole']),
+  },
   data() {
     return {
       usernameOrEmail: '',
@@ -97,9 +101,7 @@ export default {
   methods: {
     ...mapActions(['setUserInfo']),
 
-    getValidationState({ error, validated, valid = null }) {
-      return error || validated ? valid : null;
-    },
+    getValidationState,
 
     login() {
       if (!this.usernameOrEmail || !this.password || this.usernameOrEmail.length < 6) {
@@ -107,15 +109,23 @@ export default {
       }
 
       const data = {
-        usernameOrEmail: this.usernameOrEmail,
+        username: this.usernameOrEmail,
         password: this.password,
       };
 
       api.Login(data)
         .then((res) => {
-          if (res.success) {
+          if (res) {
             this.setUserInfo(res);
-            this.$router.push('');
+
+            if (this.userRole === 'ROLE_ADMIN') {
+              this.$router.push('/admin');
+            }
+            if (this.userRole === 'ROLE_MERCHANT') {
+              this.$router.push('/merchant');
+            }
+            this.$router.push('/');
+            console.log(res);
           }
         })
         .catch((err) => {
@@ -125,3 +135,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#form-login {
+  max-width: 768px;
+  margin: auto;
+}
+</style>

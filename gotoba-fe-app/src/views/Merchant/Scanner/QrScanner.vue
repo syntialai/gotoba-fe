@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { QrcodeStream } from 'vue-qrcode-reader';
 import { requestFullScreen, exitFullScreen } from '../../../utils/tool';
 
@@ -27,6 +28,7 @@ export default {
 
   },
   methods: {
+    ...mapActions(['setTicketBySku']),
     fullscreen(enterFullScreen) {
       if (enterFullScreen) {
         requestFullScreen();
@@ -35,12 +37,17 @@ export default {
       }
     },
     init() {
-      this.fullscreen(true);
+      // this.fullscreen(true);
     },
     onDecode(result) {
       this.qrcodeResult = result;
-      this.fullscreen(false);
+      // this.fullscreen(false);
       this.showScanner = false;
+
+      // if (typeof result === 'object') {
+      this.setTicketBySku(result);
+      this.$router.push('/merchant/scan/result');
+      // }
     },
   },
   watch: {

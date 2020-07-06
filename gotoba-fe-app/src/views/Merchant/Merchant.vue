@@ -44,9 +44,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.main {
-  max-width: 768px;
-}
-</style>

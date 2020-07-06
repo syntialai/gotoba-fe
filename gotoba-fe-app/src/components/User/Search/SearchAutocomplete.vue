@@ -5,7 +5,7 @@
         v-for="suggestion in matches"
         :key="suggestion"
         @click="suggestionClick(suggestion)"
-        :href="'/' + suggestion.toLowerCase().replace(' ', '+')"
+        :to="'/' + suggestion.toLowerCase().replace(' ', '+')"
         class="d-flex justify-content-between border-none"
       >
         <div class="info d-flex">
