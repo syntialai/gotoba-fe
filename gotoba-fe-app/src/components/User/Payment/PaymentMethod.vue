@@ -28,7 +28,6 @@
             buttons
             stacked
             name="radio-btn-stacked"
-            v-if="show"
             v-model="selectedMethod"
             :options="method.detail"
           >

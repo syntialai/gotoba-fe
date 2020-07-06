@@ -6,18 +6,20 @@
 
     <select-destination-autocomplete :showAutocomplete="showAutocomplete" />
 
-    <div class="w-100 d-flex fixed-bottom" style="height: 64px;">
+    <div class="w-100 d-flex box-shadow fixed-bottom">
       <div class="w-50">
         <b-button
           block
-          class="bg-white font-color-blue-primary"
+          squared
+          class="bg-white font-color-blue-primary p-3"
           @click="goBack"
         >CANCEL</b-button>
       </div>
       <div class="w-50">
         <b-button
           block
-          class="custom-btn-primary"
+          squared
+          class="custom-btn-primary p-3"
           @click="submitTravellingSchedule"
         >ADD</b-button>
       </div>

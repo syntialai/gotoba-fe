@@ -1,20 +1,23 @@
 /**
- * Preview Image procedure from input file
+ * Preview Image function from input file
  *
  * @param {File} file
+ * @returns Promise to get image in base64 format
  */
 function previewImage(file) {
-  // const files = event.target.files || event.dataTransfer.files;
-  if (!file.length) {
-    return;
-  }
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
 
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    this.image = e.target.result;
-  };
+    reader.onload = (e) => {
+      resolve(e.target.result);
+    };
 
-  reader.readAsDataURL(file);
+    reader.onerror = () => {
+      reject(reader.err);
+    };
+
+    reader.readAsDataURL(file);
+  });
 }
 
 export default previewImage;

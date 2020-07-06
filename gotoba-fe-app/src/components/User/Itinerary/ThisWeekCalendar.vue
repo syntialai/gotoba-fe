@@ -11,14 +11,15 @@
         <b-button
           variant="light"
           disabled
-          class="font-size-14"
+          class="font-size-14 p-2"
         >
           {{ item.day }}
         </b-button>
         <b-button
-          :variant="item.active? 'primary' : 'light'"
-          :class="'font-size-14 btn-rounded ' +
-            (item.active? 'custom-btn-primary' : '')
+          pill
+          :variant="item.active? 'primary' : 'secondary'"
+          :class="'font-size-14 p-2 ' +
+            (item.active? 'custom-btn-primary' : 'bg-white font-color-black-60')
           "
         >
           {{ `0${item.date}`.slice(-2) }}

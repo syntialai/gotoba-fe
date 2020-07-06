@@ -7,12 +7,12 @@ $accent-orange: #E86004;
 $accent-purple: #D204E8;
 $accent-green: #1AE804;
 
-$bg-color: #EFEFEF;
+$bg-color: #F3F3F3;
 
 $black-87: rgba(0, 0, 0, 0.87);
 $black-60: rgba(0, 0, 0, 0.60);
 $black-38: rgba(0, 0, 0, 0.38);
-$black-16-shadow: rgba(0, 0, 0, 0.16);
+$black-20-shadow: rgba(0, 0, 0, 0.2);
 $black-10: rgba(0, 0, 0, 0.10);
 
 $blue-primary-50: rgba(4, 140, 232, 0.50);
@@ -48,14 +48,14 @@ $colors: (
   "black-87": $black-87,
   "black-60": $black-60,
   "black-38": $black-38,
-  "black-16-shadow": $black-16-shadow,
+  "black-20-shadow": $black-20-shadow,
   "black-10": $black-10,
 );
 
 /*
  * shadow
  */
-$box-shadow: 1px 2px 10px $black-16-shadow;
+$box-shadow: 1px 2px 10px $black-20-shadow;
 
 /*
  * border
@@ -67,7 +67,7 @@ $border-radius: (
   "square-15": 15px,
   "square-20": 20px,
   "square-30": 30px,
-  "circle": 100%,
+  "circle": 50px,
 );
 
 /*

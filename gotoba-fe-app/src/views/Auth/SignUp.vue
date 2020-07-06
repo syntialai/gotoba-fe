@@ -1,11 +1,11 @@
 <template>
-  <div class="page-signup mt-3">
+  <div class="page-signup p-3">
     <div id="form-sign-up">
       <ValidationObserver>
         <b-form @submit="signup">
           <ValidationProvider
             name="Nickname"
-            rules="required"
+            :rules="{ required: true, min: 3 }"
             v-slot="validationContext"
           >
             <b-form-group
@@ -25,16 +25,16 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-nick-name-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-nick-name-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-nick-name-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
           <ValidationProvider
             name="Username"
-            rules="required"
+            rules="required|alpha_dash"
             v-slot="validationContext"
           >
             <b-form-group
@@ -54,10 +54,10 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-username-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-username-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-username-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -83,10 +83,10 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-email-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-email-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-email-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -113,10 +113,10 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-password-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback id="input-password-feedback-msg">
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback id="input-password-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -142,12 +142,12 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="input-confirm-password-feedback-msg"
                 ></b-form-input>
+                <b-form-invalid-feedback
+                  id="input-confirm-password-feedback-msg"
+                >
+                  {{ validationContext.errors[0] }}
+                </b-form-invalid-feedback>
               </b-input-group>
-              <b-form-invalid-feedback
-                id="input-confirm-password-feedback-msg"
-              >
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
 
@@ -214,17 +214,21 @@
     </div>
     <div class="align-center">
       <span class="font-color-black-60">Already have an account? </span>
-      <a href="/login">Log in</a>
+      <router-link to="/login">Log in</router-link>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import api from '../../api/api';
+import getValidationState from '../../utils/validation';
 
 export default {
   name: 'SignUpPage',
+  computed: {
+    ...mapGetters(['userRole']),
+  },
   data() {
     return {
       nickname: '',
@@ -239,9 +243,7 @@ export default {
   methods: {
     ...mapActions(['setUserInfo']),
 
-    getValidationState({ error, validated, valid = null }) {
-      return error || validated ? valid : null;
-    },
+    getValidationState,
 
     signup() {
       if (!this.nickname
@@ -261,16 +263,29 @@ export default {
         password: this.password,
         confirmPassword: this.confirmPassword,
         role: this.role,
-        checked: this.checked[0],
+      };
+
+      const dataLogin = {
+        username: this.username,
+        password: this.password,
       };
 
       api.Signup(data)
         .then((res) => {
-          if (res.success) {
-            this.setUserInfo(res);
-            console.log(res);
-            this.$router.push('/');
-          }
+          console.log(res);
+
+          api.Login(dataLogin)
+            .then((result) => {
+              this.setUserInfo(result);
+
+              if (this.userRole === 'ROLE_MERCHANT') {
+                this.$router.push('/merchant');
+              }
+              this.$router.push('/');
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -279,3 +294,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#form-sign-up {
+  max-width: 768px;
+  margin: auto;
+}
+</style>

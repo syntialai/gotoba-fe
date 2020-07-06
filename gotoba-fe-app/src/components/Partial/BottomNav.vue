@@ -6,10 +6,9 @@
   >
     <b-nav-item
       v-for="item of navItems"
-        :key="item.id"
-        :class="{active: isActive[item.id-1]}"
-        @click="Array.from(isActive, () => 0); isActive[key-1] = 1;"
-        :href="item.link"
+      :key="item.id"
+      :to="item.link"
+      exact-active-class="active"
     >
       <div class="align-center">
         <font-awesome-icon
@@ -17,7 +16,7 @@
           class="font-size-24"
         />
         <div :id="['bottom-nav-' + item.id]"
-          class="font-size-12"
+          class="font-size-14"
         >
           {{ item.name }}
         </div>
@@ -32,27 +31,5 @@ export default {
   props: {
     navItems: Array,
   },
-  data() {
-    return {
-      isActive: [1, 0, 0, 0, 0],
-    };
-  },
 };
 </script>
-
-<style lang="scss" scoped>
-@import '~@/assets/scss/abstracts/variables';
-
-#bottom-nav {
-  max-width: 768px;
-  margin: 0 auto;
-}
-
-a {
-  color: $gray!important;
-}
-
-a .active {
-  color: $blue-primary!important;
-}
-</style>

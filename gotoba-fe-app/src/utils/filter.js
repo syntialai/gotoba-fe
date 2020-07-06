@@ -38,9 +38,23 @@ export const formatDate = (currentDate) => {
  */
 export const isToday = (date) => {
   const today = new Date();
+
   return date.getDate === today.getDate
     && date.getMonth === today.getMonth
     && date.getFullYear === today.getFullYear;
+};
+
+/**
+ * Check a Date object is passed function
+ *
+ * @param {Date} date
+ * @returns true or false
+ */
+export const isPassed = (date) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return date < today;
 };
 
 /**

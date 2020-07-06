@@ -1,15 +1,50 @@
 <script>
-import { Line, mixins } from 'vue-chartjs'
+import { Line, mixins } from 'vue-chartjs';
 
 export default {
+  extends: Line,
   name: 'LineChart',
-  components: {
-    Line,
+  data() {
+    return {
+      options: {
+        layout: {
+          padding: 16,
+        },
+        scales: {
+          yAxes: [{
+            ticks: { beginAtZero: true },
+            gridlines: { display: true },
+          }],
+          xAxes: [{
+            gridlines: { display: false },
+          }],
+        },
+        legend: {
+          display: true,
+        },
+        maintainAspectRatio: false,
+      },
+    };
   },
   mixins: [mixins.reactiveProp],
-  props: ['chartData', 'options'],
+  props: {
+    chartData: {
+      type: Object,
+      default: null,
+    },
+  },
+  computed: {
+    computedData() {
+      return this.chartData;
+    },
+  },
+  methods: {
+    renderLineChart() {
+      this.renderChart(this.computedData, this.options);
+    },
+  },
   mounted() {
-    this.renderChart(this.chartData, this.options);
+    this.renderLineChart();
   },
 };
 </script>

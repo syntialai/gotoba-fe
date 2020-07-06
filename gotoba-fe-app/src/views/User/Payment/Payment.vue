@@ -1,8 +1,8 @@
 <template>
   <div class="payment">
-    <div class="order-items p-2">
+    <div class="order-items p-3 bg-white">
       <div class="title w-100 border-bottom-gray-young">
-        <h3>Order Item(s)</h3>
+        <h5>Order Item(s)</h5>
       </div>
       <div class="order-items-group">
         <div class="order-item-detail"
@@ -16,35 +16,35 @@
               :price="item.price"
               :discountPrice="item.discountPrice"
             />
-            <b-form-spinbutton id="item" v-model="itemCount" min="1" max="100" />
           </div>
         </div>
       </div>
     </div>
 
-    <div class="payment-details">
+    <div class="payment-details mt-3 p-3 bg-white">
       <div class="title w-100 border-bottom-gray-young">
-        <h3>Payment Details</h3>
+        <h5>Payment Details</h5>
       </div>
-      <payment-detail price="" discount="" />
+      <payment-detail :price="orderTotal.price" :discount="orderTotal.discount" />
     </div>
 
-    <div class="payment-method">
+    <div class="payment-method mt-3 p-3 bg-white">
       <div class="title w-100 border-bottom-gray-young">
-        <h3>Payment Method</h3>
+        <h5>Payment Method</h5>
       </div>
       <payment-method />
     </div>
 
     <bottom-nav-payment
-      :totalItem="1"
-      :totalPrice="100000"
+      :totalItem="orderTotal.item"
+      :totalPrice="orderTotal.price - orderTotal.discount"
       innerButton="BUY NOW"
     />
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import OrderItems from '../../../components/User/OrderItems.vue';
 import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
 import PaymentMethod from '../../../components/User/Payment/PaymentMethod.vue';
@@ -58,10 +58,16 @@ export default {
     PaymentMethod,
     BottomNavPayment,
   },
+  computed: {
+    ...mapGetters(['orderData', 'orderTotal']),
+  },
   data() {
     return {
       items: {},
     };
+  },
+  methods: {
+    ...mapActions(['setOrderData']),
   },
 };
 </script>

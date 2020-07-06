@@ -8,7 +8,7 @@
         <b-button
           variant="outline-secondary"
           v-for="item in keywords"
-          :key="item.match(/[^\s]/g).join('')"
+          :key="item"
           :href="'/search?q=' + item.toString().replace(' ', '+')"
           class="mr-3 bg-white border-rounded"
         >

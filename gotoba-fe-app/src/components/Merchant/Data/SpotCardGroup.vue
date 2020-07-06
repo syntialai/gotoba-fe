@@ -5,6 +5,7 @@
         v-for="itinerary of itineraries"
         :key="itinerary.sku"
         v-bind="itinerary"
+        @click="toSpotDetail(itinerary.sku)"
       />
     </ul>
   </div>
@@ -20,6 +21,11 @@ export default {
   },
   props: {
     itineraries: Array,
+  },
+  methods: {
+    toSpotDetail(sku) {
+      this.$router.push(`/merchant/spot/${sku}`);
+    },
   },
 };
 </script>

@@ -3,7 +3,7 @@
     :img-src="image"
     :img-alt="'Image-' + name"
     img-top
-    class="box-shadow"
+    class="box-shadow mr-3 mb-3"
   >
     <b-card-title class="font-size-12 font-color-black-87 semibold">
       {{ name }}

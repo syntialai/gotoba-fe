@@ -1,18 +1,15 @@
 <template>
-  <router-link :to="to" :target="target">
-    <div :class="'sidebar-link d-flex py-3 ' + { '__active': isActive }">
+  <router-link
+    :to="to"
+    class="sidebar-link"
+    exact-active-class="active"
+    :target="target"
+  >
+    <div class="sidebar-border pl-2 d-flex py-3">
       <div class="px-3">
-        <font-awesome-icon
-          :icon="icon"
-          :class="'icon-' + (isActive? 'gradient': 'gray')"
-        />
+        <font-awesome-icon :icon="icon" class="sidebar-icon" />
       </div>
-      <div
-        v-if="!minimized"
-        :class="'sidebar-link__item-title font-color-' +
-          (isActive? 'blue-primary bold': 'gray')
-        "
-      >
+      <div v-if="!minimized" class="sidebar-link__item-title pr-5">
         {{ title }}
       </div>
     </div>
@@ -46,17 +43,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-@import '@/assets/scss/index';
-
-.sidebar-link {
-   border: none;
-   background-color: white;
-
-  &__active {
-    border-left: 3px solid $blue-primary;
-    background-color: #f3f3f3;
-  }
-}
-</style>

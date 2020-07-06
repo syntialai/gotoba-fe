@@ -25,6 +25,10 @@ const actions = {
       });
   },
 
+  setTicketBySku({ commit }, res) {
+    commit(Types.SET_TICKET_BY_SKU, res);
+  },
+
   getTicketBySku({ commit }, sku) {
     commit(Types.SET_TICKET_BY_SKU);
 

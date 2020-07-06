@@ -1,7 +1,7 @@
 <template>
   <b-navbar class="nav-search bg-color-primary text-white">
     <b-navbar-nav class="d-flex align-center w-100">
-      <b-nav-item class="icon p-0 m-0" @click="router.go(-1)">
+      <b-nav-item class="icon p-0 m-0" @click="goBack">
         <p class="font-size-24 m-0 text-white">
           <b-icon icon="arrow-left-short" class="mr-3" />
         </p>
@@ -35,6 +35,11 @@ export default {
       set(value) {
         this.$store.dispatch('setSearchKeywords', value);
       },
+    },
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };
