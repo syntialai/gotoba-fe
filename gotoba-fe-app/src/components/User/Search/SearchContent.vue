@@ -2,15 +2,16 @@
   <div class="search-content">
     <div class="p-3">
       <div class="title font-color-blue-primary mb-3">
-        <h3>{{ title }}</h3>
+        <h5>{{ title }}</h5>
       </div>
       <div class="mt-1">
         <b-button
+          pill
           variant="outline-secondary"
           v-for="item in keywords"
           :key="item"
-          :href="'/search?q=' + item.toString().replace(' ', '+')"
-          class="mr-3 bg-white border-rounded"
+          @click="searchItem(item)"
+          class="mr-3"
         >
           {{ item }}
         </b-button>
@@ -25,6 +26,16 @@ export default {
   props: {
     title: String,
     keywords: Array,
+  },
+  methods: {
+    searchItem(keyword) {
+      this.$router.push({
+        path: '/search',
+        query: {
+          q: keyword,
+        },
+      });
+    },
   },
 };
 </script>

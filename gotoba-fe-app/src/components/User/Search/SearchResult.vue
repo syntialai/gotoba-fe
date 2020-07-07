@@ -4,17 +4,13 @@
       <SearchResultCategory
         v-for="category in categories"
         :key="category.name"
-        :class="{show: category.length > 0}"
         v-bind="category"
       />
     </div>
-    
-    <div
-      v-else
-      class=""
-    >
+
+    <div v-else>
       <div class="image-no-data">
-        <img src="../assets/img/no-data.png" alt="No-Data">
+        <img src="public/assets/img/no-data.png" alt="No-Data">
       </div>
       <div class="info-no-data">
         <div class="align-center font-color-black-60">
@@ -29,7 +25,7 @@
 </template>
 
 <script>
-import SearchResultCategory from '@/components/User/Search/SearchResultCategory.vue';
+import SearchResultCategory from './SearchResultCategory.vue';
 
 export default {
   name: 'SearchResult',
@@ -45,25 +41,25 @@ export default {
     },
     searchResultTotal() {
       return this.$store.getters.searchResults.length;
-    }
+    },
   },
   data() {
     return {
       categories: [
         {
-          categoryTitle: `Places near ${searchKeyword}`,
+          categoryTitle: `Places related to ${this.searchKeywords}`,
           categoryIcon: 'map-marked-alt',
           categoryColor: 'green',
           searchResults: [],
         },
         {
-          categoryTitle: `Eats near ${searchKeyword}`,
+          categoryTitle: `Eats related to ${this.searchKeywords}`,
           categoryIcon: 'utensils',
           categoryColor: 'orange',
           searchResults: [],
         },
         {
-          categoryTitle: `Homestay near ${searchKeyword}`,
+          categoryTitle: `Ticket with keyword ${this.searchKeywords}`,
           categoryIcon: 'hotel',
           categoryColor: 'purple',
           searchResults: [],

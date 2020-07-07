@@ -1,31 +1,28 @@
 <template>
   <div class="search">
-    <search-navigation class="mb-1" />
+    <search-navigation class="mb-1" v-on:search="doSearch" />
 
     <search-autocomplete
-      :show="keywords.length > 0"
+      v-if="searchKeywords.length > 1"
     ></search-autocomplete>
 
     <search-content
       title="Your History"
-      :keywords='history'
-      v-if="history.length > 0"
+      :keywords="history"
+      v-if="history"
       class="mt-3 mb-3"
     />
 
-    <search-content
-      title="Recommendation"
-      :keywords='recommendation'
-      v-if="recommendation.length > 0"
-      class="mt-3"
-    />
+    <search-result v-if="showResult" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import SearchNavigation from '../../../components/User/Search/SearchNavigation.vue';
 import SearchContent from '../../../components/User/Search/SearchContent.vue';
 import SearchAutocomplete from '../../../components/User/Search/SearchAutocomplete.vue';
+import SearchResult from '../../../components/User/Search/SearchResult.vue';
 
 export default {
   name: 'Search',
@@ -33,32 +30,29 @@ export default {
     SearchNavigation,
     SearchContent,
     SearchAutocomplete,
+    SearchResult,
+  },
+  computed: {
+    ...mapGetters(['searchKeywords']),
+    history() {
+      const searchHistory = localStorage.getItem('searchHistory') || null;
+      return searchHistory;
+    },
   },
   data() {
     return {
-      history: [],
-      recommendation: [],
-      cities: [
-        'Bangalore',
-        'Chennai',
-        'Cochin',
-        'Delhi',
-        'Kolkata',
-        'Mumbai',
-      ],
+      showResult: false,
     };
   },
-  computed: {
-    keywords() {
-      return this.$store.getters.searchKeywords;
-    },
-    suggestions: {
-      get() {
-        return this.$store.state.searchSuggestions;
-      },
-      set(value) {
-        this.$store.dispatch('setSearchSuggestions', value);
-      },
+  methods: {
+    doSearch() {
+      this.$router.push({
+        path: '/search',
+        query: {
+          q: this.searchKeywords,
+        },
+      });
+      this.showResult = true;
     },
   },
 };

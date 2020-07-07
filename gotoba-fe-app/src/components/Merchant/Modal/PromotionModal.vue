@@ -111,7 +111,7 @@
               <b-form-input
                 id="promotion-price"
                 v-model="promotion.price"
-                @input="formatPrice(promotion.price)"
+                :formatter="formatPrice"
                 type="text"
                 class="border-gray"
                 required

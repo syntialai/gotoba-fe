@@ -2,16 +2,6 @@
   @include map-looping($colors, "custom-btn", "background");
 }
 
-.btn {
-  color: white;
-  font-weight: bold!important;
-  text-decoration: none;
-  padding: 8px 16px;
-  text-align: center;
-  border-radius: 5px;
-  border: none!important;
-}
-
 .btn-rounded {
   border-radius: 100%!important;
 }

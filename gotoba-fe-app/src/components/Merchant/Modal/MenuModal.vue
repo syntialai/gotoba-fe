@@ -107,7 +107,7 @@
               <b-form-input
                 id="menu-price"
                 v-model="menu.price"
-                @input="formatPrice(itinerary.price)"
+                :formatter="formatPrice"
                 type="text"
                 required
                 class="border-gray"
