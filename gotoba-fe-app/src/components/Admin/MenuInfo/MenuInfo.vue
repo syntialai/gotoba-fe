@@ -1,8 +1,8 @@
 <template>
   <div class="menu-info">
-    <h2 class="font-color-blue-secondary text-capitalize">
+    <h3 class="font-color-blue-secondary text-capitalize">
       {{ menu }}
-    </h2>
+    </h3>
     <p class="font-color-black-60">
       Show {{ menu }} datas
     </p>

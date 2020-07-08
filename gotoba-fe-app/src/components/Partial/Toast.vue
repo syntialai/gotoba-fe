@@ -4,23 +4,21 @@
       v-model="showToast"
       variant="dark"
       no-close-button
-      class="b-toaster-bottom-center border-circle"
     >
-      {{ message }}
+      <div class="message">
+        {{ toastMessage }}
+      </div>
     </b-toast>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Toast',
   computed: {
-    showToast() {
-      return this.$store.state.showToast;
-    },
-    message() {
-      return this.$store.state.toastMessage;
-    },
+    ...mapGetters(['showToast', 'toastMessage']),
   },
 };
 </script>
