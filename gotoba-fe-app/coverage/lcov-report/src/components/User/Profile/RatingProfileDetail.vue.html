@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -127,8 +127,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -136,18 +136,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,11 +158,11 @@
       &lt;span class="font-size-48 font-color-blue-primary"&gt;
         {{ averageOfRatings(ratingBars) }}
       &lt;/span&gt;
-      &lt;Rating :rate="rating" font-size=16 /&gt;
+      &lt;rating :rate="rating" :font-size="16" /&gt;
       &lt;span class="font-size-12"&gt;{{ totalReviewer }}&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class="rating-details-group"&gt;
-      &lt;div v-for="(rate, index) in ratingBars.reverse()" :key="rate"&gt;
+      &lt;div v-for="(rate, index) in ratingBars.reverse()" :key="index"&gt;
         &lt;span&gt;{{ 5 - index }}&lt;/span&gt;
         &lt;b-progress
           :value="rate"
@@ -175,28 +175,28 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import Rating from '@/components/Partial/Rating.vue';</span>
-<span class="cstat-no" title="statement not covered" >import averageOfRatings from '@/utils/rating';</span>
+import Rating from '../../Partial/Rating.vue';
+import averageOfRatings from '../../../utils/rating';
 &nbsp;
 export default {
   name: 'RatingProfileDetail',
   components: {
     Rating,
   },
-<span class="fstat-no" title="function not covered" >  data() {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-      ratingBars: [60, 50, 2, 10, 500],
-    };
+  props: {
+    ratingBars: Array,
   },
   computed: {
-    averageOfRatings,
-<span class="fstat-no" title="function not covered" >    totalReviewer() {</span>
-<span class="cstat-no" title="statement not covered" >      let sumOfRatings = 0;</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      this.ratingBars.forEach((rate) =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >        sumOfRatings += rate;</span>
+    totalReviewer() {
+      let sumOfRatings = 0;
+      this.ratingBars.forEach((rate) =&gt; {
+        sumOfRatings += rate;
       });
-<span class="cstat-no" title="statement not covered" >      return sumOfRatings;</span>
+      return sumOfRatings;
     },
+  },
+  methods: {
+    averageOfRatings,
   },
 };
 &lt;/script&gt;
@@ -207,7 +207,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 09 2020 12:54:18 GMT+0700 (Indochina Time)
+                at Thu Jul 09 2020 15:00:12 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

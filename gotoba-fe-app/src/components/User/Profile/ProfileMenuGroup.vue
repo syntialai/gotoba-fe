@@ -5,7 +5,7 @@
       <b-list-group-item
         v-for="menu in menus"
         :key="menu.name"
-        :href="menu.link"
+        :to="menu.link"
         class="border-none border-bottom-gray p-2"
       >
         <profile-menu :icon="menu.icon" :name="menu.name" />

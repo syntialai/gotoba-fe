@@ -1,7 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
 import Sidebar from '@/components/Admin/Sidebar/Sidebar.vue';
-import SidebarItem from '@/components/Admin/Sidebar/SidebarItem.vue';
 
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);

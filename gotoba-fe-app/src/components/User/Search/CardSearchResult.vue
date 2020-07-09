@@ -20,14 +20,14 @@
           ></font-awesome-icon>
           <div class="value">{{ value2 }}</div>
         </div>
-        <Rating :rate="rating" fontSize="14" />
+        <rating :rate="rating" :fontSize="14" />
       </b-card-text>
     </b-card>
   </a>
 </template>
 
 <script>
-import Rating from '@/components/Partial/Rating.vue';
+import Rating from '../../Partial/Rating.vue';
 
 export default {
   name: 'CardSearchResult',

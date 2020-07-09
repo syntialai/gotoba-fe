@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1594274063485" clover="3.2.0">
-  <project timestamp="1594274063485" name="All files">
-    <metrics statements="1364" coveredstatements="13" conditionals="168" coveredconditionals="0" methods="665" coveredmethods="7" elements="2197" coveredelements="20" complexity="0" loc="1364" ncloc="1364" packages="53" files="159" classes="159"/>
+<coverage generated="1594281617285" clover="3.2.0">
+  <project timestamp="1594281617286" name="All files">
+    <metrics statements="1363" coveredstatements="41" conditionals="168" coveredconditionals="4" methods="664" coveredmethods="15" elements="2195" coveredelements="60" complexity="0" loc="1363" ncloc="1363" packages="53" files="159" classes="159"/>
     <package name="src">
       <metrics statements="18" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <file name="App.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\App.vue">
@@ -546,16 +546,16 @@
       </file>
     </package>
     <package name="src.components.User.Payment">
-      <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <metrics statements="7" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
       <file name="BottomNavPayment.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Payment\BottomNavPayment.vue">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="22" count="0" type="stmt"/>
       </file>
       <file name="CartItem.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Payment\CartItem.vue">
-        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
       </file>
       <file name="PaymentDetail.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Payment\PaymentDetail.vue">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -571,7 +571,7 @@
       </file>
     </package>
     <package name="src.components.User.Profile">
-      <metrics statements="19" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <metrics statements="18" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="2"/>
       <file name="AboutProfileDetail.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Profile\AboutProfileDetail.vue">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="21" count="0" type="stmt"/>
@@ -597,14 +597,13 @@
         <line num="18" count="0" type="stmt"/>
       </file>
       <file name="RatingProfileDetail.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Profile\RatingProfileDetail.vue">
-        <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="5" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.components.User.Review">
@@ -621,7 +620,7 @@
       </file>
     </package>
     <package name="src.components.User.Search">
-      <metrics statements="15" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="0"/>
+      <metrics statements="15" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="1"/>
       <file name="CardSearchResult.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Search\CardSearchResult.vue">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="30" count="0" type="stmt"/>
@@ -634,8 +633,8 @@
         <line num="48" count="0" type="stmt"/>
       </file>
       <file name="SearchContent.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Search\SearchContent.vue">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="32" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="32" count="1" type="stmt"/>
       </file>
       <file name="SearchNavigation.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Search\SearchNavigation.vue">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
@@ -1283,11 +1282,11 @@
       </file>
     </package>
     <package name="src.utils">
-      <metrics statements="65" coveredstatements="0" conditionals="30" coveredconditionals="0" methods="22" coveredmethods="0"/>
+      <metrics statements="65" coveredstatements="18" conditionals="30" coveredconditionals="4" methods="22" coveredmethods="3"/>
       <file name="date.js" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\utils\date.js">
-        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
       </file>
       <file name="fileHelper.js" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\utils\fileHelper.js">
         <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
@@ -1300,39 +1299,39 @@
         <line num="19" count="0" type="stmt"/>
       </file>
       <file name="filter.js" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\utils\filter.js">
-        <metrics statements="22" coveredstatements="0" conditionals="9" coveredconditionals="0" methods="8" coveredmethods="0"/>
-        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+        <metrics statements="22" coveredstatements="9" conditionals="9" coveredconditionals="4" methods="8" coveredmethods="1"/>
+        <line num="11" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="30" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="42" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="53" count="0" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
         <line num="55" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
         <line num="83" count="0" type="stmt"/>
         <line num="86" count="0" type="stmt"/>
         <line num="88" count="0" type="stmt"/>
       </file>
       <file name="rating.js" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\utils\rating.js">
-        <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
       </file>
       <file name="tool.js" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\utils\tool.js">
         <metrics statements="26" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="7" coveredmethods="0"/>
