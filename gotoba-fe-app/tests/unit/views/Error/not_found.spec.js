@@ -27,11 +27,8 @@ describe('NotFound.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check home method navigate to Home when BACK TO HOME button clicked', async () => {
-    expect(wrapper.contains('button')).toBeTruthy();
-
-    wrapper.find('button').trigger('click');
-    await wrapper.vm.$nextTick();
+  it('Check home method navigate to Home when called', async () => {
+    wrapper.vm.home();
 
     expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.$router.push).toHaveBeenCalledWith($route);

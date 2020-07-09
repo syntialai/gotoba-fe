@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1594220479338" clover="3.2.0">
-  <project timestamp="1594220479338" name="All files">
-    <metrics statements="1374" coveredstatements="5" conditionals="176" coveredconditionals="0" methods="668" coveredmethods="3" elements="2218" coveredelements="8" complexity="0" loc="1374" ncloc="1374" packages="53" files="160" classes="160"/>
+<coverage generated="1594274063485" clover="3.2.0">
+  <project timestamp="1594274063485" name="All files">
+    <metrics statements="1364" coveredstatements="13" conditionals="168" coveredconditionals="0" methods="665" coveredmethods="7" elements="2197" coveredelements="20" complexity="0" loc="1364" ncloc="1364" packages="53" files="159" classes="159"/>
     <package name="src">
       <metrics statements="18" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <file name="App.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\App.vue">
@@ -313,26 +313,21 @@
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="Search.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\Admin\Search\Search.vue">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.components.Admin.Sidebar">
-      <metrics statements="6" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="Sidebar.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\Admin\Sidebar\Sidebar.vue">
-        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-      </file>
-      <file name="SidebarItem.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\Admin\Sidebar\SidebarItem.vue">
-        <metrics statements="2" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="91" count="3" type="stmt"/>
+        <line num="92" count="3" type="stmt"/>
       </file>
     </package>
     <package name="src.components.Merchant.Card">
-      <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="7" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="CardPromotion.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\Merchant\Card\CardPromotion.vue">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="23" count="0" type="stmt"/>
@@ -346,20 +341,20 @@
         <line num="33" count="0" type="stmt"/>
       </file>
       <file name="CardSpot.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\Merchant\Card\CardSpot.vue">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="27" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="27" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.components.Merchant.Data">
-      <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="RestaurantMenuCardGroup.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\Merchant\Data\RestaurantMenuCardGroup.vue">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="12" count="0" type="stmt"/>
       </file>
       <file name="SpotCardGroup.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\Merchant\Data\SpotCardGroup.vue">
-        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.components.Merchant.Modal">
@@ -461,10 +456,10 @@
       </file>
     </package>
     <package name="src.components.User.History">
-      <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="CardHistory.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\History\CardHistory.vue">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="31" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="31" count="1" type="stmt"/>
       </file>
       <file name="CardHistoryGroup.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\History\CardHistoryGroup.vue">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -719,18 +714,10 @@
       </file>
     </package>
     <package name="src.router">
-      <metrics statements="95" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="68" coveredmethods="0"/>
+      <metrics statements="87" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="67" coveredmethods="0"/>
       <file name="index.js" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\router\index.js">
-        <metrics statements="27" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="19" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="10" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="30" count="0" type="stmt"/>

@@ -9,19 +9,19 @@ import {
 
 Vue.use(VueRouter);
 
-function checkAdminRole(to, from, next) {
-  const role = index.getters.userRole;
+// function checkAdminRole(to, from, next) {
+//   const role = index.getters.userRole;
 
-  if (role === 'ROLE_ADMIN') {
-    next();
-  } else if (role === 'ROLE_MERCHANT') {
-    next('/merchant');
-  } else if (role === 'ROLE_USER') {
-    next('/');
-  } else {
-    next('/login');
-  }
-}
+//   if (role === 'ROLE_ADMIN') {
+//     next();
+//   } else if (role === 'ROLE_MERCHANT') {
+//     next('/merchant');
+//   } else if (role === 'ROLE_USER') {
+//     next('/');
+//   } else {
+//     next('/login');
+//   }
+// }
 
 function checkMerchantRole(to, from, next) {
   const role = index.getters.userRole;
@@ -390,7 +390,7 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
-    beforeEnter: checkAdminRole,
+    // beforeEnter: checkAdminRole,
     redirect: '/admin/dashboard',
     component: Admin.ADMIN_VIEW,
     children: [

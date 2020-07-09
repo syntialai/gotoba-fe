@@ -3,7 +3,7 @@
     <aside id="sidebar-admin" class="bg-white" shadow>
       <b-button
         variant="link"
-        class="pt-3 py-3 pb-0 bg-white"
+        class="sidebar-button pt-3 py-3 pb-0 bg-white"
         @click="setPictSize"
       >
         <font-awesome-icon
