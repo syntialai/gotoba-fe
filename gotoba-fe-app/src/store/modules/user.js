@@ -4,6 +4,7 @@ import api from '../../api/api';
 
 const state = {
   userData: [],
+  userDataBySku: {},
   userActiveData: [],
   userBlockedData: [],
 };
@@ -15,6 +16,19 @@ const actions = {
     api.GetUsers()
       .then((res) => {
         commit(Types.SET_USER_DATA, res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getUserBySku({ commit }, sku) {
+    commit(Types.SET_USER_DATA_BY_SKU);
+
+    api.GetUserBySku(sku)
+      .then((res) => {
+        commit(Types.SET_USER_DATA_BY_SKU, res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -50,6 +64,7 @@ const actions = {
 
 const getters = {
   userData: (state) => state.userData,
+  userDataBySku: (state) => state.userDataBySku,
   userActiveData: (state) => state.userActiveData,
   userBlockedData: (state) => state.userBlockedData,
 };
@@ -58,6 +73,10 @@ const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.SET_USER_DATA](state, res) {
     state.userData = res;
+  },
+
+  [Types.SET_USER_DATA_BY_SKU](state, res) {
+    state.userDataBySku = res;
   },
 
   [Types.SET_USER_ACTIVE](state, res) {

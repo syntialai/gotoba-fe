@@ -95,7 +95,7 @@ export default {
     return fetchGet('/user/blocked');
   },
   GetUserBySku(sku) {
-    return fetchGet(`/user/${sku}`);
+    return fetchGet(`/user/sku/${sku}`);
   },
   GetUserByUsername(username) {
     return fetchGet(`/user/username/${username}`);

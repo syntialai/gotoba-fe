@@ -19,7 +19,8 @@ export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';
 /**
  * Authentication
  */
-export const SET_USER_INFO = 'SET_USER_INFO';
+export const SET_USER_NAME = 'SET_USER_NAME';
+export const SET_USER_SKU = 'SET_USER_SKU';
 export const SET_USER_LOGIN_STATUS = 'SET_USER_LOGIN_STATUS';
 export const SET_USER_ROLE = 'SET_USER_ROLE';
 
@@ -27,6 +28,7 @@ export const SET_USER_ROLE = 'SET_USER_ROLE';
  * User
  */
 export const SET_USER_DATA = 'SET_USER_DATA';
+export const SET_USER_DATA_BY_SKU = 'SET_USER_DATA_BY_SKU';
 export const SET_USER_ACTIVE = 'SET_USER_ACTIVE';
 export const SET_USER_BLOCKED = 'SET_USER_BLOCKED';
 

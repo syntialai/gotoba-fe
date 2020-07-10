@@ -116,7 +116,11 @@ export default {
       api.Login(data)
         .then((res) => {
           if (res) {
-            this.setUserInfo(res);
+            this.setUserInfo({
+              name: res.name,
+              sku: res.sku_user,
+              role: res.role,
+            });
 
             if (this.userRole === 'ROLE_ADMIN') {
               this.$router.push('/admin');

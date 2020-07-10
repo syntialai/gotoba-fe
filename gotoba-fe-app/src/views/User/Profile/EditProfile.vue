@@ -2,19 +2,23 @@
   <div class="edit-profile">
     <div class="container pt-4 mb-5">
       <ValidationObserver>
-        <b-form @submit.stop.prevent="updateProfile">
+        <b-form v-if="userDataBySku" @submit.stop.prevent="updateProfile">
           <b-form-group id="edit-img">
-            <b-avatar
-              :src="user.image"
-              alt="user-profile"
-            ></b-avatar>
+            <div class="d-flex justify-content-center">
+              <b-avatar
+                :src="image"
+                alt="user-profile"
+                class="my-2"
+                size="100"
+              ></b-avatar>
+            </div>
             <b-form-file
-              v-model="user.image"
+              v-model="image"
               @change="loadImage"
               accept="image/jpeg, image/jpg, image/png"
             ></b-form-file>
             <b-button
-              v-if="user.image !== userInfo.image && user.image !== null"
+              v-if="image !== userDataBySku.image && image !== null"
               size="sm"
               class="custom-btn-gray mt-2"
               @click="removePhoto"
@@ -33,7 +37,7 @@
             >
               <b-form-input
                 id="input-edit-nick-name"
-                v-model="userInfo.nickname"
+                v-model="user.nickname"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-nick-name-feedback-msg"
@@ -56,7 +60,7 @@
             >
               <b-form-input
                 id="input-edit-username"
-                v-model="userInfo.username"
+                v-model="user.username"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-username-feedback-msg"
@@ -79,7 +83,7 @@
             >
               <b-form-input
                 id="input-edit-email"
-                v-model="userInfo.email"
+                v-model="user.email"
                 type="email"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-email-feedback-msg"
@@ -97,7 +101,7 @@
           >
             <b-form-input
               id="input-edit-password"
-              v-model="userInfo.password"
+              v-model="user.password"
               type="password"
               readonly
             ></b-form-input>
@@ -115,7 +119,7 @@
             >
               <b-form-input
                 id="input-edit-phone-number"
-                v-model="userInfo.phoneNumber"
+                v-model="user.phoneNumber"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-phone-number-feedback-msg"
@@ -138,7 +142,7 @@
             >
               <b-form-input
                 id="input-edit-location"
-                v-model="userInfo.location"
+                v-model="user.location"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="itinerary-title-feedback-msg"
@@ -156,7 +160,8 @@
           >
             <b-form-datepicker
               id="input-birth-date"
-              v-model="userInfo.birthDate"
+              v-model="user.birthDate"
+              :max="new Date()"
               :date-format-options="{ year: 'numeric', month: 'long', day: 'numeric' }"
             ></b-form-datepicker>
           </b-form-group>
@@ -176,7 +181,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
@@ -184,7 +189,10 @@ import api from '../../../api/api';
 export default {
   name: 'EditProfile',
   computed: {
-    ...mapState(['userInfo']),
+    ...mapGetters(['userDataBySku', 'userSku']),
+  },
+  created() {
+    this.getUserBySku(this.userSku);
   },
   data() {
     return {
@@ -192,15 +200,15 @@ export default {
         nickname: '',
         username: '',
         email: '',
-        image: null,
         phoneNumber: '',
         location: '',
         birthDate: '', // return value YYYY-MM-DD
       },
+      image: null,
     };
   },
   methods: {
-    ...mapActions(['setUserInfo']),
+    ...mapActions(['getUserBySku']),
 
     getValidationState,
 
@@ -215,8 +223,12 @@ export default {
 
       api.UpdateProfile(data)
         .then((res) => {
-          if (res.success) {
-            this.setUserInfo(res);
+          if (res) {
+            this.setUserInfo({
+              name: res.nickname,
+              role: res.role,
+              sku: res.sku,
+            });
           }
         })
         .catch((err) => {
@@ -230,7 +242,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.user.image = res;
+            this.image = res;
           })
           .catch((err) => {
             console.log(err);
@@ -239,11 +251,13 @@ export default {
     },
 
     removePhoto() {
-      this.user.image = null;
+      this.image = null;
     },
   },
   mounted() {
-    this.user = { ...this.userInfo };
+    if (this.userDataBySku) {
+      this.user = { ...this.userDataBySku };
+    }
   },
 };
 </script>

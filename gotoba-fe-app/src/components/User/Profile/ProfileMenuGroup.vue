@@ -3,10 +3,11 @@
     <h5 class="bold pl-1">{{ title }}</h5>
     <b-list-group>
       <b-list-group-item
-        v-for="menu in menus"
+        v-for="(menu, index) in menus"
         :key="menu.name"
         :to="menu.link"
-        class="border-none border-bottom-gray p-2"
+        :class="'border-none p-2' +
+          (index < menus.length - 1? ' border-bottom-gray-young' : '')"
       >
         <profile-menu :icon="menu.icon" :name="menu.name" />
       </b-list-group-item>
