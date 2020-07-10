@@ -61,7 +61,7 @@ export default {
     };
   },
   props: {
-    data: Array,
+    galleryData: Array,
   },
 };
 </script>

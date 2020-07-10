@@ -9,19 +9,19 @@ import {
 
 Vue.use(VueRouter);
 
-// function checkAdminRole(to, from, next) {
-//   const role = index.getters.userRole;
+function checkAdminRole(to, from, next) {
+  const role = index.getters.userRole;
 
-//   if (role === 'ROLE_ADMIN') {
-//     next();
-//   } else if (role === 'ROLE_MERCHANT') {
-//     next('/merchant');
-//   } else if (role === 'ROLE_USER') {
-//     next('/');
-//   } else {
-//     next('/login');
-//   }
-// }
+  if (role === 'ROLE_ADMIN') {
+    next();
+  } else if (role === 'ROLE_MERCHANT') {
+    next('/merchant');
+  } else if (role === 'ROLE_USER') {
+    next('/');
+  } else {
+    next('/login');
+  }
+}
 
 function checkMerchantRole(to, from, next) {
   const role = index.getters.userRole;
@@ -41,7 +41,7 @@ function checkUserRole(to, from, next) {
   const role = index.getters.userRole;
 
   if (role === 'ROLE_USER') {
-    next('/');
+    next();
   } else if (role === 'ROLE_MERCHANT') {
     next('/merchant');
   } else if (role === 'ROLE_ADMIN') {
@@ -50,6 +50,18 @@ function checkUserRole(to, from, next) {
     next('/login');
   }
 }
+
+// function checkRole(to, from, next) {
+//   const role = index.getters.userRole;
+
+//   if (role === 'ROLE_USER' || !role) {
+//     next();
+//   } else if (role === 'ROLE_MERCHANT') {
+//     next('/merchant');
+//   } else if (role === 'ROLE_ADMIN') {
+//     next('/admin');
+//   }
+// }
 
 const routes = [
   {
@@ -265,7 +277,7 @@ const routes = [
   {
     path: '/itinerary/add',
     name: 'Add Itinerary',
-    // beforeEnter: checkUserRole,
+    beforeEnter: checkUserRole,
     component: Pages.ITINERARY_ADD,
     meta: {
       layout: 'default-back',
@@ -304,7 +316,7 @@ const routes = [
   {
     path: '/review/:sku',
     name: 'Review',
-    // beforeEnter: checkUserRole,
+    beforeEnter: checkUserRole,
     component: Pages.REVIEW,
     meta: {
       layout: 'default-back',
@@ -390,7 +402,7 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
-    // beforeEnter: checkAdminRole,
+    beforeEnter: checkAdminRole,
     redirect: '/admin/dashboard',
     component: Admin.ADMIN_VIEW,
     children: [

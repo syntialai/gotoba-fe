@@ -14,62 +14,58 @@ axios.interceptors.response.use(
   (err) => Promise.reject(err),
 );
 
-export function fetchGet(url, param) {
-  return new Promise((resolve, reject) => {
-    axios.get(url, {
+export async function fetchGet(url, param) {
+  let data;
+
+  try {
+    const response = await axios.get(url, {
       params: param,
-    })
-      .then((response) => {
-        resolve(response.data);
-      }, (err) => {
-        reject(err);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+    });
+    data = response.data;
+  } catch (err) {
+    console.log(err);
+  }
+
+  return data;
 }
 
-export function fetchPost(url, params) {
-  return new Promise((resolve, reject) => {
-    axios.post(url, params)
-      .then((response) => {
-        resolve(response.data);
-      }, (err) => {
-        reject(err);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+export async function fetchPost(url, params) {
+  let data;
+
+  try {
+    const response = await axios.post(url, params);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+
+  return data;
 }
 
-export function fetchPut(url, params) {
-  return new Promise((resolve, reject) => {
-    axios.put(url, params)
-      .then((response) => {
-        resolve(response.data);
-      }, (err) => {
-        reject(err);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+export async function fetchPut(url, params) {
+  let data;
+
+  try {
+    const response = await axios.put(url, params);
+    data = response.data;
+  } catch (err) {
+    console.log(err);
+  }
+
+  return data;
 }
 
-export function fetchDelete(url) {
-  return new Promise((resolve, reject) => {
-    axios.delete(url)
-      .then((response) => {
-        resolve(response.data);
-      }, (err) => {
-        reject(err);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+export async function fetchDelete(url) {
+  let data;
+
+  try {
+    const response = await axios.delete(url);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+
+  return data;
 }
 
 export default {
@@ -82,8 +78,8 @@ export default {
   Logout() {
     return fetchPost('/logout');
   },
-  GetImage(imageName) {
-    return fetchGet(`/image/${imageName}`);
+  GetImage(imageUrl) {
+    return fetchGet(`/image/${imageUrl}`);
   },
 
   /**
