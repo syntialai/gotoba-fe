@@ -1,7 +1,9 @@
 <template>
   <b-table
+    :id="id"
     :fields="fields"
     :items="items"
+    :current-page="currentPage"
     :per-page="perPage"
     responsive="sm"
     class="bg-white"
@@ -36,12 +38,14 @@ import { toCapitalize } from '../../../utils/filter';
 export default {
   name: 'UserTableData',
   props: {
+    currentPage: Number,
     perPage: {
       type: Number,
       default: 10,
     },
     fields: Array,
     items: Array,
+    id: String,
   },
   methods: {
     toCapitalize,

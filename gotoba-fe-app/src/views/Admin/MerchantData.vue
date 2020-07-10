@@ -1,15 +1,16 @@
 <template>
   <div class="merchant-data">
     <show-data-count
-      :perPage="perPage"
+      :perPage.sync="perPage"
       class="my-3"
     />
 
     <user-table-data
-      id="merchant-data-table"
+      :id="'merchant-data-table'"
       class="my-2"
       v-if="merchantDatas"
       :perPage="perPage"
+      :currentPage="currentPage"
       :fields="fields"
       :items="items"
     />
@@ -19,7 +20,9 @@
     </div>
 
     <pagination
-      :currentPage="currentPage"
+      v-if="merchantDatas"
+      :currentPage.sync="currentPage"
+      :rows="merchantDatas.length"
       :perPage="perPage"
       class="my-3"
       idControls="merchant-data-table"
@@ -47,7 +50,13 @@ export default {
       return (this.currentPage - 1) * this.perPage + 1;
     },
     dataEnd() {
-      return this.currentPage * this.perPage;
+      const end = this.currentPage * this.perPage;
+
+      if (end > this.merchantDatas.length) {
+        return this.merchantDatas.length;
+      }
+
+      return end;
     },
 
     items() {

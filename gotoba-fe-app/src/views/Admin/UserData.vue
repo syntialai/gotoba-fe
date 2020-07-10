@@ -1,15 +1,16 @@
 <template>
   <div class="user-data">
     <show-data-count
-      :perPage="perPage"
+      :perPage.sync="perPage"
       class="my-3"
     />
 
     <user-table-data
-      id="user-data-table"
+      :id="'user-data-table'"
       class="my-2"
       v-if="userData"
       :perPage="perPage"
+      :currentPage="currentPage"
       :fields="fields"
       :items="items"
     />
@@ -19,8 +20,10 @@
     </div>
 
     <pagination
-      :currentPage="currentPage"
+      v-if="userData"
+      :currentPage.sync="currentPage"
       :perPage="perPage"
+      :rows="userData.length"
       class="my-3"
       idControls="user-data-table"
     />
@@ -47,7 +50,13 @@ export default {
       return (this.currentPage - 1) * this.perPage + 1;
     },
     dataEnd() {
-      return this.currentPage * this.perPage;
+      const end = this.currentPage * this.perPage;
+
+      if (end > this.userData.length) {
+        return this.userData.length;
+      }
+
+      return end;
     },
 
     items() {

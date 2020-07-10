@@ -15,7 +15,6 @@ const actions = {
     api.GetUsers()
       .then((res) => {
         commit(Types.SET_USER_DATA, res.data);
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
