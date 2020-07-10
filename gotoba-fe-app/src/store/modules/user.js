@@ -9,12 +9,12 @@ const state = {
 };
 
 const actions = {
-  getUserData({ commit }, res) {
-    commit(Types.SET_USER_DATA, res);
+  getUserData({ commit }) {
+    commit(Types.SET_USER_DATA);
 
     api.GetUsers()
       .then((res) => {
-        commit(Types.SET_USER_DATA, res);
+        commit(Types.SET_USER_DATA, res.data);
         console.log(res);
       })
       .catch((err) => {
@@ -22,12 +22,12 @@ const actions = {
       });
   },
 
-  getActiveUsers({ commit }, res) {
-    commit(Types.SET_USER_ACTIVE, res);
+  getActiveUsers({ commit }) {
+    commit(Types.SET_USER_ACTIVE);
 
     api.GetActiveUsers()
       .then((res) => {
-        commit(Types.SET_USER_ACTIVE, res);
+        commit(Types.SET_USER_ACTIVE, res.data);
         console.log(res);
       })
       .catch((err) => {
@@ -35,12 +35,12 @@ const actions = {
       });
   },
 
-  getBlockedUsers({ commit }, res) {
-    commit(Types.SET_USER_BLOCKED, res);
+  getBlockedUsers({ commit }) {
+    commit(Types.SET_USER_BLOCKED);
 
     api.GetBlockedUsers()
       .then((res) => {
-        commit(Types.SET_USER_BLOCKED, res);
+        commit(Types.SET_USER_BLOCKED, res.data);
         console.log(res);
       })
       .catch((err) => {

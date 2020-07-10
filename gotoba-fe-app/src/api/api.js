@@ -79,7 +79,7 @@ export default {
     return fetchPost('/logout');
   },
   GetImage(imageUrl) {
-    return fetchGet(`/image/${imageUrl}`);
+    return fetchGet(`/image${imageUrl}`);
   },
 
   /**
@@ -108,7 +108,7 @@ export default {
    * Merchant
    */
   GetMerchants() {
-    return fetchGet('/merchant');
+    return fetchGet('/merchant/');
   },
   GetMerchantBySku(sku) {
     return fetchGet(`/merchant/${sku}`);

@@ -8,14 +8,14 @@
     <user-table-data
       id="merchant-data-table"
       class="my-2"
+      v-if="merchantDatas"
       :perPage="perPage"
+      :fields="fields"
+      :items="items"
     />
 
-    <div class="info">
-      Showing {{ (currentPage - 1) * perPage + 1 }} to
-      {{ currentPage * perPage }} of
-      50 entries
-      <!-- {{ users.length }} entries -->
+    <div class="info" v-if="merchantDatas">
+      Showing {{ dataStart }} to {{ dataEnd }} of {{ merchantDatas.length }} entries
     </div>
 
     <pagination
@@ -41,7 +41,26 @@ export default {
     UserTableData,
   },
   computed: {
-    ...mapGetters(['merchantData']),
+    ...mapGetters(['merchantDatas']),
+
+    dataStart() {
+      return (this.currentPage - 1) * this.perPage + 1;
+    },
+    dataEnd() {
+      return this.currentPage * this.perPage;
+    },
+
+    items() {
+      return this.merchantDatas.map((data) => ({
+        user: {
+          image: data.image || '',
+          name: data.nickname,
+        },
+        status: data.status,
+        sku: data.sku,
+        email: data.email,
+      }));
+    },
   },
   created() {
     this.getMerchantData();
@@ -50,6 +69,24 @@ export default {
     return {
       currentPage: 1,
       perPage: 10,
+      fields: [
+        {
+          key: 'user',
+          sortable: true,
+        },
+        {
+          key: 'sku',
+          sortable: true,
+        },
+        {
+          key: 'email',
+          sortable: false,
+        },
+        {
+          key: 'status',
+          sortable: true,
+        },
+      ],
     };
   },
   methods: {
