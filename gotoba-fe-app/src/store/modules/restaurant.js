@@ -24,13 +24,28 @@ const actions = {
       });
   },
 
+  getRestaurantDataBySku({ commit }, sku) {
+    commit(Types.SET_RESTAURANT_DATA_BY_SKU);
+
+    api.GetRestaurantBySku(sku)
+      .then((res) => {
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
   getRestaurantDataByMerchantSku({ commit }, merchantSku) {
-    commit(Types.SET_RESTAURANT_DATA_BY_MERCHANT_SKU);
+    commit(Types.SET_RESTAURANT_DATA_BY_SKU);
 
     api.GetRestaurantByMerchantSku(merchantSku)
       .then((res) => {
-        commit(Types.SET_RESTAURANT_DATA_BY_MERCHANT_SKU, res);
-        console.log(res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -42,8 +57,9 @@ const actions = {
 
     api.GetRestaurantMenus(sku)
       .then((res) => {
-        commit(Types.SET_RESTAURANT_MENU, res);
-        console.log(res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_MENU, res);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -103,7 +119,7 @@ const mutations = {
   [Types.SET_RESTAURANT_DATA](state, res) {
     state.restaurantDatas = res;
   },
-  [Types.SET_RESTAURANT_DATA_BY_MERCHANT_SKU](state, res) {
+  [Types.SET_RESTAURANT_DATA_BY_SKU](state, res) {
     state.restaurantData = res;
   },
   [Types.SET_RESTAURANT_MENU](state, res) {

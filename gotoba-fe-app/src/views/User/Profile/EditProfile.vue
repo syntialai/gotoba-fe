@@ -145,9 +145,9 @@
                 v-model="user.location"
                 type="text"
                 :state="getValidationState(validationContext)"
-                aria-describedby="itinerary-title-feedback-msg"
+                aria-describedby="location-feedback-msg"
               ></b-form-input>
-              <b-form-invalid-feedback id="itinerary-title-feedback-msg">
+              <b-form-invalid-feedback id="location-feedback-msg">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
             </b-form-group>
@@ -242,7 +242,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res;
+            this.image = res.toString();
           })
           .catch((err) => {
             console.log(err);

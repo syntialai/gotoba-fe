@@ -177,7 +177,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res;
+            this.image = res.toString();
           })
           .catch((err) => {
             console.log(err);

@@ -277,7 +277,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.itinerary.image = res;
+            this.itinerary.image = res.toString();
           })
           .catch((err) => {
             console.log(err);

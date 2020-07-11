@@ -397,7 +397,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.tourGuide.image = res;
+            this.tourGuide.image = res.toString();
           })
           .catch((err) => {
             console.log(err);

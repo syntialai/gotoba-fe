@@ -7,11 +7,11 @@
 
     <about-profile-detail class="mb-2" :data="data" />
 
-    <div class="rating-and-reviews mb-2">
+    <div class="rating-and-reviews mb-2 p-3 bg-white">
       <div
         class="title d-flex w-100 border-bottom-gray-young justify-content-between"
       >
-        <h3>Ratings and Reviews</h3>
+        <h5>Ratings and Reviews</h5>
         <b-icon
           icon="arrow-right-short"
           class="icon-black-60"
@@ -21,7 +21,7 @@
 
       <rating-profile-detail />
 
-      <div class="recent-reviews mt-3">
+      <!-- <div class="recent-reviews mt-3">
         <div class="title bold font-color-blue-secondary">Recent reviews</div>
         <div class="recent-reviews-group mt-3" v-if="recentReviews > 0">
           <user-review-detail
@@ -30,14 +30,14 @@
             v-bind="review"
           />
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="promotion mb-2" v-if="promotions.length > 0">
       <div
         class="title d-flex w-100 border-bottom-gray-young justify-content-between"
       >
-        <h3>Promotions</h3>
+        <h5>Promotions</h5>
         <b-icon
           icon="arrow-right-short"
           class="icon-black-60"
@@ -59,7 +59,7 @@
 import CardProfileDetail from './CardProfileDetail.vue';
 import AboutProfileDetail from './AboutProfileDetail.vue';
 import RatingProfileDetail from './RatingProfileDetail.vue';
-import UserReviewDetail from '../Review/UserReviewDetail.vue';
+// import UserReviewDetail from '../Review/UserReviewDetail.vue';
 import CardPromotion from '../CardPromotion.vue';
 
 export default {
@@ -68,18 +68,18 @@ export default {
     CardProfileDetail,
     AboutProfileDetail,
     RatingProfileDetail,
-    UserReviewDetail,
+    // UserReviewDetail,
     CardPromotion,
   },
   props: {
     data: Object,
   },
   computed: {
-    recentReviews() {
-      const reviews = this.data.reviews.slice(0);
-      reviews.sort((a, b) => b.createdAt - a.createdAt);
-      return reviews.slice(0, 3);
-    },
+    // recentReviews() {
+    //   const reviews = this.data.reviews.slice(0);
+    //   reviews.sort((a, b) => b.createdAt - a.createdAt);
+    //   return reviews.slice(0, 3);
+    // },
     promotions() {
       return [];
     },

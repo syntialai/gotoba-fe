@@ -276,7 +276,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.promotion.image = res;
+            this.promotion.image = res.toString();
           })
           .catch((err) => {
             console.log(err);

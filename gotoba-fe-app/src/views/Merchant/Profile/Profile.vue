@@ -43,7 +43,7 @@ export default {
     return {
       menuAccount: [
         {
-          name: 'Edit Profile', icon: 'user-edit', link: '/profile/edit',
+          name: 'Edit Profile', icon: 'user-edit', link: '/merchant/profile/edit',
         },
       ],
       menuAbout: [

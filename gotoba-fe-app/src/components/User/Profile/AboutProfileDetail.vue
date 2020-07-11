@@ -1,7 +1,7 @@
 <template>
   <div class="about-profile-detail bg-white p-3">
     <div class="title w-100 border-bottom-gray-young">
-      <h3>About</h3>
+      <h5>About</h5>
     </div>
     <b-table stacked
       :items="items"

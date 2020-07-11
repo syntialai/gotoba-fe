@@ -574,6 +574,15 @@ const routes = [
     },
   },
   {
+    path: '/merchant/profile/edit',
+    name: 'Edit Profile',
+    beforeEnter: checkMerchantRole,
+    component: Merchant.MERCHANT_EDIT_PROFILE,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
     path: '*',
     name: 'Not Found',
     component: NOT_FOUND,

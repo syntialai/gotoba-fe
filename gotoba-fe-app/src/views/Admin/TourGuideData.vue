@@ -2,7 +2,7 @@
   <div class="tour-guide-data">
     <div class="d-flex align-items-center justify-content-between">
       <show-data-count
-        :perPage="perPage"
+        :perPage.sync="perPage"
         class="my-3"
       />
 
@@ -14,18 +14,23 @@
 
     <tour-guide-modal />
 
-    <tour-guide-card-group id="tour-guide-data-group" :tourGuides="tourGuides" />
+    <tour-guide-card-group
+      id="tour-guide-data-group"
+      v-if="tourGuideDatas"
+      :perPage="perPage"
+      :currentPage="currentPage"
+      :tourGuideDatas="tourGuideDatas"
+    />
 
-    <div class="info">
-      Showing {{ (currentPage - 1) * perPage + 1 }} to
-      {{ currentPage * perPage }} of
-      50 entries
-      <!-- {{ users.length }} entries -->
+    <div class="info" v-if="tourGuideDatas">
+      Showing {{ dataStart }} to {{ dataEnd }} of {{ tourGuideDatas.length }} entries
     </div>
 
     <pagination
-      :currentPage="currentPage"
+      v-if="tourGuideDatas"
+      :currentPage.sync="currentPage"
       :perPage="perPage"
+      :rows="tourGuideDatas.length"
       class="my-3"
       idControls="tour-guide-data-group"
     />
@@ -33,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';
 import TourGuideCardGroup from '../../components/Admin/Data/TourGuideCardGroup.vue';
 import Pagination from '../../components/Partial/Pagination.vue';
@@ -48,9 +53,7 @@ export default {
     ShowDataCount,
   },
   computed: {
-    tourGuides() {
-      return this.$store.getters.tourGuideDatas;
-    },
+    ...mapGetters(['tourGuideDatas']),
   },
   created() {
     this.getTourGuideData();

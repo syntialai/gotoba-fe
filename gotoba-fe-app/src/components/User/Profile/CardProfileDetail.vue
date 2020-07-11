@@ -6,9 +6,9 @@
       img-left class="mb-3 border-none"
     >
       <b-card-text>
-        <h-6>{{ name }}</h-6>
+        <h6>{{ name }}</h6>
         <span>{{ location }}</span>
-        <Rating :rate="rating" font-size="10" />
+        <Rating :rate="rating" :fontSize="10" />
       </b-card-text>
     </b-card>
   </div>

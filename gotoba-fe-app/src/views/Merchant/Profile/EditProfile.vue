@@ -7,7 +7,7 @@
             <b-avatar
               :src="image"
               alt="profile"
-            >
+            />
             <b-form-file
               v-model="image"
               @change="loadImage"
@@ -177,8 +177,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import getValidationState from '../../utils/validation';
-import previewImage from '../../utils/fileHelper';
+import getValidationState from '../../../utils/validation';
+import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
 
 export default {
@@ -235,7 +235,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res;
+            this.image = res.toString();
           })
           .catch((err) => {
             console.log(err);

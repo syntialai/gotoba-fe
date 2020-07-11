@@ -168,11 +168,14 @@ export default {
   GetRestaurants() {
     return fetchGet('/restaurant');
   },
-  GetRestaurantByMerchantSku(merchantSku) {
-    return fetchGet(`/restaurant/${merchantSku}`);
+  GetRestaurantBySku(sku) {
+    return fetchGet(`/restaurant/${sku}`);
   },
-  PostRestaurant(params) {
-    return fetchPost('/restaurant/add', params);
+  GetRestaurantByMerchantSku(merchantSku) {
+    return fetchGet(`/restaurant/merchant/${merchantSku}`);
+  },
+  PostRestaurant(merchantSku, params) {
+    return fetchPost(`/restaurant/add/${merchantSku}`, params);
   },
   EditRestaurant(sku, params) {
     return fetchPut(`/restaurant/edit/${sku}`, params);

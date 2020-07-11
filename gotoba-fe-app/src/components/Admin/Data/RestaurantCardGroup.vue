@@ -2,7 +2,7 @@
   <div class="restaurant-card-group">
     <b-card-group>
       <restaurant-card
-        v-for="restaurant of restaurants"
+        v-for="restaurant of restaurantRange"
         :key="restaurant.sku"
         :restaurant="restaurant"
       />
@@ -20,6 +20,13 @@ export default {
   },
   props: {
     restaurants: Array,
+    start: Number,
+    end: Number,
+  },
+  computed: {
+    restaurantRange() {
+      return this.restaurants.slice(this.start - 1, this.end);
+    },
   },
 };
 </script>
