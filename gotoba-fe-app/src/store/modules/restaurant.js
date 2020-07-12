@@ -16,8 +16,10 @@ const actions = {
 
     api.GetRestaurants()
       .then((res) => {
-        commit(Types.SET_RESTAURANT_DATA, res);
-        console.log(res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_DATA, res.data);
+          console.log(res);
+        }
       })
       .catch((err) => {
         console.log(err);

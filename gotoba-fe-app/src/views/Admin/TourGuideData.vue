@@ -12,13 +12,13 @@
       >ADD</b-button>
     </div>
 
-    <tour-guide-modal />
+    <tour-guide-modal title="Add" />
 
     <tour-guide-card-group
       id="tour-guide-data-group"
       v-if="tourGuideDatas"
-      :perPage="perPage"
-      :currentPage="currentPage"
+      :start="dataStart"
+      :end="dataEnd"
       :tourGuideDatas="tourGuideDatas"
     />
 
@@ -54,9 +54,28 @@ export default {
   },
   computed: {
     ...mapGetters(['tourGuideDatas']),
+
+    dataStart() {
+      return (this.currentPage - 1) * this.perPage + 1;
+    },
+    dataEnd() {
+      const end = this.currentPage * this.perPage;
+
+      if (end > this.tourGuideDatas.length) {
+        return this.tourGuideDatas.length;
+      }
+
+      return end;
+    },
   },
   created() {
     this.getTourGuideData();
+  },
+  data() {
+    return {
+      currentPage: 1,
+      perPage: 10,
+    };
   },
   methods: {
     ...mapActions(['getTourGuideData']),

@@ -30,7 +30,7 @@
         </div>
 
         <div class="rating">
-          <rating rate="" :fontSize="14" />
+          <rating :rate="rating" :fontSize="14" />
           <div class="rate-number font-size-14 semibold">
             ({{ data.rating }})
           </div>

@@ -8,7 +8,7 @@
       dismissible
     >
       <div class="message">
-        {{ alertSuccess? 'Successfully' : 'Failed' }} {{ alertMessage }}!
+        {{ alertSuccess? 'Successfully' : 'Failed to' }} {{ alertMessage }}!
       </div>
     </b-alert>
   </div>

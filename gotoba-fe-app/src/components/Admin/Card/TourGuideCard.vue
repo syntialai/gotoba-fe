@@ -1,9 +1,7 @@
 <template>
   <div class="tour-guide-card">
-    <a :href="'/admin/tour-guide/' + tourGuide.sku">
-      <data-card :data="tourGuide" :otherIcon="tourGuide.gender" />
+    <data-card :data="tourGuide" :otherIcon="tourGuide.gender" />
       <!-- gender : male || female -->
-    </a>
   </div>
 </template>
 

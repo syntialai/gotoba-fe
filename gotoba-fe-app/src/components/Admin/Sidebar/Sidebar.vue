@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar h-100 position-fixed box-shadow">
+  <div class="sidebar h-100 position-absolute box-shadow">
     <aside id="sidebar-admin" class="bg-white" shadow>
       <b-button
         variant="link"
@@ -77,6 +77,11 @@ export default {
           icon: 'utensils',
           title: 'Restaurant',
           link: '/admin/restaurant',
+        },
+        {
+          icon: 'user-tie',
+          title: 'Tour Guide',
+          link: '/admin/tour-guide',
         },
         {
           icon: 'user-cog',

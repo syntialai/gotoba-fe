@@ -14,8 +14,10 @@ const actions = {
 
     api.GetItineraries()
       .then((res) => {
-        console.log(res);
-        commit(Types.SET_JOURNEY_DATA, res);
+        if (!res.error) {
+          console.log(res);
+          commit(Types.SET_JOURNEY_DATA, res.data);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -27,8 +29,10 @@ const actions = {
 
     api.GetItineraryBySku(sku)
       .then((res) => {
-        console.log(res);
-        commit(Types.SET_JOURNEY_DATA_BY_SKU, res);
+        if (!res.error) {
+          console.log(res);
+          commit(Types.SET_JOURNEY_DATA_BY_SKU, res.data);
+        }
       })
       .catch((err) => {
         console.log(err);
