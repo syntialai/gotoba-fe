@@ -5,6 +5,7 @@ import api from '../../api/api';
 const state = {
   journeyData: [],
   journeyDataBySku: {},
+  journeyDataByMerchantSku: [],
   journeyReview: [],
 };
 
@@ -15,9 +16,9 @@ const actions = {
     api.GetItineraries()
       .then((res) => {
         if (!res.error) {
-          console.log(res);
           commit(Types.SET_JOURNEY_DATA, res.data);
         }
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -39,13 +40,33 @@ const actions = {
       });
   },
 
+  getJourneyDataByMerchantSku({ commit }, merchantSku) {
+    commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU);
+
+    api.GetItineraryByMerchantSku(merchantSku)
+      .then((res) => {
+        if (!res.error) {
+          commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, res.data);
+          return;
+        }
+
+        console.log(res);
+        commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, []);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
   getJourneyReview({ commit }, sku) {
     commit(Types.SET_JOURNEY_REVIEW);
 
     api.GetReviewBySku(sku)
       .then((res) => {
+        if (!res.error) {
+          commit(Types.SET_JOURNEY_REVIEW, res);
+        }
         console.log(res);
-        commit(Types.SET_JOURNEY_REVIEW, res);
       })
       .catch((err) => {
         console.log(err);
@@ -69,6 +90,7 @@ const actions = {
 const getters = {
   journeyData: (state) => state.journeyData,
   journeyDataBySku: (state) => state.journeyDataBySku,
+  journeyDataByMerchantSku: (state) => state.journeyDataByMerchantSku,
   journeyReview: (state) => state.journeyReview,
 };
 
@@ -79,6 +101,9 @@ const mutations = {
   },
   [Types.SET_JOURNEY_DATA_BY_SKU](state, res) {
     state.journeyDataBySku = res;
+  },
+  [Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU](state, res) {
+    state.journeyDataByMerchantSku = res;
   },
   [Types.SET_JOURNEY_REVIEW](state, res) {
     state.journeyReview = res;

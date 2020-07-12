@@ -8,7 +8,7 @@
       <b-card-text>
         <h6>{{ name }}</h6>
         <span>{{ location }}</span>
-        <Rating :rate="rating" :fontSize="10" />
+        <Rating v-if="rating" :rate="rating" :fontSize="10" />
       </b-card-text>
     </b-card>
   </div>

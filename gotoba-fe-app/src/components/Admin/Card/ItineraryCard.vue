@@ -1,6 +1,9 @@
 <template>
   <div class="itinerary-card">
-    <data-card :data="itinerary" otherIcon="tag" />
+    <data-card
+      :data="itineraryData"
+      otherIcon="tag"
+    />
 
     <div class="more-itinerary-card">
       <div class="bold">Description</div>
@@ -21,6 +24,16 @@ export default {
   },
   props: {
     itinerary: Object,
+  },
+  computed: {
+    itineraryData() {
+      return {
+        image: this.itinerary.image,
+        location: this.itinerary.location,
+        other: this.itinerary.harga,
+        rating: this.itinerary.rating || null,
+      };
+    },
   },
 };
 </script>

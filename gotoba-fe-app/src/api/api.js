@@ -149,6 +149,9 @@ export default {
   GetItineraries() {
     return fetchGet('/wisata/');
   },
+  GetItineraryByMerchantSku(merchantSku) {
+    return fetchGet(`/wisata/merchant/${merchantSku}`);
+  },
   GetItineraryBySku(sku) {
     return fetchGet(`/wisata/${sku}`);
   },

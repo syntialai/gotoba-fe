@@ -17,7 +17,9 @@ const actions = {
 
     api.GetBistroType()
       .then((res) => {
-        commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -87,7 +89,9 @@ const actions = {
 
     api.GetRestaurantMenus(id)
       .then((res) => {
-        commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -100,7 +104,9 @@ const actions = {
 
     api.GetRestaurantMenus(sku)
       .then((res) => {
-        commit(Types.SET_RESTAURANT_REVIEW, res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_REVIEW, res);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -136,7 +142,6 @@ const mutations = {
   [Types.SET_RESTAURANT_BISTRO_TYPE](state, res) {
     state.bistroType = res;
   },
-
   [Types.SET_RESTAURANT_DATA](state, res) {
     state.restaurantDatas = res;
   },

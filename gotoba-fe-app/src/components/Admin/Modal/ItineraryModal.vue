@@ -10,8 +10,8 @@
       ok-title="SUBMIT"
       cancel-title="CANCEL"
     >
-      <ValidationObserver>
-        <b-form @submit.stop.prevent="submitItinerary">
+      <ValidationObserver v-slot="validate">
+        <b-form @submit.stop.prevent="validate(submitItinerary)">
           <ValidationProvider
             name="Name"
             rules="required|alpha_dash"
@@ -225,6 +225,8 @@ export default {
         price: 0,
         address: '',
         description: '',
+        createdBy: '',
+        hoursOpen: {},
       },
     };
   },
@@ -240,11 +242,7 @@ export default {
     getValidationState,
 
     submitItinerary() {
-      const data = {
-        title: this.itinerary.title,
-        image: this.itinerary.image,
-        description: this.itinerary.description,
-      };
+      const data = { ...this.itinerary };
 
       if (data.title === '' || data.image === null || data.description === '') {
         return;

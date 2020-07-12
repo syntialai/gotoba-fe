@@ -1,6 +1,6 @@
 <template>
   <div class="spot-detail">
-    <profile-detail :data="journeyData" />
+    <profile-detail :data="journeyDataBySku" />
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
     ProfileDetail,
   },
   computed: {
-    ...mapGetters(['journeyData']),
+    ...mapGetters(['journeyDataBySku']),
   },
   created() {
     this.getJourneyDataBySku(this.$route.params.sku);

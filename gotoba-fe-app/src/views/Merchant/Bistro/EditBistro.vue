@@ -115,7 +115,7 @@
 
         <ValidationProvider
           name="Bistro phone number"
-          :rules="{ numeric: true, max: 13 }"
+          :rules="{ numeric: true, min: 10, max: 13 }"
           v-slot="validationContext"
         >
           <b-form-group
@@ -206,8 +206,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-// import { alert } from '../../../utils/tool';
-// import api from '../../../api/api';
+import { alert } from '../../../utils/tool';
+import api from '../../../api/api';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 
@@ -343,30 +343,30 @@ export default {
       const data = this.bistro;
 
       console.log(data);
-      // if (this.restaurantData) {
-      //   api.EditRestaurant(this.restaurantData.sku, data)
-      //     .then((res) => {
-      //       alert('updated your bistro', true);
-      //       console.log(res);
-      //     })
-      //     .catch((err) => {
-      //       alert('update your bistro', false);
-      //       console.log(err);
-      //     });
+      if (this.restaurantData) {
+        api.EditRestaurant(this.restaurantData.sku, data)
+          .then((res) => {
+            alert('updated your bistro', true);
+            console.log(res);
+          })
+          .catch((err) => {
+            alert('update your bistro', false);
+            console.log(err);
+          });
 
-      //   return;
-      // }
+        return;
+      }
 
-      // api.PostRestaurant(this.userSku, data)
-      //   .then((res) => {
-      //     console.log(res);
-      //     alert('added your bistro', true);
-      //     this.$router.push('/merchant/bistro');
-      //   })
-      //   .catch((err) => {
-      //     alert('add your bistro', false);
-      //     console.log(err);
-      //   });
+      api.PostRestaurant(this.userSku, data)
+        .then((res) => {
+          console.log(res);
+          alert('added your bistro', true);
+          this.$router.push('/merchant/bistro');
+        })
+        .catch((err) => {
+          alert('add your bistro', false);
+          console.log(err);
+        });
     },
 
     loadImage(event) {

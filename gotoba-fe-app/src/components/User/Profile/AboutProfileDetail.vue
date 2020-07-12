@@ -21,9 +21,19 @@ export default {
       return {
         description: this.data.description,
         full_address: this.data.address,
-        hours_open: this.data.hoursOpen,
+        hours_open: this.hoursOpen,
         telephone: this.data.phone,
       };
+    },
+    hoursOpen() {
+      let hoursOpenStr = '';
+
+      Object.entries(this.data.hoursOpen)
+        .forEach(([key, value]) => {
+          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
+        });
+
+      return hoursOpenStr;
     },
   },
 };
