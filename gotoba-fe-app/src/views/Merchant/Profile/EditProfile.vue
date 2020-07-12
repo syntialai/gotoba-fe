@@ -15,6 +15,7 @@
             ></b-form-file>
             <b-button
               v-if="image !== user.image && image !== null"
+              block
               size="sm"
               class="custom-btn-gray mt-2"
               @click="removePhoto"

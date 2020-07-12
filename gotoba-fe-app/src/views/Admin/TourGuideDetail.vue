@@ -13,9 +13,15 @@
 
     <tour-guide-modal title="Edit" />
 
-    <tour-guide-card :tourGuide="tourGuideData" />
+    <tour-guide-card
+      v-if="tourGuideData"
+      :tourGuide="tourGuideData"
+    />
 
-    <div class="more-tour-guide-info">
+    <div
+      v-if="tourGuideData"
+      class="more-tour-guide-info"
+    >
       <div class="language d-flex justify-content-between">
         <div class="language-label font-color-black-60">
           Language

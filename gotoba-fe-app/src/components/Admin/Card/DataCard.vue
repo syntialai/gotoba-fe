@@ -29,8 +29,8 @@
           </div>
         </div>
 
-        <div class="rating">
-          <rating :rate="rating" :fontSize="14" />
+        <div class="rating" v-if="data.rating">
+          <rating :rate="data.rating" :fontSize="14" />
           <div class="rate-number font-size-14 semibold">
             ({{ data.rating }})
           </div>

@@ -16,5 +16,15 @@ export default {
   props: {
     tourGuide: Object,
   },
+  computed: {
+    tourGuideData() {
+      return {
+        image: this.tourGuide.image,
+        location: this.tourGuide.location,
+        other: this.tourGuide.gender,
+        rating: this.tourGuide.rating,
+      };
+    },
+  },
 };
 </script>

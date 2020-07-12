@@ -1,8 +1,14 @@
 <template>
   <div class="restaurant-detail">
-    <restaurant-card :restaurant="restaurantData" />
+    <restaurant-card
+      v-if="restaurantData"
+      :restaurant="restaurantData"
+    />
 
-    <div class="more-restaurant-info">
+    <div
+      v-if="restaurantData"
+      class="more-restaurant-info"
+    >
       <div class="full-address d-flex justify-content-between">
         <div class="full-address-label font-color-black-60">
           Full Address
@@ -17,7 +23,7 @@
           Hours
         </div>
         <div class="hours-open-value font-color-black-87 semibold pl-4">
-          {{ restaurantData.hoursOpen }}
+          {{ hoursOpen }}
         </div>
       </div>
 
@@ -44,6 +50,16 @@ export default {
   },
   computed: {
     ...mapGetters(['restaurantData', 'restaurantMenu']),
+    hoursOpen() {
+      let hoursOpenStr = '';
+
+      Object.entries(this.restaurantData.hoursOpen)
+        .forEach(([key, value]) => {
+          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
+        });
+
+      return hoursOpenStr;
+    },
   },
   created() {
     this.getRestaurantDataByMerchantSku(this.$route.params.sku);

@@ -20,9 +20,9 @@ export default {
     items() {
       return {
         description: this.data.description,
-        full_address: this.data.fullAddress,
+        full_address: this.data.address,
         hours_open: this.data.hoursOpen,
-        telephone: this.data.telephone,
+        telephone: this.data.phone,
       };
     },
   },

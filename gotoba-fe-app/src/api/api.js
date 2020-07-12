@@ -168,6 +168,9 @@ export default {
   GetRestaurants() {
     return fetchGet('/restaurant');
   },
+  GetBistroType() {
+    return fetchGet('/restaurant/bistro/');
+  },
   GetRestaurantBySku(sku) {
     return fetchGet(`/restaurant/${sku}`);
   },

@@ -5,6 +5,7 @@
         v-for="restaurant of restaurantRange"
         :key="restaurant.sku"
         :restaurant="restaurant"
+        @click="goToDetails(restaurant.sku)"
       />
     </b-card-group>
   </div>
@@ -26,6 +27,11 @@ export default {
   computed: {
     restaurantRange() {
       return this.restaurants.slice(this.start - 1, this.end);
+    },
+  },
+  methods: {
+    goToDetails(sku) {
+      this.$router.push(`/admin/restaurant/${sku}`);
     },
   },
 };

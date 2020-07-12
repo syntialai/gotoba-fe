@@ -8,9 +8,23 @@ const state = {
   restaurantMenu: {},
   restaurantMenus: [],
   restaurantReview: [],
+  bistroType: [],
 };
 
 const actions = {
+  getRestaurantBistroType({ commit }) {
+    commit(Types.SET_RESTAURANT_BISTRO_TYPE);
+
+    api.GetBistroType()
+      .then((res) => {
+        commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
   getRestaurantData({ commit }) {
     commit(Types.SET_RESTAURANT_DATA);
 
@@ -109,6 +123,7 @@ const actions = {
 };
 
 const getters = {
+  bistroType: (state) => state.bistroType,
   restaurantData: (state) => state.restaurantData,
   restaurantDatas: (state) => state.restaurantDatas,
   restaurantMenu: (state) => state.restaurantMenu,
@@ -118,6 +133,10 @@ const getters = {
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
+  [Types.SET_RESTAURANT_BISTRO_TYPE](state, res) {
+    state.bistroType = res;
+  },
+
   [Types.SET_RESTAURANT_DATA](state, res) {
     state.restaurantDatas = res;
   },

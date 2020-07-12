@@ -1,7 +1,7 @@
 <template>
   <div class="edit-bistro mt-2 p-3">
-    <ValidationObserver>
-      <b-form @submit="updateBistro">
+    <ValidationObserver v-slot="validate">
+      <b-form @submit.stop.prevent="validate(updateBistro)">
         <ValidationProvider
           name="Restaurant Image"
           rules="required"
@@ -94,13 +94,14 @@
           v-slot="validationContext"
         >
           <b-form-group
+            v-if="bistroType"
             id="bistro-type-group"
             label="Bistro Type"
             label-for="bistro-type"
           >
             <b-form-select
               v-model="bistro.bistroType"
-              :options="bistroTypeOptions"
+              :options="bistroType"
               class="border-gray"
               required
               :state="getValidationState(validationContext)"
@@ -114,7 +115,7 @@
 
         <ValidationProvider
           name="Bistro phone number"
-          rules="numeric|max:13"
+          :rules="{ numeric: true, max: 13 }"
           v-slot="validationContext"
         >
           <b-form-group
@@ -172,27 +173,22 @@
               v-for="(dayOpen, index) of bistro.hoursOpen"
               :key="dayOpen.day"
             >
-              <b-form-checkbox
-                v-model="bistro.hoursOpen[index].open"
-              >
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <div class="day">{{ dayOpen.day }}</div>
-                  <div
-                    v-if="bistro.hoursOpen[index].open"
-                    class="time ml-3 d-flex justify-content-between"
-                  >
-                    <b-form-timepicker
-                      v-model="bistro.hoursOpen[index].openTime"
-                      locale="en"
-                    ></b-form-timepicker>
-                    <div class="mx-2">-</div>
-                    <b-form-timepicker
-                      v-model="bistro.hoursOpen[index].closeTime"
-                      locale="en"
-                    ></b-form-timepicker>
-                  </div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="day semibold">{{ dayOpen.day }}</div>
+                <div
+                  class="time ml-3 d-flex justify-content-between"
+                >
+                  <b-form-timepicker
+                    v-model="bistro.hoursOpen[index].openTime"
+                    locale="en"
+                  ></b-form-timepicker>
+                  <div class="mx-2">-</div>
+                  <b-form-timepicker
+                    v-model="bistro.hoursOpen[index].closeTime"
+                    locale="en"
+                  ></b-form-timepicker>
                 </div>
-              </b-form-checkbox>
+              </div>
             </li>
           </ul>
         </b-form-group>
@@ -210,18 +206,19 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { alert } from '../../../utils/tool';
-import api from '../../../api/api';
+// import { alert } from '../../../utils/tool';
+// import api from '../../../api/api';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 
 export default {
   name: 'EditBistro',
   computed: {
-    ...mapGetters(['restaurantData', 'userSku']),
+    ...mapGetters(['restaurantData', 'bistroType', 'userSku']),
   },
   created() {
     this.getRestaurantDataByMerchantSku(this.userSku);
+    this.getRestaurantBistroType();
   },
   data() {
     return {
@@ -237,25 +234,25 @@ export default {
         address: '',
         hoursOpen: [
           {
-            open: false, day: 'Monday', openTime: '', closeTime: '',
+            day: 'Monday', openTime: '', closeTime: '',
           },
           {
-            open: false, day: 'Tuesday', openTime: '', closeTime: '',
+            day: 'Tuesday', openTime: '', closeTime: '',
           },
           {
-            open: false, day: 'Wednesday', openTime: '', closeTime: '',
+            day: 'Wednesday', openTime: '', closeTime: '',
           },
           {
-            open: false, day: 'Thursday', openTime: '', closeTime: '',
+            day: 'Thursday', openTime: '', closeTime: '',
           },
           {
-            open: false, day: 'Friday', openTime: '', closeTime: '',
+            day: 'Friday', openTime: '', closeTime: '',
           },
           {
-            open: false, day: 'Saturday', openTime: '', closeTime: '',
+            day: 'Saturday', openTime: '', closeTime: '',
           },
           {
-            open: false, day: 'Sunday', openTime: '', closeTime: '',
+            day: 'Sunday', openTime: '', closeTime: '',
           },
         ],
       },
@@ -338,37 +335,38 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getRestaurantDataByMerchantSku']),
+    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantBistroType']),
 
     getValidationState,
 
     updateBistro() {
       const data = this.bistro;
 
-      if (this.restaurantData) {
-        api.EditRestaurant(this.restaurantData.sku, data)
-          .then((res) => {
-            alert('updated your bistro', true);
-            console.log(res);
-          })
-          .catch((err) => {
-            alert('update your bistro', false);
-            console.log(err);
-          });
+      console.log(data);
+      // if (this.restaurantData) {
+      //   api.EditRestaurant(this.restaurantData.sku, data)
+      //     .then((res) => {
+      //       alert('updated your bistro', true);
+      //       console.log(res);
+      //     })
+      //     .catch((err) => {
+      //       alert('update your bistro', false);
+      //       console.log(err);
+      //     });
 
-        return;
-      }
+      //   return;
+      // }
 
-      api.PostRestaurant(this.userSku, data)
-        .then((res) => {
-          console.log(res);
-          alert('added your bistro', true);
-          this.$router.push('/merchant/bistro');
-        })
-        .catch((err) => {
-          alert('add your bistro', false);
-          console.log(err);
-        });
+      // api.PostRestaurant(this.userSku, data)
+      //   .then((res) => {
+      //     console.log(res);
+      //     alert('added your bistro', true);
+      //     this.$router.push('/merchant/bistro');
+      //   })
+      //   .catch((err) => {
+      //     alert('add your bistro', false);
+      //     console.log(err);
+      //   });
     },
 
     loadImage(event) {

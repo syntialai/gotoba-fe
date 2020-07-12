@@ -5,7 +5,10 @@
       v-bind="data"
     />
 
-    <about-profile-detail class="mb-2" :data="data" />
+    <about-profile-detail
+      class="mb-2"
+      :data="data"
+    />
 
     <div class="rating-and-reviews mb-2 p-3 bg-white">
       <div
@@ -38,11 +41,12 @@
         class="title d-flex w-100 border-bottom-gray-young justify-content-between"
       >
         <h5>Promotions</h5>
-        <b-icon
-          icon="arrow-right-short"
-          class="icon-black-60"
-          href=""
-        ></b-icon>
+        <router-link :to="'/promotion/' + data.sku">
+          <b-icon
+            icon="arrow-right-short"
+            class="icon-black-60"
+          ></b-icon>
+        </router-link>
       </div>
       <div class="promotion-group">
         <card-promotion

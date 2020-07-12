@@ -20,6 +20,7 @@
             <b-button
               v-if="image !== userDataBySku.image && image !== null"
               size="sm"
+              block
               class="custom-btn-gray mt-2"
               @click="removePhoto"
             >Remove photo</b-button>
