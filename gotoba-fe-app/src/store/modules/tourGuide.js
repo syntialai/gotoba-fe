@@ -14,7 +14,9 @@ const actions = {
 
     api.GetTourGuides()
       .then((res) => {
-        commit(Types.SET_TOUR_GUIDE_DATA, res);
+        if (!res.error) {
+          commit(Types.SET_TOUR_GUIDE_DATA, res.data);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -27,7 +29,9 @@ const actions = {
 
     api.GetTourGuideBySku(sku)
       .then((res) => {
-        commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res);
+        if (!res.error) {
+          commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res.data);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -74,7 +78,12 @@ const mutations = {
     state.tourGuideDatas = res;
   },
   [Types.SET_TOUR_GUIDE_DATA_BY_SKU](state, res) {
-    state.tourGuideData = res;
+    const tourGuide = { ...res };
+
+    tourGuide.availableLocation = res.availableLocation.join(', ');
+    tourGuide.language = res.language.join(', ');
+
+    state.tourGuideData = tourGuide;
   },
   [Types.SET_TOUR_GUIDE_REVIEW](state, res) {
     state.tourGuideReview = res;

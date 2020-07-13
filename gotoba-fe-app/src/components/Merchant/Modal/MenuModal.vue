@@ -107,7 +107,7 @@
               <b-form-input
                 id="menu-price"
                 v-model="menu.price"
-                @input="formatPrice(itinerary.price)"
+                :formatter="formatPrice"
                 type="text"
                 required
                 class="border-gray"
@@ -199,7 +199,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.menu.image = res;
+            this.menu.image = res.toString();
           })
           .catch((err) => {
             console.log(err);

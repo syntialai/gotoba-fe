@@ -18,9 +18,7 @@ export default {
       const breadcrumb = pathArray.reduce((array, path, index) => {
         array.push({
           text: toCapitalize(path), // this.$router.matched[index].meta.breadcrumb || path
-          to: array[index - 1]
-            ? `/${array[index - 1].path}/${path}`
-            : `/admin/${path}`,
+          to: index === 0 ? `/${path}` : `/admin/${path}`,
         });
 
         return array;

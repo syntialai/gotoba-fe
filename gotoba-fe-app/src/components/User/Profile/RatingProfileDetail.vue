@@ -4,11 +4,11 @@
       <span class="font-size-48 font-color-blue-primary">
         {{ averageOfRatings(ratingBars) }}
       </span>
-      <Rating :rate="rating" font-size=16 />
+      <rating :rate="rating" :font-size="16" />
       <span class="font-size-12">{{ totalReviewer }}</span>
     </div>
     <div class="rating-details-group">
-      <div v-for="(rate, index) in ratingBars.reverse()" :key="rate">
+      <div v-for="(rate, index) in ratingBars.reverse()" :key="index">
         <span>{{ 5 - index }}</span>
         <b-progress
           :value="rate"
@@ -21,21 +21,18 @@
 </template>
 
 <script>
-import Rating from '@/components/Partial/Rating.vue';
-import averageOfRatings from '@/utils/rating';
+import Rating from '../../Partial/Rating.vue';
+import averageOfRatings from '../../../utils/rating';
 
 export default {
   name: 'RatingProfileDetail',
   components: {
     Rating,
   },
-  data() {
-    return {
-      ratingBars: [60, 50, 2, 10, 500],
-    };
+  props: {
+    ratingBars: Array,
   },
   computed: {
-    averageOfRatings,
     totalReviewer() {
       let sumOfRatings = 0;
       this.ratingBars.forEach((rate) => {
@@ -43,6 +40,9 @@ export default {
       });
       return sumOfRatings;
     },
+  },
+  methods: {
+    averageOfRatings,
   },
 };
 </script>

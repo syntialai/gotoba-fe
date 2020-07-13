@@ -24,7 +24,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -38,14 +38,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -107,11 +107,8 @@
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -141,11 +138,16 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,7 +161,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;div :class="'search-autocomplete ' + {show: suggestionShow}"&gt;
+  &lt;div class="search-autocomplete"&gt;
     &lt;b-list-group&gt;
       &lt;b-list-group-item
         v-for="suggestion in matches"
@@ -185,26 +187,27 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
+<span class="cstat-no" title="statement not covered" >import { mapGetters, mapActions } from 'vuex';</span>
+&nbsp;
 export default {
   name: 'SearchAutocomplete',
   computed: {
-<span class="fstat-no" title="function not covered" >    suggestions() {</span>
-<span class="cstat-no" title="statement not covered" >      return this.$store.getters.searchSuggestions;</span>
-    },
-<span class="fstat-no" title="function not covered" >    suggestionShow() {</span>
-<span class="cstat-no" title="statement not covered" >      return this.$store.getters.searchSuggestionShow;</span>
-    },
+    ...mapGetters(['searchSuggestions', 'searchKeywords']),
 <span class="fstat-no" title="function not covered" >    matches() {</span>
-<span class="cstat-no" title="statement not covered" >      const keyword = this.$store.getters.searchKeywords;</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      return this.suggestions.filter(</span></span>
-        (str) =&gt; str.substr(0, keyword.length).toLowerCase() === keyword.toLowerCase(),
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      return this.searchSuggestions.filter(</span></span>
+        (str) =&gt; str.substr(
+          0,
+          this.searchKeywords.length,
+        ).toLowerCase()
+        === this.searchKeywords.toLowerCase(),
       );
     },
   },
   methods: {
+    ...mapActions(['setSearchShowStatus']),
 <span class="fstat-no" title="function not covered" >    suggestionClick(suggestion) {</span>
 <span class="cstat-no" title="statement not covered" >      this.selection = suggestion;</span>
-<span class="cstat-no" title="statement not covered" >      this.show = false;</span>
+<span class="cstat-no" title="statement not covered" >      this.setSearchShowStatus(false);</span>
     },
   },
 };
@@ -216,7 +219,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Jul 05 2020 21:14:50 GMT+0700 (Indochina Time)
+                at Thu Jul 09 2020 19:54:19 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

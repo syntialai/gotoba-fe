@@ -1,5 +1,5 @@
 <template>
-  <div class="journey">
+  <div class="journey" v-if="journeyData">
     <div class="journey-profiles bg-white p-3">
       <h6>Nearby Places</h6>
       <div class="journey-group d-flex flex-wrap">
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="journey-ticket bg-white p-3 my-3">
+    <div class="journey-ticket bg-white p-3 my-3" v-if="ticketJourney">
       <h6>Ticket for Journey</h6>
       <div class="ticket-group">
         <card-home-long
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import CardHome from '../../../components/User/Home/CardHome.vue';
 import CardHomeLong from '../../../components/User/Home/CardHomeLong.vue';
 
@@ -40,7 +40,12 @@ export default {
   computed: {
     ...mapGetters(['journeyData', 'ticketJourney']),
   },
+  created() {
+    this.getJourneyData();
+    this.getTicketJourney();
+  },
   methods: {
+    ...mapActions(['getJourneyData', 'getTicketJourney']),
     goToProfile(journeySku) {
       this.$router.push(`/journey/${journeySku}`);
     },

@@ -1,8 +1,6 @@
 <template>
   <div class="restaurant-card">
-    <a :href="'/admin/restaurant/' + restaurant.sku">
-      <data-card :data="restaurant" otherIcon="hamburger" />
-    </a>
+    <data-card :data="restaurantData" otherIcon="hamburger" />
   </div>
 </template>
 
@@ -16,6 +14,16 @@ export default {
   },
   props: {
     restaurant: Object,
+  },
+  computed: {
+    restaurantData() {
+      return {
+        image: this.restaurant.image,
+        location: this.restaurant.location,
+        other: this.restaurant.bistroType,
+        rating: this.restaurant.rating || null,
+      };
+    },
   },
 };
 </script>

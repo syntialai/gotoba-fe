@@ -41,7 +41,7 @@ function checkUserRole(to, from, next) {
   const role = index.getters.userRole;
 
   if (role === 'ROLE_USER') {
-    next('/');
+    next();
   } else if (role === 'ROLE_MERCHANT') {
     next('/merchant');
   } else if (role === 'ROLE_ADMIN') {
@@ -50,6 +50,18 @@ function checkUserRole(to, from, next) {
     next('/login');
   }
 }
+
+// function checkRole(to, from, next) {
+//   const role = index.getters.userRole;
+
+//   if (role === 'ROLE_USER' || !role) {
+//     next();
+//   } else if (role === 'ROLE_MERCHANT') {
+//     next('/merchant');
+//   } else if (role === 'ROLE_ADMIN') {
+//     next('/admin');
+//   }
+// }
 
 const routes = [
   {
@@ -265,7 +277,7 @@ const routes = [
   {
     path: '/itinerary/add',
     name: 'Add Itinerary',
-    // beforeEnter: checkUserRole,
+    beforeEnter: checkUserRole,
     component: Pages.ITINERARY_ADD,
     meta: {
       layout: 'default-back',
@@ -274,7 +286,6 @@ const routes = [
   {
     path: '/itinerary/add/show-on-map',
     name: 'Set Destination',
-    beforeEnter: checkUserRole,
     component: Pages.ADD_DESTINATION,
   },
   {
@@ -304,7 +315,7 @@ const routes = [
   {
     path: '/review/:sku',
     name: 'Review',
-    // beforeEnter: checkUserRole,
+    beforeEnter: checkUserRole,
     component: Pages.REVIEW,
     meta: {
       layout: 'default-back',
@@ -557,6 +568,15 @@ const routes = [
     name: 'Spot Promotion',
     beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_SPOT_PROMOTION,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/merchant/profile/edit',
+    name: 'Edit Profile',
+    beforeEnter: checkMerchantRole,
+    component: Merchant.MERCHANT_EDIT_PROFILE,
     meta: {
       layout: 'default-back',
     },

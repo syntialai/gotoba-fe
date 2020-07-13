@@ -1,5 +1,5 @@
 <template>
-  <div :class="'search-autocomplete ' + {show: suggestionShow}">
+  <div class="search-autocomplete">
     <b-list-group>
       <b-list-group-item
         v-for="suggestion in matches"
@@ -25,26 +25,27 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'SearchAutocomplete',
   computed: {
-    suggestions() {
-      return this.$store.getters.searchSuggestions;
-    },
-    suggestionShow() {
-      return this.$store.getters.searchSuggestionShow;
-    },
+    ...mapGetters(['searchSuggestions', 'searchKeywords']),
     matches() {
-      const keyword = this.$store.getters.searchKeywords;
-      return this.suggestions.filter(
-        (str) => str.substr(0, keyword.length).toLowerCase() === keyword.toLowerCase(),
+      return this.searchSuggestions.filter(
+        (str) => str.substr(
+          0,
+          this.searchKeywords.length,
+        ).toLowerCase()
+        === this.searchKeywords.toLowerCase(),
       );
     },
   },
   methods: {
+    ...mapActions(['setSearchShowStatus']),
     suggestionClick(suggestion) {
       this.selection = suggestion;
-      this.show = false;
+      this.setSearchShowStatus(false);
     },
   },
 };

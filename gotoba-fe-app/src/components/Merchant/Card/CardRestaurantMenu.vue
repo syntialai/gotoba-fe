@@ -22,7 +22,7 @@
         class="font-size-12 font-color-black-60"
       ></b-card-sub-title>
       <b-card-text class="font-color-orange-accent font-size-14 semibold">
-        {{ menu.price }}
+        {{ menu.harga }}
       </b-card-text>
     </b-card>
   </div>

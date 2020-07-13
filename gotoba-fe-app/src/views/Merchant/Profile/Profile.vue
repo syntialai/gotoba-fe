@@ -1,18 +1,9 @@
 <template>
   <div class="profile">
-    <div class="merchant-profile d-flex w-100 m-4 bg-white box-shadow">
-      <div class="merchant-img">
-        <b-avatar :src="userInfo.image"></b-avatar>
-      </div>
-      <div class="merchant-info">
-        <div class="merchant-name bold font-size-20">
-          {{ userInfo.name }}
-        </div>
-        <div class="merchant-location font-color-black-60">
-          {{ userInfo.location }}
-        </div>
-      </div>
-    </div>
+    <card-profile-user
+      :name="userName"
+      image=""
+    />
 
     <profile-menu-group
       title="Account"
@@ -29,21 +20,30 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { alert } from '../../../utils/tool';
+import CardProfileUser from '../../../components/User/Profile/CardProfileUser.vue';
 import ProfileMenuGroup from '../../../components/User/Profile/ProfileMenuGroup.vue';
 
 export default {
   name: 'Profile',
   components: {
+    CardProfileUser,
     ProfileMenuGroup,
   },
   computed: {
-    ...mapGetters(['userInfo']),
+    ...mapGetters(['userName', 'userLoginStatus', 'userRole']),
+  },
+  created() {
+    if (!this.userLoginStatus || this.userRole !== 'ROLE_MERCHANT') {
+      alert('You should log in first', false);
+      this.$router.push('/login');
+    }
   },
   data() {
     return {
       menuAccount: [
         {
-          name: 'Edit Profile', icon: 'user-edit', link: '/profile/edit',
+          name: 'Edit Profile', icon: 'user-edit', link: '/merchant/profile/edit',
         },
       ],
       menuAbout: [

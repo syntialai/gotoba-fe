@@ -1,22 +1,27 @@
 <template>
   <div class="restaurant-data">
     <show-data-count
-      :perPage="perPage"
+      :perPage.sync="perPage"
       class="my-3"
     />
 
-    <restaurant-card-group id="restaurant-data-group" :restaurants="restaurants" />
+    <restaurant-card-group
+      id="restaurant-data-group"
+      v-if="restaurantDatas"
+      :restaurants="restaurantDatas"
+      :start="dataStart"
+      :end="dataEnd"
+    />
 
-    <div class="info">
-      Showing {{ (currentPage - 1) * perPage + 1 }} to
-      {{ currentPage * perPage }} of
-      50 entries
-      <!-- {{ users.length }} entries -->
+    <div class="info" v-if="restaurantDatas">
+      Showing {{ dataStart }} to {{ dataEnd }} of {{ restaurantDatas.length }} entries
     </div>
 
     <pagination
-      :currentPage="currentPage"
+      v-if="restaurantDatas"
+      :currentPage.sync="currentPage"
       :perPage="perPage"
+      :rows="restaurantDatas.length"
       class="my-3"
       idControls="restaurant-data-group"
     />
@@ -38,6 +43,19 @@ export default {
   },
   computed: {
     ...mapGetters(['restaurantDatas']),
+
+    dataStart() {
+      return (this.currentPage - 1) * this.perPage + 1;
+    },
+    dataEnd() {
+      const end = this.currentPage * this.perPage;
+
+      if (end > this.restaurantDatas.length) {
+        return this.restaurantDatas.length;
+      }
+
+      return end;
+    },
   },
   created() {
     this.getRestaurantData();
@@ -45,7 +63,7 @@ export default {
   data() {
     return {
       currentPage: 1,
-      perPage: 1,
+      perPage: 10,
     };
   },
   methods: {

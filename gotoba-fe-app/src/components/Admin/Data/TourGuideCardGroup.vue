@@ -5,6 +5,7 @@
         v-for="tourGuide of tourGuides"
         :key="tourGuide.sku"
         :tourGuide="tourGuide"
+        @click="goToDetails(tourGuide.sku)"
       />
     </b-card-group>
   </div>
@@ -20,6 +21,11 @@ export default {
   },
   props: {
     tourGuides: Array,
+  },
+  methods: {
+    goToDetails(sku) {
+      this.$router.push(`/admin/tour-guide/${sku}`);
+    },
   },
 };
 </script>

@@ -1,9 +1,7 @@
 <template>
   <div class="tour-guide-card">
-    <a :href="'/admin/tour-guide/' + tourGuide.sku">
-      <data-card :data="tourGuide" :otherIcon="tourGuide.gender" />
+    <data-card :data="tourGuide" :otherIcon="tourGuide.gender" />
       <!-- gender : male || female -->
-    </a>
   </div>
 </template>
 
@@ -17,6 +15,16 @@ export default {
   },
   props: {
     tourGuide: Object,
+  },
+  computed: {
+    tourGuideData() {
+      return {
+        image: this.tourGuide.image,
+        location: this.tourGuide.location,
+        other: this.tourGuide.gender,
+        rating: this.tourGuide.rating,
+      };
+    },
   },
 };
 </script>

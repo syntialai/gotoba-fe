@@ -1,28 +1,29 @@
 <template>
   <div class="user-data">
     <show-data-count
-      :perPage="perPage"
+      :perPage.sync="perPage"
       class="my-3"
     />
 
     <user-table-data
-      id="user-data-table"
+      :id="'user-data-table'"
       class="my-2"
+      v-if="userData"
       :perPage="perPage"
+      :currentPage="currentPage"
       :fields="fields"
-      :items="userData"
+      :items="items"
     />
 
-    <div class="info">
-      Showing {{ (currentPage - 1) * perPage + 1 }} to
-      {{ currentPage * perPage }} of
-      50 entries
-      <!-- {{ users.length }} entries -->
+    <div class="info" v-if="userData">
+      Showing {{ dataStart }} to {{ dataEnd }} of {{ userData.length }} entries
     </div>
 
     <pagination
-      :currentPage="currentPage"
+      v-if="userData"
+      :currentPage.sync="currentPage"
       :perPage="perPage"
+      :rows="userData.length"
       class="my-3"
       idControls="user-data-table"
     />
@@ -44,6 +45,31 @@ export default {
   },
   computed: {
     ...mapGetters(['userData']),
+
+    dataStart() {
+      return (this.currentPage - 1) * this.perPage + 1;
+    },
+    dataEnd() {
+      const end = this.currentPage * this.perPage;
+
+      if (end > this.userData.length) {
+        return this.userData.length;
+      }
+
+      return end;
+    },
+
+    items() {
+      return this.userData.map((data) => ({
+        user: {
+          image: data.image || '',
+          name: data.nickname,
+        },
+        status: data.status,
+        sku: data.sku,
+        email: data.email,
+      }));
+    },
   },
   created() {
     this.getUserData();

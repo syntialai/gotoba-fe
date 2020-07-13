@@ -50,7 +50,7 @@
               <div v-if="image === null">
                 <b-form-file
                   id="photo-image"
-                  v-model="photo.image"
+                  v-model="image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -98,6 +98,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { alert } from '../../../utils/tool';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
@@ -106,8 +107,8 @@ export default {
   name: 'PhotoModal',
   data() {
     return {
-      photo: this.photos,
-      image: null,
+      photo: { ...this.photos },
+      image: this.photos.image || null,
     };
   },
   computed: {
@@ -149,20 +150,24 @@ export default {
         api.PostGalleryPhoto(data)
           .then((res) => {
             console.log(res);
-            this.$router.push({ path: '/admin/gallery' });
+            alert('added photo', true);
           })
           .catch((err) => {
             console.log(err);
+            alert('to add photo', false);
           });
 
         return;
       }
+
       api.EditGalleryPhoto(this.$route.params.sku, data)
         .then((res) => {
           console.log(res);
+          alert('updated photo', true);
         })
         .catch((err) => {
           console.log(err);
+          alert('to update photo', false);
         });
     },
 
@@ -172,15 +177,16 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res;
+            this.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
           });
       }
     },
+
     removePhoto() {
-      this.photo.image = null;
+      this.image = null;
     },
   },
 };
