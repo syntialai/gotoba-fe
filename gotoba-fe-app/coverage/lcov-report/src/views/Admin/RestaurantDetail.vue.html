@@ -24,7 +24,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -38,14 +38,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -112,7 +112,29 @@
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -157,6 +179,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,9 +202,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div class="restaurant-detail"&gt;
-    &lt;restaurant-card :restaurant="restaurantData" /&gt;
+    &lt;restaurant-card
+      v-if="restaurantData"
+      :restaurant="restaurantData"
+    /&gt;
 &nbsp;
-    &lt;div class="more-restaurant-info"&gt;
+    &lt;div
+      v-if="restaurantData"
+      class="more-restaurant-info"
+    &gt;
       &lt;div class="full-address d-flex justify-content-between"&gt;
         &lt;div class="full-address-label font-color-black-60"&gt;
           Full Address
@@ -187,7 +225,7 @@
           Hours
         &lt;/div&gt;
         &lt;div class="hours-open-value font-color-black-87 semibold pl-4"&gt;
-          {{ restaurantData.hoursOpen }}
+          {{ hoursOpen }}
         &lt;/div&gt;
       &lt;/div&gt;
 &nbsp;
@@ -214,6 +252,16 @@ export default {
   },
   computed: {
     ...mapGetters(['restaurantData', 'restaurantMenu']),
+<span class="fstat-no" title="function not covered" >    hoursOpen() {</span>
+<span class="cstat-no" title="statement not covered" >      let hoursOpenStr = '';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      Object.entries(this.restaurantData.hoursOpen)</span></span>
+        .forEach(([key, value]) =&gt; {
+<span class="cstat-no" title="statement not covered" >          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return hoursOpenStr;</span>
+    },
   },
 <span class="fstat-no" title="function not covered" >  created() {</span>
 <span class="cstat-no" title="statement not covered" >    this.getRestaurantDataByMerchantSku(this.$route.params.sku);</span>
@@ -231,7 +279,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 09 2020 19:54:19 GMT+0700 (Indochina Time)
+                at Tue Jul 14 2020 03:39:16 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

@@ -1,7 +1,6 @@
 <template>
   <div class="tour-guide-card">
     <data-card :data="tourGuide" :otherIcon="tourGuide.gender" />
-      <!-- gender : male || female -->
   </div>
 </template>
 

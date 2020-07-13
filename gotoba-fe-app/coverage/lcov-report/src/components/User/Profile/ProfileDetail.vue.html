@@ -24,7 +24,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -38,14 +38,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -144,7 +144,15 @@
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,26 +213,26 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -239,13 +247,16 @@
       v-bind="data"
     /&gt;
 &nbsp;
-    &lt;about-profile-detail class="mb-2" :data="data" /&gt;
+    &lt;about-profile-detail
+      class="mb-2"
+      :data="data"
+    /&gt;
 &nbsp;
-    &lt;div class="rating-and-reviews mb-2"&gt;
+    &lt;div class="rating-and-reviews mb-2 p-3 bg-white"&gt;
       &lt;div
         class="title d-flex w-100 border-bottom-gray-young justify-content-between"
       &gt;
-        &lt;h3&gt;Ratings and Reviews&lt;/h3&gt;
+        &lt;h5&gt;Ratings and Reviews&lt;/h5&gt;
         &lt;b-icon
           icon="arrow-right-short"
           class="icon-black-60"
@@ -255,7 +266,7 @@
 &nbsp;
       &lt;rating-profile-detail /&gt;
 &nbsp;
-      &lt;div class="recent-reviews mt-3"&gt;
+      &lt;!-- &lt;div class="recent-reviews mt-3"&gt;
         &lt;div class="title bold font-color-blue-secondary"&gt;Recent reviews&lt;/div&gt;
         &lt;div class="recent-reviews-group mt-3" v-if="recentReviews &gt; 0"&gt;
           &lt;user-review-detail
@@ -264,19 +275,20 @@
             v-bind="review"
           /&gt;
         &lt;/div&gt;
-      &lt;/div&gt;
+      &lt;/div&gt; --&gt;
     &lt;/div&gt;
 &nbsp;
     &lt;div class="promotion mb-2" v-if="promotions.length &gt; 0"&gt;
       &lt;div
         class="title d-flex w-100 border-bottom-gray-young justify-content-between"
       &gt;
-        &lt;h3&gt;Promotions&lt;/h3&gt;
-        &lt;b-icon
-          icon="arrow-right-short"
-          class="icon-black-60"
-          href=""
-        &gt;&lt;/b-icon&gt;
+        &lt;h5&gt;Promotions&lt;/h5&gt;
+        &lt;router-link :to="'/promotion/' + data.sku"&gt;
+          &lt;b-icon
+            icon="arrow-right-short"
+            class="icon-black-60"
+          &gt;&lt;/b-icon&gt;
+        &lt;/router-link&gt;
       &lt;/div&gt;
       &lt;div class="promotion-group"&gt;
         &lt;card-promotion
@@ -293,7 +305,7 @@
 <span class="cstat-no" title="statement not covered" >import CardProfileDetail from './CardProfileDetail.vue';</span>
 <span class="cstat-no" title="statement not covered" >import AboutProfileDetail from './AboutProfileDetail.vue';</span>
 <span class="cstat-no" title="statement not covered" >import RatingProfileDetail from './RatingProfileDetail.vue';</span>
-<span class="cstat-no" title="statement not covered" >import UserReviewDetail from '../Review/UserReviewDetail.vue';</span>
+// import UserReviewDetail from '../Review/UserReviewDetail.vue';
 <span class="cstat-no" title="statement not covered" >import CardPromotion from '../CardPromotion.vue';</span>
 &nbsp;
 export default {
@@ -302,18 +314,18 @@ export default {
     CardProfileDetail,
     AboutProfileDetail,
     RatingProfileDetail,
-    UserReviewDetail,
+    // UserReviewDetail,
     CardPromotion,
   },
   props: {
     data: Object,
   },
   computed: {
-<span class="fstat-no" title="function not covered" >    recentReviews() {</span>
-<span class="cstat-no" title="statement not covered" >      const reviews = this.data.reviews.slice(0);</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      reviews.sort((a, b) =&gt; b.createdAt - a.createdAt);</span></span>
-<span class="cstat-no" title="statement not covered" >      return reviews.slice(0, 3);</span>
-    },
+    // recentReviews() {
+    //   const reviews = this.data.reviews.slice(0);
+    //   reviews.sort((a, b) =&gt; b.createdAt - a.createdAt);
+    //   return reviews.slice(0, 3);
+    // },
 <span class="fstat-no" title="function not covered" >    promotions() {</span>
 <span class="cstat-no" title="statement not covered" >      return [];</span>
     },
@@ -327,7 +339,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 09 2020 19:54:19 GMT+0700 (Indochina Time)
+                at Tue Jul 14 2020 03:39:16 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

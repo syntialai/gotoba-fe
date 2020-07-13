@@ -24,28 +24,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>0/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>0/30</span>
             </div>
         
             
@@ -122,7 +122,16 @@
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -132,20 +141,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -156,6 +155,20 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -165,9 +178,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -194,32 +212,36 @@ import api from '../../api/api';
 &nbsp;
 const state = <span class="cstat-no" title="statement not covered" >{</span>
   userLoginStatus: localStorage.getItem('userLoginStatus') || false,
-  userInfo: localStorage.getItem('userInfo') || {},
+  userName: localStorage.getItem('userName') || '',
+  userSku: localStorage.getItem('userSku') || '',
   userRole: localStorage.getItem('userRole') || '',
 };
 &nbsp;
 const actions = <span class="cstat-no" title="statement not covered" >{</span>
 <span class="fstat-no" title="function not covered" >  se</span>tUserInfo({ commit }, res) {
-<span class="cstat-no" title="statement not covered" >    localStorage.setItem('userInfo', res);</span>
+<span class="cstat-no" title="statement not covered" >    localStorage.setItem('userName', res.name);</span>
+<span class="cstat-no" title="statement not covered" >    localStorage.setItem('userSku', res.sku);</span>
 <span class="cstat-no" title="statement not covered" >    localStorage.setItem('userLoginStatus', true);</span>
 <span class="cstat-no" title="statement not covered" >    localStorage.setItem('userRole', res.role);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    commit(Types.SET_USER_INFO, res);</span>
+<span class="cstat-no" title="statement not covered" >    commit(Types.SET_USER_NAME, res.name);</span>
+<span class="cstat-no" title="statement not covered" >    commit(Types.SET_USER_SKU, res.sku);</span>
 <span class="cstat-no" title="statement not covered" >    commit(Types.SET_USER_LOGIN_STATUS, true);</span>
 <span class="cstat-no" title="statement not covered" >    commit(Types.SET_USER_ROLE, res.role);</span>
   },
 &nbsp;
 <span class="fstat-no" title="function not covered" >  se</span>tLogOut({ commit }) {
 <span class="cstat-no" title="statement not covered" >    api.Logout()</span>
-      .then(<span class="fstat-no" title="function not covered" >(r</span>es) =&gt; {
-<span class="cstat-no" title="statement not covered" >        localStorage.removeItem('userInfo');</span>
+      .then(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >        localStorage.removeItem('userName');</span>
+<span class="cstat-no" title="statement not covered" >        localStorage.removeItem('userSku');</span>
 <span class="cstat-no" title="statement not covered" >        localStorage.removeItem('userLoginStatus');</span>
 <span class="cstat-no" title="statement not covered" >        localStorage.removeItem('userRole');</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        commit(Types.SET_USER_INFO, {});</span>
+<span class="cstat-no" title="statement not covered" >        commit(Types.SET_USER_NAME, '');</span>
+<span class="cstat-no" title="statement not covered" >        commit(Types.SET_USER_SKU, '');</span>
 <span class="cstat-no" title="statement not covered" >        commit(Types.SET_USER_LOGIN_STATUS, false);</span>
 <span class="cstat-no" title="statement not covered" >        commit(Types.SET_USER_ROLE, '');</span>
-<span class="cstat-no" title="statement not covered" >        console.log(res);</span>
       })
       .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
 <span class="cstat-no" title="statement not covered" >        console.log(err);</span>
@@ -229,14 +251,19 @@ const actions = <span class="cstat-no" title="statement not covered" >{</span>
 &nbsp;
 const getters = <span class="cstat-no" title="statement not covered" >{</span>
   userLoginStatus: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.userLoginStatus,</span>
-  userInfo: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.userInfo,</span>
+  userName: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.userName,</span>
+  userSku: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.userSku,</span>
   userRole: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.userRole,</span>
 };
 &nbsp;
 const mutations = <span class="cstat-no" title="statement not covered" >{</span>
   // eslint-disable-next-line space-before-function-paren
-<span class="fstat-no" title="function not covered" >  [T</span>ypes.SET_USER_INFO](state, res) {
-<span class="cstat-no" title="statement not covered" >    state.userInfo = res;</span>
+<span class="fstat-no" title="function not covered" >  [T</span>ypes.SET_USER_NAME](state, res) {
+<span class="cstat-no" title="statement not covered" >    state.userName = res;</span>
+  },
+&nbsp;
+<span class="fstat-no" title="function not covered" >  [T</span>ypes.SET_USER_SKU](state, res) {
+<span class="cstat-no" title="statement not covered" >    state.userSku = res;</span>
   },
 &nbsp;
 <span class="fstat-no" title="function not covered" >  [T</span>ypes.SET_USER_LOGIN_STATUS](state, status) {
@@ -261,7 +288,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 09 2020 19:54:19 GMT+0700 (Indochina Time)
+                at Tue Jul 14 2020 03:39:16 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

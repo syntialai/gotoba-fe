@@ -24,28 +24,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -149,6 +149,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -160,13 +166,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -202,19 +202,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div class="profile"&gt;
-    &lt;div class="merchant-profile d-flex w-100 m-4 bg-white box-shadow"&gt;
-      &lt;div class="merchant-img"&gt;
-        &lt;b-avatar :src="userInfo.image"&gt;&lt;/b-avatar&gt;
-      &lt;/div&gt;
-      &lt;div class="merchant-info"&gt;
-        &lt;div class="merchant-name bold font-size-20"&gt;
-          {{ userInfo.name }}
-        &lt;/div&gt;
-        &lt;div class="merchant-location font-color-black-60"&gt;
-          {{ userInfo.location }}
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+    &lt;card-profile-user
+      :name="userName"
+      image=""
+    /&gt;
 &nbsp;
     &lt;profile-menu-group
       title="Account"
@@ -231,21 +222,30 @@
 &nbsp;
 &lt;script&gt;
 <span class="cstat-no" title="statement not covered" >import { mapGetters } from 'vuex';</span>
+<span class="cstat-no" title="statement not covered" >import { alert } from '../../../utils/tool';</span>
+<span class="cstat-no" title="statement not covered" >import CardProfileUser from '../../../components/User/Profile/CardProfileUser.vue';</span>
 <span class="cstat-no" title="statement not covered" >import ProfileMenuGroup from '../../../components/User/Profile/ProfileMenuGroup.vue';</span>
 &nbsp;
 export default {
   name: 'Profile',
   components: {
+    CardProfileUser,
     ProfileMenuGroup,
   },
   computed: {
-    ...mapGetters(['userInfo']),
+    ...mapGetters(['userName', 'userLoginStatus', 'userRole']),
+  },
+<span class="fstat-no" title="function not covered" >  created() {</span>
+<span class="cstat-no" title="statement not covered" >    if (!this.userLoginStatus || this.userRole !== 'ROLE_MERCHANT') {</span>
+<span class="cstat-no" title="statement not covered" >      alert('You should log in first', false);</span>
+<span class="cstat-no" title="statement not covered" >      this.$router.push('/login');</span>
+    }
   },
 <span class="fstat-no" title="function not covered" >  data() {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
       menuAccount: [
         {
-          name: 'Edit Profile', icon: 'user-edit', link: '/profile/edit',
+          name: 'Edit Profile', icon: 'user-edit', link: '/merchant/profile/edit',
         },
       ],
       menuAbout: [
@@ -279,7 +279,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 09 2020 19:54:19 GMT+0700 (Indochina Time)
+                at Tue Jul 14 2020 03:39:16 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>
