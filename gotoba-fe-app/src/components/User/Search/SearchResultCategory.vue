@@ -9,7 +9,7 @@
     </div>
 
     <div class="category-group">
-      <CardSearchResult 
+      <CardSearchResult
         v-for="item in searchResults"
         :key="item.sku"
         v-bind="item"
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import CardSearchResult from '@/components/User/Search/CardSearchResult.vue';
+import CardSearchResult from './CardSearchResult.vue';
 
 export default {
   name: 'SearchResultCategory',
@@ -30,11 +30,7 @@ export default {
     categoryIcon: String,
     categoryTitle: String,
     categoryColor: String,
-  },
-  computed: {
-    searchResults() {
-      return this.$store.getters.searchResults;
-    },
+    searchResults: Array,
   },
 };
 </script>

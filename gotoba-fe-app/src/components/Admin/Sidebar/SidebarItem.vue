@@ -3,7 +3,6 @@
     :to="to"
     class="sidebar-link"
     exact-active-class="active"
-    :target="target"
   >
     <div class="sidebar-border pl-2 d-flex py-3">
       <div class="px-3">
@@ -24,22 +23,6 @@ export default {
     title: String,
     minimized: Boolean,
     to: String,
-    target: {
-      type: String,
-      default: '',
-    },
-  },
-  data() {
-    return {
-      isActive: this.activeByDefault,
-    };
-  },
-  methods: {
-    updateActiveState() {
-      this.isActive = (this.$route.name
-        === this.to.name)
-        || this.activeByDefault;
-    },
   },
 };
 </script>

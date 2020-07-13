@@ -9,7 +9,9 @@
       />
     </div>
     <div class="search-icon px-1">
-      <a href="" class="icon-black-60 icon"><b-icon icon="search"></b-icon></a>
+      <router-link to="" class="icon-black-60 icon">
+        <b-icon icon="search"></b-icon>
+      </router-link>
     </div>
   </div>
 </template>

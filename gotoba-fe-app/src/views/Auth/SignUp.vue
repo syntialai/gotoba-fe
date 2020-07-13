@@ -221,6 +221,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { alert } from '../../utils/tool';
 import api from '../../api/api';
 import getValidationState from '../../utils/validation';
 
@@ -245,7 +246,7 @@ export default {
 
     getValidationState,
 
-    signup() {
+    async signup() {
       if (!this.nickname
         || !this.username
         || !this.email
@@ -270,26 +271,20 @@ export default {
         password: this.password,
       };
 
-      api.Signup(data)
-        .then((res) => {
-          console.log(res);
+      try {
+        await api.Signup(data);
 
-          api.Login(dataLogin)
-            .then((result) => {
-              this.setUserInfo(result);
+        const loginRes = await api.Login(dataLogin);
 
-              if (this.userRole === 'ROLE_MERCHANT') {
-                this.$router.push('/merchant');
-              }
-              this.$router.push('/');
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        this.setUserInfo(loginRes);
+
+        if (this.userRole === 'ROLE_MERCHANT') {
+          this.$router.push('/merchant');
+        }
+        this.$router.push('/');
+      } catch (err) {
+        alert('sign up. Check your internet connection.', false);
+      }
     },
   },
 };

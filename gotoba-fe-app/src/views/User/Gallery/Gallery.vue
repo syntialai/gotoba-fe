@@ -12,7 +12,7 @@
       Show every moment captured around Lake Toba
     </div>
 
-    <gallery-group :data="galleryData" />
+    <gallery-group v-if="galleryData" :galleryData="galleryData" />
   </div>
 </template>
 

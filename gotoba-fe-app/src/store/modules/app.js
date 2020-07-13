@@ -30,6 +30,9 @@ const actions = {
 const getters = {
   showToast: (state) => state.showToast,
   showAlert: (state) => state.showAlert,
+  alertMessage: (state) => state.alertMessage,
+  alertSuccess: (state) => state.alertSuccess,
+  toastMessage: (state) => state.toastMessage,
 };
 
 const mutations = {

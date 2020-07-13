@@ -21,8 +21,8 @@ const actions = {
     commit(Types.SET_SEARCH_SUGGESTIONS_SHOW_STATUS, value);
   },
 
-  getSearchResults({ commit }, value) {
-    commit(Types.SET_SEARCH_RESULTS, value);
+  getSearchResults({ commit }) {
+    commit(Types.SET_SEARCH_RESULTS);
   },
 };
 

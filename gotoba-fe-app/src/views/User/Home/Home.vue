@@ -43,7 +43,7 @@
             @click="goToDetails('promotion', ticket.sku)"
           />
         </div>
-      </div>
+      </div> -->
 
       <div class="nearby-place content-group">
         <div class="title font-color-blue-primary">
@@ -71,7 +71,7 @@
             @click="goToDetails('journey', journey.sku)"
           />
         </div>
-      </div>
+      </div> -->
 
       <div class="nearby-resto content-group">
         <div class="title font-color-blue-primary">
@@ -102,7 +102,21 @@
       </div>
     </div>
 
-    <gallery-home />
+    <div class="gallery content-group my-3">
+      <div class="title mb-1 pt-3 d-flex align-items-center">
+        <font-awesome-icon
+            :icon="['far', 'images']"
+            class="icon-gradient font-size-24 pr-2"
+          />
+        <h6 class="font-color-blue-primary m-0">Our Gallery</h6>
+      </div>
+
+      <div class="info font-color-black-60 font-size-14 mb-3">
+        Show every moment captured around Lake Toba
+      </div>
+
+      <gallery-home v-if="galleryData" :galleryData="galleryData" />
+    </div>
 
     <the-footer />
   </div>
@@ -129,7 +143,7 @@ export default {
     NearbyRestoIcon,
   },
   computed: {
-    ...mapGetters(['restaurantDatas', 'journeyData', 'ticketDatas']),
+    ...mapGetters(['restaurantDatas', 'journeyData', 'ticketDatas', 'galleryData']),
     promotions() {
       const promotion = [...this.ticketDatas];
 
@@ -142,6 +156,7 @@ export default {
     this.getRestaurantData();
     this.getJourneyData();
     this.getTicketData();
+    this.getGalleryData();
   },
   data() {
     return {
@@ -168,7 +183,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData']),
+    ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData', 'getGalleryData']),
     goToDetails(category, sku) {
       this.$router.push(`/${category}/${sku}`);
     },

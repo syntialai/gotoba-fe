@@ -1,12 +1,18 @@
 <template>
-  <div class="user-profile w-100 m-4 bg-white box-shadow position-relative border-square-10">
+  <div class="user-profile m-4 p-4 bg-white box-shadow position-relative border-square-10">
     <b-media vertical-align="center">
       <template v-slot:aside>
-        <b-avatar :src="user.image"></b-avatar>
+        <b-avatar
+          :src="image"
+          size="64"
+          class="bg-color-gray"
+        ></b-avatar>
       </template>
-      <div class="user-info">
-        <div class="user-name bold font-size-20">{{ user.nickname }}</div>
-        <div class="user-location font-color-black-60">{{ user.address }}</div>
+      <div class="user-info d-flex align-items-center">
+        <div class="user-name font-size-20 bold font-color-black-87">
+          {{ name }}
+        </div>
+        <!-- <div class="user-location">{{ user.address }}</div> -->
       </div>
     </b-media>
   </div>
@@ -16,7 +22,8 @@
 export default {
   name: 'CardProfileUser',
   props: {
-    user: Object,
+    name: String,
+    image: String,
   },
 };
 </script>

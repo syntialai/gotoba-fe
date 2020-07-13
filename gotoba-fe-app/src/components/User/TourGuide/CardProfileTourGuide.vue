@@ -5,8 +5,8 @@
         <b-avatar :src="tourGuide.image"></b-avatar>
       </template>
       <div class="user-info">
-        <div class="user-name bold font-size-20">{{ tourGuide.nickname }}</div>
-        <div class="user-location font-color-black-60">{{ tourGuide.address }}</div>
+        <div class="user-name bold font-size-20">{{ tourGuide.name }}</div>
+        <div class="user-location font-color-black-60">{{ tourGuide.location }}</div>
       </div>
     </b-media>
   </div>

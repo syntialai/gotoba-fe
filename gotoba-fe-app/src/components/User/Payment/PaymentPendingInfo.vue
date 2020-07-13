@@ -22,7 +22,7 @@
     </div>
     <b-button
       class="w-100"
-      href=""
+      to=""
       v-if="accountLabel == 'Bank'"
     >
       UPLOAD TRANSFER BILLS

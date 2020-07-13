@@ -13,8 +13,7 @@ const actions = {
 
     api.GetMerchants()
       .then((res) => {
-        commit(Types.SET_MERCHANT_DATA, res);
-        console.log(res);
+        commit(Types.SET_MERCHANT_DATA, res.data);
       })
       .catch((err) => {
         console.log(err);

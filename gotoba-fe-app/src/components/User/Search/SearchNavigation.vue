@@ -6,7 +6,7 @@
           <b-icon icon="arrow-left-short" class="mr-3" />
         </p>
       </b-nav-item>
-      <b-nav-form class="w-100 pr-3">
+      <b-nav-item class="w-100 pr-3">
         <b-input-group class="w-100 border-circle">
           <b-input-group-prepend is-text>
             <b-icon icon="search"></b-icon>
@@ -15,11 +15,13 @@
             id="input-search"
             v-model="keywords"
             type="search"
-            required
+            autocomplete="off"
+            debounce="500"
+            @keyup.enter="$emit('search')"
             placeholder="Search for place, eat, ..."
           ></b-form-input>
         </b-input-group>
-      </b-nav-form>
+      </b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </template>

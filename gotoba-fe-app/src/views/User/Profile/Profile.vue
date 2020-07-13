@@ -1,6 +1,9 @@
 <template>
   <div class="profile">
-    <card-profile-user :user="userInfo" />
+    <card-profile-user
+      :name="userName"
+      image=""
+    />
 
     <profile-menu-group
       title="Account"
@@ -10,7 +13,7 @@
     <profile-menu-group
       title="About"
       :menus="menuAbout"
-      class="my-3"
+      class="mt-3 mb-5"
     />
   </div>
 </template>
@@ -28,10 +31,10 @@ export default {
     ProfileMenuGroup,
   },
   computed: {
-    ...mapGetters(['userInfo', 'userLoginStatus']),
+    ...mapGetters(['userName', 'userLoginStatus', 'userRole']),
   },
   created() {
-    if (!this.userLoginStatus) {
+    if (!this.userLoginStatus || this.userRole !== 'ROLE_USER') {
       alert('You should log in first', false);
       this.$router.push('/login');
     }

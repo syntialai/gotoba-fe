@@ -1,6 +1,9 @@
 <template>
   <div class="journey-profile">
-    <profile-detail :data="journeyDataBySku" />
+    <profile-detail
+      v-if="journeyDataBySku"
+      :data="journeyDataBySku"
+    />
   </div>
 </template>
 

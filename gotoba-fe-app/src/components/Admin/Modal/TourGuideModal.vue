@@ -31,7 +31,7 @@
                 :state="getValidationState(validationContext)"
                 aria-describedby="tour-guide-name-feedback-msg"
               ></b-form-input>
-              <b-form-invalid-feedback id="tour-guide-location-feedback-msg">
+              <b-form-invalid-feedback id="tour-guide-name-feedback-msg">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
             </b-form-group>
@@ -58,7 +58,7 @@
                   :state="getValidationState(validationContext)"
                   aria-describedby="tour-guide-image-feedback-msg"
                 ></b-form-file>
-                <b-form-invalid-feedback id="tour-guide-location-feedback-msg">
+                <b-form-invalid-feedback id="tour-guide-image-feedback-msg">
                   {{ validationContext.errors[0] }}
                 </b-form-invalid-feedback>
               </div>
@@ -74,24 +74,49 @@
           </ValidationProvider>
 
           <ValidationProvider
-            name="Born Date"
-            rules="required"
+            name="Age"
+            rules="required|numeric"
             v-slot="validationContext"
           >
             <b-form-group
-              id="tour-guide-born-date-group"
-              label="Born Date"
-              label-for="tour-guide-born-date"
+              id="tour-guide-age-group"
+              label="Age"
+              label-for="tour-guide-age"
             >
-              <b-form-datepicker
-                id="tour-guide-born-date"
-                v-model="tourGuide.bornDate"
-                :max="new Date()"
+              <b-form-input
+                id="tour-guide-age"
+                v-model="tourGuide.age"
+                type="number"
                 required
                 :state="getValidationState(validationContext)"
-                aria-describedby="tour-guide-born-date-feedback-msg"
-              ></b-form-datepicker>
-              <b-form-invalid-feedback id="tour-guide-born-date-feedback-msg">
+                aria-describedby="tour-guide-age-feedback-msg"
+              ></b-form-input>
+              <b-form-invalid-feedback id="tour-guide-age-feedback-msg">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </ValidationProvider>
+
+          <ValidationProvider
+            name="Rating"
+            rules="required|numeric|min:1"
+            v-slot="validationContext"
+          >
+            <b-form-group
+              id="tour-guide-rating-group"
+              label="Rating"
+              label-for="tour-guide-rating"
+            >
+              <b-form-spinbutton
+                id="tour-guide-rating"
+                v-model="tourGuide.rating"
+                min="1"
+                max="5"
+                required
+                :state="getValidationState(validationContext)"
+                aria-describedby="tour-guide-rating-feedback-msg"
+              ></b-form-spinbutton>
+              <b-form-invalid-feedback id="tour-guide-rating-feedback-msg">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
             </b-form-group>
@@ -158,17 +183,30 @@
               label="Location"
               label-for="tour-guide-location"
             >
-              <b-form-select
+              <b-form-input
                 id="tour-guide-location"
                 v-model="tourGuide.location"
-                :options="locationOptions"
+                list="location-list"
                 required
+                @change="locationSuggestions"
                 :state="getValidationState(validationContext)"
                 aria-describedby="tour-guide-location-feedback-msg"
-              ></b-form-select>
+              ></b-form-input>
               <b-form-invalid-feedback id="tour-guide-location-feedback-msg">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
+
+              <datalist
+                id="location-list"
+                v-if="locationList"
+              >
+                <option
+                  v-for="location in locationList"
+                  :key="location"
+                >
+                  {{ location }}
+                </option>
+              </datalist>
             </b-form-group>
           </ValidationProvider>
 
@@ -207,14 +245,14 @@
               label="Available location"
               label-for="tour-guide-available-location"
             >
-              <b-form-select
+              <b-form-checkbox-group
                 id="tour-guide-available-location"
                 v-model="tourGuide.availableLocation"
                 :options="locationOptions"
                 required
                 :state="getValidationState(validationContext)"
                 aria-describedby="tour-guide-available-location-feedback-msg"
-              ></b-form-select>
+              ></b-form-checkbox-group>
               <b-form-invalid-feedback id="tour-guide-available-location-feedback-msg">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
@@ -332,6 +370,7 @@ import { mapGetters } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
+import { alert } from '../../../utils/tool';
 
 export default {
   name: 'TourGuideModal',
@@ -343,18 +382,23 @@ export default {
       tourGuide: {
         name: '',
         image: null,
-        bornDate: Date(),
-        gender: '',
+        age: 0,
+        rating: 1,
         occupation: '',
         location: '',
         language: [],
-        availableLocation: '',
+        availableLocation: [],
         phoneNumber: '',
         email: '',
         whatsapp: '',
         experience: '',
         description: '',
       },
+      locationOptions: [
+        { text: 'Parapat', value: 'Parapat' },
+        { text: 'Silangit', value: 'Silangit' },
+      ],
+      locationList: null,
     };
   },
   props: {
@@ -369,13 +413,15 @@ export default {
     submitTourGuide() {
       const data = { ...this.tourGuide };
 
+      console.log(data);
       if (this.title === 'Add') {
         api.PostTourGuide(data)
           .then((res) => {
+            alert('added tour guide', true);
             console.log(res);
-            this.$router.push({ path: '/admin/tour-guide' });
           })
           .catch((err) => {
+            alert('add tour guide', false);
             console.log(err);
           });
 
@@ -384,9 +430,11 @@ export default {
 
       api.EditTourGuide(this.$route.params.sku, data)
         .then((res) => {
+          alert('updated tour guide', true);
           console.log(res);
         })
         .catch((err) => {
+          alert('update tour guide', true);
           console.log(err);
         });
     },
@@ -407,6 +455,20 @@ export default {
 
     removePhoto() {
       this.tourGuide.image = null;
+    },
+
+    locationSuggestions() {
+      if (this.tourGuide.location) {
+        api.GetSearchLocationResult(this.tourGuide.location)
+          .then((res) => {
+            this.locationList = res.map((item) => item.display_name);
+            console.log(this.locationList);
+          })
+          .catch((err) => {
+            console.log(err);
+            this.locationList = null;
+          });
+      }
     },
   },
 };

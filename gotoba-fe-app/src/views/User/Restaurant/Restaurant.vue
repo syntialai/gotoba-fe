@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import CardHome from '../../../components/User/Home/CardHome.vue';
 import CardHomeLong from '../../../components/User/Home/CardHomeLong.vue';
 
@@ -40,7 +40,12 @@ export default {
   computed: {
     ...mapGetters(['restaurantDatas', 'ticketRestaurant']),
   },
+  created() {
+    this.getRestaurantData();
+    this.getTicketRestaurant();
+  },
   methods: {
+    ...mapActions(['getRestaurantData', 'getTicketRestaurant']),
     goToProfile(restaurantSku) {
       this.$router.push(`/restaurant/${restaurantSku}`);
     },

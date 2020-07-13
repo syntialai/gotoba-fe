@@ -1,8 +1,10 @@
 <template>
   <div class="m-3">
     <b-pagination
-      v-model="currentPage"
+      v-model="currPage"
+      @input="updateCurrentPage"
       :per-page="perPage"
+      :total-rows="rows"
       :aria-controls="idControls"
       first-number
       last-number
@@ -23,7 +25,18 @@ export default {
       type: Number,
       default: 10,
     },
+    rows: Number,
     idControls: String,
+  },
+  data() {
+    return {
+      currPage: this.currentPage,
+    };
+  },
+  methods: {
+    updateCurrentPage() {
+      this.$emit('update:currentPage', this.currPage);
+    },
   },
 };
 </script>

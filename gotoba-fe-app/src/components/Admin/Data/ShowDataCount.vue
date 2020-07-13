@@ -3,6 +3,7 @@
     <div>Show</div>
     <b-form-select
       v-model="selected"
+      @change="updateSelected"
       :options="options"
       class="mx-2"
       style="width: 72px"
@@ -25,6 +26,11 @@ export default {
       selected: this.perPage,
       options: [5, 10, 20, 50],
     };
+  },
+  methods: {
+    updateSelected() {
+      this.$emit('update:perPage', this.selected);
+    },
   },
 };
 </script>

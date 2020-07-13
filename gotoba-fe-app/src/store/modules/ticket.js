@@ -8,7 +8,6 @@ const state = {
   ticketByMerchant: [],
   ticketRestaurant: [],
   ticketJourney: [],
-  ticketHotel: [],
 };
 
 const actions = {
@@ -81,19 +80,6 @@ const actions = {
       });
   },
 
-  getTicketHotel({ commit }) {
-    commit(Types.SET_TICKET_HOTEL);
-
-    api.GetHotelTicket()
-      .then((res) => {
-        console.log(res);
-        commit(Types.SET_TICKET_HOTEL, res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
   removeTicket({ commit }, sku) {
     commit(Types.REMOVE_TICKET);
 
@@ -114,7 +100,6 @@ const getters = {
   ticketByMerchant: (state) => state.ticketByMerchant,
   ticketRestaurant: (state) => state.ticketRestaurant,
   ticketJourney: (state) => state.ticketJourney,
-  ticketHotel: (state) => state.ticketHotel,
 };
 
 const mutations = {
@@ -133,9 +118,6 @@ const mutations = {
   },
   [Types.SET_TICKET_JOURNEY](state, res) {
     state.ticketJourney = res;
-  },
-  [Types.SET_TICKET_HOTEL](state, res) {
-    state.ticketHotel = res;
   },
 };
 

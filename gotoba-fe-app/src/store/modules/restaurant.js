@@ -8,15 +8,18 @@ const state = {
   restaurantMenu: {},
   restaurantMenus: [],
   restaurantReview: [],
+  bistroType: [],
 };
 
 const actions = {
-  getRestaurantData({ commit }) {
-    commit(Types.SET_RESTAURANT_DATA);
+  getRestaurantBistroType({ commit }) {
+    commit(Types.SET_RESTAURANT_BISTRO_TYPE);
 
-    api.GetRestaurants()
+    api.GetBistroType()
       .then((res) => {
-        commit(Types.SET_RESTAURANT_DATA, res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -24,13 +27,43 @@ const actions = {
       });
   },
 
+  getRestaurantData({ commit }) {
+    commit(Types.SET_RESTAURANT_DATA);
+
+    api.GetRestaurants()
+      .then((res) => {
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_DATA, res.data);
+          console.log(res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getRestaurantDataBySku({ commit }, sku) {
+    commit(Types.SET_RESTAURANT_DATA_BY_SKU);
+
+    api.GetRestaurantBySku(sku)
+      .then((res) => {
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
   getRestaurantDataByMerchantSku({ commit }, merchantSku) {
-    commit(Types.SET_RESTAURANT_DATA_BY_MERCHANT_SKU);
+    commit(Types.SET_RESTAURANT_DATA_BY_SKU);
 
     api.GetRestaurantByMerchantSku(merchantSku)
       .then((res) => {
-        commit(Types.SET_RESTAURANT_DATA_BY_MERCHANT_SKU, res);
-        console.log(res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -42,8 +75,9 @@ const actions = {
 
     api.GetRestaurantMenus(sku)
       .then((res) => {
-        commit(Types.SET_RESTAURANT_MENU, res);
-        console.log(res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_MENU, res);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +89,9 @@ const actions = {
 
     api.GetRestaurantMenus(id)
       .then((res) => {
-        commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -68,7 +104,9 @@ const actions = {
 
     api.GetRestaurantMenus(sku)
       .then((res) => {
-        commit(Types.SET_RESTAURANT_REVIEW, res);
+        if (!res.error) {
+          commit(Types.SET_RESTAURANT_REVIEW, res);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -91,6 +129,7 @@ const actions = {
 };
 
 const getters = {
+  bistroType: (state) => state.bistroType,
   restaurantData: (state) => state.restaurantData,
   restaurantDatas: (state) => state.restaurantDatas,
   restaurantMenu: (state) => state.restaurantMenu,
@@ -100,10 +139,13 @@ const getters = {
 
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
+  [Types.SET_RESTAURANT_BISTRO_TYPE](state, res) {
+    state.bistroType = res;
+  },
   [Types.SET_RESTAURANT_DATA](state, res) {
     state.restaurantDatas = res;
   },
-  [Types.SET_RESTAURANT_DATA_BY_MERCHANT_SKU](state, res) {
+  [Types.SET_RESTAURANT_DATA_BY_SKU](state, res) {
     state.restaurantData = res;
   },
   [Types.SET_RESTAURANT_MENU](state, res) {

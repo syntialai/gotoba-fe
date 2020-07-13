@@ -13,7 +13,8 @@ const actions = {
 
     api.GetGalleryPhotos()
       .then((res) => {
-        commit(Types.SET_GALLERY_DATA, res);
+        commit(Types.SET_GALLERY_DATA, res.data);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -25,7 +26,7 @@ const actions = {
 
     api.GetGalleryPhotosBySku(sku)
       .then((res) => {
-        commit(Types.SET_GALLERY_PHOTO, res);
+        commit(Types.SET_GALLERY_PHOTO, res.data);
         console.log(res);
       })
       .catch((err) => {

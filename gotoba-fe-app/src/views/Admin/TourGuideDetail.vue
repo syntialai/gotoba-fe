@@ -13,15 +13,21 @@
 
     <tour-guide-modal title="Edit" />
 
-    <tour-guide-card :tourGuide="tourGuide" />
+    <tour-guide-card
+      v-if="tourGuideData"
+      :tourGuide="tourGuideData"
+    />
 
-    <div class="more-tour-guide-info">
+    <div
+      v-if="tourGuideData"
+      class="more-tour-guide-info"
+    >
       <div class="language d-flex justify-content-between">
         <div class="language-label font-color-black-60">
           Language
         </div>
         <div class="language-value font-color-black-87 semibold pl-4">
-          {{ tourGuide.language }}
+          {{ tourGuideData.language }}
         </div>
       </div>
 
@@ -30,7 +36,7 @@
           Available location
         </div>
         <div class="available-location-value font-color-black-87 semibold pl-4">
-          {{ tourGuide.availableLocation }}
+          {{ tourGuideData.availableLocation }}
         </div>
       </div>
 
@@ -39,7 +45,7 @@
           Phone Number
         </div>
         <div class="phone-number-value font-color-black-87 semibold pl-4">
-          {{ tourGuide.phoneNumber }}
+          {{ tourGuideData.phoneNumber }}
         </div>
       </div>
 
@@ -48,7 +54,7 @@
           Email
         </div>
         <div class="email-value font-color-black-87 semibold pl-4">
-          {{ tourGuide.email }}
+          {{ tourGuideData.email }}
         </div>
       </div>
 
@@ -57,7 +63,7 @@
           Whatsapp
         </div>
         <div class="whatsapp-number-value font-color-black-87 semibold pl-4">
-          {{ tourGuide.whatsappNumber }}
+          {{ tourGuideData.whatsapp }}
         </div>
       </div>
 
@@ -66,7 +72,7 @@
           Experience
         </div>
         <div class="experience-value font-color-black-87 semibold p-3">
-          {{ tourGuide.experience }}
+          {{ tourGuideData.experience }}
         </div>
       </div>
 
@@ -75,7 +81,7 @@
           Description
         </div>
         <div class="description-value font-color-black-87 semibold p-3">
-          {{ tourGuide.description }}
+          {{ tourGuideData.description }}
         </div>
       </div>
     </div>
@@ -84,7 +90,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { confirmModal } from '../../utils/tool';
 import TourGuideCard from '../../components/Admin/Card/TourGuideCard.vue';
 import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';
 
@@ -103,12 +108,29 @@ export default {
   methods: {
     ...mapActions(['getTourGuideBySku', 'removeTourGuide']),
     deleteTourGuide() {
-      const confirmModalValue = confirmModal(this.tourGuide.name);
+      const confirmModalValue = this.confirmModal(this.tourGuideData.name);
 
       if (confirmModalValue) {
         this.removeTourGuide(this.tourGuide.sku);
-        this.$router.go(-1);
+        this.$router.push('/admin/tour-guide');
       }
+    },
+    confirmModal(object) {
+      this.$bvModal.msgBoxConfirm(`${object} will be removed permanently from this system.`, {
+        title: 'Are you sure?',
+        size: 'sm',
+        okVariant: 'danger',
+        okTitle: 'YES',
+        cancelVariant: 'outline-secondary',
+        cancelTitle: 'NO',
+        footerClass: 'p-2',
+        hideHeaderClose: false,
+        centered: true,
+      })
+        .then((value) => value)
+        .catch(
+          (err) => console.log(err),
+        );
     },
   },
 };
