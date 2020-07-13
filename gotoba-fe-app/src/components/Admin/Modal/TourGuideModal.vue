@@ -183,17 +183,30 @@
               label="Location"
               label-for="tour-guide-location"
             >
-              <b-form-select
+              <b-form-input
                 id="tour-guide-location"
                 v-model="tourGuide.location"
-                :options="locationOptions"
+                list="location-list"
                 required
+                @change="locationSuggestions"
                 :state="getValidationState(validationContext)"
                 aria-describedby="tour-guide-location-feedback-msg"
-              ></b-form-select>
+              ></b-form-input>
               <b-form-invalid-feedback id="tour-guide-location-feedback-msg">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
+
+              <datalist
+                id="location-list"
+                v-if="locationList"
+              >
+                <option
+                  v-for="location in locationList"
+                  :key="location"
+                >
+                  {{ location }}
+                </option>
+              </datalist>
             </b-form-group>
           </ValidationProvider>
 
@@ -385,6 +398,7 @@ export default {
         { text: 'Parapat', value: 'Parapat' },
         { text: 'Silangit', value: 'Silangit' },
       ],
+      locationList: null,
     };
   },
   props: {
@@ -441,6 +455,20 @@ export default {
 
     removePhoto() {
       this.tourGuide.image = null;
+    },
+
+    locationSuggestions() {
+      if (this.tourGuide.location) {
+        api.GetSearchLocationResult(this.tourGuide.location)
+          .then((res) => {
+            this.locationList = res.map((item) => item.display_name);
+            console.log(this.locationList);
+          })
+          .catch((err) => {
+            console.log(err);
+            this.locationList = null;
+          });
+      }
     },
   },
 };

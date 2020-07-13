@@ -76,15 +76,29 @@
             <b-form-input
               id="spot-location"
               v-model="spot.location"
+              list="location-list"
               type="text"
               class="border-gray"
               required
+              @change="locationSuggestions"
               :state="getValidationState(validationContext)"
               aria-describedby="edit-location-feedback-msg"
             ></b-form-input>
             <b-form-invalid-feedback id="edit-location-feedback-msg">
               {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
+
+            <datalist
+              id="location-list"
+              v-if="locationList"
+            >
+              <option
+                v-for="location in locationList"
+                :key="location"
+              >
+                {{ location }}
+              </option>
+            </datalist>
           </b-form-group>
         </ValidationProvider>
 
@@ -210,6 +224,7 @@ import previewImage from '../../../utils/fileHelper';
 import getValidationState from '../../../utils/validation';
 import api from '../../../api/api';
 import { alert } from '../../../utils/tool';
+import getLocation from '../../../utils/location';
 
 export default {
   name: 'EditSpot',
@@ -235,6 +250,7 @@ export default {
         hoursOpen: [],
       },
       image: '',
+      locationList: null,
     };
   },
   methods: {
@@ -288,11 +304,41 @@ export default {
     removePhoto() {
       this.image = null;
     },
+
+    locationSuggestions() {
+      if (this.spot.location) {
+        api.GetSearchLocationResult(this.spot.location)
+          .then((res) => {
+            this.locationList = res.map((item) => item.display_name);
+            console.log(this.locationList);
+          })
+          .catch((err) => {
+            console.log(err);
+            this.locationList = null;
+          });
+      }
+    },
   },
   mounted() {
     if (this.journeyDataBySku) {
       this.spot = { ...this.journeyDataBySku };
     }
+
+    getLocation((position) => {
+      this.spot.longitude = position.coords.longitude;
+      this.spot.latitude = position.coords.latitude;
+
+      api.ReverseGeocoding(this.spot.longitude, this.spot.latitude)
+        .then((res) => {
+          this.spot.address = res.display_name;
+          this.spot.location = `${res.address.suburb}, ${res.address.city}`;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, (err) => {
+      console.log(err);
+    });
   },
 };
 </script>

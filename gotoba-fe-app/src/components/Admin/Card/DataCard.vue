@@ -1,7 +1,7 @@
 <template>
   <div class="data-card">
     <b-card
-      :img-src="data.image"
+      :img-src="getImage(data.image)"
       :img-alt="data.location"
       img-left
       class="p-2"
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import api from '../../../api/api';
 import Rating from '../../Partial/Rating.vue';
 
 export default {
@@ -51,6 +52,12 @@ export default {
   },
   components: {
     Rating,
+  },
+  methods: {
+    async getImage(url) {
+      const res = await api.GetImage(url);
+      return res.data;
+    },
   },
 };
 </script>

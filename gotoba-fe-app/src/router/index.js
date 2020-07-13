@@ -286,7 +286,6 @@ const routes = [
   {
     path: '/itinerary/add/show-on-map',
     name: 'Set Destination',
-    beforeEnter: checkUserRole,
     component: Pages.ADD_DESTINATION,
   },
   {

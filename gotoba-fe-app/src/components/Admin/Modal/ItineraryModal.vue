@@ -111,15 +111,29 @@
               <b-form-input
                 id="itinerary-location"
                 v-model="itinerary.location"
+                list="location-list"
                 type="text"
                 class="border-gray"
                 required
+                @change="locationSuggestions"
                 :state="getValidationState(validationContext)"
                 aria-describedby="itinerary-location-feedback-msg"
               ></b-form-input>
               <b-form-invalid-feedback id="itinerary-location-feedback-msg">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
+
+              <datalist
+                id="location-list"
+                v-if="locationList"
+              >
+                <option
+                  v-for="location in locationList"
+                  :key="location"
+                >
+                  {{ location }}
+                </option>
+              </datalist>
             </b-form-group>
           </ValidationProvider>
 
@@ -209,6 +223,7 @@ import { mapGetters } from 'vuex';
 import { formatPrice } from '../../../utils/filter';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
+import getLocation from '../../../utils/location';
 import api from '../../../api/api';
 
 export default {
@@ -222,12 +237,15 @@ export default {
         title: '',
         image: null,
         location: '',
+        longitude: 0,
+        latitude: 0,
         price: 0,
         address: '',
         description: '',
         createdBy: '',
         hoursOpen: {},
       },
+      locationList: null,
     };
   },
   props: {
@@ -285,6 +303,37 @@ export default {
     removePhoto() {
       this.itinerary.image = null;
     },
+
+    locationSuggestions() {
+      if (this.itinerary.location) {
+        api.GetSearchLocationResult(this.itinerary.location)
+          .then((res) => {
+            this.locationList = res.map((item) => item.display_name);
+            console.log(this.locationList);
+          })
+          .catch((err) => {
+            console.log(err);
+            this.locationList = null;
+          });
+      }
+    },
+  },
+  mounted() {
+    getLocation((position) => {
+      this.itinerary.longitude = position.coords.longitude;
+      this.itinerary.latitude = position.coords.latitude;
+
+      api.ReverseGeocoding(this.itinerary.longitude, this.itinerary.latitude)
+        .then((res) => {
+          this.itinerary.address = res.display_name;
+          this.itinerary.location = `${res.address.suburb}, ${res.address.city}`;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, (err) => {
+      console.log(err);
+    });
   },
 };
 </script>

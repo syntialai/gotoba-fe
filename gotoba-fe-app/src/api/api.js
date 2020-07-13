@@ -268,6 +268,18 @@ export default {
   GetNearByLocation(long, lat) {
     return fetchGet(`/nearBy/${long}/${lat}`);
   },
+  async GetSearchLocationResult(location) {
+    const res = await axios
+      .get(`http://nominatim.openstreetmap.org/search?format=json&limit=5&country=Indonesia&q=${location}`);
+    return res.data;
+  },
+  async ReverseGeocoding(long, lat) {
+    const res = await axios
+      .get(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${lat}&lon=${long}`);
+
+    console.log(res);
+    return res.data.features[0].properties;
+  },
 
   /**
    * Ticket
