@@ -88,5 +88,23 @@ export default {
       return [];
     },
   },
+  methods: {
+    hoursOpen(hours) {
+      let hoursOpenStr = '';
+
+      Object.entries(hours)
+        .forEach(([key, value]) => {
+          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
+        });
+
+      return hoursOpenStr;
+    },
+    aboutData() {
+      const newData = { ...this.data };
+      newData.hoursOpen = this.hoursOpen(newData.hoursOpen);
+
+      return newData;
+    },
+  },
 };
 </script>

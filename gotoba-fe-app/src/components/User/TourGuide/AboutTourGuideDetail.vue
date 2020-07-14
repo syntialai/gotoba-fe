@@ -1,7 +1,7 @@
 <template>
   <div class="about-tour-guide-detail bg-white p-3">
     <div class="title w-100 border-bottom-gray-young">
-      <h3>About</h3>
+      <h5>About</h5>
     </div>
     <b-table stacked
       :items="items"
@@ -18,15 +18,17 @@ export default {
   },
   computed: {
     items() {
-      return {
-        language: this.data.language,
-        available_location: this.data.availableLocation,
-        phone_number: this.data.phone,
-        email: this.data.email,
-        whatsapp: this.data.whatsapp,
-        experience: this.data.experience || '-',
-        description: this.data.description,
-      };
+      return [
+        {
+          language: this.data.language,
+          available_location: this.data.availableLocation,
+          phone_number: this.data.phone,
+          email: this.data.email,
+          whatsapp: this.data.whatsapp,
+          experience: this.data.experience || '-',
+          description: this.data.description || '-',
+        }
+      ];
     },
   },
 };
