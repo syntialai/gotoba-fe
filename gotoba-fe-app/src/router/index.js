@@ -259,9 +259,9 @@ const routes = [
     },
   },
   {
-    path: '/promotion/:sku',
-    name: 'Promotion Detail',
-    component: Pages.PROMOTION_DETAIL,
+    path: '/ticket/:sku',
+    name: 'Ticket Detail',
+    component: Pages.TICKET_DETAIL,
     meta: {
       layout: 'default-back',
     },
@@ -295,7 +295,7 @@ const routes = [
     component: Pages.SHOW_QR_CODE,
   },
   {
-    path: '/payment/:sku',
+    path: '/payment',
     name: 'Payment Process',
     beforeEnter: checkUserRole,
     component: Pages.PAYMENT,

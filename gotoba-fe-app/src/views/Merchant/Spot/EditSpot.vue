@@ -64,6 +64,31 @@
         </ValidationProvider>
 
         <ValidationProvider
+            name="Title"
+            rules="required"
+            v-slot="validationContext"
+          >
+            <b-form-group
+              id="spot-title-group"
+              label="Title"
+              label-for="spot-title"
+            >
+              <b-form-input
+                id="spot-title"
+                v-model="spot.title"
+                type="text"
+                class="border-gray"
+                required
+                :state="getValidationState(validationContext)"
+                aria-describedby="spot-title-feedback-msg"
+              ></b-form-input>
+              <b-form-invalid-feedback id="spot-title-feedback-msg">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </ValidationProvider>
+
+        <ValidationProvider
           name="Location"
           rules="required"
           v-slot="validationContext"
@@ -128,31 +153,6 @@
         </ValidationProvider>
 
         <ValidationProvider
-          name="Bistro phone number"
-          :rules="{ numeric: true, min: 10, max: 13 }"
-          v-slot="validationContext"
-        >
-          <b-form-group
-            id="spot-phone-number-group"
-            label="Phone Number"
-            label-for="spot-phone-number"
-          >
-            <b-form-input
-              id="spot-phone-number"
-              v-model="spot.phone"
-              type="text"
-              class="border-gray"
-              required
-              :state="getValidationState(validationContext)"
-              aria-describedby="edit-phone-number-feedback-msg"
-            ></b-form-input>
-            <b-form-invalid-feedback id="edit-phone-number-feedback-msg">
-              {{ validationContext.errors[0] }}
-            </b-form-invalid-feedback>
-          </b-form-group>
-        </ValidationProvider>
-
-        <ValidationProvider
           name="Bistro address"
           rules="required"
           v-slot="validationContext"
@@ -187,25 +187,48 @@
               v-for="(dayOpen, index) of spot.hoursOpen"
               :key="dayOpen.day"
             >
-              <b-form-checkbox v-model="spot.hoursOpen[index].open">
-                <div class="d-flex justify-content-between">
-                  <div class="day">{{ dayOpen.day }}</div>
-                  <div class="time">
-                    <b-form-timepicker
-                      v-model="spot.hoursOpen[index].openTime"
-                      locale="en"
-                    ></b-form-timepicker>
-                    -
-                    <b-form-timepicker
-                      v-model="spot.hoursOpen[index].closeTime"
-                      locale="en"
-                    ></b-form-timepicker>
-                  </div>
+              <div class="d-flex justify-content-between">
+                <div class="day">{{ dayOpen.day }}</div>
+                <div class="time">
+                  <b-form-timepicker
+                    v-model="spot.hoursOpen[index].openTime"
+                    locale="en"
+                  ></b-form-timepicker>
+                  -
+                  <b-form-timepicker
+                    v-model="spot.hoursOpen[index].closeTime"
+                    locale="en"
+                  ></b-form-timepicker>
                 </div>
-              </b-form-checkbox>
+              </div>
             </li>
           </ul>
         </b-form-group>
+
+        <ValidationProvider
+            name="Description"
+            rules="required"
+            v-slot="validationContext"
+          >
+            <b-form-group
+              id="spot-description-group"
+              label="Description"
+              label-for="spot-description"
+            >
+              <b-form-textarea
+                id="spot-description"
+                v-model="spot.description"
+                rows="5"
+                max-rows="6"
+                class="border-gray"
+                :state="getValidationState(validationContext)"
+                aria-describedby="spot-description-feedback-msg"
+              ></b-form-textarea>
+              <b-form-invalid-feedback id="spot-description-feedback-msg">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </ValidationProvider>
 
         <b-button
           block
@@ -229,7 +252,7 @@ import getLocation from '../../../utils/location';
 export default {
   name: 'EditSpot',
   computed: {
-    ...mapGetters(['journeyDataBySku']),
+    ...mapGetters(['journeyDataBySku', 'userSku']),
   },
   created() {
     this.getJourneyDataBySku(this.$route.params.sku);
@@ -245,8 +268,8 @@ export default {
         latitude: 0.0,
         createdBy: '',
         price: '',
-        phone: '',
         address: '',
+        description: '',
         hoursOpen: [],
       },
       image: '',
@@ -260,6 +283,7 @@ export default {
 
     updateSpot() {
       const data = { ...this.spot };
+      data.createdBy = this.userSku;
 
       if (data.sku) {
         api.EditItinerary(data.sku, data)

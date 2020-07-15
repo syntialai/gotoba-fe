@@ -1,7 +1,7 @@
 <template>
   <div class="this-week-calendar box-shadow border-square-20 bg-white">
     <div
-      class="days d-flex justify-content-around p-2"
+      class="days d-flex justify-content-around p-3"
     >
       <b-button-group
         vertical

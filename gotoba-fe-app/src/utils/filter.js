@@ -11,7 +11,7 @@ import { months, days } from './date';
 export const formatPrice = (price, comma = false, idr = false) => {
   const formattedPrice = (idr ? 'Rp' : '')
                   + new Intl.NumberFormat('id').format(parseInt(price, 10))
-                  + (comma ? '.00' : '');
+                  + (comma ? ',00' : '');
   return formattedPrice;
 };
 

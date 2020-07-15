@@ -19,8 +19,17 @@ const actions = {
     commit(Types.SET_ORDER_TOTAL);
   },
 
+  setCartDataQuantity({ commit }, res) {
+    commit(Types.SET_CART_DATA_QUANTITY, res);
+  },
+
   selectAllCartData({ commit }, select) {
     commit(Types.SET_CART_DATA_ALL_CHECKED_OR_UNCHECKED, select);
+    commit(Types.SET_ORDER_TOTAL);
+  },
+
+  setOrderData({ commit }, data) {
+    commit(Types.SET_ORDER_DATA, data);
     commit(Types.SET_ORDER_TOTAL);
   },
 
@@ -117,7 +126,23 @@ const getters = {
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.SET_CART_DATA](state, res) {
+    if (state.cartData.length > 0) {
+      state.cartData.concat(res);
+      return;
+    }
+
     state.cartData = res;
+  },
+
+  [Types.SET_CART_DATA_QUANTITY](state, res) {
+    const indexData = state.cartData.findIndex((data) => data.ticketSku === res.ticketSku);
+
+    if (indexData === -1) {
+      state.cartData.push(res);
+      return;
+    }
+
+    state.cartData[indexData].quantity += 1;
   },
 
   [Types.SET_CART_DATA_ALL_CHECKED_OR_UNCHECKED](state, select) {
@@ -145,6 +170,14 @@ const mutations = {
     state.orderTotal.item = totalItem;
     state.orderTotal.price = totalPrice;
     state.orderTotal.discount = totalDiscount;
+  },
+
+  [Types.SET_ORDER_TOTAL](state, res) {
+    state.orderTotal = {
+      item: res.quantity,
+      price: res.quantity * res.price,
+      discount: res.quantity * res.discount,
+    };
   },
 
   [Types.SET_ORDER_DATA](state, res) {

@@ -7,10 +7,10 @@
           {{ data.title }}
         </span>
         <span class="font-size-14 d-block mb-1">
-          {{ data.info }}
+          {{ data.description }}
         </span>
         <span>Valid until : </span>
-        <span class="date font-color-black-87">{{ data.date }}</span>
+        <span class="date font-color-black-87">{{ data.expiredDate }}</span>
       </div>
     </div>
   </div>

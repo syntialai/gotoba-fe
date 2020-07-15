@@ -37,16 +37,8 @@
     </div>
 
     <div class="promotion mb-2" v-if="promotions.length > 0">
-      <div
-        class="title d-flex w-100 border-bottom-gray-young justify-content-between"
-      >
+      <div class="title border-bottom-gray-young">
         <h5>Promotions</h5>
-        <router-link :to="'/promotion/' + data.sku">
-          <b-icon
-            icon="arrow-right-short"
-            class="icon-black-60"
-          ></b-icon>
-        </router-link>
       </div>
       <div class="promotion-group">
         <card-promotion

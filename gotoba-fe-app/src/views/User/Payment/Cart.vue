@@ -15,7 +15,7 @@
           </b-button>
         </div>
       </div>
-      <div class="order-items-group w-100 py-3">
+      <div class="order-items-group w-100 py-3" v-if="cartData">
         <div class="order-item-detail"
           v-for="item in cartData"
           :key="item.name"

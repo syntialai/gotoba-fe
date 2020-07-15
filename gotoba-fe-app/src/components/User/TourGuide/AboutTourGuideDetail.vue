@@ -27,7 +27,7 @@ export default {
           whatsapp: this.data.whatsapp,
           experience: this.data.experience || '-',
           description: this.data.description || '-',
-        }
+        },
       ];
     },
   },

@@ -34,7 +34,7 @@ export default {
       Object.entries(this.data.hoursOpen)
         .forEach(([key, value], index) => {
           hoursOpenStr += `${key} = ${value[0]} - ${value[1]}`;
-          
+
           if (index !== objLength - 1) {
             hoursOpenStr += '\n';
           }
