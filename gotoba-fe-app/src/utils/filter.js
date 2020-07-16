@@ -10,7 +10,7 @@ import { months, days } from './date';
  */
 export const formatPrice = (price, comma = false, idr = false) => {
   const formattedPrice = (idr ? 'Rp' : '')
-                  + new Intl.NumberFormat('id').format(parseInt(price, 10))
+                  + (new Intl.NumberFormat('id').format(price)).replace(/,/gi, '.')
                   + (comma ? ',00' : '');
   return formattedPrice;
 };
@@ -39,9 +39,9 @@ export const formatDate = (currentDate) => {
 export const isToday = (date) => {
   const today = new Date();
 
-  return date.getDate === today.getDate
-    && date.getMonth === today.getMonth
-    && date.getFullYear === today.getFullYear;
+  return date.getDate() === today.getDate()
+    && date.getMonth() === today.getMonth()
+    && date.getFullYear() === today.getFullYear();
 };
 
 /**

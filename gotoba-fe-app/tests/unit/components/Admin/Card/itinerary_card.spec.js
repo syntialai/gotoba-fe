@@ -5,10 +5,12 @@ describe('ItineraryCard.vue', () => {
   const expectedData = {
     image: '/wisata/img.png',
     location: 'Parapat',
-    other: 100000,
+    name: 'Parapat',
+    other: 'Rp100.000,00',
     rating: null,
   };
   const itinerary = {
+    name: 'Parapat',
     image: '/wisata/img.png',
     location: 'Parapat',
     harga: 100000,
