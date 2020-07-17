@@ -13,7 +13,7 @@ describe('ItineraryCard.vue', () => {
     name: 'Parapat',
     image: '/wisata/img.png',
     location: 'Parapat',
-    harga: 100000,
+    price: 100000,
   };
 
   let wrapper;

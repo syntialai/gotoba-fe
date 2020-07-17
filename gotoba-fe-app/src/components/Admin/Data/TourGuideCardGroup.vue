@@ -21,6 +21,13 @@ export default {
   },
   props: {
     tourGuides: Array,
+    start: Number,
+    end: Number,
+  },
+  computed: {
+    tourGuideRange() {
+      return this.tourGuides.slice(this.start - 1, this.end);
+    },
   },
   methods: {
     goToDetails(sku) {

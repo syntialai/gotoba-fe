@@ -33,7 +33,7 @@ export default {
         name: this.itinerary.name,
         image: this.itinerary.image,
         location: this.itinerary.location,
-        other: formatPrice(this.itinerary.harga.toString(), true, true),
+        other: formatPrice(this.itinerary.price.toString(), true, true),
         rating: this.itinerary.rating || null,
       };
     },
