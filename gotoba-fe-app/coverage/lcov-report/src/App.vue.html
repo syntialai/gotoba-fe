@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -116,14 +116,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -139,7 +139,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,14 +164,14 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { mapGetters } from 'vuex';</span>
-<span class="cstat-no" title="statement not covered" >import Auth from './layouts/Auth.vue';</span>
-<span class="cstat-no" title="statement not covered" >import BackgroundBlue from './layouts/BackgroundBlue.vue';</span>
-<span class="cstat-no" title="statement not covered" >import Default from './layouts/Default.vue';</span>
-<span class="cstat-no" title="statement not covered" >import DefaultBack from './layouts/DefaultBack.vue';</span>
-<span class="cstat-no" title="statement not covered" >import NotFound from './layouts/NotFound.vue';</span>
-<span class="cstat-no" title="statement not covered" >import Alert from './components/Partial/Alert.vue';</span>
-<span class="cstat-no" title="statement not covered" >import Toast from './components/Partial/Toast.vue';</span>
+import { mapGetters } from 'vuex';
+import Auth from './layouts/Auth.vue';
+import BackgroundBlue from './layouts/BackgroundBlue.vue';
+import Default from './layouts/Default.vue';
+import DefaultBack from './layouts/DefaultBack.vue';
+import NotFound from './layouts/NotFound.vue';
+import Alert from './components/Partial/Alert.vue';
+import Toast from './components/Partial/Toast.vue';
 &nbsp;
 export default {
   name: 'App',
@@ -186,8 +186,8 @@ export default {
   },
   computed: {
     ...mapGetters(['showAlert', 'showToast']),
-<span class="fstat-no" title="function not covered" >    layout() {</span>
-<span class="cstat-no" title="statement not covered" >      return `${(this.$route.meta.layout || 'default')}`;</span>
+    layout() {
+<span class="branch-1 cbranch-no" title="branch not covered" >      return `${(this.$route.meta.layout || 'default')}`;</span>
     },
   },
 };
@@ -207,7 +207,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Jul 18 2020 03:08:10 GMT+0700 (Indochina Time)
+                at Sat Jul 18 2020 03:58:33 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\prettify.js"></script>

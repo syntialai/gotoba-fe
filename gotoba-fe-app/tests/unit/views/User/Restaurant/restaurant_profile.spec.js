@@ -58,7 +58,7 @@ describe('RestaurantProfile.vue', () => {
     wrapper.destroy();
   });
 
-  it('Check getRestaurantDataBySku actions to be called when created', () => {
+  it('Check getRestaurantDataByMerchantSku and getRestaurantMenu actions to be called when created', () => {
     expect(actions.getRestaurantDataByMerchantSku).toHaveBeenCalledTimes(1);
     expect(actions.getRestaurantMenu).toHaveBeenCalledTimes(1);
 
