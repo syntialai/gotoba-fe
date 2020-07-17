@@ -51,12 +51,6 @@ export default {
   },
   data() {
     return {
-      // images: [
-      //   'https://indonesiatatler.com/images/i/story-20160819151207-maritim.go.id_resized_773x457.jpg',
-      //   'https://www.indonesia.travel/content/dam/indtravelrevamp/en/destinations/revision-2019/all-revision-destination/sumatra/Lake_Toba.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg',
-      //   'https://dummyimage.com/1280/000000/ffffff',
-      //   'https://dummyimage.com/400/000000/ffffff',
-      // ],
       index: null,
     };
   },

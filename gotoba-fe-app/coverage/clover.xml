@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1594994719617" clover="3.2.0">
-  <project timestamp="1594994719617" name="All files">
-    <metrics statements="1659" coveredstatements="309" conditionals="279" coveredconditionals="49" methods="777" coveredmethods="71" elements="2715" coveredelements="429" complexity="0" loc="1659" ncloc="1659" packages="53" files="162" classes="162"/>
+<coverage generated="1595003553764" clover="3.2.0">
+  <project timestamp="1595003553765" name="All files">
+    <metrics statements="1659" coveredstatements="329" conditionals="279" coveredconditionals="49" methods="777" coveredmethods="77" elements="2715" coveredelements="455" complexity="0" loc="1659" ncloc="1659" packages="53" files="162" classes="162"/>
     <package name="src">
       <metrics statements="18" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <file name="App.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\App.vue">
@@ -529,10 +529,10 @@
       </file>
     </package>
     <package name="src.components.User.Home">
-      <metrics statements="16" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <metrics statements="16" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <file name="CardHome.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Home\CardHome.vue">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="24" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="24" count="1" type="stmt"/>
       </file>
       <file name="GalleryGroup.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Home\GalleryGroup.vue">
         <metrics statements="10" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
@@ -631,7 +631,7 @@
       </file>
     </package>
     <package name="src.components.User.Profile">
-      <metrics statements="28" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="5"/>
+      <metrics statements="28" coveredstatements="19" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="5"/>
       <file name="AboutProfileDetail.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Profile\AboutProfileDetail.vue">
         <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <line num="21" count="2" type="stmt"/>
@@ -644,15 +644,15 @@
         <line num="43" count="2" type="stmt"/>
       </file>
       <file name="CardProfileDetail.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Profile\CardProfileDetail.vue">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="18" count="0" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="18" count="1" type="stmt"/>
       </file>
       <file name="ProfileDetail.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Profile\ProfileDetail.vue">
-        <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
+        <metrics statements="12" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
         <line num="80" count="0" type="stmt"/>
         <line num="85" count="0" type="stmt"/>
         <line num="87" count="0" type="stmt"/>
@@ -668,8 +668,8 @@
       </file>
       <file name="RatingProfileDetail.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\components\User\Profile\RatingProfileDetail.vue">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="5" type="stmt"/>
@@ -1473,7 +1473,7 @@
       </file>
       <file name="rating.js" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\utils\rating.js">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
@@ -1547,14 +1547,14 @@
       </file>
       <file name="GalleryDetail.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\views\Admin\GalleryDetail.vue">
         <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
       </file>
       <file name="ItineraryData.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\views\Admin\ItineraryData.vue">
         <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
@@ -1970,9 +1970,9 @@
       <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="Gallery.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\views\User\Gallery\Gallery.vue">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.views.User.History">
@@ -2003,7 +2003,7 @@
       </file>
     </package>
     <package name="src.views.User.Home">
-      <metrics statements="30" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="0"/>
+      <metrics statements="30" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="2"/>
       <file name="Home.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\views\User\Home\Home.vue">
         <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="126" count="0" type="stmt"/>
@@ -2020,11 +2020,11 @@
         <line num="181" count="0" type="stmt"/>
       </file>
       <file name="Promotion.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\views\User\Home\Promotion.vue">
-        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
       </file>
       <file name="TicketDetail.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\views\User\Home\TicketDetail.vue">
         <metrics statements="14" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
@@ -2084,22 +2084,22 @@
       </file>
     </package>
     <package name="src.views.User.Journey">
-      <metrics statements="17" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <metrics statements="17" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="4"/>
       <file name="Journey.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\views\User\Journey\Journey.vue">
-        <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="44" count="3" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
       </file>
       <file name="JourneyProfile.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\views\User\Journey\JourneyProfile.vue">
-        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
       </file>
       <file name="JourneyReview.vue" path="D:\FUTURE Program\PHASE 2\gotoba-fe\gotoba-fe-app\src\views\User\Journey\JourneyReview.vue">
         <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>

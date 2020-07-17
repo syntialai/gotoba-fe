@@ -50,7 +50,7 @@ export default {
       this.$router.push(`/journey/${journeySku}`);
     },
     goToDetails(ticketSku) {
-      this.$router.push(`/promotion/${ticketSku}`);
+      this.$router.push(`/ticket/${ticketSku}`);
     },
   },
 };
