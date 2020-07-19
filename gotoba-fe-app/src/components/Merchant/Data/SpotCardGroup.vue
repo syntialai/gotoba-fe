@@ -4,7 +4,7 @@
       <card-spot
         v-for="itinerary of itineraries"
         :key="itinerary.sku"
-        v-bind="itinerary"
+        :itinerary="itinerary"
         @click="toSpotDetail(itinerary.sku)"
       />
     </ul>

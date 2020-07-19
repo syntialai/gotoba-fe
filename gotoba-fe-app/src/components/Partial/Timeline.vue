@@ -17,19 +17,20 @@
       </li>
       <li v-if="add" @click="addSchedule">
         <div class="d-flex justify-content-between w-100">
-          <div class="timeline-place-select font-color-black-87 semibold">
+          <div class="timeline-place-select font-color-black-87 semibold w-50">
             <b-input-group
-              size="sm"
+              size="sm" class="w-100"
             >
               <b-form-input
                 v-model="schedule.destination"
+                list="location-list"
                 required
               ></b-form-input>
-              <b-input-group-append>
-                <b-button class="custom-btn-white">
-                  <b-icon icon="chevron-down" />
-                </b-button>
-              </b-input-group-append>
+              <select-destination-autocomplete
+                v-if="locationList"
+                :locationList="locationList"
+                :searchKeywords="schedule.destination"
+              />
             </b-input-group>
           </div>
           <div class="timeline-time">
@@ -37,6 +38,7 @@
               v-model="schedule.time"
               required
               locale="en"
+              size="sm"
             ></b-form-timepicker>
           </div>
         </div>
@@ -46,13 +48,22 @@
 </template>
 
 <script>
+import SelectDestinationAutocomplete from '../User/Itinerary/SelectDestinationAutocomplete.vue';
+
 export default {
   name: 'Timeline',
+  components: {
+    SelectDestinationAutocomplete,
+  },
   props: {
     timelines: Array,
     add: {
       type: Boolean,
       default: false,
+    },
+    locationList: {
+      type: Array,
+      default: null,
     },
   },
   data() {
@@ -81,7 +92,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-@import '@/assets/scss/index';
-</style>

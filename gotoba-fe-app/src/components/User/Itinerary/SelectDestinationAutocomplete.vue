@@ -1,28 +1,27 @@
 <template>
-  <div class="select-destination-autocomplete" v-if="showAutocomplete">
-    <div class="p-2 border-bottom-gray-young">
-      <b-button variant="outline-secondary">
-        <font-awesome-icon
-          class="icon-accent-green"
-          icon="map"
-        ></font-awesome-icon>
-        <div class="pl-2">Select via Map</div>
-      </b-button>
-    </div>
-    <b-list-group class="mt-2">
-      <b-list-group-item
-        v-for="suggestion in matches"
-        :key="suggestion"
-        @click="suggestionClick(suggestion)"
-        :href="'/' + suggestion.toLowerCase().replace(' ', '+')"
-        class="d-flex justify-content-between border-none"
+  <div class="select-destination-autocomplete">
+    <datalist id="location-list">
+      <option>
+        <div class="p-2 border-bottom-gray-young">
+          <b-button variant="outline-secondary" @click="showOnMap">
+            <font-awesome-icon
+              class="icon-accent-green"
+              icon="map"
+            ></font-awesome-icon>
+            <div class="pl-2">Select via Map</div>
+          </b-button>
+        </div>
+      </option>
+      <option
+        v-for="location in locationList"
+        :key="location"
       >
         <card-location
-          :name="suggestion.name"
-          :location="suggestion.location"
+          :name="location.name"
+          :location="location.address"
         />
-      </b-list-group-item>
-    </b-list-group>
+      </option>
+    </datalist>
   </div>
 </template>
 
@@ -35,19 +34,23 @@ export default {
     CardLocation,
   },
   props: {
-    showAutocomplete: {
-      type: Boolean,
-      default: false,
+    locationList: Array,
+    searchKeywords: String,
+  },
+  computed: {
+    matches() {
+      return this.locationList.filter(
+        (str) => str.substr(
+          0,
+          this.searchKeywords.length,
+        ).toLowerCase()
+        === this.searchKeywords.toLowerCase(),
+      );
     },
   },
-  data() {
-    return {
-      matches: [],
-    };
-  },
   methods: {
-    suggestionClick(suggestion) {
-      this.$router.push(`${this.$route.path}/${suggestion.name}`);
+    showOnMap() {
+      this.$router.push('/itinerary/add/show-on-map');
     },
   },
 };

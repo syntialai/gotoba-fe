@@ -1,5 +1,5 @@
 <template>
-  <div class="card-spot bg-white py-2 mb-2">
+  <div class="card-spot bg-white py-2 px-3 mb-2">
     <b-media tag="li" vertical-align="center">
       <template v-slot:aside>
         <b-img
@@ -9,7 +9,7 @@
           :alt="itinerary.name"
         ></b-img>
       </template>
-      <h5 class="m-0">{{ itinerary.title }}</h5>
+      <h5 class="m-0">{{ itinerary.name }}</h5>
       <p class="mb-0">
         {{ itinerary.address }}
       </p>

@@ -2,9 +2,11 @@
   <div class="add-itinerary">
     <choose-date-calendar />
 
-    <timeline :timelines="timelines" />
-
-    <select-destination-autocomplete :showAutocomplete="showAutocomplete" />
+    <timeline
+      :timelines="timelines"
+      :add="true"
+      :locationList="locationList"
+    />
 
     <div class="w-100 d-flex box-shadow fixed-bottom">
       <div class="w-50">
@@ -28,8 +30,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import ChooseDateCalendar from '../../../components/User/Itinerary/ChooseDateCalendar.vue';
-import SelectDestinationAutocomplete from '../../../components/User/Itinerary/SelectDestinationAutocomplete.vue';
 import Timeline from '../../../components/Partial/Timeline.vue';
 import api from '../../../api/api';
 
@@ -37,16 +39,25 @@ export default {
   name: 'AddItinerary',
   components: {
     ChooseDateCalendar,
-    SelectDestinationAutocomplete,
     Timeline,
+  },
+  computed: {
+    ...mapGetters(['journeyData', 'restaurantDatas']),
+    locationList() {
+      return [...this.journeyData, ...this.restaurantDatas].sort();
+    },
+  },
+  created() {
+    this.getJourneyData();
+    this.getRestaurantData();
   },
   data() {
     return {
       timelines: [],
-      showAutocomplete: false,
     };
   },
   methods: {
+    ...mapActions(['getJourneyData', 'getRestaurantData']),
     submitTravellingSchedule() {
       const data = {};
 

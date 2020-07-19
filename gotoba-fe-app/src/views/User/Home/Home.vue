@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="container">
-      <div id="category" class="m-3">
+      <div id="category" class="my-3">
         <b-button-group
           class="d-flex justify-content-around box-shadow bg-white border-square-10"
         >
@@ -9,7 +9,7 @@
             v-for="menu in mainMenus"
             :key="menu.name"
             :to="menu.link"
-            class="bg-white border-square-10 p-3"
+            class="bg-white border-square-10 p-2"
           >
             <div class="menu-icon">
               <font-awesome-icon
@@ -100,22 +100,22 @@
           />
         </div>
       </div>
-    </div>
 
-    <div class="gallery content-group m-3 p-4" v-if="galleryData">
-      <div class="title mb-1 pt-3 d-flex align-items-center">
-        <font-awesome-icon
-            :icon="['far', 'images']"
-            class="icon-gradient font-size-24 pr-2"
-          />
-        <h6 class="font-color-blue-primary m-0">Our Gallery</h6>
+      <div class="gallery content-group" v-if="galleryData">
+        <div class="title mb-1 pt-3 d-flex align-items-center">
+          <font-awesome-icon
+              :icon="['far', 'images']"
+              class="icon-gradient font-size-24 pr-2"
+            />
+          <h6 class="font-color-blue-primary m-0">Our Gallery</h6>
+        </div>
+
+        <div class="info font-color-black-60 font-size-14 mb-3">
+          Show every moment captured around Lake Toba
+        </div>
+
+        <gallery-home :galleryData="galleryData" />
       </div>
-
-      <div class="info font-color-black-60 font-size-14 mb-3">
-        Show every moment captured around Lake Toba
-      </div>
-
-      <gallery-home :galleryData="galleryData" />
     </div>
 
     <the-footer />

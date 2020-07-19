@@ -1,7 +1,7 @@
 <template>
   <div class="card-description-detail">
     <b-card class="w-100" no-body>
-      <!-- <b-aspect aspect="16:9">
+      <b-aspect aspect="16:9">
         <b-card-img
           v-if="getImage"
           :src="getImage"
@@ -9,7 +9,7 @@
           class="w-100"
           top
         ></b-card-img>
-      </b-aspect> -->
+      </b-aspect>
       <b-card-title>
         {{ title }}
       </b-card-title>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-// import api from '../../api/api';
+import api from '../../api/api';
 
 export default {
   name: 'CardInfoDetail',
@@ -31,11 +31,11 @@ export default {
     description: String,
   },
   methods: {
-    // async getImage() {
-    //   const res = await api.GetImage(this.image);
-    //   console.log(res);
-    //   return res;
-    // },
+    async getImage() {
+      const res = await api.GetImage(this.image);
+      console.log(res);
+      return res;
+    },
   },
 };
 </script>

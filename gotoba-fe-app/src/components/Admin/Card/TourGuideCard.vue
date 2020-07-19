@@ -20,7 +20,7 @@ export default {
       return {
         image: this.tourGuide.image,
         location: this.tourGuide.location,
-        other: this.tourGuide.gender,
+        other: this.tourGuide.age.toString(),
         rating: this.tourGuide.rating,
       };
     },

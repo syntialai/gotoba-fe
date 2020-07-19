@@ -16,10 +16,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'NotFound',
+  computed: {
+    ...mapGetters(['userRole']),
+  },
   methods: {
     home() {
+      if (this.userRole === 'ROLE_ADMIN') {
+        this.$router.push('/admin');
+        return;
+      }
+
+      if (this.userRole === 'ROLE_MERCHANT') {
+        this.$router.push('/merchant');
+        return;
+      }
+
       this.$router.push('/');
     },
   },

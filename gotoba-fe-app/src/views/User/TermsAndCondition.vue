@@ -1,9 +1,9 @@
 <template>
   <div class="terms-and-condition">
     <div class="container pl-2 pr-2">
-      <h2 class="font-color-blue-secondary">
+      <h5 class="font-color-blue-secondary">
         <strong>Terms and Conditions</strong>
-      </h2>
+      </h5>
       <p>Welcome to gotoba!</p>
       <br>
       <p>
@@ -40,7 +40,7 @@
         interchangeable and therefore as referring to same.
       </p>
 
-      <h3 class="font-color-blue-secondary semibold">Cookies</h3>
+      <h6 class="font-color-blue-secondary semibold">Cookies</h6>
       <p>
         We employ the use of cookies. By accessing gotoba, you agreed to use
         cookies in agreement with the FUTURE Medan's Privacy Policy.
@@ -54,7 +54,7 @@
         use cookies.
       </p>
 
-      <h3 class="font-color-blue-secondary semibold">License</h3>
+      <h6 class="font-color-blue-secondary semibold">License</h6>
       <p>
         Unless otherwise stated, FUTURE Medan and/or its licensors own the
         intellectual property rights for all material on gotoba. All
@@ -121,9 +121,9 @@
         of your Comments in any and all forms, formats or media.
       </p>
 
-      <h3 class="font-color-blue-secondary semibold">
+      <h6 class="font-color-blue-secondary semibold">
         Hyperlinking to our Content
-      </h3>
+      </h6>
       <p>
         The following organizations may link to our Website without prior
         written approval:
@@ -212,14 +212,14 @@
         linking absent a trademark license agreement.
       </p>
 
-      <h3 class="font-color-blue-secondary semibold">iFrames</h3>
+      <h6 class="font-color-blue-secondary semibold">iFrames</h6>
       <p>
         Without prior approval and written permission, you may not create
         frames around our Webpages that alter in any way the visual
         presentation or appearance of our Website.
       </p>
 
-      <h3 class="font-color-blue-secondary semibold">Content Liability</h3>
+      <h6 class="font-color-blue-secondary semibold">Content Liability</h6>
       <p>
         We shall not be hold responsible for any content that appears on your
         Website. You agree to protect and defend us against all claims that
@@ -229,10 +229,10 @@
         other violation of, any third party rights.
       </p>
 
-      <h3 class="font-color-blue-secondary semibold">Your Privacy</h3>
+      <h6 class="font-color-blue-secondary semibold">Your Privacy</h6>
       <p>Please read <a href="/privacy-policy">Privacy Policy</a></p>
 
-      <h3 class="font-color-blue-secondary semibold">Reservation of Rights</h3>
+      <h6 class="font-color-blue-secondary semibold">Reservation of Rights</h6>
       <p>
         We reserve the right to request that you remove all links or any
         particular link to our Website. You approve to immediately remove
@@ -242,9 +242,9 @@
         to and follow these linking terms and conditions.
       </p>
 
-      <h3 class="font-color-blue-secondary semibold">
+      <h6 class="font-color-blue-secondary semibold">
         Removal of links from our website
-      </h3>
+      </h6>
       <p>
         If you find any link on our Website that is offensive for any reason,
         you are free to contact and inform us any moment. We will consider
@@ -259,7 +259,7 @@
         on the website is kept up to date.
       </p>
 
-      <h3 class="font-color-blue-secondary semibold">Disclaimer</h3>
+      <h6 class="font-color-blue-secondary semibold">Disclaimer</h6>
       <p>
         To the maximum extent permitted by applicable law, we exclude all
         representations, warranties and conditions relating to our website
@@ -314,7 +314,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h2, h3 {
+h5, h6 {
   margin-top: 20px;
 }
 

@@ -17,7 +17,7 @@
 
     <itinerary-modal />
 
-    <spot-card-group v-bind="itineraries" />
+    <spot-card-group :itineraries="itineraries" v-if="itineraries" />
   </div>
 </template>
 
