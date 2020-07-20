@@ -15,7 +15,9 @@
       </b-nav-item>
     </b-nav>
 
-    <router-view class="overflow-hidden min-vh-100"></router-view>
+    <router-view
+      class="overflow-hidden min-vh-100 vh-100 bg-white"
+    ></router-view>
 
   </div>
 </template>

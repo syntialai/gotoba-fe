@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="container">
-      <div id="category" class="my-3">
+      <div id="category" class="my-3 p-2">
         <b-button-group
           class="d-flex justify-content-around box-shadow bg-white border-square-10"
         >
@@ -9,7 +9,7 @@
             v-for="menu in mainMenus"
             :key="menu.name"
             :to="menu.link"
-            class="bg-white border-square-10 p-2"
+            class="bg-white border-square-10 px-2 py-3 border-none"
           >
             <div class="menu-icon">
               <font-awesome-icon

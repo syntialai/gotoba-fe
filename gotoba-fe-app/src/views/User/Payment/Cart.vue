@@ -2,7 +2,7 @@
   <div class="cart min-vh-100 position-relative bg-color-main">
     <div class="order-items px-3 bg-white">
       <div
-        class="border-bottom-gray-young d-flex justify-content-between py-2"
+        class="border-bottom-gray-young d-flex justify-content-between align-items-center py-2"
       >
         <div class="title font-size-20 bold">Order Item(s)</div>
         <div class="select-all font-color-black-60">

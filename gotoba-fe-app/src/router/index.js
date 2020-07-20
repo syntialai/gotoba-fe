@@ -87,12 +87,12 @@ const routes = [
       },
       {
         path: 'my-tickets',
-        name: 'My Tickets',
         beforeEnter: checkUserRole,
         component: Pages.MY_TICKETS,
         children: [
           {
             path: '',
+            name: 'My Tickets',
             component: Pages.TICKET_VALID,
             meta: {
               layout: 'background-blue',
@@ -100,6 +100,7 @@ const routes = [
           },
           {
             path: 'expired',
+            name: 'My Tickets',
             component: Pages.TICKET_EXPIRED,
             meta: {
               layout: 'background-blue',
