@@ -11,7 +11,7 @@ const state = {
 
 const actions = {
   getJourneyData({ commit }) {
-    commit(Types.SET_JOURNEY_DATA);
+    commit(Types.SET_JOURNEY_DATA, []);
 
     api.GetItineraries()
       .then((res) => {
@@ -47,10 +47,10 @@ const actions = {
       .then((res) => {
         if (!res.error) {
           commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, res.data);
+          console.log(res);
           return;
         }
 
-        console.log(res);
         commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, []);
       })
       .catch((err) => {

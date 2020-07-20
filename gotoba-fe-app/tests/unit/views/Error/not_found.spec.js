@@ -27,7 +27,7 @@ describe('NotFound.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check home method navigate to Home when called', async () => {
+  it('Check home method navigate to Home when called', () => {
     wrapper.vm.home();
 
     expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);

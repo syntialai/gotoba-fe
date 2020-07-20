@@ -1,10 +1,11 @@
 <template>
   <div class="search-result">
-    <div v-if="searchResultTotal > 0">
-      <SearchResultCategory
-        v-for="category in categories"
-        :key="category.name"
-        v-bind="category"
+    <div v-if="searchResultTotal > 0" class="m-3">
+      <search-result-category
+        v-for="item in searchResults"
+        :key="item.name"
+        :searchKeyword="searchKeywords"
+        v-bind="item"
       />
     </div>
 
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import SearchResultCategory from './SearchResultCategory.vue';
 
 export default {
@@ -33,39 +35,35 @@ export default {
     SearchResultCategory,
   },
   computed: {
-    searchKeywords() {
-      return this.$store.getters.searchKeywords;
+    ...mapGetters(['searchWisataResults', 'searchRestaurantResults', 'searchKeywords']),
+    searchResultTotal() {
+      return this.searchWisataResults.length + this.searchRestaurantResults.length;
     },
     searchResults() {
-      return this.$store.getters.searchResults;
-    },
-    searchResultTotal() {
-      return this.$store.getters.searchResults.length;
-    },
-  },
-  data() {
-    return {
-      categories: [
+      return [
         {
-          categoryTitle: `Places related to ${this.searchKeywords}`,
+          categoryTitle: 'Places related to',
           categoryIcon: 'map-marked-alt',
           categoryColor: 'green',
-          searchResults: [],
+          category: 'journey',
+          searchResults: this.searchWisataResults,
         },
         {
-          categoryTitle: `Eats related to ${this.searchKeywords}`,
+          categoryTitle: 'Eats related to',
           categoryIcon: 'utensils',
           categoryColor: 'orange',
-          searchResults: [],
+          category: 'restaurant',
+          searchResults: this.searchRestaurantResults,
         },
-        {
-          categoryTitle: `Ticket with keyword ${this.searchKeywords}`,
-          categoryIcon: 'hotel',
-          categoryColor: 'purple',
-          searchResults: [],
-        },
-      ],
-    };
+      ];
+    },
+  },
+  created() {
+    this.getSearchWisataResults();
+    this.getSearchRestaurantResults();
+  },
+  methods: {
+    ...mapActions(['getSearchWisataResults', 'getSearchRestaurantResults']),
   },
 };
 </script>

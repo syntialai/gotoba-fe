@@ -1,15 +1,9 @@
 module.exports = {
   runtimeCompiler: true,
   assetsDir: 'static',
-  // devServer: {
-  //   proxy: 'http://localhost:8800/',
-    // {
-    //   '^/': {
-    //     target: 'http://localhost:8800',
-    //     changeOrigin: true,
-    //   },
-    // },
-  // },
+  devServer: {
+    proxy: 'http://localhost:8800/',
+  },
   css: {
     loaderOptions: {
       sass: {

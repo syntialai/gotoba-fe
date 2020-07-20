@@ -1,8 +1,8 @@
 <template>
   <div class="page-signup p-3">
     <div id="form-sign-up">
-      <ValidationObserver>
-        <b-form @submit="signup">
+      <ValidationObserver v-slot="validate">
+        <b-form @submit.stop.prevent="validate(signup)">
           <ValidationProvider
             name="Nickname"
             :rules="{ required: true, min: 3 }"

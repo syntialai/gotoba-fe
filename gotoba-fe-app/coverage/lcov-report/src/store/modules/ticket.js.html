@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">7.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/52</span>
+                <span class='fraction'>4/52</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">7.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/52</span>
+                <span class='fraction'>4/52</span>
             </div>
         
             
@@ -200,15 +200,12 @@
 <a name='L142'></a><a href='#L142'>142</a>
 <a name='L143'></a><a href='#L143'>143</a>
 <a name='L144'></a><a href='#L144'>144</a>
-<a name='L145'></a><a href='#L145'>145</a>
-<a name='L146'></a><a href='#L146'>146</a>
-<a name='L147'></a><a href='#L147'>147</a>
-<a name='L148'></a><a href='#L148'>148</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L145'></a><a href='#L145'>145</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -216,7 +213,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -288,15 +286,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -313,7 +307,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -322,7 +316,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -353,17 +347,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable no-shadow */
 import * as Types from '../types';
 import api from '../../api/api';
+import { isPassed } from '../../utils/filter';
 &nbsp;
-const state = <span class="cstat-no" title="statement not covered" >{</span>
+const state = {
   ticketDatas: [],
   ticketData: {},
   ticketByMerchant: [],
   ticketRestaurant: [],
   ticketJourney: [],
-  ticketHotel: [],
+  ticketPromotion: [],
 };
 &nbsp;
-const actions = <span class="cstat-no" title="statement not covered" >{</span>
+const actions = {
 <span class="fstat-no" title="function not covered" >  ge</span>tTicketData({ commit }, userSku) {
 <span class="cstat-no" title="statement not covered" >    commit(Types.SET_TICKET_DATA);</span>
 &nbsp;
@@ -386,8 +381,8 @@ const actions = <span class="cstat-no" title="statement not covered" >{</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    api.GetTicketBySku(sku)</span>
       .then(<span class="fstat-no" title="function not covered" >(r</span>es) =&gt; {
-<span class="cstat-no" title="statement not covered" >        console.log(res);</span>
-<span class="cstat-no" title="statement not covered" >        commit(Types.SET_TICKET_BY_SKU, res);</span>
+<span class="cstat-no" title="statement not covered" >        console.log(res.data);</span>
+<span class="cstat-no" title="statement not covered" >        commit(Types.SET_TICKET_BY_SKU, res.data);</span>
       })
       .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
 <span class="cstat-no" title="statement not covered" >        console.log(err);</span>
@@ -433,17 +428,13 @@ const actions = <span class="cstat-no" title="statement not covered" >{</span>
       });
   },
 &nbsp;
-<span class="fstat-no" title="function not covered" >  ge</span>tTicketHotel({ commit }) {
-<span class="cstat-no" title="statement not covered" >    commit(Types.SET_TICKET_HOTEL);</span>
+<span class="fstat-no" title="function not covered" >  ge</span>tTicketPromotion({ commit, getters }) {
+    const tickets = <span class="cstat-no" title="statement not covered" >getters.ticketDatas;</span>
+    const filterPromoTickets = <span class="cstat-no" title="statement not covered" >tickets</span>
+      .filter(<span class="fstat-no" title="function not covered" >(t</span>icket) =&gt; <span class="cstat-no" title="statement not covered" >!isPassed(ticket.expiredDate) &amp;&amp; ticket.discount &gt; 0)</span>
+      .sort(<span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; <span class="cstat-no" title="statement not covered" >b.expiredDate - a.expiredDate)</span>;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    api.GetHotelTicket()</span>
-      .then(<span class="fstat-no" title="function not covered" >(r</span>es) =&gt; {
-<span class="cstat-no" title="statement not covered" >        console.log(res);</span>
-<span class="cstat-no" title="statement not covered" >        commit(Types.SET_TICKET_HOTEL, res);</span>
-      })
-      .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
-<span class="cstat-no" title="statement not covered" >        console.log(err);</span>
-      });
+<span class="cstat-no" title="statement not covered" >    commit(Types.SET_TICKET_PROMOTION, filterPromoTickets);</span>
   },
 &nbsp;
 <span class="fstat-no" title="function not covered" >  re</span>moveTicket({ commit }, sku) {
@@ -460,16 +451,16 @@ const actions = <span class="cstat-no" title="statement not covered" >{</span>
   },
 };
 &nbsp;
-const getters = <span class="cstat-no" title="statement not covered" >{</span>
+const getters = {
   ticketDatas: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.ticketDatas,</span>
   ticketData: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.ticketData,</span>
   ticketByMerchant: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.ticketByMerchant,</span>
   ticketRestaurant: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.ticketRestaurant,</span>
   ticketJourney: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.ticketJourney,</span>
-  ticketHotel: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.ticketHotel,</span>
+  ticketPromotion: <span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.ticketPromotion,</span>
 };
 &nbsp;
-const mutations = <span class="cstat-no" title="statement not covered" >{</span>
+const mutations = {
   // eslint-disable-next-line space-before-function-paren
 <span class="fstat-no" title="function not covered" >  [T</span>ypes.SET_TICKET_DATA](state, res) {
 <span class="cstat-no" title="statement not covered" >    state.ticketDatas = res;</span>
@@ -486,8 +477,8 @@ const mutations = <span class="cstat-no" title="statement not covered" >{</span>
 <span class="fstat-no" title="function not covered" >  [T</span>ypes.SET_TICKET_JOURNEY](state, res) {
 <span class="cstat-no" title="statement not covered" >    state.ticketJourney = res;</span>
   },
-<span class="fstat-no" title="function not covered" >  [T</span>ypes.SET_TICKET_HOTEL](state, res) {
-<span class="cstat-no" title="statement not covered" >    state.ticketHotel = res;</span>
+<span class="fstat-no" title="function not covered" >  [T</span>ypes.SET_TICKET_PROMOTION](state, res) {
+<span class="cstat-no" title="statement not covered" >    state.ticketPromotion = res;</span>
   },
 };
 &nbsp;
@@ -504,7 +495,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 09 2020 19:54:19 GMT+0700 (Indochina Time)
+                at Sat Jul 18 2020 03:58:33 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="container">
-      <div id="category" class="m-3">
+      <div id="category" class="my-3 p-2">
         <b-button-group
           class="d-flex justify-content-around box-shadow bg-white border-square-10"
         >
@@ -9,7 +9,7 @@
             v-for="menu in mainMenus"
             :key="menu.name"
             :to="menu.link"
-            class="bg-white border-square-10 p-3"
+            class="bg-white border-square-10 px-2 py-3 border-none"
           >
             <div class="menu-icon">
               <font-awesome-icon
@@ -22,7 +22,7 @@
         </b-button-group>
       </div>
 
-      <div class="ongoing-promo content-group">
+      <div class="ongoing-promo content-group" v-if="ticketPromotion">
         <div class="title font-color-blue-primary">
           <span class="title-icon pr-2">
             <ongoing-promo-icon />
@@ -43,9 +43,9 @@
             @click="goToDetails('promotion', ticket.sku)"
           />
         </div>
-      </div> -->
+      </div>
 
-      <div class="nearby-place content-group">
+      <div class="nearby-place content-group" v-if="journeyData">
         <div class="title font-color-blue-primary">
           <span class="title-icon pr-2">
             <nearby-place-icon />
@@ -71,9 +71,9 @@
             @click="goToDetails('journey', journey.sku)"
           />
         </div>
-      </div> -->
+      </div>
 
-      <div class="nearby-resto content-group">
+      <div class="nearby-resto content-group" v-if="restaurantDatas">
         <div class="title font-color-blue-primary">
           <span class="title-icon pr-2">
             <nearby-resto-icon />
@@ -100,22 +100,22 @@
           />
         </div>
       </div>
-    </div>
 
-    <div class="gallery content-group my-3">
-      <div class="title mb-1 pt-3 d-flex align-items-center">
-        <font-awesome-icon
-            :icon="['far', 'images']"
-            class="icon-gradient font-size-24 pr-2"
-          />
-        <h6 class="font-color-blue-primary m-0">Our Gallery</h6>
+      <div class="gallery content-group" v-if="galleryData">
+        <div class="title mb-1 pt-3 d-flex align-items-center">
+          <font-awesome-icon
+              :icon="['far', 'images']"
+              class="icon-gradient font-size-24 pr-2"
+            />
+          <h6 class="font-color-blue-primary m-0">Our Gallery</h6>
+        </div>
+
+        <div class="info font-color-black-60 font-size-14 mb-3">
+          Show every moment captured around Lake Toba
+        </div>
+
+        <gallery-home :galleryData="galleryData" />
       </div>
-
-      <div class="info font-color-black-60 font-size-14 mb-3">
-        Show every moment captured around Lake Toba
-      </div>
-
-      <gallery-home v-if="galleryData" :galleryData="galleryData" />
     </div>
 
     <the-footer />
@@ -124,7 +124,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { isPassed } from '../../../utils/filter';
 import CardHome from '../../../components/User/Home/CardHome.vue';
 import GalleryHome from '../../../components/User/Home/GalleryHome.vue';
 import TheFooter from '../../../components/Partial/TheFooter.vue';
@@ -143,20 +142,14 @@ export default {
     NearbyRestoIcon,
   },
   computed: {
-    ...mapGetters(['restaurantDatas', 'journeyData', 'ticketDatas', 'galleryData']),
-    promotions() {
-      const promotion = [...this.ticketDatas];
-
-      return promotion
-        .filter((ticket) => !isPassed(ticket.expiredDate))
-        .sort((a, b) => b.expiredDate - a.expiredDate);
-    },
+    ...mapGetters(['restaurantDatas', 'journeyData', 'ticketPromotion', 'galleryData']),
   },
   created() {
+    this.getGalleryData();
     this.getRestaurantData();
     this.getJourneyData();
     this.getTicketData();
-    this.getGalleryData();
+    this.getTicketPromotion();
   },
   data() {
     return {
@@ -183,7 +176,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData', 'getGalleryData']),
+    ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData', 'getTicketPromotion', 'getGalleryData']),
     goToDetails(category, sku) {
       this.$router.push(`/${category}/${sku}`);
     },
@@ -194,5 +187,21 @@ export default {
 <style lang="scss" scoped>
 .content-group {
   margin-top: 40px;
+}
+
+.menu-name {
+  font-size: 14px!important;
+}
+
+@media screen and (min-width: 425px) {
+  .menu-name {
+    font-size: 16px!important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .menu-name {
+    font-size: 20px!important;
+  }
 }
 </style>

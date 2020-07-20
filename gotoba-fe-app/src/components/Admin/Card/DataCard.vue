@@ -4,14 +4,14 @@
       :img-src="getImage(data.image)"
       :img-alt="data.location"
       img-left
-      class="p-2"
+      class="p-2 border-gray-young"
     >
       <b-card-body>
-        <b-card-sub-title class="bold font-color-blue-secondary">
-          {{ data.location }}
+        <b-card-sub-title class="bold font-color-blue-secondary mb-3">
+          {{ data.name }}
         </b-card-sub-title>
 
-        <div class="other d-flex align-items-center">
+        <div class="other d-flex align-items-center mb-2">
           <div class="other-icon icon-gradient">
             <font-awesome-icon :icon="otherIcon"></font-awesome-icon>
           </div>

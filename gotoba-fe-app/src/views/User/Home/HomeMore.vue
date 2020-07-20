@@ -8,13 +8,13 @@
         All Promos
       </b-nav-item>
       <b-nav-item
-        to="/more/restaurant" exact
+        to="/more/journey" exact
         exact-active-class="active"
       >
         Journey
       </b-nav-item>
       <b-nav-item
-        to="/more/journey" exact
+        to="/more/restaurant" exact
         exact-active-class="active"
       >
         Restaurant

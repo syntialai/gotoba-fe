@@ -28,7 +28,7 @@ describe('RatingProfileDetail.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check totalReviewer computed to return sum of ratingBars when called', async () => {
+  it('Check totalReviewer computed to return sum of ratingBars when called', () => {
     expect(wrapper.vm.totalReviewer).toBe(expectedData);
   });
 });

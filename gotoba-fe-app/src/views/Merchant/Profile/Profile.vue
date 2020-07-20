@@ -13,7 +13,8 @@
     <profile-menu-group
       title="About"
       :menus="menuAbout"
-      class="my-3"
+      :logOut="true"
+      class="mt-3 mb-5"
     />
   </div>
 </template>
@@ -55,9 +56,6 @@ export default {
         },
         {
           name: 'Help Centre', icon: 'question-circle', link: '/faq',
-        },
-        {
-          name: 'Log Out', icon: 'sign-out-alt', link: '/log-out',
         },
       ],
     };

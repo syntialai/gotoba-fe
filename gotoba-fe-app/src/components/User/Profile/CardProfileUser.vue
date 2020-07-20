@@ -1,5 +1,5 @@
 <template>
-  <div class="user-profile m-4 p-4 bg-white box-shadow position-relative border-square-10">
+  <div class="user-profile m-3 p-4 bg-white box-shadow position-relative border-square-10">
     <b-media vertical-align="center">
       <template v-slot:aside>
         <b-avatar

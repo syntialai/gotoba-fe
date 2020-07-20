@@ -4,10 +4,10 @@
       <h6>Recent Promotion</h6>
       <div class="promotion-group">
         <card-home-long
-          v-for="ticket in promotions"
+          v-for="ticket in ticketPromotion"
           :key="ticket.sku"
           :data="ticket"
-          @click="goToProfile(ticket.sku)"
+          @click="goToDetails(ticket.sku)"
         />
       </div>
     </div>
@@ -15,8 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { isPassed } from '../../../utils/filter';
+import { mapGetters, mapActions } from 'vuex';
 import CardHomeLong from '../../../components/User/Home/CardHomeLong.vue';
 
 export default {
@@ -25,18 +24,15 @@ export default {
     CardHomeLong,
   },
   computed: {
-    ...mapGetters(['ticketDatas']),
-    promotions() {
-      const promotion = [...this.ticketDatas];
-
-      return promotion
-        .filter((ticket) => !isPassed(ticket.expiredDate))
-        .sort((a, b) => b.expiredDate - a.expiredDate);
-    },
+    ...mapGetters(['ticketPromotion']),
+  },
+  created() {
+    this.getTicketPromotion();
   },
   methods: {
-    goToProfile(ticketSku) {
-      this.$router.push(`/promotion/${ticketSku}`);
+    ...mapActions(['getTicketPromotion']),
+    goToDetails(ticketSku) {
+      this.$router.push(`/ticket/${ticketSku}`);
     },
   },
 };

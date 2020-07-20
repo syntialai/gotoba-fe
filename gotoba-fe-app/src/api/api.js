@@ -76,7 +76,7 @@ export default {
     return fetchPost('/auth/signup', params);
   },
   Logout() {
-    return fetchPost('/logout');
+    return fetchPost('/auth/logout');
   },
   GetImage(imageUrl) {
     return fetchGet(`/image${imageUrl}`);

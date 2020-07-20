@@ -37,16 +37,8 @@
     </div>
 
     <div class="promotion mb-2" v-if="promotions.length > 0">
-      <div
-        class="title d-flex w-100 border-bottom-gray-young justify-content-between"
-      >
+      <div class="title border-bottom-gray-young">
         <h5>Promotions</h5>
-        <router-link :to="'/promotion/' + data.sku">
-          <b-icon
-            icon="arrow-right-short"
-            class="icon-black-60"
-          ></b-icon>
-        </router-link>
       </div>
       <div class="promotion-group">
         <card-promotion
@@ -86,6 +78,24 @@ export default {
     // },
     promotions() {
       return [];
+    },
+  },
+  methods: {
+    hoursOpen(hours) {
+      let hoursOpenStr = '';
+
+      Object.entries(hours)
+        .forEach(([key, value]) => {
+          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
+        });
+
+      return hoursOpenStr;
+    },
+    aboutData() {
+      const newData = { ...this.data };
+      newData.hoursOpen = this.hoursOpen(newData.hoursOpen);
+
+      return newData;
     },
   },
 };

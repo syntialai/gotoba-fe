@@ -2,6 +2,11 @@
   @include map-looping($colors, "custom-btn", "background");
 }
 
+.btn {
+  font-weight: bold;
+  border-color: none!important;
+}
+
 .btn-rounded {
   border-radius: 100%!important;
 }

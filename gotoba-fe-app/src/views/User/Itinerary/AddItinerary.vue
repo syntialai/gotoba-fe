@@ -2,16 +2,18 @@
   <div class="add-itinerary">
     <choose-date-calendar />
 
-    <timeline :timelines="timelines" />
-
-    <select-destination-autocomplete :showAutocomplete="showAutocomplete" />
+    <timeline
+      v-if="locationData"
+      :timelines="timelines"
+      :add="true"
+    />
 
     <div class="w-100 d-flex box-shadow fixed-bottom">
       <div class="w-50">
         <b-button
           block
           squared
-          class="bg-white font-color-blue-primary p-3"
+          class="bg-white font-color-blue-primary p-3 border-none"
           @click="goBack"
         >CANCEL</b-button>
       </div>
@@ -19,7 +21,7 @@
         <b-button
           block
           squared
-          class="custom-btn-primary p-3"
+          class="custom-btn-primary p-3 border-none"
           @click="submitTravellingSchedule"
         >ADD</b-button>
       </div>
@@ -28,8 +30,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import ChooseDateCalendar from '../../../components/User/Itinerary/ChooseDateCalendar.vue';
-import SelectDestinationAutocomplete from '../../../components/User/Itinerary/SelectDestinationAutocomplete.vue';
 import Timeline from '../../../components/Partial/Timeline.vue';
 import api from '../../../api/api';
 
@@ -37,22 +39,38 @@ export default {
   name: 'AddItinerary',
   components: {
     ChooseDateCalendar,
-    SelectDestinationAutocomplete,
     Timeline,
+  },
+  computed: {
+    ...mapGetters(['locationData', 'userSku', 'newSchedule']),
+  },
+  created() {
+    this.getLocationData();
+    console.log(this.locationData);
   },
   data() {
     return {
       timelines: [],
-      showAutocomplete: false,
     };
   },
   methods: {
+    ...mapActions(['getLocationData', 'setLocationKeyword', 'setNewSchedule']),
     submitTravellingSchedule() {
-      const data = {};
+      const data = {
+        title: this.newSchedule.destination.substr(
+          0,
+          this.newSchedule.destination.indexOf(','),
+        ),
+        description: this.newSchedule.destination,
+        date: this.newSchedule.time,
+        vacationDestination: this.newSchedule.destination,
+      };
 
-      api.PostTravellingSchedule(this.data.sku, data)
+      api.PostTravellingSchedule(this.userSku, data)
         .then((res) => {
           console.log(res);
+          this.setLocationKeyword('');
+          this.setNewSchedule([]);
           this.$router.push('/itinerary');
         })
         .catch((err) => {
@@ -60,6 +78,8 @@ export default {
         });
     },
     goBack() {
+      this.setLocationKeyword('');
+      this.setNewSchedule([]);
       this.$router.go(-1);
     },
   },
