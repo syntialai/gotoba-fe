@@ -3,9 +3,9 @@
     <choose-date-calendar />
 
     <timeline
+      v-if="locationData"
       :timelines="timelines"
       :add="true"
-      :locationList="locationList"
     />
 
     <div class="w-100 d-flex box-shadow fixed-bottom">
@@ -13,7 +13,7 @@
         <b-button
           block
           squared
-          class="bg-white font-color-blue-primary p-3"
+          class="bg-white font-color-blue-primary p-3 border-none"
           @click="goBack"
         >CANCEL</b-button>
       </div>
@@ -21,7 +21,7 @@
         <b-button
           block
           squared
-          class="custom-btn-primary p-3"
+          class="custom-btn-primary p-3 border-none"
           @click="submitTravellingSchedule"
         >ADD</b-button>
       </div>
@@ -42,14 +42,11 @@ export default {
     Timeline,
   },
   computed: {
-    ...mapGetters(['journeyData', 'restaurantDatas']),
-    locationList() {
-      return [...this.journeyData, ...this.restaurantDatas].sort();
-    },
+    ...mapGetters(['locationData', 'userSku', 'newSchedule']),
   },
   created() {
-    this.getJourneyData();
-    this.getRestaurantData();
+    this.getLocationData();
+    console.log(this.locationData);
   },
   data() {
     return {
@@ -57,13 +54,23 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getJourneyData', 'getRestaurantData']),
+    ...mapActions(['getLocationData', 'setLocationKeyword', 'setNewSchedule']),
     submitTravellingSchedule() {
-      const data = {};
+      const data = {
+        title: this.newSchedule.destination.substr(
+          0,
+          this.newSchedule.destination.indexOf(','),
+        ),
+        description: this.newSchedule.destination,
+        date: this.newSchedule.time,
+        vacationDestination: this.newSchedule.destination,
+      };
 
-      api.PostTravellingSchedule(this.data.sku, data)
+      api.PostTravellingSchedule(this.userSku, data)
         .then((res) => {
           console.log(res);
+          this.setLocationKeyword('');
+          this.setNewSchedule([]);
           this.$router.push('/itinerary');
         })
         .catch((err) => {
@@ -71,6 +78,8 @@ export default {
         });
     },
     goBack() {
+      this.setLocationKeyword('');
+      this.setNewSchedule([]);
       this.$router.go(-1);
     },
   },

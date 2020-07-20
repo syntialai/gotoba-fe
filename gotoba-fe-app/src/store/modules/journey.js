@@ -11,7 +11,7 @@ const state = {
 
 const actions = {
   getJourneyData({ commit }) {
-    commit(Types.SET_JOURNEY_DATA);
+    commit(Types.SET_JOURNEY_DATA, []);
 
     api.GetItineraries()
       .then((res) => {

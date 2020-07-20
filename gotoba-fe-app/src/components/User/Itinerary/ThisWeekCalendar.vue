@@ -5,7 +5,7 @@
     >
       <b-button-group
         vertical
-        v-for="item in days"
+        v-for="item in week"
         :key="item.day"
       >
         <b-button
@@ -18,9 +18,10 @@
         <b-button
           pill
           :variant="item.active? 'primary' : 'secondary'"
-          :class="'font-size-14 p-2 ' +
-            (item.active? 'custom-btn-primary' : 'bg-white font-color-black-60')
+          :class="'font-size-14 p-2 semibold ' +
+            (item.active? 'custom-btn-primary border-none' : 'bg-white font-color-black-60')
           "
+          @click="setActive(item.date)"
         >
           {{ `0${item.date}`.slice(-2) }}
         </b-button>
@@ -30,20 +31,42 @@
 </template>
 
 <script>
+import { toFullDay } from '../../../utils/filter';
+
 export default {
   name: 'ThisWeekCalendar',
   data() {
     return {
-      days: [
-        { day: 'Mo', date: 28, active: true },
-        { day: 'Tu', date: 29, active: false },
-        { day: 'We', date: 30, active: false },
-        { day: 'Th', date: 31, active: false },
-        { day: 'Fr', date: 1, active: false },
-        { day: 'Sa', date: 2, active: false },
-        { day: 'Su', date: 3, active: false },
-      ],
+      week: [],
     };
+  },
+  created() {
+    this.days();
+  },
+  methods: {
+    days() {
+      const today = new Date();
+      const week = [];
+
+      for (let i = 0; i < 7; i += 1) {
+        week.push({
+          day: toFullDay((today.getDay() + i) % 7).substr(0, 2),
+          date: new Date(today.setDate(today.getDate() + 1)).getDate(),
+          active: i === 0,
+        });
+      }
+
+      this.week = week;
+    },
+    setActive(date) {
+      const changeWeek = this.week.map((item) => ({
+        day: item.day,
+        date: item.date,
+        active: item.date === date,
+      }));
+
+      this.week = changeWeek;
+    },
   },
 };
 </script>

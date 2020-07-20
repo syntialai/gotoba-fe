@@ -2,7 +2,7 @@
   <div class="choose-date-calendar bg-white p-3">
     <div class="month-picked semibold font-size-20 w-100 d-flex justify-content-center">
       <div class="month-year pr-3">
-        {{ toMonthYear(new Date(value)) }}
+        {{ toMonthYear(toDate) }}
       </div>
       <div class="choose-month">
         <font-awesome-icon
@@ -16,30 +16,32 @@
           placement="bottomleft"
           class="p-2"
         >
-          <b-calendar
+          <b-form-datepicker
+            v-model="dateSelected"
             class="m-0 p-0 w-100"
-            v-model="value"
             :hide-header="true"
             :min="new Date()"
+            locale="en-US"
             v-if="showCalendar"
-          ></b-calendar>
+          ></b-form-datepicker>
         </b-popover>
       </div>
     </div>
 
     <div class="date-choose d-flex overflow-auto mt-3">
       <card-date
-        v-for="date in 29"
+        v-for="date in selectedDayOfMonth"
         :key="date"
         :date="date"
-        :day="toFullDay(date % 7).substr(0, 3)"
-        :active="true"
+        :day="getDay(dateSelected.getFullYear(), dateSelected.getMonth(), date).substr(0, 3)"
+        :active="isSelectedDate(date)"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import { toFullMonth, toFullDay } from '../../../utils/filter';
 import CardDate from './CardDate.vue';
 
@@ -47,18 +49,43 @@ export default {
   name: 'ChooseDateCalendar',
   data() {
     return {
-      value: new Date(),
       showCalendar: false,
     };
   },
   components: {
     CardDate,
   },
+  computed: {
+    ...mapGetters(['selectedDate']),
+    selectedDayOfMonth() {
+      const date = this.toDate;
+      const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+
+      return daysInMonth;
+    },
+    toDate() {
+      return new Date(this.selectedDate.year, this.selectedDate.month, this.selectedDate.date);
+    },
+    dateSelected: {
+      get() {
+        return this.toDate;
+      },
+      set(value) {
+        this.setSelectedDate(new Date(value));
+      },
+    },
+  },
   methods: {
-    toFullDay,
+    ...mapActions(['setSelectedDate']),
     toFullMonth,
+    getDay(year, month, day) {
+      return toFullDay(new Date(year, month, day).getDay());
+    },
     toMonthYear(date) {
       return `${toFullMonth(date.getMonth())}, ${date.getFullYear()}`;
+    },
+    isSelectedDate(date) {
+      return date === this.selectedDate.date;
     },
   },
 };

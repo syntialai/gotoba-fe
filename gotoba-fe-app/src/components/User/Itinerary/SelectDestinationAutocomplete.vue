@@ -1,31 +1,39 @@
 <template>
-  <div class="select-destination-autocomplete">
-    <datalist id="location-list">
-      <option>
-        <div class="p-2 border-bottom-gray-young">
-          <b-button variant="outline-secondary" @click="showOnMap">
+  <div class="select-destination-autocomplete w-100 bg-white"
+    v-if="locationData && open && locationKeyword.length >= 3"
+  >
+    <ul id="location-list" class="p-2">
+      <li>
+        <div class="border-bottom-gray-young pb-2">
+          <b-button
+            variant="outline-secondary"
+            class="d-flex align-items-center"
+            @click="showOnMap"
+          >
             <font-awesome-icon
               class="icon-accent-green"
               icon="map"
             ></font-awesome-icon>
-            <div class="pl-2">Select via Map</div>
+            <div class="font-size-12 ml-2">Select via Map</div>
           </b-button>
         </div>
-      </option>
-      <option
-        v-for="location in locationList"
-        :key="location"
+      </li>
+      <li
+        v-for="location in matches"
+        :key="location.sku"
+        @click="select(location.name)"
       >
         <card-location
           :name="location.name"
           :location="location.address"
         />
-      </option>
-    </datalist>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import CardLocation from './CardLocation.vue';
 
 export default {
@@ -33,24 +41,36 @@ export default {
   components: {
     CardLocation,
   },
-  props: {
-    locationList: Array,
-    searchKeywords: String,
+  data() {
+    return {
+      open: true,
+    };
   },
   computed: {
+    ...mapGetters(['locationKeyword', 'locationData']),
     matches() {
-      return this.locationList.filter(
-        (str) => str.substr(
+      return this.locationData.filter(
+        (item) => item.name.substr(
           0,
-          this.searchKeywords.length,
+          this.locationKeyword.length,
         ).toLowerCase()
-        === this.searchKeywords.toLowerCase(),
+        === this.locationKeyword.toLowerCase()
+        || item.address.substr(
+          0,
+          this.locationKeyword.length,
+        ).toLowerCase()
+        === this.locationKeyword.toLowerCase(),
       );
     },
   },
   methods: {
+    ...mapActions(['setLocationKeyword']),
     showOnMap() {
-      this.$router.push('/itinerary/add/show-on-map');
+      this.$router.replace('/itinerary/add/show-on-map');
+    },
+    select(name) {
+      this.setLocationKeyword(name);
+      this.open = false;
     },
   },
 };

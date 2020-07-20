@@ -28,7 +28,7 @@ const actions = {
   },
 
   getRestaurantData({ commit }) {
-    commit(Types.SET_RESTAURANT_DATA);
+    commit(Types.SET_RESTAURANT_DATA, []);
 
     api.GetRestaurants()
       .then((res) => {
