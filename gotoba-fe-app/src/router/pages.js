@@ -20,7 +20,7 @@ const TOUR_GUIDE = () => import('../views/User/TourGuide/TourGuide.vue');
 const TOUR_GUIDE_PROFILE = () => import('../views/User/TourGuide/TourGuideProfile.vue');
 const TOUR_GUIDE_REVIEW = () => import('../views/User/TourGuide/TourGuideReview.vue');
 const PROMOTION = () => import('../views/User/Home/Promotion.vue');
-const PROMOTION_DETAIL = () => import('../views/User/Home/PromotionDetail.vue');
+const TICKET_DETAIL = () => import('../views/User/Home/TicketDetail.vue');
 const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
 const ITINERARY_ADD = () => import('../views/User/Itinerary/AddItinerary.vue');
 const ADD_DESTINATION = () => import('../views/User/Itinerary/AddDestination.vue');
@@ -91,7 +91,7 @@ export const Pages = {
   TOUR_GUIDE_PROFILE,
   TOUR_GUIDE_REVIEW,
   PROMOTION,
-  PROMOTION_DETAIL,
+  TICKET_DETAIL,
   GALLERY,
   ITINERARY_ADD,
   ADD_DESTINATION,

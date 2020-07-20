@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import CardHomeLong from '../../../components/User/Home/CardHomeLong.vue';
 
 export default {
@@ -26,7 +26,11 @@ export default {
   computed: {
     ...mapGetters(['tourGuideDatas']),
   },
+  created() {
+    this.getTourGuideData();
+  },
   methods: {
+    ...mapActions(['getTourGuideData']),
     goToProfile(tourGuideSku) {
       this.$router.push(`/tour-guide/${tourGuideSku}`);
     },

@@ -23,6 +23,13 @@ export default {
   },
   props: {
     photos: Array,
+    start: Number,
+    end: Number,
+  },
+  computed: {
+    galleryRange() {
+      return this.photos.slice(this.start - 1, this.end);
+    },
   },
   methods: {
     async getImage(url) {

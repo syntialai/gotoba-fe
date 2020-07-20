@@ -8,8 +8,8 @@ const averageOfRatings = (rating) => {
   let sumOfRates = 0;
   let sumOfReviewers = 0;
 
-  rating.forEach((value, index, array) => {
-    sumOfRates += value * (array[index] + 1);
+  rating.forEach((value, index) => {
+    sumOfRates += value * (index + 1);
     sumOfReviewers += value;
   });
 

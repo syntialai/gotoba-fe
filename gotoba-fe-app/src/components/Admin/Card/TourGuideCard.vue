@@ -1,7 +1,6 @@
 <template>
   <div class="tour-guide-card">
     <data-card :data="tourGuide" :otherIcon="tourGuide.gender" />
-      <!-- gender : male || female -->
   </div>
 </template>
 
@@ -21,7 +20,7 @@ export default {
       return {
         image: this.tourGuide.image,
         location: this.tourGuide.location,
-        other: this.tourGuide.gender,
+        other: this.tourGuide.age.toString(),
         rating: this.tourGuide.rating,
       };
     },

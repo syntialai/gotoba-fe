@@ -229,11 +229,12 @@ import api from '../../../api/api';
 export default {
   name: 'ItineraryModal',
   computed: {
-    ...mapGetters(['journeyData']),
+    ...mapGetters(['journeyData', 'userSku']),
   },
   data() {
     return {
       itinerary: {
+        name: '',
         title: '',
         image: null,
         location: '',
@@ -243,7 +244,7 @@ export default {
         address: '',
         description: '',
         createdBy: '',
-        hoursOpen: {},
+        hoursOpen: [],
       },
       locationList: null,
     };
@@ -261,6 +262,7 @@ export default {
 
     submitItinerary() {
       const data = { ...this.itinerary };
+      data.createdBy = this.userSku;
 
       if (data.title === '' || data.image === null || data.description === '') {
         return;

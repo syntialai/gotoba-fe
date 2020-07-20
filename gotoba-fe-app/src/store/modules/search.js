@@ -1,11 +1,13 @@
 /* eslint-disable no-shadow */
 import * as Types from '../types';
+import api from '../../api/api';
 
 const state = {
   searchKeywords: '',
   searchSuggestions: [],
   searchSuggestionShow: false,
-  searchResults: {},
+  searchWisataResults: [],
+  searchRestaurantResults: [],
 };
 
 const actions = {
@@ -21,8 +23,22 @@ const actions = {
     commit(Types.SET_SEARCH_SUGGESTIONS_SHOW_STATUS, value);
   },
 
-  getSearchResults({ commit }) {
-    commit(Types.SET_SEARCH_RESULTS);
+  async getSearchWisataResults({ commit }) {
+    commit(Types.SET_SEARCH_WISATA_RESULTS, []);
+
+    const res = await api.GetItineraries();
+    if (!res.error) {
+      commit(Types.SET_SEARCH_WISATA_RESULTS, res.data);
+    }
+  },
+
+  async getSearchRestaurantResults({ commit }) {
+    commit(Types.SET_SEARCH_RESTAURANT_RESULTS, []);
+
+    const res = await api.GetRestaurants();
+    if (!res.error) {
+      commit(Types.SET_SEARCH_RESTAURANT_RESULTS, res.data);
+    }
   },
 };
 
@@ -30,7 +46,8 @@ const getters = {
   searchKeywords: (state) => state.searchKeywords,
   searchSuggestions: (state) => state.searchSuggestions,
   searchSuggestionShow: (state) => state.searchSuggestionShow,
-  searchResults: (state) => state.searchResults,
+  searchWisataResults: (state) => state.searchWisataResults,
+  searchRestaurantResults: (state) => state.searchRestaurantResults,
 };
 
 const mutations = {
@@ -47,8 +64,12 @@ const mutations = {
     state.searchSuggestionShow = value;
   },
 
-  [Types.SET_SEARCH_RESULTS](state, value) {
-    state.searchResults = value;
+  [Types.SET_SEARCH_WISATA_RESULTS](state, res) {
+    state.searchWisataResults = res;
+  },
+
+  [Types.SET_SEARCH_RESTAURANT_RESULTS](state, res) {
+    state.searchRestaurantResults = res;
   },
 };
 

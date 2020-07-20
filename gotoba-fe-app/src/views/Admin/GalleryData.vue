@@ -16,17 +16,21 @@
 
     <gallery-card-group
       id="gallery-data-group"
+      v-if="galleryData"
+      :start="dataStart"
+      :end="dataEnd"
       :photos="galleryData"
     />
 
-    <div class="info">
+    <div class="info" v-if="galleryData">
       Showing {{ dataStart }} to {{ dataEnd }} of {{ galleryData.length }} entries
-      <!-- {{ users.length }} entries -->
     </div>
 
     <pagination
+      v-if="galleryData"
       :currentPage.sync="currentPage"
       :perPage.sync="perPage"
+      :rows="galleryData.length"
       class="my-3"
       idControls="gallery-data-group"
     />
@@ -55,7 +59,13 @@ export default {
       return (this.currentPage - 1) * this.perPage + 1;
     },
     dataEnd() {
-      return this.currentPage * this.perPage;
+      const end = this.currentPage * this.perPage;
+
+      if (end > this.galleryData.length) {
+        return this.galleryData.length;
+      }
+
+      return end;
     },
   },
   created() {

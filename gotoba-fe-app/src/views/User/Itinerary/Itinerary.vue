@@ -2,7 +2,7 @@
   <div class="itinerary p-3">
     <this-week-calendar class="mb-3" />
 
-    <itinerary-plan class="box-shadow" />
+    <itinerary-plan class="box-shadow"/>
 
     <pdf-modal />
 

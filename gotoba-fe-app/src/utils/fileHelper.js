@@ -13,7 +13,7 @@ function previewImage(file) {
     };
 
     reader.onerror = () => {
-      reject(reader.err);
+      reject(reader.error);
     };
 
     reader.readAsDataURL(file);

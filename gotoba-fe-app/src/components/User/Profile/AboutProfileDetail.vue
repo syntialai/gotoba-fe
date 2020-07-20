@@ -18,19 +18,26 @@ export default {
   },
   computed: {
     items() {
-      return {
-        description: this.data.description,
-        full_address: this.data.address,
-        hours_open: this.hoursOpen,
-        telephone: this.data.phone,
-      };
+      return [
+        {
+          description: this.data.description,
+          full_address: this.data.address,
+          hours_open: this.hoursOpen,
+          telephone: this.data.phone,
+        },
+      ];
     },
     hoursOpen() {
       let hoursOpenStr = '';
 
+      const objLength = Object.keys(this.data.hoursOpen).length;
       Object.entries(this.data.hoursOpen)
-        .forEach(([key, value]) => {
-          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
+        .forEach(([key, value], index) => {
+          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}`;
+
+          if (index !== objLength - 1) {
+            hoursOpenStr += '\n';
+          }
         });
 
       return hoursOpenStr;

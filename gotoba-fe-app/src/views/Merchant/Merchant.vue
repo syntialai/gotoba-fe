@@ -22,8 +22,10 @@ export default {
     currentRouteName() {
       return this.$route.name;
     },
-    navItems() {
-      return [
+  },
+  data() {
+    return {
+      navItems: [
         {
           id: 1, name: 'Order List', icon: 'clipboard-list', link: '/merchant/order-list',
         },
@@ -39,8 +41,8 @@ export default {
         {
           id: 5, name: 'Profile', icon: 'user', link: '/merchant/profile',
         },
-      ];
-    },
+      ],
+    };
   },
 };
 </script>

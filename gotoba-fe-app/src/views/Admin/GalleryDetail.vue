@@ -18,7 +18,9 @@
 
       <h2 class="mt-3">{{ galleryPhoto.title }}</h2>
 
-      <!-- <p>{{ galleryPhoto.description }}</p> -->
+      <p v-if="galleryPhoto.description && galleryPhoto.description !== ''">
+        {{ galleryPhoto.description }}
+      </p>
     </div>
   </div>
 </template>

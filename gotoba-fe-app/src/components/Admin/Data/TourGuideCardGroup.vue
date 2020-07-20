@@ -2,7 +2,7 @@
   <div class="tour-guide-card-group">
     <b-card-group>
       <tour-guide-card
-        v-for="tourGuide of tourGuides"
+        v-for="tourGuide of tourGuideRange"
         :key="tourGuide.sku"
         :tourGuide="tourGuide"
         @click="goToDetails(tourGuide.sku)"
@@ -21,6 +21,13 @@ export default {
   },
   props: {
     tourGuides: Array,
+    start: Number,
+    end: Number,
+  },
+  computed: {
+    tourGuideRange() {
+      return this.tourGuides.slice(this.start - 1, this.end);
+    },
   },
   methods: {
     goToDetails(sku) {

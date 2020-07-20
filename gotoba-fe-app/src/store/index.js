@@ -6,6 +6,7 @@ import app from './modules/app';
 import auth from './modules/auth';
 import gallery from './modules/gallery';
 import journey from './modules/journey';
+import location from './modules/location';
 import merchant from './modules/merchant';
 import order from './modules/order';
 import restaurant from './modules/restaurant';
@@ -24,6 +25,7 @@ export default new Vuex.Store({
     auth,
     gallery,
     journey,
+    location,
     merchant,
     order,
     restaurant,

@@ -51,7 +51,7 @@ describe('Alert.vue (Danger Alert Showed)', () => {
 
   beforeEach(() => {
     getters = {
-      alertMessage: () => 'to show alert',
+      alertMessage: () => 'show alert',
       alertSuccess: () => false,
       showAlert: () => true,
     };

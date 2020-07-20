@@ -19,7 +19,7 @@
       v-if="tourGuideDatas"
       :start="dataStart"
       :end="dataEnd"
-      :tourGuideDatas="tourGuideDatas"
+      :tourGuides="tourGuideDatas"
     />
 
     <div class="info" v-if="tourGuideDatas">

@@ -32,8 +32,5 @@ export default {
       return breadcrumb;
     },
   },
-  methods: {
-    toCapitalize,
-  },
 };
 </script>

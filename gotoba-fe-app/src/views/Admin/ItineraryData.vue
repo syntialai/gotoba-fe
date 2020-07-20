@@ -76,7 +76,7 @@ export default {
       perPage: 10,
     };
   },
-  method: {
+  methods: {
     ...mapActions(['getJourneyData']),
   },
 };

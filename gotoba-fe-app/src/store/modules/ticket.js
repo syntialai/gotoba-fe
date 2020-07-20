@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import * as Types from '../types';
 import api from '../../api/api';
+import { isPassed } from '../../utils/filter';
 
 const state = {
   ticketDatas: [],
@@ -8,6 +9,7 @@ const state = {
   ticketByMerchant: [],
   ticketRestaurant: [],
   ticketJourney: [],
+  ticketPromotion: [],
 };
 
 const actions = {
@@ -33,8 +35,8 @@ const actions = {
 
     api.GetTicketBySku(sku)
       .then((res) => {
-        console.log(res);
-        commit(Types.SET_TICKET_BY_SKU, res);
+        console.log(res.data);
+        commit(Types.SET_TICKET_BY_SKU, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -80,6 +82,15 @@ const actions = {
       });
   },
 
+  getTicketPromotion({ commit, getters }) {
+    const tickets = getters.ticketDatas;
+    const filterPromoTickets = tickets
+      .filter((ticket) => !isPassed(ticket.expiredDate) && ticket.discount > 0)
+      .sort((a, b) => b.expiredDate - a.expiredDate);
+
+    commit(Types.SET_TICKET_PROMOTION, filterPromoTickets);
+  },
+
   removeTicket({ commit }, sku) {
     commit(Types.REMOVE_TICKET);
 
@@ -100,6 +111,7 @@ const getters = {
   ticketByMerchant: (state) => state.ticketByMerchant,
   ticketRestaurant: (state) => state.ticketRestaurant,
   ticketJourney: (state) => state.ticketJourney,
+  ticketPromotion: (state) => state.ticketPromotion,
 };
 
 const mutations = {
@@ -118,6 +130,9 @@ const mutations = {
   },
   [Types.SET_TICKET_JOURNEY](state, res) {
     state.ticketJourney = res;
+  },
+  [Types.SET_TICKET_PROMOTION](state, res) {
+    state.ticketPromotion = res;
   },
 };
 

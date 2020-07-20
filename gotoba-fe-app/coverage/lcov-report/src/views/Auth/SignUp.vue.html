@@ -38,7 +38,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -354,12 +354,7 @@
 <a name='L296'></a><a href='#L296'>296</a>
 <a name='L297'></a><a href='#L297'>297</a>
 <a name='L298'></a><a href='#L298'>298</a>
-<a name='L299'></a><a href='#L299'>299</a>
-<a name='L300'></a><a href='#L300'>300</a>
-<a name='L301'></a><a href='#L301'>301</a>
-<a name='L302'></a><a href='#L302'>302</a>
-<a name='L303'></a><a href='#L303'>303</a>
-<a name='L304'></a><a href='#L304'>304</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L299'></a><a href='#L299'>299</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -584,6 +579,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -632,7 +628,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -643,11 +638,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -665,8 +655,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div class="page-signup p-3"&gt;
     &lt;div id="form-sign-up"&gt;
-      &lt;ValidationObserver&gt;
-        &lt;b-form @submit="signup"&gt;
+      &lt;ValidationObserver v-slot="validate"&gt;
+        &lt;b-form @submit.stop.prevent="validate(signup)"&gt;
           &lt;ValidationProvider
             name="Nickname"
             :rules="{ required: true, min: 3 }"
@@ -885,6 +875,7 @@
 &nbsp;
 &lt;script&gt;
 <span class="cstat-no" title="statement not covered" >import { mapActions, mapGetters } from 'vuex';</span>
+<span class="cstat-no" title="statement not covered" >import { alert } from '../../utils/tool';</span>
 <span class="cstat-no" title="statement not covered" >import api from '../../api/api';</span>
 <span class="cstat-no" title="statement not covered" >import getValidationState from '../../utils/validation';</span>
 &nbsp;
@@ -909,7 +900,7 @@ export default {
 &nbsp;
     getValidationState,
 &nbsp;
-<span class="fstat-no" title="function not covered" >    signup() {</span>
+<span class="fstat-no" title="function not covered" >    async signup() {</span>
 <span class="cstat-no" title="statement not covered" >      if (!this.nickname</span>
         || !this.username
         || !this.email
@@ -934,26 +925,20 @@ export default {
         password: this.password,
       };
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      api.Signup(data)</span></span>
-        .then((res) =&gt; {
-<span class="cstat-no" title="statement not covered" >          console.log(res);</span>
+<span class="cstat-no" title="statement not covered" >      try {</span>
+<span class="cstat-no" title="statement not covered" >        await api.Signup(data);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >          api.Login(dataLogin)</span></span>
-            .then((result) =&gt; {
-<span class="cstat-no" title="statement not covered" >              this.setUserInfo(result);</span>
+<span class="cstat-no" title="statement not covered" >        const loginRes = await api.Login(dataLogin);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >              if (this.userRole === 'ROLE_MERCHANT') {</span>
-<span class="cstat-no" title="statement not covered" >                this.$router.push('/merchant');</span>
-              }
-<span class="cstat-no" title="statement not covered" >              this.$router.push('/');</span>
-<span class="fstat-no" title="function not covered" >            })</span>
-            .catch((err) =&gt; {
-<span class="cstat-no" title="statement not covered" >              console.log(err);</span>
-            });
-<span class="fstat-no" title="function not covered" >        })</span>
-        .catch((err) =&gt; {
-<span class="cstat-no" title="statement not covered" >          console.log(err);</span>
-        });
+<span class="cstat-no" title="statement not covered" >        this.setUserInfo(loginRes);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.userRole === 'ROLE_MERCHANT') {</span>
+<span class="cstat-no" title="statement not covered" >          this.$router.push('/merchant');</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.$router.push('/');</span>
+      } catch (err) {
+<span class="cstat-no" title="statement not covered" >        alert('sign up. Check your internet connection.', false);</span>
+      }
     },
   },
 };
@@ -972,7 +957,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 09 2020 19:54:19 GMT+0700 (Indochina Time)
+                at Sat Jul 18 2020 03:58:33 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

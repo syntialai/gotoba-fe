@@ -18,6 +18,9 @@ describe('CartItem.vue', () => {
   beforeEach(() => {
     wrapper = mount(CartItem, {
       propsData: { ...item },
+      data() {
+        return data;
+      },
       localVue,
       stubs: [
         'update:quantity',
@@ -31,8 +34,6 @@ describe('CartItem.vue', () => {
   });
 
   it('Check updateQuantity method emit to update:quantity when called', async () => {
-    wrapper.setData({ ...data });
-
     wrapper.vm.updateQuantity();
     await wrapper.vm.$nextTick()
 
