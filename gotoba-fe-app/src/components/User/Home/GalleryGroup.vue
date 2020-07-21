@@ -26,6 +26,7 @@
 
 <script>
 import VueGallery from 'vue-gallery';
+import api from '../../../api/api';
 
 export default {
   name: 'GalleryGroup',
@@ -46,7 +47,7 @@ export default {
       return (width - margin * 2) / 3;
     },
     images() {
-      return this.galleryData.map((data) => data.image);
+      return this.galleryData.map((data) => api.imageUrl(data.image));
     },
   },
   data() {

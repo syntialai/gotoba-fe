@@ -14,7 +14,7 @@
         <b-form @submit.stop.prevent="validate(submitItinerary)">
           <ValidationProvider
             name="Name"
-            rules="required|alpha_dash"
+            rules="required"
             v-slot="validationContext"
           >
             <b-form-group
@@ -100,7 +100,7 @@
 
           <ValidationProvider
             name="Location"
-            rules="required|alpha_dash"
+            rules="required"
             v-slot="validationContext"
           >
             <b-form-group
@@ -139,7 +139,7 @@
 
           <ValidationProvider
             name="Price"
-            :rules="{ required: true, numeric: true, min_value: 0 }"
+            :rules="{ required: true, numeric: true, min: 0 }"
             v-slot="validationContext"
           >
             <b-form-group
@@ -150,7 +150,6 @@
               <b-form-input
                 id="itinerary-price"
                 v-model="itinerary.price"
-                :formatter="formatPrice"
                 type="text"
                 class="border-gray"
                 required
@@ -165,7 +164,7 @@
 
           <ValidationProvider
             name="Address"
-            rules="required|alpha_dash"
+            rules="required"
             v-slot="validationContext"
           >
             <b-form-group
@@ -219,9 +218,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { formatPrice } from '../../../utils/filter';
+import { mapGetters, mapState } from 'vuex';
 import getValidationState from '../../../utils/validation';
+import { alert } from '../../../utils/tool';
 import previewImage from '../../../utils/fileHelper';
 import getLocation from '../../../utils/location';
 import api from '../../../api/api';
@@ -229,23 +228,12 @@ import api from '../../../api/api';
 export default {
   name: 'ItineraryModal',
   computed: {
+    ...mapState(['journeyDataBySku']),
     ...mapGetters(['journeyData', 'userSku']),
   },
   data() {
     return {
-      itinerary: {
-        name: '',
-        title: '',
-        image: null,
-        location: '',
-        longitude: 0,
-        latitude: 0,
-        price: 0,
-        address: '',
-        description: '',
-        createdBy: '',
-        hoursOpen: [],
-      },
+      itinerary: { ...this.journeyDataBySku },
       locationList: null,
     };
   },
@@ -256,8 +244,6 @@ export default {
     },
   },
   methods: {
-    formatPrice,
-
     getValidationState,
 
     submitItinerary() {
@@ -271,9 +257,14 @@ export default {
       if (this.title === 'Add') {
         api.PostItinerary(data)
           .then((res) => {
-            console.log(res);
+            if (!res.error) {
+              alert('added itinerary', true);
+              return;
+            }
+            alert('add itinerary', false);
           })
           .catch((err) => {
+            alert('add itinerary', false);
             console.log(err);
           });
 
@@ -282,9 +273,14 @@ export default {
 
       api.EditItinerary(this.itinerary.sku, data)
         .then((res) => {
-          console.log(res);
+          if (!res.error) {
+            alert('updated itinerary', true);
+            return;
+          }
+          alert('update itinerary', false);
         })
         .catch((err) => {
+          alert('update itinerary', true);
           console.log(err);
         });
     },

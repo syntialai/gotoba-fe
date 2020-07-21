@@ -19,7 +19,7 @@ export default {
     restaurantData() {
       return {
         image: this.restaurant.image,
-        location: this.restaurant.location,
+        location: this.restaurant.address,
         other: this.restaurant.bistroType,
         rating: this.restaurant.rating || null,
       };

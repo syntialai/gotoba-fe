@@ -2,7 +2,7 @@
   <div class="card-profile-tour-guide p-3 bg-white">
     <b-media vertical-align="center">
       <template v-slot:aside>
-        <b-avatar :src="tourGuide.image"></b-avatar>
+        <b-avatar :src="imageUrl"></b-avatar>
       </template>
       <div class="user-info">
         <div class="user-name bold font-size-20">{{ tourGuide.name }}</div>
@@ -13,10 +13,17 @@
 </template>
 
 <script>
+import api from '../../../api/api';
+
 export default {
   name: 'CardProfileTourGuide',
   props: {
     tourGuide: Object,
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.tourGuide.image);
+    },
   },
 };
 </script>

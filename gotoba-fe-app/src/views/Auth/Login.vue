@@ -122,10 +122,10 @@ export default {
               role: res.role,
             });
 
-            if (this.userRole === 'ROLE_ADMIN') {
+            if (res.role === 'ROLE_ADMIN') {
               this.$router.push('/admin');
             }
-            if (this.userRole === 'ROLE_MERCHANT') {
+            if (res.role === 'ROLE_MERCHANT') {
               this.$router.push('/merchant');
             }
             this.$router.push('/');

@@ -3,7 +3,7 @@
     <data-card
       :data="itineraryData"
       otherIcon="tag"
-      class="border-bottom-gray"
+      class="border-bottom-gray-young"
     />
 
     <div class="mt-0 more-itinerary-card bg-white p-3 border-gray-young">
@@ -32,7 +32,7 @@ export default {
       return {
         name: this.itinerary.name,
         image: this.itinerary.image,
-        location: this.itinerary.location,
+        location: this.itinerary.address,
         other: formatPrice(this.itinerary.price.toString(), true, true),
         rating: this.itinerary.rating || null,
       };

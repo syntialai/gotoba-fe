@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="how-to-pay">
-      <a href="">How to Pay?</a>
+      <router-link to="">How to Pay?</router-link>
     </div>
     <b-button
       class="w-100"

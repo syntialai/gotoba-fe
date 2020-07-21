@@ -1,7 +1,7 @@
 <template>
   <div class="cart-item">
     <div class="d-flex">
-      <b-img :src="image" :alt="name" />
+      <b-img :src="imageUrl" :alt="name" />
       <div class="cart-item__info pl-3">
         <div class="cart-item__size">
           <span class="item__name font-color-black-87 d-block">
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import api from '../../../api/api';
 import { formatPrice } from '../../../utils/filter';
 
 export default {
@@ -45,6 +46,11 @@ export default {
     quantity: {
       type: Number,
       default: 1,
+    },
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.image);
     },
   },
   data() {

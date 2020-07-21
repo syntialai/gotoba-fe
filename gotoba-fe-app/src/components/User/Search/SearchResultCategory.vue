@@ -17,6 +17,7 @@
         :key="item.sku"
         :sku="item.sku"
         :title="item.title"
+        :imageSrc="item.image"
         :category="category"
         :icon1="info.icon1"
         :icon2="info.icon2"

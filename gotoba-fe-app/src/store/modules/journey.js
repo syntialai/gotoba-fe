@@ -4,7 +4,19 @@ import api from '../../api/api';
 
 const state = {
   journeyData: [],
-  journeyDataBySku: {},
+  journeyDataBySku: {
+    name: '',
+    title: '',
+    image: null,
+    location: '',
+    longitude: 0,
+    latitude: 0,
+    price: 0,
+    address: '',
+    description: '',
+    createdBy: '',
+    hoursOpen: [],
+  },
   journeyDataByMerchantSku: [],
   journeyReview: [],
 };

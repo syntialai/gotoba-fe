@@ -12,7 +12,7 @@
     </div>
 
     <div class="chart-section bg-white p-3 mb-2">
-      <div class="d-flex flex-wrap justify-content-around">
+      <div class="d-flex flex-wrap justify-content-between">
         <line-chart
           :chartData="lineChartData"
           :width="getSize"
@@ -97,8 +97,8 @@ export default {
         },
         {
           title: '500',
-          text: 'Hotel ticket sold',
-          icon: 'hotel',
+          text: 'Tour guide available',
+          icon: 'user-tie',
           colorNo: 2,
         },
       ],

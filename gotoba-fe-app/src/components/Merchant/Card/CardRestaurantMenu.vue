@@ -1,7 +1,7 @@
 <template>
   <div class="card-restaurant-menu">
     <b-card
-      :img-src="menu.picture"
+      :img-src="imageUrl"
       :img-alt="'Image-' + menu.name"
       img-top
       class="box-shadow border-square-10"
@@ -28,11 +28,19 @@
   </div>
 </template>
 
+
 <script>
+import api from '../../../api/api';
+
 export default {
   name: 'CardRestaurantMenu',
   props: {
     menu: Object,
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.menu.image);
+    },
   },
 };
 </script>

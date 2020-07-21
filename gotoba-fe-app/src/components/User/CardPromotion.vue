@@ -1,8 +1,8 @@
 <template>
   <div class="card-promotion">
-    <a :href="'/' + route + '/' + sku">
+    <router-link :href="'/' + route + '/' + sku">
       <b-card
-        :img-src="imageSrc"
+        :img-src="imageUrl"
         :img-alt="'image' + sku"
         img-left
         class="mb-3 border-square-5"
@@ -14,19 +14,26 @@
           {{ info }}
         </b-card-text>
       </b-card>
-    </a>
+    </router-link>
   </div>
 </template>
 
 <script>
+import api from '../../api/api';
+
 export default {
   name: 'CardPromotion',
   props: {
     route: String,
     sku: String,
-    imageSrc: String,
+    image: String,
     title: String,
     info: String,
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.image);
+    },
   },
 };
 </script>

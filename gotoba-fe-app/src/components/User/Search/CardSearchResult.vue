@@ -1,7 +1,7 @@
 <template>
   <router-link :to="'/' + category + '/' + sku">
     <b-card
-      :img-src="imageSrc"
+      :img-src="imageUrl"
       :img-alt="'image' + sku"
       img-left
       class="mb-3 border-square-5"
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import api from '../../../api/api';
 import Rating from '../../Partial/Rating.vue';
 
 export default {
@@ -46,6 +47,11 @@ export default {
     rating: {
       type: Number,
       default: null,
+    },
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.imageSrc);
     },
   },
 };

@@ -3,8 +3,8 @@
     <b-card class="w-100" no-body>
       <b-aspect aspect="16:9">
         <b-card-img
-          v-if="getImage"
-          :src="getImage"
+          v-if="image"
+          :src="imageUrl"
           :alt="'Image-' + title"
           class="w-100"
           top
@@ -30,11 +30,9 @@ export default {
     image: String,
     description: String,
   },
-  methods: {
-    async getImage() {
-      const res = await api.GetImage(this.image);
-      console.log(res);
-      return res;
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.image);
     },
   },
 };

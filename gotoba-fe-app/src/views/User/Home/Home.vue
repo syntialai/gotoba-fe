@@ -66,7 +66,7 @@
             :key="journey.sku"
             :name="journey.name"
             :image="journey.image"
-            :location="journey.location"
+            :location="journey.address"
             :rating="journey.rating"
             @click="goToDetails('journey', journey.sku)"
           />

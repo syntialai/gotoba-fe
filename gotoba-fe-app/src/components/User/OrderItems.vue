@@ -3,7 +3,7 @@
     <b-card no-body
       block
       class="pr-2"
-      :img-src="image"
+      :img-src="imageUrl"
       :img-alt="name"
       img-left
     >
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import api from '../../api/api';
 import { formatPrice } from '../../utils/filter';
 
 export default {
@@ -44,6 +45,11 @@ export default {
     return {
       discount: this.discountPrice !== 0,
     };
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.image);
+    },
   },
   methods: {
     formatPrice,

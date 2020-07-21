@@ -36,6 +36,7 @@
 
 <script>
 import { VueAgile } from 'vue-agile';
+import api from '../../../api/api';
 
 export default {
   name: 'GalleryHome',
@@ -47,7 +48,7 @@ export default {
   },
   computed: {
     slides() {
-      return this.galleryData.map((data) => data.image);
+      return this.galleryData.map((data) => api.imageUrl(data.image));
     },
   },
   data() {

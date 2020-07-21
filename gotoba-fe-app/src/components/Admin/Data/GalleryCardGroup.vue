@@ -4,7 +4,7 @@
       <gallery-card
         v-for="photo of photos"
         :key="photo.title"
-        :image="getImage(photo.image)"
+        :image="photo.image"
         :info="photo.title"
         :sku="photo.sku"
       />
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import api from '../../../api/api';
 import GalleryCard from '../Card/GalleryCard.vue';
 
 export default {
@@ -29,12 +28,6 @@ export default {
   computed: {
     galleryRange() {
       return this.photos.slice(this.start - 1, this.end);
-    },
-  },
-  methods: {
-    async getImage(url) {
-      const res = await api.GetImage(url);
-      return res.data;
     },
   },
 };

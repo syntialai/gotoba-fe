@@ -2,7 +2,7 @@
   <div class="card-ticket bg-white w-100">
     <b-card class="m-2 d-flex">
       <b-card-img
-        :src="ticket.image"
+        :src="imageUrl"
         :alt="'image-' + ticket.title"
         class="ml-1 mr-3 border-circle"
       ></b-card-img>
@@ -27,10 +27,17 @@
 </template>
 
 <script>
+import api from '../../../api/api';
+
 export default {
   name: 'CardTicket',
   props: {
     ticket: Object,
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.ticket.image);
+    },
   },
 };
 </script>

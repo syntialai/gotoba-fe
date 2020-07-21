@@ -3,7 +3,7 @@
     <b-media tag="li" vertical-align="center">
       <template v-slot:aside>
         <b-img
-          :src="data.image"
+          :src="imageUrl"
           rounded
           width="44"
           :alt="data.name"
@@ -18,10 +18,17 @@
 </template>
 
 <script>
+import api from '../../../api/api';
+
 export default {
   name: 'CardMedia',
   props: {
     data: Object,
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.data.image);
+    },
   },
 };
 </script>

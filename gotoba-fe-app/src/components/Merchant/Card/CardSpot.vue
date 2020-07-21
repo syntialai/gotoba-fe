@@ -3,7 +3,7 @@
     <b-media tag="li" vertical-align="center">
       <template v-slot:aside>
         <b-img
-          :src="itinerary.image"
+          :src="imageUrl"
           rounded
           width="64"
           :alt="itinerary.name"
@@ -24,12 +24,18 @@
 </template>
 
 <script>
+import api from '../../../api/api';
 import Rating from '../../Partial/Rating.vue';
 
 export default {
   name: 'CardSpot',
   components: {
     Rating,
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.itinerary.image);
+    },
   },
   props: {
     itinerary: Object,

@@ -78,8 +78,8 @@ export default {
   Logout() {
     return fetchPost('/auth/logout');
   },
-  GetImage(imageUrl) {
-    return fetchGet(`/image${imageUrl}`);
+  imageUrl(url) {
+    return `${axios.defaults.baseURL}image${url}`;
   },
 
   /**
