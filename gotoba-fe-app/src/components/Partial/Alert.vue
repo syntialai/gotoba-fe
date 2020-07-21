@@ -1,7 +1,7 @@
 <template>
   <div class="alert">
     <b-alert
-      v-model="showAlert"
+      v-model="show"
       class="position-fixed fixed-top m-0 rounded-0"
       style="z-index: 9000;"
       :variant="alertSuccess? 'success' : 'danger'"
@@ -15,12 +15,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Alert',
   computed: {
     ...mapGetters(['showAlert', 'alertMessage', 'alertSuccess']),
+    show: {
+      get() {
+        return this.showAlert;
+      },
+      set(value) {
+        this.setShowAlert(value);
+      },
+    },
+  },
+  methods: {
+    ...mapActions(['setShowAlert']),
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar h-100 position-absolute box-shadow">
+  <div class="sidebar h-100 position-fixed overflow-auto box-shadow">
     <aside id="sidebar-admin" class="bg-white" shadow>
       <b-button
         variant="link"
@@ -113,3 +113,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+::-webkit-scrollbar {
+  display: none;
+}
+</style>

@@ -169,11 +169,11 @@
                 v-model="role"
                 required
               >
-                <b-form-select-option value="user" selected>
+                <b-form-select-option value="ROLE_USER" selected>
                   <font-awesome-icon icon="user"></font-awesome-icon>
                   User
                 </b-form-select-option>
-                <b-form-select-option value="merchant">
+                <b-form-select-option value="ROLE_MERCHANT">
                   <b-icon
                     icon="person-fill"
                     class="icon icon-gradient pr-2">
@@ -243,7 +243,7 @@ export default {
       email: '',
       password: '',
       confirmPassword: '',
-      role: 'user',
+      role: 'ROLE_USER',
       checked: 'false',
       showLoading: false,
     };
@@ -290,7 +290,7 @@ export default {
             this.setUserInfo(loginRes);
             this.showLoading = false;
 
-            if (data.role === 'ROLE_MERCHANT') {
+            if (this.role === 'ROLE_MERCHANT') {
               this.$router.push('/merchant');
             }
             this.$router.push('/');

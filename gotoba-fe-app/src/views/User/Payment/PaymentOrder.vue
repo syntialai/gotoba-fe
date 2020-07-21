@@ -2,7 +2,7 @@
   <div class="payment-order">
     <div class="information p-2">
       <div class="image-waiting p-4 w-100">
-        <img src="@/assets/img/Waiting.png" alt="Waiting" :width="imageWidth">
+        <img src="@/assets/img/illustrate/Waiting.png" alt="Waiting" :width="imageWidth">
       </div>
 
       <div class="align-center font-color-black-60">

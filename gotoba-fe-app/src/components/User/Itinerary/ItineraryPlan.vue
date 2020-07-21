@@ -6,8 +6,17 @@
     />
 
     <div class="empty" v-else>
-      <div class="align-center">
-        You haven't set your plan for this day!
+      <div class="align-center my-2">
+        <div class="w-100">
+          <img
+            src="@/assets/img/illustrate/no-schedule.png"
+            alt="No Schedule"
+            width="50%"
+          >
+        </div>
+        <div class="text-info mt-2">
+          You haven't set your plan for this day!
+        </div>
       </div>
     </div>
   </div>

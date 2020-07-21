@@ -36,7 +36,7 @@
         <br>
         All rights reserved.
       </div>
-      <div class="font-size-10">
+      <div class="font-size-12 m-2">
         <router-link to="" class="text-white">Terms of Use</router-link> |
          <router-link to="" class="text-white">Privacy Policy</router-link> |
          <router-link to="" class="text-white">Site Map</router-link>

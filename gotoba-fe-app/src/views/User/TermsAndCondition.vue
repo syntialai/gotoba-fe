@@ -1,6 +1,6 @@
 <template>
   <div class="terms-and-condition">
-    <div class="container pl-2 pr-2">
+    <div class="container px-3">
       <h5 class="font-color-blue-secondary">
         <strong>Terms and Conditions</strong>
       </h5>
@@ -301,7 +301,7 @@
 
       <div class="options mt-4">
         <b-button disabled class="w-100" variant="primary">I AGREED</b-button>
-        <b-button href="#" class="w-100">BACK TO TOP</b-button>
+        <b-button to="" class="w-100 mt-2 text-white">BACK TO TOP</b-button>
       </div>
     </div>
   </div>
