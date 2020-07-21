@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'SearchContent',
   props: {
@@ -28,13 +30,9 @@ export default {
     keywords: Array,
   },
   methods: {
+    ...mapActions(['setSearchKeywords']),
     searchItem(keyword) {
-      this.$router.push({
-        path: '/search',
-        query: {
-          q: keyword,
-        },
-      });
+      this.setSearchKeywords(keyword);
     },
   },
 };

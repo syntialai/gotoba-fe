@@ -43,7 +43,7 @@ export default {
     ...mapActions(['setLogOut']),
     logout() {
       this.setLogOut();
-      this.$router.push('/');
+      this.$router.push('/login');
     },
   },
 };

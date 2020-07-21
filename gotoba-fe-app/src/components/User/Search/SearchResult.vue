@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 import SearchResultCategory from './SearchResultCategory.vue';
 
 export default {
@@ -46,24 +46,27 @@ export default {
           categoryIcon: 'map-marked-alt',
           categoryColor: 'green',
           category: 'journey',
-          searchResults: this.searchWisataResults,
+          searchResults: this.filterSearch(this.searchKeywords, this.searchWisataResults),
         },
         {
           categoryTitle: 'Eats related to',
           categoryIcon: 'utensils',
           categoryColor: 'orange',
           category: 'restaurant',
-          searchResults: this.searchRestaurantResults,
+          searchResults: this.filterSearch(this.searchKeywords, this.searchRestaurantResults),
         },
       ];
     },
   },
-  created() {
-    this.getSearchWisataResults();
-    this.getSearchRestaurantResults();
-  },
   methods: {
-    ...mapActions(['getSearchWisataResults', 'getSearchRestaurantResults']),
+    filterSearch(word, array) {
+      const keyword = word.trim().toLowerCase();
+      return array.filter(
+        (data) => (data.name.toLowerCase().includes(keyword)
+        || data.title.toLowerCase().includes(keyword))
+        && keyword.length > 2,
+      );
+    },
   },
 };
 </script>

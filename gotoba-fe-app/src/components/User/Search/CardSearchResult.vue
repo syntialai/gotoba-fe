@@ -4,6 +4,7 @@
       :img-src="imageUrl"
       :img-alt="'image' + sku"
       img-left
+      img-width="150"
       class="mb-3 border-square-5"
     >
       <b-card-sub-title class="font-color-blue-primary">

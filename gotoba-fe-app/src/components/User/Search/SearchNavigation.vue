@@ -16,7 +16,7 @@
             v-model="keywords"
             type="search"
             autocomplete="off"
-            debounce="500"
+            debounce="1000"
             @keyup.enter="$emit('search')"
             placeholder="Search for place, eat, ..."
           ></b-form-input>
@@ -32,7 +32,7 @@ export default {
   computed: {
     keywords: {
       get() {
-        return this.$store.state.searchKeywords;
+        return this.$store.getters.searchKeywords;
       },
       set(value) {
         this.$store.dispatch('setSearchKeywords', value);
@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     goBack() {
+      this.$store.dispatch('setSearchKeywords', '');
       this.$router.go(-1);
     },
   },

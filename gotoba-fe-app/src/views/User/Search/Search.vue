@@ -2,26 +2,21 @@
   <div class="search">
     <search-navigation class="mb-1" v-on:search="doSearch" />
 
-    <search-autocomplete
-      v-if="searchKeywords.length > 1"
-    ></search-autocomplete>
-
     <search-content
       title="Your History"
       :keywords="history"
-      v-if="history"
+      v-if="searchKeywords.length <= 2"
       class="mt-3 mb-3"
     />
 
-    <search-result v-if="showResult" />
+    <search-result v-if="searchKeywords.length > 2" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import SearchNavigation from '../../../components/User/Search/SearchNavigation.vue';
 import SearchContent from '../../../components/User/Search/SearchContent.vue';
-import SearchAutocomplete from '../../../components/User/Search/SearchAutocomplete.vue';
 import SearchResult from '../../../components/User/Search/SearchResult.vue';
 
 export default {
@@ -29,30 +24,54 @@ export default {
   components: {
     SearchNavigation,
     SearchContent,
-    SearchAutocomplete,
     SearchResult,
   },
   computed: {
-    ...mapGetters(['searchKeywords']),
+    ...mapGetters([
+      'searchKeywords',
+      'searchWisataResults',
+      'searchRestaurantResults',
+      'searchSuggestionShow',
+    ]),
     history() {
       const searchHistory = localStorage.getItem('searchHistory') || null;
+
+      if (searchHistory) {
+        return JSON.parse(searchHistory).history;
+      }
+
       return searchHistory;
     },
   },
-  data() {
-    return {
-      showResult: false,
-    };
+  created() {
+    this.getSearchWisataResults();
+    this.getSearchRestaurantResults();
+    this.setSearchSuggestions([
+      ...this.searchRestaurantResults,
+      ...this.SearchWisataResults,
+    ]);
   },
   methods: {
+    ...mapActions([
+      'getSearchWisataResults',
+      'getSearchRestaurantResults',
+      'setSearchSuggestions',
+      'setSearchShowStatus',
+    ]),
     doSearch() {
-      this.$router.push({
-        path: '/search',
-        query: {
-          q: this.searchKeywords,
-        },
-      });
-      this.showResult = true;
+      this.setSearchShowStatus(false);
+
+      const history = JSON.parse(localStorage.getItem('searchHistory'));
+      if (history) {
+        history.history.push(this.searchKeywords);
+        const res = JSON.stringify(history);
+        localStorage.setItem('searchHistory', res);
+        return;
+      }
+
+      localStorage.setItem('searchHistory', JSON.stringify({
+        history: [this.searchKeywords],
+      }));
     },
   },
 };

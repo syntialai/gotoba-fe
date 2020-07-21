@@ -5,7 +5,7 @@ import api from '../../api/api';
 const state = {
   searchKeywords: '',
   searchSuggestions: [],
-  searchSuggestionShow: false,
+  searchSuggestionShow: true,
   searchWisataResults: [],
   searchRestaurantResults: [],
 };

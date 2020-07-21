@@ -51,9 +51,10 @@ export default {
       for (let i = 0; i < 7; i += 1) {
         week.push({
           day: toFullDay((today.getDay() + i) % 7).substr(0, 2),
-          date: new Date(today.setDate(today.getDate() + 1)).getDate(),
+          date: today.getDate(),
           active: i === 0,
         });
+        today.setDate(today.getDate() + 1);
       }
 
       this.week = week;

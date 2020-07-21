@@ -3,7 +3,7 @@
     <aside id="sidebar-admin" class="bg-white" shadow>
       <b-button
         variant="link"
-        class="sidebar-button pt-3 py-3 pb-0 bg-white"
+        class="sidebar-button pt-3 pb-0 bg-white"
         @click="setPictSize"
       >
         <font-awesome-icon
@@ -16,19 +16,32 @@
         <b-avatar
           src=""
           :size="pictSize + 'px'"
-          class="my-3"
+          class="mt-3"
         ></b-avatar>
       </div>
       <ul class="sidebar__menu p-0 mt-2">
         <li class="sidebar-link-group">
-          <sidebar-item
+          <router-link
             v-for="(menu, key) in menus"
             :key="key"
-            :minimized="minimized"
-            :icon="menu.icon"
-            :title="menu.title"
             :to="menu.link"
-          />
+            class="sidebar-link"
+            exact-active-class="active"
+          >
+            <sidebar-item
+              :minimized="minimized"
+              :icon="menu.icon"
+              :title="menu.title"
+            />
+          </router-link>
+          <button @click="logout" class="border-none p-0 bg-white">
+            <sidebar-item
+              :minimized="minimized"
+              icon="sign-out-alt"
+              title="Log Out"
+              class="font-color-gray"
+            />
+          </button>
         </li>
       </ul>
     </aside>
@@ -36,6 +49,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import SidebarItem from './SidebarItem.vue';
 
 export default {
@@ -83,17 +97,17 @@ export default {
           title: 'Tour Guide',
           link: '/admin/tour-guide',
         },
-        {
-          icon: 'user-cog',
-          title: 'Settings',
-          link: '/admin/settings',
-        },
       ],
     };
   },
   methods: {
+    ...mapActions(['setLogOut']),
+    logout() {
+      this.setLogOut();
+      this.$router.push('/login');
+    },
     setPictSize() {
-      this.pictSize = 40 + this.minimized * 40;
+      this.pictSize = 40 + this.minimized * 20;
       this.minimized = !this.minimized;
     },
   },

@@ -5,11 +5,10 @@
         <h4 class="bold">EXPLORE MORE</h4>
         <hr>
         <ul class="pl-0">
-          <li><a href="">About Lake Toba</a></li>
-          <li><a href="">Destinations</a></li>
-          <li><a href="">Restaurants</a></li>
-          <li><a href="">Hotels and Homestays</a></li>
-          <li><a href="">Events</a></li>
+          <li><router-link to="/about">About Lake Toba</router-link></li>
+          <li><router-link to="/more/journey">Destinations</router-link></li>
+          <li><router-link to="/more/restaurant">Restaurants</router-link></li>
+          <li><router-link to="/more">Promotions</router-link></li>
         </ul>
       </div>
       <div class="contact">
@@ -26,21 +25,21 @@
           </li>
           <li class="contact-whatsapp">
             <font-awesome-icon :icon="['fab', 'whatsapp']" />
-            <span class="contact-whatsapp-text pl-3">0819-9033-3364</span>
+            <span class="contact-whatsapp-text pl-3">0895-6052-36639</span>
           </li>
         </ul>
       </div>
     </div>
-    <div class="bg-color-blue-primary">
+    <div class="bg-color-blue-primary p-3">
       <div class="copyright font-size-12 semibold">
         © 2020 GoToba - FUTURE Medan
         <br>
         All rights reserved.
       </div>
       <div class="font-size-10">
-        <a href="">Terms of Use</a> |
-         <a href="">Privacy Policy</a> |
-         <a href="">Site Map</a>
+        <router-link to="" class="text-white">Terms of Use</router-link> |
+         <router-link to="" class="text-white">Privacy Policy</router-link> |
+         <router-link to="" class="text-white">Site Map</router-link>
       </div>
     </div>
   </div>
@@ -67,5 +66,9 @@ hr {
 
 li a, hr {
   color: white;
+}
+
+.footer {
+  margin-bottom: 64px;
 }
 </style>
