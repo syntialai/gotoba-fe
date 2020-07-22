@@ -1,4 +1,5 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
+import flushPromises from 'flush-promises';
 import BootstrapVue from 'bootstrap-vue';
 import CartItem from '@/components/User/Payment/CartItem.vue';
 
@@ -16,7 +17,7 @@ describe('CartItem.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(CartItem, {
+    wrapper = shallowMount(CartItem, {
       propsData: { ...item },
       data() {
         return data;
@@ -35,7 +36,7 @@ describe('CartItem.vue', () => {
 
   it('Check updateQuantity method emit to update:quantity when called', async () => {
     wrapper.vm.updateQuantity();
-    await wrapper.vm.$nextTick()
+    await flushPromises();
 
     expect(wrapper.emitted()['update:quantity']).toBeTruthy();
     expect(wrapper.emitted()['update:quantity'].length).toBe(1);

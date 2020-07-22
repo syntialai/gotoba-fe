@@ -24,6 +24,7 @@ export const SET_USER_NAME = 'SET_USER_NAME';
 export const SET_USER_SKU = 'SET_USER_SKU';
 export const SET_USER_LOGIN_STATUS = 'SET_USER_LOGIN_STATUS';
 export const SET_USER_ROLE = 'SET_USER_ROLE';
+export const SET_USER_IMAGE = 'SET_USER_IMAGE';
 
 /**
  * User

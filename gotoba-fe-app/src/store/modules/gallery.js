@@ -34,6 +34,10 @@ const actions = {
       });
   },
 
+  setGalleryPhoto({ commit }, res) {
+    commit(Types.SET_GALLERY_PHOTO, res);
+  },
+
   removeGalleryPhoto({ commit }, sku) {
     commit(Types.REMOVE_GALLERY_PHOTO);
 

@@ -6,7 +6,7 @@
         <router-link
           v-for="journey in journeyData"
           :key="journey.sku"
-          :to="'/journey/' + journey.sku"
+          :to="goToDetail('journey', journey.sku)"
         >
           <card-home
             :name="journey.name"
@@ -24,7 +24,7 @@
         <router-link
           v-for="ticket in ticketJourney"
           :key="ticket.sku"
-          :to="'/ticket/' + ticket.sku"
+          :to="goToDetail('ticket', ticket.sku)"
         >
           <card-home-long :data="ticket" />
         </router-link>
@@ -53,6 +53,9 @@ export default {
   },
   methods: {
     ...mapActions(['getJourneyData', 'getTicketJourney']),
+    goToDetail(category, sku) {
+      return `/${category}/${sku}`;
+    },
   },
 };
 </script>

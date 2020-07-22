@@ -3,7 +3,7 @@
     <b-media vertical-align="center">
       <template v-slot:aside>
         <b-avatar
-          :src="image"
+          :src="imageSrc"
           size="64"
           class="bg-color-gray"
         ></b-avatar>
@@ -12,18 +12,24 @@
         <div class="user-name font-size-20 bold font-color-black-87">
           {{ name }}
         </div>
-        <!-- <div class="user-location">{{ user.address }}</div> -->
       </div>
     </b-media>
   </div>
 </template>
 
 <script>
+import api from '../../../api/api';
+
 export default {
   name: 'CardProfileUser',
   props: {
     name: String,
     image: String,
+  },
+  computed: {
+    imageSrc() {
+      return api.imageUrl(this.image);
+    },
   },
 };
 </script>

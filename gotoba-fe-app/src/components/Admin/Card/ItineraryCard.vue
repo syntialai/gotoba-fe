@@ -8,8 +8,8 @@
       />
 
       <div class="mt-0 more-itinerary-card bg-white p-3 border-gray-young">
-        <div class="bold">Description</div>
-        <div class="description-detail font-size-14">
+        <div class="semibold font-color-black-87">Description</div>
+        <div class="description-detail font-size-14 font-color-black-60">
           {{ itinerary.description }}
         </div>
       </div>

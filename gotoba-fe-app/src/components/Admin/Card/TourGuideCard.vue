@@ -1,6 +1,8 @@
 <template>
   <div class="tour-guide-card">
-    <data-card :data="tourGuide" :otherIcon="tourGuide.gender" />
+    <router-link :to="goToTourGuideDetail">
+      <data-card :data="tourGuide" :otherIcon="tourGuide.gender" />
+    </router-link>
   </div>
 </template>
 
@@ -23,6 +25,9 @@ export default {
         other: this.tourGuide.age.toString(),
         rating: this.tourGuide.rating,
       };
+    },
+    goToTourGuideDetail() {
+      return `/admin/tour-guide/${this.tourGuide.sku}`;
     },
   },
 };

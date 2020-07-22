@@ -4,17 +4,21 @@
       <ValidationObserver>
         <b-form v-if="merchantData" @submit.stop.prevent="updateProfile">
           <b-form-group id="edit-img">
-            <b-avatar
-              :src="image"
-              alt="profile"
-            />
+            <div class="align-center">
+              <b-avatar
+                :src="merchantData.image"
+                alt="profile"
+                class="my-2"
+                size="100"
+              />
+            </div>
             <b-form-file
-              v-model="image"
+              v-model="merchantData.image"
               @change="loadImage"
               accept="image/jpeg, image/jpg, image/png"
             ></b-form-file>
             <b-button
-              v-if="image !== user.image && image !== null"
+              v-if="merchantData.image !== null && merchantData.image !== ''"
               block
               size="sm"
               class="custom-btn-gray mt-2"
@@ -34,7 +38,7 @@
             >
               <b-form-input
                 id="input-edit-nick-name"
-                v-model="user.nickname"
+                v-model="merchantData.nickname"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-nick-name-feedback-msg"
@@ -57,7 +61,7 @@
             >
               <b-form-input
                 id="input-edit-username"
-                v-model="user.username"
+                v-model="merchantData.username"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-username-feedback-msg"
@@ -80,7 +84,7 @@
             >
               <b-form-input
                 id="input-edit-email"
-                v-model="user.email"
+                v-model="merchantData.email"
                 type="email"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-email-feedback-msg"
@@ -90,77 +94,6 @@
               </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
-
-          <b-form-group
-            id="edit-password"
-            label="Password"
-            label-for="input-edit-password"
-          >
-            <b-form-input
-              id="input-edit-password"
-              v-model="user.password"
-              type="password"
-              readonly
-            ></b-form-input>
-          </b-form-group>
-
-          <ValidationProvider
-            name="Phone number"
-            rules="numeric"
-            v-slot="validationContext"
-          >
-            <b-form-group
-              id="edit-phone-number"
-              label="Phone number"
-              label-for="input-edit-phone-number"
-            >
-              <b-form-input
-                id="input-edit-phone-number"
-                v-model="user.phoneNumber"
-                type="text"
-                :state="getValidationState(validationContext)"
-                aria-describedby="edit-phone-number-feedback-msg"
-              ></b-form-input>
-              <b-form-invalid-feedback id="edit-phone-number-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-          </ValidationProvider>
-
-          <ValidationProvider
-            name="Location"
-            rules="alpha_spaces"
-            v-slot="validationContext"
-          >
-            <b-form-group
-              id="edit-location"
-              label="Location"
-              label-for="input-edit-location"
-            >
-              <b-form-input
-                id="input-edit-location"
-                v-model="user.location"
-                type="text"
-                :state="getValidationState(validationContext)"
-                aria-describedby="itinerary-title-feedback-msg"
-              ></b-form-input>
-              <b-form-invalid-feedback id="itinerary-title-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-          </ValidationProvider>
-
-          <b-form-group
-            id="edit-birth-date"
-            label="Birthdate"
-            label-for="input-birth-date"
-          >
-            <b-form-datepicker
-              id="input-birth-date"
-              v-model="user.birthDate"
-              :date-format-options="{ year: 'numeric', month: 'long', day: 'numeric' }"
-            ></b-form-datepicker>
-          </b-form-group>
 
           <b-button
             block
@@ -190,39 +123,27 @@ export default {
   created() {
     this.getMerchantDataBySku(this.userSku);
   },
-  data() {
-    return {
-      user: {
-        nickname: '',
-        username: '',
-        email: '',
-        phoneNumber: '',
-        location: '',
-        birthDate: '', // return value YYYY-MM-DD
-      },
-      image: null,
-    };
-  },
   methods: {
     ...mapActions(['getMerchantDataBySku']),
 
     getValidationState,
 
     updateProfile() {
-      if (!this.nickname
-        || !this.username
-        || !this.email) {
+      if (!this.merchantData.nickname
+        || !this.merchantData.username
+        || !this.merchantData.email) {
         return;
       }
 
-      const data = { ...this.user };
+      const data = { ...this.merchantData };
 
-      api.UpdateProfile(data)
+      api.EditMerchant(this.userSku, data)
         .then((res) => {
           this.setUserInfo({
             name: res.nickname,
             role: res.role,
             sku: res.sku,
+            image: res.image,
           });
         })
         .catch((err) => {
@@ -236,7 +157,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res.toString();
+            this.merchantData.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -245,13 +166,8 @@ export default {
     },
 
     removePhoto() {
-      this.image = null;
+      this.merchantData.image = null;
     },
-  },
-  mounted() {
-    if (this.merchantData) {
-      this.user = { ...this.merchantData };
-    }
   },
 };
 </script>

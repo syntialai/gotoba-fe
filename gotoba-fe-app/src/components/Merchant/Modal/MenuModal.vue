@@ -13,7 +13,7 @@
         <b-form @submit.stop.prevent="submitMenu">
           <ValidationProvider
             name="Name"
-            rules="required|alpha_dash"
+            rules="required"
             v-slot="validationContext"
           >
             <b-form-group
@@ -23,7 +23,7 @@
             >
               <b-form-input
                 id="menu-name"
-                v-model="menu.name"
+                v-model="restaurantMenu.name"
                 type="text"
                 class="border-gray"
                 required
@@ -46,10 +46,10 @@
               label="Photo"
               label-for="menu-image"
             >
-              <div v-if="menu.image === null">
+              <div v-if="restaurantMenu.image === null">
                 <b-form-file
                   id="menu-image"
-                  v-model="menu.image"
+                  v-model="restaurantMenu.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -62,7 +62,7 @@
                 </b-form-invalid-feedback>
               </div>
               <div v-else>
-                <b-img :src="menu.image" center :width="100"></b-img>
+                <b-img :src="restaurantMenu.image" center :width="100"></b-img>
                 <b-button
                   size="sm"
                   class="custom-btn-gray mt-2"
@@ -82,12 +82,14 @@
               label="Category"
               label-for="menu-category"
             >
-              <b-form-select
-                v-model="menu.category"
-                :options="categoryOptions"
+              <b-form-input
+                type="text"
+                v-model="restaurantMenu.category"
+                class="border-gray"
+                required
                 :state="getValidationState(validationContext)"
                 aria-describedby="itinerary-category-feedback-msg"
-              ></b-form-select>
+              ></b-form-input>
               <b-form-invalid-feedback id="itinerary-category-feedback-msg">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
@@ -106,8 +108,7 @@
             >
               <b-form-input
                 id="menu-price"
-                v-model="menu.price"
-                :formatter="formatPrice"
+                v-model="restaurantMenu.price"
                 type="text"
                 required
                 class="border-gray"
@@ -126,8 +127,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { formatPrice } from '../../../utils/filter';
+import { mapGetters, mapActions } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
@@ -143,6 +143,13 @@ export default {
       default: 'Add',
     },
   },
+  created() {
+    if (this.title === 'Edit') {
+      this.getRestaurantMenuById(this.$route.params.id);
+    } else {
+      this.setRestaurantMenu({});
+    }
+  },
   data() {
     return {
       menu: {
@@ -154,12 +161,12 @@ export default {
     };
   },
   methods: {
-    formatPrice,
+    ...mapActions(['getRestaurantMenuById', 'setRestaurantMenu']),
 
     getValidationState,
     
     submitMenu() {
-      const data = { ...this.menu };
+      const data = { ...this.restaurantMenu };
 
       if (
         data.name === ''
@@ -174,7 +181,7 @@ export default {
         api.AddRestaurantMenu(this.$route.params.sku, data)
           .then((res) => {
             console.log(res);
-            this.$route.push('/merchant/bistro');
+            this.$router.push('/merchant/bistro');
           })
           .catch((err) => {
             console.log(err);
@@ -186,7 +193,7 @@ export default {
       api.EditRestaurantMenu(this.$route.params.sku, this.$route.params.id, data)
         .then((res) => {
           console.log(res);
-          this.$route.push('/merchant/bistro');
+          this.$router.push('/merchant/bistro');
         })
         .catch((err) => {
           console.log(err);
@@ -199,7 +206,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.menu.image = res.toString();
+            this.restaurantMenu.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -208,7 +215,7 @@ export default {
     },
 
     removePhoto() {
-      this.menu.image = null;
+      this.restaurantMenu.image = null;
     },
   },
 };

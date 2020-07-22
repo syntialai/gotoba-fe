@@ -2,7 +2,7 @@
   <div class="profile">
     <card-profile-user
       :name="userName"
-      image=""
+      :image="userImage"
     />
 
     <profile-menu-group
@@ -32,7 +32,7 @@ export default {
     ProfileMenuGroup,
   },
   computed: {
-    ...mapGetters(['userName', 'userLoginStatus', 'userRole']),
+    ...mapGetters(['userName', 'userImage', 'userLoginStatus', 'userRole']),
   },
   created() {
     if (!this.userLoginStatus || this.userRole !== 'ROLE_USER') {

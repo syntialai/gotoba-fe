@@ -87,7 +87,7 @@ const actions = {
   getRestaurantMenuById({ commit }, id) {
     commit(Types.SET_RESTAURANT_MENU_BY_ID);
 
-    api.GetRestaurantMenus(id)
+    api.GetRestaurantMenuById(id)
       .then((res) => {
         if (!res.error) {
           commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
@@ -97,6 +97,10 @@ const actions = {
       .catch((err) => {
         console.log(err);
       });
+  },
+
+  setRestaurantMenu({ commit }, res) {
+    commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
   },
 
   getRestaurantReview({ commit }, sku) {

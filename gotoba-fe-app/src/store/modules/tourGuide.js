@@ -39,6 +39,10 @@ const actions = {
       });
   },
 
+  setTourGuideBySku({ commit }, res) {
+    commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res);
+  },
+
   getTourGuideReview({ commit }, sku) {
     commit(Types.SET_TOUR_GUIDE_REVIEW);
 

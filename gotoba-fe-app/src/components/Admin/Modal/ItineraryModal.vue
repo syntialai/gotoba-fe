@@ -24,7 +24,7 @@
             >
               <b-form-input
                 id="itinerary-name"
-                v-model="itinerary.name"
+                v-model="journeyDataBySku.name"
                 type="text"
                 class="border-gray"
                 required
@@ -49,7 +49,7 @@
             >
               <b-form-input
                 id="itinerary-title"
-                v-model="itinerary.title"
+                v-model="journeyDataBySku.title"
                 type="text"
                 class="border-gray"
                 required
@@ -72,10 +72,10 @@
               label="Photo"
               label-for="itinerary-image"
             >
-              <div v-if="itinerary.image === null">
+              <div v-if="!journeyDataBySku.image || journeyDataBySku.image === ''">
                 <b-form-file
                   id="itinerary-image"
-                  v-model="itinerary.image"
+                  v-model="journeyDataBySku.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -110,7 +110,7 @@
             >
               <b-form-input
                 id="itinerary-location"
-                v-model="itinerary.location"
+                v-model="journeyDataBySku.location"
                 list="location-list"
                 type="text"
                 class="border-gray"
@@ -149,7 +149,7 @@
             >
               <b-form-input
                 id="itinerary-price"
-                v-model="itinerary.price"
+                v-model="journeyDataBySku.price"
                 type="text"
                 class="border-gray"
                 required
@@ -174,7 +174,7 @@
             >
               <b-form-textarea
                 id="itinerary-address"
-                v-model="itinerary.address"
+                v-model="journeyDataBySku.address"
                 rows="5"
                 max-rows="6"
                 class="border-gray"
@@ -199,7 +199,7 @@
             >
               <b-form-textarea
                 id="itinerary-description"
-                v-model="itinerary.description"
+                v-model="journeyDataBySku.description"
                 rows="5"
                 max-rows="6"
                 class="border-gray"
@@ -218,7 +218,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import { alert } from '../../../utils/tool';
 import previewImage from '../../../utils/fileHelper';
@@ -228,12 +228,17 @@ import api from '../../../api/api';
 export default {
   name: 'ItineraryModal',
   computed: {
-    ...mapState(['journeyDataBySku']),
-    ...mapGetters(['journeyData', 'userSku']),
+    ...mapGetters(['journeyDataBySku', 'journeyData', 'userSku']),
+  },
+  created() {
+    if (this.title === 'Edit') {
+      this.getJourneyDataBySku(this.$route.params.sku);
+    } else {
+      this.setJourneyDataBySku({});
+    }
   },
   data() {
     return {
-      itinerary: { ...this.journeyDataBySku },
       locationList: null,
     };
   },
@@ -244,10 +249,12 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setJourneyDataBySku', 'getJourneyDataBySku']),
+
     getValidationState,
 
     submitItinerary() {
-      const data = { ...this.itinerary };
+      const data = { ...this.journeyDataBySku };
       data.createdBy = this.userSku;
 
       if (data.title === '' || data.image === null || data.description === '') {
@@ -271,7 +278,7 @@ export default {
         return;
       }
 
-      api.EditItinerary(this.itinerary.sku, data)
+      api.EditItinerary(this.journeyDataBySku.sku, data)
         .then((res) => {
           if (!res.error) {
             alert('updated itinerary', true);
@@ -291,7 +298,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.itinerary.image = res.toString();
+            this.journeyDataBySku.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -299,12 +306,12 @@ export default {
       }
     },
     removePhoto() {
-      this.itinerary.image = null;
+      this.journeyDataBySku.image = null;
     },
 
     locationSuggestions() {
-      if (this.itinerary.location) {
-        api.GetSearchLocationResult(this.itinerary.location)
+      if (this.journeyDataBySku.location) {
+        api.GetSearchLocationResult(this.journeyDataBySku.location)
           .then((res) => {
             this.locationList = res.map((item) => item.display_name);
             console.log(this.locationList);
@@ -318,13 +325,13 @@ export default {
   },
   mounted() {
     getLocation((position) => {
-      this.itinerary.longitude = position.coords.longitude;
-      this.itinerary.latitude = position.coords.latitude;
+      this.journeyDataBySku.longitude = position.coords.longitude;
+      this.journeyDataBySku.latitude = position.coords.latitude;
 
-      api.ReverseGeocoding(this.itinerary.longitude, this.itinerary.latitude)
+      api.ReverseGeocoding(this.journeyDataBySku.longitude, this.journeyDataBySku.latitude)
         .then((res) => {
-          this.itinerary.address = res.display_name;
-          this.itinerary.location = `${res.address.suburb}, ${res.address.city}`;
+          this.journeyDataBySku.address = res.display_name;
+          this.journeyDataBySku.location = `${res.address.suburb}, ${res.address.city}`;
         })
         .catch((err) => {
           console.log(err);

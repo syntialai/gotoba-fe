@@ -24,28 +24,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>0/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>0/27</span>
             </div>
         
             
@@ -271,7 +271,15 @@
 <a name='L213'></a><a href='#L213'>213</a>
 <a name='L214'></a><a href='#L214'>214</a>
 <a name='L215'></a><a href='#L215'>215</a>
-<a name='L216'></a><a href='#L216'>216</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a>
+<a name='L223'></a><a href='#L223'>223</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -403,17 +411,23 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -501,7 +515,7 @@
         &lt;b-form @submit.stop.prevent="submitMenu"&gt;
           &lt;ValidationProvider
             name="Name"
-            rules="required|alpha_dash"
+            rules="required"
             v-slot="validationContext"
           &gt;
             &lt;b-form-group
@@ -511,7 +525,7 @@
             &gt;
               &lt;b-form-input
                 id="menu-name"
-                v-model="menu.name"
+                v-model="restaurantMenu.name"
                 type="text"
                 class="border-gray"
                 required
@@ -534,10 +548,10 @@
               label="Photo"
               label-for="menu-image"
             &gt;
-              &lt;div v-if="menu.image === null"&gt;
+              &lt;div v-if="restaurantMenu.image === null"&gt;
                 &lt;b-form-file
                   id="menu-image"
-                  v-model="menu.image"
+                  v-model="restaurantMenu.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -550,7 +564,7 @@
                 &lt;/b-form-invalid-feedback&gt;
               &lt;/div&gt;
               &lt;div v-else&gt;
-                &lt;b-img :src="menu.image" center :width="100"&gt;&lt;/b-img&gt;
+                &lt;b-img :src="restaurantMenu.image" center :width="100"&gt;&lt;/b-img&gt;
                 &lt;b-button
                   size="sm"
                   class="custom-btn-gray mt-2"
@@ -570,12 +584,14 @@
               label="Category"
               label-for="menu-category"
             &gt;
-              &lt;b-form-select
-                v-model="menu.category"
-                :options="categoryOptions"
+              &lt;b-form-input
+                type="text"
+                v-model="restaurantMenu.category"
+                class="border-gray"
+                required
                 :state="getValidationState(validationContext)"
                 aria-describedby="itinerary-category-feedback-msg"
-              &gt;&lt;/b-form-select&gt;
+              &gt;&lt;/b-form-input&gt;
               &lt;b-form-invalid-feedback id="itinerary-category-feedback-msg"&gt;
                 {{ validationContext.errors[0] }}
               &lt;/b-form-invalid-feedback&gt;
@@ -594,8 +610,7 @@
             &gt;
               &lt;b-form-input
                 id="menu-price"
-                v-model="menu.price"
-                :formatter="formatPrice"
+                v-model="restaurantMenu.price"
                 type="text"
                 required
                 class="border-gray"
@@ -614,8 +629,7 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { mapGetters } from 'vuex';</span>
-<span class="cstat-no" title="statement not covered" >import { formatPrice } from '../../../utils/filter';</span>
+<span class="cstat-no" title="statement not covered" >import { mapGetters, mapActions } from 'vuex';</span>
 <span class="cstat-no" title="statement not covered" >import getValidationState from '../../../utils/validation';</span>
 <span class="cstat-no" title="statement not covered" >import previewImage from '../../../utils/fileHelper';</span>
 <span class="cstat-no" title="statement not covered" >import api from '../../../api/api';</span>
@@ -631,6 +645,13 @@ export default {
       default: 'Add',
     },
   },
+<span class="fstat-no" title="function not covered" >  created() {</span>
+<span class="cstat-no" title="statement not covered" >    if (this.title === 'Edit') {</span>
+<span class="cstat-no" title="statement not covered" >      this.getRestaurantMenuById(this.$route.params.id);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      this.setRestaurantMenu({});</span>
+    }
+  },
 <span class="fstat-no" title="function not covered" >  data() {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
       menu: {
@@ -642,12 +663,12 @@ export default {
     };
   },
   methods: {
-    formatPrice,
+    ...mapActions(['getRestaurantMenuById', 'setRestaurantMenu']),
 &nbsp;
     getValidationState,
     
 <span class="fstat-no" title="function not covered" >    submitMenu() {</span>
-<span class="cstat-no" title="statement not covered" >      const data = { ...this.menu };</span>
+<span class="cstat-no" title="statement not covered" >      const data = { ...this.restaurantMenu };</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (</span>
         data.name === ''
@@ -662,7 +683,7 @@ export default {
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        api.AddRestaurantMenu(this.$route.params.sku, data)</span></span>
           .then((res) =&gt; {
 <span class="cstat-no" title="statement not covered" >            console.log(res);</span>
-<span class="cstat-no" title="statement not covered" >            this.$route.push('/merchant/bistro');</span>
+<span class="cstat-no" title="statement not covered" >            this.$router.push('/merchant/bistro');</span>
 <span class="fstat-no" title="function not covered" >          })</span>
           .catch((err) =&gt; {
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
@@ -674,7 +695,7 @@ export default {
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      api.EditRestaurantMenu(this.$route.params.sku, this.$route.params.id, data)</span></span>
         .then((res) =&gt; {
 <span class="cstat-no" title="statement not covered" >          console.log(res);</span>
-<span class="cstat-no" title="statement not covered" >          this.$route.push('/merchant/bistro');</span>
+<span class="cstat-no" title="statement not covered" >          this.$router.push('/merchant/bistro');</span>
 <span class="fstat-no" title="function not covered" >        })</span>
         .catch((err) =&gt; {
 <span class="cstat-no" title="statement not covered" >          console.log(err);</span>
@@ -687,7 +708,7 @@ export default {
 <span class="cstat-no" title="statement not covered" >      if (files &amp;&amp; files[0]) {</span>
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        previewImage(files[0])</span></span>
           .then((res) =&gt; {
-<span class="cstat-no" title="statement not covered" >            this.menu.image = res.toString();</span>
+<span class="cstat-no" title="statement not covered" >            this.restaurantMenu.image = res.toString();</span>
 <span class="fstat-no" title="function not covered" >          })</span>
           .catch((err) =&gt; {
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
@@ -696,7 +717,7 @@ export default {
     },
 &nbsp;
 <span class="fstat-no" title="function not covered" >    removePhoto() {</span>
-<span class="cstat-no" title="statement not covered" >      this.menu.image = null;</span>
+<span class="cstat-no" title="statement not covered" >      this.restaurantMenu.image = null;</span>
     },
   },
 };
@@ -708,7 +729,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Jul 22 2020 19:44:22 GMT+0700 (Indochina Time)
+                at Thu Jul 23 2020 02:49:15 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

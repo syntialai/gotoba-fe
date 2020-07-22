@@ -28,7 +28,6 @@ const actions = {
     api.GetUserBySku(sku)
       .then((res) => {
         commit(Types.SET_USER_DATA_BY_SKU, res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);

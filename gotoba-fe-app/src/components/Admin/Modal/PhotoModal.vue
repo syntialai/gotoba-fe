@@ -24,7 +24,7 @@
             >
               <b-form-input
                 id="photo-title"
-                v-model="photo.title"
+                v-model="galleryPhoto.title"
                 type="text"
                 class="border-gray"
                 required
@@ -47,10 +47,10 @@
               label="Photo"
               label-for="photo-image"
             >
-              <div v-if="image === null">
+              <div v-if="!galleryPhoto.image || galleryPhoto.image === ''">
                 <b-form-file
                   id="photo-image"
-                  v-model="image"
+                  v-model="galleryPhoto.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -64,7 +64,7 @@
               </div>
               <div v-else>
                 <b-img
-                  :src="image"
+                  :src="galleryPhoto.image"
                   center
                   :width="100"
                 ></b-img>
@@ -84,7 +84,7 @@
           >
             <b-form-textarea
               id="photo-description"
-              v-model="photo.description"
+              v-model="galleryPhoto.description"
               rows="5"
               max-rows="6"
               class="border-gray"
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import { alert } from '../../../utils/tool';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
@@ -105,40 +105,33 @@ import api from '../../../api/api';
 
 export default {
   name: 'PhotoModal',
-  data() {
-    return {
-      photo: { ...this.photos },
-      image: this.photos.image || null,
-    };
-  },
   computed: {
     ...mapGetters(['galleryPhoto']),
+  },
+  created() {
+    if (this.title === 'Edit') {
+      this.getGalleryPhoto(this.$route.params.sku);
+    } else {
+      this.setGalleryPhoto({});
+    }
   },
   props: {
     title: {
       type: String,
       default: 'Add',
     },
-    photos: {
-      type: Object,
-      default: () => (
-        {
-          title: '',
-          image: null,
-          description: '',
-        }
-      ),
-    },
   },
   methods: {
+    ...mapActions(['getGalleryPhoto', 'setGalleryPhoto']),
+
     getValidationState,
 
     submitPhoto() {
       const data = {
-        name: this.photo.title,
-        title: this.photo.title,
-        description: this.photo.description,
-        image: this.image,
+        name: this.galleryPhoto.title,
+        title: this.galleryPhoto.title,
+        description: this.galleryPhoto.description,
+        image: this.galleryPhoto.image,
         show: true,
       };
 
@@ -149,8 +142,11 @@ export default {
       if (this.title === 'Add') {
         api.PostGalleryPhoto(data)
           .then((res) => {
-            console.log(res);
-            alert('added photo', true);
+            if (!res.error) {
+              alert('added photo', true);
+            } else {
+              alert('to add photo', false);
+            }
           })
           .catch((err) => {
             console.log(err);
@@ -162,8 +158,11 @@ export default {
 
       api.EditGalleryPhoto(this.$route.params.sku, data)
         .then((res) => {
-          console.log(res);
-          alert('updated photo', true);
+          if (!res.error) {
+            alert('updated photo', true);
+          } else {
+            alert('to update photo', false);  
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -177,7 +176,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res.toString();
+            this.galleryPhoto.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -186,7 +185,7 @@ export default {
     },
 
     removePhoto() {
-      this.image = null;
+      this.galleryPhoto.image = null;
     },
   },
 };

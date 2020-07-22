@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">12% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/47</span>
+                <span class='fraction'>6/50</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/17</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Functions</span>
                 <span class='fraction'>0/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/20</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">12% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/47</span>
+                <span class='fraction'>6/50</span>
             </div>
         
             
@@ -393,7 +393,14 @@
 <a name='L335'></a><a href='#L335'>335</a>
 <a name='L336'></a><a href='#L336'>336</a>
 <a name='L337'></a><a href='#L337'>337</a>
-<a name='L338'></a><a href='#L338'>338</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a>
+<a name='L340'></a><a href='#L340'>340</a>
+<a name='L341'></a><a href='#L341'>341</a>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a>
+<a name='L344'></a><a href='#L344'>344</a>
+<a name='L345'></a><a href='#L345'>345</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -606,6 +613,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -615,19 +635,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -756,7 +770,7 @@
             &gt;
               &lt;b-form-input
                 id="itinerary-name"
-                v-model="itinerary.name"
+                v-model="journeyDataBySku.name"
                 type="text"
                 class="border-gray"
                 required
@@ -781,7 +795,7 @@
             &gt;
               &lt;b-form-input
                 id="itinerary-title"
-                v-model="itinerary.title"
+                v-model="journeyDataBySku.title"
                 type="text"
                 class="border-gray"
                 required
@@ -804,10 +818,10 @@
               label="Photo"
               label-for="itinerary-image"
             &gt;
-              &lt;div v-if="itinerary.image === null"&gt;
+              &lt;div v-if="!journeyDataBySku.image || journeyDataBySku.image === ''"&gt;
                 &lt;b-form-file
                   id="itinerary-image"
-                  v-model="itinerary.image"
+                  v-model="journeyDataBySku.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -842,7 +856,7 @@
             &gt;
               &lt;b-form-input
                 id="itinerary-location"
-                v-model="itinerary.location"
+                v-model="journeyDataBySku.location"
                 list="location-list"
                 type="text"
                 class="border-gray"
@@ -881,7 +895,7 @@
             &gt;
               &lt;b-form-input
                 id="itinerary-price"
-                v-model="itinerary.price"
+                v-model="journeyDataBySku.price"
                 type="text"
                 class="border-gray"
                 required
@@ -906,7 +920,7 @@
             &gt;
               &lt;b-form-textarea
                 id="itinerary-address"
-                v-model="itinerary.address"
+                v-model="journeyDataBySku.address"
                 rows="5"
                 max-rows="6"
                 class="border-gray"
@@ -931,7 +945,7 @@
             &gt;
               &lt;b-form-textarea
                 id="itinerary-description"
-                v-model="itinerary.description"
+                v-model="journeyDataBySku.description"
                 rows="5"
                 max-rows="6"
                 class="border-gray"
@@ -950,22 +964,27 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { mapGetters, mapState } from 'vuex';</span>
-<span class="cstat-no" title="statement not covered" >import getValidationState from '../../../utils/validation';</span>
-<span class="cstat-no" title="statement not covered" >import { alert } from '../../../utils/tool';</span>
-<span class="cstat-no" title="statement not covered" >import previewImage from '../../../utils/fileHelper';</span>
-<span class="cstat-no" title="statement not covered" >import getLocation from '../../../utils/location';</span>
-<span class="cstat-no" title="statement not covered" >import api from '../../../api/api';</span>
+import { mapGetters, mapActions } from 'vuex';
+import getValidationState from '../../../utils/validation';
+import { alert } from '../../../utils/tool';
+import previewImage from '../../../utils/fileHelper';
+import getLocation from '../../../utils/location';
+import api from '../../../api/api';
 &nbsp;
 export default {
   name: 'ItineraryModal',
   computed: {
-    ...mapState(['journeyDataBySku']),
-    ...mapGetters(['journeyData', 'userSku']),
+    ...mapGetters(['journeyDataBySku', 'journeyData', 'userSku']),
+  },
+<span class="fstat-no" title="function not covered" >  created() {</span>
+<span class="cstat-no" title="statement not covered" >    if (this.title === 'Edit') {</span>
+<span class="cstat-no" title="statement not covered" >      this.getJourneyDataBySku(this.$route.params.sku);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      this.setJourneyDataBySku({});</span>
+    }
   },
 <span class="fstat-no" title="function not covered" >  data() {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
-      itinerary: { ...this.journeyDataBySku },
       locationList: null,
     };
   },
@@ -976,10 +995,12 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setJourneyDataBySku', 'getJourneyDataBySku']),
+&nbsp;
     getValidationState,
 &nbsp;
 <span class="fstat-no" title="function not covered" >    submitItinerary() {</span>
-<span class="cstat-no" title="statement not covered" >      const data = { ...this.itinerary };</span>
+<span class="cstat-no" title="statement not covered" >      const data = { ...this.journeyDataBySku };</span>
 <span class="cstat-no" title="statement not covered" >      data.createdBy = this.userSku;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (data.title === '' || data.image === null || data.description === '') {</span>
@@ -1003,7 +1024,7 @@ export default {
 <span class="cstat-no" title="statement not covered" >        return;</span>
       }
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      api.EditItinerary(this.itinerary.sku, data)</span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      api.EditItinerary(this.journeyDataBySku.sku, data)</span></span>
         .then((res) =&gt; {
 <span class="cstat-no" title="statement not covered" >          if (!res.error) {</span>
 <span class="cstat-no" title="statement not covered" >            alert('updated itinerary', true);</span>
@@ -1023,7 +1044,7 @@ export default {
 <span class="cstat-no" title="statement not covered" >      if (files &amp;&amp; files[0]) {</span>
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        previewImage(files[0])</span></span>
           .then((res) =&gt; {
-<span class="cstat-no" title="statement not covered" >            this.itinerary.image = res.toString();</span>
+<span class="cstat-no" title="statement not covered" >            this.journeyDataBySku.image = res.toString();</span>
 <span class="fstat-no" title="function not covered" >          })</span>
           .catch((err) =&gt; {
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
@@ -1031,12 +1052,12 @@ export default {
       }
     },
 <span class="fstat-no" title="function not covered" >    removePhoto() {</span>
-<span class="cstat-no" title="statement not covered" >      this.itinerary.image = null;</span>
+<span class="cstat-no" title="statement not covered" >      this.journeyDataBySku.image = null;</span>
     },
 &nbsp;
 <span class="fstat-no" title="function not covered" >    locationSuggestions() {</span>
-<span class="cstat-no" title="statement not covered" >      if (this.itinerary.location) {</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        api.GetSearchLocationResult(this.itinerary.location)</span></span>
+<span class="cstat-no" title="statement not covered" >      if (this.journeyDataBySku.location) {</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        api.GetSearchLocationResult(this.journeyDataBySku.location)</span></span>
           .then((res) =&gt; {
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >            this.locationList = res.map((item) =&gt; item.display_name);</span></span>
 <span class="cstat-no" title="statement not covered" >            console.log(this.locationList);</span>
@@ -1050,13 +1071,13 @@ export default {
   },
 <span class="fstat-no" title="function not covered" >  mounted() {</span>
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    getLocation((position) =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >      this.itinerary.longitude = position.coords.longitude;</span>
-<span class="cstat-no" title="statement not covered" >      this.itinerary.latitude = position.coords.latitude;</span>
+<span class="cstat-no" title="statement not covered" >      this.journeyDataBySku.longitude = position.coords.longitude;</span>
+<span class="cstat-no" title="statement not covered" >      this.journeyDataBySku.latitude = position.coords.latitude;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      api.ReverseGeocoding(this.itinerary.longitude, this.itinerary.latitude)</span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      api.ReverseGeocoding(this.journeyDataBySku.longitude, this.journeyDataBySku.latitude)</span></span>
         .then((res) =&gt; {
-<span class="cstat-no" title="statement not covered" >          this.itinerary.address = res.display_name;</span>
-<span class="cstat-no" title="statement not covered" >          this.itinerary.location = `${res.address.suburb}, ${res.address.city}`;</span>
+<span class="cstat-no" title="statement not covered" >          this.journeyDataBySku.address = res.display_name;</span>
+<span class="cstat-no" title="statement not covered" >          this.journeyDataBySku.location = `${res.address.suburb}, ${res.address.city}`;</span>
 <span class="fstat-no" title="function not covered" >        })</span>
         .catch((err) =&gt; {
 <span class="cstat-no" title="statement not covered" >          console.log(err);</span>
@@ -1074,7 +1095,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Jul 22 2020 19:44:22 GMT+0700 (Indochina Time)
+                at Thu Jul 23 2020 02:49:15 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

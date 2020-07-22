@@ -6,19 +6,19 @@
           <b-form-group id="edit-img">
             <div class="d-flex justify-content-center">
               <b-avatar
-                :src="image"
+                :src="userDataBySku.image"
                 alt="user-profile"
                 class="my-2"
                 size="100"
               ></b-avatar>
             </div>
             <b-form-file
-              v-model="image"
+              v-model="userDataBySku.image"
               @change="loadImage"
               accept="image/jpeg, image/jpg, image/png"
             ></b-form-file>
             <b-button
-              v-if="image !== userDataBySku.image && image !== null"
+              v-if="userDataBySku.image && userDataBySku.image.length > 0"
               size="sm"
               block
               class="custom-btn-gray mt-2"
@@ -38,7 +38,7 @@
             >
               <b-form-input
                 id="input-edit-nick-name"
-                v-model="user.nickname"
+                v-model="userDataBySku.nickname"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-nick-name-feedback-msg"
@@ -61,7 +61,7 @@
             >
               <b-form-input
                 id="input-edit-username"
-                v-model="user.username"
+                v-model="userDataBySku.username"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-username-feedback-msg"
@@ -84,7 +84,7 @@
             >
               <b-form-input
                 id="input-edit-email"
-                v-model="user.email"
+                v-model="userDataBySku.email"
                 type="email"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-email-feedback-msg"
@@ -94,78 +94,6 @@
               </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
-
-          <b-form-group
-            id="edit-password"
-            label="Password"
-            label-for="input-edit-password"
-          >
-            <b-form-input
-              id="input-edit-password"
-              v-model="user.password"
-              type="password"
-              readonly
-            ></b-form-input>
-          </b-form-group>
-
-          <ValidationProvider
-            name="Phone number"
-            rules="numeric"
-            v-slot="validationContext"
-          >
-            <b-form-group
-              id="edit-phone-number"
-              label="Phone number"
-              label-for="input-edit-phone-number"
-            >
-              <b-form-input
-                id="input-edit-phone-number"
-                v-model="user.phoneNumber"
-                type="text"
-                :state="getValidationState(validationContext)"
-                aria-describedby="edit-phone-number-feedback-msg"
-              ></b-form-input>
-              <b-form-invalid-feedback id="edit-phone-number-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-          </ValidationProvider>
-
-          <ValidationProvider
-            name="Location"
-            rules="alpha_spaces"
-            v-slot="validationContext"
-          >
-            <b-form-group
-              id="edit-location"
-              label="Location"
-              label-for="input-edit-location"
-            >
-              <b-form-input
-                id="input-edit-location"
-                v-model="user.location"
-                type="text"
-                :state="getValidationState(validationContext)"
-                aria-describedby="location-feedback-msg"
-              ></b-form-input>
-              <b-form-invalid-feedback id="location-feedback-msg">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-          </ValidationProvider>
-
-          <b-form-group
-            id="edit-birth-date"
-            label="Birth date"
-            label-for="input-birth-date"
-          >
-            <b-form-datepicker
-              id="input-birth-date"
-              v-model="user.birthDate"
-              :max="new Date()"
-              :date-format-options="{ year: 'numeric', month: 'long', day: 'numeric' }"
-            ></b-form-datepicker>
-          </b-form-group>
 
           <b-button
             block
@@ -185,6 +113,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
+import { alert } from '../../../utils/tool';
 import api from '../../../api/api';
 
 export default {
@@ -197,42 +126,42 @@ export default {
   },
   data() {
     return {
-      user: {
-        nickname: '',
-        username: '',
-        email: '',
-        phoneNumber: '',
-        location: '',
-        birthDate: '', // return value YYYY-MM-DD
-      },
       image: null,
     };
   },
   methods: {
-    ...mapActions(['getUserBySku']),
+    ...mapActions(['getUserBySku', 'setUserInfo']),
 
     getValidationState,
 
     updateProfile() {
-      if (!this.nickname
-        || !this.username
-        || !this.email) {
+      if (!this.userDataBySku.nickname
+        || !this.userDataBySku.username
+        || !this.userDataBySku.email) {
         return;
       }
 
-      const data = { ...this.user };
+      const data = {
+        email: this.userDataBySku.email,
+        username: this.userDataBySku.username,
+        nickname: this.userDataBySku.nickname,
+        image: this.userDataBySku.image.toString(),
+      };
 
-      api.UpdateProfile(data)
+      api.EditUser(this.userSku, data)
         .then((res) => {
-          if (res) {
+          if (!res.error) {
             this.setUserInfo({
               name: res.nickname,
               role: res.role,
               sku: res.sku,
+              image: res.image,
             });
+            alert('updated profile', true);
           }
         })
         .catch((err) => {
+          alert('update profile', false);
           console.log(err);
         });
     },
@@ -243,7 +172,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res.toString();
+            this.userDataBySku.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -252,13 +181,8 @@ export default {
     },
 
     removePhoto() {
-      this.image = null;
+      this.userDataBySku.image = '';
     },
-  },
-  mounted() {
-    if (this.userDataBySku) {
-      this.user = { ...this.userDataBySku };
-    }
   },
 };
 </script>

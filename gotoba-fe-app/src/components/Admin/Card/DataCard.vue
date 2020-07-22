@@ -24,7 +24,7 @@
               <div class="other-icon icon-gradient">
                 <font-awesome-icon :icon="otherIcon"></font-awesome-icon>
               </div>
-              <div class="other-text pl-3">
+              <div class="other-text pl-3 font-color-black-60">
                 {{ data.other }}
               </div>
             </div>
@@ -33,14 +33,18 @@
               <div class="location-icon icon-gradient">
                 <font-awesome-icon icon="map-marker-alt"></font-awesome-icon>
               </div>
-              <div class="location-text pl-3">
+              <div class="location-text pl-3 font-color-black-60">
                 {{ data.location }}
               </div>
             </div>
 
-            <div class="rating" v-if="data.rating">
-              <rating :rate="data.rating" :fontSize="14" />
-              <div class="rate-number font-size-14 semibold">
+            <div class="rating d-flex align-items-center" v-if="data.rating">
+              <rating
+                :rate="data.rating"
+                :fontSize="14"
+                class="pr-1"
+              />
+              <div class="rate-number semibold font-color-black-60">
                 ({{ data.rating }})
               </div>
             </div>

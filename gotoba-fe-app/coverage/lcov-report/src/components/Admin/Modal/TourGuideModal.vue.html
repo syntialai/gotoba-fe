@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">14.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>5/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">14.29% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>5/35</span>
             </div>
         
             
@@ -531,7 +531,14 @@
 <a name='L473'></a><a href='#L473'>473</a>
 <a name='L474'></a><a href='#L474'>474</a>
 <a name='L475'></a><a href='#L475'>475</a>
-<a name='L476'></a><a href='#L476'>476</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L476'></a><a href='#L476'>476</a>
+<a name='L477'></a><a href='#L477'>477</a>
+<a name='L478'></a><a href='#L478'>478</a>
+<a name='L479'></a><a href='#L479'>479</a>
+<a name='L480'></a><a href='#L480'>480</a>
+<a name='L481'></a><a href='#L481'>481</a>
+<a name='L482'></a><a href='#L482'>482</a>
+<a name='L483'></a><a href='#L483'>483</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -892,6 +899,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -901,13 +920,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1032,7 +1046,7 @@
             &gt;
               &lt;b-form-input
                 id="tour-guide-name"
-                v-model="tourGuide.name"
+                v-model="tourGuideData.name"
                 type="text"
                 class="border-gray"
                 required
@@ -1055,10 +1069,10 @@
               label="Photo"
               label-for="tour-guide-image"
             &gt;
-              &lt;div v-if="tourGuide.image === null"&gt;
+              &lt;div v-if="tourGuideData.image === null"&gt;
                 &lt;b-form-file
                   id="photo-image"
-                  v-model="tourGuide.image"
+                  v-model="tourGuideData.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -1071,7 +1085,7 @@
                 &lt;/b-form-invalid-feedback&gt;
               &lt;/div&gt;
               &lt;div v-else&gt;
-                &lt;b-img :src="tourGuide.image" center :width="100"&gt;&lt;/b-img&gt;
+                &lt;b-img :src="tourGuideData.image" center :width="100"&gt;&lt;/b-img&gt;
                 &lt;b-button
                   size="sm"
                   class="custom-btn-gray mt-2"
@@ -1093,7 +1107,7 @@
             &gt;
               &lt;b-form-input
                 id="tour-guide-age"
-                v-model="tourGuide.age"
+                v-model="tourGuideData.age"
                 type="number"
                 required
                 :state="getValidationState(validationContext)"
@@ -1117,7 +1131,7 @@
             &gt;
               &lt;b-form-spinbutton
                 id="tour-guide-rating"
-                v-model="tourGuide.rating"
+                v-model="tourGuideData.rating"
                 min="1"
                 max="5"
                 required
@@ -1142,7 +1156,7 @@
             &gt;
               &lt;b-form-select
                 id="tour-guide-gender"
-                v-model="tourGuide.gender"
+                v-model="tourGuideData.gender"
                 :state="getValidationState(validationContext)"
                 aria-describedby="tour-guide-gender-feedback-msg"
               &gt;
@@ -1168,7 +1182,7 @@
             &gt;
               &lt;b-form-input
                 id="tour-guide-occupation"
-                v-model="tourGuide.occupation"
+                v-model="tourGuideData.occupation"
                 type="text"
                 class="border-gray"
                 required
@@ -1193,7 +1207,7 @@
             &gt;
               &lt;b-form-input
                 id="tour-guide-location"
-                v-model="tourGuide.location"
+                v-model="tourGuideData.location"
                 list="location-list"
                 required
                 @change="locationSuggestions"
@@ -1230,7 +1244,7 @@
             &gt;
               &lt;b-form-tags
                 input-id="tour-guide-language"
-                v-model="tourGuide.language"
+                v-model="tourGuideData.language"
                 separator=" ,;"
                 required
                 placeholder="Add a tag"
@@ -1255,7 +1269,7 @@
             &gt;
               &lt;b-form-checkbox-group
                 id="tour-guide-available-location"
-                v-model="tourGuide.availableLocation"
+                v-model="tourGuideData.availableLocation"
                 :options="locationOptions"
                 required
                 :state="getValidationState(validationContext)"
@@ -1279,7 +1293,7 @@
             &gt;
               &lt;b-form-input
                 id="tour-guide-phone-number"
-                v-model="tourGuide.phoneNumber"
+                v-model="tourGuideData.phoneNumber"
                 type="text"
                 class="border-gray"
                 required
@@ -1304,7 +1318,7 @@
             &gt;
               &lt;b-form-input
                 id="tour-guide-email"
-                v-model="tourGuide.email"
+                v-model="tourGuideData.email"
                 type="email"
                 class="border-gray"
                 required
@@ -1329,7 +1343,7 @@
             &gt;
               &lt;b-form-input
                 id="tour-guide-whatsapp"
-                v-model="tourGuide.whatsapp"
+                v-model="tourGuideData.whatsapp"
                 type="text"
                 class="border-gray"
                 required
@@ -1349,7 +1363,7 @@
           &gt;
             &lt;b-form-textarea
               id="tour-guide-experience"
-              v-model="tourGuide.experience"
+              v-model="tourGuideData.experience"
               rows="3"
               max-rows="6"
             &gt;&lt;/b-form-textarea&gt;
@@ -1362,7 +1376,7 @@
           &gt;
             &lt;b-form-textarea
               id="tour-guide-description"
-              v-model="tourGuide.description"
+              v-model="tourGuideData.description"
               rows="3"
               max-rows="6"
             &gt;&lt;/b-form-textarea&gt;
@@ -1374,16 +1388,23 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { mapGetters } from 'vuex';</span>
-<span class="cstat-no" title="statement not covered" >import getValidationState from '../../../utils/validation';</span>
-<span class="cstat-no" title="statement not covered" >import previewImage from '../../../utils/fileHelper';</span>
-<span class="cstat-no" title="statement not covered" >import api from '../../../api/api';</span>
-<span class="cstat-no" title="statement not covered" >import { alert } from '../../../utils/tool';</span>
+import { mapGetters } from 'vuex';
+import getValidationState from '../../../utils/validation';
+import previewImage from '../../../utils/fileHelper';
+import api from '../../../api/api';
+import { alert } from '../../../utils/tool';
 &nbsp;
 export default {
   name: 'TourGuideModal',
   computed: {
     ...mapGetters(['tourGuideData']),
+  },
+<span class="fstat-no" title="function not covered" >  created() {</span>
+<span class="cstat-no" title="statement not covered" >    if (this.title === 'Edit') {</span>
+<span class="cstat-no" title="statement not covered" >      this.getTourGuideBySku(this.$route.params.sku);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      this.setTourGuideBySku({});</span>
+    }
   },
 <span class="fstat-no" title="function not covered" >  data() {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
@@ -1419,7 +1440,7 @@ export default {
     getValidationState,
 &nbsp;
 <span class="fstat-no" title="function not covered" >    submitTourGuide() {</span>
-<span class="cstat-no" title="statement not covered" >      const data = { ...this.tourGuide };</span>
+<span class="cstat-no" title="statement not covered" >      const data = { ...this.tourGuideData };</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      console.log(data);</span>
 <span class="cstat-no" title="statement not covered" >      if (this.title === 'Add') {</span>
@@ -1453,7 +1474,7 @@ export default {
 <span class="cstat-no" title="statement not covered" >      if (files &amp;&amp; files[0]) {</span>
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        previewImage(files[0])</span></span>
           .then((res) =&gt; {
-<span class="cstat-no" title="statement not covered" >            this.tourGuide.image = res;</span>
+<span class="cstat-no" title="statement not covered" >            this.tourGuideData.image = res;</span>
 <span class="fstat-no" title="function not covered" >          })</span>
           .catch((err) =&gt; {
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
@@ -1462,12 +1483,12 @@ export default {
     },
 &nbsp;
 <span class="fstat-no" title="function not covered" >    removePhoto() {</span>
-<span class="cstat-no" title="statement not covered" >      this.tourGuide.image = null;</span>
+<span class="cstat-no" title="statement not covered" >      this.tourGuideData.image = null;</span>
     },
 &nbsp;
 <span class="fstat-no" title="function not covered" >    locationSuggestions() {</span>
-<span class="cstat-no" title="statement not covered" >      if (this.tourGuide.location) {</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        api.GetSearchLocationResult(this.tourGuide.location)</span></span>
+<span class="cstat-no" title="statement not covered" >      if (this.tourGuideData.location) {</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        api.GetSearchLocationResult(this.tourGuideData.location)</span></span>
           .then((res) =&gt; {
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >            this.locationList = res.map((item) =&gt; item.display_name);</span></span>
 <span class="cstat-no" title="statement not covered" >            console.log(this.locationList);</span>
@@ -1488,7 +1509,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Jul 22 2020 19:44:22 GMT+0700 (Indochina Time)
+                at Thu Jul 23 2020 02:49:15 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

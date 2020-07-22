@@ -321,7 +321,7 @@ export default {
   GetOrderDetailByMerchant(merchantSku) {
     return fetchGet(`/order/merchant/${merchantSku}`);
   },
-  GetOrderDetailByUser(userSku) {
+  GetOrderDetailByUser(userSku, status) {
     return fetchGet(`/order/user/${userSku}/status/${status}`);
   },
   PostOrderDetail(userSku, params) {

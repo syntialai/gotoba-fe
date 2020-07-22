@@ -24,7 +24,7 @@
             >
               <b-form-input
                 id="tour-guide-name"
-                v-model="tourGuide.name"
+                v-model="tourGuideData.name"
                 type="text"
                 class="border-gray"
                 required
@@ -47,10 +47,10 @@
               label="Photo"
               label-for="tour-guide-image"
             >
-              <div v-if="tourGuide.image === null">
+              <div v-if="tourGuideData.image === null">
                 <b-form-file
                   id="photo-image"
-                  v-model="tourGuide.image"
+                  v-model="tourGuideData.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -63,7 +63,7 @@
                 </b-form-invalid-feedback>
               </div>
               <div v-else>
-                <b-img :src="tourGuide.image" center :width="100"></b-img>
+                <b-img :src="tourGuideData.image" center :width="100"></b-img>
                 <b-button
                   size="sm"
                   class="custom-btn-gray mt-2"
@@ -85,7 +85,7 @@
             >
               <b-form-input
                 id="tour-guide-age"
-                v-model="tourGuide.age"
+                v-model="tourGuideData.age"
                 type="number"
                 required
                 :state="getValidationState(validationContext)"
@@ -109,7 +109,7 @@
             >
               <b-form-spinbutton
                 id="tour-guide-rating"
-                v-model="tourGuide.rating"
+                v-model="tourGuideData.rating"
                 min="1"
                 max="5"
                 required
@@ -134,7 +134,7 @@
             >
               <b-form-select
                 id="tour-guide-gender"
-                v-model="tourGuide.gender"
+                v-model="tourGuideData.gender"
                 :state="getValidationState(validationContext)"
                 aria-describedby="tour-guide-gender-feedback-msg"
               >
@@ -160,7 +160,7 @@
             >
               <b-form-input
                 id="tour-guide-occupation"
-                v-model="tourGuide.occupation"
+                v-model="tourGuideData.occupation"
                 type="text"
                 class="border-gray"
                 required
@@ -185,7 +185,7 @@
             >
               <b-form-input
                 id="tour-guide-location"
-                v-model="tourGuide.location"
+                v-model="tourGuideData.location"
                 list="location-list"
                 required
                 @change="locationSuggestions"
@@ -222,7 +222,7 @@
             >
               <b-form-tags
                 input-id="tour-guide-language"
-                v-model="tourGuide.language"
+                v-model="tourGuideData.language"
                 separator=" ,;"
                 required
                 placeholder="Add a tag"
@@ -247,7 +247,7 @@
             >
               <b-form-checkbox-group
                 id="tour-guide-available-location"
-                v-model="tourGuide.availableLocation"
+                v-model="tourGuideData.availableLocation"
                 :options="locationOptions"
                 required
                 :state="getValidationState(validationContext)"
@@ -271,7 +271,7 @@
             >
               <b-form-input
                 id="tour-guide-phone-number"
-                v-model="tourGuide.phoneNumber"
+                v-model="tourGuideData.phoneNumber"
                 type="text"
                 class="border-gray"
                 required
@@ -296,7 +296,7 @@
             >
               <b-form-input
                 id="tour-guide-email"
-                v-model="tourGuide.email"
+                v-model="tourGuideData.email"
                 type="email"
                 class="border-gray"
                 required
@@ -321,7 +321,7 @@
             >
               <b-form-input
                 id="tour-guide-whatsapp"
-                v-model="tourGuide.whatsapp"
+                v-model="tourGuideData.whatsapp"
                 type="text"
                 class="border-gray"
                 required
@@ -341,7 +341,7 @@
           >
             <b-form-textarea
               id="tour-guide-experience"
-              v-model="tourGuide.experience"
+              v-model="tourGuideData.experience"
               rows="3"
               max-rows="6"
             ></b-form-textarea>
@@ -354,7 +354,7 @@
           >
             <b-form-textarea
               id="tour-guide-description"
-              v-model="tourGuide.description"
+              v-model="tourGuideData.description"
               rows="3"
               max-rows="6"
             ></b-form-textarea>
@@ -376,6 +376,13 @@ export default {
   name: 'TourGuideModal',
   computed: {
     ...mapGetters(['tourGuideData']),
+  },
+  created() {
+    if (this.title === 'Edit') {
+      this.getTourGuideBySku(this.$route.params.sku);
+    } else {
+      this.setTourGuideBySku({});
+    }
   },
   data() {
     return {
@@ -411,7 +418,7 @@ export default {
     getValidationState,
 
     submitTourGuide() {
-      const data = { ...this.tourGuide };
+      const data = { ...this.tourGuideData };
 
       console.log(data);
       if (this.title === 'Add') {
@@ -445,7 +452,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.tourGuide.image = res;
+            this.tourGuideData.image = res;
           })
           .catch((err) => {
             console.log(err);
@@ -454,12 +461,12 @@ export default {
     },
 
     removePhoto() {
-      this.tourGuide.image = null;
+      this.tourGuideData.image = null;
     },
 
     locationSuggestions() {
-      if (this.tourGuide.location) {
-        api.GetSearchLocationResult(this.tourGuide.location)
+      if (this.tourGuideData.location) {
+        api.GetSearchLocationResult(this.tourGuideData.location)
           .then((res) => {
             this.locationList = res.map((item) => item.display_name);
             console.log(this.locationList);

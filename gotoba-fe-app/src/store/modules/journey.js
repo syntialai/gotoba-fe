@@ -52,6 +52,10 @@ const actions = {
       });
   },
 
+  setJourneyDataBySku({ commit }, res) {
+    commit(Types.SET_JOURNEY_DATA_BY_SKU, res);
+  },
+
   getJourneyDataByMerchantSku({ commit }, merchantSku) {
     commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU);
 
