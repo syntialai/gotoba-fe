@@ -5,11 +5,8 @@ import ItineraryCardGroup from '@/components/Admin/Data/ItineraryCardGroup.vue';
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
 
-const $router = { push: jest.fn() };
-
 describe('ItineraryCardGroup.vue', () => {
   const expectedData = {
-    path: '/admin/itinerary/WIS_0001_0001',
     itineraries: [
       { sku: 'WIS_0001_0001' },
       { sku: 'WIS_0001_0002' },
@@ -34,9 +31,6 @@ describe('ItineraryCardGroup.vue', () => {
 
   beforeEach(() => {
     wrapper = mount(ItineraryCardGroup, {
-      mocks: {
-        $router,
-      },
       propsData: { ...props },
       localVue,
       stubs: ['itinerary-card'],
@@ -48,14 +42,7 @@ describe('ItineraryCardGroup.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check itineraryRange computed return sliced itineraries props', async () => {
+  it('Check itineraryRange computed return sliced itineraries props', () => {
     expect(wrapper.vm.itineraryRange).toStrictEqual(expectedData.itineraries);
-  });
-
-  it('Check goToDetails method navigate to Itinerary Details when called with param', () => {
-    wrapper.vm.goToDetails(props.itineraries[0].sku);
-
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith(expectedData.path);
   });
 });

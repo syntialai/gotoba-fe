@@ -1,0 +1,8 @@
+.table.b-table.b-table-stacked > tbody > tr > ::before {
+  text-align: left!important;
+  font-weight: 400!important;
+}
+
+.table.b-table.b-table-stacked > tbody > tr > [data-label] > div {
+  font-weight: 600!important;
+}

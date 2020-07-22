@@ -5,13 +5,13 @@ describe('TourGuideCard.vue', () => {
   const expectedData = {
     image: '/tour-guide/img.png',
     location: 'Parapat',
-    other: 'Female',
+    other: '25',
     rating: 5.0,
   };
   const tourGuide = {
     image: '/tour-guide/img.png',
     location: 'Parapat',
-    gender: 'Female',
+    age: 25,
     rating: 5.0,
   };
 

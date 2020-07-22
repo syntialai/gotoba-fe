@@ -9,7 +9,7 @@
         class="title d-flex w-100 border-bottom-gray-young justify-content-between"
       >
         <h3>Ratings and Reviews</h3>
-        <router-link :to="'/tour-guide/' + tourGuideData.sku + '/review'">
+        <router-link :to="goToReviews">
           <b-icon
             icon="arrow-right-short"
             class="icon-black-60"
@@ -50,6 +50,9 @@ export default {
   },
   computed: {
     ...mapGetters(['tourGuideData', 'tourGuideReview']),
+    goToReviews() {
+      return `/tour-guide/${this.tourGuideData.sku}/review`;
+    },
   },
   created() {
     this.getTourGuideBySku(this.$route.params.sku);

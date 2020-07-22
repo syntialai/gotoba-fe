@@ -1,18 +1,20 @@
 <template>
-  <div class="itinerary-card">
-    <data-card
-      :data="itineraryData"
-      otherIcon="tag"
-      class="border-bottom-gray-young"
-    />
+  <router-link :to="goToItineraryDetail">
+    <div class="itinerary-card">
+      <data-card
+        :data="itineraryData"
+        otherIcon="tag"
+        class="border-bottom-gray-young"
+      />
 
-    <div class="mt-0 more-itinerary-card bg-white p-3 border-gray-young">
-      <div class="bold">Description</div>
-      <div class="description-detail font-size-14">
-        {{ itinerary.description }}
+      <div class="mt-0 more-itinerary-card bg-white p-3 border-gray-young">
+        <div class="bold">Description</div>
+        <div class="description-detail font-size-14">
+          {{ itinerary.description }}
+        </div>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -36,6 +38,9 @@ export default {
         other: formatPrice(this.itinerary.price.toString(), true, true),
         rating: this.itinerary.rating || null,
       };
+    },
+    goToItineraryDetail() {
+      return `/admin/itinerary/${this.itinerary.sku}`;
     },
   },
 };

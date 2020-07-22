@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -94,7 +94,22 @@
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,10 +132,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,19 +163,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;b-card
-    :img-src="image"
-    :img-alt="'Image-' + name"
-    img-top
-    class="box-shadow mr-3 mb-3"
-  &gt;
-    &lt;b-card-title class="font-size-12 font-color-black-87 semibold"&gt;
+  &lt;b-card class="card-home box-shadow mr-3 mb-3"&gt;
+    &lt;b-card-img
+      :src="imageUrl"
+      :alt="'Image-' + name"
+      width="100%"
+      class="object-fit_fill"
+      top
+    &gt;&lt;/b-card-img&gt;
+    &lt;b-card-title class="font-size-14 font-color-black-87 semibold mt-2 mb-1"&gt;
       {{ name }}
     &lt;/b-card-title&gt;
-    &lt;b-card-text class="font-size-8 font-color-black-60"&gt;
+    &lt;b-card-text class="font-size-12 font-color-black-60"&gt;
       {{ location }}
     &lt;/b-card-text&gt;
-    &lt;b-card-text class="pl-2 font-size-8 text-muted"&gt;
+    &lt;b-card-text class="pl-2 font-size-12 text-muted" v-if="rating"&gt;
       &lt;rating :rate="rating" :fontSize="8" /&gt;
       &lt;span class="font-color-black-87 semibold pl-1"&gt;
         ({{ rating }})
@@ -155,7 +187,8 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-import Rating from '../../Partial/Rating.vue';
+<span class="cstat-no" title="statement not covered" >import api from '../../../api/api';</span>
+<span class="cstat-no" title="statement not covered" >import Rating from '../../Partial/Rating.vue';</span>
 &nbsp;
 export default {
   name: 'CardHome',
@@ -168,8 +201,20 @@ export default {
   components: {
     Rating,
   },
+  computed: {
+<span class="fstat-no" title="function not covered" >    imageUrl() {</span>
+<span class="cstat-no" title="statement not covered" >      return api.imageUrl(this.image);</span>
+    },
+  },
 };
 &lt;/script&gt;
+&nbsp;
+&lt;style lang="scss"&gt;
+.card-home {
+  min-width: 100px;
+  max-width: 200px;
+}
+&lt;/style&gt;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -177,7 +222,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Jul 18 2020 03:58:33 GMT+0700 (Indochina Time)
+                at Wed Jul 22 2020 19:44:22 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

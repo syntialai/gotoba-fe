@@ -19,6 +19,20 @@ const actions = {
     commit(Types.SET_ORDER_TOTAL);
   },
 
+  getCartData({ commit }, userSku) {
+    commit(Types.SET_CART_DATA);
+
+    api.GetOrderDetailByUser(userSku, 1)
+      .then((res) => {
+        commit(Types.SET_CART_DATA, res.data);
+        commit(Types.SET_ORDER_TOTAL);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
   setCartDataQuantity({ commit }, res) {
     commit(Types.SET_CART_DATA_QUANTITY, res);
   },

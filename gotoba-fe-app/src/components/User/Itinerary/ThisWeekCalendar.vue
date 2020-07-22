@@ -19,7 +19,7 @@
           pill
           :variant="item.active? 'primary' : 'secondary'"
           :class="'font-size-14 p-2 semibold ' +
-            (item.active? 'custom-btn-primary border-none' : 'bg-white font-color-black-60')
+            (item.active? 'custom-btn-primary' : 'btn-outline')
           "
           @click="setActive(item.date)"
         >
@@ -50,7 +50,7 @@ export default {
 
       for (let i = 0; i < 7; i += 1) {
         week.push({
-          day: toFullDay((today.getDay() + i) % 7).substr(0, 2),
+          day: toFullDay(today.getDay() % 7).substr(0, 2),
           date: today.getDate(),
           active: i === 0,
         });

@@ -3,6 +3,7 @@
     <card-profile-detail
       class="mb-2 mt-2"
       v-bind="data"
+      :location="data.address"
     />
 
     <about-profile-detail

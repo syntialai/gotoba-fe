@@ -36,11 +36,14 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <card-home
-            v-for="ticket in promotions"
-            :key="ticket.sku"
-            v-bind="ticket"
-            @click="goToDetails('promotion', ticket.sku)"
+          <card-ticket-promotion
+            v-for="ticket in ticketPromotion"
+            :key="ticket.title"
+            :name="ticket.title"
+            :image="ticket.image"
+            :price="ticket.price"
+            :discount="ticket.discount"
+            :sku="ticket.sku"
           />
         </div>
       </div>
@@ -107,7 +110,7 @@
               :icon="['far', 'images']"
               class="icon-gradient font-size-24 pr-2"
             />
-          <h6 class="font-color-blue-primary m-0">Our Gallery</h6>
+          <h6 class="font-color-blue-primary bold m-0">Our Gallery</h6>
         </div>
 
         <div class="info font-color-black-60 font-size-14 mb-3">
@@ -124,6 +127,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import CardTicketPromotion from '../../../components/User/Home/CardTicketPromotion.vue';
 import CardHome from '../../../components/User/Home/CardHome.vue';
 import GalleryHome from '../../../components/User/Home/GalleryHome.vue';
 import TheFooter from '../../../components/Partial/TheFooter.vue';
@@ -135,6 +139,7 @@ export default {
   name: 'Home',
   components: {
     CardHome,
+    CardTicketPromotion,
     GalleryHome,
     TheFooter,
     OngoingPromoIcon,
@@ -149,7 +154,6 @@ export default {
     this.getRestaurantData();
     this.getJourneyData();
     this.getTicketData();
-    this.getTicketPromotion();
   },
   data() {
     return {

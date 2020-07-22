@@ -284,6 +284,9 @@ export default {
   /**
    * Ticket
    */
+  GetTickets() {
+    return fetchGet('/ticket/');
+  },
   GetTicketByMerchant(merchantSku) {
     return fetchGet(`/ticket/merchant/${merchantSku}`);
   },
@@ -319,7 +322,7 @@ export default {
     return fetchGet(`/order/merchant/${merchantSku}`);
   },
   GetOrderDetailByUser(userSku) {
-    return fetchGet(`/order/user/${userSku}`);
+    return fetchGet(`/order/user/${userSku}/status/${status}`);
   },
   PostOrderDetail(userSku, params) {
     return fetchPost(`/order/user/${userSku}/add`, params);

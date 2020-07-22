@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/' + category + '/' + sku">
+  <router-link :to="goToProfileDetail">
     <b-card
       :img-src="imageUrl"
       :img-alt="'image' + sku"
@@ -53,6 +53,9 @@ export default {
   computed: {
     imageUrl() {
       return api.imageUrl(this.imageSrc);
+    },
+    goToProfileDetail() {
+      return `/${this.category}/${this.sku}`;
     },
   },
 };

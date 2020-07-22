@@ -27,10 +27,11 @@ export default {
     ...mapGetters(['ticketPromotion']),
   },
   created() {
+    this.getTicketData();
     this.getTicketPromotion();
   },
   methods: {
-    ...mapActions(['getTicketPromotion']),
+    ...mapActions(['getTicketPromotion', 'getTicketData']),
     goToDetails(ticketSku) {
       this.$router.push(`/ticket/${ticketSku}`);
     },

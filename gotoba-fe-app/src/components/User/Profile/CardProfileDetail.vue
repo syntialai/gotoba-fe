@@ -1,9 +1,12 @@
 <template>
   <div class="card-profile-detail bg-white p-3">
     <b-card
-      :img-src="image"
+      :img-src="imageUrl"
       img-alt="Card image"
-      img-left class="mb-3 border-none"
+      img-left
+      class="mb-3 border-none object-fit_cover"
+      img-width="80"
+      img-height="80"
     >
       <b-card-text>
         <h6>{{ name }}</h6>
@@ -15,6 +18,7 @@
 </template>
 
 <script>
+import api from '../../../api/api';
 import Rating from '../../Partial/Rating.vue';
 
 export default {
@@ -27,6 +31,11 @@ export default {
   },
   components: {
     Rating,
+  },
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.image);
+    },
   },
 };
 </script>

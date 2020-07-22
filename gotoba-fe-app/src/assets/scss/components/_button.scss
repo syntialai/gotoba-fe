@@ -1,10 +1,12 @@
+@import '../abstracts/variables';
+
 @mixin button {
   @include map-looping($colors, "custom-btn", "background");
 }
 
 .btn {
-  font-weight: bold;
-  border-color: none!important;
+  font-weight: bold!important;
+  border: none!important;
 }
 
 .btn-rounded {
@@ -12,8 +14,10 @@
 }
 
 .btn-outline {
-  border: 1px solid $border-gray;
-  color: $border-gray;
+  border: 1px solid $black-38!important;
+  color: $black-38!important;
+  font-weight: 400!important;
+  background-color: white!important;
 }
 
 @include button;

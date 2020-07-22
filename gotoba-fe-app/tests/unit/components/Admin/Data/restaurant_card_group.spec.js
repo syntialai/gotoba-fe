@@ -5,11 +5,8 @@ import RestaurantCardGroup from '@/components/Admin/Data/RestaurantCardGroup.vue
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
 
-const $router = { push: jest.fn() };
-
 describe('RestaurantCardGroup.vue', () => {
   const expectedData = {
-    path: '/admin/restaurant/REST_0001_0001',
     restaurants: [
       { sku: 'REST_0001_0001' },
       { sku: 'REST_0001_0002' },
@@ -34,9 +31,6 @@ describe('RestaurantCardGroup.vue', () => {
 
   beforeEach(() => {
     wrapper = mount(RestaurantCardGroup, {
-      mocks: {
-        $router,
-      },
       propsData: { ...props },
       localVue,
       stubs: ['restaurant-card'],
@@ -50,12 +44,5 @@ describe('RestaurantCardGroup.vue', () => {
 
   it('Check restaurantRange computed return sliced restaurants props', async () => {
     expect(wrapper.vm.restaurantRange).toStrictEqual(expectedData.restaurants);
-  });
-
-  it('Check goToDetails method navigate to Restaurant Details when called with param', () => {
-    wrapper.vm.goToDetails(props.restaurants[0].sku);
-
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith(expectedData.path);
   });
 });

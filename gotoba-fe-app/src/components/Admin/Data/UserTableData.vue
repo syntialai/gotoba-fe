@@ -25,7 +25,7 @@
     </template>
 
     <template v-slot:cell(status)="data">
-      <b-badge to="" :variant="data.value === 'active'? 'success' : 'danger'">
+      <b-badge :variant="data.value === 'active'? 'success' : 'danger'">
         {{ data.value }}
       </b-badge>
     </template>

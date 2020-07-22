@@ -8,7 +8,7 @@
             :src="imageUrl"
             :alt="data.location"
             width="100%"
-            left="true"
+            :left="true"
           ></b-card-img>
           <b-card-img v-else blank-src>
             <b-avatar variant="primary" :text="initialName"></b-avatar>
@@ -69,7 +69,7 @@ export default {
       return api.imageUrl(this.data.image);
     },
     initialName() {
-      return this.data.name.split().map((name) => name[0]).join();
+      return this.data.name.split(' ').map((name) => name[0]).join('');
     },
   },
 };

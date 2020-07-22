@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -119,7 +119,20 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,8 +175,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -176,50 +200,63 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div class="data-card"&gt;
-    &lt;b-card
-      :img-src="getImage(data.image)"
-      :img-alt="data.location"
-      img-left
-      class="p-2 border-gray-young"
-    &gt;
-      &lt;b-card-body&gt;
-        &lt;b-card-sub-title class="bold font-color-blue-secondary mb-3"&gt;
-          {{ data.name }}
-        &lt;/b-card-sub-title&gt;
+    &lt;b-card class="border-gray-young mt-2"&gt;
+      &lt;b-row no-gutters&gt;
+        &lt;b-col md="8"&gt;
+          &lt;b-card-img
+            v-if="data.image"
+            :src="imageUrl"
+            :alt="data.location"
+            width="100%"
+            :left="true"
+          &gt;&lt;/b-card-img&gt;
+          &lt;b-card-img v-else blank-src&gt;
+            &lt;b-avatar variant="primary" :text="initialName"&gt;&lt;/b-avatar&gt;
+          &lt;/b-card-img&gt;
+        &lt;/b-col&gt;
+        &lt;b-col md="4"&gt;
+          &lt;b-card-body class="p-3"&gt;
+            &lt;b-card-sub-title class="bold font-color-blue-secondary mb-3"&gt;
+              {{ data.name }}
+            &lt;/b-card-sub-title&gt;
 &nbsp;
-        &lt;div class="other d-flex align-items-center mb-2"&gt;
-          &lt;div class="other-icon icon-gradient"&gt;
-            &lt;font-awesome-icon :icon="otherIcon"&gt;&lt;/font-awesome-icon&gt;
-          &lt;/div&gt;
-          &lt;div class="other-text pl-3"&gt;
-            {{ data.other }}
-          &lt;/div&gt;
-        &lt;/div&gt;
+            &lt;div class="other d-flex align-items-center mb-2"&gt;
+              &lt;div class="other-icon icon-gradient"&gt;
+                &lt;font-awesome-icon :icon="otherIcon"&gt;&lt;/font-awesome-icon&gt;
+              &lt;/div&gt;
+              &lt;div class="other-text pl-3"&gt;
+                {{ data.other }}
+              &lt;/div&gt;
+            &lt;/div&gt;
 &nbsp;
-        &lt;div class="location d-flex align-items-center"&gt;
-          &lt;div class="location-icon icon-gradient"&gt;
-            &lt;font-awesome-icon icon="map-marker-alt"&gt;&lt;/font-awesome-icon&gt;
-          &lt;/div&gt;
-          &lt;div class="location-text pl-3"&gt;
-            {{ data.location }}
-          &lt;/div&gt;
-        &lt;/div&gt;
+            &lt;div class="location d-flex align-items-center"&gt;
+              &lt;div class="location-icon icon-gradient"&gt;
+                &lt;font-awesome-icon icon="map-marker-alt"&gt;&lt;/font-awesome-icon&gt;
+              &lt;/div&gt;
+              &lt;div class="location-text pl-3"&gt;
+                {{ data.location }}
+              &lt;/div&gt;
+            &lt;/div&gt;
 &nbsp;
-        &lt;div class="rating" v-if="data.rating"&gt;
-          &lt;rating :rate="data.rating" :fontSize="14" /&gt;
-          &lt;div class="rate-number font-size-14 semibold"&gt;
-            ({{ data.rating }})
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/b-card-body&gt;
+            &lt;div class="rating" v-if="data.rating"&gt;
+              &lt;rating :rate="data.rating" :fontSize="14" /&gt;
+              &lt;div class="rate-number font-size-14 semibold"&gt;
+                ({{ data.rating }})
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/b-card-body&gt;
+        &lt;/b-col&gt;
+      &lt;/b-row&gt;
     &lt;/b-card&gt;
   &lt;/div&gt;
 &lt;/template&gt;
@@ -237,10 +274,12 @@ export default {
   components: {
     Rating,
   },
-  methods: {
-<span class="fstat-no" title="function not covered" >    async getImage(url) {</span>
-<span class="cstat-no" title="statement not covered" >      const res = await api.GetImage(url);</span>
-<span class="cstat-no" title="statement not covered" >      return res.data;</span>
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.data.image);
+    },
+    initialName() {
+      return this.data.name.split(' ').map((name) =&gt; name[0]).join('');
     },
   },
 };
@@ -252,7 +291,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Jul 18 2020 03:58:33 GMT+0700 (Indochina Time)
+                at Wed Jul 22 2020 19:44:22 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

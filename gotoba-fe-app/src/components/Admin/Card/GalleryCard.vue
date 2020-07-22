@@ -1,6 +1,6 @@
 <template>
   <div class="gallery-card box-shadow">
-    <router-link :to="'/admin/gallery/' + sku">
+    <router-link :to="goToAdminGallery">
       <b-card
         :img-src="imageUrl"
         :img-alt="info"
@@ -28,6 +28,9 @@ export default {
   computed: {
     imageUrl() {
       return api.imageUrl(this.image);
+    },
+    goToAdminGallery() {
+      return `/admin/gallery/${this.sku}`;
     },
   },
 };

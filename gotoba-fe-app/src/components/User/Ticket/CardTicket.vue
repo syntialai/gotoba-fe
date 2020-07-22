@@ -11,10 +11,10 @@
           {{ ticket.title }}
         </div>
         <div class="merchant font-color-blue-secondary mb-2">
-          <a href="">{{ ticket.merchant }}</a>
+          <span>{{ ticket.merchant }}</span>
         </div>
         <div class="valid">
-          <div v-if="ticket.expiredDate <= Date.now" class="font-color-red">
+          <div v-if="isExpired" class="font-color-red">
             Expired on {{ ticket.expiredDate }}
           </div>
           <div else class="font-color-gray">
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { isPassed } from '../../../utils/filter';
 import api from '../../../api/api';
 
 export default {
@@ -37,6 +38,9 @@ export default {
   computed: {
     imageUrl() {
       return api.imageUrl(this.ticket.image);
+    },
+    isExpired() {
+      return isPassed(new Date(this.ticket.expiredDate));
     },
   },
 };

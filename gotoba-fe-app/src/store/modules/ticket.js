@@ -6,6 +6,7 @@ import { isPassed } from '../../utils/filter';
 const state = {
   ticketDatas: [],
   ticketData: {},
+  ticketByUser: [],
   ticketByMerchant: [],
   ticketRestaurant: [],
   ticketJourney: [],
@@ -13,13 +14,14 @@ const state = {
 };
 
 const actions = {
-  getTicketData({ commit }, userSku) {
+  getTicketData({ commit }) {
     commit(Types.SET_TICKET_DATA);
 
-    api.GetTicketByUser(userSku)
+    api.GetTickets()
       .then((res) => {
         console.log(res);
-        commit(Types.SET_TICKET_DATA, res);
+        commit(Types.SET_TICKET_DATA, res.data);
+        commit(Types.SET_TICKET_PROMOTION, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -37,6 +39,19 @@ const actions = {
       .then((res) => {
         console.log(res.data);
         commit(Types.SET_TICKET_BY_SKU, res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getTicketByUser({ commit }, userSku) {
+    commit(Types.SET_TICKET_BY_USER);
+
+    api.GetTicketByUser(userSku)
+      .then((res) => {
+        console.log(res);
+        commit(Types.SET_TICKET_BY_USER, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -108,6 +123,7 @@ const actions = {
 const getters = {
   ticketDatas: (state) => state.ticketDatas,
   ticketData: (state) => state.ticketData,
+  ticketByUser: (state) => state.ticketByUser,
   ticketByMerchant: (state) => state.ticketByMerchant,
   ticketRestaurant: (state) => state.ticketRestaurant,
   ticketJourney: (state) => state.ticketJourney,
@@ -122,6 +138,9 @@ const mutations = {
   [Types.SET_TICKET_BY_SKU](state, res) {
     state.ticketData = res;
   },
+  [Types.SET_TICKET_BY_USER](state, res) {
+    state.ticketByUser = res;
+  },
   [Types.SET_TICKET_BY_MERCHANT](state, res) {
     state.ticketByMerchant = res;
   },
@@ -132,7 +151,11 @@ const mutations = {
     state.ticketJourney = res;
   },
   [Types.SET_TICKET_PROMOTION](state, res) {
-    state.ticketPromotion = res;
+    const filterPromoTickets = res
+      .filter((ticket) => !isPassed(ticket.expiredDate) && ticket.discount > 0)
+      .sort((a, b) => b.expiredDate - a.expiredDate);
+
+    state.ticketPromotion = filterPromoTickets;
   },
 };
 
