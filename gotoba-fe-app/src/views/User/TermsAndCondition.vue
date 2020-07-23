@@ -1,6 +1,6 @@
 <template>
   <div class="terms-and-condition">
-    <div class="container px-3">
+    <div class="content px-3">
       <h5 class="font-color-blue-secondary">
         <strong>Terms and Conditions</strong>
       </h5>

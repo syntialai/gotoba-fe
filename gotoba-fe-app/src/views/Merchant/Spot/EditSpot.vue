@@ -30,7 +30,7 @@
             </b-form-invalid-feedback>
             <b-button
               block
-              v-if="image !== spot.image && image !== null"
+              v-if="journeyDataBySku.image && journeyDataBySku.image !== null"
               size="sm"
               class="custom-btn-gray mt-2"
               @click="removePhoto"
@@ -50,7 +50,7 @@
           >
             <b-form-input
               id="spot-name"
-              v-model="spot.name"
+              v-model="journeyDataBySku.name"
               type="text"
               class="border-gray"
               required
@@ -75,7 +75,7 @@
             >
               <b-form-input
                 id="spot-title"
-                v-model="spot.title"
+                v-model="journeyDataBySku.title"
                 type="text"
                 class="border-gray"
                 required
@@ -100,7 +100,7 @@
           >
             <b-form-input
               id="spot-location"
-              v-model="spot.location"
+              v-model="journeyDataBySku.location"
               list="location-list"
               type="text"
               class="border-gray"
@@ -139,7 +139,7 @@
           >
             <b-form-input
               id="spot-price"
-              v-model="spot.price"
+              v-model="journeyDataBySku.price"
               type="text"
               class="border-gray"
               required
@@ -164,7 +164,7 @@
           >
             <b-form-input
               id="spot-full-address"
-              v-model="spot.address"
+              v-model="journeyDataBySku.address"
               type="text"
               class="border-gray"
               required
@@ -184,19 +184,19 @@
         >
           <ul class="list-unstyled">
             <li
-              v-for="(dayOpen, index) of spot.hoursOpen"
+              v-for="(dayOpen, index) of journeyDataBySku.hoursOpen"
               :key="dayOpen.day"
             >
               <div class="d-flex justify-content-between">
                 <div class="day">{{ dayOpen.day }}</div>
                 <div class="time">
                   <b-form-timepicker
-                    v-model="spot.hoursOpen[index].openTime"
+                    v-model="journeyDataBySku.hoursOpen[index].openTime"
                     locale="en"
                   ></b-form-timepicker>
                   -
                   <b-form-timepicker
-                    v-model="spot.hoursOpen[index].closeTime"
+                    v-model="journeyDataBySku.hoursOpen[index].closeTime"
                     locale="en"
                   ></b-form-timepicker>
                 </div>
@@ -217,7 +217,7 @@
             >
               <b-form-textarea
                 id="spot-description"
-                v-model="spot.description"
+                v-model="journeyDataBySku.description"
                 rows="5"
                 max-rows="6"
                 class="border-gray"
@@ -259,20 +259,20 @@ export default {
   },
   data() {
     return {
-      spot: {
-        name: '',
-        title: '',
-        image: null,
-        location: '',
-        longitude: 0.0,
-        latitude: 0.0,
-        createdBy: '',
-        price: '',
-        address: '',
-        description: '',
-        hoursOpen: [],
-      },
-      image: '',
+      // spot: {
+      //   name: '',
+      //   title: '',
+      //   image: null,
+      //   location: '',
+      //   longitude: 0.0,
+      //   latitude: 0.0,
+      //   createdBy: '',
+      //   price: '',
+      //   address: '',
+      //   description: '',
+      //   hoursOpen: [],
+      // },
+      // image: '',
       locationList: null,
     };
   },
@@ -321,6 +321,7 @@ export default {
           })
           .catch((err) => {
             console.log(err);
+            alert('to show photo', false);
           });
       }
     },
@@ -330,8 +331,8 @@ export default {
     },
 
     locationSuggestions() {
-      if (this.spot.location) {
-        api.GetSearchLocationResult(this.spot.location)
+      if (this.journeyDataBySku.location) {
+        api.GetSearchLocationResult(this.journeyDataBySku.location)
           .then((res) => {
             this.locationList = res.map((item) => item.display_name);
             console.log(this.locationList);
@@ -344,18 +345,14 @@ export default {
     },
   },
   mounted() {
-    if (this.journeyDataBySku) {
-      this.spot = { ...this.journeyDataBySku };
-    }
-
     getLocation((position) => {
-      this.spot.longitude = position.coords.longitude;
-      this.spot.latitude = position.coords.latitude;
+      this.journeyDataBySku.longitude = position.coords.longitude;
+      this.journeyDataBySku.latitude = position.coords.latitude;
 
-      api.ReverseGeocoding(this.spot.longitude, this.spot.latitude)
+      api.ReverseGeocoding(this.journeyDataBySku.longitude, this.journeyDataBySku.latitude)
         .then((res) => {
-          this.spot.address = res.display_name;
-          this.spot.location = `${res.address.suburb}, ${res.address.city}`;
+          this.journeyDataBySku.address = res.display_name;
+          this.journeyDataBySku.location = `${res.address.suburb}, ${res.address.city}`;
         })
         .catch((err) => {
           console.log(err);

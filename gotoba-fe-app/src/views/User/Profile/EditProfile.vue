@@ -1,6 +1,6 @@
 <template>
   <div class="edit-profile">
-    <div class="container pt-4 mb-5">
+    <div class="form-edit-profile pt-4 mb-5">
       <ValidationObserver>
         <b-form v-if="userDataBySku" @submit.stop.prevent="updateProfile">
           <b-form-group id="edit-img">

@@ -22,7 +22,7 @@ describe('TourGuideCard.vue', () => {
       propsData: {
         tourGuide,
       },
-      stubs: ['data-card'],
+      stubs: ['data-card', 'router-link'],
     });
   });
 

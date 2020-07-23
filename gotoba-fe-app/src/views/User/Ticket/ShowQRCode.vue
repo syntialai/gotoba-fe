@@ -8,7 +8,7 @@
       QR Code
     </div>
 
-    <q-r-code-info v-bind="ticketData" />
+    <q-r-code-info :ticket="ticketData" />
 
     <div class="close">
       <b-button
@@ -33,7 +33,7 @@ export default {
     QRCodeInfo,
   },
   computed: {
-    ...mapGetters(['ticketData']),
+    ...mapGetters(['ticketData', 'orderData']),
     // ticket() {
     //   return {
     //     title: 'QR Code',
@@ -46,7 +46,7 @@ export default {
     this.getTicketBySku(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getTicketBySku']),
+    ...mapActions(['getTicketBySku', 'getOrderDataBySku', 'getPaymentBySku']),
   },
 };
 </script>

@@ -4,9 +4,9 @@
       <div class="title w-100 border-bottom-gray-young">
         <h5>Order Item(s)</h5>
       </div>
-      <div class="order-items-group">
+      <div class="order-items-group" v-if="orderData && orderData.length > 0">
         <div class="order-item-detail"
-          v-for="item in items"
+          v-for="item in orderData"
           :key="item.name"
         >
           <div class="order-item-info">
@@ -25,7 +25,10 @@
       <div class="title w-100 border-bottom-gray-young">
         <h5>Payment Details</h5>
       </div>
-      <payment-detail :price="orderTotal.price" :discount="orderTotal.discount" />
+      <payment-detail
+        :price="orderTotal.price"
+        :discount="orderTotal.discount"
+      />
     </div>
 
     <div class="payment-method mt-3 p-3 bg-white">
@@ -37,14 +40,16 @@
 
     <bottom-nav-payment
       :totalItem="orderTotal.item"
-      :totalPrice="orderTotal.price - orderTotal.discount"
+      :totalPrice="total"
       innerButton="BUY NOW"
+      :buttonFunction="pay"
     />
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import api from '../../../api/api';
 import OrderItems from '../../../components/User/OrderItems.vue';
 import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
 import PaymentMethod from '../../../components/User/Payment/PaymentMethod.vue';
@@ -59,15 +64,31 @@ export default {
     BottomNavPayment,
   },
   computed: {
-    ...mapGetters(['orderData', 'orderTotal']),
-  },
-  data() {
-    return {
-      items: {},
-    };
+    ...mapGetters(['orderData', 'orderTotal', 'userSku']),
+    total() {
+      return this.orderTotal.price - this.orderTotal.discount;
+    },
   },
   methods: {
     ...mapActions(['setOrderData']),
+    async pay() {
+      const data = {
+        total: this.total,
+        status: 'WAITING',
+        merchantSku: this.orderData.merchantSku,
+        orderId: 2,
+      };
+
+      const paymentRes = await api.PostPayment(this.userSku, data);
+      const orderRes = await api.CheckoutOrder(this.orderData.sku);
+
+      if (!paymentRes.error && !orderRes.error) {
+        this.goToThanksPage(paymentRes.data.sku);
+      }
+    },
+    goToThanksPage(sku) {
+      this.$router.push(`/order/thankyou/${sku}`);
+    },
   },
 };
 </script>

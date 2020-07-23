@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Alert',
@@ -25,10 +25,13 @@ export default {
       get() {
         return this.showAlert;
       },
-      set(value) {
-        this.$store.dispatch('showAlert', value);
+      set() {
+        return (value) => this.setShowAlert(value);
       },
     },
+  },
+  methods: {
+    ...mapActions(['setShowAlert']),
   },
 };
 </script>

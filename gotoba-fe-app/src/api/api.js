@@ -324,6 +324,18 @@ export default {
   GetOrderDetailByUser(userSku, status) {
     return fetchGet(`/order/user/${userSku}/status/${status}`);
   },
+  CheckoutOrder(sku) {
+    return fetchPut(`/order/checkout/${sku}`);
+  },
+  ApproveOrder(sku) {
+    return fetchPut(`/order/approve/${sku}`);
+  },
+  RejectOrder(sku) {
+    return fetchPut(`/order/reject/${sku}`);
+  },
+  CancelOrder(sku) {
+    return fetchPut(`/order/cancel/${sku}`);
+  },
   PostOrderDetail(userSku, params) {
     return fetchPost(`/order/user/${userSku}/add`, params);
   },

@@ -10,7 +10,7 @@
         </span>
       </b-navbar-nav>
       <b-navbar-nav right class="ml-auto">
-        <b-button class="btn custom-btn-primary border-none">
+        <b-button class="btn custom-btn-primary border-none" @click="buttonFunc">
           {{ innerButton }}
         </b-button>
       </b-navbar-nav>
@@ -27,6 +27,7 @@ export default {
     totalItem: Number,
     totalPrice: Number,
     innerButton: String,
+    buttonFunc: Function,
   },
   methods: {
     formatPrice,

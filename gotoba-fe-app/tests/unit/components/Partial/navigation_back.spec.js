@@ -1,18 +1,22 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
 import NavigationBack from '@/components/Partial/NavigationBack.vue';
 
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
 
+const $route = {
+  name: 'Restaurant',
+};
 const $router = { go: jest.fn() };
 
 describe('NotFound.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(NavigationBack, {
+    wrapper = shallowMount(NavigationBack, {
       mocks: {
+        $route,
         $router,
       },
       localVue,
@@ -27,12 +31,12 @@ describe('NotFound.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check goBack method navigate to page before when BACK nav-item clicked', async () => {
-    expect(wrapper.find('.nav')).toBeTruthy();
-    expect(wrapper.find('.nav-link')).toBeTruthy();
+  it('Check currentRouteName computed to return route name', () => {
+    expect(wrapper.vm.currentRouteName).toMatch($route.name);
+  });
 
-    wrapper.find('.nav-link').trigger('click');
-    await wrapper.vm.$nextTick();
+  it('Check goBack method navigate to page before', () => {
+    wrapper.vm.goBack();
 
     expect(wrapper.vm.$router.go).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.$router.go).toHaveBeenCalledWith(-1);

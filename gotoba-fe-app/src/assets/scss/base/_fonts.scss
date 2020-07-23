@@ -38,4 +38,8 @@ body {
   text-decoration: line-through!important;
 }
 
+a, a:hover {
+  text-decoration: none;
+}
+
 @include font-size();

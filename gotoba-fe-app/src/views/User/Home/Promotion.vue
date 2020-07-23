@@ -7,7 +7,6 @@
           v-for="ticket in ticketPromotion"
           :key="ticket.sku"
           :data="ticket"
-          @click="goToDetails(ticket.sku)"
         />
       </div>
     </div>
@@ -32,9 +31,6 @@ export default {
   },
   methods: {
     ...mapActions(['getTicketPromotion', 'getTicketData']),
-    goToDetails(ticketSku) {
-      this.$router.push(`/ticket/${ticketSku}`);
-    },
   },
 };
 </script>

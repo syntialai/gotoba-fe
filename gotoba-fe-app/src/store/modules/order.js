@@ -7,6 +7,8 @@ const state = {
   cancelledPaymentData: [],
   waitingPaymentData: [],
   orderData: [],
+  orderDataBySku: [],
+  paymentDataBySku: {},
   orderTotal: { item: 0, price: 0, discount: 0 },
   cartData: [],
   merchantRestaurantOrder: [],
@@ -54,6 +56,30 @@ const actions = {
       .then((res) => {
         commit(Types.SET_ORDER_DATA, res);
         console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getOrderDataBySku({ commit }, sku) {
+    commit(Types.SET_ORDER_DATA_BY_SKU);
+
+    api.GetOrderDetail(sku)
+      .then((res) => {
+        commit(Types.SET_ORDER_DATA_BY_SKU, res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getPaymentBySku({ commit }, sku) {
+    commit(Types.SET_PAYMENT_BY_SKU);
+
+    api.GetPayment(sku)
+      .then((res) => {
+        commit(Types.SET_PAYMENT_BY_SKU, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -128,8 +154,10 @@ const actions = {
 
 const getters = {
   orderData: (state) => state.orderData,
+  orderDataBySku: (state) => state.orderDataBySku,
   orderTotal: (state) => state.orderTotal,
   cartData: (state) => state.cartData,
+  paymentDataBySku: (state) => state.paymentDataBySku,
   acceptedPaymentData: (state) => state.acceptedPaymentData,
   waitingPaymentData: (state) => state.waitingPaymentData,
   cancelledPaymentData: (state) => state.cancelledPaymentData,
@@ -196,6 +224,14 @@ const mutations = {
 
   [Types.SET_ORDER_DATA](state, res) {
     state.orderData = res;
+  },
+
+  [Types.SET_ORDER_DATA_BY_SKU](state, res) {
+    state.orderDataBySku = res;
+  },
+
+  [Types.SET_PAYMENT_BY_SKU](state, res) {
+    state.paymentDataBySku = res;
   },
 
   [Types.SET_ACCEPTED_PAYMENT_DATA](state, res) {

@@ -7,7 +7,7 @@ import index from '../store/index';
  * @param {Boolean} success
  */
 export function alert(message, success) {
-  index.dispatch('showAlert', true);
+  index.dispatch('setShowAlert', true);
   index.dispatch('setAlertSuccess', success);
   index.dispatch('setAlertMessage', message);
 }
@@ -18,7 +18,7 @@ export function alert(message, success) {
  * @param {String} message
  */
 export function toast(message) {
-  index.dispatch('showToast', true);
+  index.dispatch('setShowToast', true);
   index.dispatch('setToastMessage', message);
 }
 

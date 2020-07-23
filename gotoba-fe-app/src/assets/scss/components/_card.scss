@@ -1,3 +1,30 @@
 .card-body {
-  padding: 12px!important;
+  padding: 8px!important;
+}
+
+.card-home {
+  width: 100%;
+}
+
+.responsive-card {
+  margin-right: 8px;
+  width: calc((100% - 16px) / 2);
+}
+
+@media screen and (min-width: 425px) {
+  .responsive-card {
+    width: calc((100% - 16px) / 3);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .responsive-card {
+    width: calc((100% - 16px) / 4);
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .responsive-card {
+    width: calc((100% - 16px) / 5);
+  }
 }

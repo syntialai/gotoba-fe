@@ -3,18 +3,21 @@
     <div class="journey-profiles bg-white p-3">
       <h6>Nearby Places</h6>
       <div class="journey-group d-flex flex-wrap">
-        <router-link
+        <div class="responsive-card"
           v-for="journey in journeyData"
           :key="journey.sku"
-          :to="goToDetail('journey', journey.sku)"
         >
-          <card-home
-            :name="journey.name"
-            :rating="journey.rating"
-            :image="journey.image"
-            :location="journey.address"
-          />
-        </router-link>
+          <router-link
+            :to="goToDetail('journey', journey.sku)"
+          >
+            <card-home
+              :name="journey.name"
+              :rating="journey.rating"
+              :image="journey.image"
+              :location="journey.address"
+            />
+          </router-link>
+        </div>
       </div>
     </div>
 

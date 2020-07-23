@@ -12,18 +12,12 @@ localVue.use(BootstrapVue);
 localVue.use(Vuex);
 
 jest.mock('@/api/api', () => ({
-  PostGalleryPhoto: jest.fn().mockResolvedValue({
-    code: 201,
-    status: 'Created',
-  }),
-  EditGalleryPhoto: jest.fn().mockResolvedValue({
-    code: 200,
-    status: 'OK',
-  }),
+  PostGalleryPhoto: jest.fn(),
+  EditGalleryPhoto: jest.fn(),
 }));
 jest.mock('@/utils/tool');
 jest.mock('@/utils/fileHelper', () => {
-  return jest.fn().mockResolvedValue('image.png');
+  return jest.fn();
 });
 
 const $route = {
@@ -31,7 +25,6 @@ const $route = {
     sku: 'PHOT_0001_0001',
   },
 };
-const getValidationState = jest.fn();
 
 describe('PhotoModal.vue', () => {
   const event = {
@@ -69,6 +62,16 @@ describe('PhotoModal.vue', () => {
   let wrapper;
 
   beforeEach(() => {
+    api.PostGalleryPhoto.mockResolvedValue({
+      code: 201,
+      status: 'Created',
+    });
+    api.EditGalleryPhoto.mockResolvedValue({
+      code: 200,
+      status: 'OK',
+    });
+    previewImage.mockResolvedValue('image.png');
+
     getters = {
       galleryPhoto: () => ({
         title: 'Image',
@@ -124,6 +127,7 @@ describe('PhotoModal.vue', () => {
     await flushPromises();
 
     expect(previewImage).toHaveBeenCalledTimes(1);
+    expect(previewImage).toHaveBeenCalledWith(event.target.files[0]);
     expect(wrapper.vm.galleryPhoto.image).toMatch(expectedData.image);
   });
 
@@ -150,6 +154,15 @@ describe('PhotoModal.vue with title props', () => {
   let wrapper;
 
   beforeEach(() => {
+    api.PostGalleryPhoto.mockResolvedValue({
+      code: 201,
+      status: 'Created',
+    });
+    api.EditGalleryPhoto.mockResolvedValue({
+      code: 200,
+      status: 'OK',
+    });
+
     getters = {
       galleryPhoto: () => ({
         title: 'Image',
@@ -200,94 +213,254 @@ describe('PhotoModal.vue with title props', () => {
   });
 });
 
-// jest.mock('@/api/api', () => ({
-//   PostGalleryPhoto: jest.fn().mockResolvedValue({
-//     status: 400,
-//     error: 'Bad Request',
-//   }),
-//   EditGalleryPhoto: jest.fn().mockResolvedValue({
-//     status: 401,
-//     error: 'Not Authorized',
-//   }),
-// }));
+describe('PhotoModal.vue check function returned', () => {
+  const event = {
+    target: {},
+  };
+  const expectedData = {
+    data: {
+      name: 'Image',
+      title: 'Image',
+      description: 'Gallery mock',
+      image: '/image/image.png',
+      show: true,
+    },
+    image: 'image.png',
+  };
+  let getters;
+  let actions;
+  let store;
+  let wrapper;
 
-// describe('PhotoModal.vue check error api promise', () => {
-//   const event = {
-//     target: { files: ['image.png'] },
-//   };
-//   const expectedData = {
-//     galleryPhoto: {
-//       title: 'Image',
-//       image: '/image/image.png',
-//       description: 'Gallery mock',
-//     },
-//     data: {
-//       name: 'Image',
-//       title: 'Image',
-//       description: 'Gallery mock',
-//       image: '/image/image.png',
-//       show: true,
-//     },
-//     image: 'image.png',
-//   };
-//   let getters;
-//   let actions;
-//   let store;
-//   let wrapper;
+  beforeEach(() => {
+    getters = {
+      galleryPhoto: () => ({
+        title: 'OK',
+        image: null,
+        description: 'Gallery mock',
+      }),
+    };
+    actions = {
+      setGalleryPhoto: jest.fn(),
+      getGalleryPhoto: jest.fn(),
+    };
+    store = new Vuex.Store({ getters, actions });
+    wrapper = shallowMount(PhotoModal, {
+      mocks: {
+        $route,
+      },
+      localVue,
+      store,
+      stubs: [
+        'ValidationObserver',
+        'ValidationProvider',
+      ],
+    });
+  });
 
-//   beforeEach(() => {
-//     getters = {
-//       galleryPhoto: () => ({
-//         title: 'Image',
-//         image: '/image/image.png',
-//         description: 'Gallery mock',
-//       }),
-//     };
-//     actions = {
-//       setGalleryPhoto: jest.fn(),
-//       getGalleryPhoto: jest.fn(),
-//     };
-//     store = new Vuex.Store({ getters, actions });
-//     wrapper = shallowMount(PhotoModal, {
-//       mocks: {
-//         $route,
-//       },
-//       localVue,
-//       store,
-//       stubs: [
-//         'ValidationObserver',
-//         'ValidationProvider',
-//       ],
-//     });
-//   });
+  afterEach(() => {
+    jest.resetModules();
+    jest.clearAllMocks();
+  });
 
-//   afterEach(() => {
-//     jest.resetModules();
-//     jest.clearAllMocks();
-//   });
+  it('Check submitPhoto method to returned', async () => {
+    wrapper.vm.submitPhoto();
+    await flushPromises();
 
-//   it('Check submitPhoto method to call api PostGalleryPhoto and show error', async () => {
-//     wrapper.vm.submitPhoto();
-//     await flushPromises();
+    expect(api.PostGalleryPhoto).not.toHaveBeenCalled();
+    expect(api.EditGalleryPhoto).not.toHaveBeenCalled();
+  });
 
-//     expect(api.PostGalleryPhoto).toHaveBeenCalledTimes(1);
-//     expect(api.PostGalleryPhoto).toHaveBeenCalledWith(expectedData.data);
+  it('Check loadImage method to returned', async () => {
+    wrapper.vm.loadImage(event);
+    await flushPromises();
+
+    expect(previewImage).not.toHaveBeenCalled();
+  });
+});
+
+describe('PhotoModal.vue check error api promise', () => {
+  const event = {
+    target: { files: ['image.png'] },
+  };
+  const expectedData = {
+    galleryPhoto: {
+      title: 'Image',
+      image: '/image/image.png',
+      description: 'Gallery mock',
+    },
+    data: {
+      name: 'Image',
+      title: 'Image',
+      description: 'Gallery mock',
+      image: '/image/image.png',
+      show: true,
+    },
+    image: 'image.png',
+  };
+  let getters;
+  let actions;
+  let store;
+  let wrapper;
+
+  beforeEach(() => {
+    api.PostGalleryPhoto.mockResolvedValue({
+      status: 400,
+      error: 'Bad Request',
+    }),
+    api.EditGalleryPhoto.mockResolvedValue({
+      status: 401,
+      error: 'Not Authorized',
+    });
+
+    getters = {
+      galleryPhoto: () => ({
+        title: 'Image',
+        image: '/image/image.png',
+        description: 'Gallery mock',
+      }),
+    };
+    actions = {
+      setGalleryPhoto: jest.fn(),
+      getGalleryPhoto: jest.fn(),
+    };
+    store = new Vuex.Store({ getters, actions });
+    wrapper = shallowMount(PhotoModal, {
+      mocks: {
+        $route,
+      },
+      localVue,
+      store,
+      stubs: [
+        'ValidationObserver',
+        'ValidationProvider',
+      ],
+    });
+  });
+
+  afterEach(() => {
+    jest.resetModules();
+    jest.clearAllMocks();
+  });
+
+  it('Check submitPhoto method to call api PostGalleryPhoto and show error', async () => {
+    wrapper.vm.submitPhoto();
+    await flushPromises();
+
+    expect(api.PostGalleryPhoto).toHaveBeenCalledTimes(1);
+    expect(api.PostGalleryPhoto).toHaveBeenCalledWith(expectedData.data);
     
-//     expect(alert).toHaveBeenCalledTimes(1);
-//     expect(alert).toHaveBeenCalledWith('to add photo', false);
-//   });
+    expect(alert).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledWith('to add photo', false);
+  });
 
-//   it('Check submitPhoto method to call api EditGalleryPhoto and show error', async () => {
-//     wrapper.setProps({
-//       title: 'Edit',
-//     });
-//     wrapper.vm.submitPhoto();
-//     await flushPromises();
+  it('Check submitPhoto method to call api EditGalleryPhoto and show error', async () => {
+    wrapper.setProps({
+      title: 'Edit',
+    });
+    wrapper.vm.submitPhoto();
+    await flushPromises();
 
-//     expect(api.EditGalleryPhoto).toHaveBeenCalledTimes(1);
-//     expect(api.EditGalleryPhoto).toHaveBeenCalledWith($route.params.sku, expectedData.data);
+    expect(api.EditGalleryPhoto).toHaveBeenCalledTimes(1);
+    expect(api.EditGalleryPhoto).toHaveBeenCalledWith($route.params.sku, expectedData.data);
     
-//     expect(alert).toHaveBeenCalledTimes(1);
-//     expect(alert).toHaveBeenCalledWith('to update photo', false);
-//   });
-// });
+    expect(alert).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledWith('to update photo', false);
+  });
+});
+
+describe('PhotoModal.vue check catch error while making a request', () => {
+  const event = {
+    target: { files: ['image.png'] },
+  };
+  const expectedData = {
+    galleryPhoto: {
+      title: 'Image',
+      image: '/image/image.png',
+      description: 'Gallery mock',
+    },
+    data: {
+      name: 'Image',
+      title: 'Image',
+      description: 'Gallery mock',
+      image: '/image/image.png',
+      show: true,
+    },
+    image: 'image.png',
+  };
+  let getters;
+  let actions;
+  let store;
+  let wrapper;
+
+  beforeEach(() => {
+    api.PostGalleryPhoto.mockRejectedValue(new Error()),
+    api.EditGalleryPhoto.mockRejectedValue(new Error());
+    previewImage.mockRejectedValue(new Error());
+
+    getters = {
+      galleryPhoto: () => ({
+        title: 'Image',
+        image: '/image/image.png',
+        description: 'Gallery mock',
+      }),
+    };
+    actions = {
+      setGalleryPhoto: jest.fn(),
+      getGalleryPhoto: jest.fn(),
+    };
+    store = new Vuex.Store({ getters, actions });
+    wrapper = shallowMount(PhotoModal, {
+      mocks: {
+        $route,
+      },
+      localVue,
+      store,
+      stubs: [
+        'ValidationObserver',
+        'ValidationProvider',
+      ],
+    });
+  });
+
+  afterEach(() => {
+    jest.resetModules();
+    jest.clearAllMocks();
+  });
+
+  it('Check submitPhoto method to call api PostGalleryPhoto and show error', async () => {
+    wrapper.vm.submitPhoto();
+    await flushPromises();
+
+    expect(api.PostGalleryPhoto).toHaveBeenCalledTimes(1);
+    expect(api.PostGalleryPhoto).toHaveBeenCalledWith(expectedData.data);
+    
+    expect(alert).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledWith('to add photo', false);
+  });
+
+  it('Check submitPhoto method to call api EditGalleryPhoto and show error', async () => {
+    wrapper.setProps({
+      title: 'Edit',
+    });
+    wrapper.vm.submitPhoto();
+    await flushPromises();
+
+    expect(api.EditGalleryPhoto).toHaveBeenCalledTimes(1);
+    expect(api.EditGalleryPhoto).toHaveBeenCalledWith($route.params.sku, expectedData.data);
+    
+    expect(alert).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledWith('to update photo', false);
+  });
+
+  it('Check loadImage method to fail change image data and show alert', async () => {
+    wrapper.vm.loadImage(event);
+    await flushPromises();
+
+    expect(previewImage).toHaveBeenCalledTimes(1);
+    expect(previewImage).toHaveBeenCalledWith(event.target.files[0]);
+
+    expect(alert).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledWith('to show photo', false);
+  });
+});

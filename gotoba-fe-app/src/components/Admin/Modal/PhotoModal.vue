@@ -144,9 +144,9 @@ export default {
           .then((res) => {
             if (!res.error) {
               alert('added photo', true);
-            } else {
-              alert('to add photo', false);
+              return;
             }
+            alert('to add photo', false);
           })
           .catch((err) => {
             console.log(err);
@@ -160,9 +160,9 @@ export default {
         .then((res) => {
           if (!res.error) {
             alert('updated photo', true);
-          } else {
-            alert('to update photo', false);  
+            return;
           }
+          alert('to update photo', false);
         })
         .catch((err) => {
           console.log(err);
@@ -180,6 +180,7 @@ export default {
           })
           .catch((err) => {
             console.log(err);
+            alert('to show photo', false);
           });
       }
     },

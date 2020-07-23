@@ -5,7 +5,7 @@
         {{ title }}
       </div>
       <div class="qr-code-valid-date font-color-black-60">
-        {{ formatDate(date) }}
+        {{  }}
       </div>
     </div>
 
@@ -30,12 +30,15 @@ export default {
     QRCode,
   },
   props: {
-    title: String,
-    date: Date,
-    qrCodeValue: String,
+    ticket: Object,
   },
-  methods: {
-    formatDate,
+  computed: {
+    validDate() {
+      return formatDate(expiredDate);
+    },
+    qrCodeValue() {
+      
+    },
   },
 };
 </script>

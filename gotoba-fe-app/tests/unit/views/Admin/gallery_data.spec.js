@@ -1,8 +1,10 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
+import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import GalleryData from '@/views/Admin/GalleryData.vue';
 
 const localVue = createLocalVue();
+localVue.use(BootstrapVue);
 localVue.use(Vuex);
 
 describe('GalleryData.vue', () => {

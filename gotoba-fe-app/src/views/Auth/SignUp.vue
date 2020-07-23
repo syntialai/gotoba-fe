@@ -259,10 +259,12 @@ export default {
         || !this.email
         || !this.password
         || !this.confirmPassword
-        || !this.checked[0]
+        || this.checked !== 'true'
       ) {
         return;
       }
+
+      this.showLoading = true;
 
       const data = {
         nickname: this.nickname,
@@ -270,6 +272,7 @@ export default {
         email: this.email,
         password: this.password,
         confirmPassword: this.confirmPassword,
+        image: '',
         role: this.role,
       };
 
@@ -278,28 +281,42 @@ export default {
         password: this.password,
       };
 
-      this.showLoading = true;
-
       try {
         const res = await api.Signup(data);
 
         if (!res.error) {
           const loginRes = await api.Login(dataLogin);
+          this.showLoading = false;
 
           if (!loginRes.error) {
-            this.setUserInfo(loginRes);
-            this.showLoading = false;
+            this.setUserInfo({
+              name: loginRes.name,
+              sku: loginRes.sku_user,
+              role: loginRes.role,
+              image: loginRes.image,
+            });
 
-            if (this.role === 'ROLE_MERCHANT') {
-              this.$router.push('/merchant');
-            }
-            this.$router.push('/');
+            this.checkRole();
+            return;
           }
+
+          alert('log your account. Please try to log in', false);
+          return;
         }
+
+        this.showLoading = false;
+        alert('sign your account. Please try again later', false);
       } catch (err) {
         this.showLoading = false;
-        alert('sign up. Check your internet connection', false);
+        alert('sign up. Please try again later', false);
       }
+    },
+    checkRole() {
+      if (this.role === 'ROLE_MERCHANT') {
+        this.$router.push('/merchant');
+        return;
+      }
+      this.$router.push('/');
     },
   },
 };

@@ -24,28 +24,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
@@ -159,7 +159,18 @@
 <a name='L101'></a><a href='#L101'>101</a>
 <a name='L102'></a><a href='#L102'>102</a>
 <a name='L103'></a><a href='#L103'>103</a>
-<a name='L104'></a><a href='#L104'>104</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -241,6 +252,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -251,6 +267,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -304,6 +324,7 @@
           :totalItem="orderTotal.item"
           :totalPrice="orderTotal.price - orderTotal.discount"
           innerButton="CHECKOUT"
+          :buttonFunc="checkout"
         /&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -342,19 +363,28 @@ export default {
   computed: {
     ...mapGetters(['cartData', 'orderTotal']),
   },
+<span class="fstat-no" title="function not covered" >  created() {</span>
+<span class="cstat-no" title="statement not covered" >    if (this.cartData.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      this.getCartData();</span>
+    }
+  },
 <span class="fstat-no" title="function not covered" >  data() {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
       select: false,
     };
   },
   methods: {
-    ...mapActions(['setOrderData', 'selectAllCartData']),
+    ...mapActions(['setOrderData', 'selectAllCartData', 'getCartData']),
 <span class="fstat-no" title="function not covered" >    checkAll() {</span>
 <span class="cstat-no" title="statement not covered" >      this.select = !this.select;</span>
 <span class="cstat-no" title="statement not covered" >      this.selectAllCartData(this.select);</span>
     },
 <span class="fstat-no" title="function not covered" >    goToTicketPage() {</span>
 <span class="cstat-no" title="statement not covered" >      this.$router.push('/more');</span>
+    },
+<span class="fstat-no" title="function not covered" >    checkout() {</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      this.setOrderData(this.cartData.filter((item) =&gt; item.selected));</span></span>
+<span class="cstat-no" title="statement not covered" >      this.$router.push('/payment');</span>
     },
   },
 };
@@ -372,7 +402,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 23 2020 02:49:15 GMT+0700 (Indochina Time)
+                at Thu Jul 23 2020 21:08:00 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

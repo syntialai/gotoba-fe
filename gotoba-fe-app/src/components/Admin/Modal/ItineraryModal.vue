@@ -187,6 +187,34 @@
             </b-form-group>
           </ValidationProvider>
 
+          <b-form-group
+            id="itinerary-hours-open-group"
+            label="Hours Open"
+            label-for="itinerary-hours-open"
+          >
+            <ul class="list-unstyled">
+              <li
+                v-for="(dayOpen, index) of journeyDataBySku.hoursOpen"
+                :key="dayOpen.day"
+              >
+                <div class="d-flex justify-content-between">
+                  <div class="day">{{ dayOpen.day }}</div>
+                  <div class="time">
+                    <b-form-timepicker
+                      v-model="journeyDataBySku.hoursOpen[index].openTime"
+                      locale="en"
+                    ></b-form-timepicker>
+                    -
+                    <b-form-timepicker
+                      v-model="journeyDataBySku.hoursOpen[index].closeTime"
+                      locale="en"
+                    ></b-form-timepicker>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </b-form-group>
+
           <ValidationProvider
             name="Description"
             rules="required"

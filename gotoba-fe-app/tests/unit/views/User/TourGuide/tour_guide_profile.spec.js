@@ -48,7 +48,11 @@ describe('TourGuideProfile.vue', () => {
       },
       store,
       localVue,
-      stubs: ['font-awesome-icon', 'b-icon'],
+      stubs: [
+        'font-awesome-icon',
+        'b-icon',
+        'router-link',
+      ],
     });
   });
 

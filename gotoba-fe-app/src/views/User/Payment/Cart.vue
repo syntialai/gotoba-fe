@@ -40,6 +40,7 @@
           :totalItem="orderTotal.item"
           :totalPrice="orderTotal.price - orderTotal.discount"
           innerButton="CHECKOUT"
+          :buttonFunc="checkout"
         />
       </div>
     </div>
@@ -78,19 +79,28 @@ export default {
   computed: {
     ...mapGetters(['cartData', 'orderTotal']),
   },
+  created() {
+    if (this.cartData.length === 0) {
+      this.getCartData();
+    }
+  },
   data() {
     return {
       select: false,
     };
   },
   methods: {
-    ...mapActions(['setOrderData', 'selectAllCartData']),
+    ...mapActions(['setOrderData', 'selectAllCartData', 'getCartData']),
     checkAll() {
       this.select = !this.select;
       this.selectAllCartData(this.select);
     },
     goToTicketPage() {
       this.$router.push('/more');
+    },
+    checkout() {
+      this.setOrderData(this.cartData.filter((item) => item.selected));
+      this.$router.push('/payment');
     },
   },
 };

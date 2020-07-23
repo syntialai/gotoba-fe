@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="container">
+    <div class="home-content px-3">
       <div id="category" class="my-3 p-2">
         <b-button-group
           class="d-flex justify-content-around box-shadow bg-white border-square-10"
@@ -36,15 +36,23 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <card-ticket-promotion
+          <div
+            class="responsive-card"
             v-for="ticket in ticketPromotion"
             :key="ticket.title"
-            :name="ticket.title"
-            :image="ticket.image"
-            :price="ticket.price"
-            :discount="ticket.discount"
-            :sku="ticket.sku"
-          />
+          >
+            <router-link
+              :to="goToDetails('ticket', ticket.sku)"
+            >
+              <card-ticket-promotion
+                :name="ticket.title"
+                :image="ticket.image"
+                :price="ticket.price"
+                :discount="ticket.discount"
+                :sku="ticket.sku"
+              />
+            </router-link>
+          </div>
         </div>
       </div>
 
@@ -64,15 +72,22 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <card-home
+          <div
+            class="responsive-card"
             v-for="journey in journeyData"
             :key="journey.sku"
-            :name="journey.name"
-            :image="journey.image"
-            :location="journey.address"
-            :rating="journey.rating"
-            @click="goToDetails('journey', journey.sku)"
-          />
+          >
+            <router-link
+              :to="goToDetails('journey', journey.sku)"
+            >
+              <card-home
+                :name="journey.name"
+                :image="journey.image"
+                :location="journey.address"
+                :rating="journey.rating"
+              />
+            </router-link>
+          </div>
         </div>
       </div>
 
@@ -92,15 +107,22 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <card-home
+          <div
+            class="responsive-card"
             v-for="restaurant in restaurantDatas"
             :key="restaurant.sku"
-            :name="restaurant.name"
-            :image="restaurant.image"
-            :location="restaurant.location"
-            :rating="restaurant.rating"
-            @click="goToDetails('restaurant', restaurant.sku)"
-          />
+          >
+            <router-link
+              :to="goToDetails('restaurant', restaurant.sku)"
+            >
+              <card-home
+                :name="restaurant.name"
+                :image="restaurant.image"
+                :location="restaurant.location"
+                :rating="restaurant.rating"
+              />
+            </router-link>
+          </div>
         </div>
       </div>
 
@@ -182,7 +204,7 @@ export default {
   methods: {
     ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData', 'getTicketPromotion', 'getGalleryData']),
     goToDetails(category, sku) {
-      this.$router.push(`/${category}/${sku}`);
+      return `/${category}/${sku}`;
     },
   },
 };

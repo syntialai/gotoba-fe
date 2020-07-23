@@ -1,8 +1,10 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
+import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import TourGuideData from '@/views/Admin/TourGuideData.vue';
 
 const localVue = createLocalVue();
+localVue.use(BootstrapVue);
 localVue.use(Vuex);
 
 describe('TourGuideData.vue', () => {

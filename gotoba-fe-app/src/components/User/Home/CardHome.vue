@@ -1,5 +1,5 @@
 <template>
-  <b-card class="card-home box-shadow mr-3 mb-3">
+  <b-card class="card-home box-shadow mb-3">
     <b-card-img
       :src="imageUrl"
       :alt="'Image-' + name"
@@ -47,7 +47,6 @@ export default {
 
 <style lang="scss">
 .card-home {
-  min-width: 100px;
-  max-width: 200px;
+  min-width: 120px;
 }
 </style>

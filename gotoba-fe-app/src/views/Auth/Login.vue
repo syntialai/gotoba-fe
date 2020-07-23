@@ -92,16 +92,13 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import api from '../../api/api';
 import { alert } from '../../utils/tool';
 import getValidationState from '../../utils/validation';
 
 export default {
   name: 'LoginPage',
-  computed: {
-    ...mapGetters(['userRole']),
-  },
   data() {
     return {
       username: '',
@@ -129,29 +126,37 @@ export default {
       try {
         const res = await api.Login(data);
         console.log(res);
+        this.showLoading = false;
 
         if (!res.error) {
           this.setUserInfo({
             name: res.name,
             sku: res.sku_user,
             role: res.role,
+            image: res.image,
           });
 
-          this.showLoading = false;
-
-          if (res.role === 'ROLE_ADMIN') {
-            this.$router.push('/admin');
-          }
-          if (res.role === 'ROLE_MERCHANT') {
-            this.$router.push('/merchant');
-          }
-          this.$router.push('/');
+          this.checkRole(res.role);
+          return;
         }
+
+        alert('log in. Check your username/password', false);
       } catch (err) {
         this.showLoading = false;
-        alert('log in. Check your username/password', false);
+        alert('log in. Please try again later', false);
         console.log(err);
       }
+    },
+    checkRole(role) {
+      if (role === 'ROLE_ADMIN') {
+        this.$router.push('/admin');
+        return;
+      }
+      if (role === 'ROLE_MERCHANT') {
+        this.$router.push('/merchant');
+        return;
+      }
+      this.$router.push('/');
     },
   },
 };

@@ -24,14 +24,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/45</span>
+                <span class='fraction'>0/44</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -45,7 +45,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/45</span>
+                <span class='fraction'>0/44</span>
             </div>
         
             
@@ -421,10 +421,7 @@
 <a name='L363'></a><a href='#L363'>363</a>
 <a name='L364'></a><a href='#L364'>364</a>
 <a name='L365'></a><a href='#L365'>365</a>
-<a name='L366'></a><a href='#L366'>366</a>
-<a name='L367'></a><a href='#L367'>367</a>
-<a name='L368'></a><a href='#L368'>368</a>
-<a name='L369'></a><a href='#L369'>369</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L366'></a><a href='#L366'>366</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -747,23 +744,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -771,7 +751,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -824,7 +818,7 @@
             &lt;/b-form-invalid-feedback&gt;
             &lt;b-button
               block
-              v-if="image !== spot.image &amp;&amp; image !== null"
+              v-if="journeyDataBySku.image &amp;&amp; journeyDataBySku.image !== null"
               size="sm"
               class="custom-btn-gray mt-2"
               @click="removePhoto"
@@ -844,7 +838,7 @@
           &gt;
             &lt;b-form-input
               id="spot-name"
-              v-model="spot.name"
+              v-model="journeyDataBySku.name"
               type="text"
               class="border-gray"
               required
@@ -869,7 +863,7 @@
             &gt;
               &lt;b-form-input
                 id="spot-title"
-                v-model="spot.title"
+                v-model="journeyDataBySku.title"
                 type="text"
                 class="border-gray"
                 required
@@ -894,7 +888,7 @@
           &gt;
             &lt;b-form-input
               id="spot-location"
-              v-model="spot.location"
+              v-model="journeyDataBySku.location"
               list="location-list"
               type="text"
               class="border-gray"
@@ -933,7 +927,7 @@
           &gt;
             &lt;b-form-input
               id="spot-price"
-              v-model="spot.price"
+              v-model="journeyDataBySku.price"
               type="text"
               class="border-gray"
               required
@@ -958,7 +952,7 @@
           &gt;
             &lt;b-form-input
               id="spot-full-address"
-              v-model="spot.address"
+              v-model="journeyDataBySku.address"
               type="text"
               class="border-gray"
               required
@@ -978,19 +972,19 @@
         &gt;
           &lt;ul class="list-unstyled"&gt;
             &lt;li
-              v-for="(dayOpen, index) of spot.hoursOpen"
+              v-for="(dayOpen, index) of journeyDataBySku.hoursOpen"
               :key="dayOpen.day"
             &gt;
               &lt;div class="d-flex justify-content-between"&gt;
                 &lt;div class="day"&gt;{{ dayOpen.day }}&lt;/div&gt;
                 &lt;div class="time"&gt;
                   &lt;b-form-timepicker
-                    v-model="spot.hoursOpen[index].openTime"
+                    v-model="journeyDataBySku.hoursOpen[index].openTime"
                     locale="en"
                   &gt;&lt;/b-form-timepicker&gt;
                   -
                   &lt;b-form-timepicker
-                    v-model="spot.hoursOpen[index].closeTime"
+                    v-model="journeyDataBySku.hoursOpen[index].closeTime"
                     locale="en"
                   &gt;&lt;/b-form-timepicker&gt;
                 &lt;/div&gt;
@@ -1011,7 +1005,7 @@
             &gt;
               &lt;b-form-textarea
                 id="spot-description"
-                v-model="spot.description"
+                v-model="journeyDataBySku.description"
                 rows="5"
                 max-rows="6"
                 class="border-gray"
@@ -1053,20 +1047,20 @@ export default {
   },
 <span class="fstat-no" title="function not covered" >  data() {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
-      spot: {
-        name: '',
-        title: '',
-        image: null,
-        location: '',
-        longitude: 0.0,
-        latitude: 0.0,
-        createdBy: '',
-        price: '',
-        address: '',
-        description: '',
-        hoursOpen: [],
-      },
-      image: '',
+      // spot: {
+      //   name: '',
+      //   title: '',
+      //   image: null,
+      //   location: '',
+      //   longitude: 0.0,
+      //   latitude: 0.0,
+      //   createdBy: '',
+      //   price: '',
+      //   address: '',
+      //   description: '',
+      //   hoursOpen: [],
+      // },
+      // image: '',
       locationList: null,
     };
   },
@@ -1115,6 +1109,7 @@ export default {
 <span class="fstat-no" title="function not covered" >          })</span>
           .catch((err) =&gt; {
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
+<span class="cstat-no" title="statement not covered" >            alert('to show photo', false);</span>
           });
       }
     },
@@ -1124,8 +1119,8 @@ export default {
     },
 &nbsp;
 <span class="fstat-no" title="function not covered" >    locationSuggestions() {</span>
-<span class="cstat-no" title="statement not covered" >      if (this.spot.location) {</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        api.GetSearchLocationResult(this.spot.location)</span></span>
+<span class="cstat-no" title="statement not covered" >      if (this.journeyDataBySku.location) {</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        api.GetSearchLocationResult(this.journeyDataBySku.location)</span></span>
           .then((res) =&gt; {
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >            this.locationList = res.map((item) =&gt; item.display_name);</span></span>
 <span class="cstat-no" title="statement not covered" >            console.log(this.locationList);</span>
@@ -1138,18 +1133,14 @@ export default {
     },
   },
 <span class="fstat-no" title="function not covered" >  mounted() {</span>
-<span class="cstat-no" title="statement not covered" >    if (this.journeyDataBySku) {</span>
-<span class="cstat-no" title="statement not covered" >      this.spot = { ...this.journeyDataBySku };</span>
-    }
-&nbsp;
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    getLocation((position) =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >      this.spot.longitude = position.coords.longitude;</span>
-<span class="cstat-no" title="statement not covered" >      this.spot.latitude = position.coords.latitude;</span>
+<span class="cstat-no" title="statement not covered" >      this.journeyDataBySku.longitude = position.coords.longitude;</span>
+<span class="cstat-no" title="statement not covered" >      this.journeyDataBySku.latitude = position.coords.latitude;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      api.ReverseGeocoding(this.spot.longitude, this.spot.latitude)</span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      api.ReverseGeocoding(this.journeyDataBySku.longitude, this.journeyDataBySku.latitude)</span></span>
         .then((res) =&gt; {
-<span class="cstat-no" title="statement not covered" >          this.spot.address = res.display_name;</span>
-<span class="cstat-no" title="statement not covered" >          this.spot.location = `${res.address.suburb}, ${res.address.city}`;</span>
+<span class="cstat-no" title="statement not covered" >          this.journeyDataBySku.address = res.display_name;</span>
+<span class="cstat-no" title="statement not covered" >          this.journeyDataBySku.location = `${res.address.suburb}, ${res.address.city}`;</span>
 <span class="fstat-no" title="function not covered" >        })</span>
         .catch((err) =&gt; {
 <span class="cstat-no" title="statement not covered" >          console.log(err);</span>
@@ -1167,7 +1158,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 23 2020 02:49:15 GMT+0700 (Indochina Time)
+                at Thu Jul 23 2020 21:08:00 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>
