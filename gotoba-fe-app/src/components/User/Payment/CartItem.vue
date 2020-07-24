@@ -1,68 +1,83 @@
 <template>
-  <div class="cart-item">
+  <div class="cart-item mb-3">
     <div class="d-flex">
-      <b-img :src="imageUrl" :alt="name" />
+      <b-img :src="imageUrl" />
       <div class="cart-item__info pl-3">
         <div class="cart-item__size">
           <span class="item__name font-color-black-87 d-block">
-            {{ name }}
+            {{ ticket.title }}
           </span>
-          <span
-            :class="['normal-price ' + { strikethrough: discount }]"
-          >
-            {{ formatPrice(price) }}
-          </span>
-          <span v-if="discount" class="discount-price font-color-red semibold">
-            {{ formatPrice(discountPrice) }}
-          </span>
+          <div class="mb-2">
+            <span
+              :class="{ 'strikethrough': ticket.discount > 0 }"
+            >
+              {{ formatPrice(ticket.price) }}
+            </span>
+            <span v-if="ticket.discount > 0" class="pl-1 discount-price font-color-red semibold">
+              {{ formatPrice(ticket.discount) }}
+            </span>
+          </div>
         </div>
-        <b-form-spinbutton
-          id="item"
-          class="mt-2"
-          v-model="itemCount"
-          @change="updateQuantity"
-          min="1"
-          max="50"
-        />
+        <div class="d-flex mt-3">
+          <div class="edit-cart-data">
+            <b-form-spinbutton
+              id="item"
+              class="border-gray"
+              v-model="itemCount"
+              @change="updateQuantity"
+              min="1"
+              max="50"
+            />
+          </div>
+          <div class="delete-cart-data ml-3">
+            <b-button @click="removeOrder(ticket.sku)" class="custom-btn-gray">
+              <span class="icon-white">
+                <b-icon icon="trash"></b-icon>
+              </span>
+            </b-button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import api from '../../../api/api';
+import { toast } from '../../../utils/tool';
 import { formatPrice } from '../../../utils/filter';
 
 export default {
   name: 'CartItem',
   props: {
-    name: String,
-    image: String,
-    price: Number,
-    discountPrice: {
-      type: Number,
-      default: 0,
-    },
-    quantity: {
-      type: Number,
-      default: 1,
-    },
+    ticket: Object,
   },
   computed: {
     imageUrl() {
-      return api.imageUrl(this.image);
+      return api.imageUrl(this.ticket.image);
     },
   },
   data() {
     return {
-      discount: this.discountPrice !== 0,
-      itemCount: this.quantity,
+      itemCount: this.ticket.quantity,
     };
   },
   methods: {
+    ...mapActions(['removeOrder']),
     formatPrice,
-    updateQuantity() {
+    async updateQuantity() {
       this.$emit('update:quantity', this.itemCount);
+
+      const data = { ...this.ticket };
+      data.quantity = this.itemCount;
+
+      try {
+        await api.EditOrderDetail(this.ticket.sku, data);
+        toast('Updated cart item!');
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

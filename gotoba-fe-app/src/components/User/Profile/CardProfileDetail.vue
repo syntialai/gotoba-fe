@@ -4,14 +4,32 @@
       :img-src="imageUrl"
       img-alt="Card image"
       img-left
-      class="mb-3 border-none object-fit_cover"
+      class="border-none object-fit_cover"
       img-width="80"
       img-height="80"
     >
       <b-card-text>
-        <h6>{{ name }}</h6>
-        <span>{{ location }}</span>
-        <Rating v-if="rating" :rate="rating" :fontSize="10" />
+        <div class="d-flex justify-content-between">
+          <div class="info">
+            <h6 class="font-color-black-87">{{ name }}</h6>
+            <div class="font-size-14">{{ location }}</div>
+            <rating
+              v-if="rating"
+              :rate="rating"
+              :fontSize="10"
+            />
+          </div>
+          <div class="show-on-map">
+            <div class="icon-btn">
+              <b-button to="" variant="light">
+                <font-awesome-icon
+                  icon="map-marked-alt"
+                  class="icon-gradient"
+                ></font-awesome-icon>
+              </b-button>
+            </div>
+          </div>
+        </div>
       </b-card-text>
     </b-card>
   </div>

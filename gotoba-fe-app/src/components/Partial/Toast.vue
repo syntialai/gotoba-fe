@@ -24,8 +24,8 @@ export default {
       get() {
         return this.showToast;
       },
-      set(value) {
-        this.setShowToast(value);
+      set() {
+        return (value) => this.setShowToast(value);
       },
     },
   },

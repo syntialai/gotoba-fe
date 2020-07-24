@@ -9,16 +9,22 @@
       />
     </div>
 
-    <div v-else>
-      <div class="image-no-data">
-        <img src="public/assets/img/no-data.png" alt="No-Data">
-      </div>
-      <div class="info-no-data">
-        <div class="align-center font-color-black-60">
-          <div class="semibold">
-            We couldn't find what you're looking for...
+    <div v-else class="vh-100 d-flex">
+      <div class="align-self-center align-center">
+        <div class="image-no-data">
+          <img
+            src="@/assets/img/illustrate/no-data.png"
+            alt="No-Data"
+            width="50%"
+          >
+        </div>
+        <div class="info-no-data m-3">
+          <div class="font-color-black-60">
+            <div class="semibold">
+              We couldn't find what you're looking for...
+            </div>
+            <div>Try searching with another keyword.</div>
           </div>
-          <div>Try searching with another keyword.</div>
         </div>
       </div>
     </div>

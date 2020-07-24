@@ -24,7 +24,7 @@
             >
               <b-form-input
                 id="photo-title"
-                v-model="galleryPhoto.title"
+                v-model="photo.title"
                 type="text"
                 class="border-gray"
                 required
@@ -47,10 +47,10 @@
               label="Photo"
               label-for="photo-image"
             >
-              <div v-if="!galleryPhoto.image || galleryPhoto.image === ''">
+              <div v-if="!photo.image || photo.image === ''">
                 <b-form-file
                   id="photo-image"
-                  v-model="galleryPhoto.image"
+                  v-model="photo.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -64,7 +64,7 @@
               </div>
               <div v-else>
                 <b-img
-                  :src="galleryPhoto.image"
+                  :src="photo.image"
                   center
                   :width="100"
                 ></b-img>
@@ -84,7 +84,7 @@
           >
             <b-form-textarea
               id="photo-description"
-              v-model="galleryPhoto.description"
+              v-model="photo.description"
               rows="5"
               max-rows="6"
               class="border-gray"
@@ -121,6 +121,15 @@ export default {
       default: 'Add',
     },
   },
+  data() {
+    return {
+      photo: {
+        title: '',
+        description: '',
+        image: null,
+      },
+    };
+  },
   methods: {
     ...mapActions(['getGalleryPhoto', 'setGalleryPhoto']),
 
@@ -128,10 +137,10 @@ export default {
 
     submitPhoto() {
       const data = {
-        name: this.galleryPhoto.title,
-        title: this.galleryPhoto.title,
-        description: this.galleryPhoto.description,
-        image: this.galleryPhoto.image,
+        name: this.photo.title,
+        title: this.photo.title,
+        description: this.photo.description,
+        image: this.photo.image,
         show: true,
       };
 
@@ -187,6 +196,11 @@ export default {
 
     removePhoto() {
       this.galleryPhoto.image = null;
+    },
+  },
+  watch: {
+    galleryPhoto() {
+      this.photo = { ...this.galleryPhoto };
     },
   },
 };

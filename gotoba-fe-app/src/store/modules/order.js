@@ -1,13 +1,16 @@
 /* eslint-disable no-shadow */
 import * as Types from '../types';
 import api from '../../api/api';
+import { isToday, isPassed } from '../../utils/filter';
 
 const state = {
   acceptedPaymentData: [],
   cancelledPaymentData: [],
   waitingPaymentData: [],
   orderData: [],
-  orderDataBySku: [],
+  approvedOrderData: {},
+  rejectedOrderData: [],
+  orderDataBySku: {},
   paymentDataBySku: {},
   orderTotal: { item: 0, price: 0, discount: 0 },
   cartData: [],
@@ -18,7 +21,7 @@ const state = {
 const actions = {
   setCartData({ commit }, res) {
     commit(Types.SET_CART_DATA, res);
-    commit(Types.SET_ORDER_TOTAL);
+    commit(Types.SET_CART_TOTAL);
   },
 
   getCartData({ commit }, userSku) {
@@ -27,8 +30,8 @@ const actions = {
     api.GetOrderDetailByUser(userSku, 1)
       .then((res) => {
         commit(Types.SET_CART_DATA, res.data);
-        commit(Types.SET_ORDER_TOTAL);
-        console.log(res);
+        commit(Types.SET_ORDER_DATA, res.data);
+        commit(Types.SET_ORDER_TOTAL, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -39,14 +42,14 @@ const actions = {
     commit(Types.SET_CART_DATA_QUANTITY, res);
   },
 
-  selectAllCartData({ commit }, select) {
-    commit(Types.SET_CART_DATA_ALL_CHECKED_OR_UNCHECKED, select);
-    commit(Types.SET_ORDER_TOTAL);
+  setOrderData({ commit }, data) {
+    console.log(data);
+    commit(Types.SET_ORDER_DATA, data);
+    commit(Types.SET_ORDER_TOTAL, data);
   },
 
-  setOrderData({ commit }, data) {
-    commit(Types.SET_ORDER_DATA, data);
-    commit(Types.SET_ORDER_TOTAL);
+  setOrderTotal({ commit }, data) {
+    commit(Types.SET_ORDER_TOTAL, data);
   },
 
   getOrderData({ commit }, sku) {
@@ -56,6 +59,30 @@ const actions = {
       .then((res) => {
         commit(Types.SET_ORDER_DATA, res);
         console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getApprovedOrderData({ commit }, userSku) {
+    commit(Types.SET_APPROVED_ORDER_DATA, []);
+
+    api.GetOrderDetailByUser(userSku, 3)
+      .then((res) => {
+        commit(Types.SET_APPROVED_ORDER_DATA, res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  getRejectedOrderData({ commit }, userSku) {
+    commit(Types.SET_REJECTED_ORDER_DATA);
+
+    api.GetOrderDetailByUser(userSku, 0)
+      .then((res) => {
+        commit(Types.SET_REJECTED_ORDER_DATA, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -150,10 +177,22 @@ const actions = {
         console.log(err);
       });
   },
+
+  removeOrder({ commit }, sku) {
+    api.RemoveOrder(sku)
+      .then(() => {
+        commit(Types.REMOVE_ORDER, sku);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 const getters = {
   orderData: (state) => state.orderData,
+  approvedOrderData: (state) => state.approvedOrderData,
+  rejectedOrderData: (state) => state.rejectedOrderData,
   orderDataBySku: (state) => state.orderDataBySku,
   orderTotal: (state) => state.orderTotal,
   cartData: (state) => state.cartData,
@@ -168,17 +207,12 @@ const getters = {
 const mutations = {
   // eslint-disable-next-line space-before-function-paren
   [Types.SET_CART_DATA](state, res) {
-    if (state.cartData.length > 0) {
-      state.cartData.concat(res);
-      return;
-    }
-
     state.cartData = res;
   },
-
   [Types.SET_CART_DATA_QUANTITY](state, res) {
     const indexData = state.cartData.findIndex((data) => data.ticketSku === res.ticketSku);
 
+    console.log(indexData);
     if (indexData === -1) {
       state.cartData.push(res);
       return;
@@ -186,72 +220,67 @@ const mutations = {
 
     state.cartData[indexData].quantity += 1;
   },
-
-  [Types.SET_CART_DATA_ALL_CHECKED_OR_UNCHECKED](state, select) {
-    const newCartData = state.cartData.map((item) => {
-      const cartTmp = { ...item };
-      cartTmp.selected = select;
-
-      return cartTmp;
-    });
-
-    state.cartData = newCartData;
-  },
-
-  [Types.SET_ORDER_TOTAL](state) {
+  [Types.SET_ORDER_TOTAL](state, res) {
     let totalItem = 0;
     let totalPrice = 0;
     let totalDiscount = 0;
 
-    state.cartData.forEach((data) => {
-      totalItem += data.quantity * data.selected;
-      totalPrice += data.price * data.quantity * data.selected;
-      totalDiscount += data.discount * data.quantity * data.selected;
+    res.forEach((data) => {
+      totalItem += data.quantity;
+      totalPrice += data.price * data.quantity;
+      totalDiscount += data.discount * data.quantity;
     });
 
-    state.orderTotal.item = totalItem;
-    state.orderTotal.price = totalPrice;
-    state.orderTotal.discount = totalDiscount;
-  },
-
-  [Types.SET_ORDER_TOTAL](state, res) {
     state.orderTotal = {
-      item: res.quantity,
-      price: res.quantity * res.price,
-      discount: res.quantity * res.discount,
+      item: totalItem,
+      price: totalPrice,
+      discount: totalDiscount,
     };
   },
-
   [Types.SET_ORDER_DATA](state, res) {
     state.orderData = res;
   },
-
+  [Types.SET_APPROVED_ORDER_DATA](state, res) {
+    const order = {
+      valid: [],
+      expired: [],
+    };
+    res.forEach((item) => {
+      const expiredDate = new Date(item.expiredDate);
+      if (isPassed(expiredDate) && isToday(expiredDate)) {
+        order.expired.push(item);
+      } else {
+        order.valid.push(item);
+      }
+    });
+    state.approvedOrderData = order;
+  },
+  [Types.SET_REJECTED_ORDER_DATA](state, res) {
+    state.rejectedOrderData = res;
+  },
   [Types.SET_ORDER_DATA_BY_SKU](state, res) {
     state.orderDataBySku = res;
   },
-
   [Types.SET_PAYMENT_BY_SKU](state, res) {
     state.paymentDataBySku = res;
   },
-
   [Types.SET_ACCEPTED_PAYMENT_DATA](state, res) {
     state.acceptedPaymentData = res;
   },
-
   [Types.SET_WAITING_PAYMENT_DATA](state, res) {
     state.waitingPaymentData = res;
   },
-
   [Types.SET_CANCELLED_PAYMENT_DATA](state, res) {
     state.cancelledPaymentData = res;
   },
-
   [Types.SET_MERCHANT_ITINERARY_ORDER](state, res) {
     state.merchantItineraryOrder = res;
   },
-
   [Types.SET_MERCHANT_RESTAURANT_ORDER](state, res) {
     state.merchantRestaurantOrder = res;
+  },
+  [Types.REMOVE_ORDER](state, sku) {
+    state.cartData.filter((item) => item.sku !== sku);
   },
 };
 

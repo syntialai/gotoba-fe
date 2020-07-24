@@ -114,6 +114,7 @@ const routes = [
       {
         path: 'cart',
         name: 'Cart',
+        beforeEnter: checkUserRole,
         component: Pages.CART,
         meta: {
           layout: 'background-blue',

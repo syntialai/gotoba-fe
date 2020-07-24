@@ -27,21 +27,25 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'SearchNavigation',
   computed: {
+    ...mapGetters(['searchKeywords']),
     keywords: {
       get() {
-        return this.$store.getters.searchKeywords;
+        return this.searchKeywords;
       },
-      set(value) {
-        this.$store.dispatch('setSearchKeywords', value);
+      set() {
+        return (value) => this.setSearchKeywords(value);
       },
     },
   },
   methods: {
+    ...mapActions(['setSearchKeywords']),
     goBack() {
-      this.$store.dispatch('setSearchKeywords', '');
+      this.setSearchKeywords('');
       this.$router.go(-1);
     },
   },

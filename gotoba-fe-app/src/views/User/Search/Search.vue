@@ -48,7 +48,7 @@ export default {
     this.getSearchRestaurantResults();
     this.setSearchSuggestions([
       ...this.searchRestaurantResults,
-      ...this.SearchWisataResults,
+      ...this.searchWisataResults,
     ]);
   },
   methods: {

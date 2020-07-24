@@ -7,17 +7,16 @@
       <div class="order-items-group" v-if="orderData && orderData.length > 0">
         <div class="order-item-detail"
           v-for="item in orderData"
-          :key="item.name"
+          :key="item.title"
         >
-          <div class="order-item-info">
-            <order-items
-              :name="item.name"
-              :image="item.image"
-              :price="item.price"
-              :discountPrice="item.discountPrice"
-            />
+          <order-items
+            :name="item.title"
+            :image="item.image"
+            :price="item.price"
+            :discountPrice="item.discount"
+            :quantity="item.quantity"
+          />
           </div>
-        </div>
       </div>
     </div>
 
@@ -28,31 +27,27 @@
       <payment-detail
         :price="orderTotal.price"
         :discount="orderTotal.discount"
+        :total="total"
       />
-    </div>
-
-    <div class="payment-method mt-3 p-3 bg-white">
-      <div class="title w-100 border-bottom-gray-young">
-        <h5>Payment Method</h5>
-      </div>
-      <payment-method />
     </div>
 
     <bottom-nav-payment
       :totalItem="orderTotal.item"
       :totalPrice="total"
       innerButton="BUY NOW"
-      :buttonFunction="pay"
+      :buttonFunc="pay"
+      :loading="loading"
+      class="fixed-bottom"
     />
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import api from '../../../api/api';
+import { toast } from '../../../utils/tool';
 import OrderItems from '../../../components/User/OrderItems.vue';
 import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
-import PaymentMethod from '../../../components/User/Payment/PaymentMethod.vue';
 import BottomNavPayment from '../../../components/User/Payment/BottomNavPayment.vue';
 
 export default {
@@ -60,7 +55,6 @@ export default {
   components: {
     OrderItems,
     PaymentDetail,
-    PaymentMethod,
     BottomNavPayment,
   },
   computed: {
@@ -69,21 +63,35 @@ export default {
       return this.orderTotal.price - this.orderTotal.discount;
     },
   },
+  data() {
+    return {
+      loading: false,
+    };
+  },
   methods: {
-    ...mapActions(['setOrderData']),
     async pay() {
       const data = {
         total: this.total,
         status: 'WAITING',
-        merchantSku: this.orderData.merchantSku,
-        orderId: 2,
+        merchantSku: this.orderData.map((item) => item.merchantSku).toString(),
+        orderSku: this.orderData.map((item) => item.sku).toString(),
       };
 
-      const paymentRes = await api.PostPayment(this.userSku, data);
-      const orderRes = await api.CheckoutOrder(this.orderData.sku);
+      this.loading = true;
 
-      if (!paymentRes.error && !orderRes.error) {
+      console.log(data);
+
+      try {
+        const paymentRes = await api.PostPayment(this.userSku, data);
+        this.orderData.forEach(async (order) => {
+          await api.CheckoutOrder(order.sku);
+        });
+
+        this.loading = false;
         this.goToThanksPage(paymentRes.data.sku);
+      } catch (err) {
+        this.loading = false;
+        toast('Error while checkout item!');
       }
     },
     goToThanksPage(sku) {

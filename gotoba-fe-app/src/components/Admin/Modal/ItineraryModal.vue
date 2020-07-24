@@ -24,7 +24,7 @@
             >
               <b-form-input
                 id="itinerary-name"
-                v-model="journeyDataBySku.name"
+                v-model="itinerary.name"
                 type="text"
                 class="border-gray"
                 required
@@ -49,7 +49,7 @@
             >
               <b-form-input
                 id="itinerary-title"
-                v-model="journeyDataBySku.title"
+                v-model="itinerary.title"
                 type="text"
                 class="border-gray"
                 required
@@ -72,10 +72,10 @@
               label="Photo"
               label-for="itinerary-image"
             >
-              <div v-if="!journeyDataBySku.image || journeyDataBySku.image === ''">
+              <div v-if="!itinerary.image || itinerary.image === ''">
                 <b-form-file
                   id="itinerary-image"
-                  v-model="journeyDataBySku.image"
+                  v-model="itinerary.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -110,7 +110,7 @@
             >
               <b-form-input
                 id="itinerary-location"
-                v-model="journeyDataBySku.location"
+                v-model="itinerary.location"
                 list="location-list"
                 type="text"
                 class="border-gray"
@@ -149,7 +149,7 @@
             >
               <b-form-input
                 id="itinerary-price"
-                v-model="journeyDataBySku.price"
+                v-model="itinerary.price"
                 type="text"
                 class="border-gray"
                 required
@@ -174,7 +174,7 @@
             >
               <b-form-textarea
                 id="itinerary-address"
-                v-model="journeyDataBySku.address"
+                v-model="itinerary.address"
                 rows="5"
                 max-rows="6"
                 class="border-gray"
@@ -194,19 +194,19 @@
           >
             <ul class="list-unstyled">
               <li
-                v-for="(dayOpen, index) of journeyDataBySku.hoursOpen"
+                v-for="(dayOpen, index) of itinerary.hoursOpen"
                 :key="dayOpen.day"
               >
                 <div class="d-flex justify-content-between">
                   <div class="day">{{ dayOpen.day }}</div>
                   <div class="time">
                     <b-form-timepicker
-                      v-model="journeyDataBySku.hoursOpen[index].openTime"
+                      v-model="itinerary.hoursOpen[index].openTime"
                       locale="en"
                     ></b-form-timepicker>
                     -
                     <b-form-timepicker
-                      v-model="journeyDataBySku.hoursOpen[index].closeTime"
+                      v-model="itinerary.hoursOpen[index].closeTime"
                       locale="en"
                     ></b-form-timepicker>
                   </div>
@@ -227,7 +227,7 @@
             >
               <b-form-textarea
                 id="itinerary-description"
-                v-model="journeyDataBySku.description"
+                v-model="itinerary.description"
                 rows="5"
                 max-rows="6"
                 class="border-gray"
@@ -267,6 +267,7 @@ export default {
   },
   data() {
     return {
+      itinerary: {},
       locationList: null,
     };
   },
@@ -367,6 +368,11 @@ export default {
     }, (err) => {
       console.log(err);
     });
+  },
+  watch: {
+    journeyDataBySku() {
+      this.itinerary = { ...this.journeyDataBySku };
+    },
   },
 };
 </script>

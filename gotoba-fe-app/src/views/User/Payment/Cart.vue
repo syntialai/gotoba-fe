@@ -17,31 +17,33 @@
           </div>
         </div>
         <div class="order-items-group w-100 py-3">
-          <div class="order-item-detail"
-            v-for="item in cartData"
-            :key="item.name"
+          <b-form-checkbox-group
+            v-model="selected"
+            @input="setOrderData(selected)"
           >
             <b-form-checkbox
+              v-for="item in cartData"
+              :key="item.name"
               class="w-100"
-              v-model="item.selected"
+              :value="item"
             >
               <cart-item
-                :name="item.name"
-                :image="item.image"
-                :price="item.price"
-                :discountPrice="item.discountPrice"
+                :ticket="item"
                 :quantity.sync="item.quantity"
               />
             </b-form-checkbox>
-          </div>
+          </b-form-checkbox-group>
         </div>
 
-        <bottom-nav-payment
-          :totalItem="orderTotal.item"
-          :totalPrice="orderTotal.price - orderTotal.discount"
-          innerButton="CHECKOUT"
-          :buttonFunc="checkout"
-        />
+        <div class="mt-80 fixed-bottom">
+          <bottom-nav-payment
+            :totalItem="orderTotal.item"
+            :totalPrice="orderTotal.price - orderTotal.discount"
+            innerButton="CHECKOUT"
+            :buttonFunc="checkout"
+            :loading="loading"
+          />
+        </div>
       </div>
     </div>
     <div class="cart_empty" v-else>
@@ -49,7 +51,8 @@
         <img
           src="@/assets/img/illustrate/empty-cart.png"
           alt="No data"
-          width="50%"
+          width="40%"
+          class="mt-3"
         >
       </div>
       <div class="info align-center">
@@ -57,8 +60,8 @@
           Oops! Your cart is empty. Start adding ticket to your cart.
         </div>
         <b-button
-          class="custom-btn-primary border-none"
-          @click="goToTicketPage"
+          class="custom-btn-primary border-none text-white"
+          to="/more"
         >ADD SOME TICKET</b-button>
       </div>
     </div>
@@ -77,30 +80,42 @@ export default {
     BottomNavPayment,
   },
   computed: {
-    ...mapGetters(['cartData', 'orderTotal']),
+    ...mapGetters(['cartData', 'orderTotal', 'userSku']),
   },
   created() {
-    if (this.cartData.length === 0) {
-      this.getCartData();
-    }
+    this.getCartData(this.userSku);
   },
   data() {
     return {
-      select: false,
+      select: true,
+      selected: this.cartData,
+      loading: false,
     };
   },
   methods: {
-    ...mapActions(['setOrderData', 'selectAllCartData', 'getCartData']),
+    ...mapActions(['setOrderData', 'selectAllCartData', 'getCartData', 'setCartData']),
     checkAll() {
       this.select = !this.select;
-      this.selectAllCartData(this.select);
+      if (this.select) {
+        this.selected = this.cartData;
+        this.total();
+        return;
+      }
+      this.selected = [];
+      this.total();
     },
-    goToTicketPage() {
-      this.$router.push('/more');
+    total() {
+      this.setOrderData(this.selected);
     },
     checkout() {
-      this.setOrderData(this.cartData.filter((item) => item.selected));
+      this.loading = true;
+      this.total();
       this.$router.push('/payment');
+    },
+  },
+  watch: {
+    cartData() {
+      this.selected = [...this.cartData];
     },
   },
 };
@@ -110,4 +125,8 @@ export default {
 .custom-control-label {
   width: 100%!important;
 }
-</style>
+
+.mt-80 {
+   margin-bottom: 80px!important;
+ }
+ </style>

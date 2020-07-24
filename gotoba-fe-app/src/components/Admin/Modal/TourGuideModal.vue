@@ -24,7 +24,7 @@
             >
               <b-form-input
                 id="tour-guide-name"
-                v-model="tourGuideData.name"
+                v-model="tourGuide.name"
                 type="text"
                 class="border-gray"
                 required
@@ -47,10 +47,10 @@
               label="Photo"
               label-for="tour-guide-image"
             >
-              <div v-if="tourGuideData.image === null">
+              <div v-if="tourGuide.image === null">
                 <b-form-file
                   id="photo-image"
-                  v-model="tourGuideData.image"
+                  v-model="tourGuide.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -63,7 +63,7 @@
                 </b-form-invalid-feedback>
               </div>
               <div v-else>
-                <b-img :src="tourGuideData.image" center :width="100"></b-img>
+                <b-img :src="tourGuide.image" center :width="100"></b-img>
                 <b-button
                   size="sm"
                   class="custom-btn-gray mt-2"
@@ -85,7 +85,7 @@
             >
               <b-form-input
                 id="tour-guide-age"
-                v-model="tourGuideData.age"
+                v-model="tourGuide.age"
                 type="number"
                 required
                 :state="getValidationState(validationContext)"
@@ -109,7 +109,7 @@
             >
               <b-form-spinbutton
                 id="tour-guide-rating"
-                v-model="tourGuideData.rating"
+                v-model="tourGuide.rating"
                 min="1"
                 max="5"
                 required
@@ -134,7 +134,7 @@
             >
               <b-form-select
                 id="tour-guide-gender"
-                v-model="tourGuideData.gender"
+                v-model="tourGuide.gender"
                 :state="getValidationState(validationContext)"
                 aria-describedby="tour-guide-gender-feedback-msg"
               >
@@ -160,7 +160,7 @@
             >
               <b-form-input
                 id="tour-guide-occupation"
-                v-model="tourGuideData.occupation"
+                v-model="tourGuide.occupation"
                 type="text"
                 class="border-gray"
                 required
@@ -185,7 +185,7 @@
             >
               <b-form-input
                 id="tour-guide-location"
-                v-model="tourGuideData.location"
+                v-model="tourGuide.location"
                 list="location-list"
                 required
                 @change="locationSuggestions"
@@ -222,7 +222,7 @@
             >
               <b-form-tags
                 input-id="tour-guide-language"
-                v-model="tourGuideData.language"
+                v-model="tourGuide.language"
                 separator=" ,;"
                 required
                 placeholder="Add a tag"
@@ -247,7 +247,7 @@
             >
               <b-form-checkbox-group
                 id="tour-guide-available-location"
-                v-model="tourGuideData.availableLocation"
+                v-model="tourGuide.availableLocation"
                 :options="locationOptions"
                 required
                 :state="getValidationState(validationContext)"
@@ -271,7 +271,7 @@
             >
               <b-form-input
                 id="tour-guide-phone-number"
-                v-model="tourGuideData.phoneNumber"
+                v-model="tourGuide.phoneNumber"
                 type="text"
                 class="border-gray"
                 required
@@ -296,7 +296,7 @@
             >
               <b-form-input
                 id="tour-guide-email"
-                v-model="tourGuideData.email"
+                v-model="tourGuide.email"
                 type="email"
                 class="border-gray"
                 required
@@ -321,7 +321,7 @@
             >
               <b-form-input
                 id="tour-guide-whatsapp"
-                v-model="tourGuideData.whatsapp"
+                v-model="tourGuide.whatsapp"
                 type="text"
                 class="border-gray"
                 required
@@ -341,7 +341,7 @@
           >
             <b-form-textarea
               id="tour-guide-experience"
-              v-model="tourGuideData.experience"
+              v-model="tourGuide.experience"
               rows="3"
               max-rows="6"
             ></b-form-textarea>
@@ -354,7 +354,7 @@
           >
             <b-form-textarea
               id="tour-guide-description"
-              v-model="tourGuideData.description"
+              v-model="tourGuide.description"
               rows="3"
               max-rows="6"
             ></b-form-textarea>
@@ -366,7 +366,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
@@ -415,6 +415,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setTourGuideBySku', 'getTourGuideBySku']),
     getValidationState,
 
     submitTourGuide() {
@@ -476,6 +477,11 @@ export default {
             this.locationList = null;
           });
       }
+    },
+  },
+  watch: {
+    tourGuideData() {
+      this.tourGuide = { ...this.tourGuideData };
     },
   },
 };

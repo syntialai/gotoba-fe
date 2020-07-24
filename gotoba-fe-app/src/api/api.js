@@ -75,6 +75,9 @@ export default {
   Signup(params) {
     return fetchPost('/auth/signup', params);
   },
+  CheckToken() {
+    return fetchGet('/auth/validate');
+  },
   Logout() {
     return fetchPost('/auth/logout');
   },
@@ -342,12 +345,15 @@ export default {
   EditOrderDetail(sku, params) {
     return fetchPut(`/order/edit/${sku}`, params);
   },
+  RemoveOrder(sku) {
+    return fetchDelete(`/order/delete/${sku}`);
+  },
 
   /**
    * Payment
    */
   GetPayment(sku) {
-    return fetchGet(`/pay/${sku}`);
+    return fetchGet(`/pay/sku/${sku}`);
   },
   GetPaymentByMerchant(merchantSku) {
     return fetchGet(`/pay/merchant/${merchantSku}`);

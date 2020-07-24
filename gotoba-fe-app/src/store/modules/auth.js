@@ -8,6 +8,7 @@ const state = {
   userSku: localStorage.getItem('userSku') || '',
   userImage: localStorage.getItem('userImage') || '',
   userRole: localStorage.getItem('userRole') || '',
+  isAuthenticated: false,
 };
 
 const actions = {
@@ -25,20 +26,37 @@ const actions = {
     commit(Types.SET_USER_IMAGE, res.image);
   },
 
+  setIsAuthenticated({ commit }, status) {
+    commit(Types.SET_IS_AUTHENTICATED, status);
+  },
+
+  async getIsAuthenticated({ commit }) {
+    try {
+      const res = await api.CheckToken();
+      if (res.code === 200) {
+        commit(Types.SET_IS_AUTHENTICATED, true);
+      }
+    } catch (err) {
+      commit(Types.SET_IS_AUTHENTICATED, false);
+    }
+  },
+
   setLogOut({ commit }) {
     api.Logout()
-      .then(() => {
-        localStorage.removeItem('userName');
-        localStorage.removeItem('userSku');
-        localStorage.removeItem('userLoginStatus');
-        localStorage.removeItem('userRole');
-        localStorage.removeItem('userImage');
+      .then((res) => {
+        if (res.code === 200) {
+          localStorage.removeItem('userName');
+          localStorage.removeItem('userSku');
+          localStorage.removeItem('userLoginStatus');
+          localStorage.removeItem('userRole');
+          localStorage.removeItem('userImage');
 
-        commit(Types.SET_USER_NAME, '');
-        commit(Types.SET_USER_SKU, '');
-        commit(Types.SET_USER_LOGIN_STATUS, false);
-        commit(Types.SET_USER_ROLE, '');
-        commit(Types.SET_USER_IMAGE, '');
+          commit(Types.SET_USER_NAME, '');
+          commit(Types.SET_USER_SKU, '');
+          commit(Types.SET_USER_LOGIN_STATUS, false);
+          commit(Types.SET_USER_ROLE, '');
+          commit(Types.SET_USER_IMAGE, '');
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -52,6 +70,7 @@ const getters = {
   userSku: (state) => state.userSku,
   userRole: (state) => state.userRole,
   userImage: (state) => state.userImage,
+  isAuthenticated: (state) => state.isAuthenticated,
 };
 
 const mutations = {
@@ -70,6 +89,9 @@ const mutations = {
   },
   [Types.SET_USER_IMAGE](state, res) {
     state.userImage = res;
+  },
+  [Types.SET_IS_AUTHENTICATED](state, status) {
+    state.isAuthenticated = status;
   },
 };
 

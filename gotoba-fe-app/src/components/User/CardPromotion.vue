@@ -1,6 +1,6 @@
 <template>
   <div class="card-promotion">
-    <router-link :href="'/' + route + '/' + sku">
+    <router-link :to="link">
       <b-card
         :img-src="imageUrl"
         :img-alt="'image' + sku"
@@ -33,6 +33,9 @@ export default {
   computed: {
     imageUrl() {
       return api.imageUrl(this.image);
+    },
+    link() {
+      return `/${this.route}'/${this.sku}`;
     },
   },
 };

@@ -11,7 +11,7 @@
           v-for="item in keywords"
           :key="item"
           @click="searchItem(item)"
-          class="mr-3 btn-outline"
+          class="mr-2 mb-2 btn-outline"
         >
           {{ item }}
         </b-button>

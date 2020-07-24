@@ -2,16 +2,18 @@
   <router-link :to="goToTicketDetails">
     <div class="card-home-long bg-white box-shadow mb-3">
       <div class="d-flex p-3">
-        <b-img :src="imageUrl" :alt="data.sku" width="150" height="100" />
+        <div class="image">
+          <b-img :src="imageUrl" :alt="data.sku" width="150" height="100" />
+        </div>
         <div class="card-home__info pl-3">
-          <span class="item__name font-color-black-87 semibold d-block">
+          <div class="item__name font-color-black-87 semibold d-block">
             {{ data.title }}
-          </span>
-          <span class="font-size-14 d-block mb-1 font-color-black-60">
+          </div>
+          <div class="font-size-14 d-block mb-1 font-color-black-60">
             {{ data.description }}
-          </span>
-          <span class="font-color-black-60">Valid until : </span>
-          <span class="date font-color-black-87 pb-3">{{ date }}</span>
+          </div>
+          <div class="font-color-black-60">Valid until : </div>
+          <div class="date font-color-black-87 pb-3">{{ date }}</div>
         </div>
       </div>
     </div>
@@ -55,18 +57,6 @@ img {
 
   @media screen and (min-width: 768px) {
     width: 160px;
-    height: 120px;
-  }
-}
-
-.card-home__info {
-  height: 90px;
-
-  @media screen and (min-width: 425px) {
-    height: 105px;
-  }
-
-  @media screen and (min-width: 768px) {
     height: 120px;
   }
 }

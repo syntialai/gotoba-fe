@@ -5,7 +5,7 @@
     </div>
     <b-table stacked
       :items="items"
-      class="border-none font-color-black-60 align-left"
+      class="border-none"
     ></b-table>
   </div>
 </template>

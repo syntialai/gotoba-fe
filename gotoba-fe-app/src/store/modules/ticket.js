@@ -6,7 +6,6 @@ import { isPassed } from '../../utils/filter';
 const state = {
   ticketDatas: [],
   ticketData: {},
-  ticketByUser: [],
   ticketByMerchant: [],
   ticketRestaurant: [],
   ticketJourney: [],
@@ -39,19 +38,6 @@ const actions = {
       .then((res) => {
         console.log(res.data);
         commit(Types.SET_TICKET_BY_SKU, res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
-  getTicketByUser({ commit }, userSku) {
-    commit(Types.SET_TICKET_BY_USER);
-
-    api.GetTicketByUser(userSku)
-      .then((res) => {
-        console.log(res);
-        commit(Types.SET_TICKET_BY_USER, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -123,7 +109,6 @@ const actions = {
 const getters = {
   ticketDatas: (state) => state.ticketDatas,
   ticketData: (state) => state.ticketData,
-  ticketByUser: (state) => state.ticketByUser,
   ticketByMerchant: (state) => state.ticketByMerchant,
   ticketRestaurant: (state) => state.ticketRestaurant,
   ticketJourney: (state) => state.ticketJourney,
@@ -137,9 +122,6 @@ const mutations = {
   },
   [Types.SET_TICKET_BY_SKU](state, res) {
     state.ticketData = res;
-  },
-  [Types.SET_TICKET_BY_USER](state, res) {
-    state.ticketByUser = res;
   },
   [Types.SET_TICKET_BY_MERCHANT](state, res) {
     state.ticketByMerchant = res;

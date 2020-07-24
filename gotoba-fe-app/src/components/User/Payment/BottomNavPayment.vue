@@ -1,17 +1,23 @@
 <template>
   <div class="bottom-nav-payment">
-    <b-navbar class="bottom-nav-payment__navbar bg-white fixed-bottom">
+    <b-navbar class="bottom-nav-payment__navbar bg-white">
       <b-navbar-nav class="d-flex flex-column">
         <span class="semibold font-color-black-87 p-0">
           {{ totalItem }} item
         </span>
         <span class="p-0 font-color-blue-primary">
-          {{ formatPrice(totalPrice, true, true) }}
+          {{ price }}
         </span>
       </b-navbar-nav>
       <b-navbar-nav right class="ml-auto">
         <b-button class="btn custom-btn-primary border-none" @click="buttonFunc">
-          {{ innerButton }}
+          <div v-if="loading">
+            <b-spinner small></b-spinner>
+            Processing..
+          </div>
+          <div v-else>
+            {{ innerButton }}
+          </div>
         </b-button>
       </b-navbar-nav>
     </b-navbar>
@@ -28,9 +34,12 @@ export default {
     totalPrice: Number,
     innerButton: String,
     buttonFunc: Function,
+    loading: Boolean,
   },
-  methods: {
-    formatPrice,
+  computed: {
+    price() {
+      return formatPrice(this.totalPrice, true, true);
+    },
   },
 };
 </script>

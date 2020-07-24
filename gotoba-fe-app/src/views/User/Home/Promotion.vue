@@ -1,6 +1,6 @@
 <template>
   <div class="promotion">
-    <div class="promotion-profiles bg-white p-3 my-3">
+    <div class="promotion-profiles bg-white p-3">
       <h6>Recent Promotion</h6>
       <div class="promotion-group">
         <card-home-long
