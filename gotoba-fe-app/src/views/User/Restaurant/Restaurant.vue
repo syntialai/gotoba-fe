@@ -1,7 +1,7 @@
 <template>
   <div class="restaurant">
     <div class="restaurant-profiles bg-white p-3" v-if="restaurantDatas">
-      <h6>Nearby Eats</h6>
+      <h6 class="mb-3">Nearby Eats</h6>
       <div class="restaurant-group d-flex flex-wrap">
         <div class="responsive-card"
           v-for="restaurant in restaurantDatas"
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="restaurant-ticket bg-white p-3 my-3" v-if="ticketRestaurant">
+    <div class="restaurant-ticket bg-white p-3" v-if="ticketRestaurant">
       <h6>Ticket for Restaurant</h6>
       <div class="ticket-group">
         <router-link

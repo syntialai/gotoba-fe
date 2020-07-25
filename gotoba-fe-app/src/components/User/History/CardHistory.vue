@@ -33,12 +33,12 @@ export default {
       return Object.keys(this.history)[0];
     },
     date() {
-      return formatDate(new Date(this.keys));
+      return formatDate(new Date(this.key));
     },
   },
   methods: {
     goToDetails(orderSku) {
-      return `/${this.$route.path}/${orderSku}`;
+      return `${this.$route.path}/${orderSku}`;
     },
   },
 };

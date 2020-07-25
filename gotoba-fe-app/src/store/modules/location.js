@@ -4,6 +4,7 @@ import api from '../../api/api';
 
 const state = {
   locationData: [],
+  locationSet: {},
   locationKeyword: '',
   newSchedule: [],
   schedule: [],
@@ -28,13 +29,25 @@ const actions = {
   },
 
   async getSchedule({ commit }, userSku) {
-    commit(Types.SET_NEW_SCHEDULE, []);
+    commit(Types.SET_SCHEDULE);
 
-    const res = await api.GetTravellingSchedule(userSku);
-
-    if (!res.error) {
-      commit(Types.SET_SCHEDULE, res.data);
+    try {
+      const res = await api.GetTravellingSchedule(userSku);
+      if (!res.error) {
+        commit(Types.SET_SCHEDULE, res.data.map((item) => ({
+          destination: item.address,
+          time: new Date(item.date),
+          formattedTime: item.date.split()[4],
+        })));
+        console.log(res.data);
+      }
+    } catch (err) {
+      console.log(err);
     }
+  },
+
+  setLocation({ commit }, res) {
+    commit(Types.SET_LOCATION, res);
   },
 
   setLocationKeyword({ commit }, keyword) {
@@ -52,6 +65,7 @@ const actions = {
 
 const getters = {
   locationData: (state) => state.locationData,
+  locationSet: (state) => state.locationSet,
   locationKeyword: (state) => state.locationKeyword,
   schedule: (state) => state.schedule,
   newSchedule: (state) => state.newSchedule,
@@ -63,15 +77,15 @@ const mutations = {
   [Types.SET_LOCATION_DATA](state, res) {
     state.locationData = res;
   },
+  [Types.SET_LOCATION](state, res) {
+    state.locationSet = res;
+    console.log(res);
+  },
   [Types.SET_LOCATION_KEYWORD](state, res) {
     state.locationKeyword = res;
   },
   [Types.SET_SCHEDULE](state, res) {
-    state.schedule = res.map((item) => ({
-      destination: item.address,
-      time: new Date(item.date),
-      formattedTime: item.date.split()[4],
-    }));
+    state.schedule = res;
   },
   [Types.SET_NEW_SCHEDULE](state, res) {
     state.newSchedule.push(res);

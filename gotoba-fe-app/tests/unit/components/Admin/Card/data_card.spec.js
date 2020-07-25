@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
 import DataCard from '@/components/Admin/Card/DataCard.vue';
 
@@ -17,7 +17,7 @@ describe('DataCard.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(DataCard, {
+    wrapper = shallowMount(DataCard, {
       propsData: {
         data: data,
       },

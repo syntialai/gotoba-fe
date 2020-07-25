@@ -3,11 +3,10 @@
     <div class="tour-guide-profiles bg-white p-3 my-3">
       <h6>Available tour guides</h6>
       <div class="tour-guide-group">
-        <card-home-long
+        <card-tour-guide
           v-for="tourGuide in tourGuideDatas"
           :key="tourGuide.sku"
-          :data="tourGuide"
-          @click="goToProfile(tourGuide.sku)"
+          :tourGuide="tourGuide"
         />
       </div>
     </div>
@@ -16,12 +15,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import CardHomeLong from '../../../components/User/Home/CardHomeLong.vue';
+import CardTourGuide from '../../../components/User/TourGuide/CardTourGuide.vue';
 
 export default {
   name: 'TourGuide',
   components: {
-    CardHomeLong,
+    CardTourGuide,
   },
   computed: {
     ...mapGetters(['tourGuideDatas']),
@@ -31,9 +30,6 @@ export default {
   },
   methods: {
     ...mapActions(['getTourGuideData']),
-    goToProfile(tourGuideSku) {
-      this.$router.push(`/tour-guide/${tourGuideSku}`);
-    },
   },
 };
 </script>

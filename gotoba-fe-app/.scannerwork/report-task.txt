@@ -1,0 +1,6 @@
+projectKey=gotoba-fe
+serverUrl=http://localhost:9000
+serverVersion=7.0.0.36138
+dashboardUrl=http://localhost:9000/dashboard/index/gotoba-fe
+ceTaskId=AXN8rRKqFemC4NPmMSyU
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXN8rRKqFemC4NPmMSyU

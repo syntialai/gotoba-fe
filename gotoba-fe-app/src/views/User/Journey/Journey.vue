@@ -1,7 +1,7 @@
 <template>
   <div class="journey" v-if="journeyData">
     <div class="journey-profiles bg-white p-3">
-      <h6>Nearby Places</h6>
+      <h6 class="mb-3">Nearby Places</h6>
       <div class="journey-group d-flex flex-wrap">
         <div class="responsive-card"
           v-for="journey in journeyData"
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="journey-ticket bg-white p-3 my-3" v-if="ticketJourney">
+    <div class="journey-ticket bg-white p-3" v-if="ticketJourney">
       <h6>Ticket for Journey</h6>
       <div class="ticket-group">
         <router-link

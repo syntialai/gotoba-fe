@@ -16,11 +16,12 @@
         class="title d-flex w-100 border-bottom-gray-young justify-content-between"
       >
         <h5>Ratings and Reviews</h5>
-        <b-icon
-          icon="arrow-right-short"
-          class="icon-black-60"
-          href=""
-        ></b-icon>
+        <b-button to="" variant="light">
+          <b-icon
+            icon="arrow-right-short"
+            class="icon-black-60"
+          ></b-icon>
+        </b-button>
       </div>
 
       <rating-profile-detail />

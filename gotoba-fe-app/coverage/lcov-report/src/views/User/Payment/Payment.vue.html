@@ -24,28 +24,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
@@ -150,12 +150,15 @@
 <a name='L92'></a><a href='#L92'>92</a>
 <a name='L93'></a><a href='#L93'>93</a>
 <a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -217,6 +220,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -227,8 +233,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -253,17 +269,16 @@
       &lt;div class="order-items-group" v-if="orderData &amp;&amp; orderData.length &gt; 0"&gt;
         &lt;div class="order-item-detail"
           v-for="item in orderData"
-          :key="item.name"
+          :key="item.title"
         &gt;
-          &lt;div class="order-item-info"&gt;
-            &lt;order-items
-              :name="item.name"
-              :image="item.image"
-              :price="item.price"
-              :discountPrice="item.discountPrice"
-            /&gt;
+          &lt;order-items
+            :name="item.title"
+            :image="item.image"
+            :price="item.price"
+            :discountPrice="item.discount"
+            :quantity="item.quantity"
+          /&gt;
           &lt;/div&gt;
-        &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
 &nbsp;
@@ -274,31 +289,27 @@
       &lt;payment-detail
         :price="orderTotal.price"
         :discount="orderTotal.discount"
+        :total="total"
       /&gt;
-    &lt;/div&gt;
-&nbsp;
-    &lt;div class="payment-method mt-3 p-3 bg-white"&gt;
-      &lt;div class="title w-100 border-bottom-gray-young"&gt;
-        &lt;h5&gt;Payment Method&lt;/h5&gt;
-      &lt;/div&gt;
-      &lt;payment-method /&gt;
     &lt;/div&gt;
 &nbsp;
     &lt;bottom-nav-payment
       :totalItem="orderTotal.item"
       :totalPrice="total"
       innerButton="BUY NOW"
-      :buttonFunction="pay"
+      :buttonFunc="pay"
+      :loading="loading"
+      class="fixed-bottom"
     /&gt;
   &lt;/div&gt;
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { mapActions, mapGetters } from 'vuex';</span>
+<span class="cstat-no" title="statement not covered" >import { mapGetters } from 'vuex';</span>
 <span class="cstat-no" title="statement not covered" >import api from '../../../api/api';</span>
+<span class="cstat-no" title="statement not covered" >import { toast } from '../../../utils/tool';</span>
 <span class="cstat-no" title="statement not covered" >import OrderItems from '../../../components/User/OrderItems.vue';</span>
 <span class="cstat-no" title="statement not covered" >import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';</span>
-<span class="cstat-no" title="statement not covered" >import PaymentMethod from '../../../components/User/Payment/PaymentMethod.vue';</span>
 <span class="cstat-no" title="statement not covered" >import BottomNavPayment from '../../../components/User/Payment/BottomNavPayment.vue';</span>
 &nbsp;
 export default {
@@ -306,7 +317,6 @@ export default {
   components: {
     OrderItems,
     PaymentDetail,
-    PaymentMethod,
     BottomNavPayment,
   },
   computed: {
@@ -315,21 +325,35 @@ export default {
 <span class="cstat-no" title="statement not covered" >      return this.orderTotal.price - this.orderTotal.discount;</span>
     },
   },
+<span class="fstat-no" title="function not covered" >  data() {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      loading: false,
+    };
+  },
   methods: {
-    ...mapActions(['setOrderData']),
 <span class="fstat-no" title="function not covered" >    async pay() {</span>
 <span class="cstat-no" title="statement not covered" >      const data = {</span>
         total: this.total,
         status: 'WAITING',
-        merchantSku: this.orderData.merchantSku,
-        orderId: 2,
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        merchantSku: this.orderData.map((item) =&gt; item.merchantSku).toString(),</span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        orderSku: this.orderData.map((item) =&gt; item.sku).toString(),</span></span>
       };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      const paymentRes = await api.PostPayment(this.userSku, data);</span>
-<span class="cstat-no" title="statement not covered" >      const orderRes = await api.CheckoutOrder(this.orderData.sku);</span>
+<span class="cstat-no" title="statement not covered" >      this.loading = true;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      if (!paymentRes.error &amp;&amp; !orderRes.error) {</span>
+<span class="cstat-no" title="statement not covered" >      console.log(data);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      try {</span>
+<span class="cstat-no" title="statement not covered" >        const paymentRes = await api.PostPayment(this.userSku, data);</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        this.orderData.forEach(async (order) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >          await api.CheckoutOrder(order.sku);</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.loading = false;</span>
 <span class="cstat-no" title="statement not covered" >        this.goToThanksPage(paymentRes.data.sku);</span>
+      } catch (err) {
+<span class="cstat-no" title="statement not covered" >        this.loading = false;</span>
+<span class="cstat-no" title="statement not covered" >        toast('Error while checkout item!');</span>
       }
     },
 <span class="fstat-no" title="function not covered" >    goToThanksPage(sku) {</span>
@@ -345,7 +369,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 23 2020 21:08:00 GMT+0700 (Indochina Time)
+                at Sat Jul 25 2020 22:22:22 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

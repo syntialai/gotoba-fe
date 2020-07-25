@@ -47,7 +47,7 @@
               label="Photo"
               label-for="photo-image"
             >
-              <div v-if="!photo.image || photo.image === ''">
+              <div v-if="!photo.image || photo.image === null">
                 <b-form-file
                   id="photo-image"
                   v-model="photo.image"
@@ -185,7 +185,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.galleryPhoto.image = res.toString();
+            this.photo.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -195,7 +195,7 @@ export default {
     },
 
     removePhoto() {
-      this.galleryPhoto.image = null;
+      this.photo.image = null;
     },
   },
   watch: {

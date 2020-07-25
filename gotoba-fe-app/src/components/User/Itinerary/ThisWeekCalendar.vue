@@ -21,7 +21,7 @@
           :class="'font-size-14 p-2 semibold ' +
             (item.active? 'custom-btn-primary' : 'btn-outline')
           "
-          @click="setActive(item.date)"
+          @click="setActive(item)"
         >
           {{ `0${item.date}`.slice(-2) }}
         </b-button>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { toFullDay } from '../../../utils/filter';
 
 export default {
@@ -44,6 +45,7 @@ export default {
     this.days();
   },
   methods: {
+    ...mapActions(['setSelectedDate']),
     days() {
       const today = new Date();
       const week = [];
@@ -52,6 +54,8 @@ export default {
         week.push({
           day: toFullDay(today.getDay() % 7).substr(0, 2),
           date: today.getDate(),
+          month: today.getMonth(),
+          year: today.getFullYear(),
           active: i === 0,
         });
         today.setDate(today.getDate() + 1);
@@ -63,10 +67,17 @@ export default {
       const changeWeek = this.week.map((item) => ({
         day: item.day,
         date: item.date,
-        active: item.date === date,
+        month: item.month,
+        year: item.year,
+        active: item.date === date.date,
       }));
 
       this.week = changeWeek;
+      this.setSelectedDate(new Date(
+        date.year,
+        date.month,
+        date.day,
+      ));
     },
   },
 };

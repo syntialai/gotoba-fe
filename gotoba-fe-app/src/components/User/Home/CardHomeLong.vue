@@ -34,6 +34,7 @@ export default {
       return api.imageUrl(this.data.image);
     },
     date() {
+      console.log(this.data.expiredDate);
       const dateArray = formatDate(new Date(this.data.expiredDate)).split(' ');
       dateArray.shift();
       return dateArray.join(' ');

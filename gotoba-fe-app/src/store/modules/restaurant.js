@@ -18,9 +18,8 @@ const actions = {
     api.GetBistroType()
       .then((res) => {
         if (!res.error) {
-          commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data);
+          commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data.map((item) => item.name));
         }
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -62,7 +61,7 @@ const actions = {
     api.GetRestaurantByMerchantSku(merchantSku)
       .then((res) => {
         if (!res.error) {
-          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res.data);
         }
       })
       .catch((err) => {

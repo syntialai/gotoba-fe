@@ -37,8 +37,8 @@ export default {
       get() {
         return this.searchKeywords;
       },
-      set() {
-        return (value) => this.setSearchKeywords(value);
+      set(value) {
+        return this.setSearchKeywords(value);
       },
     },
   },

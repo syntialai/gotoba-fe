@@ -47,7 +47,7 @@ describe('Toast.vue', () => {
   });
 
   it('Check show computed setters to call setShowToast actions', () => {
-    wrapper.vm.show(false);
+    wrapper.vm.show = false;
 
     expect(actions.setShowToast).toHaveBeenCalledTimes(1);
     expect(actions.setShowToast.mock.calls[0][1]).toBe(false);

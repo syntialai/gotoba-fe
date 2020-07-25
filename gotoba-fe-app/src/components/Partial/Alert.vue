@@ -25,8 +25,8 @@ export default {
       get() {
         return this.showAlert;
       },
-      set() {
-        return (value) => this.setShowAlert(value);
+      set(value) {
+        this.setShowAlert(value);
       },
     },
   },

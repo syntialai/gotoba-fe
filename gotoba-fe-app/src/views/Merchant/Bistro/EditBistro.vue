@@ -73,32 +73,37 @@
             label="Location"
             label-for="bistro-location"
           >
-            <b-form-input
-              id="bistro-location"
-              v-model="bistro.location"
-              list="location-list"
-              type="text"
-              class="border-gray"
-              required
-              @change="locationSuggestions"
-              :state="getValidationState(validationContext)"
-              aria-describedby="edit-location-feedback-msg"
-            ></b-form-input>
-            <b-form-invalid-feedback id="edit-location-feedback-msg">
-              {{ validationContext.errors[0] }}
-            </b-form-invalid-feedback>
+            <b-input-group>
+              <b-form-input
+                id="bistro-location"
+                v-model="bistro.location"
+                type="text"
+                class="border-gray"
+                required
+                disabled
+                :state="getValidationState(validationContext)"
+                aria-describedby="edit-location-feedback-msg"
+              ></b-form-input>
+              <b-input-group-append>
+                <b-button
+                  to="/merchant/set-location/bistro"
+                  variant="outline-secondary"
+                  class="d-flex align-items-center"
+                >
+                  <font-awesome-icon
+                    class="icon-accent-green"
+                    icon="map-marked-alt"
+                  ></font-awesome-icon>
+                  <div class="font-size-12 ml-2">
+                    Select via Map
+                  </div>
+                </b-button>
+              </b-input-group-append>
 
-            <datalist
-              id="location-list"
-              v-if="locationList"
-            >
-              <option
-                v-for="location in locationList"
-                :key="location"
-              >
-                {{ location }}
-              </option>
-            </datalist>
+              <b-form-invalid-feedback id="edit-location-feedback-msg">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-input-group>
           </b-form-group>
         </ValidationProvider>
 
@@ -108,7 +113,7 @@
           v-slot="validationContext"
         >
           <b-form-group
-            v-if="bistroType"
+            v-if="bistroType && bistroType.length > 0"
             id="bistro-type-group"
             label="Bistro Type"
             label-for="bistro-type"
@@ -229,11 +234,14 @@ import getLocation from '../../../utils/location';
 export default {
   name: 'EditBistro',
   computed: {
-    ...mapGetters(['restaurantData', 'bistroType', 'userSku']),
+    ...mapGetters(['restaurantData', 'bistroType', 'userSku', 'locationSet']),
   },
   created() {
     this.getRestaurantDataByMerchantSku(this.userSku);
     this.getRestaurantBistroType();
+    if (this.locationSet.location) {
+      Object.assign(this.bistro, this.locationSet);
+    }
   },
   data() {
     return {
@@ -271,87 +279,15 @@ export default {
           },
         ],
       },
-      bistroTypeOptions: [
-        'All-day cafe',
-        'All-you-can-eat restaurant',
-        'Automat',
-        'Automated restaurant',
-        'Bakery',
-        'Bar',
-        'Bar mleczny',
-        'Bistro',
-        'Bouchon',
-        'Brasserie',
-        'Breastaurant',
-        'Bridge restaurant',
-        'Cafe (British)',
-        'Café gourmand',
-        'Cafeteria',
-        'Cakery',
-        'Cantina',
-        'Carvery',
-        'Chifa',
-        'Chiringuito',
-        'Chuckwagon',
-        'Churrascaria',
-        'Coffeehouse',
-        'Coney Island (restaurant)',
-        'Concession stand',
-        'Cosplay restaurant',
-        'Diner',
-        'Dining car',
-        'Dining room',
-        'Dinner theater',
-        'Dinner train',
-        'Drive-in',
-        'Drive-through',
-        'Farm Stall',
-        'Fast food restaurant',
-        'Fast casual restaurant',
-        'Fish and chip shop',
-        'Floating restaurant',
-        'Food booth',
-        'Food cart',
-        'Food court',
-        'Food truck',
-        'Gastropub',
-        'Ghost restaurant',
-        'Greasy spoon',
-        'Hawker centre ',
-        'Health food',
-        'Ice cream cart',
-        'Ice cream van',
-        'Juke joint',
-        'Kopi tiam',
-        'Milk bar',
-        'Mobile catering',
-        'Mystery dinner',
-        'Pancake house',
-        'Pie and mash',
-        'Pizza delivery',
-        'Pop-up restaurant',
-        'Ramen shop',
-        'Raw bar',
-        'Revolving restaurant',
-        'Sandwich bar',
-        'Seafood restaurant',
-        'Snack bar',
-        'Soda shop',
-        'Soup kitchen',
-        'Steakhouse',
-        'Strausse',
-        'Supper club',
-        'Take-out',
-        'Tower restaurant',
-        'Truck stop',
-        'Underground restaurant',
-      ],
       image: null,
-      locationList: null,
     };
   },
   methods: {
-    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantBistroType']),
+    ...mapActions([
+      'getRestaurantDataByMerchantSku',
+      'getRestaurantBistroType',
+      'setLocation',
+    ]),
 
     getValidationState,
 
@@ -402,41 +338,36 @@ export default {
     removePhoto() {
       this.image = null;
     },
+  },
+  mounted() {
+    if (!this.locationSet.location) {
+      getLocation((position) => {
+        this.bistro.longitude = position.coords.longitude;
+        this.bistro.latitude = position.coords.latitude;
 
-    locationSuggestions() {
-      if (this.bistro.location) {
-        api.GetSearchLocationResult(this.bistro.location)
+        api.ReverseGeocoding(this.bistro.longitude, this.bistro.latitude)
           .then((res) => {
-            this.locationList = res.map((item) => item.display_name);
-            console.log(this.locationList);
+            this.bistro.address = res.display_name;
+            this.bistro.location = `${res.address.suburb}, ${res.address.city}`;
+            this.setLocation({
+              longitude: this.bistro.longitude,
+              latitude: this.bistro.latitude,
+              address: this.bistro.address,
+              location: this.bistro.location,
+            });
           })
           .catch((err) => {
             console.log(err);
-            this.locationList = null;
           });
-      }
-    },
-  },
-  mounted() {
-    if (this.restaurantData) {
-      this.bistro = { ...this.restaurantData };
+      }, (err) => {
+        console.log(err);
+      });
     }
-
-    getLocation((position) => {
-      this.bistro.longitude = position.coords.longitude;
-      this.bistro.latitude = position.coords.latitude;
-
-      api.ReverseGeocoding(this.bistro.longitude, this.bistro.latitude)
-        .then((res) => {
-          this.bistro.address = res.display_name;
-          this.bistro.location = `${res.address.suburb}, ${res.address.city}`;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, (err) => {
-      console.log(err);
-    });
+  },
+  watch: {
+    restaurantData() {
+      this.bistro = { ...this.restaurantData };
+    },
   },
 };
 </script>

@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import CardInfo from '../../../components/Merchant/Card/CardInfo.vue';
 
 export default {
@@ -48,6 +49,9 @@ export default {
         value2: 5,
       };
     },
+  },
+  methods: {
+    ...mapActions(['']),
   },
 };
 </script>

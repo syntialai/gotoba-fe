@@ -55,6 +55,9 @@ const TOUR_GUIDE_DETAIL = () => import('../views/Admin/TourGuideDetail.vue');
 
 const MERCHANT_VIEW = () => import('../views/Merchant/Merchant.vue');
 const MERCHANT_ORDER_LIST = () => import('../views/Merchant/Order/OrderList.vue');
+const MERCHANT_ORDER_RESTAURANT = () => import('../views/Merchant/Order/RestaurantOrder.vue');
+const MERCHANT_ORDER_ITINERARY = () => import('../views/Merchant/Order/ItineraryOrder.vue');
+const MERCHANT_ADD_LOCATION = () => import('../views/Merchant/Location/AddDestination.vue');
 const MERCHANT_PROFILE = () => import('../views/Merchant/Profile/Profile.vue');
 const MERCHANT_SPOT = () => import('../views/Merchant/Spot/Spot.vue');
 const MERCHANT_SPOT_DETAIL = () => import('../views/Merchant/Spot/SpotDetail.vue');
@@ -130,6 +133,9 @@ export const Admin = {
 export const Merchant = {
   MERCHANT_VIEW,
   MERCHANT_ORDER_LIST,
+  MERCHANT_ORDER_ITINERARY,
+  MERCHANT_ORDER_RESTAURANT,
+  MERCHANT_ADD_LOCATION,
   MERCHANT_PROFILE,
   MERCHANT_SPOT,
   MERCHANT_SPOT_DETAIL,

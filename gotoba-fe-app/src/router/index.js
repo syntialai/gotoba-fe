@@ -475,6 +475,24 @@ const routes = [
         path: 'order-list',
         name: 'Order List',
         component: Merchant.MERCHANT_ORDER_LIST,
+        children: [
+          {
+            path: '',
+            name: 'Order List',
+            component: Merchant.MERCHANT_ORDER_RESTAURANT,
+            meta: {
+              layout: 'background-blue',
+            },
+          },
+          {
+            path: 'itinerary',
+            name: 'Order List',
+            component: Merchant.MERCHANT_ORDER_ITINERARY,
+            meta: {
+              layout: 'background-blue',
+            },
+          },
+        ],
         meta: {
           layout: 'background-blue',
         },
@@ -579,6 +597,15 @@ const routes = [
     name: 'Edit Profile',
     beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_EDIT_PROFILE,
+    meta: {
+      layout: 'default-back',
+    },
+  },
+  {
+    path: '/merchant/set-location/:category',
+    name: 'Set Location',
+    beforeEnter: checkMerchantRole,
+    component: Merchant.MERCHANT_ADD_LOCATION,
     meta: {
       layout: 'default-back',
     },

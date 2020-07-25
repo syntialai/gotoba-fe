@@ -43,10 +43,6 @@
         <l-control-zoom position="topright"></l-control-zoom>
       </l-map>
 
-      <l-control position="topleft">
-
-      </l-control>
-
       <l-control position="bottomcenter">
         <div
           class="set-dest fixed-bottom box-shadow bg-white border-square-20 p-3"
@@ -161,6 +157,9 @@ export default {
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };

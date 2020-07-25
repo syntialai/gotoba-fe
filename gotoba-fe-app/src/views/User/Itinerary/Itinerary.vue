@@ -1,5 +1,5 @@
 <template>
-  <div class="itinerary p-3">
+  <div class="itinerary p-3 vh-100">
     <this-week-calendar class="mb-3" />
 
     <itinerary-plan class="box-shadow"/>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import ItineraryPlan from '../../../components/User/Itinerary/ItineraryPlan.vue';
 import PdfModal from '../../../components/User/Itinerary/PdfModal.vue';
 import ThisWeekCalendar from '../../../components/User/Itinerary/ThisWeekCalendar.vue';
@@ -37,7 +38,14 @@ export default {
     PdfModal,
     ThisWeekCalendar,
   },
+  computed: {
+    ...mapGetters(['schedule', 'userSku']),
+  },
+  created() {
+    this.getSchedule(this.userSku);
+  },
   methods: {
+    ...mapActions(['getSchedule']),
     addItinerary() {
       this.$router.push('/itinerary/add');
     },

@@ -364,9 +364,6 @@ export default {
   GetJourneyPaymentByMerchant(merchantSku) {
     return fetchGet(`/pay/merchant/${merchantSku}/category/journey`);
   },
-  GetHotelPaymentByMerchant(merchantSku) {
-    return fetchGet(`/pay/merchant/${merchantSku}/category/hotel`);
-  },
   GetAcceptedPaymentByUser(userSku) {
     return fetchGet(`/pay/user/${userSku}/status/ACCEPTED`);
   },

@@ -51,7 +51,6 @@ describe('PhotoModal.vue', () => {
       image: null,
       description: '',
     },
-    image: null,
   };
   const props = {
     title: 'Edit',
@@ -87,6 +86,11 @@ describe('PhotoModal.vue', () => {
     wrapper = shallowMount(PhotoModal, {
       mocks: {
         $route,
+      },
+      data() {
+        return {
+          photo: data.photo,
+        };
       },
       localVue,
       store,
@@ -132,9 +136,14 @@ describe('PhotoModal.vue', () => {
   });
 
   it('Check removePhoto method to remove galleryPhoto image data', async () => {
+    wrapper.vm.setData({
+      photo: {
+        image: 'image.png',
+      },
+    });
     wrapper.vm.removePhoto();
     await flushPromises();
-    expect(wrapper.vm.galleryPhoto.image).toBeNull();
+    expect(wrapper.vm.photo.image).toBeNull();
   });
 });
 
@@ -146,6 +155,13 @@ describe('PhotoModal.vue with title props', () => {
       description: 'Gallery mock',
       image: '/image/image.png',
       show: true,
+    },
+  };
+  const data = {
+    photo: {
+      title: '',
+      image: null,
+      description: '',
     },
   };
   let getters;
@@ -181,6 +197,11 @@ describe('PhotoModal.vue with title props', () => {
       },
       mocks: {
         $route,
+      },
+      data() {
+        return {
+          ...data,
+        };
       },
       localVue,
       store,
@@ -227,6 +248,13 @@ describe('PhotoModal.vue check function returned', () => {
     },
     image: 'image.png',
   };
+  const data = {
+    photo: {
+      title: '',
+      image: null,
+      description: '',
+    },
+  };
   let getters;
   let actions;
   let store;
@@ -248,6 +276,11 @@ describe('PhotoModal.vue check function returned', () => {
     wrapper = shallowMount(PhotoModal, {
       mocks: {
         $route,
+      },
+      data() {
+        return {
+          ...data,
+        };
       },
       localVue,
       store,
@@ -298,6 +331,13 @@ describe('PhotoModal.vue check error api promise', () => {
     },
     image: 'image.png',
   };
+  const data = {
+    photo: {
+      title: '',
+      image: null,
+      description: '',
+    },
+  };
   let getters;
   let actions;
   let store;
@@ -328,6 +368,11 @@ describe('PhotoModal.vue check error api promise', () => {
     wrapper = shallowMount(PhotoModal, {
       mocks: {
         $route,
+      },
+      data() {
+        return {
+          ...data,
+        };
       },
       localVue,
       store,
@@ -388,6 +433,13 @@ describe('PhotoModal.vue check catch error while making a request', () => {
     },
     image: 'image.png',
   };
+  const data = {
+    photo: {
+      title: '',
+      image: null,
+      description: '',
+    },
+  };
   let getters;
   let actions;
   let store;
@@ -413,6 +465,11 @@ describe('PhotoModal.vue check catch error while making a request', () => {
     wrapper = shallowMount(PhotoModal, {
       mocks: {
         $route,
+      },
+      data() {
+        return {
+          ...data,
+        };
       },
       localVue,
       store,

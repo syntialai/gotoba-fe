@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     validDate() {
-      return formatDate(this.ticket.expiredDate);
+      return formatDate(new Date(this.ticket.expiredDate));
     },
     qrCodeValue() {
       return JSON.stringify({

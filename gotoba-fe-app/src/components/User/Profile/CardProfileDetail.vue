@@ -8,7 +8,7 @@
       img-width="80"
       img-height="80"
     >
-      <b-card-text>
+      <b-card-text class="ml-3">
         <div class="d-flex justify-content-between">
           <div class="info">
             <h6 class="font-color-black-87">{{ name }}</h6>

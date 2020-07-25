@@ -24,7 +24,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
@@ -38,14 +38,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
@@ -141,7 +141,15 @@
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -191,6 +199,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,17 +225,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -228,13 +234,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div class="history-details"&gt;
-    &lt;div class="order-details bg-white p-2"&gt;
+    &lt;div class="order-details bg-white p-3 my-2"&gt;
       &lt;div class="title w-100 border-bottom-gray-young"&gt;
-        &lt;h3&gt;Order Details&lt;/h3&gt;
+        &lt;h6 class="font-color-black-87"&gt;Order Details&lt;/h6&gt;
       &lt;/div&gt;
-      &lt;div class="details"&gt;
+      &lt;div class="detail mt-2"&gt;
         &lt;div
-          class="d-flex justify-content-between font-size-14 font-color-black-60"
+          class="d-flex justify-content-between font-size-14 font-color-black-60 mb-2"
           v-for="info in orderInfo"
           :key="info.name"
         &gt;
@@ -248,66 +254,69 @@
       &lt;/div&gt;
     &lt;/div&gt;
 &nbsp;
-    &lt;div class="order-items"&gt;
+    &lt;div class="order-items p-3 bg-white my-1"&gt;
       &lt;div class="title w-100 border-bottom-gray-young"&gt;
-        &lt;h3&gt;Order Item(s)&lt;/h3&gt;
+        &lt;h6 class="font-color-black-87"&gt;Order Item(s)&lt;/h6&gt;
       &lt;/div&gt;
       &lt;div class="order-items-group"&gt;
         &lt;order-items
-          v-for="item in items"
-          :key="item.name.toLowerCase().replace(' ','-')"
-          :name="item.name"
+          v-for="item in orderDataBySku"
+          :key="item.title"
+          :name="item.title"
           :image="item.image"
           :price="item.price"
-          :discountPrice="item.discountPrice"
+          :quantity="item.quantity"
+          :discountPrice="item.discount"
         /&gt;
       &lt;/div&gt;
     &lt;/div&gt;
 &nbsp;
-    &lt;div class="payment-details"&gt;
+    &lt;div class="payment-details p-3 bg-white my-2"&gt;
       &lt;div class="title w-100 border-bottom-gray-young"&gt;
-        &lt;h3&gt;Payment Details&lt;/h3&gt;
+        &lt;h6 class="font-color-black-87"&gt;Payment Details&lt;/h6&gt;
       &lt;/div&gt;
-      &lt;payment-detail price="" discount="" /&gt;
+      &lt;payment-detail
+        :price="orderTotal.price"
+        :discount="orderTotal.discount"
+        :total="orderTotal.price - orderTotal.discount"
+      /&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
+<span class="cstat-no" title="statement not covered" >import { mapGetters, mapActions } from 'vuex';</span>
+<span class="cstat-no" title="statement not covered" >import { formatPrice } from '../../../utils/filter';</span>
 <span class="cstat-no" title="statement not covered" >import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';</span>
 <span class="cstat-no" title="statement not covered" >import OrderItems from '../../../components/User/OrderItems.vue';</span>
 &nbsp;
 export default {
   name: 'HistoryDetails',
-<span class="fstat-no" title="function not covered" >  data() {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-      orderInfo: [
-        {
-          name: 'Order Id', value: 'ID #abc',
-        },
-        {
-          name: 'Transaction Date', value: 'Wed, Feb 12 2020',
-        },
-        {
-          name: 'Purchase Status', value: 'Payment Received',
-        },
-        {
-          name: 'Payment Method', value: 'Bank Transfer - Bank BCA',
-        },
-      ],
-      items: [
-        {
-          name: 'E-ticket Danau Toba',
-          image: 'https://www.pegipegi.com/travel/wp-content/uploads/2017/11/shutterstock_521143462.jpg',
-          price: 100000,
-          discountPrice: 50000,
-        },
-      ],
-    };
-  },
   components: {
     PaymentDetail,
     OrderItems,
+  },
+  computed: {
+    ...mapGetters(['paymentDataBySku', 'orderDataBySku', 'orderTotal']),
+<span class="fstat-no" title="function not covered" >    orderInfo() {</span>
+<span class="cstat-no" title="statement not covered" >      return [</span>
+        {
+          name: 'Order Id', value: this.orderDataBySku.id,
+        },
+        {
+          name: 'Transaction Date', value: formatPrice(this.paymentDataBySku.created),
+        },
+        {
+          name: 'Purchase Status', value: this.paymentDataBySku.status,
+        },
+      ];
+    },
+  },
+<span class="fstat-no" title="function not covered" >  created() {</span>
+<span class="cstat-no" title="statement not covered" >    this.getPaymentBySku(this.$route.params.sku);</span>
+  },
+  methods: {
+    ...mapActions(['getPaymentBySku', 'getOrderDataBySku', 'setOrderTotal']),
   },
 };
 &lt;/script&gt;
@@ -318,7 +327,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 23 2020 21:08:00 GMT+0700 (Indochina Time)
+                at Sat Jul 25 2020 22:22:22 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

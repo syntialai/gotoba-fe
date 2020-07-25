@@ -77,6 +77,7 @@ export default {
         toast('Updated cart item!');
       } catch (err) {
         console.log(err);
+        toast('Error while adding ticket');
       }
     },
   },

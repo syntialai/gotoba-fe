@@ -12,7 +12,7 @@
         <div class="category-info font-size-12">
           {{ category }}
         </div>
-        <h5>
+        <h5 class="font-color-black-87">
           {{ info.title }}
         </h5>
       </div>
@@ -42,14 +42,14 @@
             ></font-awesome-icon>
             <span class="pl-2">Valid before</span>
           </div>
-          <div class="expired-date semibold pl-4">
+          <div class="expired-date semibold pl-4 font-color-black-87">
             {{ expiredDate }}
           </div>
         </div>
       </div>
     </div>
     <div class="description p-3 bg-white mb-5 mt-2">
-      <h6>Description</h6>
+      <h6 class="font-color-black-87">Description</h6>
       <p class="mt-3">
         {{ info.description }}
       </p>

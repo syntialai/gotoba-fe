@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.22% </span>
+                <span class="strong">5.17% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/115</span>
+                <span class='fraction'>6/116</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">1.1% </span>
+                <span class="strong">1.09% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/91</span>
+                <span class='fraction'>1/92</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.22% </span>
+                <span class="strong">5.17% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/115</span>
+                <span class='fraction'>6/116</span>
             </div>
         
             
@@ -435,18 +435,21 @@
 <a name='L377'></a><a href='#L377'>377</a>
 <a name='L378'></a><a href='#L378'>378</a>
 <a name='L379'></a><a href='#L379'>379</a>
-<a name='L380'></a><a href='#L380'>380</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">34x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">34x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">34x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -516,13 +519,16 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -780,11 +786,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -890,6 +896,9 @@ export default {
   },
 <span class="fstat-no" title="function not covered" >  Si</span>gnup(params) {
 <span class="cstat-no" title="statement not covered" >    return fetchPost('/auth/signup', params);</span>
+  },
+<span class="fstat-no" title="function not covered" >  Ch</span>eckToken() {
+<span class="cstat-no" title="statement not covered" >    return fetchGet('/auth/validate');</span>
   },
 <span class="fstat-no" title="function not covered" >  Lo</span>gout() {
 <span class="cstat-no" title="statement not covered" >    return fetchPost('/auth/logout');</span>
@@ -1158,12 +1167,15 @@ export default {
 <span class="fstat-no" title="function not covered" >  Ed</span>itOrderDetail(sku, params) {
 <span class="cstat-no" title="statement not covered" >    return fetchPut(`/order/edit/${sku}`, params);</span>
   },
+<span class="fstat-no" title="function not covered" >  Re</span>moveOrder(sku) {
+<span class="cstat-no" title="statement not covered" >    return fetchDelete(`/order/delete/${sku}`);</span>
+  },
 &nbsp;
   /**
    * Payment
    */
 <span class="fstat-no" title="function not covered" >  Ge</span>tPayment(sku) {
-<span class="cstat-no" title="statement not covered" >    return fetchGet(`/pay/${sku}`);</span>
+<span class="cstat-no" title="statement not covered" >    return fetchGet(`/pay/sku/${sku}`);</span>
   },
 <span class="fstat-no" title="function not covered" >  Ge</span>tPaymentByMerchant(merchantSku) {
 <span class="cstat-no" title="statement not covered" >    return fetchGet(`/pay/merchant/${merchantSku}`);</span>
@@ -1173,9 +1185,6 @@ export default {
   },
 <span class="fstat-no" title="function not covered" >  Ge</span>tJourneyPaymentByMerchant(merchantSku) {
 <span class="cstat-no" title="statement not covered" >    return fetchGet(`/pay/merchant/${merchantSku}/category/journey`);</span>
-  },
-<span class="fstat-no" title="function not covered" >  Ge</span>tHotelPaymentByMerchant(merchantSku) {
-<span class="cstat-no" title="statement not covered" >    return fetchGet(`/pay/merchant/${merchantSku}/category/hotel`);</span>
   },
 <span class="fstat-no" title="function not covered" >  Ge</span>tAcceptedPaymentByUser(userSku) {
 <span class="cstat-no" title="statement not covered" >    return fetchGet(`/pay/user/${userSku}/status/ACCEPTED`);</span>
@@ -1200,7 +1209,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 23 2020 21:08:00 GMT+0700 (Indochina Time)
+                at Sat Jul 25 2020 22:22:22 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\prettify.js"></script>
