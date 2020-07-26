@@ -1,6 +1,7 @@
 <template>
-  <div class="qr-scanner">
+  <div class="qr-scanner vh-100 w-100">
     <qrcode-stream
+      class="h-100 w-100"
       v-show="showScanner"
       @decode="onDecode"
     ></qrcode-stream>
@@ -10,6 +11,7 @@
 <script>
 import { mapActions } from 'vuex';
 import { QrcodeStream } from 'vue-qrcode-reader';
+import { toast } from '../../../utils/tool';
 
 export default {
   name: 'QrScanner',
@@ -26,12 +28,22 @@ export default {
     ...mapActions(['setTicketBySku']),
     onDecode(result) {
       this.qrcodeResult = result;
-      this.showScanner = false;
 
-      // if (typeof result === 'object') {
-      this.setTicketBySku(result);
-      this.$router.push('/merchant/scan/result');
-      // }
+      const jsonResult = JSON.parse(result);
+
+      if (jsonResult.redeem
+      && jsonResult.price
+      && jsonResult.expiredDate
+      && jsonResult.merchantSku
+      && jsonResult.title
+      && jsonResult.userSku) {
+        this.setTicketBySku(jsonResult);
+        this.showScanner = false;
+        this.$router.push('/merchant/scan/result');
+        return;
+      }
+
+      toast('QR Code is not valid!');
     },
   },
 };

@@ -34,11 +34,7 @@ const actions = {
     try {
       const res = await api.GetTravellingSchedule(userSku);
       if (!res.error) {
-        commit(Types.SET_SCHEDULE, res.data.map((item) => ({
-          destination: item.address,
-          time: new Date(item.date),
-          formattedTime: item.date.split()[4],
-        })));
+        commit(Types.SET_SCHEDULE, res.data);
         console.log(res.data);
       }
     } catch (err) {
@@ -54,8 +50,15 @@ const actions = {
     commit(Types.SET_LOCATION_KEYWORD, keyword);
   },
 
-  addNewSchedule({ commit }, res) {
-    commit(Types.SET_NEW_SCHEDULE, res);
+  addNewSchedule({ commit, state }, res, date) {
+    const index = state.newSchedule.findIndex((item) => item.date === date);
+    if (index === -1) {
+      commit(Types.SET_NEW_SCHEDULE, {
+        date,
+        schedule: [res],
+      });
+    }
+    commit(Types.SET_NEW_SCHEDULE, res, index);
   },
 
   setSelectedDate({ commit }, date) {
@@ -89,6 +92,13 @@ const mutations = {
   },
   [Types.SET_NEW_SCHEDULE](state, res) {
     state.newSchedule.push(res);
+  },
+  [Types.SET_NEW_SCHEDULE](state, res, index) {
+    if (state.newSchedule[index].schedule) {
+      state.newSchedule[index].schedule.push(res);
+      return;
+    }
+    state.newSchedule[index].schedule = [res];
   },
   [Types.SET_SELECTED_DATE](state, date) {
     state.selectedDate = {

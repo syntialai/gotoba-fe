@@ -14,8 +14,7 @@
           Thank you for shopping at gotoba!
         </div>
         <div class="complete-payment mb-1">
-          Have you completed the payment? Upload your payment bill or
-          Check your payment status at
+          Check your payment/order status at
           <router-link :to="goToHistory">
             History
           </router-link>

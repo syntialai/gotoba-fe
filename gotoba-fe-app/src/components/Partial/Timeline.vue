@@ -11,7 +11,7 @@
             {{ timeline.destination }}
           </div>
           <div class="timeline-time">
-            {{ timeline.formattedTime }}
+            {{ timeline.time }}
           </div>
         </div>
       </li>
@@ -95,23 +95,14 @@ export default {
     addSchedule() {
       const data = {
         destination: this.locationKeyword,
-        time: new Date(
-          this.selectedDate.date,
-          this.selectedDate.month,
-          this.selectedDate.year,
-          this.context.hours,
-          this.context.minutes,
-          this.context.seconds,
-          0,
-        ),
-        formattedTime: this.context.formatted,
+        time: this.context.formatted,
       };
 
       if (data.destination === null || data.time === null) {
         return;
       }
 
-      this.addNewSchedule(data);
+      this.addNewSchedule(data, this.selectedDate);
       this.time = null;
       this.context = null;
       this.setLocationKeyword('');

@@ -252,17 +252,17 @@ export default {
   GetTravellingSchedule(userSku) {
     return fetchGet(`/schedule/${userSku}`);
   },
-  GetTravellingScheduleById(id) {
-    return fetchGet(`/schedule/detail/${id}`);
+  GetTravellingScheduleBySku(sku) {
+    return fetchGet(`/schedule/detail/${sku}`);
   },
   PostTravellingSchedule(userSku, params) {
     return fetchPost(`/schedule/${userSku}/add/`, params);
   },
-  EditTravellingSchedule(id, params) {
-    return fetchPut(`/schedule/edit/${id}`, params);
+  EditTravellingSchedule(sku, params) {
+    return fetchPut(`/schedule/edit/${sku}`, params);
   },
-  RemoveTravellingSchedule(id) {
-    return fetchPut(`/schedule/delete/${id}`);
+  RemoveTravellingSchedule(sku) {
+    return fetchDelete(`/schedule/delete/${sku}`);
   },
 
   /**

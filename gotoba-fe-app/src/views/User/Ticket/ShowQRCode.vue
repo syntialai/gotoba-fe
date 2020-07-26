@@ -8,7 +8,10 @@
       QR Code
     </div>
 
-    <q-r-code-info :ticket="ticketData" />
+    <q-r-code-info
+      v-if="orderDataBySku"
+      :ticket="orderDataBySku"
+    />
 
     <div class="close">
       <b-button
@@ -33,7 +36,7 @@ export default {
     QRCodeInfo,
   },
   computed: {
-    ...mapGetters(['orderData']),
+    ...mapGetters(['orderDataBySku']),
   },
   created() {
     this.getOrderDataBySku(this.$route.params.sku);

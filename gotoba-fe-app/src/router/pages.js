@@ -34,7 +34,6 @@ const EDIT_PROFILE = () => import('../views/User/Profile/EditProfile.vue');
 const HISTORY = () => import('../views/User/History/History.vue');
 const TERMS_AND_CONDITION = () => import('../views/User/TermsAndCondition.vue');
 const PRIVACY_POLICY = () => import('../views/User/PrivacyPolicy.vue');
-const PAYMENT_GUIDE = () => import('../views/User/Payment/PaymentGuide.vue');
 const HISTORY_SUCCESS = () => import('../views/User/History/HistorySuccess.vue');
 const HISTORY_PENDING = () => import('../views/User/History/HistoryPending.vue');
 const HISTORY_CANCELLED = () => import('../views/User/History/HistoryCancelled.vue');
@@ -108,7 +107,6 @@ export const Pages = {
   HISTORY,
   TERMS_AND_CONDITION,
   PRIVACY_POLICY,
-  PAYMENT_GUIDE,
   HISTORY_SUCCESS,
   HISTORY_PENDING,
   HISTORY_CANCELLED,

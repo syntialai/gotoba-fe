@@ -88,7 +88,7 @@ export default {
   data() {
     return {
       select: true,
-      selected: this.cartData,
+      selected: [],
       loading: false,
     };
   },

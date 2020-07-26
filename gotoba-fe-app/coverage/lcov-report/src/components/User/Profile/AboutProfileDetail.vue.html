@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -123,7 +123,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,19 +133,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,8 +169,8 @@ export default {
     data: Object,
   },
   computed: {
-    items() {
-      return [
+<span class="fstat-no" title="function not covered" >    items() {</span>
+<span class="cstat-no" title="statement not covered" >      return [</span>
         {
           description: this.data.description,
           full_address: this.data.address,
@@ -179,20 +179,20 @@ export default {
         },
       ];
     },
-    hoursOpen() {
-      let hoursOpenStr = '';
+<span class="fstat-no" title="function not covered" >    hoursOpen() {</span>
+<span class="cstat-no" title="statement not covered" >      let hoursOpenStr = '';</span>
 &nbsp;
-      const objLength = Object.keys(this.data.hoursOpen).length;
-      Object.entries(this.data.hoursOpen)
+<span class="cstat-no" title="statement not covered" >      const objLength = Object.keys(this.data.hoursOpen).length;</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      Object.entries(this.data.hoursOpen)</span></span>
         .forEach(([key, value], index) =&gt; {
-          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}`;
+<span class="cstat-no" title="statement not covered" >          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}`;</span>
 &nbsp;
-          if (index !== objLength - 1) {
-            hoursOpenStr += '\n';
+<span class="cstat-no" title="statement not covered" >          if (index !== objLength - 1) {</span>
+<span class="cstat-no" title="statement not covered" >            hoursOpenStr += '\n';</span>
           }
         });
 &nbsp;
-      return hoursOpenStr;
+<span class="cstat-no" title="statement not covered" >      return hoursOpenStr;</span>
     },
   },
 };
@@ -204,7 +204,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Jul 25 2020 22:22:22 GMT+0700 (Indochina Time)
+                at Sun Jul 26 2020 00:52:36 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

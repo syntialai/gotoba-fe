@@ -393,14 +393,6 @@ const routes = [
     },
   },
   {
-    path: '/faq/payment/transfer',
-    name: 'Payment Guide',
-    component: Pages.PAYMENT_GUIDE,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
     path: '/admin',
     name: 'Admin',
     beforeEnter: checkAdminRole,
@@ -564,6 +556,9 @@ const routes = [
     name: 'Scan Result',
     beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_SCAN_RESULT,
+    meta: {
+      layout: 'default-back',
+    },
   },
   {
     path: '/merchant/spot/:sku',

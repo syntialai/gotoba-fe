@@ -2,7 +2,7 @@
   <div class="profile">
     <card-profile-user
       :name="userName"
-      image=""
+      :image="userImage"
     />
 
     <profile-menu-group
@@ -21,7 +21,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { alert } from '../../../utils/tool';
 import CardProfileUser from '../../../components/User/Profile/CardProfileUser.vue';
 import ProfileMenuGroup from '../../../components/User/Profile/ProfileMenuGroup.vue';
 
@@ -32,13 +31,12 @@ export default {
     ProfileMenuGroup,
   },
   computed: {
-    ...mapGetters(['userName', 'userLoginStatus', 'userRole']),
-  },
-  created() {
-    if (!this.userLoginStatus || this.userRole !== 'ROLE_MERCHANT') {
-      alert('You should log in first', false);
-      this.$router.push('/login');
-    }
+    ...mapGetters([
+      'userName',
+      'userLoginStatus',
+      'userRole',
+      'userImage',
+    ]),
   },
   data() {
     return {

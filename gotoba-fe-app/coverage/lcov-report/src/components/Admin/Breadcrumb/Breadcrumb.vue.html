@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,33 +97,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,33 +133,33 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-import { toCapitalize } from '../../../utils/filter';
+<span class="cstat-no" title="statement not covered" >import { toCapitalize } from '../../../utils/filter';</span>
 &nbsp;
 export default {
   name: 'Breadcrumb',
   computed: {
-    breadcrumbs() {
-      const pathArray = this.$route.path.split('/');
-      pathArray.shift();
+<span class="fstat-no" title="function not covered" >    breadcrumbs() {</span>
+<span class="cstat-no" title="statement not covered" >      const pathArray = this.$route.path.split('/');</span>
+<span class="cstat-no" title="statement not covered" >      pathArray.shift();</span>
 &nbsp;
-      const active = pathArray.slice(-1);
-      pathArray.splice(-1);
+<span class="cstat-no" title="statement not covered" >      const active = pathArray.slice(-1);</span>
+<span class="cstat-no" title="statement not covered" >      pathArray.splice(-1);</span>
 &nbsp;
-      const breadcrumb = pathArray.reduce((array, path, index) =&gt; {
-        array.push({
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      const breadcrumb = pathArray.reduce((array, path, index) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        array.push({</span>
           text: toCapitalize(path),
-<span class="branch-1 cbranch-no" title="branch not covered" >          to: index === 0 ? `/${path}` : `/admin/${path}`,</span>
+          to: index === 0 ? `/${path}` : `/admin/${path}`,
         });
 &nbsp;
-        return array;
+<span class="cstat-no" title="statement not covered" >        return array;</span>
       }, []);
 &nbsp;
-      breadcrumb.push({
+<span class="cstat-no" title="statement not covered" >      breadcrumb.push({</span>
         text: toCapitalize(active[0]),
         active: true,
       });
 &nbsp;
-      return breadcrumb;
+<span class="cstat-no" title="statement not covered" >      return breadcrumb;</span>
     },
   },
 };
@@ -171,7 +171,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Jul 25 2020 22:22:22 GMT+0700 (Indochina Time)
+                at Sun Jul 26 2020 00:52:36 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

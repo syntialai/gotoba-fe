@@ -22,6 +22,46 @@
         </b-button-group>
       </div>
 
+      <div class="carousel my-3 box-shadow">
+        <b-carousel
+          id="toba-carousel"
+          v-model="slide"
+          :interval="2000"
+          controls
+          indicators
+          img-width="768"
+          img-height="512"
+          style="text-shadow: 1px 2px 10px #b7b7b7;"
+        >
+          <b-carousel-slide
+            caption="Lake Toba"
+            text="Extraordinary natural wonder of the world in North Sumatra"
+            img-src="@/assets/img/toba/danau-toba.jpg"
+          ></b-carousel-slide>
+          <b-carousel-slide
+            caption="Samosir Island"
+            text="The world’s largest island within an island, located in Lake Toba"
+            img-src="@/assets/img/toba/samosir-island.jpg"
+          ></b-carousel-slide>
+          <b-carousel-slide
+            caption="Sipiso Piso Waterfall"
+            text="Find one of the beautiful waterfall near Lake Toba"
+            img-src="@/assets/img/toba/sipiso-piso.jpg"
+          ></b-carousel-slide>
+          <b-carousel-slide
+            caption="Tuktuk Siadong"
+            text="Find a great laid back place to chill out for a few days"
+            img-src="@/assets/img/toba/tuk-tuk.jpg"
+          ></b-carousel-slide>
+          <b-carousel-slide
+            caption="Lake Toba"
+            :text="'Surrounded by stunning mountains, waterfalls, hot springs, and many'
+            + 'cultural villages. Join us!'"
+            img-src="@/assets/img/toba/danau-toba-night.jpg"
+          ></b-carousel-slide>
+        </b-carousel>
+      </div>
+
       <div class="ongoing-promo content-group" v-if="ticketPromotion">
         <div class="title font-color-blue-primary">
           <span class="title-icon pr-2">

@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -215,10 +215,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -227,11 +227,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -239,17 +239,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -329,10 +329,10 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-import { mapActions } from 'vuex';
-import api from '../../../api/api';
-import { toast } from '../../../utils/tool';
-import { formatPrice } from '../../../utils/filter';
+<span class="cstat-no" title="statement not covered" >import { mapActions } from 'vuex';</span>
+<span class="cstat-no" title="statement not covered" >import api from '../../../api/api';</span>
+<span class="cstat-no" title="statement not covered" >import { toast } from '../../../utils/tool';</span>
+<span class="cstat-no" title="statement not covered" >import { formatPrice } from '../../../utils/filter';</span>
 &nbsp;
 export default {
   name: 'CartItem',
@@ -340,30 +340,30 @@ export default {
     ticket: Object,
   },
   computed: {
-    imageUrl() {
-      return api.imageUrl(this.ticket.image);
+<span class="fstat-no" title="function not covered" >    imageUrl() {</span>
+<span class="cstat-no" title="statement not covered" >      return api.imageUrl(this.ticket.image);</span>
     },
   },
-  data() {
-    return {
+<span class="fstat-no" title="function not covered" >  data() {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
       itemCount: this.ticket.quantity,
     };
   },
   methods: {
     ...mapActions(['removeOrder']),
     formatPrice,
-    async updateQuantity() {
-      this.$emit('update:quantity', this.itemCount);
+<span class="fstat-no" title="function not covered" >    async updateQuantity() {</span>
+<span class="cstat-no" title="statement not covered" >      this.$emit('update:quantity', this.itemCount);</span>
 &nbsp;
-      const data = { ...this.ticket };
-      data.quantity = this.itemCount;
+<span class="cstat-no" title="statement not covered" >      const data = { ...this.ticket };</span>
+<span class="cstat-no" title="statement not covered" >      data.quantity = this.itemCount;</span>
 &nbsp;
-      try {
-        await api.EditOrderDetail(this.ticket.sku, data);
-        toast('Updated cart item!');
+<span class="cstat-no" title="statement not covered" >      try {</span>
+<span class="cstat-no" title="statement not covered" >        await api.EditOrderDetail(this.ticket.sku, data);</span>
+<span class="cstat-no" title="statement not covered" >        toast('Updated cart item!');</span>
       } catch (err) {
-        console.log(err);
-        toast('Error while adding ticket');
+<span class="cstat-no" title="statement not covered" >        console.log(err);</span>
+<span class="cstat-no" title="statement not covered" >        toast('Error while adding ticket');</span>
       }
     },
   },
@@ -405,7 +405,7 @@ img {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Jul 25 2020 22:22:22 GMT+0700 (Indochina Time)
+                at Sun Jul 26 2020 00:52:36 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\..\prettify.js"></script>

@@ -42,7 +42,13 @@ export default {
     Timeline,
   },
   computed: {
-    ...mapGetters(['locationData', 'userSku', 'newSchedule']),
+    ...mapGetters([
+      'locationData',
+      'userSku',
+      'newSchedule',
+      'selectedDate',
+      'schedule',
+    ]),
   },
   created() {
     this.getLocationData();
@@ -54,32 +60,33 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getLocationData', 'setLocationKeyword', 'setNewSchedule']),
+    ...mapActions([
+      'getLocationData',
+      'setLocationKeyword',
+      'setNewSchedule',
+    ]),
     submitTravellingSchedule() {
-      const data = {
-        title: this.newSchedule.destination.substr(
-          0,
-          this.newSchedule.destination.indexOf(','),
-        ),
-        description: this.newSchedule.destination,
-        date: this.newSchedule.time,
-        vacationDestination: this.newSchedule.destination,
-      };
-
-      api.PostTravellingSchedule(this.userSku, data)
-        .then((res) => {
-          console.log(res);
-          this.setLocationKeyword('');
-          this.setNewSchedule([]);
-          this.$router.push('/itinerary');
-        })
-        .catch((err) => {
-          console.log(err);
+      try {
+        this.newSchedule.forEach(async (schedule) => {
+          const index = this.schedule.findIndex((item) => item.date === schedule.date);
+          if (index === -1) {
+            await api.PostTravellingSchedule(this.userSku, schedule);
+          } else {
+            await api.EditTravellingSchedule(this.schedule[index].sku, schedule);
+          }
         });
+        this.setDefault();
+        this.$router.push('/itinerary');
+      } catch (err) {
+        console.log(err);
+      }
     },
-    goBack() {
+    setDefault() {
       this.setLocationKeyword('');
       this.setNewSchedule([]);
+    },
+    goBack() {
+      this.setDefault();
       this.$router.go(-1);
     },
   },

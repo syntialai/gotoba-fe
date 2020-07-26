@@ -70,6 +70,7 @@ const actions = {
 
     api.GetOrderDetailByUser(userSku, 3)
       .then((res) => {
+        console.log(res);
         commit(Types.SET_APPROVED_ORDER_DATA, res.data);
       })
       .catch((err) => {
@@ -95,6 +96,7 @@ const actions = {
     api.GetOrderDetail(sku)
       .then((res) => {
         commit(Types.SET_ORDER_DATA_BY_SKU, res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);

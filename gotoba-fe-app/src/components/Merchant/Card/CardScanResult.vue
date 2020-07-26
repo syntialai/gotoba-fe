@@ -7,14 +7,18 @@
       {{ price }}
     </div>
 
-    <card-media :data="result" />
+    <card-media
+      v-if="journeyDataBySku || restaurantData"
+      :data="mediaData"
+    />
 
-    <b-table borderless :items="items"></b-table>
+    <b-table stacked :items="items"></b-table>
   </div>
 </template>
 
 <script>
-import { formatPrice, formatDate } from '../../../utils/filter';
+import { mapGetters } from 'vuex';
+import { formatPrice, formatDate, isPassed } from '../../../utils/filter';
 import CardMedia from './CardMedia.vue';
 
 export default {
@@ -26,21 +30,37 @@ export default {
     result: Object,
   },
   computed: {
+    ...mapGetters([
+      'journeyDataBySku',
+      'restaurantData',
+    ]),
     price() {
-      return formatPrice(this.result.price, false, true);
+      return formatPrice(this.result.price - this.result.discount, false, true);
+    },
+    status() {
+      if (isPassed(new Date(this.result.expiredDate))) {
+        return 'Expired';
+      }
+      if (this.result.redeem) {
+        return 'Available';
+      }
+
+      return 'Used';
     },
     items() {
       return [
-        [
-          'Expired date', formatDate(this.result.expiredDate),
-        ],
-        [
-          'Paid by', this.result.username,
-        ],
-        [
-          'Status', this.result.status,
-        ],
+        {
+          expired_date: formatDate(new Date(this.result.expiredDate)),
+          quantity: this.result.quantity,
+          status: this.status,
+        },
       ];
+    },
+    mediaData() {
+      if (this.result.wisataSku) {
+        return this.journeyDataBySku;
+      }
+      return this.restaurantData;
     },
   },
 };

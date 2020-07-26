@@ -28,7 +28,7 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'MyTickets',
   computed: {
-    ...mapGetters(['approvedOrderData']),
+    ...mapGetters(['approvedOrderData', 'userSku']),
   },
   created() {
     this.getApprovedOrderData(this.userSku);

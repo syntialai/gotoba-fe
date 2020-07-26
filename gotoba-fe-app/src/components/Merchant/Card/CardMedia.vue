@@ -9,7 +9,9 @@
           :alt="data.name"
         ></b-img>
       </template>
-      <h5 class="m-0 semibold font-color-black-87">{{ data.name }}</h5>
+      <h5 class="m-0 semibold font-color-black-87">
+        {{ data.name }}
+      </h5>
       <p class="mb-0 font-size-14">
         {{ data.location }}
       </p>

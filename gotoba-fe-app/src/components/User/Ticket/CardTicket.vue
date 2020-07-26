@@ -1,33 +1,33 @@
 <template>
   <div class="card-ticket bg-white w-100">
-    <b-card class="m-2 d-flex">
-      <b-card-img
-        :src="imageUrl"
-        :alt="'image-' + ticket.title"
-        class="ml-1 mr-3 border-circle"
-      ></b-card-img>
-      <b-card-text class="font-size-12">
-        <div class="title semibold mb-1">
-          {{ ticket.title }}
-        </div>
-        <div class="merchant font-color-blue-secondary mb-2">
-          <span>{{ ticket.merchant }}</span>
-        </div>
-        <div class="valid">
-          <div v-if="isExpired" class="font-color-red">
-            Expired on {{ ticket.expiredDate }}
+    <router-link :to="goToQRCode">
+      <b-card class="m-2 d-flex">
+        <b-card-img
+          :src="imageUrl"
+          :alt="'image-' + ticket.title"
+          class="border-circle"
+          left
+        ></b-card-img>
+        <b-card-text class="m-2">
+          <div class="title semibold font-size-14">
+            {{ ticket.title }}
           </div>
-          <div else class="font-color-gray">
-            Valid until {{ ticket.expiredDate }}
+          <div class="valid font-size-12">
+            <div v-if="isExpired" class="font-color-red">
+              Expired on {{ expiredDate }}
+            </div>
+            <div else class="font-color-gray">
+              Valid until {{ expiredDate }}
+            </div>
           </div>
-        </div>
-      </b-card-text>
-    </b-card>
+        </b-card-text>
+      </b-card>
+    </router-link>
   </div>
 </template>
 
 <script>
-import { isPassed } from '../../../utils/filter';
+import { isPassed, formatDate } from '../../../utils/filter';
 import api from '../../../api/api';
 
 export default {
@@ -41,6 +41,14 @@ export default {
     },
     isExpired() {
       return isPassed(new Date(this.ticket.expiredDate));
+    },
+    goToQRCode() {
+      return `/my-tickets/${this.ticket.sku}`;
+    },
+    expiredDate() {
+      const date = formatDate(new Date(this.ticket.expiredDate)).split(' ');
+      date.shift();
+      return date.join(' ');
     },
   },
 };

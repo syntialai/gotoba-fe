@@ -2,7 +2,7 @@
   <div class="itinerary-plan bg-white border-square-20 p-3">
     <b-overlay
       id="overlay-timeline"
-      :show="!schedule"
+      :show="schedule"
       variant="light"
       spinner-variant="primary"
       :opacity="0.6"
@@ -42,7 +42,6 @@ export default {
       type: Array,
       default: null,
     },
-
   },
   components: {
     Timeline,
