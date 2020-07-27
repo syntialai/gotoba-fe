@@ -1,10 +1,10 @@
 <template>
   <div class="timeline">
-    <ul class="timeline">
+    <ul class="timeline" v-if="sortedTimeline">
       <li
-        v-for="timeline in getTimeline"
-        :key="timeline.destination"
-        class="active"
+        v-for="(timeline, index) in sortedTimeline"
+        :key="index"
+        :class="{ 'active': index === sortedTimeline.length - 1 }"
       >
         <div class="d-flex justify-content-between w-100">
           <div class="timeline-place font-color-black-87 semibold">
@@ -79,14 +79,41 @@ export default {
         this.setLocationKeyword(value);
       },
     },
+    date() {
+      return new Date(
+        this.selectedDate.year,
+        this.selectedDate.month,
+        this.selectedDate.date,
+      ).toString();
+    },
     getTimeline() {
-      return [...this.timelines, ...this.newSchedule].sort((a, b) => b.time < a.time);
+      const selected = this.newSchedule.find((item) => item.date === this.date);
+
+      if (selected) {
+        return [
+          ...this.timelines,
+          ...selected.schedule,
+        ];
+      }
+
+      return [...this.timelines];
+    },
+    sortedTimeline() {
+      const timeline = this.getTimeline;
+      return timeline.sort((a, b) => {
+        const bTime = this.getTime(b.time);
+        const bDate = new Date(0, 0, 0, bTime[0], bTime[1], 0);
+
+        const aTime = this.getTime(a.time);
+        const aDate = new Date(0, 0, 0, aTime[0], aTime[1], 0);
+
+        return aDate.getTime() - bDate.getTime();
+      });
     },
   },
   data() {
     return {
       time: null,
-      schedules: [],
       context: null,
     };
   },
@@ -94,21 +121,37 @@ export default {
     ...mapActions(['setLocationKeyword', 'addNewSchedule']),
     addSchedule() {
       const data = {
-        destination: this.locationKeyword,
-        time: this.context.formatted,
+        date: this.date,
+        schedule: [
+          {
+            destination: this.locationKeyword,
+            time: this.context.formatted,
+          },
+        ],
       };
 
       if (data.destination === null || data.time === null) {
         return;
       }
 
-      this.addNewSchedule(data, this.selectedDate);
+      this.addNewSchedule(data);
+
       this.time = null;
       this.context = null;
       this.setLocationKeyword('');
     },
     onContext(context) {
       this.context = context;
+    },
+    getTime(timeStr) {
+      const amPm = timeStr.split(' ').pop();
+      const time = timeStr.split(':');
+      let hour = parseInt(time[0], 10);
+      if (amPm === 'PM') {
+        hour += 12;
+      }
+      const minutes = parseInt(time[1].slice(0, 2), 10);
+      return [hour, minutes];
     },
   },
 };

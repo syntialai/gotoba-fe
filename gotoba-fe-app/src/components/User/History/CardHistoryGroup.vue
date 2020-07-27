@@ -2,10 +2,13 @@
   <div class="card-history-group">
     <div
       class="history-by-day"
-      v-for="history in historyByDate"
-      :key="history.date"
+      v-for="(history, index) in historyByDate"
+      :key="index"
     >
-      <card-history :history="history" />
+      <card-history
+        :history="history"
+        :date="index"
+      />
     </div>
   </div>
 </template>
@@ -32,6 +35,7 @@ export default {
           history[date] = [item];
         }
       });
+      console.log(history);
       return history;
     },
   },

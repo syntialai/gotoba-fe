@@ -4,7 +4,7 @@
       <div class="title w-100 border-bottom-gray-young">
         <h6 class="font-color-black-87">Order Details</h6>
       </div>
-      <div class="detail mt-2">
+      <div class="detail mt-2" v-if="orderInfo">
         <div
           class="d-flex justify-content-between font-size-14 font-color-black-60 mb-2"
           v-for="info in orderInfo"
@@ -52,7 +52,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { formatPrice } from '../../../utils/filter';
+import { formatDate } from '../../../utils/filter';
 import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
 import OrderItems from '../../../components/User/OrderItems.vue';
 
@@ -70,7 +70,8 @@ export default {
           name: 'Order Id', value: this.orderDataBySku.id,
         },
         {
-          name: 'Transaction Date', value: formatPrice(this.paymentDataBySku.created),
+          name: 'Transaction Date',
+          value: formatDate(new Date(this.paymentDataBySku.createdAt)),
         },
         {
           name: 'Purchase Status', value: this.paymentDataBySku.status,

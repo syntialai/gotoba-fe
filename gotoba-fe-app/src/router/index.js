@@ -151,22 +151,6 @@ const routes = [
     },
   },
   {
-    path: '/notification',
-    name: 'Notification',
-    component: Pages.NOTIFICATION,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
-    path: '/notification/:title',
-    name: 'Notification Detail',
-    component: Pages.NOTIFICATION_DETAIL,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
     path: '/search',
     name: 'Search',
     component: Pages.SEARCH,
@@ -289,6 +273,9 @@ const routes = [
     path: '/itinerary/add/show-on-map',
     name: 'Set Destination',
     component: Pages.ADD_DESTINATION,
+    meta: {
+      layout: 'default-back',
+    },
   },
   {
     path: '/my-tickets/:sku',

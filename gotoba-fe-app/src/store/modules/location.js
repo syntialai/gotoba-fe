@@ -50,15 +50,20 @@ const actions = {
     commit(Types.SET_LOCATION_KEYWORD, keyword);
   },
 
-  addNewSchedule({ commit, state }, res, date) {
-    const index = state.newSchedule.findIndex((item) => item.date === date);
+  clearNewSchedule({ commit }) {
+    commit(Types.CLEAR_NEW_SCHEDULE);
+  },
+
+  addNewSchedule({ commit, state }, res) {
+    const index = state.newSchedule.findIndex((item) => item.date === res.date);
     if (index === -1) {
-      commit(Types.SET_NEW_SCHEDULE, {
-        date,
-        schedule: [res],
-      });
+      commit(Types.SET_NEW_SCHEDULE, res);
+      return;
     }
-    commit(Types.SET_NEW_SCHEDULE, res, index);
+    commit(Types.SET_NEW_SCHEDULE_DETAIL, {
+      schedule: res.schedule,
+      index,
+    });
   },
 
   setSelectedDate({ commit }, date) {
@@ -93,12 +98,13 @@ const mutations = {
   [Types.SET_NEW_SCHEDULE](state, res) {
     state.newSchedule.push(res);
   },
-  [Types.SET_NEW_SCHEDULE](state, res, index) {
-    if (state.newSchedule[index].schedule) {
-      state.newSchedule[index].schedule.push(res);
-      return;
-    }
-    state.newSchedule[index].schedule = [res];
+  [Types.CLEAR_NEW_SCHEDULE](state) {
+    state.newSchedule = [];
+  },
+  [Types.SET_NEW_SCHEDULE_DETAIL](state, res) {
+    state.newSchedule[res.index].schedule.push(
+      ...res.schedule,
+    );
   },
   [Types.SET_SELECTED_DATE](state, date) {
     state.selectedDate = {

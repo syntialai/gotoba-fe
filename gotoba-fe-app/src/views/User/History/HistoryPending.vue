@@ -1,6 +1,9 @@
 <template>
   <div class="history-pending">
-    <card-history-group :histories="waitingPaymentData" />
+    <card-history-group
+      v-if="waitingPaymentData"
+      :histories="waitingPaymentData"
+    />
   </div>
 </template>
 
@@ -14,10 +17,10 @@ export default {
     CardHistoryGroup,
   },
   computed: {
-    ...mapGetters(['waitingPaymentData', 'userData']),
+    ...mapGetters(['waitingPaymentData', 'userSku']),
   },
   created() {
-    this.getWaitingPayment(this.userData.sku);
+    this.getWaitingPayment(this.userSku);
   },
   methods: {
     ...mapActions(['getWaitingPayment']),

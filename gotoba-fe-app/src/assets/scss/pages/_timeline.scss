@@ -29,4 +29,16 @@ ul.timeline {
     height: 20px;
     z-index: 400;
   }
+
+  > li.active:before {
+    content: ' ';
+    background: $blue-gradient;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    left: 16px;
+    width: 20px;
+    height: 20px;
+    z-index: 400;
+  }
 }

@@ -42,4 +42,8 @@ a, a:hover {
   text-decoration: none;
 }
 
+.text-shadow-black {
+  text-shadow: $text-shadow-black!important;
+}
+
 @include font-size();

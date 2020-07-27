@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-menu-group bg-white p-3 position-relative">
+  <div class="profile-menu-group bg-white p-3">
     <h5 class="bold pl-1">{{ title }}</h5>
     <b-list-group>
       <b-list-group-item

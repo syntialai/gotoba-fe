@@ -6,8 +6,6 @@ const MY_TICKETS = () => import('../views/User/Ticket/MyTickets.vue');
 const CART = () => import('../views/User/Payment/Cart.vue');
 const PROFILE = () => import('../views/User/Profile/Profile.vue');
 
-const NOTIFICATION = () => import('../views/User/Notification/Notification.vue');
-const NOTIFICATION_DETAIL = () => import('../views/User/Notification/NotificationDetail.vue');
 const SEARCH = () => import('../views/User/Search/Search.vue');
 const HOME_MORE = () => import('../views/User/Home/HomeMore.vue');
 const RESTAURANT = () => import('../views/User/Restaurant/Restaurant.vue');
@@ -79,8 +77,6 @@ export const Pages = {
   MY_TICKETS,
   CART,
   PROFILE,
-  NOTIFICATION,
-  NOTIFICATION_DETAIL,
   SEARCH,
   HOME_MORE,
   RESTAURANT,

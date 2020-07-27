@@ -26,12 +26,12 @@
         <b-carousel
           id="toba-carousel"
           v-model="slide"
-          :interval="2000"
+          :interval="3000"
           controls
           indicators
           img-width="768"
           img-height="512"
-          style="text-shadow: 1px 2px 10px #b7b7b7;"
+          class="text-shadow-black"
         >
           <b-carousel-slide
             caption="Lake Toba"

@@ -16,10 +16,7 @@
       </b-navbar-brand>
       <b-navbar-nav right class="ml-auto">
         <b-nav-item to="/search">
-          <p class="text-white mb-0"><b-icon icon="search"></b-icon></p>
-        </b-nav-item>
-        <b-nav-item to="/notification">
-          <p class="text-white mb-0"><b-icon icon="bell-fill"></b-icon></p>
+          <p class="text-white mb-0 mr-1"><b-icon icon="search"></b-icon></p>
         </b-nav-item>
       </b-navbar-nav>
     </b-navbar>

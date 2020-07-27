@@ -9,6 +9,7 @@
       <b-button
         block
         :disabled="!ticketData.redeem"
+        @click="useTicket"
         class="m-3"
       >
         USE TICKET
@@ -32,6 +33,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { alert } from '../../../utils/tool';
+import api from '../../../api/api';
 import CardScanResult from '../../../components/Merchant/Card/CardScanResult.vue';
 
 export default {
@@ -61,7 +64,20 @@ export default {
     ...mapActions([
       'getJourneyDataBySku',
       'getRestaurantDataByMerchantSku',
+      'setTicketBySku',
     ]),
+    async useTicket() {
+      const data = { ...this.ticketData };
+      data.redeem = false;
+
+      try {
+        await api.EditOrderDetail(this.ticketData.sku, data);
+        this.setTicketBySku(data);
+        alert('used ticket!', true);
+      } catch (err) {
+        alert('use ticket. Please try again!', true);
+      }
+    },
   },
 };
 </script>

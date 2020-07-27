@@ -15,8 +15,8 @@
           </b-card-img>
         </b-col>
         <b-col md="4">
-          <b-card-body class="p-3">
-            <b-card-sub-title class="bold font-color-blue-secondary mb-3">
+          <b-card-body class="m-3">
+            <b-card-sub-title class="bold font-color-blue-secondary mb-2">
               {{ data.name }}
             </b-card-sub-title>
 

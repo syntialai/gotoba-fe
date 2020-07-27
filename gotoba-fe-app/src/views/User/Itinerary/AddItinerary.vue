@@ -63,7 +63,7 @@ export default {
     ...mapActions([
       'getLocationData',
       'setLocationKeyword',
-      'setNewSchedule',
+      'clearNewSchedule',
     ]),
     submitTravellingSchedule() {
       try {
@@ -75,19 +75,19 @@ export default {
             await api.EditTravellingSchedule(this.schedule[index].sku, schedule);
           }
         });
-        this.setDefault();
         this.$router.push('/itinerary');
+        this.setDefault();
       } catch (err) {
         console.log(err);
       }
     },
     setDefault() {
       this.setLocationKeyword('');
-      this.setNewSchedule([]);
+      this.clearNewSchedule();
     },
     goBack() {
-      this.setDefault();
       this.$router.go(-1);
+      this.setDefault();
     },
   },
 };

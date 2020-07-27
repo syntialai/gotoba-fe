@@ -120,7 +120,9 @@ const actions = {
 
     api.GetAcceptedPaymentByUser(userSku)
       .then((res) => {
-        commit(Types.SET_ACCEPTED_PAYMENT_DATA, res);
+        if (!res.error) {
+          commit(Types.SET_ACCEPTED_PAYMENT_DATA, res.data);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -133,7 +135,9 @@ const actions = {
 
     api.GetWaitingPaymentByUser(userSku)
       .then((res) => {
-        commit(Types.SET_WAITING_PAYMENT_DATA, res);
+        if (!res.error) {
+          commit(Types.SET_WAITING_PAYMENT_DATA, res.data);
+        }
         console.log(res);
       })
       .catch((err) => {
@@ -146,7 +150,9 @@ const actions = {
 
     api.GetCancelledPaymentByUser(userSku)
       .then((res) => {
-        commit(Types.SET_CANCELLED_PAYMENT_DATA, res);
+        if (!res.error) {
+          commit(Types.SET_CANCELLED_PAYMENT_DATA, res.data);
+        }
         console.log(res);
       })
       .catch((err) => {
