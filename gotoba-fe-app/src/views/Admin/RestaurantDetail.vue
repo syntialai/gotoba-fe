@@ -62,11 +62,11 @@ export default {
     },
   },
   created() {
-    this.getRestaurantDataByMerchantSku(this.$route.params.sku);
-    this.getRestaurantMenus(this.$route.params.sku);
+    this.getRestaurantDataBySku(this.$route.params.sku);
+    // this.getRestaurantMenu(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantMenus']),
+    ...mapActions(['getRestaurantDataBySku', 'getRestaurantMenu']),
   },
 };
 </script>

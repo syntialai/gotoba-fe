@@ -7,6 +7,7 @@ const CART = () => import('../views/User/Payment/Cart.vue');
 const PROFILE = () => import('../views/User/Profile/Profile.vue');
 
 const SEARCH = () => import('../views/User/Search/Search.vue');
+const ABOUT = () => import('../views/User/Home/About.vue');
 const HOME_MORE = () => import('../views/User/Home/HomeMore.vue');
 const RESTAURANT = () => import('../views/User/Restaurant/Restaurant.vue');
 const RESTAURANT_PROFILE = () => import('../views/User/Restaurant/RestaurantProfile.vue');
@@ -77,6 +78,7 @@ export const Pages = {
   MY_TICKETS,
   CART,
   PROFILE,
+  ABOUT,
   SEARCH,
   HOME_MORE,
   RESTAURANT,

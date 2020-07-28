@@ -14,7 +14,7 @@
               {{ formatPrice(ticket.price) }}
             </span>
             <span v-if="ticket.discount > 0" class="pl-1 discount-price font-color-red semibold">
-              {{ formatPrice(ticket.discount) }}
+              {{ formatPrice(ticket.price - ticket.discount) }}
             </span>
           </div>
         </div>

@@ -37,9 +37,8 @@
         All rights reserved.
       </div>
       <div class="font-size-12 m-2">
-        <router-link to="" class="text-white">Terms of Use</router-link> |
-         <router-link to="" class="text-white">Privacy Policy</router-link> |
-         <router-link to="" class="text-white">Site Map</router-link>
+        <router-link to="/terms-and-condition" class="text-white">Terms of Use</router-link> |
+         <router-link to="/privacy-policy" class="text-white">Privacy Policy</router-link>
       </div>
     </div>
   </div>

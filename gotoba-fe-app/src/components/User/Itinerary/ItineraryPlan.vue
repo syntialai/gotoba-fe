@@ -2,7 +2,7 @@
   <div class="itinerary-plan bg-white border-square-20 p-3">
     <b-overlay
       id="overlay-timeline"
-      :show="schedule"
+      :show="!schedules"
       variant="light"
       spinner-variant="primary"
       :opacity="0.6"
@@ -10,8 +10,8 @@
       rounded="sm"
     >
       <timeline
-        v-if="schedule && schedule.length > 0"
-        :timelines="schedule"
+        v-if="todayTimeline"
+        :timelines="schedules"
       />
 
       <div class="empty" v-else>
@@ -33,18 +33,31 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Timeline from '../../Partial/Timeline.vue';
 
 export default {
   name: 'ItineraryPlan',
   props: {
-    schedule: {
+    schedules: {
       type: Array,
       default: null,
     },
   },
   components: {
     Timeline,
+  },
+  computed: {
+    ...mapGetters(['schedule', 'selectedDate']),
+    todayTimeline() {
+      const date = new Date(
+        this.selectedDate.year,
+        this.selectedDate.month,
+        this.selectedDate.date,
+      ).toString();
+
+      return this.schedule.find((item) => item.date === date);
+    },
   },
 };
 </script>

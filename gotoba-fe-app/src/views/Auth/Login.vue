@@ -69,13 +69,9 @@
               </b-form-group>
             </ValidationProvider>
 
-            <span class="align-right d-block mb-3">
-              <router-link to="/forgot-password">Forgot Password?</router-link>
-            </span>
-
             <b-button
               id="button-submit"
-              class="btn custom-btn-primary w-100 d-block mb-3"
+              class="btn custom-btn-primary w-100 d-block my-3"
               type="submit"
             >
               LOG IN

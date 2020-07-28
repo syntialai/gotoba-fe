@@ -12,6 +12,7 @@ import order from './modules/order';
 import restaurant from './modules/restaurant';
 import review from './modules/review';
 import search from './modules/search';
+import schedule from './modules/schedule';
 import ticket from './modules/ticket';
 import tourGuide from './modules/tourGuide';
 import user from './modules/user';
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     restaurant,
     review,
     search,
+    schedule,
     ticket,
     tourGuide,
     user,

@@ -6,13 +6,7 @@ const state = {
   locationData: [],
   locationSet: {},
   locationKeyword: '',
-  newSchedule: [],
-  schedule: [],
-  selectedDate: {
-    date: new Date().getDate(),
-    month: new Date().getMonth(),
-    year: new Date().getFullYear(),
-  },
+  locationOpen: true,
 };
 
 const actions = {
@@ -24,50 +18,16 @@ const actions = {
 
     if (!rest.error && !wist.error) {
       commit(Types.SET_LOCATION_DATA, [...rest.data, ...wist.data]);
-      console.log([...rest.data, ...wist.data]);
     }
   },
-
-  async getSchedule({ commit }, userSku) {
-    commit(Types.SET_SCHEDULE);
-
-    try {
-      const res = await api.GetTravellingSchedule(userSku);
-      if (!res.error) {
-        commit(Types.SET_SCHEDULE, res.data);
-        console.log(res.data);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  },
-
   setLocation({ commit }, res) {
     commit(Types.SET_LOCATION, res);
   },
-
   setLocationKeyword({ commit }, keyword) {
     commit(Types.SET_LOCATION_KEYWORD, keyword);
   },
-
-  clearNewSchedule({ commit }) {
-    commit(Types.CLEAR_NEW_SCHEDULE);
-  },
-
-  addNewSchedule({ commit, state }, res) {
-    const index = state.newSchedule.findIndex((item) => item.date === res.date);
-    if (index === -1) {
-      commit(Types.SET_NEW_SCHEDULE, res);
-      return;
-    }
-    commit(Types.SET_NEW_SCHEDULE_DETAIL, {
-      schedule: res.schedule,
-      index,
-    });
-  },
-
-  setSelectedDate({ commit }, date) {
-    commit(Types.SET_SELECTED_DATE, date);
+  setLocationOpen({ commit }, status) {
+    commit(Types.SET_LOCATION_OPEN, status);
   },
 };
 
@@ -75,9 +35,7 @@ const getters = {
   locationData: (state) => state.locationData,
   locationSet: (state) => state.locationSet,
   locationKeyword: (state) => state.locationKeyword,
-  schedule: (state) => state.schedule,
-  newSchedule: (state) => state.newSchedule,
-  selectedDate: (state) => state.selectedDate,
+  locationOpen: (state) => state.locationOpen,
 };
 
 const mutations = {
@@ -87,31 +45,12 @@ const mutations = {
   },
   [Types.SET_LOCATION](state, res) {
     state.locationSet = res;
-    console.log(res);
   },
   [Types.SET_LOCATION_KEYWORD](state, res) {
     state.locationKeyword = res;
   },
-  [Types.SET_SCHEDULE](state, res) {
-    state.schedule = res;
-  },
-  [Types.SET_NEW_SCHEDULE](state, res) {
-    state.newSchedule.push(res);
-  },
-  [Types.CLEAR_NEW_SCHEDULE](state) {
-    state.newSchedule = [];
-  },
-  [Types.SET_NEW_SCHEDULE_DETAIL](state, res) {
-    state.newSchedule[res.index].schedule.push(
-      ...res.schedule,
-    );
-  },
-  [Types.SET_SELECTED_DATE](state, date) {
-    state.selectedDate = {
-      date: date.getDate(),
-      month: date.getMonth(),
-      year: date.getFullYear(),
-    };
+  [Types.SET_LOCATION_OPEN](state, status) {
+    state.locationOpen = status;
   },
 };
 

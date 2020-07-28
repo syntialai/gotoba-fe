@@ -35,7 +35,7 @@
           </b-form-checkbox-group>
         </div>
 
-        <div class="mt-80 fixed-bottom">
+        <div class="margin-80 fixed-bottom">
           <bottom-nav-payment
             :totalItem="orderTotal.item"
             :totalPrice="orderTotal.price - orderTotal.discount"
@@ -125,8 +125,4 @@ export default {
 .custom-control-label {
   width: 100%!important;
 }
-
-.mt-80 {
-   margin-bottom: 80px!important;
- }
  </style>

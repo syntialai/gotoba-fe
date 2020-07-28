@@ -24,6 +24,7 @@ export default {
         location: this.restaurant.address,
         other: this.restaurant.bistroType,
         rating: this.restaurant.rating || null,
+        name: this.restaurant.name,
       };
     },
     goToRestaurantDetail() {

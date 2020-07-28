@@ -89,7 +89,7 @@ export default {
    * User
    */
   GetUsers() {
-    return fetchGet('/user/');
+    return fetchGet('/user/customer/');
   },
   GetActiveUsers() {
     return fetchGet('/user/active');
@@ -102,6 +102,12 @@ export default {
   },
   GetUserByUsername(username) {
     return fetchGet(`/user/username/${username}`);
+  },
+  ActivateUser(sku) {
+    return fetchPut(`/user/activate/${sku}`);
+  },
+  BlockUser(sku) {
+    return fetchPut(`/user/block/${sku}`);
   },
   EditUser(sku, params) {
     return fetchPut(`/user/edit/${sku}`, params);

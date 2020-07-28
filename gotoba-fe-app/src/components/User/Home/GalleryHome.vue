@@ -12,7 +12,7 @@
         :key="index"
         :class="`slide--${index}`"
       >
-        <img :src="slide" alt="image-preview" />
+        <img :src="slide" alt="image-preview" class="w-100 object-fit_cover" />
       </div>
     </agile>
     <agile

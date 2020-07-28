@@ -11,7 +11,10 @@
       >EDIT</b-button>
     </div>
 
-    <itinerary-modal title="Edit" :itinerary="itinerary" />
+    <itinerary-modal
+      title="Edit"
+      :itinerary="journeyDataBySku"
+    />
 
     <itinerary-card
       v-if="journeyDataBySku"

@@ -70,7 +70,11 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['locationKeyword', 'newSchedule', 'selectedDate']),
+    ...mapGetters([
+      'locationKeyword',
+      'newSchedule',
+      'selectedDate',
+    ]),
     location: {
       get() {
         return this.locationKeyword;
@@ -86,17 +90,25 @@ export default {
         this.selectedDate.date,
       ).toString();
     },
+    getSavedTimeline() {
+      const timeline = this.timelines.find((item) => item.date === this.date);
+
+      if (timeline) {
+        return timeline.schedule;
+      }
+      return [];
+    },
     getTimeline() {
       const selected = this.newSchedule.find((item) => item.date === this.date);
 
       if (selected) {
         return [
-          ...this.timelines,
+          ...this.getSavedTimeline,
           ...selected.schedule,
         ];
       }
 
-      return [...this.timelines];
+      return this.getSavedTimeline;
     },
     sortedTimeline() {
       const timeline = this.getTimeline;
@@ -118,7 +130,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['setLocationKeyword', 'addNewSchedule']),
+    ...mapActions([
+      'setLocationKeyword',
+      'addNewSchedule',
+      'setLocationOpen',
+    ]),
     addSchedule() {
       const data = {
         date: this.date,
@@ -139,6 +155,7 @@ export default {
       this.time = null;
       this.context = null;
       this.setLocationKeyword('');
+      this.setLocationOpen(true);
     },
     onContext(context) {
       this.context = context;

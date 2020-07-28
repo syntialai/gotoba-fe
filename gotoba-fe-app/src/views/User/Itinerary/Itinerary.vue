@@ -2,7 +2,11 @@
   <div class="itinerary p-3 vh-100">
     <this-week-calendar class="mb-3" />
 
-    <itinerary-plan class="box-shadow"/>
+    <itinerary-plan
+      v-if="schedule"
+      :schedules="schedule"
+      class="box-shadow"
+    />
 
     <pdf-modal />
 

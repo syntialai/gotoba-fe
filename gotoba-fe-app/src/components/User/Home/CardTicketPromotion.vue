@@ -50,10 +50,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.card-home {
-  min-width: 100px;
-  max-width: 200px;
-}
-</style>

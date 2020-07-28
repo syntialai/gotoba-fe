@@ -20,7 +20,6 @@
             id="begin-date"
             v-model="begin.date"
             :min="begin.min"
-            :max="begin.max"
             :date-format-options="{ year: 'numeric', month: 'long', day: 'numeric' }"
           ></b-form-datepicker>
         </b-form-group>
@@ -34,7 +33,6 @@
             id="end-date"
             v-model="end.date"
             :min="end.min"
-            :max="end.max"
             :date-format-options="{ year: 'numeric', month: 'long', day: 'numeric' }"
           ></b-form-datepicker>
         </b-form-group>
@@ -46,9 +44,13 @@
 <script>
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'PdfModal',
+  computed: {
+    ...mapGetters(['schedule']),
+  },
   data() {
     return {
       begin: {
@@ -64,6 +66,7 @@ export default {
     };
   },
   methods: {
+    getItinerary() {},
     exportPdf() {
       /* eslint new-cap: ["error", { "newIsCapExceptions": ["jsPDF"] }] */
       const pdfName = `Itinerary - ${this.begin.date} - ${this.end.date}`;

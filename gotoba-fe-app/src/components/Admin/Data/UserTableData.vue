@@ -24,15 +24,20 @@
       </div>
     </template>
 
-    <template v-slot:cell(status)="data">
-      <b-badge :variant="data.value === 'active'? 'success' : 'danger'">
-        {{ data.value }}
+    <template v-slot:cell(status)="{ item }">
+      <b-badge
+        :variant="item.status === 'active'? 'success' : 'danger'"
+        @click="confirmModal(item.status, item.sku)"
+      >
+        {{ item.status }}
       </b-badge>
     </template>
   </b-table>
 </template>
 
 <script>
+import api from '../../../api/api';
+import { alert } from '../../../utils/tool';
 import { toCapitalize } from '../../../utils/filter';
 
 export default {
@@ -49,6 +54,54 @@ export default {
   },
   methods: {
     toCapitalize,
+    getStatus(status) {
+      if (status === 'active') {
+        return 'blocked';
+      }
+      return 'active';
+    },
+    async changeStatus(status, sku) {
+      let res;
+      try {
+        if (status === 'blocked') {
+          res = await api.BlockUser(sku);
+        } else {
+          res = await api.ActivateUser(sku);
+        }
+
+        if (!res.error) {
+          console.log(res);
+          alert('changed user status', true);
+        } else {
+          alert('change user status', false);
+        }
+      } catch (err) {
+        alert('change user status', false);
+      }
+    },
+    confirmModal(status, sku) {
+      const statusInv = this.getStatus(status);
+
+      this.$bvModal.msgBoxConfirm(`User with sku ${sku} will be ${statusInv}.`, {
+        title: 'Change user status',
+        size: 'sm',
+        okVariant: 'danger',
+        okTitle: 'YES',
+        cancelVariant: 'outline-secondary',
+        cancelTitle: 'NO',
+        footerClass: 'p-2',
+        hideHeaderClose: false,
+        centered: true,
+      })
+        .then((value) => {
+          if (value) {
+            this.changeStatus(statusInv, sku);
+          }
+        })
+        .catch(
+          (err) => console.log(err),
+        );
+    },
   },
 };
 </script>

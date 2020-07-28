@@ -4,7 +4,7 @@
 
     <timeline
       v-if="locationData"
-      :timelines="timelines"
+      :timelines="schedule"
       :add="true"
     />
 
@@ -52,37 +52,40 @@ export default {
   },
   created() {
     this.getLocationData();
-    console.log(this.locationData);
-  },
-  data() {
-    return {
-      timelines: [],
-    };
   },
   methods: {
     ...mapActions([
       'getLocationData',
       'setLocationKeyword',
       'clearNewSchedule',
+      'setLocationOpen',
     ]),
     submitTravellingSchedule() {
       try {
-        this.newSchedule.forEach(async (schedule) => {
-          const index = this.schedule.findIndex((item) => item.date === schedule.date);
+        this.newSchedule.forEach(async (sched) => {
+          const index = this.schedule.findIndex((item) => item.date === sched.date);
           if (index === -1) {
-            await api.PostTravellingSchedule(this.userSku, schedule);
+            await api.PostTravellingSchedule(this.userSku, {
+              userSku: this.userSku,
+              date: sched.date,
+              schedule: sched.schedule,
+            });
           } else {
-            await api.EditTravellingSchedule(this.schedule[index].sku, schedule);
+            const editSched = sched;
+            editSched.schedule.push(...this.schedule[index].schedule);
+
+            await api.EditTravellingSchedule(this.schedule[index].sku, editSched);
           }
         });
-        this.$router.push('/itinerary');
         this.setDefault();
+        this.$router.push('/itinerary');
       } catch (err) {
         console.log(err);
       }
     },
     setDefault() {
       this.setLocationKeyword('');
+      this.setLocationOpen(true);
       this.clearNewSchedule();
     },
     goBack() {

@@ -13,7 +13,7 @@
     <b-card-text class="font-size-12 px-2 font-color-black-60">
       {{ location }}
     </b-card-text>
-    <b-card-text class="px-2 font-size-12 text-muted" v-if="rating">
+    <b-card-text class="px-2 font-size-12 text-muted d-flex" v-if="rating">
       <rating :rate="rating" :fontSize="8" />
       <span class="font-color-black-87 semibold pl-1">
         ({{ rating }})

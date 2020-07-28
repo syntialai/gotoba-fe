@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="date-choose d-flex overflow-auto mt-3">
+    <div id="date-choose" class="d-flex overflow-auto mt-3">
       <card-date
         v-for="date in selectedDayOfMonth"
         :key="date"
@@ -72,6 +72,7 @@ export default {
       },
       set(value) {
         this.setSelectedDate(new Date(value));
+        this.scrollToDate();
       },
     },
   },
@@ -87,12 +88,24 @@ export default {
     isSelectedDate(date) {
       return date === this.selectedDate.date;
     },
+    scrollToDate() {
+      const elm = document.getElementById('date-choose');
+      const cardDate = document.getElementsByClassName('card-date');
+      let scroll = 0;
+
+      for (let i = 0; i < this.selectedDate.date - 1; i += 1) {
+        scroll += cardDate[i].clientWidth + 8;
+      }
+
+      elm.scrollTo({
+        top: 0,
+        left: scroll,
+        behavior: 'smooth',
+      });
+    },
+  },
+  mounted() {
+    this.scrollToDate();
   },
 };
 </script>
-
-<style lang="scss" scoped>
-::-webkit-scrollbar {
-  display: none;
-}
-</style>

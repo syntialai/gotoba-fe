@@ -76,7 +76,7 @@ export default {
       this.setSelectedDate(new Date(
         date.year,
         date.month,
-        date.day,
+        date.date,
       ));
     },
   },

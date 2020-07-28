@@ -25,7 +25,6 @@
       <div class="carousel my-3 box-shadow">
         <b-carousel
           id="toba-carousel"
-          v-model="slide"
           :interval="3000"
           controls
           indicators
@@ -175,8 +174,13 @@
           <h6 class="font-color-blue-primary bold m-0">Our Gallery</h6>
         </div>
 
-        <div class="info font-color-black-60 font-size-14 mb-3">
-          Show every moment captured around Lake Toba
+        <div class="d-flex justify-content-between">
+          <div class="info font-color-black-60 font-size-14 mb-3">
+            Show every moment captured around Lake Toba
+          </div>
+          <div class="show-all">
+            <router-link to="/gallery">Show all</router-link>
+          </div>
         </div>
 
         <gallery-home :galleryData="galleryData" />

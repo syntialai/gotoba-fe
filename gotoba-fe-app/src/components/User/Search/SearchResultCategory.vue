@@ -16,7 +16,7 @@
         v-for="item in searchResults"
         :key="item.sku"
         :sku="item.sku"
-        :title="item.title"
+        :title="item.name"
         :imageSrc="item.image"
         :category="category"
         :icon1="info.icon1"

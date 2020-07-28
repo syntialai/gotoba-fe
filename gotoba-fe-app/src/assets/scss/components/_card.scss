@@ -5,9 +5,11 @@
 
 .card-home {
   width: 100%;
+  min-width: 120px;
+  max-width: 200px;
 }
 
-.responsive-card {
+.responsive-card, .responsive-card-admin {
   margin-right: 8px;
   width: calc((100% - 16px) / 2);
 }
@@ -21,6 +23,10 @@
 @media screen and (min-width: 768px) {
   .responsive-card {
     width: calc((100% - 16px) / 4);
+  }
+
+  .responsive-card-admin {
+    width: calc((100% - 32px) / 4);
   }
 }
 

@@ -52,24 +52,27 @@ export default {
           categoryIcon: 'map-marked-alt',
           categoryColor: 'green',
           category: 'journey',
-          searchResults: this.filterSearch(this.searchKeywords, this.searchWisataResults),
+          searchResults: this.filterSearch(this.searchWisataResults),
         },
         {
           categoryTitle: 'Eats related to',
           categoryIcon: 'utensils',
           categoryColor: 'orange',
           category: 'restaurant',
-          searchResults: this.filterSearch(this.searchKeywords, this.searchRestaurantResults),
+          searchResults: this.filterSearch(this.searchRestaurantResults),
         },
       ];
     },
   },
   methods: {
-    filterSearch(word, array) {
-      const keyword = word.trim().toLowerCase();
+    filterSearch(array) {
+      const keyword = this.searchKeywords.trim().toLowerCase();
+      console.log('keyword', keyword);
+      console.log('array', array);
+      console.log(array[0].name, array[0].title);
       return array.filter(
         (data) => (data.name.toLowerCase().includes(keyword)
-        || data.title.toLowerCase().includes(keyword))
+        || data.address.toLowerCase().includes(keyword))
         && keyword.length > 2,
       );
     },

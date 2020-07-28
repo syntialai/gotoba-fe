@@ -7,7 +7,7 @@
       img-width="150"
       class="mb-3 border-square-5"
     >
-      <b-card-body>
+      <b-card-body class="ml-2 mt-3">
         <b-card-sub-title class="font-color-blue-primary">
           {{ title }}
         </b-card-sub-title>
@@ -26,7 +26,10 @@
             ></font-awesome-icon>
             <div class="value font-color-black-60">{{ value2 }}</div>
           </div>
-          <rating v-if="rating" :rate="rating" :fontSize="14" />
+          <div class="d-flex" v-if="rating">
+            <rating :rate="rating" :fontSize="14" />
+            <div class="rate font-color-black-87 pl-1">({{rating}})</div>
+          </div>
         </b-card-text>
       </b-card-body>
     </b-card>

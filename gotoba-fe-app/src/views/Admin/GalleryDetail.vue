@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between">
       <b-button
         class="custom-btn-red border-none"
-        @click="deleteGalleryPhoto"
+        @click="confirmModal"
       >DELETE</b-button>
       <b-button
         v-b-modal.add-photo-modal
@@ -13,8 +13,8 @@
 
     <photo-modal title="Edit" :photo="galleryPhoto" />
 
-    <div class="photo-detail">
-      <img :src="galleryPhoto.image" :alt="galleryPhoto.title">
+    <div class="photo-detail py-3">
+      <img :src="imageUrl" :alt="galleryPhoto.title" class="w-100">
 
       <h2 class="mt-3">{{ galleryPhoto.title }}</h2>
 
@@ -27,6 +27,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import api from '../../api/api';
 import PhotoModal from '../../components/Admin/Modal/PhotoModal.vue';
 
 export default {
@@ -36,22 +37,21 @@ export default {
   },
   computed: {
     ...mapGetters(['galleryPhoto']),
+    imageUrl() {
+      return api.imageUrl(this.galleryPhoto.image);
+    },
   },
   created() {
     this.getGalleryPhoto(this.$route.params.sku);
   },
   methods: {
     ...mapActions(['getGalleryPhoto', 'removeGalleryPhoto']),
-    deleteGalleryPhoto() {
-      const confirmModalValue = this.confirmModal(this.galleryPhoto.title);
-
-      if (confirmModalValue) {
-        this.removeGalleryPhoto(this.galleryPhoto.sku);
-        this.$router.push('/admin/gallery');
-      }
+    async deleteGalleryPhoto() {
+      this.removeGalleryPhoto(this.galleryPhoto.sku);
+      this.$router.push('/admin/gallery');
     },
-    confirmModal(object) {
-      this.$bvModal.msgBoxConfirm(`${object} will be removed permanently from this system.`, {
+    confirmModal() {
+      this.$bvModal.msgBoxConfirm('Photo will be removed permanently from this system.', {
         title: 'Are you sure?',
         size: 'sm',
         okVariant: 'danger',
@@ -62,7 +62,11 @@ export default {
         hideHeaderClose: false,
         centered: true,
       })
-        .then((value) => value)
+        .then((value) => {
+          if (value) {
+            this.deleteGalleryPhoto();
+          }
+        })
         .catch(
           (err) => console.log(err),
         );

@@ -151,6 +151,11 @@ const routes = [
     },
   },
   {
+    path: '/about',
+    name: 'About',
+    component: Pages.ABOUT,
+  },
+  {
     path: '/search',
     name: 'Search',
     component: Pages.SEARCH,

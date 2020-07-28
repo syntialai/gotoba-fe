@@ -415,7 +415,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setTourGuideBySku', 'getTourGuideBySku']),
+    ...mapActions(['setTourGuideBySku', 'getTourGuideBySku', 'getTourGuideData']),
     getValidationState,
 
     submitTourGuide() {
@@ -426,6 +426,7 @@ export default {
         api.PostTourGuide(data)
           .then((res) => {
             alert('added tour guide', true);
+            this.getTourGuideData();
             console.log(res);
           })
           .catch((err) => {

@@ -1,8 +1,8 @@
 <template>
-  <div class="gallery-group m-3">
+  <div class="gallery-group">
     <vue-gallery :images="images" :index="index" @close="index = null" />
 
-    <div class="image-group d-flex justify-content-between flex-wrap">
+    <div class="image-group d-flex flex-wrap">
       <div
         class="responsive-image"
         v-for="(image, imageIndex) in images"
@@ -69,18 +69,18 @@ img {
 
 .responsive-image {
   box-sizing: border-box;
-  width: 33.33333%;
+  width: 50%;
 }
 
 @media screen and (min-width: 425px) {
   .responsive-image {
-    width: 25%;
+    width: 33.33333%;
   }
 }
 
 @media screen and (min-width: 768px) {
   .responsive-image {
-    width: 20%;
+    width: 25%;
   }
 }
 </style>

@@ -31,7 +31,6 @@ export default {
       'searchKeywords',
       'searchWisataResults',
       'searchRestaurantResults',
-      'searchSuggestionShow',
     ]),
     history() {
       const searchHistory = localStorage.getItem('searchHistory') || null;
@@ -56,11 +55,8 @@ export default {
       'getSearchWisataResults',
       'getSearchRestaurantResults',
       'setSearchSuggestions',
-      'setSearchShowStatus',
     ]),
     doSearch() {
-      this.setSearchShowStatus(false);
-
       const history = JSON.parse(localStorage.getItem('searchHistory'));
       if (history) {
         history.history.push(this.searchKeywords);

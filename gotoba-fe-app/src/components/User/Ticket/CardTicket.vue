@@ -1,13 +1,12 @@
 <template>
   <div class="card-ticket bg-white w-100">
     <router-link :to="goToQRCode">
-      <b-card class="m-2 d-flex">
-        <b-card-img
-          :src="imageUrl"
-          :alt="'image-' + ticket.title"
-          class="border-circle"
-          left
-        ></b-card-img>
+      <b-card
+        class="m-2 d-flex justify-content-between"
+        :img-src="imageUrl"
+        img-width="80"
+        img-left
+      >
         <b-card-text class="m-2">
           <div class="title semibold font-size-14">
             {{ ticket.title }}

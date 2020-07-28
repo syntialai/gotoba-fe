@@ -267,7 +267,10 @@ export default {
   },
   data() {
     return {
-      itinerary: {},
+      itinerary: {
+        latitude: 0,
+        longitude: 0,
+      },
       locationList: null,
     };
   },
@@ -278,7 +281,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setJourneyDataBySku', 'getJourneyDataBySku']),
+    ...mapActions(['setJourneyDataBySku', 'getJourneyDataBySku', 'getJourneyData']),
 
     getValidationState,
 
@@ -295,6 +298,7 @@ export default {
           .then((res) => {
             if (!res.error) {
               alert('added itinerary', true);
+              this.getJourneyData();
               return;
             }
             alert('add itinerary', false);
@@ -335,7 +339,7 @@ export default {
       }
     },
     removePhoto() {
-      this.journeyDataBySku.image = null;
+      this.itinerary.image = null;
     },
 
     locationSuggestions() {
@@ -354,13 +358,13 @@ export default {
   },
   mounted() {
     getLocation((position) => {
-      this.journeyDataBySku.longitude = position.coords.longitude;
-      this.journeyDataBySku.latitude = position.coords.latitude;
+      this.itinerary.longitude = position.coords.longitude;
+      this.itinerary.latitude = position.coords.latitude;
 
-      api.ReverseGeocoding(this.journeyDataBySku.longitude, this.journeyDataBySku.latitude)
+      api.ReverseGeocoding(this.itinerary.longitude, this.itinerary.latitude)
         .then((res) => {
-          this.journeyDataBySku.address = res.display_name;
-          this.journeyDataBySku.location = `${res.address.suburb}, ${res.address.city}`;
+          this.itinerary.address = res.display_name;
+          this.itinerary.location = `${res.address.suburb}, ${res.address.city}`;
         })
         .catch((err) => {
           console.log(err);
@@ -368,11 +372,6 @@ export default {
     }, (err) => {
       console.log(err);
     });
-  },
-  watch: {
-    journeyDataBySku() {
-      this.itinerary = { ...this.journeyDataBySku };
-    },
   },
 };
 </script>

@@ -7,7 +7,7 @@
         class="w-100"
       ></b-img>
     </b-aspect>
-    <div class="info mt-3 mb-2 p-3 bg-white">
+    <div class="info mb-2 p-3 bg-white">
       <div class="title">
         <div class="category-info font-size-12">
           {{ category }}

@@ -10,6 +10,7 @@ module.exports = {
     // process `*.vue` files with `vue-jest`
     '.*\\.(vue)$': 'vue-jest',
   },
+  coverageDirectory: 'tests/coverage',
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{js,vue}', '!src/main.js'],
 };

@@ -5,10 +5,7 @@
         class="max-100"
         ref="map"
         :zoom="zoom"
-        :center="[
-          location.latitude,
-          location.longitude,
-        ]"
+        :center="center"
         :options="{zoomControl: false}"
         @update:zoom="zoomUpdated"
         @update:center="centerUpdated"
@@ -43,13 +40,16 @@
               </font-awesome-layers>
             </l-icon>
           </l-marker>
+          <l-marker
+            :lat-lng="[location.latitude, location.longitude]"
+          ></l-marker>
         </div>
         <l-control-zoom position="topright"></l-control-zoom>
       </l-map>
 
       <l-control
         position="bottomcenter"
-        v-if="location.location !== ''"
+        v-if="location.location !== '' && location.address !== ''"
       >
         <div
           class="set-dest fixed-bottom box-shadow bg-white border-square-20 p-3"
@@ -123,6 +123,7 @@ export default {
   data() {
     return {
       zoom: 9,
+      center: [2.6, 98.7],
       bounds: null,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -160,7 +161,7 @@ export default {
       this.zoom = zoom;
     },
     centerUpdated(center) {
-      [this.location.latitude, this.location.longitude] = center;
+      this.center = center;
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;

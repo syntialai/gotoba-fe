@@ -107,6 +107,9 @@ export default {
   name: 'PhotoModal',
   computed: {
     ...mapGetters(['galleryPhoto']),
+    imageUrl() {
+      return api.imageUrl(this.galleryPhoto.image);
+    },
   },
   created() {
     if (this.title === 'Edit') {
@@ -131,7 +134,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getGalleryPhoto', 'setGalleryPhoto']),
+    ...mapActions(['getGalleryPhoto', 'setGalleryPhoto', 'getGalleryData']),
 
     getValidationState,
 
@@ -153,6 +156,7 @@ export default {
           .then((res) => {
             if (!res.error) {
               alert('added photo', true);
+              this.getGalleryData();
               return;
             }
             alert('to add photo', false);
@@ -169,6 +173,7 @@ export default {
         .then((res) => {
           if (!res.error) {
             alert('updated photo', true);
+            this.getGalleryPhoto(this.$route.params.sku);
             return;
           }
           alert('to update photo', false);
@@ -201,6 +206,7 @@ export default {
   watch: {
     galleryPhoto() {
       this.photo = { ...this.galleryPhoto };
+      this.photo.image = this.imageUrl;
     },
   },
 };

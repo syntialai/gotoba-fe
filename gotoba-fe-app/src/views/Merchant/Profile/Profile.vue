@@ -14,7 +14,7 @@
       title="About"
       :menus="menuAbout"
       :logOut="true"
-      class="mt-3 mb-5"
+      class="mt-3 margin-80"
     />
   </div>
 </template>

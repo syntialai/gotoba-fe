@@ -1,13 +1,16 @@
 <template>
   <div class="gallery-data">
-    <b-card-group column>
-      <gallery-card
+    <b-card-group class="d-flex flex-wrap">
+      <div class="responsive-card-admin"
         v-for="photo of photos"
         :key="photo.title"
-        :image="photo.image"
-        :info="photo.title"
-        :sku="photo.sku"
-      />
+      >
+        <gallery-card
+          :image="photo.image"
+          :info="photo.title"
+          :sku="photo.sku"
+        />
+      </div>
     </b-card-group>
   </div>
 </template>
