@@ -54,13 +54,19 @@ export default {
   },
   created() {
     this.getRestaurantDataBySku(this.$route.params.sku);
-    this.getRestaurantMenu(this.$route.params.sku);
   },
   methods: {
     ...mapActions([
       'getRestaurantDataBySku',
       'getRestaurantMenu',
     ]),
+  },
+  watch: {
+    restaurantData() {
+      if (this.restaurantData) {
+        this.getRestaurantMenu(this.restaurantData.merchantSku);
+      }
+    },
   },
 };
 </script>

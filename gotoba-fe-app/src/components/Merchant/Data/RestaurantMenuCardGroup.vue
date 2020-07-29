@@ -4,7 +4,7 @@
       class="title d-flex w-100 border-bottom-gray-young justify-content-between"
     >
       <h5>Menus</h5>
-      <div class="add">
+      <div class="add" v-if="add">
         <b-button variant="link">Add</b-button>
       </div>
     </div>
@@ -28,6 +28,10 @@ export default {
   },
   props: {
     restaurantMenu: Array,
+    add: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>

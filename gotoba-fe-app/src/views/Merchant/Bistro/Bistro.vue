@@ -1,28 +1,17 @@
 <template>
   <div class="restaurant-profile position-relative margin-80">
-    <div v-if="restaurantData && promotions && restaurantData.length > 0">
+    <div v-if="restaurantData && restaurantData.length > 0">
       <profile-detail
         :data="restaurantData[0]"
-        :promotions="promotions"
+        :promotions="ticketRestaurantByMerchant"
       />
 
       <div class="menus">
         <div class="menu" v-if="restaurantMenus">
           <restaurant-menu-card-group
+            :add="true"
             :restaurantMenu="restaurantMenus"
           />
-        </div>
-        <div class="add-menu" v-else>
-          <div class="mb-2 p-3 bg-white">
-            <div
-              class="title d-flex w-100 border-bottom-gray-young justify-content-between"
-            >
-              <h5>Menus</h5>
-              <div class="add">
-                <b-button variant="link">Add</b-button>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -64,13 +53,10 @@ export default {
   computed: {
     ...mapGetters([
       'restaurantData',
-      'ticketPromotion',
+      'ticketRestaurantByMerchant',
       'restaurantMenus',
       'userSku',
     ]),
-    promotions() {
-      return this.ticketRestaurant.filter((item) => item.merchantSku === this.userSku);
-    },
   },
   created() {
     this.getRestaurantDataByMerchantSku(this.userSku);

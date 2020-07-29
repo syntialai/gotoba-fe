@@ -181,35 +181,24 @@
           </b-form-group>
         </ValidationProvider>
 
-
         <b-form-group
           id="bistro-hours-open-group"
           label="Hours Open"
           label-for="bistro-hours-open"
         >
-          <ul class="list-unstyled">
-            <li
-              v-for="(dayOpen, index) of bistro.hoursOpen"
-              :key="dayOpen.day"
-            >
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <div class="day semibold">{{ dayOpen.day }}</div>
-                <div
-                  class="time ml-3 d-flex justify-content-between"
-                >
-                  <b-form-timepicker
-                    v-model="bistro.hoursOpen[index].openTime"
-                    locale="en"
-                  ></b-form-timepicker>
-                  <div class="mx-2">-</div>
-                  <b-form-timepicker
-                    v-model="bistro.hoursOpen[index].closeTime"
-                    locale="en"
-                  ></b-form-timepicker>
-                </div>
-              </div>
-            </li>
-          </ul>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <b-form-timepicker
+              v-model="open"
+              locale="en"
+              required
+            ></b-form-timepicker>
+            <div class="mx-2">-</div>
+            <b-form-timepicker
+              v-model="close"
+              locale="en"
+              required
+            ></b-form-timepicker>
+          </div>
         </b-form-group>
 
         <b-button
@@ -242,9 +231,12 @@ export default {
     if (this.locationSet.location) {
       Object.assign(this.bistro, this.locationSet);
     }
+    console.log(this.bistro);
   },
   data() {
     return {
+      open: '',
+      close: '',
       bistro: {
         name: '',
         image: null,
@@ -255,29 +247,15 @@ export default {
         bistroType: '',
         phone: '',
         address: '',
-        hoursOpen: [
-          {
-            day: 'Monday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Tuesday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Wednesday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Thursday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Friday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Saturday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Sunday', openTime: '', closeTime: '',
-          },
-        ],
+        hoursOpen: {
+          monday: [],
+          tuesday: [],
+          wednesday: [],
+          thursday: [],
+          friday: [],
+          saturday: [],
+          sunday: [],
+        },
       },
       image: null,
     };
@@ -293,6 +271,30 @@ export default {
 
     updateBistro() {
       const data = this.bistro;
+
+
+      if (!this.open
+        || !this.close
+        || data.name === ''
+        || data.image === null
+        || data.location === ''
+        || data.longitude === 0
+        || data.latitude === 0
+        || data.rating === 0
+        || data.bistroType === ''
+        || data.phone === ''
+        || data.address === ''
+      ) {
+        return;
+      }
+
+      Object.keys(this.data.hoursOpen)
+        .forEach((key) => {
+          this.data.hoursOpen[key] = [
+            this.open,
+            this.close,
+          ];
+        });
 
       console.log(data);
       if (this.restaurantData) {

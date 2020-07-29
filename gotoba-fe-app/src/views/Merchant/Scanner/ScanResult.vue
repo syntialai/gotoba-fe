@@ -3,12 +3,13 @@
     <div v-if="isMerchant">
       <card-scan-result
         class="mt-3"
-        :result="ticketData"
+        v-if="orderDataBySku"
+        :result="ticket"
       />
 
       <b-button
         block
-        :disabled="!ticketData.redeem"
+        :disabled="ticket.redeem"
         @click="useTicket"
         class="m-3"
       >
@@ -46,7 +47,13 @@ export default {
     ...mapGetters([
       'ticketData',
       'userSku',
+      'orderDataBySku',
     ]),
+    ticket() {
+      const data = this.ticketData;
+      data.redeem = this.orderDataBySku.redeem;
+      return data;
+    },
     isMerchant() {
       return this.ticketData.merchantSku === this.userSku;
     },
@@ -59,23 +66,25 @@ export default {
         this.getRestaurantDataByMerchantSku(this.ticketData.merchantSku);
       }
     }
+    this.getOrderDataBySku(this.ticketData.sku);
   },
   methods: {
     ...mapActions([
       'getJourneyDataBySku',
       'getRestaurantDataByMerchantSku',
       'setTicketBySku',
+      'getOrderDataBySku',
     ]),
     async useTicket() {
       const data = { ...this.ticketData };
-      data.redeem = false;
+      data.redeem = true;
 
       try {
         await api.EditOrderDetail(this.ticketData.sku, data);
         this.setTicketBySku(data);
-        alert('used ticket!', true);
+        alert('used ticket', true);
       } catch (err) {
-        alert('use ticket. Please try again!', true);
+        alert('use ticket. Please try again later', false);
       }
     },
   },

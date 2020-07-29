@@ -11,7 +11,7 @@
       :data="data"
     />
 
-    <div class="rating-and-reviews mb-2 p-3 bg-white">
+    <!-- <div class="rating-and-reviews mb-2 p-3 bg-white">
       <div
         class="title d-flex w-100 border-bottom-gray-young justify-content-between"
       >
@@ -24,9 +24,9 @@
         </b-button>
       </div>
 
-      <!-- <rating-profile-detail /> -->
+      <rating-profile-detail />
 
-      <!-- <div class="recent-reviews mt-3">
+      <div class="recent-reviews mt-3">
         <div class="title bold font-color-blue-secondary">Recent reviews</div>
         <div class="recent-reviews-group mt-3" v-if="recentReviews > 0">
           <user-review-detail
@@ -35,11 +35,11 @@
             v-bind="review"
           />
         </div>
-      </div> -->
-    </div>
+      </div>
+    </div> -->
 
-    <div class="promotion mb-2" v-if="promotions.length > 0">
-      <div class="title border-bottom-gray-young">
+    <div class="promotion mb-2 bg-white p-3" v-if="promotions.length > 0">
+      <div class="title border-bottom-gray-young mb-3">
         <h5>Promotions</h5>
       </div>
       <div class="promotion-group">

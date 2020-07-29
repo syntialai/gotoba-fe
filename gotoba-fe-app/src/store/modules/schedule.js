@@ -21,6 +21,7 @@ const actions = {
       if (!res.error) {
         const schedules = res.data;
         commit(Types.SET_SCHEDULE, schedules.sort((a, b) => new Date(a) - new Date(b)));
+        console.log(res.data);
       }
     } catch (err) {
       console.log(err);

@@ -1,6 +1,10 @@
 <template>
   <div class="spot-detail">
-    <profile-detail :data="journeyDataBySku" />
+    <profile-detail
+      v-if="journeyDataBySku"
+      :data="journeyDataBySku"
+      :promotions="ticketItineraryByMerchant"
+    />
   </div>
 </template>
 
@@ -14,13 +18,21 @@ export default {
     ProfileDetail,
   },
   computed: {
-    ...mapGetters(['journeyDataBySku']),
+    ...mapGetters([
+      'journeyDataBySku',
+      'userSku',
+      'ticketItineraryByMerchant',
+    ]),
   },
   created() {
     this.getJourneyDataBySku(this.$route.params.sku);
+    this.getTicketByMerchant(this.userSku);
   },
   methods: {
-    ...mapActions(['getJourneyDataBySku']),
+    ...mapActions([
+      'getJourneyDataBySku',
+      'getTicketByMerchant',
+    ]),
   },
 };
 </script>

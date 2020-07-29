@@ -15,6 +15,7 @@ const state = {
   paymentDataBySku: {},
   orderTotal: { item: 0, price: 0, discount: 0 },
   cartData: [],
+  merchantOrderData: [],
   merchantRestaurantOrder: [],
   merchantItineraryOrder: [],
 };
@@ -172,30 +173,25 @@ const actions = {
       });
   },
 
-  getMerchantItineraryOrder({ commit }, merchantSku) {
-    commit(Types.SET_MERCHANT_ITINERARY_ORDER);
-
-    api.GetJourneyPaymentByMerchant(merchantSku)
-      .then((res) => {
-        commit(Types.SET_MERCHANT_ITINERARY_ORDER, res);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async getMerchantOrderData({ commit }, merchantSku) {
+    const res = await api.GetOrderDetailByMerchant(merchantSku);
+    commit(Types.SET_MERCHANT_ORDER_DATA, res.data || []);
   },
 
-  getMerchantRestaurantOrder({ commit }, merchantSku) {
-    commit(Types.SET_MERCHANT_RESTAURANT_ORDER);
+  async getMerchantItineraryOrder({ commit, dispatch, getters }) {
+    await dispatch('getMerchantOrderData', getters.userSku);
 
-    api.GetRestaurantPaymentByMerchant(merchantSku)
-      .then((res) => {
-        commit(Types.SET_MERCHANT_RESTAURANT_ORDER, res);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log(getters.merchantOrderData);
+    const data = getters.merchantOrderData.filter((item) => item.category === 'journey' || item.category === 'wisata');
+    commit(Types.SET_MERCHANT_ITINERARY_ORDER, data);
+  },
+
+  async getMerchantRestaurantOrder({ commit, dispatch, getters }) {
+    await dispatch('getMerchantOrderData', getters.userSku);
+
+    console.log(getters.merchantOrderData);
+    const data = getters.merchantOrderData.filter((item) => item.category === 'restaurant');
+    commit(Types.SET_MERCHANT_RESTAURANT_ORDER, data);
   },
 
   removeOrder({ commit }, sku) {
@@ -221,6 +217,7 @@ const getters = {
   acceptedPaymentData: (state) => state.acceptedPaymentData,
   waitingPaymentData: (state) => state.waitingPaymentData,
   cancelledPaymentData: (state) => state.cancelledPaymentData,
+  merchantOrderData: (state) => state.merchantOrderData,
   merchantItineraryOrder: (state) => state.merchantItineraryOrder,
   merchantRestaurantOrder: (state) => state.merchantRestaurantOrder,
 };
@@ -260,6 +257,9 @@ const mutations = {
   },
   [Types.SET_ORDER_DATA](state, res) {
     state.orderData = res;
+  },
+  [Types.SET_MERCHANT_ORDER_DATA](state, res) {
+    state.merchantOrderData = res;
   },
   [Types.SET_FILTERED_ORDER_DATA](state, res) {
     state.filteredOrderData = res;

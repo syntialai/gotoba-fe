@@ -376,6 +376,9 @@ export default {
   name: 'TourGuideModal',
   computed: {
     ...mapGetters(['tourGuideData']),
+    imageUrl() {
+      return api.imageUrl(this.tourGuideData.image);
+    },
   },
   created() {
     if (this.title === 'Edit') {
@@ -463,7 +466,7 @@ export default {
     },
 
     removePhoto() {
-      this.tourGuideData.image = null;
+      this.tourGuide.image = null;
     },
 
     locationSuggestions() {
@@ -483,6 +486,9 @@ export default {
   watch: {
     tourGuideData() {
       this.tourGuide = { ...this.tourGuideData };
+      this.tourGuide.image = this.imageUrl;
+      this.tourGuide.language = this.tourGuideData.language.split(',');
+      this.tourGuide.availableLocation = this.tourGuideData.availableLocation.split(',');
     },
   },
 };

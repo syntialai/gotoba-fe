@@ -87,3 +87,30 @@ export const toCapitalize = (sentence) => {
     .join(' ');
   return capitalized;
 };
+
+/**
+ * Get time from string time
+ */
+export const getTime = (timeStr) => {
+  const amPm = timeStr.split(' ').pop();
+  const time = timeStr.split(':');
+  let hour = parseInt(time[0], 10);
+  if (amPm === 'PM') {
+    hour += 12;
+  }
+  const minutes = parseInt(time[1].slice(0, 2), 10);
+  return [hour, minutes];
+};
+
+/**
+ * Sort by Time Function
+ */
+export const sortTime = (list) => list.sort((a, b) => {
+  const bTime = getTime(b.time);
+  const bDate = new Date(0, 0, 0, bTime[0], bTime[1], 0);
+
+  const aTime = getTime(a.time);
+  const aDate = new Date(0, 0, 0, aTime[0], aTime[1], 0);
+
+  return aDate.getTime() - bDate.getTime();
+});

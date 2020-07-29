@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar h-100 position-fixed overflow-auto box-shadow">
+  <div class="sidebar h-100 position-fixed overflow-auto bg-white box-shadow">
     <aside id="sidebar-admin" class="bg-white" shadow>
       <b-button
         variant="link"
@@ -16,7 +16,7 @@
         <b-avatar
           src=""
           :size="pictSize + 'px'"
-          class="mt-3"
+          class="my-3"
         ></b-avatar>
       </div>
       <ul class="sidebar__menu p-0 mt-2">
@@ -62,11 +62,6 @@ export default {
       minimized: true,
       pictSize: 40,
       menus: [
-        {
-          icon: 'tachometer-alt',
-          title: 'Dashboard',
-          link: '/admin/dashboard',
-        },
         {
           icon: 'users',
           title: 'User',

@@ -5,13 +5,14 @@
         :img-src="imageUrl"
         :img-alt="'image' + sku"
         img-left
-        class="mb-3 border-square-5"
+        img-width="80"
+        class="mb-3"
       >
-        <b-card-sub-title class="font-color-black-87">
+        <b-card-sub-title class="p-2 font-color-black-87">
           {{ title }}
         </b-card-sub-title>
-        <b-card-text>
-          {{ info }}
+        <b-card-text class="font-color-black-60 px-2">
+          {{ description }}
         </b-card-text>
       </b-card>
     </router-link>
@@ -28,14 +29,14 @@ export default {
     sku: String,
     image: String,
     title: String,
-    info: String,
+    description: String,
   },
   computed: {
     imageUrl() {
       return api.imageUrl(this.image);
     },
     link() {
-      return `/${this.route}'/${this.sku}`;
+      return `/${this.route}/${this.sku}`;
     },
   },
 };

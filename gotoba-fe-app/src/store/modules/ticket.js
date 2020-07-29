@@ -7,6 +7,8 @@ const state = {
   ticketDatas: [],
   ticketData: {},
   ticketByMerchant: [],
+  ticketRestaurantByMerchant: [],
+  ticketItineraryByMerchant: [],
   ticketRestaurant: [],
   ticketJourney: [],
   ticketPromotion: [],
@@ -14,8 +16,6 @@ const state = {
 
 const actions = {
   getTicketData({ commit }) {
-    commit(Types.SET_TICKET_DATA);
-
     api.GetTickets()
       .then((res) => {
         console.log(res);
@@ -45,12 +45,16 @@ const actions = {
   },
 
   getTicketByMerchant({ commit }, merchantSku) {
-    commit(Types.SET_TICKET_BY_MERCHANT);
+    commit(Types.SET_TICKET_BY_MERCHANT, []);
+    commit(Types.SET_TICKET_RESTAURANT_BY_MERCHANT, []);
+    commit(Types.SET_TICKET_ITINERARY_BY_MERCHANT, []);
 
     api.GetTicketByMerchant(merchantSku)
       .then((res) => {
         console.log(res);
         commit(Types.SET_TICKET_BY_MERCHANT, res.data);
+        commit(Types.SET_TICKET_RESTAURANT_BY_MERCHANT, res.data);
+        commit(Types.SET_TICKET_ITINERARY_BY_MERCHANT, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -85,6 +89,7 @@ const actions = {
 
   getTicketPromotion({ commit, getters }) {
     const tickets = getters.ticketDatas;
+
     const filterPromoTickets = tickets
       .filter((ticket) => !isPassed(ticket.expiredDate) && ticket.discount > 0)
       .sort((a, b) => b.expiredDate - a.expiredDate);
@@ -110,6 +115,8 @@ const getters = {
   ticketDatas: (state) => state.ticketDatas,
   ticketData: (state) => state.ticketData,
   ticketByMerchant: (state) => state.ticketByMerchant,
+  ticketRestaurantByMerchant: (state) => state.ticketRestaurantByMerchant,
+  ticketItineraryByMerchant: (state) => state.ticketItineraryByMerchant,
   ticketRestaurant: (state) => state.ticketRestaurant,
   ticketJourney: (state) => state.ticketJourney,
   ticketPromotion: (state) => state.ticketPromotion,
@@ -125,6 +132,12 @@ const mutations = {
   },
   [Types.SET_TICKET_BY_MERCHANT](state, res) {
     state.ticketByMerchant = res;
+  },
+  [Types.SET_TICKET_RESTAURANT_BY_MERCHANT](state, res) {
+    state.ticketRestaurantByMerchant = res.filter((item) => item.category === 'restaurant');
+  },
+  [Types.SET_TICKET_ITINERARY_BY_MERCHANT](state, res) {
+    state.ticketItineraryByMerchant = res.filter((item) => item.category === 'journey' || item.category === 'wisata');
   },
   [Types.SET_TICKET_RESTAURANT](state, res) {
     state.ticketRestaurant = res;

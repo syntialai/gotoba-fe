@@ -57,17 +57,14 @@ const actions = {
   },
 
   getJourneyDataByMerchantSku({ commit }, merchantSku) {
-    commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU);
+    commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, []);
 
     api.GetItineraryByMerchantSku(merchantSku)
       .then((res) => {
         if (!res.error) {
           commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, res.data);
           console.log(res);
-          return;
         }
-
-        commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, []);
       })
       .catch((err) => {
         console.log(err);

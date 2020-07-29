@@ -3,7 +3,7 @@
     <div class="result-title align-center font-color-blue-primary bold">
       {{ result.title }}
     </div>
-    <div class="result-price align-center font-size-32 semibold mt-2">
+    <div class="result-price align-center font-size-32 semibold my-2">
       {{ price }}
     </div>
 
@@ -41,7 +41,7 @@ export default {
       if (isPassed(new Date(this.result.expiredDate))) {
         return 'Expired';
       }
-      if (this.result.redeem) {
+      if (!this.result.redeem) {
         return 'Available';
       }
 

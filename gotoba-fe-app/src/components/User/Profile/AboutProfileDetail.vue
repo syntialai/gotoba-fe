@@ -1,5 +1,5 @@
 <template>
-  <div class="about-profile-detail bg-white p-3">
+  <div class="about-profile-detail bg-white px-3 pt-3">
     <div class="title w-100 border-bottom-gray-young">
       <h5>About</h5>
     </div>

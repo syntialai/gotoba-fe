@@ -1,11 +1,11 @@
 <template>
   <div class="itinerary-order">
-    <card-history-group :histories="itineraryOrderData" />
+    <card-history-group :histories="merchantItineraryOrder" />
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import CardHistoryGroup from '../../../components/User/History/CardHistoryGroup.vue';
 
 export default {
@@ -14,13 +14,7 @@ export default {
     CardHistoryGroup,
   },
   computed: {
-    ...mapGetters(['merchantItineraryOrder', 'userInfo']),
-  },
-  created() {
-    this.getMerchantItineraryOrder(this.userInfo.sku);
-  },
-  methods: {
-    ...mapActions(['getMerchantItineraryOrder']),
+    ...mapGetters(['merchantItineraryOrder']),
   },
 };
 </script>

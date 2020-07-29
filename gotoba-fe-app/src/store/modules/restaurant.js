@@ -75,7 +75,6 @@ const actions = {
     api.GetRestaurantMenus(sku)
       .then((res) => {
         if (!res.error) {
-          console.log(res);
           commit(Types.SET_RESTAURANT_MENU, res.data);
         }
       })

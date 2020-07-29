@@ -152,10 +152,12 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+
+      console.log(this.location);
     },
     setDestinationLocation() {
       this.setLocation(this.location);
-      this.$router.replace(`/merchant/${this.route.params.category}/edit`);
+      this.$router.replace(`/merchant/${this.$route.params.category}/edit`);
     },
     zoomUpdated(zoom) {
       this.zoom = zoom;

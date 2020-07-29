@@ -2,7 +2,7 @@
   <div class="data-card">
     <b-card class="border-gray-young mt-2">
       <b-row no-gutters>
-        <b-col md="8">
+        <b-col md="6">
           <b-card-img
             v-if="data.image"
             :src="imageUrl"
@@ -14,7 +14,7 @@
             <b-avatar variant="primary" :text="initialName"></b-avatar>
           </b-card-img>
         </b-col>
-        <b-col md="4">
+        <b-col md="6">
           <b-card-body class="m-3">
             <b-card-sub-title class="bold font-color-blue-secondary mb-2">
               {{ data.name }}
@@ -78,3 +78,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.card-max-width {
+  max-width: 400px;
+}
+</style>

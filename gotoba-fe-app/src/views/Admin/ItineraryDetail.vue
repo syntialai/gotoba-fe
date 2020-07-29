@@ -25,7 +25,7 @@
       v-if="journeyDataBySku"
       class="more-itinerary-info"
     >
-      <div class="full-address d-flex justify-content-between">
+      <div class="full-address d-flex justify-content-between py-2">
         <div class="full-address-label font-color-black-60">
           Full Address
         </div>
@@ -34,11 +34,11 @@
         </div>
       </div>
 
-      <div class="hours-open d-flex justify-content-between">
+      <div class="hours-open d-flex justify-content-between pt-1">
         <div class="hours-open-label font-color-black-60">
-          Hours
+          Hours Open
         </div>
-        <div class="hours-open-value font-color-black-87 semibold pl-4">
+        <div class="hours-open-value font-color-black-87 semibold pl-4 white-space-pre">
           {{ hoursOpen }}
         </div>
       </div>
@@ -57,6 +57,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { toCapitalize } from '../../utils/filter';
 import ItineraryCard from '../../components/Admin/Card/ItineraryCard.vue';
 import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
 
@@ -73,7 +74,7 @@ export default {
 
       Object.entries(this.journeyDataBySku.hoursOpen)
         .forEach(([key, value]) => {
-          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
+          hoursOpenStr += `${toCapitalize(key)} = ${value[0]} - ${value[1]}\n`;
         });
 
       return hoursOpenStr;
@@ -112,3 +113,10 @@ export default {
   },
 };
 </script>
+
+
+<style lang="scss">
+.white-space-pre {
+  white-space: pre-wrap;
+}
+</style>

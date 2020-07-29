@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import CardInfo from '../../../components/Merchant/Card/CardInfo.vue';
 
 export default {
@@ -41,17 +41,28 @@ export default {
     CardInfo,
   },
   computed: {
+    ...mapGetters([
+      'merchantItineraryOrder',
+      'merchantRestaurantOrder',
+    ]),
     cardInfo() {
       return {
         info1: 'Ordered Restaurant Ticket',
-        value1: 2,
+        value1: this.merchantRestaurantOrder.length,
         info2: 'Ordered Itinerary Ticket',
-        value2: 5,
+        value2: this.merchantItineraryOrder.length,
       };
     },
   },
+  created() {
+    this.getMerchantItineraryOrder();
+    this.getMerchantRestaurantOrder();
+  },
   methods: {
-    ...mapActions(['']),
+    ...mapActions([
+      'getMerchantItineraryOrder',
+      'getMerchantRestaurantOrder',
+    ]),
   },
 };
 </script>

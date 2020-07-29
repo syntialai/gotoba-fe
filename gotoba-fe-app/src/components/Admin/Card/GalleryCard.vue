@@ -5,9 +5,10 @@
         :img-src="imageUrl"
         :img-alt="info"
         img-top
-        class="p-2 my-2"
+        img-height="120"
+        class="p-0 my-2"
       >
-        <b-card-text class="align-center semibold">
+        <b-card-text class="align-center semibold p-2">
           {{ info }}
         </b-card-text>
       </b-card>

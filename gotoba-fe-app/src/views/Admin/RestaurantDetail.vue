@@ -9,7 +9,7 @@
       v-if="restaurantData"
       class="more-restaurant-info"
     >
-      <div class="full-address d-flex justify-content-between">
+      <div class="full-address d-flex justify-content-between py-2">
         <div class="full-address-label font-color-black-60">
           Full Address
         </div>
@@ -18,16 +18,16 @@
         </div>
       </div>
 
-      <div class="hours-open d-flex justify-content-between">
+      <div class="hours-open d-flex justify-content-between py-1">
         <div class="hours-open-label font-color-black-60">
           Hours
         </div>
-        <div class="hours-open-value font-color-black-87 semibold pl-4">
+        <div class="hours-open-value font-color-black-87 semibold pl-4 white-space-pre">
           {{ hoursOpen }}
         </div>
       </div>
 
-      <div class="phone-number d-flex justify-content-between">
+      <div class="phone-number d-flex justify-content-between pb-2">
         <div class="phone-number-label font-color-black-60">
           Phone Number
         </div>
@@ -41,6 +41,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { toCapitalize } from '../../utils/filter';
 import RestaurantCard from '../../components/Admin/Card/RestaurantCard.vue';
 
 export default {
@@ -55,7 +56,7 @@ export default {
 
       Object.entries(this.restaurantData.hoursOpen)
         .forEach(([key, value]) => {
-          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
+          hoursOpenStr += `${toCapitalize(key)}\t\t${value[0]} - ${value[1]}\n`;
         });
 
       return hoursOpenStr;
@@ -63,10 +64,15 @@ export default {
   },
   created() {
     this.getRestaurantDataBySku(this.$route.params.sku);
-    // this.getRestaurantMenu(this.$route.params.sku);
   },
   methods: {
     ...mapActions(['getRestaurantDataBySku', 'getRestaurantMenu']),
   },
 };
 </script>
+
+<style lang="scss">
+.white-space-pre {
+  white-space: pre-wrap;
+}
+</style>
