@@ -1,16 +1,19 @@
 <template>
-  <div class="restaurant-profile position-relative">
-    <div v-if="restaurantData && restaurantData.length > 0">
-      <profile-detail :data="restaurantData" />
+  <div class="restaurant-profile position-relative margin-80">
+    <div v-if="restaurantData && promotions && restaurantData.length > 0">
+      <profile-detail
+        :data="restaurantData[0]"
+        :promotions="promotions"
+      />
 
-      <div class="menu">
-        <div class="menu" v-if="restaurantMenu">
+      <div class="menus">
+        <div class="menu" v-if="restaurantMenus">
           <restaurant-menu-card-group
-            :restaurantMenu="restaurantMenu"
+            :restaurantMenu="restaurantMenus"
           />
         </div>
         <div class="add-menu" v-else>
-          <div class="rating-and-reviews mb-2 p-3 bg-white">
+          <div class="mb-2 p-3 bg-white">
             <div
               class="title d-flex w-100 border-bottom-gray-young justify-content-between"
             >
@@ -59,14 +62,27 @@ export default {
     RestaurantMenuCardGroup,
   },
   computed: {
-    ...mapGetters(['restaurantData', 'restaurantMenu', 'userSku']),
+    ...mapGetters([
+      'restaurantData',
+      'ticketPromotion',
+      'restaurantMenus',
+      'userSku',
+    ]),
+    promotions() {
+      return this.ticketRestaurant.filter((item) => item.merchantSku === this.userSku);
+    },
   },
   created() {
     this.getRestaurantDataByMerchantSku(this.userSku);
+    this.getTicketByMerchant(this.userSku);
     this.getRestaurantMenu(this.userSku);
   },
   methods: {
-    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantMenu']),
+    ...mapActions([
+      'getRestaurantDataByMerchantSku',
+      'getRestaurantMenu',
+      'getTicketByMerchant',
+    ]),
   },
 };
 </script>

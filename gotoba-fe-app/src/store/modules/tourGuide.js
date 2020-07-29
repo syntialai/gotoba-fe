@@ -32,7 +32,6 @@ const actions = {
         if (!res.error) {
           commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res.data);
         }
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -82,10 +81,12 @@ const mutations = {
     state.tourGuideDatas = res;
   },
   [Types.SET_TOUR_GUIDE_DATA_BY_SKU](state, res) {
-    const tourGuide = { ...res };
+    const tourGuide = res;
 
-    tourGuide.availableLocation = res.availableLocation.join(', ');
-    tourGuide.language = res.language.join(', ');
+    if (res) {
+      tourGuide.availableLocation = res.availableLocation.join(', ');
+      tourGuide.language = res.language.join(', ');
+    }
 
     state.tourGuideData = tourGuide;
   },

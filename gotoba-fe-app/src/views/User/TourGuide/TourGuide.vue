@@ -1,7 +1,7 @@
 <template>
   <div class="tour-guide">
-    <div class="tour-guide-profiles bg-white p-3 my-3">
-      <h6>Available tour guides</h6>
+    <div class="tour-guide-profiles bg-white p-3">
+      <h6 class="mb-3">Available tour guides</h6>
       <div class="tour-guide-group">
         <card-tour-guide
           v-for="tourGuide in tourGuideDatas"

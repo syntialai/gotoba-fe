@@ -8,6 +8,7 @@ const state = {
   cancelledPaymentData: [],
   waitingPaymentData: [],
   orderData: [],
+  filteredOrderData: [],
   approvedOrderData: {},
   rejectedOrderData: [],
   orderDataBySku: {},
@@ -52,17 +53,17 @@ const actions = {
     commit(Types.SET_ORDER_TOTAL, data);
   },
 
-  getOrderData({ commit }, sku) {
+  async getOrderData({ commit }, sku) {
     commit(Types.SET_ORDER_DATA);
 
-    api.GetOrderDetailByUser(sku)
-      .then((res) => {
-        commit(Types.SET_ORDER_DATA, res);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await api.GetOrderDetailByUser(sku, 2);
+      if (!res.error) {
+        commit(Types.SET_ORDER_DATA, res.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   getApprovedOrderData({ commit }, userSku) {
@@ -90,12 +91,22 @@ const actions = {
       });
   },
 
+  async getSomeOrderData({ dispatch, getters, commit }, listSku) {
+    await dispatch('getOrderData', getters.userSku);
+
+    const order = getters.orderData.filter((item) => listSku.includes(item.sku));
+    console.log('order', order);
+    commit(Types.SET_FILTERED_ORDER_DATA, order);
+    commit(Types.SET_ORDER_TOTAL, order);
+  },
+
   getOrderDataBySku({ commit }, sku) {
     commit(Types.SET_ORDER_DATA_BY_SKU);
 
     api.GetOrderDetail(sku)
       .then((res) => {
         commit(Types.SET_ORDER_DATA_BY_SKU, res.data);
+        commit(Types.SET_ORDER_TOTAL, res.data);
         console.log(res.data);
       })
       .catch((err) => {
@@ -109,6 +120,7 @@ const actions = {
     api.GetPayment(sku)
       .then((res) => {
         commit(Types.SET_PAYMENT_BY_SKU, res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -199,6 +211,7 @@ const actions = {
 
 const getters = {
   orderData: (state) => state.orderData,
+  filteredOrderData: (state) => state.filteredOrderData,
   approvedOrderData: (state) => state.approvedOrderData,
   rejectedOrderData: (state) => state.rejectedOrderData,
   orderDataBySku: (state) => state.orderDataBySku,
@@ -247,6 +260,9 @@ const mutations = {
   },
   [Types.SET_ORDER_DATA](state, res) {
     state.orderData = res;
+  },
+  [Types.SET_FILTERED_ORDER_DATA](state, res) {
+    state.filteredOrderData = res;
   },
   [Types.SET_APPROVED_ORDER_DATA](state, res) {
     const order = {

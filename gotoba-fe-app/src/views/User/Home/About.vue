@@ -133,7 +133,7 @@
         <b>Gallery</b> of Lake Toba
       </h4>
 
-      <gallery-home :galleryData="galleryData" />
+      <gallery-home class="p-3" :galleryData="galleryData" />
     </div>
 
     <the-footer class="mb-0 mt-4" />

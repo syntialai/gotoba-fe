@@ -22,7 +22,7 @@ export default {
         {
           language: this.data.language,
           available_location: this.data.availableLocation,
-          phone_number: this.data.phone,
+          phone_number: this.data.phone || this.data.whatsapp,
           email: this.data.email,
           whatsapp: this.data.whatsapp,
           experience: this.data.experience || '-',

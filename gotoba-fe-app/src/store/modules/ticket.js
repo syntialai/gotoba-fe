@@ -50,7 +50,7 @@ const actions = {
     api.GetTicketByMerchant(merchantSku)
       .then((res) => {
         console.log(res);
-        commit(Types.SET_TICKET_BY_MERCHANT, res);
+        commit(Types.SET_TICKET_BY_MERCHANT, res.data);
       })
       .catch((err) => {
         console.log(err);

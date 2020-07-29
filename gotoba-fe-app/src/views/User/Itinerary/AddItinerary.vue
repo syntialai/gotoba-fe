@@ -8,20 +8,19 @@
       :add="true"
     />
 
-    <div class="w-100 d-flex box-shadow fixed-bottom">
-      <div class="w-50">
+    <div class="w-100 d-flex bg-white box-shadow fixed-bottom">
+      <div class="w-50 p-2">
         <b-button
           block
-          squared
-          class="bg-white font-color-blue-primary p-3 border-none"
+          class="bg-white font-color-blue-primary p-3 border-square-10 box-shadow"
           @click="goBack"
         >CANCEL</b-button>
       </div>
-      <div class="w-50">
+      <div class="w-50 p-2">
         <b-button
           block
           squared
-          class="custom-btn-primary p-3 border-none"
+          class="custom-btn-primary p-3 border-square-10 box-shadow"
           @click="submitTravellingSchedule"
         >ADD</b-button>
       </div>

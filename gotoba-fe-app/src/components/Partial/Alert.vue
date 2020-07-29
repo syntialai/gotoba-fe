@@ -6,6 +6,7 @@
       style="z-index: 9000;"
       :variant="alertSuccess? 'success' : 'danger'"
       dismissible
+      fade
     >
       <div class="message">
         {{ alertSuccess? 'Successfully' : 'Failed to' }} {{ alertMessage }}!

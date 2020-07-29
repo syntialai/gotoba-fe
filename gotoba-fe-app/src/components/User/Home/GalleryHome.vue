@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery-home p-3 bg-white">
+  <div class="gallery-home">
     <agile
       class="main"
       ref="main"

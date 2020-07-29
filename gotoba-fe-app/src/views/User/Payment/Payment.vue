@@ -79,6 +79,8 @@ export default {
 
       this.loading = true;
 
+      console.log(this.orderData, data);
+
       try {
         const paymentRes = await api.PostPayment(this.userSku, data);
         this.orderData.forEach(async (order) => {

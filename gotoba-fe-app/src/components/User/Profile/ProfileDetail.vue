@@ -3,7 +3,7 @@
     <card-profile-detail
       class="mb-2 mt-2"
       v-bind="data"
-      :location="data.address"
+      :add="userRole === 'ROLE_MERCHANT'"
     />
 
     <about-profile-detail
@@ -24,7 +24,7 @@
         </b-button>
       </div>
 
-      <rating-profile-detail />
+      <!-- <rating-profile-detail /> -->
 
       <!-- <div class="recent-reviews mt-3">
         <div class="title bold font-color-blue-secondary">Recent reviews</div>
@@ -54,9 +54,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import CardProfileDetail from './CardProfileDetail.vue';
 import AboutProfileDetail from './AboutProfileDetail.vue';
-import RatingProfileDetail from './RatingProfileDetail.vue';
+// import RatingProfileDetail from './RatingProfileDetail.vue';
 // import UserReviewDetail from '../Review/UserReviewDetail.vue';
 import CardPromotion from '../CardPromotion.vue';
 
@@ -65,40 +66,21 @@ export default {
   components: {
     CardProfileDetail,
     AboutProfileDetail,
-    RatingProfileDetail,
+    // RatingProfileDetail,
     // UserReviewDetail,
     CardPromotion,
   },
   props: {
     data: Object,
+    promotions: Array,
   },
   computed: {
+    ...mapGetters(['userRole']),
     // recentReviews() {
     //   const reviews = this.data.reviews.slice(0);
     //   reviews.sort((a, b) => b.createdAt - a.createdAt);
     //   return reviews.slice(0, 3);
     // },
-    promotions() {
-      return [];
-    },
-  },
-  methods: {
-    hoursOpen(hours) {
-      let hoursOpenStr = '';
-
-      Object.entries(hours)
-        .forEach(([key, value]) => {
-          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
-        });
-
-      return hoursOpenStr;
-    },
-    aboutData() {
-      const newData = { ...this.data };
-      newData.hoursOpen = this.hoursOpen(newData.hoursOpen);
-
-      return newData;
-    },
   },
 };
 </script>

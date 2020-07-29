@@ -64,7 +64,7 @@ export default {
   computed: {
     ...mapGetters(['orderTotal', 'paymentDataBySku']),
     goToHistory() {
-      return `/history/details/${this.$route.params.sku}`;
+      return `/history/details/${this.paymentDataBySku.sku}`;
     },
     total() {
       return this.orderTotal.price - this.orderTotal.discount;

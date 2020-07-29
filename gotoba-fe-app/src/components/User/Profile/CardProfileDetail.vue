@@ -12,20 +12,29 @@
         <div class="d-flex justify-content-between">
           <div class="info">
             <h6 class="font-color-black-87">{{ name }}</h6>
-            <div class="font-size-14">{{ location }}</div>
-            <rating
-              v-if="rating"
-              :rate="rating"
-              :fontSize="10"
-            />
+            <div class="font-size-14">{{ address }}</div>
+            <div class="rating d-flex align-items-center" v-if="rating">
+              <rating
+                :rate="rating"
+                :fontSize="12"
+              />
+              <div class="pl-1">({{ rating }})</div>
+            </div>
           </div>
-          <div class="show-on-map">
+          <div class="buttons d-flex flex-column justify-content-between">
             <div class="icon-btn">
-              <b-button to="" variant="light">
+              <b-button :to="showOnMap" variant="light">
                 <font-awesome-icon
                   icon="map-marked-alt"
                   class="icon-gradient"
                 ></font-awesome-icon>
+              </b-button>
+            </div>
+            <div class="edit-btn" v-if="add">
+              <b-button to="/merchant/bistro/edit" variant="light">
+                <p class="icon-gradient m-0">
+                  <b-icon icon="pencil-square"></b-icon>
+                </p>
               </b-button>
             </div>
           </div>
@@ -43,9 +52,13 @@ export default {
   name: 'CardProfileDetail',
   props: {
     name: String,
-    location: String,
+    address: String,
     rating: Number,
     image: String,
+    add: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     Rating,
@@ -53,6 +66,9 @@ export default {
   computed: {
     imageUrl() {
       return api.imageUrl(this.image);
+    },
+    showOnMap() {
+      return `${this.$route.path}/show-on-map`;
     },
   },
 };

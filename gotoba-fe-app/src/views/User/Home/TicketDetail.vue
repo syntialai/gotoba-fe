@@ -3,20 +3,18 @@
     <div class="ticket-card">
       <card-info-detail :info="ticketData" v-if="ticketData" />
 
-      <div class="w-100 d-flex box-shadow fixed-bottom">
-        <div class="w-50">
+      <div class="w-100 d-flex box-shadow fixed-bottom bg-white">
+        <div class="w-50 p-2">
           <b-button
             block
-            squared
-            class="bg-white font-color-blue-primary p-3"
+            class="bg-white font-color-blue-primary p-3 border-square-10 box-shadow"
             @click="addToCart"
           >ADD TO CART</b-button>
         </div>
-        <div class="w-50">
+        <div class="w-50 p-2">
           <b-button
             block
-            squared
-            class="custom-btn-primary p-3"
+            class="custom-btn-primary p-3 border-square-10"
             @click="payNow"
           >PAY NOW</b-button>
         </div>
@@ -91,11 +89,10 @@ export default {
       }
     },
 
-    payNow() {
-      const data = this.setData();
+    async payNow() {
+      await this.addToCart();
 
-      this.setOrderData([data]);
-      this.$router.push('/payment');
+      this.$router.push('/cart');
     },
   },
 };

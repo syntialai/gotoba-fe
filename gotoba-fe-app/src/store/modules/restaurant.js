@@ -47,7 +47,7 @@ const actions = {
     api.GetRestaurantBySku(sku)
       .then((res) => {
         if (!res.error) {
-          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res.data);
         }
       })
       .catch((err) => {
@@ -75,7 +75,8 @@ const actions = {
     api.GetRestaurantMenus(sku)
       .then((res) => {
         if (!res.error) {
-          commit(Types.SET_RESTAURANT_MENU, res);
+          console.log(res);
+          commit(Types.SET_RESTAURANT_MENU, res.data);
         }
       })
       .catch((err) => {
