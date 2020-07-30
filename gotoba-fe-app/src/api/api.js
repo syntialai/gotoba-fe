@@ -345,6 +345,9 @@ export default {
   CancelOrder(sku) {
     return fetchPut(`/order/cancel/${sku}`);
   },
+  RedeemOrder(sku) {
+    return fetchPut(`/order/redeem/${sku}`);
+  },
   PostOrderDetail(userSku, params) {
     return fetchPost(`/order/user/${userSku}/add`, params);
   },

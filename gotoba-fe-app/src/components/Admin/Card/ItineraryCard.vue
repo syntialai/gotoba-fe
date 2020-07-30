@@ -1,6 +1,6 @@
 <template>
   <router-link :to="goToItineraryDetail">
-    <div class="itinerary-card box-shadow mb-3">
+    <div class="itinerary-card box-shadow">
       <data-card
         :data="itineraryData"
         otherIcon="tag"

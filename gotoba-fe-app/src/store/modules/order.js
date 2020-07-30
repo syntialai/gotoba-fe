@@ -10,14 +10,17 @@ const state = {
   orderData: [],
   filteredOrderData: [],
   approvedOrderData: {},
-  rejectedOrderData: [],
   orderDataBySku: {},
   paymentDataBySku: {},
   orderTotal: { item: 0, price: 0, discount: 0 },
   cartData: [],
   merchantOrderData: [],
-  merchantRestaurantOrder: [],
-  merchantItineraryOrder: [],
+  merchantResponsedData: [],
+  merchantWaitingResponseData: [],
+  merchantOrderCount: {
+    restaurant: 0,
+    itinerary: 0,
+  },
 };
 
 const actions = {
@@ -55,12 +58,11 @@ const actions = {
   },
 
   async getOrderData({ commit }, sku) {
-    commit(Types.SET_ORDER_DATA);
-
     try {
       const res = await api.GetOrderDetailByUser(sku, 2);
       if (!res.error) {
         commit(Types.SET_ORDER_DATA, res.data);
+        console.log('getOrderData', res.data);
       }
     } catch (err) {
       console.log(err);
@@ -80,25 +82,20 @@ const actions = {
       });
   },
 
-  getRejectedOrderData({ commit }, userSku) {
-    commit(Types.SET_REJECTED_ORDER_DATA);
-
-    api.GetOrderDetailByUser(userSku, 0)
-      .then((res) => {
-        commit(Types.SET_REJECTED_ORDER_DATA, res.data);
-      })
-      .catch((err) => {
-        console.log(err);
+  async getSomeOrderData({ commit }, listSku) {
+    try {
+      const order = [];
+      listSku.forEach(async (sku) => {
+        const res = await api.GetOrderDetail(sku);
+        if (!res.error) {
+          order.push(res.data);
+        }
       });
-  },
-
-  async getSomeOrderData({ dispatch, getters, commit }, listSku) {
-    await dispatch('getOrderData', getters.userSku);
-
-    const order = getters.orderData.filter((item) => listSku.includes(item.sku));
-    console.log('order', order);
-    commit(Types.SET_FILTERED_ORDER_DATA, order);
-    commit(Types.SET_ORDER_TOTAL, order);
+      commit(Types.SET_FILTERED_ORDER_DATA, order);
+      commit(Types.SET_ORDER_TOTAL, order);
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   getOrderDataBySku({ commit }, sku) {
@@ -113,6 +110,10 @@ const actions = {
       .catch((err) => {
         console.log(err);
       });
+  },
+
+  setOrderDataBySku({ commit }, res) {
+    commit(Types.SET_ORDER_DATA_BY_SKU, res);
   },
 
   getPaymentBySku({ commit }, sku) {
@@ -176,22 +177,31 @@ const actions = {
   async getMerchantOrderData({ commit }, merchantSku) {
     const res = await api.GetOrderDetailByMerchant(merchantSku);
     commit(Types.SET_MERCHANT_ORDER_DATA, res.data || []);
+    commit(Types.SET_MERCHANT_WAITING_DATA, res.data || []);
+    commit(Types.SET_MERCHANT_RESPONSED_DATA, res.data || []);
   },
 
-  async getMerchantItineraryOrder({ commit, dispatch, getters }) {
+  async getMerchantOrderCount({ commit, dispatch, getters }) {
     await dispatch('getMerchantOrderData', getters.userSku);
 
-    console.log(getters.merchantOrderData);
-    const data = getters.merchantOrderData.filter((item) => item.category === 'journey' || item.category === 'wisata');
-    commit(Types.SET_MERCHANT_ITINERARY_ORDER, data);
+    const itinerary = getters.merchantOrderData.filter((item) => (item.category === 'journey'
+      || item.category === 'wisata')
+      && item.status === 3);
+    const restaurant = getters.merchantOrderData.filter((item) => item.category === 'restaurant'
+      && item.status === 3);
+
+    commit(Types.SET_MERCHANT_ORDER_COUNT, {
+      restaurant: restaurant.length,
+      itinerary: itinerary.length,
+    });
   },
 
-  async getMerchantRestaurantOrder({ commit, dispatch, getters }) {
-    await dispatch('getMerchantOrderData', getters.userSku);
+  addItineraryOrderCount({ commit }) {
+    commit(Types.ADD_ITINERARY_ORDER_COUNT);
+  },
 
-    console.log(getters.merchantOrderData);
-    const data = getters.merchantOrderData.filter((item) => item.category === 'restaurant');
-    commit(Types.SET_MERCHANT_RESTAURANT_ORDER, data);
+  addRestaurantOrderCount({ commit }) {
+    commit(Types.ADD_RESTAURANT_ORDER_COUNT);
   },
 
   removeOrder({ commit }, sku) {
@@ -209,7 +219,6 @@ const getters = {
   orderData: (state) => state.orderData,
   filteredOrderData: (state) => state.filteredOrderData,
   approvedOrderData: (state) => state.approvedOrderData,
-  rejectedOrderData: (state) => state.rejectedOrderData,
   orderDataBySku: (state) => state.orderDataBySku,
   orderTotal: (state) => state.orderTotal,
   cartData: (state) => state.cartData,
@@ -218,8 +227,9 @@ const getters = {
   waitingPaymentData: (state) => state.waitingPaymentData,
   cancelledPaymentData: (state) => state.cancelledPaymentData,
   merchantOrderData: (state) => state.merchantOrderData,
-  merchantItineraryOrder: (state) => state.merchantItineraryOrder,
-  merchantRestaurantOrder: (state) => state.merchantRestaurantOrder,
+  merchantResponsedData: (state) => state.merchantResponsedData,
+  merchantWaitingResponseData: (state) => state.merchantWaitingResponseData,
+  merchantOrderCount: (state) => state.merchantOrderCount,
 };
 
 const mutations = {
@@ -261,6 +271,12 @@ const mutations = {
   [Types.SET_MERCHANT_ORDER_DATA](state, res) {
     state.merchantOrderData = res;
   },
+  [Types.SET_MERCHANT_WAITING_DATA](state, res) {
+    state.merchantWaitingResponseData = res.filter((item) => item.status === 2);
+  },
+  [Types.SET_MERCHANT_RESPONSED_DATA](state, res) {
+    state.merchantResponsedData = res.filter((item) => item.status === 3 || item.status === 0);
+  },
   [Types.SET_FILTERED_ORDER_DATA](state, res) {
     state.filteredOrderData = res;
   },
@@ -279,9 +295,6 @@ const mutations = {
     });
     state.approvedOrderData = order;
   },
-  [Types.SET_REJECTED_ORDER_DATA](state, res) {
-    state.rejectedOrderData = res;
-  },
   [Types.SET_ORDER_DATA_BY_SKU](state, res) {
     state.orderDataBySku = res;
   },
@@ -297,11 +310,14 @@ const mutations = {
   [Types.SET_CANCELLED_PAYMENT_DATA](state, res) {
     state.cancelledPaymentData = res;
   },
-  [Types.SET_MERCHANT_ITINERARY_ORDER](state, res) {
-    state.merchantItineraryOrder = res;
+  [Types.SET_MERCHANT_ORDER_COUNT](state, res) {
+    state.merchantOrderCount = res;
   },
-  [Types.SET_MERCHANT_RESTAURANT_ORDER](state, res) {
-    state.merchantRestaurantOrder = res;
+  [Types.ADD_ITINERARY_ORDER_COUNT](state) {
+    state.merchantOrderCount.itinerary += 1;
+  },
+  [Types.ADD_RESTAURANT_ORDER_COUNT](state) {
+    state.merchantOrderCount.restaurant += 1;
   },
   [Types.REMOVE_ORDER](state, sku) {
     state.cartData.filter((item) => item.sku !== sku);

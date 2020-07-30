@@ -6,19 +6,19 @@
           <b-form-group id="edit-img">
             <div class="d-flex justify-content-center">
               <b-avatar
-                :src="userDataBySku.image"
+                :src="user.image"
                 alt="user-profile"
                 class="my-2"
                 size="100"
               ></b-avatar>
             </div>
             <b-form-file
-              v-model="userDataBySku.image"
+              v-model="user.image"
               @change="loadImage"
               accept="image/jpeg, image/jpg, image/png"
             ></b-form-file>
             <b-button
-              v-if="userDataBySku.image && userDataBySku.image.length > 0"
+              v-if="user.image !== ''"
               size="sm"
               block
               class="custom-btn-gray mt-2"
@@ -120,13 +120,21 @@ export default {
   name: 'EditProfile',
   computed: {
     ...mapGetters(['userDataBySku', 'userSku']),
+    imageUrl() {
+      return api.imageUrl(this.user.image);
+    },
   },
   created() {
     this.getUserBySku(this.userSku);
   },
   data() {
     return {
-      image: null,
+      user: {
+        nickname: '',
+        username: '',
+        email: '',
+        image: '',
+      },
     };
   },
   methods: {
@@ -135,27 +143,28 @@ export default {
     getValidationState,
 
     updateProfile() {
-      if (!this.userDataBySku.nickname
-        || !this.userDataBySku.username
-        || !this.userDataBySku.email) {
+      if (!this.user.nickname
+        || !this.user.username
+        || !this.user.email) {
         return;
       }
 
       const data = {
-        email: this.userDataBySku.email,
-        username: this.userDataBySku.username,
-        nickname: this.userDataBySku.nickname,
-        image: this.userDataBySku.image.toString(),
+        email: this.user.email,
+        username: this.user.username,
+        nickname: this.user.nickname,
+        image: this.user.image,
       };
 
       api.EditUser(this.userSku, data)
         .then((res) => {
           if (!res.error) {
+            console.log(res);
             this.setUserInfo({
-              name: res.nickname,
-              role: res.role,
-              sku: res.sku,
-              image: res.image,
+              name: res.data.nickname,
+              role: res.data.roles,
+              sku: res.data.sku,
+              image: res.data.image,
             });
             alert('updated profile', true);
           }
@@ -172,7 +181,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.userDataBySku.image = res.toString();
+            this.user.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -181,7 +190,13 @@ export default {
     },
 
     removePhoto() {
-      this.userDataBySku.image = '';
+      this.user.image = '';
+    },
+  },
+  watch: {
+    userDataBySku() {
+      this.user = { ...this.userDataBySku };
+      this.user.image = this.imageUrl;
     },
   },
 };

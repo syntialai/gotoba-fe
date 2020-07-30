@@ -11,10 +11,10 @@
       >EDIT</b-button>
     </div>
 
-    <itinerary-modal
+    <!-- <itinerary-modal
       title="Edit"
       :itinerary="journeyDataBySku"
-    />
+    /> -->
 
     <itinerary-card
       v-if="journeyDataBySku"
@@ -23,7 +23,7 @@
 
     <div
       v-if="journeyDataBySku"
-      class="more-itinerary-info"
+      class="more-itinerary-info bg-white p-3"
     >
       <div class="full-address d-flex justify-content-between py-2">
         <div class="full-address-label font-color-black-60">
@@ -45,10 +45,10 @@
 
       <div class="phone-number d-flex justify-content-between">
         <div class="phone-number-label font-color-black-60">
-          Phone Number
+          Created by
         </div>
         <div class="phone-number-value font-color-black-87 semibold pl-4">
-          {{ journeyDataBySku.phone }}
+          {{ journeyDataBySku.createdBy }}
         </div>
       </div>
     </div>
@@ -59,13 +59,13 @@
 import { mapActions, mapGetters } from 'vuex';
 import { toCapitalize } from '../../utils/filter';
 import ItineraryCard from '../../components/Admin/Card/ItineraryCard.vue';
-import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
+// import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
 
 export default {
   name: 'ItineraryDetail',
   components: {
     ItineraryCard,
-    ItineraryModal,
+    // ItineraryModal,
   },
   computed: {
     ...mapGetters(['journeyDataBySku']),
@@ -74,7 +74,7 @@ export default {
 
       Object.entries(this.journeyDataBySku.hoursOpen)
         .forEach(([key, value]) => {
-          hoursOpenStr += `${toCapitalize(key)} = ${value[0]} - ${value[1]}\n`;
+          hoursOpenStr += `${toCapitalize(key)}\t = ${value[0]} - ${value[1]}\n`;
         });
 
       return hoursOpenStr;

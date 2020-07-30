@@ -61,7 +61,7 @@ export default {
       return formatPrice(this.price);
     },
     discounts() {
-      return formatPrice(this.discountPrice);
+      return formatPrice(this.price - this.discountPrice);
     },
     quantities() {
       let count = `${this.quantity} pc`;

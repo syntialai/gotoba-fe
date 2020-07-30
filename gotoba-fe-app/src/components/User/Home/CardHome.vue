@@ -4,6 +4,7 @@
       :src="imageUrl"
       :alt="'Image-' + name"
       width="100%"
+      height="120px"
       class="object-fit_fill"
       top
     ></b-card-img>

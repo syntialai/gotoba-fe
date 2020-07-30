@@ -1,15 +1,15 @@
 <template>
   <div class="scan-result">
-    <div v-if="isMerchant">
+    <div v-if="orderDataBySku && isMerchant">
       <card-scan-result
         class="mt-3"
         v-if="orderDataBySku"
-        :result="ticket"
+        :result="orderDataBySku"
       />
 
       <b-button
         block
-        :disabled="ticket.redeem"
+        :disabled="!orderDataBySku.redeem"
         @click="useTicket"
         class="m-3"
       >
@@ -35,6 +35,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { alert } from '../../../utils/tool';
+import { isPassed } from '../../../utils/filter';
 import api from '../../../api/api';
 import CardScanResult from '../../../components/Merchant/Card/CardScanResult.vue';
 
@@ -49,23 +50,14 @@ export default {
       'userSku',
       'orderDataBySku',
     ]),
-    ticket() {
-      const data = this.ticketData;
-      data.redeem = this.orderDataBySku.redeem;
-      return data;
-    },
     isMerchant() {
-      return this.ticketData.merchantSku === this.userSku;
+      return this.orderDataBySku.merchantSku === this.userSku;
+    },
+    canUse() {
+      return this.orderDataBySku.redeem && !isPassed(new Date(this.result.expiredDate));
     },
   },
   created() {
-    if (this.isMerchant) {
-      if (this.ticketData.wisataSku) {
-        this.getJourneyDataBySku(this.ticketData.wisataSku);
-      } else {
-        this.getRestaurantDataByMerchantSku(this.ticketData.merchantSku);
-      }
-    }
     this.getOrderDataBySku(this.ticketData.sku);
   },
   methods: {
@@ -74,17 +66,28 @@ export default {
       'getRestaurantDataByMerchantSku',
       'setTicketBySku',
       'getOrderDataBySku',
+      'setOrderDataBySku',
     ]),
     async useTicket() {
-      const data = { ...this.ticketData };
-      data.redeem = true;
+      const data = { ...this.orderDataBySku };
+      data.redeem = false;
 
       try {
-        await api.EditOrderDetail(this.ticketData.sku, data);
-        this.setTicketBySku(data);
+        const res = await api.RedeemOrder(this.orderDataBySku.sku);
+        this.setOrderDataBySku(data);
+        console.log(res, data);
         alert('used ticket', true);
       } catch (err) {
         alert('use ticket. Please try again later', false);
+      }
+    },
+  },
+  watch: {
+    orderDataBySku() {
+      if (this.orderDataBySku) {
+        this.getJourneyDataBySku(this.orderDataBySku.wisataSku);
+      } else {
+        this.getRestaurantDataByMerchantSku(this.orderDataBySku.merchantSku);
       }
     },
   },

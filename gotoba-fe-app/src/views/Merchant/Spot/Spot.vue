@@ -37,14 +37,14 @@ export default {
   computed: {
     ...mapGetters([
       'journeyDataByMerchantSku',
-      'merchantItineraryOrder',
+      'merchantOrderCount',
       'userSku',
     ]),
     cardInfo() {
       return {
         value1: this.itineraries.length,
         info1: 'Spots Active',
-        value2: this.merchantItineraryOrder.length,
+        value2: this.merchantOrderCount.itinerary,
         info2: 'Recent Orders',
       };
     },
@@ -54,12 +54,12 @@ export default {
   },
   created() {
     this.getJourneyDataByMerchantSku(this.userSku);
-    this.getMerchantItineraryOrder(this.userSku);
+    this.getMerchantOrderCount();
   },
   methods: {
     ...mapActions([
       'getJourneyDataByMerchantSku',
-      'getMerchantItineraryOrder',
+      'getMerchantOrderCount',
     ]),
   },
 };

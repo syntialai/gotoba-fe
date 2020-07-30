@@ -41,7 +41,7 @@ export default {
       if (isPassed(new Date(this.result.expiredDate))) {
         return 'Expired';
       }
-      if (!this.result.redeem) {
+      if (this.result.redeem) {
         return 'Available';
       }
 

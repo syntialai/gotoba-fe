@@ -20,7 +20,7 @@
 
     <div
       v-if="tourGuideData"
-      class="more-tour-guide-info"
+      class="more-tour-guide-info bg-white p-3"
     >
       <div class="language d-flex justify-content-between py-1">
         <div class="language-label font-color-black-60">

@@ -332,16 +332,16 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'History Success',
-        component: Pages.HISTORY_SUCCESS,
+        name: 'History',
+        component: Pages.HISTORY_PENDING,
         meta: {
           layout: 'default-back',
         },
       },
       {
-        path: 'pending',
-        name: 'History Pending',
-        component: Pages.HISTORY_PENDING,
+        path: 'done',
+        name: 'History Success',
+        component: Pages.HISTORY_SUCCESS,
         meta: {
           layout: 'default-back',
         },
@@ -458,15 +458,15 @@ const routes = [
           {
             path: '',
             name: 'Order List',
-            component: Merchant.MERCHANT_ORDER_RESTAURANT,
+            component: Merchant.MERCHANT_ORDER_NEW,
             meta: {
               layout: 'background-blue',
             },
           },
           {
-            path: 'itinerary',
+            path: 'recent',
             name: 'Order List',
-            component: Merchant.MERCHANT_ORDER_ITINERARY,
+            component: Merchant.MERCHANT_ORDER_RECENT,
             meta: {
               layout: 'background-blue',
             },

@@ -7,7 +7,7 @@
 
     <div
       v-if="restaurantData"
-      class="more-restaurant-info"
+      class="more-restaurant-info bg-white p-3"
     >
       <div class="full-address d-flex justify-content-between py-2">
         <div class="full-address-label font-color-black-60">

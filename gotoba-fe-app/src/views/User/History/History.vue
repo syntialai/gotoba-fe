@@ -7,20 +7,20 @@
       >
         <div class="d-flex flex-column">
           <span class="tab-icon icon">
-            <b-icon icon="check-circle" font-scale="1"></b-icon>
+            <b-icon icon="clock" font-scale="1"></b-icon>
           </span>
-          <span class="tab-title">ACTIVE</span>
+          <span class="tab-title">RECENT</span>
         </div>
       </b-nav-item>
       <b-nav-item
-        to="/history/pending" exact
+        to="/history/done" exact
         exact-active-class="active"
       >
         <div class="d-flex flex-column">
           <span class="tab-icon icon">
-            <b-icon icon="clock" font-scale="1"></b-icon>
+            <b-icon icon="check-circle" font-scale="1"></b-icon>
           </span>
-          <span class="tab-title">PENDING</span>
+          <span class="tab-title">DONE</span>
         </div>
       </b-nav-item>
       <b-nav-item

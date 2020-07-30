@@ -5,7 +5,10 @@
     >
       <h5>Menus</h5>
       <div class="add" v-if="add">
-        <b-button variant="link">Add</b-button>
+        <b-button
+          variant="link"
+          @click="openModal"
+        >Add</b-button>
       </div>
     </div>
     <div class="menu-group d-flex overflow-auto mt-3">
@@ -31,6 +34,11 @@ export default {
     add: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    openModal() {
+      this.$emit('showMenuModal', true);
     },
   },
 };

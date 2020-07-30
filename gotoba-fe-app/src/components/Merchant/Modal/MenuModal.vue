@@ -135,7 +135,11 @@ import api from '../../../api/api';
 export default {
   name: 'MenuModal',
   computed: {
-    ...mapGetters(['restaurantMenu']),
+    ...mapGetters([
+      'restaurantMenu',
+      'restaurantData',
+      'userSku',
+    ]),
   },
   props: {
     title: {
@@ -161,12 +165,18 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getRestaurantMenuById', 'setRestaurantMenu']),
+    ...mapActions([
+      'getRestaurantMenuById',
+      'getRestaurantMenu',
+    ]),
 
     getValidationState,
-    
+
     submitMenu() {
       const data = { ...this.restaurantMenu };
+      data.status = 'active';
+      data.restaurantSku = this.restaurantData[0].sku;
+      data.merchantSku = this.userSku;
 
       if (
         data.name === ''
@@ -178,10 +188,10 @@ export default {
       }
 
       if (this.title === 'Add') {
-        api.AddRestaurantMenu(this.$route.params.sku, data)
+        api.AddRestaurantMenu(this.userSku, data)
           .then((res) => {
             console.log(res);
-            this.$router.push('/merchant/bistro');
+            this.getRestaurantMenu(this.userSku);
           })
           .catch((err) => {
             console.log(err);
@@ -190,10 +200,14 @@ export default {
         return;
       }
 
-      api.EditRestaurantMenu(this.$route.params.sku, this.$route.params.id, data)
+      api.EditRestaurantMenu(
+        this.userSku,
+        this.restaurantMenu.id,
+        data,
+      )
         .then((res) => {
           console.log(res);
-          this.$router.push('/merchant/bistro');
+          this.getRestaurantMenu(this.userSku);
         })
         .catch((err) => {
           console.log(err);
@@ -206,7 +220,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.restaurantMenu.image = res.toString();
+            this.menu.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -215,7 +229,7 @@ export default {
     },
 
     removePhoto() {
-      this.restaurantMenu.image = null;
+      this.menu.image = null;
     },
   },
 };

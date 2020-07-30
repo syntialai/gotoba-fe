@@ -103,7 +103,7 @@
           <span class="title-text font-weight-bold">Recommended Nearby Places</span>
         </div>
         <div class="d-flex justify-content-between">
-          <span class="title-description semibold mt-2 mb-2">
+          <span class="title-description semibold my-2">
             Best Journey of Lake Toba
           </span>
           <span class="show-all font-size-14">
@@ -165,7 +165,7 @@
         </div>
       </div>
 
-      <div class="gallery content-group" v-if="galleryData">
+      <div class="gallery content-group mb-3" v-if="galleryData">
         <div class="title mb-1 pt-3 d-flex align-items-center">
           <font-awesome-icon
               :icon="['far', 'images']"

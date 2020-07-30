@@ -6,7 +6,7 @@
       </div>
       <b-overlay
         id="overlay-order-detail"
-        :show="!paymentDataBySku"
+        :show="paymentDataBySku === 'undefined'"
         variant="light"
         :opacity="0.6"
         blur="2px"
@@ -35,14 +35,14 @@
       </div>
       <b-overlay
         id="overlay-order"
-        :show="!filteredOrderData"
+        :show="filteredOrderData === 'undefined'"
         variant="light"
         :opacity="0.6"
         blur="2px"
         rounded="sm"
       >
         <div
-          v-if="filteredOrderData"
+          v-if="filteredOrderData.length > 0"
           class="order-items-group"
         >
           <order-items
@@ -108,8 +108,12 @@ export default {
   },
   watch: {
     paymentDataBySku() {
-      this.getSomeOrderData(this.paymentDataBySku.orderSku.split(','));
-      console.log(this.filteredOrderData);
+      console.log(this.paymentDataBySku);
+      if (this.paymentDataBySku) {
+        this.getSomeOrderData(this.paymentDataBySku.orderSku.split(','));
+        console.log(this.paymentDataBySku.orderSku.split(','));
+        console.log('filter', this.filteredOrderData);
+      }
     },
   },
 };

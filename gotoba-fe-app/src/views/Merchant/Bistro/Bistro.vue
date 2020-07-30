@@ -4,6 +4,7 @@
       <profile-detail
         :data="restaurantData[0]"
         :promotions="ticketRestaurantByMerchant"
+        v-on:showMenuModal="showMenuModal"
       />
 
       <div class="menus">
@@ -11,9 +12,15 @@
           <restaurant-menu-card-group
             :add="true"
             :restaurantMenu="restaurantMenus"
+            v-on:showPromotionModal="showPromotionModal"
           />
         </div>
       </div>
+
+      <promotion-modal :show="promotion" />
+
+      <menu-modal :show="menu" />
+
     </div>
 
     <div
@@ -43,12 +50,16 @@
 import { mapActions, mapGetters } from 'vuex';
 import ProfileDetail from '../../../components/User/Profile/ProfileDetail.vue';
 import RestaurantMenuCardGroup from '../../../components/Merchant/Data/RestaurantMenuCardGroup.vue';
+import PromotionModal from '../../../components/Merchant/Modal/PromotionModal.vue';
+import MenuModal from '../../../components/Merchant/Modal/MenuModal.vue';
 
 export default {
   name: 'Bistro',
   components: {
     ProfileDetail,
     RestaurantMenuCardGroup,
+    PromotionModal,
+    MenuModal,
   },
   computed: {
     ...mapGetters([
@@ -62,6 +73,12 @@ export default {
     this.getRestaurantDataByMerchantSku(this.userSku);
     this.getTicketByMerchant(this.userSku);
     this.getRestaurantMenu(this.userSku);
+  },
+  data() {
+    return {
+      menu: false,
+      promotion: false,
+    };
   },
   methods: {
     ...mapActions([

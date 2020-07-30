@@ -18,7 +18,6 @@ const state = {
     hoursOpen: [],
   },
   journeyDataByMerchantSku: [],
-  journeyReview: [],
 };
 
 const actions = {
@@ -29,8 +28,8 @@ const actions = {
       .then((res) => {
         if (!res.error) {
           commit(Types.SET_JOURNEY_DATA, res.data);
+          console.log(res.data);
         }
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -71,21 +70,6 @@ const actions = {
       });
   },
 
-  getJourneyReview({ commit }, sku) {
-    commit(Types.SET_JOURNEY_REVIEW);
-
-    api.GetReviewBySku(sku)
-      .then((res) => {
-        if (!res.error) {
-          commit(Types.SET_JOURNEY_REVIEW, res);
-        }
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
   removeItinerary({ commit }, sku) {
     commit(Types.REMOVE_ITINERARY);
 
@@ -104,7 +88,6 @@ const getters = {
   journeyData: (state) => state.journeyData,
   journeyDataBySku: (state) => state.journeyDataBySku,
   journeyDataByMerchantSku: (state) => state.journeyDataByMerchantSku,
-  journeyReview: (state) => state.journeyReview,
 };
 
 const mutations = {
@@ -117,9 +100,6 @@ const mutations = {
   },
   [Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU](state, res) {
     state.journeyDataByMerchantSku = res;
-  },
-  [Types.SET_JOURNEY_REVIEW](state, res) {
-    state.journeyReview = res;
   },
 };
 

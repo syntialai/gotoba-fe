@@ -10,7 +10,6 @@ import location from './modules/location';
 import merchant from './modules/merchant';
 import order from './modules/order';
 import restaurant from './modules/restaurant';
-import review from './modules/review';
 import search from './modules/search';
 import schedule from './modules/schedule';
 import ticket from './modules/ticket';
@@ -30,7 +29,6 @@ export default new Vuex.Store({
     merchant,
     order,
     restaurant,
-    review,
     search,
     schedule,
     ticket,

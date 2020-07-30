@@ -36,9 +36,7 @@ export default {
       return formatDate(new Date(this.ticket.expiredDate));
     },
     qrCodeValue() {
-      return JSON.stringify({
-        ...this.ticket,
-      });
+      return this.ticket.sku;
     },
   },
 };

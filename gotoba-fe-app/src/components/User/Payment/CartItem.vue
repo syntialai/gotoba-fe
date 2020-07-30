@@ -3,19 +3,19 @@
     <div class="d-flex">
       <b-img :src="imageUrl" />
       <div class="cart-item__info pl-3">
-        <div class="cart-item__size">
-          <span class="item__name font-color-black-87 d-block">
+        <div>
+          <div class="item__name font-color-black-87 d-block">
             {{ ticket.title }}
-          </span>
-          <div class="mb-2">
-            <span
+          </div>
+          <div class="mb-2 d-flex">
+            <div
               :class="{ 'strikethrough': ticket.discount > 0 }"
             >
               {{ formatPrice(ticket.price) }}
-            </span>
-            <span v-if="ticket.discount > 0" class="pl-1 discount-price font-color-red semibold">
+            </div>
+            <div v-if="ticket.discount > 0" class="pl-1 discount-price font-color-red semibold">
               {{ formatPrice(ticket.price - ticket.discount) }}
-            </span>
+            </div>
           </div>
         </div>
         <div class="d-flex mt-3">

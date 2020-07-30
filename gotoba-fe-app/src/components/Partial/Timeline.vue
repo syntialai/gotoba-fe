@@ -55,6 +55,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { sortTime } from '../../utils/filter';
 import SelectDestinationAutocomplete from '../User/Itinerary/SelectDestinationAutocomplete.vue';
 
 export default {
@@ -111,16 +112,7 @@ export default {
       return this.getSavedTimeline;
     },
     sortedTimeline() {
-      const timeline = this.getTimeline;
-      return timeline.sort((a, b) => {
-        const bTime = this.getTime(b.time);
-        const bDate = new Date(0, 0, 0, bTime[0], bTime[1], 0);
-
-        const aTime = this.getTime(a.time);
-        const aDate = new Date(0, 0, 0, aTime[0], aTime[1], 0);
-
-        return aDate.getTime() - bDate.getTime();
-      });
+      return sortTime(this.getTimeline);
     },
   },
   data() {
@@ -159,16 +151,6 @@ export default {
     },
     onContext(context) {
       this.context = context;
-    },
-    getTime(timeStr) {
-      const amPm = timeStr.split(' ').pop();
-      const time = timeStr.split(':');
-      let hour = parseInt(time[0], 10);
-      if (amPm === 'PM') {
-        hour += 12;
-      }
-      const minutes = parseInt(time[1].slice(0, 2), 10);
-      return [hour, minutes];
     },
   },
 };

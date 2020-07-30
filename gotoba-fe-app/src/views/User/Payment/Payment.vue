@@ -68,6 +68,9 @@ export default {
       loading: false,
     };
   },
+  created() {
+    console.log(this.userSku);
+  },
   methods: {
     async pay() {
       const data = {
@@ -79,16 +82,18 @@ export default {
 
       this.loading = true;
 
-      console.log(this.orderData, data);
-
       try {
         const paymentRes = await api.PostPayment(this.userSku, data);
         this.orderData.forEach(async (order) => {
           await api.CheckoutOrder(order.sku);
         });
 
-        this.loading = false;
-        this.goToThanksPage(paymentRes.data.sku);
+        console.log(paymentRes);
+
+        if (!paymentRes.error) {
+          this.loading = false;
+          this.goToThanksPage(paymentRes.data.sku);
+        }
       } catch (err) {
         this.loading = false;
         toast('Error while checkout item!');
