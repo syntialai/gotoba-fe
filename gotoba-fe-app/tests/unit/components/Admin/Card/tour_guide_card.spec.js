@@ -5,14 +5,16 @@ describe('TourGuideCard.vue', () => {
   const expectedData = {
     image: '/tour-guide/img.png',
     location: 'Parapat',
-    other: '25',
+    other: 25,
     rating: 5.0,
+    name: 'Tour Guide',
   };
   const tourGuide = {
     image: '/tour-guide/img.png',
     location: 'Parapat',
     age: 25,
     rating: 5.0,
+    name: 'Tour Guide',
   };
 
   let wrapper;
@@ -33,5 +35,5 @@ describe('TourGuideCard.vue', () => {
 
   it('Check tourGuideData computed return true object', () => {
     expect(wrapper.vm.tourGuideData).toStrictEqual(expectedData);
-  })
+  });
 });

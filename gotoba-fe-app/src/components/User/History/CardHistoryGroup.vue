@@ -35,7 +35,6 @@ export default {
           history[date] = [item];
         }
       });
-      console.log(history);
       return history;
     },
   },

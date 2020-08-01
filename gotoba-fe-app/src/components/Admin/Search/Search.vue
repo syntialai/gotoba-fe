@@ -3,7 +3,6 @@
     <div class="w-100">
       <b-form-input
         class="search-input"
-        v-model="keywords"
         placeholder="Search for ..."
         type="search"
       />
@@ -19,11 +18,6 @@
 <script>
 export default {
   name: 'Search',
-  data() {
-    return {
-      keywords: '',
-    };
-  },
 };
 </script>
 

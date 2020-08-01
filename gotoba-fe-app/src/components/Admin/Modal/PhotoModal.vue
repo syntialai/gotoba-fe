@@ -205,8 +205,10 @@ export default {
   },
   watch: {
     galleryPhoto() {
-      this.photo = { ...this.galleryPhoto };
-      this.photo.image = this.imageUrl;
+      if (this.title === 'Edit') {
+        this.photo = { ...this.galleryPhoto };
+        this.photo.image = this.imageUrl;
+      }
     },
   },
 };

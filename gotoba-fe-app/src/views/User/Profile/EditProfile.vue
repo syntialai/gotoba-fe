@@ -139,9 +139,7 @@ export default {
   },
   methods: {
     ...mapActions(['getUserBySku', 'setUserInfo']),
-
     getValidationState,
-
     updateProfile() {
       if (!this.user.nickname
         || !this.user.username
@@ -149,17 +147,11 @@ export default {
         return;
       }
 
-      const data = {
-        email: this.user.email,
-        username: this.user.username,
-        nickname: this.user.nickname,
-        image: this.user.image,
-      };
+      const data = { ...this.user };
 
       api.EditUser(this.userSku, data)
         .then((res) => {
           if (!res.error) {
-            console.log(res);
             this.setUserInfo({
               name: res.data.nickname,
               role: res.data.roles,
@@ -167,14 +159,15 @@ export default {
               image: res.data.image,
             });
             alert('updated profile', true);
+            return;
           }
+          alert('update profile', false);
         })
         .catch((err) => {
           alert('update profile', false);
           console.log(err);
         });
     },
-
     loadImage(event) {
       const { files } = event.target;
 
@@ -188,7 +181,6 @@ export default {
           });
       }
     },
-
     removePhoto() {
       this.user.image = '';
     },

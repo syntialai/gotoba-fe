@@ -2,7 +2,7 @@
   <div class="choose-date-calendar bg-white p-3">
     <div class="month-picked semibold font-size-20 w-100 d-flex justify-content-center">
       <div class="month-year pr-3">
-        {{ toMonthYear(toDate) }}
+        {{ toMonthYear }}
       </div>
       <div class="choose-month">
         <font-awesome-icon
@@ -66,6 +66,9 @@ export default {
     toDate() {
       return new Date(this.selectedDate.year, this.selectedDate.month, this.selectedDate.date);
     },
+    toMonthYear() {
+      return `${toFullMonth(this.toDate.getMonth())}, ${this.toDate.getFullYear()}`;
+    },
     dateSelected: {
       get() {
         return this.toDate;
@@ -81,9 +84,6 @@ export default {
     toFullMonth,
     getDay(year, month, day) {
       return toFullDay(new Date(year, month, day).getDay());
-    },
-    toMonthYear(date) {
-      return `${toFullMonth(date.getMonth())}, ${date.getFullYear()}`;
     },
     isSelectedDate(date) {
       return date === this.selectedDate.date;

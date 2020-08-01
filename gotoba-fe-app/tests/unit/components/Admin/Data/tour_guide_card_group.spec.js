@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
 import TourGuideCardGroup from '@/components/Admin/Data/TourGuideCardGroup.vue';
 
@@ -53,12 +53,11 @@ describe('TourGuideCardGroup.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(TourGuideCardGroup, {
+    wrapper = shallowMount(TourGuideCardGroup, {
       propsData: {
         ...props,
       },
       localVue,
-      stubs: ['tour-guide-card'],
     });
   });
 
@@ -70,11 +69,4 @@ describe('TourGuideCardGroup.vue', () => {
   it('Check tourGuideRange computed to return true range of array', () => {
     expect(wrapper.vm.tourGuideRange).toStrictEqual(expectedData.tourGuideRange);
   });
-
-  // it('Check goToDetails method navigate to TourGuide Details when called with param', () => {
-  //   wrapper.vm.goToDetails(tourGuides[0].sku);
-
-  //   expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-  //   expect(wrapper.vm.$router.push).toHaveBeenCalledWith(expectedData);
-  // });
 });

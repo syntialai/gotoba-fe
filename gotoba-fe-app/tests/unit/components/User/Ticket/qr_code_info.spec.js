@@ -4,14 +4,7 @@ import QRCodeInfo from '@/components/User/Ticket/QRCodeInfo.vue';
 describe('QRCodeInfo.vue', () => {
   const expectedData = {
     validDate: 'Friday, 24 Jul 2020',
-    qrCodeValue: `{
-      redeem: false,
-      expiredDate: 'Friday, 24 Jul 2020',
-      sku: 'TICK_0001',
-      merchantSku: 'HEND_0001',
-      price: 100000,
-      discount: 50000,
-    }`,
+    qrCodeValue: 'TICK_0001',
   };
   const data = {
     ticket: {
@@ -28,7 +21,7 @@ describe('QRCodeInfo.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(QRCodeInfo, {
       propsData: {
-        ticket: data,
+        ...data,
       },
       stubs: ['vue-qrcode'],
     });

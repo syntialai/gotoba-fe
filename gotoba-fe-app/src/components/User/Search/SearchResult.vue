@@ -67,9 +67,7 @@ export default {
   methods: {
     filterSearch(array) {
       const keyword = this.searchKeywords.trim().toLowerCase();
-      console.log('keyword', keyword);
-      console.log('array', array);
-      console.log(array[0].name, array[0].title);
+
       return array.filter(
         (data) => (data.name.toLowerCase().includes(keyword)
         || data.address.toLowerCase().includes(keyword))

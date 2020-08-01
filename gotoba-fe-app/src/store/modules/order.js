@@ -82,17 +82,15 @@ const actions = {
       });
   },
 
-  async getSomeOrderData({ commit }, listSku) {
+  async getSomeOrderData({ commit, getters }, listSku) {
     try {
-      const order = [];
-      listSku.forEach(async (sku) => {
-        const res = await api.GetOrderDetail(sku);
-        if (!res.error) {
-          order.push(res.data);
-        }
-      });
-      commit(Types.SET_FILTERED_ORDER_DATA, order);
-      commit(Types.SET_ORDER_TOTAL, order);
+      const res = await api.GetOrderDetailByNotCart(getters.userSku);
+      if (!res.error) {
+        const order = res.data.filter((item) => listSku.includes(item.sku));
+        console.log(res.data, order);
+        commit(Types.SET_FILTERED_ORDER_DATA, order);
+        commit(Types.SET_ORDER_TOTAL, order);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -252,11 +250,13 @@ const mutations = {
     let totalItem = 0;
     let totalPrice = 0;
     let totalDiscount = 0;
+    console.log('res', res.length);
 
     res.forEach((data) => {
       totalItem += data.quantity;
       totalPrice += data.price * data.quantity;
       totalDiscount += data.discount * data.quantity;
+      console.log('res', data.length);
     });
 
     state.orderTotal = {

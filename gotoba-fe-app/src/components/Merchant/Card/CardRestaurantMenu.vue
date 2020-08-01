@@ -4,8 +4,6 @@
       :img-src="imageUrl"
       :img-alt="'Image-' + menu.name"
       img-top
-      img-height="99px"
-      img-width="132px"
       class="box-shadow border-square-10"
     >
       <b-card-title
@@ -39,3 +37,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.card-restaurant-menu {
+  max-width: 150px;
+}
+</style>

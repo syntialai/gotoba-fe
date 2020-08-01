@@ -1,23 +1,27 @@
 import { shallowMount } from '@vue/test-utils';
+import { formatDate } from '@/utils/filter';
 import CardHistory from '@/components/User/History/CardHistory.vue';
 
 const $route = {
-  path: '/history/pending'
+  path: '/history/pending',
 };
+
+jest.mock('@/utils/filter');
+formatDate.mockImplementation(() => 'Friday, 31 Jul 2020');
 
 describe('CardHistory.vue', () => {
   const expectedData = {
-    goToDetails: '/history/pending/ORD_0001_0001_0001',
-    key: '2020-07-25',
-    date: 'Saturday, 25 Jul 2020',
+    goToDetails: '/history/details/ORD_0001_0001_0001',
+    dateFormat: '31 Jul 2020',
   };
   const history = {
-    '2020-07-25': [
+    history: [
       {
         orderSku: 'ORD_0001_0001_0001',
         id: 1,
-      }
+      },
     ],
+    date: '2020-07-31',
   };
   let wrapper;
 
@@ -27,7 +31,7 @@ describe('CardHistory.vue', () => {
         $route,
       },
       propsData: {
-        history: history,
+        history,
       },
       stubs: ['router-link'],
     });
@@ -38,12 +42,8 @@ describe('CardHistory.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check key computed to return first key of object', () => {
-    expect(wrapper.vm.key).toMatch(expectedData.key);
-  });
-
   it('Check date computed to return date from props', () => {
-    expect(wrapper.vm.date).toMatch(expectedData.date);
+    expect(wrapper.vm.dateFormat).toMatch(expectedData.dateFormat);
   });
 
   it('Check goToDetails method navigate to History Details when called', () => {

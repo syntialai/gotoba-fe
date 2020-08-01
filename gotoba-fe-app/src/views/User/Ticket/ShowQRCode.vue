@@ -42,7 +42,7 @@ export default {
     this.getOrderDataBySku(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getOrderDataBySku', 'getPaymentBySku']),
+    ...mapActions(['getOrderDataBySku']),
   },
 };
 </script>

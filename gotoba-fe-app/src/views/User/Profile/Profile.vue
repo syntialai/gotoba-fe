@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import { alert } from '../../../utils/tool';
+import { mapGetters } from 'vuex';
 import CardProfileUser from '../../../components/User/Profile/CardProfileUser.vue';
 import ProfileMenuGroup from '../../../components/User/Profile/ProfileMenuGroup.vue';
 
@@ -32,13 +31,7 @@ export default {
     ProfileMenuGroup,
   },
   computed: {
-    ...mapGetters(['userName', 'userImage', 'userLoginStatus', 'userRole']),
-  },
-  created() {
-    if (!this.userLoginStatus || this.userRole !== 'ROLE_USER') {
-      alert('You should log in first', false);
-      this.$router.push('/login');
-    }
+    ...mapGetters(['userName', 'userImage']),
   },
   data() {
     return {
@@ -62,9 +55,6 @@ export default {
         },
       ],
     };
-  },
-  methods: {
-    ...mapActions(['setLogOut']),
   },
 };
 </script>

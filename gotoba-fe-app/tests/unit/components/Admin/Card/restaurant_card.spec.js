@@ -8,6 +8,7 @@ describe('RestaurantCard.vue', () => {
       location: 'Parapat, North Sumatra',
       other: 'All-day Cafe',
       rating: null,
+      name: 'Restaurant',
     },
     goToRestaurantDetail: '/admin/restaurant/REST_0001_0001',
   };
@@ -16,6 +17,7 @@ describe('RestaurantCard.vue', () => {
     address: 'Parapat, North Sumatra',
     bistroType: 'All-day Cafe',
     sku: 'REST_0001_0001',
+    name: 'Restaurant',
   };
 
   let wrapper;

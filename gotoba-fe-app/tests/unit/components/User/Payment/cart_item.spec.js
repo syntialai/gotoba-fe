@@ -56,6 +56,7 @@ describe('CartItem.vue', () => {
       store,
       stubs: [
         'update:quantity',
+        'b-icon',
       ],
     });
   });

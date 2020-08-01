@@ -5,11 +5,6 @@ import Search from '@/views/User/Search/Search.vue';
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-window.localStorage = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-};
-
 describe('Search.vue', () => {
   const expectedData = {
     searchKeywords: 'danau',
@@ -17,14 +12,30 @@ describe('Search.vue', () => {
     history: {
       history: ['danau'],
     },
+    historyAdd: {
+      history: ['toba', 'danau'],
+    },
+  };
+  const data = {
+    history1: {
+      history: ['toba'],
+    },
+    history2: {
+      history: ['danau'],
+    },
   };
 
+  let getItem;
+  let setItem;
   let getters;
   let actions;
   let store;
   let wrapper;
 
   beforeEach(() => {
+    getItem = jest.spyOn(Object.getPrototypeOf(window.localStorage), 'getItem');
+    setItem = jest.spyOn(Object.getPrototypeOf(window.localStorage), 'setItem');
+
     getters = {
       searchKeywords: () => 'danau',
       searchWisataResults: () => [],
@@ -34,7 +45,6 @@ describe('Search.vue', () => {
       getSearchWisataResults: jest.fn(),
       getSearchRestaurantResults: jest.fn(),
       setSearchSuggestions: jest.fn(),
-      setSearchShowStatus: jest.fn(),
     };
     store = new Vuex.Store({
       getters,
@@ -55,37 +65,48 @@ describe('Search.vue', () => {
     expect(actions.getSearchWisataResults).toHaveBeenCalledTimes(1);
     expect(actions.getSearchRestaurantResults).toHaveBeenCalledTimes(1);
     expect(actions.setSearchSuggestions).toHaveBeenCalledTimes(1);
-    expect(actions.setSearchSuggestions.mock.calls[0][1]).toStrictEqual(expectedData.searchSuggestions);
+    expect(actions.setSearchSuggestions.mock.calls[0][1]).toStrictEqual(
+      expectedData.searchSuggestions,
+    );
   });
 
   it('Check history computed return history from localStorage is null', () => {
-    localStorage.getItem.mockImplementation(() => null);
+    getItem.mockReturnValue(null);
 
     expect(wrapper.vm.history).toBeNull();
   });
 
   it('Check history computed return history from localStorage is some object', () => {
-    localStorage.getItem.mockImplementation(() => `{
-      history: ['danau'],
-    }`);
+    getItem.mockReturnValue(JSON.stringify(data.history2));
 
-    expect(wrapper.vm.history).toStrictEqual(expectedData.history);
+    expect(wrapper.vm.history).toStrictEqual(expectedData.history.history);
   });
 
-  it('Check doSearch method to call localStorage and add history', () => {
-    localStorage.getItem.mockImplementation(() => null);
+  it('Check doSearch method to call localStorage and add history when localStorage is empty', () => {
+    getItem.mockReturnValue(null);
     wrapper.vm.doSearch();
 
-    expect(actions.setSearchShowStatus).toHaveBeenCalledTimes(1);
-    expect(actions.setSearchShowStatus.mock.calls[0][1]).toHaveBeenCalledWith(false);
+    expect(getItem).toHaveBeenCalledTimes(1);
+    expect(getItem).toHaveBeenCalledWith('searchHistory');
 
-    expect(localStorage.getItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.getItem).toHaveBeenCalledWith('searchHistory');
-    
-    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(localStorage.setItem).toHaveBeenCalledWith(
+    expect(setItem).toHaveBeenCalledTimes(1);
+    expect(setItem).toHaveBeenCalledWith(
       'searchHistory',
-      JSON.stringify(expectedData.history)
+      JSON.stringify(expectedData.history),
     );
-  })
+  });
+
+  it('Check doSearch method to call localStorage and add history when localStorage is filled', () => {
+    getItem.mockReturnValue(JSON.stringify(data.history1));
+    wrapper.vm.doSearch();
+
+    expect(getItem).toHaveBeenCalledTimes(1);
+    expect(getItem).toHaveBeenCalledWith('searchHistory');
+
+    expect(setItem).toHaveBeenCalledTimes(1);
+    expect(setItem).toHaveBeenCalledWith(
+      'searchHistory',
+      JSON.stringify(expectedData.historyAdd),
+    );
+  });
 });

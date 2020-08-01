@@ -42,11 +42,11 @@ describe('CardTicketPromotion.vue', () => {
 
   it('Check promotionPrice computed return formatted promotion price', () => {
     expect(wrapper.vm.promotionPrice).toMatch(expectedData.promotionPrice);
-  })
+  });
 
   it('Check actualPrice computed return formatted price', () => {
     expect(wrapper.vm.actualPrice).toMatch(expectedData.actualPrice);
-  })
+  });
 
   it('Check goToTicketDetail computed return link to ticket details', () => {
     expect(wrapper.vm.goToTicketDetail).toMatch(expectedData.goToTicketDetail);

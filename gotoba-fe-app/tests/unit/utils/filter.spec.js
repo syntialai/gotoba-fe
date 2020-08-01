@@ -93,3 +93,53 @@ describe('filter.js : toCapitalize', () => {
     expect(actualData).toMatch(expectedData);
   });
 });
+
+describe('filter.js : getTime', () => {
+  it('Check function to return AM time from string time params', () => {
+    expectedData = [12, 0];
+    actualData = filter.getTime('12:00 AM');
+
+    expect(actualData).toStrictEqual(expectedData);
+  });
+
+  it('Check function to return PM time from string time params', () => {
+    expectedData = [24, 0];
+    actualData = filter.getTime('12:00 PM');
+
+    expect(actualData).toStrictEqual(expectedData);
+  });
+});
+
+describe('filter.js : sortTime', () => {
+  it('Check function to return sorted array by time', () => {
+    expectedData = [
+      { time: '12:00 AM' },
+      { time: '01:00 PM' },
+      { time: '11:00 PM' },
+    ];
+    actualData = filter.sortTime([
+      { time: '01:00 PM' },
+      { time: '11:00 PM' },
+      { time: '12:00 AM' },
+    ]);
+
+    expect(actualData).toStrictEqual(expectedData);
+  });
+});
+
+describe('filter.js : sortDate', () => {
+  it('Check function to return sorted array by date', () => {
+    expectedData = [
+      { date: new Date(2020, 7, 31).toString() },
+      { date: new Date(2020, 8, 1).toString() },
+      { date: new Date(2020, 8, 31).toString() },
+    ];
+    actualData = filter.sortTime([
+      { date: new Date(2020, 8, 1).toString() },
+      { date: new Date(2020, 8, 31).toString() },
+      { date: new Date(2020, 7, 31).toString() },
+    ]);
+
+    expect(actualData).toStrictEqual(expectedData);
+  });
+});

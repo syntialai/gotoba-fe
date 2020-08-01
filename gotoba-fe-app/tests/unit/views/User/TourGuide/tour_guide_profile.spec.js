@@ -24,18 +24,9 @@ describe('TourGuideProfile.vue', () => {
         name: 'TourGuide 1',
         sku: 'TOUR_0001',
       }),
-      tourGuideReview: () => ([
-        {
-          image: '',
-          name: 'TourGuide 1',
-          sku: 'TOUR_0001',
-          rating: 5,
-        },
-      ]),
     };
     actions = {
       getTourGuideBySku: jest.fn(),
-      getTourGuideReview: jest.fn(),
     };
     store = new Vuex.Store({
       actions,
@@ -62,11 +53,8 @@ describe('TourGuideProfile.vue', () => {
     wrapper.destroy();
   });
 
-  it('Check getTourGuideBySku and getTourGuideReview actions to be called when created', () => {
+  it('Check getTourGuideBySku and actions to be called when created', () => {
     expect(actions.getTourGuideBySku).toHaveBeenCalledTimes(1);
-    expect(actions.getTourGuideReview).toHaveBeenCalledTimes(1);
-
     expect(actions.getTourGuideBySku.mock.calls[0][1]).toEqual($route.params.sku);
-    expect(actions.getTourGuideReview.mock.calls[0][1]).toEqual($route.params.sku);
   });
 });

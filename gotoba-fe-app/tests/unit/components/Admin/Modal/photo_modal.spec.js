@@ -14,11 +14,10 @@ localVue.use(Vuex);
 jest.mock('@/api/api', () => ({
   PostGalleryPhoto: jest.fn(),
   EditGalleryPhoto: jest.fn(),
+  imageUrl: jest.fn().mockImplementation(() => 'http://localhost:8800/image/image/image.png'),
 }));
 jest.mock('@/utils/tool');
-jest.mock('@/utils/fileHelper', () => {
-  return jest.fn();
-});
+jest.mock('@/utils/fileHelper', () => jest.fn());
 
 const $route = {
   params: {
@@ -51,9 +50,11 @@ describe('PhotoModal.vue', () => {
       image: null,
       description: '',
     },
-  };
-  const props = {
-    title: 'Edit',
+    photoChanged: {
+      title: 'Image',
+      description: 'Gallery mock',
+      image: '/image/image.png',
+    },
   };
   let getters;
   let actions;
@@ -116,12 +117,15 @@ describe('PhotoModal.vue', () => {
   });
 
   it('Check submitPhoto method to call api PostGalleryPhoto', async () => {
+    wrapper.setData({
+      photo: data.photoChanged,
+    });
     wrapper.vm.submitPhoto();
     await flushPromises();
 
     expect(api.PostGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.PostGalleryPhoto).toHaveBeenCalledWith(expectedData.data);
-    
+
     expect(alert).toHaveBeenCalledTimes(1);
     expect(alert).toHaveBeenCalledWith('added photo', true);
   });
@@ -136,7 +140,7 @@ describe('PhotoModal.vue', () => {
   });
 
   it('Check removePhoto method to remove galleryPhoto image data', async () => {
-    wrapper.vm.setData({
+    wrapper.setData({
       photo: {
         image: 'image.png',
       },
@@ -156,12 +160,28 @@ describe('PhotoModal.vue with title props', () => {
       image: '/image/image.png',
       show: true,
     },
+    photoChanged: {
+      title: 'Image',
+      image: 'http://localhost:8800/image/image/image.png',
+      description: 'Gallery mock',
+    },
+    imageUrl: 'http://localhost:8800/image/image/image.png',
   };
   const data = {
     photo: {
       title: '',
       image: null,
       description: '',
+    },
+    photo2: {
+      title: 'Image',
+      image: '/image/image.png',
+      description: 'Gallery mock',
+    },
+    photoChanged: {
+      title: 'Image',
+      image: 'http://localhost:8800/image/image/image.png',
+      description: 'Gallery mock',
     },
   };
   let getters;
@@ -222,13 +242,33 @@ describe('PhotoModal.vue with title props', () => {
     expect(actions.getGalleryPhoto.mock.calls[0][1]).toEqual($route.params.sku);
   });
 
+  it('Check imageUrl computed return image url from data image', () => {
+    expect(wrapper.vm.imageUrl).toMatch(expectedData.imageUrl);
+  });
+
+  it('Check watcher to change photo data when title is Edit', async () => {
+    store.hotUpdate({
+      getters: {
+        galleryPhoto: () => data.photoChanged,
+      },
+    });
+    await flushPromises();
+
+    expect(wrapper.vm.title).toMatch('Edit');
+    expect(wrapper.vm.$data.photo).toStrictEqual(expectedData.photoChanged);
+    expect(wrapper.vm.$data.photo.image).toMatch(expectedData.imageUrl);
+  });
+
   it('Check submitPhoto method to call api EditGalleryPhoto', async () => {
+    wrapper.setData({
+      photo: data.photo2,
+    });
     wrapper.vm.submitPhoto();
     await flushPromises();
 
     expect(api.EditGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.EditGalleryPhoto).toHaveBeenCalledWith($route.params.sku, expectedData.data);
-    
+
     expect(alert).toHaveBeenCalledTimes(1);
     expect(alert).toHaveBeenCalledWith('updated photo', true);
   });
@@ -237,16 +277,6 @@ describe('PhotoModal.vue with title props', () => {
 describe('PhotoModal.vue check function returned', () => {
   const event = {
     target: {},
-  };
-  const expectedData = {
-    data: {
-      name: 'Image',
-      title: 'Image',
-      description: 'Gallery mock',
-      image: '/image/image.png',
-      show: true,
-    },
-    image: 'image.png',
   };
   const data = {
     photo: {
@@ -313,9 +343,6 @@ describe('PhotoModal.vue check function returned', () => {
 });
 
 describe('PhotoModal.vue check error api promise', () => {
-  const event = {
-    target: { files: ['image.png'] },
-  };
   const expectedData = {
     galleryPhoto: {
       title: 'Image',
@@ -337,6 +364,11 @@ describe('PhotoModal.vue check error api promise', () => {
       image: null,
       description: '',
     },
+    photo2: {
+      title: 'Image',
+      image: '/image/image.png',
+      description: 'Gallery mock',
+    },
   };
   let getters;
   let actions;
@@ -347,7 +379,7 @@ describe('PhotoModal.vue check error api promise', () => {
     api.PostGalleryPhoto.mockResolvedValue({
       status: 400,
       error: 'Bad Request',
-    }),
+    });
     api.EditGalleryPhoto.mockResolvedValue({
       status: 401,
       error: 'Not Authorized',
@@ -389,12 +421,15 @@ describe('PhotoModal.vue check error api promise', () => {
   });
 
   it('Check submitPhoto method to call api PostGalleryPhoto and show error', async () => {
+    wrapper.setData({
+      photo: data.photo2,
+    });
     wrapper.vm.submitPhoto();
     await flushPromises();
 
     expect(api.PostGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.PostGalleryPhoto).toHaveBeenCalledWith(expectedData.data);
-    
+
     expect(alert).toHaveBeenCalledTimes(1);
     expect(alert).toHaveBeenCalledWith('to add photo', false);
   });
@@ -403,12 +438,15 @@ describe('PhotoModal.vue check error api promise', () => {
     wrapper.setProps({
       title: 'Edit',
     });
+    wrapper.setData({
+      photo: data.photo2,
+    });
     wrapper.vm.submitPhoto();
     await flushPromises();
 
     expect(api.EditGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.EditGalleryPhoto).toHaveBeenCalledWith($route.params.sku, expectedData.data);
-    
+
     expect(alert).toHaveBeenCalledTimes(1);
     expect(alert).toHaveBeenCalledWith('to update photo', false);
   });
@@ -439,6 +477,11 @@ describe('PhotoModal.vue check catch error while making a request', () => {
       image: null,
       description: '',
     },
+    photo2: {
+      title: 'Image',
+      image: '/image/image.png',
+      description: 'Gallery mock',
+    },
   };
   let getters;
   let actions;
@@ -446,7 +489,7 @@ describe('PhotoModal.vue check catch error while making a request', () => {
   let wrapper;
 
   beforeEach(() => {
-    api.PostGalleryPhoto.mockRejectedValue(new Error()),
+    api.PostGalleryPhoto.mockRejectedValue(new Error());
     api.EditGalleryPhoto.mockRejectedValue(new Error());
     previewImage.mockRejectedValue(new Error());
 
@@ -486,17 +529,23 @@ describe('PhotoModal.vue check catch error while making a request', () => {
   });
 
   it('Check submitPhoto method to call api PostGalleryPhoto and show error', async () => {
+    wrapper.setData({
+      photo: data.photo2,
+    });
     wrapper.vm.submitPhoto();
     await flushPromises();
 
     expect(api.PostGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.PostGalleryPhoto).toHaveBeenCalledWith(expectedData.data);
-    
+
     expect(alert).toHaveBeenCalledTimes(1);
     expect(alert).toHaveBeenCalledWith('to add photo', false);
   });
 
   it('Check submitPhoto method to call api EditGalleryPhoto and show error', async () => {
+    wrapper.setData({
+      photo: data.photo2,
+    });
     wrapper.setProps({
       title: 'Edit',
     });
@@ -505,7 +554,7 @@ describe('PhotoModal.vue check catch error while making a request', () => {
 
     expect(api.EditGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.EditGalleryPhoto).toHaveBeenCalledWith($route.params.sku, expectedData.data);
-    
+
     expect(alert).toHaveBeenCalledTimes(1);
     expect(alert).toHaveBeenCalledWith('to update photo', false);
   });

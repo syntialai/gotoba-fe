@@ -21,7 +21,7 @@ describe('CardHomeLong.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(CardHomeLong, {
       propsData: {
-        data: data,
+        data,
       },
       localVue,
       stubs: ['router-link'],
@@ -39,7 +39,7 @@ describe('CardHomeLong.vue', () => {
 
   it('Check date computed return date format without day', () => {
     expect(wrapper.vm.date).toMatch(expectedData.date);
-  })
+  });
 
   it('Check goToTicketDetails computed return link to ticket details', () => {
     expect(wrapper.vm.goToTicketDetails).toMatch(expectedData.goToTicketDetails);

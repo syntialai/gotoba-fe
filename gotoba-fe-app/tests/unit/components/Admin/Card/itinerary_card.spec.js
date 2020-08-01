@@ -17,7 +17,7 @@ describe('ItineraryCard.vue', () => {
     image: '/wisata/img.png',
     address: 'Parapat, North Sumatra',
     price: 100000,
-    sku: 'WIS_0001_0001'
+    sku: 'WIS_0001_0001',
   };
 
   let wrapper;
@@ -38,7 +38,7 @@ describe('ItineraryCard.vue', () => {
 
   it('Check itineraryData computed return true object', () => {
     expect(wrapper.vm.itineraryData).toStrictEqual(expectedData.itineraryData);
-  })
+  });
 
   it('Check goToItineraryDetail computed return link to Itinerary Details', () => {
     expect(wrapper.vm.goToItineraryDetail).toMatch(expectedData.goToItineraryDetail);

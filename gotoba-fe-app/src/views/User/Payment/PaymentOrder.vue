@@ -1,5 +1,5 @@
 <template>
-  <div class="payment-order p-2">
+  <div class="payment-order p-2" v-if="paymentDataBySku">
     <div class="information p-2">
       <div class="image-waiting p-4 w-100">
         <img

@@ -333,6 +333,9 @@ export default {
   GetOrderDetailByUser(userSku, status) {
     return fetchGet(`/order/user/${userSku}/status/${status}`);
   },
+  GetOrderDetailByNotCart(userSku) {
+    return fetchGet(`/order/notCart/userSku/${userSku}`);
+  },
   CheckoutOrder(sku) {
     return fetchPut(`/order/checkout/${sku}`);
   },
@@ -363,6 +366,9 @@ export default {
    */
   GetPayment(sku) {
     return fetchGet(`/pay/sku/${sku}`);
+  },
+  GetPaymentByOrder(orderSku) {
+    return fetchGet(`/pay/orderSku/${orderSku}`);
   },
   GetPaymentByMerchant(merchantSku) {
     return fetchGet(`/pay/merchant/${merchantSku}`);

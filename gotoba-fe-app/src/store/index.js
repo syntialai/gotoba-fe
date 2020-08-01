@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import admin from './modules/admin';
 import app from './modules/app';
 import auth from './modules/auth';
 import gallery from './modules/gallery';
@@ -20,7 +19,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    admin,
     app,
     auth,
     gallery,

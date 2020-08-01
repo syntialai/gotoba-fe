@@ -49,17 +49,21 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { mapGetters } from 'vuex';
-import { formatDate, sortTime } from '../../../utils/filter';
+import { formatDate, sortTime, sortDate } from '../../../utils/filter';
 
 export default {
   name: 'PdfModal',
   computed: {
     ...mapGetters(['schedule']),
     maxDate() {
-      if (this.schedule.length > 0) {
-        return new Date(this.schedule[this.schedule.length - 1].date);
+      const sched = this.sortedSchedule;
+      if (sched.length > 0) {
+        return new Date(sched[sched.length - 1].date);
       }
       return new Date();
+    },
+    sortedSchedule() {
+      return sortDate(this.schedule);
     },
   },
   data() {
@@ -96,10 +100,20 @@ export default {
         headStyles: { fillColor: [4, 140, 232] },
       });
 
+      doc.autoTable({
+        head: [[]],
+        body: [[]],
+        startY: 0,
+        margin: {
+          top: 20,
+          bottom: 20,
+        },
+      });
+
       // Table
       doc.setFontSize(12);
 
-      const filteredSched = this.schedule.filter((item) => {
+      const filteredSched = this.sortedSchedule.filter((item) => {
         const itemDate = new Date(item.date);
         return itemDate >= new Date(begin) && itemDate <= new Date(end);
       });
@@ -111,7 +125,8 @@ export default {
         doc.text(
           formatDate(new Date(sched.date)),
           15,
-          typeof doc.autoTable.previous.finalY === 'undefined' ? 10 : doc.autoTable.previous.finalY + 10,
+          typeof doc.autoTable.previous.finalY === 'undefined' || doc.autoTable.previous.finalY < 40
+            ? 45 : doc.autoTable.previous.finalY + 10,
         );
 
         const schedArr = [];
@@ -120,12 +135,15 @@ export default {
           console.log(schedArr);
         });
 
+        console.log(doc.autoTable.previous.finalY);
+
         doc.autoTable({
           head: [['Time', 'Destination']],
           body: schedArr,
-          startY: typeof doc.autoTable.previous.finalY === 'undefined' ? 15 : doc.autoTable.previous.finalY + 15,
+          startY: doc.autoTable.previous.finalY === 0
+            ? 50 : doc.autoTable.previous.finalY + 15,
           margin: {
-            top: 15,
+            top: 10,
             bottom: 20,
           },
         });

@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
 import RestaurantCardGroup from '@/components/Admin/Data/RestaurantCardGroup.vue';
 
@@ -30,7 +30,7 @@ describe('RestaurantCardGroup.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(RestaurantCardGroup, {
+    wrapper = shallowMount(RestaurantCardGroup, {
       propsData: { ...props },
       localVue,
       stubs: ['restaurant-card'],
@@ -42,7 +42,7 @@ describe('RestaurantCardGroup.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check restaurantRange computed return sliced restaurants props', async () => {
+  it('Check restaurantRange computed return sliced restaurants props', () => {
     expect(wrapper.vm.restaurantRange).toStrictEqual(expectedData.restaurants);
   });
 });

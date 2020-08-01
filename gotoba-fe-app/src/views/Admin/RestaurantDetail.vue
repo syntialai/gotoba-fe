@@ -50,7 +50,7 @@ export default {
     RestaurantCard,
   },
   computed: {
-    ...mapGetters(['restaurantData', 'restaurantMenu']),
+    ...mapGetters(['restaurantData']),
     hoursOpen() {
       let hoursOpenStr = '';
 
@@ -66,7 +66,7 @@ export default {
     this.getRestaurantDataBySku(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getRestaurantDataBySku', 'getRestaurantMenu']),
+    ...mapActions(['getRestaurantDataBySku']),
   },
 };
 </script>

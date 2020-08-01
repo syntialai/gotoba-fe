@@ -30,14 +30,13 @@ describe('PaymentOrder.vue', () => {
 
   beforeEach(() => {
     getters = {
-      paymentDataBySku: () => [
-        {
-          total: 50000,
-          status: 'WAITING',
-          merchantSku: 'SYNT_0001',
-          orderSku: 'ORD_0001',
-        },
-      ],
+      paymentDataBySku: () => ({
+        total: 50000,
+        status: 'WAITING',
+        merchantSku: 'SYNT_0001',
+        orderSku: 'ORD_0001',
+        sku: 'PAY_0001',
+      }),
       orderTotal: () => ({
         item: 1,
         price: 100000,
@@ -77,6 +76,6 @@ describe('PaymentOrder.vue', () => {
   });
 
   it('Check goToHistory computed return goToHistory link', () => {
-    expect(wrapper.vm.goToHistory).toBe(expectedData.goToHistory);
+    expect(wrapper.vm.goToHistory).toMatch(expectedData.goToHistory);
   });
 });

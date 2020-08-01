@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
 import GalleryCardGroup from '@/components/Admin/Data/GalleryCardGroup.vue';
 
@@ -37,10 +37,9 @@ describe('GalleryCardGroup.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(GalleryCardGroup, {
+    wrapper = shallowMount(GalleryCardGroup, {
       propsData: { ...props },
       localVue,
-      stubs: ['gallery-card'],
     });
   });
 

@@ -69,13 +69,15 @@ export default {
           res = await api.ActivateUser(sku);
         }
 
-        if (!res.error) {
-          console.log(res);
-          alert('changed user status', true);
-        } else {
-          alert('change user status', false);
-        }
+        this.callAlert(res);
       } catch (err) {
+        alert('change user status', false);
+      }
+    },
+    callAlert(res) {
+      if (!res.error) {
+        alert('changed user status', true);
+      } else {
         alert('change user status', false);
       }
     },
@@ -97,10 +99,7 @@ export default {
           if (value) {
             this.changeStatus(statusInv, sku);
           }
-        })
-        .catch(
-          (err) => console.log(err),
-        );
+        });
     },
   },
 };

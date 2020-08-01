@@ -6,19 +6,19 @@
           <b-form-group id="edit-img">
             <div class="align-center">
               <b-avatar
-                :src="merchantData.image"
+                :src="merchant.image"
                 alt="profile"
                 class="my-2"
                 size="100"
               />
             </div>
             <b-form-file
-              v-model="merchantData.image"
+              v-model="merchant.image"
               @change="loadImage"
               accept="image/jpeg, image/jpg, image/png"
             ></b-form-file>
             <b-button
-              v-if="merchantData.image !== null && merchantData.image !== ''"
+              v-if="merchant.image !== ''"
               block
               size="sm"
               class="custom-btn-gray mt-2"
@@ -38,7 +38,7 @@
             >
               <b-form-input
                 id="input-edit-nick-name"
-                v-model="merchantData.nickname"
+                v-model="merchant.nickname"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-nick-name-feedback-msg"
@@ -61,7 +61,7 @@
             >
               <b-form-input
                 id="input-edit-username"
-                v-model="merchantData.username"
+                v-model="merchant.username"
                 type="text"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-username-feedback-msg"
@@ -84,7 +84,7 @@
             >
               <b-form-input
                 id="input-edit-email"
-                v-model="merchantData.email"
+                v-model="merchant.email"
                 type="email"
                 :state="getValidationState(validationContext)"
                 aria-describedby="edit-email-feedback-msg"
@@ -113,60 +113,82 @@
 import { mapActions, mapGetters } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
+import { alert } from '../../../utils/tool';
 import api from '../../../api/api';
 
 export default {
   name: 'EditProfile',
   computed: {
     ...mapGetters(['merchantData', 'userSku']),
+    imageUrl() {
+      return api.imageUrl(this.merchant.image);
+    },
   },
   created() {
     this.getMerchantDataBySku(this.userSku);
   },
+  data() {
+    return {
+      merchant: {
+        nickname: '',
+        username: '',
+        email: '',
+        image: '',
+      },
+    };
+  },
   methods: {
-    ...mapActions(['getMerchantDataBySku']),
-
+    ...mapActions(['getMerchantDataBySku', 'setUserInfo']),
     getValidationState,
-
     updateProfile() {
-      if (!this.merchantData.nickname
-        || !this.merchantData.username
-        || !this.merchantData.email) {
+      if (!this.merchant.nickname
+        || !this.merchant.username
+        || !this.merchant.email) {
         return;
       }
 
-      const data = { ...this.merchantData };
+      const data = { ...this.merchant };
 
       api.EditMerchant(this.userSku, data)
         .then((res) => {
-          this.setUserInfo({
-            name: res.nickname,
-            role: res.role,
-            sku: res.sku,
-            image: res.image,
-          });
+          if (!res.error) {
+            this.setUserInfo({
+              name: res.data.nickname,
+              role: res.data.roles,
+              sku: res.data.sku,
+              image: res.data.image,
+            });
+            alert('updated profile', true);
+            return;
+          }
+          alert('update profile', false);
         })
         .catch((err) => {
+          alert('update profile', false);
           console.log(err);
         });
     },
-
     loadImage(event) {
       const { files } = event.target;
 
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.merchantData.image = res.toString();
+            this.merchant.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
           });
       }
     },
-
     removePhoto() {
-      this.merchantData.image = null;
+      this.merchant.image = '';
+    },
+  },
+  watch: {
+    merchantData() {
+      this.merchant = { ...this.merchantData };
+      this.merchant.image = this.imageUrl;
     },
   },
 };

@@ -422,9 +422,24 @@ export default {
     getValidationState,
 
     submitTourGuide() {
-      const data = { ...this.tourGuideData };
+      const data = { ...this.tourGuide };
 
-      console.log(data);
+      if (data.title === ''
+          || data.image === null
+          || data.age === 0
+          || data.rating === 1
+          || data.occupation === ''
+          || data.location === ''
+          || data.language === []
+          || data.availableLocation === []
+          || data.phoneNumber === ''
+          || data.email === ''
+          || data.whatsapp === ''
+          || data.experience === ''
+          || data.description === '') {
+        return;
+      }
+
       if (this.title === 'Add') {
         api.PostTourGuide(data)
           .then((res) => {
@@ -457,10 +472,11 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.tourGuideData.image = res;
+            this.tourGuide.image = res;
           })
           .catch((err) => {
             console.log(err);
+            alert('to show tour guide', false);
           });
       }
     },
@@ -470,7 +486,7 @@ export default {
     },
 
     locationSuggestions() {
-      if (this.tourGuideData.location) {
+      if (this.tourGuide.location) {
         api.GetSearchLocationResult(this.tourGuideData.location)
           .then((res) => {
             this.locationList = res.map((item) => item.display_name);

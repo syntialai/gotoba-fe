@@ -10,10 +10,13 @@ describe('CardTicket.vue', () => {
   const expectedData = {
     imageUrl: 'http://localhost:8800/image/img.png',
     isExpired: [true, false],
+    goToQRCode: '/my-tickets/TICK_0001',
+    expiredDate: '23 Jul 2020',
   };
   const data = {
     image: '/img.png',
     expiredDate: '2020-07-23',
+    sku: 'TICK_0001',
   };
   let wrapper;
 
@@ -23,6 +26,7 @@ describe('CardTicket.vue', () => {
         ticket: data,
       },
       localVue,
+      stubs: ['router-link'],
     });
   });
 
@@ -48,5 +52,13 @@ describe('CardTicket.vue', () => {
     await flushPromises();
 
     expect(wrapper.vm.isExpired).toBe(expectedData.isExpired[1]);
+  });
+
+  it('Check goToQRCode computed return link to qr code page', () => {
+    expect(wrapper.vm.goToQRCode).toBe(expectedData.goToQRCode);
+  });
+
+  it('Check expiredDate computed return expiredDate formatted', () => {
+    expect(wrapper.vm.expiredDate).toBe(expectedData.expiredDate);
   });
 });

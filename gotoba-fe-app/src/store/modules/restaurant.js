@@ -7,7 +7,6 @@ const state = {
   restaurantDatas: [],
   restaurantMenu: {},
   restaurantMenus: [],
-  restaurantReview: [],
   bistroType: [],
 };
 
@@ -102,21 +101,6 @@ const actions = {
     commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
   },
 
-  getRestaurantReview({ commit }, sku) {
-    commit(Types.SET_RESTAURANT_REVIEW);
-
-    api.GetRestaurantMenus(sku)
-      .then((res) => {
-        if (!res.error) {
-          commit(Types.SET_RESTAURANT_REVIEW, res);
-        }
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
   removeRestaurantMenu({ commit }, sku, id) {
     commit(Types.REMOVE_RESTAURANT_MENU);
 
@@ -137,7 +121,6 @@ const getters = {
   restaurantDatas: (state) => state.restaurantDatas,
   restaurantMenu: (state) => state.restaurantMenu,
   restaurantMenus: (state) => state.restaurantMenus,
-  restaurantReview: (state) => state.restaurantReview,
 };
 
 const mutations = {
@@ -156,9 +139,6 @@ const mutations = {
   },
   [Types.SET_RESTAURANT_MENU_BY_ID](state, res) {
     state.restaurantMenu = res;
-  },
-  [Types.SET_RESTAURANT_REVIEW](state, res) {
-    state.restaurantReview = res;
   },
 };
 

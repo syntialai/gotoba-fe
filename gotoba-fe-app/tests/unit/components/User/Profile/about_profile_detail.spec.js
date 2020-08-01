@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
 import AboutProfileDetail from '@/components/User/Profile/AboutProfileDetail.vue';
 
@@ -7,32 +7,76 @@ localVue.use(BootstrapVue);
 
 describe('AboutProfileDetail.vue', () => {
   const expectedData = {
-    items: [
-      {
-        description: 'Desc Example',
-        full_address: 'Address Example',
-        hours_open: 'monday = 10.00AM - 10.00PM\ntuesday = 10.00AM - 10.00PM',
-        telephone: '081377233761',
-      },
-    ],
-    hoursOpen: 'monday = 10.00AM - 10.00PM\ntuesday = 10.00AM - 10.00PM',
+    complete: {
+      items: [
+        {
+          description: 'Desc Example',
+          full_address: 'Address Example',
+          hours_open: 'Monday = 10.00AM - 10.00PM\nTuesday = 10.00AM - 10.00PM\n',
+          telephone: '081377233761',
+        },
+      ],
+    },
+    no_desc: {
+      items: [
+        {
+          description: '-',
+          full_address: 'Address Example',
+          hours_open: 'Monday = 10.00AM - 10.00PM\nTuesday = 10.00AM - 10.00PM\n',
+          telephone: '081377233761',
+        },
+      ],
+    },
+    no_telp: {
+      items: [
+        {
+          description: 'Desc Example',
+          full_address: 'Address Example',
+          hours_open: 'Monday = 10.00AM - 10.00PM\nTuesday = 10.00AM - 10.00PM\n',
+          telephone: '-',
+        },
+      ],
+    },
+    hoursOpen: 'Monday = 10.00AM - 10.00PM\nTuesday = 10.00AM - 10.00PM\n',
   };
   const props = {
-    data: {
-      description: 'Desc Example',
-      address: 'Address Example',
-      hoursOpen: {
-        monday: ['10.00AM', '10.00PM'],
-        tuesday: ['10.00AM', '10.00PM'],
+    complete: {
+      data: {
+        description: 'Desc Example',
+        address: 'Address Example',
+        hoursOpen: {
+          monday: ['10.00AM', '10.00PM'],
+          tuesday: ['10.00AM', '10.00PM'],
+        },
+        phone: '081377233761',
       },
-      phone: '081377233761',
+    },
+    no_desc: {
+      data: {
+        address: 'Address Example',
+        hoursOpen: {
+          monday: ['10.00AM', '10.00PM'],
+          tuesday: ['10.00AM', '10.00PM'],
+        },
+        phone: '081377233761',
+      },
+    },
+    no_telp: {
+      data: {
+        description: 'Desc Example',
+        address: 'Address Example',
+        hoursOpen: {
+          monday: ['10.00AM', '10.00PM'],
+          tuesday: ['10.00AM', '10.00PM'],
+        },
+      },
     },
   };
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(AboutProfileDetail, {
-      propsData: { ...props },
+    wrapper = shallowMount(AboutProfileDetail, {
+      propsData: { ...props.complete },
       localVue,
     });
   });
@@ -47,6 +91,20 @@ describe('AboutProfileDetail.vue', () => {
   });
 
   it('Check items computed return changed props', () => {
-    expect(wrapper.vm.items).toStrictEqual(expectedData.items);
+    expect(wrapper.vm.items).toStrictEqual(expectedData.complete.items);
+  });
+
+  it('Check items computed return no description data', () => {
+    wrapper.setProps({
+      ...props.no_desc,
+    });
+    expect(wrapper.vm.items).toStrictEqual(expectedData.no_desc.items);
+  });
+
+  it('Check items computed return no telephone data', () => {
+    wrapper.setProps({
+      ...props.no_telp,
+    });
+    expect(wrapper.vm.items).toStrictEqual(expectedData.no_telp.items);
   });
 });

@@ -13,6 +13,7 @@ localVue.use(Vuex);
 jest.mock('@/api/api', () => ({
   PostPayment: jest.fn(),
   CheckoutOrder: jest.fn(),
+  GetPaymentByOrder: jest.fn(),
 }));
 jest.mock('@/utils/tool');
 
@@ -106,6 +107,13 @@ describe('Payment.vue', () => {
       code: 200,
       status: 'OK',
     });
+    api.GetPaymentByOrder.mockResolvedValue({
+      code: 200,
+      status: 'OK',
+      data: {
+        sku: 'PAY_0005',
+      },
+    });
 
     const spyMethod = jest.spyOn(wrapper.vm, 'goToThanksPage');
     wrapper.vm.pay();
@@ -119,8 +127,12 @@ describe('Payment.vue', () => {
     expect(api.CheckoutOrder).toHaveBeenCalledTimes(1);
     expect(api.CheckoutOrder).toHaveBeenCalledWith(expectedData.payment.orderSku);
 
+    expect(api.GetPaymentByOrder).toHaveBeenCalledTimes(1);
+    expect(api.GetPaymentByOrder).toHaveBeenCalledWith(expectedData.payment.orderSku);
+
     expect(wrapper.vm.$data.loading).toBe(false);
     expect(spyMethod).toHaveBeenCalledTimes(1);
+    expect(spyMethod).toHaveBeenCalledWith('PAY_0005');
   });
 
   it('Check pay method to not call api and goToThanksPage method', async () => {
@@ -130,7 +142,6 @@ describe('Payment.vue', () => {
       error: 'Bad Request',
     });
 
-    const spyMethod = jest.spyOn(wrapper.vm, 'goToThanksPage');
     wrapper.vm.pay();
     expect(wrapper.vm.$data.loading).toBe(true);
 
@@ -140,9 +151,9 @@ describe('Payment.vue', () => {
     expect(api.PostPayment).toHaveBeenCalledWith(expectedData.userSku, expectedData.payment);
 
     expect(api.CheckoutOrder).not.toHaveBeenCalled();
+    expect(api.GetPaymentByOrder).not.toHaveBeenCalled();
 
     expect(wrapper.vm.$data.loading).toBe(false);
-    expect(spyMethod).not.toHaveBeenCalled();
 
     expect(toast).toHaveBeenCalledTimes(1);
     expect(toast).toHaveBeenCalledWith('Error while checkout item!');

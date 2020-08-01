@@ -1,9 +1,6 @@
 import index from '@/store/index';
 import * as tool from '@/utils/tool';
 
-let expectedData;
-let actualData;
-
 describe('tool.js: alert', () => {
   beforeEach(() => {
     jest.mock('@/store/index', () => ({

@@ -25,7 +25,7 @@ describe('Cart.vue', () => {
         image: 'img.png',
         name: 'OK',
         quantity: 1,
-      }]
+      }],
     ],
     userSku: 'HEND_0001',
   };
@@ -125,7 +125,11 @@ describe('Cart.vue', () => {
   });
 
   it('Check cartData watch to change selected data when cartData is changed', async () => {
-    actions.setCartData(expectedData.cartData[0]);
+    store.hotUpdate({
+      getters: {
+        cartData: () => expectedData.cartData[0],
+      },
+    });
     await flushPromises();
 
     expect(wrapper.vm.$data.selected).toStrictEqual(expectedData.cartData[0]);

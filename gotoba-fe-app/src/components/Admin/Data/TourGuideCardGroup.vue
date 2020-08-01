@@ -25,7 +25,6 @@ export default {
   },
   computed: {
     tourGuideRange() {
-      console.log(this.tourGuides);
       return this.tourGuides.slice(this.start - 1, this.end);
     },
   },

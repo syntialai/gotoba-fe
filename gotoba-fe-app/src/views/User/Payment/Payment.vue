@@ -68,9 +68,6 @@ export default {
       loading: false,
     };
   },
-  created() {
-    console.log(this.userSku);
-  },
   methods: {
     async pay() {
       const data = {
@@ -88,11 +85,12 @@ export default {
           await api.CheckoutOrder(order.sku);
         });
 
-        console.log(paymentRes);
-
         if (!paymentRes.error) {
-          this.loading = false;
-          this.goToThanksPage(paymentRes.data.sku);
+          api.GetPaymentByOrder(data.orderSku)
+            .then((res) => {
+              this.loading = false;
+              this.goToThanksPage(res.data.sku);
+            });
         }
       } catch (err) {
         this.loading = false;

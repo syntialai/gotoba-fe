@@ -1,4 +1,4 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
 import ItineraryCardGroup from '@/components/Admin/Data/ItineraryCardGroup.vue';
 
@@ -30,7 +30,7 @@ describe('ItineraryCardGroup.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(ItineraryCardGroup, {
+    wrapper = shallowMount(ItineraryCardGroup, {
       propsData: { ...props },
       localVue,
       stubs: ['itinerary-card'],

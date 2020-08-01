@@ -19,7 +19,7 @@ describe('DataCard.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(DataCard, {
       propsData: {
-        data: data,
+        data,
       },
       localVue,
       stubs: ['rating', 'font-awesome-icon'],

@@ -63,6 +63,7 @@
         <h6 class="font-color-black-87">Payment Details</h6>
       </div>
       <payment-detail
+        v-if="filteredOrderData.length > 0"
         :price="orderTotal.price"
         :discount="orderTotal.discount"
         :total="orderTotal.price - orderTotal.discount"
@@ -104,15 +105,12 @@ export default {
     this.getPaymentBySku(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getPaymentBySku', 'getSomeOrderData', 'setOrderTotal']),
+    ...mapActions(['getPaymentBySku', 'getSomeOrderData']),
   },
   watch: {
     paymentDataBySku() {
-      console.log(this.paymentDataBySku);
       if (this.paymentDataBySku) {
         this.getSomeOrderData(this.paymentDataBySku.orderSku.split(','));
-        console.log(this.paymentDataBySku.orderSku.split(','));
-        console.log('filter', this.filteredOrderData);
       }
     },
   },
