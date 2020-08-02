@@ -3,7 +3,7 @@
     <div class="btn d-flex justify-content-between my-3">
       <b-button
         class="custom-btn-red"
-        @click="deleteTourGuide"
+        @click="confirmModal"
       >DELETE</b-button>
       <b-button
         class="custom-btn-primary"
@@ -108,15 +108,11 @@ export default {
   methods: {
     ...mapActions(['getTourGuideBySku', 'removeTourGuide']),
     deleteTourGuide() {
-      const confirmModalValue = this.confirmModal(this.tourGuideData.name);
-
-      if (confirmModalValue) {
-        this.removeTourGuide(this.tourGuide.sku);
-        this.$router.push('/admin/tour-guide');
-      }
+      this.removeTourGuide(this.tourGuideData.sku);
+      this.$router.push('/admin/tour-guide');
     },
-    confirmModal(object) {
-      this.$bvModal.msgBoxConfirm(`${object} will be removed permanently from this system.`, {
+    confirmModal() {
+      this.$bvModal.msgBoxConfirm('Tour Guide will be removed permanently from this system.', {
         title: 'Are you sure?',
         size: 'sm',
         okVariant: 'danger',
@@ -127,7 +123,11 @@ export default {
         hideHeaderClose: false,
         centered: true,
       })
-        .then((value) => value)
+        .then((value) => {
+          if (value) {
+            this.deleteTourGuide();
+          }
+        })
         .catch(
           (err) => console.log(err),
         );

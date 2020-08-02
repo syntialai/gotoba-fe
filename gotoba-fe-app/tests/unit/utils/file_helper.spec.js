@@ -10,6 +10,7 @@ describe('fileHelper.js', () => {
 
     const expectedData = new Promise((resolve, reject) => {
       resolve(e.target.result);
+      // eslint-disable-next-line prefer-promise-reject-errors
       reject({ error: null });
     });
     const actualData = previewImage(file);

@@ -63,7 +63,10 @@ export default {
       return new Date();
     },
     sortedSchedule() {
-      return sortDate(this.schedule);
+      if (this.schedule.length > 0) {
+        return sortDate(this.schedule);
+      }
+      return [];
     },
   },
   data() {

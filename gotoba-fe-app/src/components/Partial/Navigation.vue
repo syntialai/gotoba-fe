@@ -19,7 +19,7 @@
       </b-navbar-brand>
       <b-navbar-nav right class="ml-auto">
         <b-nav-item to="/about" class="semibold">ABOUT</b-nav-item>
-        <b-nav-item to="/search" v-if="userRole === 'ROLE_USER'">
+        <b-nav-item to="/search" v-if="isUser">
           <p class="mb-0 mr-0"><b-icon icon="search"></b-icon></p>
         </b-nav-item>
       </b-navbar-nav>
@@ -39,6 +39,9 @@ export default {
     ...mapGetters(['userRole']),
     isTitleHome() {
       return this.title === 'Home' || this.title === 'Order List';
+    },
+    isUser() {
+      return this.userRole === 'ROLE_USER';
     },
   },
 };

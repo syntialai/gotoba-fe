@@ -54,7 +54,7 @@ export default {
       return this.orderDataBySku.merchantSku === this.userSku;
     },
     canUse() {
-      return this.orderDataBySku.redeem && !isPassed(new Date(this.result.expiredDate));
+      return this.orderDataBySku.redeem && !isPassed(new Date(this.orderDataBySku.expiredDate));
     },
   },
   created() {
@@ -74,9 +74,13 @@ export default {
 
       try {
         const res = await api.RedeemOrder(this.orderDataBySku.sku);
-        this.setOrderDataBySku(data);
+        if (!res.error) {
+          this.setOrderDataBySku(data);
+          alert('used ticket', true);
+          return;
+        }
         console.log(res, data);
-        alert('used ticket', true);
+        alert('use ticket. Please try again later', false);
       } catch (err) {
         alert('use ticket. Please try again later', false);
       }
@@ -84,9 +88,9 @@ export default {
   },
   watch: {
     orderDataBySku() {
-      if (this.orderDataBySku) {
+      if (this.orderDataBySku && this.orderDataBySku.wisataSku) {
         this.getJourneyDataBySku(this.orderDataBySku.wisataSku);
-      } else {
+      } else if (this.orderDataBySku) {
         this.getRestaurantDataByMerchantSku(this.orderDataBySku.merchantSku);
       }
     },

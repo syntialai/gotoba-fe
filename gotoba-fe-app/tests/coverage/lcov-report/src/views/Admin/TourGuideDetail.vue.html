@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -284,9 +284,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -298,20 +298,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -323,6 +319,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -335,7 +335,7 @@
     &lt;div class="btn d-flex justify-content-between my-3"&gt;
       &lt;b-button
         class="custom-btn-red"
-        @click="deleteTourGuide"
+        @click="confirmModal"
       &gt;DELETE&lt;/b-button&gt;
       &lt;b-button
         class="custom-btn-primary"
@@ -421,9 +421,9 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { mapActions, mapGetters } from 'vuex';</span>
-<span class="cstat-no" title="statement not covered" >import TourGuideCard from '../../components/Admin/Card/TourGuideCard.vue';</span>
-<span class="cstat-no" title="statement not covered" >import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';</span>
+import { mapActions, mapGetters } from 'vuex';
+import TourGuideCard from '../../components/Admin/Card/TourGuideCard.vue';
+import TourGuideModal from '../../components/Admin/Modal/TourGuideModal.vue';
 &nbsp;
 export default {
   name: 'TourGuideDetail',
@@ -434,21 +434,17 @@ export default {
   computed: {
     ...mapGetters(['tourGuideData']),
   },
-<span class="fstat-no" title="function not covered" >  created() {</span>
-<span class="cstat-no" title="statement not covered" >    this.getTourGuideBySku(this.$route.params.sku);</span>
+  created() {
+    this.getTourGuideBySku(this.$route.params.sku);
   },
   methods: {
     ...mapActions(['getTourGuideBySku', 'removeTourGuide']),
-<span class="fstat-no" title="function not covered" >    deleteTourGuide() {</span>
-<span class="cstat-no" title="statement not covered" >      const confirmModalValue = this.confirmModal(this.tourGuideData.name);</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >      if (confirmModalValue) {</span>
-<span class="cstat-no" title="statement not covered" >        this.removeTourGuide(this.tourGuide.sku);</span>
-<span class="cstat-no" title="statement not covered" >        this.$router.push('/admin/tour-guide');</span>
-      }
+    deleteTourGuide() {
+      this.removeTourGuide(this.tourGuideData.sku);
+      this.$router.push('/admin/tour-guide');
     },
-<span class="fstat-no" title="function not covered" >    confirmModal(object) {</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      this.$bvModal.msgBoxConfirm(`${object} will be removed permanently from this system.`, {</span></span>
+    confirmModal() {
+      this.$bvModal.msgBoxConfirm('Tour Guide will be removed permanently from this system.', {
         title: 'Are you sure?',
         size: 'sm',
         okVariant: 'danger',
@@ -459,7 +455,11 @@ export default {
         hideHeaderClose: false,
         centered: true,
       })
-        .then((value) =&gt; value)
+        .then((value) =&gt; {
+          if (value) {
+            this.deleteTourGuide();
+          }
+        })
         .catch(
           (err) =&gt; console.log(err),
         );
@@ -474,7 +474,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Aug 02 2020 13:22:20 GMT+0700 (Indochina Time)
+                at Sun Aug 02 2020 20:38:18 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

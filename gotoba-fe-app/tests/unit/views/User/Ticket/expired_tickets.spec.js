@@ -8,14 +8,8 @@ localVue.use(BootstrapVue);
 localVue.use(Vuex);
 
 describe('ExpiredTicket.vue', () => {
-  const expectedData = {
-    valid: [],
-    expired: [],
-  };
-
   let getters;
   let store;
-  // eslint-disable-next-line no-unused-vars
   let wrapper;
 
   beforeEach(() => {
@@ -39,7 +33,7 @@ describe('ExpiredTicket.vue', () => {
     jest.resetModules();
   });
 
-  it('Check getters is exist', () => {
-    expect(store.getters.getApprovedOrderData).toStrictEqual(expectedData);
+  it('Check wrapper is vue instance', () => {
+    expect(wrapper.isVueInstance()).toBe(true);
   });
 });

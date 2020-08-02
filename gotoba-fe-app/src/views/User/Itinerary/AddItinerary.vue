@@ -88,8 +88,8 @@ export default {
       this.clearNewSchedule();
     },
     goBack() {
-      this.$router.go(-1);
       this.setDefault();
+      this.$router.go(-1);
     },
   },
 };

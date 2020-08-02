@@ -146,8 +146,7 @@ export default {
           || res.address.village
           || res.address.suburb
           || res.address.town
-          || ''}, 
-          ${res.address.state_district
+          || ''}, ${res.address.state_district
           || res.address.state}`;
         })
         .catch((err) => {

@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     ...mapActions(['getGalleryPhoto', 'removeGalleryPhoto']),
-    async deleteGalleryPhoto() {
+    deleteGalleryPhoto() {
       this.removeGalleryPhoto(this.galleryPhoto.sku);
       this.$router.push('/admin/gallery');
     },

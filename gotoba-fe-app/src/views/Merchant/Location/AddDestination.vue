@@ -152,8 +152,6 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-
-      console.log(this.location);
     },
     setDestinationLocation() {
       this.setLocation(this.location);

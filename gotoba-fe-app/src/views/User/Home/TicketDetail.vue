@@ -56,7 +56,7 @@ export default {
     setData() {
       const data = {
         quantity: this.quantity,
-        redeem: 0,
+        redeem: true,
         expiredDate: this.ticketData.expiredDate,
         title: this.ticketData.title,
         image: this.ticketData.image,
@@ -81,10 +81,15 @@ export default {
         } else {
           res = await api.EditOrderDetail(this.orderSku, data);
         }
-        this.orderSku = res.data.sku;
-        toast('Ticket has been added to cart!');
+        if (!res.error) {
+          this.orderSku = res.data.sku;
+          this.quantity += 1;
+          toast('Ticket has been added to cart!');
+          return;
+        }
+        toast('Error while adding ticket!');
       } catch (err) {
-        toast('Error while adding ticket');
+        toast('Error while adding ticket!');
       }
     },
 

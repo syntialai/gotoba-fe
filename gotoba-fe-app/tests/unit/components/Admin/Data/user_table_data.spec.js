@@ -14,10 +14,6 @@ jest.mock('@/api/api', () => ({
 }));
 jest.mock('@/utils/tool');
 
-const $bvModal = {
-  msgBoxConfirm: jest.fn().mockResolvedValue(true),
-};
-
 describe('UserTableData.vue', () => {
   const expectedData = {
     getStatus: {
@@ -57,10 +53,8 @@ describe('UserTableData.vue', () => {
 
   beforeEach(() => {
     wrapper = shallowMount(UserTableData, {
-      mocks: {
-        $bvModal,
-      },
       localVue,
+      stubs: ['b-table'],
     });
   });
 
@@ -96,17 +90,39 @@ describe('UserTableData.vue', () => {
   });
 
   it('Check confirmModal method to call changeStatus when value is true', async () => {
+    const bvModal = jest.spyOn(wrapper.vm.$bvModal, 'msgBoxConfirm')
+      .mockResolvedValue(true);
+    const statusInv = jest.spyOn(wrapper.vm, 'getStatus').mockReturnValue('blocked');
+
     wrapper.vm.confirmModal(data.status.active, data.sku);
     await flushPromises();
 
-    expect(wrapper.vm.getStatus).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.getStatus).toHaveBeenCalledWith(expectedData.getStatus.else);
+    expect(statusInv).toHaveBeenCalledTimes(1);
+    expect(statusInv).toHaveBeenCalledWith(expectedData.getStatus.else);
+
+    expect(bvModal).toHaveBeenCalledTimes(1);
 
     expect(wrapper.vm.changeStatus).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.changeStatus).toHaveBeenCalledWith(
       expectedData.getStatus.if,
       expectedData.sku,
     );
+  });
+
+  it('Check confirmModal method to not call changeStatus when value is false', async () => {
+    const bvModal = jest.spyOn(wrapper.vm.$bvModal, 'msgBoxConfirm')
+      .mockResolvedValue(false);
+    const statusInv = jest.spyOn(wrapper.vm, 'getStatus').mockReturnValue('blocked');
+
+    wrapper.vm.confirmModal(data.status.active, data.sku);
+    await flushPromises();
+
+    expect(statusInv).toHaveBeenCalledTimes(1);
+    expect(statusInv).toHaveBeenCalledWith(expectedData.getStatus.else);
+
+    expect(bvModal).toHaveBeenCalledTimes(1);
+
+    expect(wrapper.vm.changeStatus).not.toHaveBeenCalled();
   });
 });
 
@@ -149,9 +165,6 @@ describe('UserTableData.vue - changeStatus - BlockUser', () => {
 
   beforeEach(() => {
     wrapper = shallowMount(UserTableData, {
-      mocks: {
-        $bvModal,
-      },
       localVue,
     });
   });
@@ -227,9 +240,6 @@ describe('UserTableData.vue - changeStatus - ActivateUser', () => {
 
   beforeEach(() => {
     wrapper = shallowMount(UserTableData, {
-      mocks: {
-        $bvModal,
-      },
       localVue,
     });
   });

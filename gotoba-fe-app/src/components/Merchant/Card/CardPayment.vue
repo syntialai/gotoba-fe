@@ -84,12 +84,16 @@ export default {
         if (!res.error) {
           if (this.item.category === 'restaurant') {
             this.addRestaurantOrderCount();
+            this.getMerchantOrderData();
+            alert('accepted order', true);
             return;
           }
           this.addItineraryOrderCount();
           this.getMerchantOrderData();
           alert('accepted order', true);
+          return;
         }
+        alert('accept order', false);
       } catch (err) {
         alert('accept order', false);
       }
@@ -100,7 +104,9 @@ export default {
         if (!res.error) {
           this.getMerchantOrderData();
           alert('rejected order', true);
+          return;
         }
+        alert('reject order', false);
       } catch (err) {
         alert('reject order', false);
       }
