@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -187,8 +187,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -204,22 +204,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,8 +278,8 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import api from '../../api/api';</span>
-<span class="cstat-no" title="statement not covered" >import { formatPrice } from '../../utils/filter';</span>
+import api from '../../api/api';
+import { formatPrice } from '../../utils/filter';
 &nbsp;
 export default {
   name: 'OrderItems',
@@ -294,23 +294,23 @@ export default {
     quantity: Number,
   },
   computed: {
-<span class="fstat-no" title="function not covered" >    imageUrl() {</span>
-<span class="cstat-no" title="statement not covered" >      return api.imageUrl(this.image);</span>
+    imageUrl() {
+      return api.imageUrl(this.image);
     },
-<span class="fstat-no" title="function not covered" >    prices() {</span>
-<span class="cstat-no" title="statement not covered" >      return formatPrice(this.price);</span>
+    prices() {
+      return formatPrice(this.price);
     },
-<span class="fstat-no" title="function not covered" >    discounts() {</span>
-<span class="cstat-no" title="statement not covered" >      return formatPrice(this.price - this.discountPrice);</span>
+    discounts() {
+      return formatPrice(this.price - this.discountPrice);
     },
-<span class="fstat-no" title="function not covered" >    quantities() {</span>
-<span class="cstat-no" title="statement not covered" >      let count = `${this.quantity} pc`;</span>
+    quantities() {
+      let count = `${this.quantity} pc`;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      if (this.quantity &gt; 1) {</span>
-<span class="cstat-no" title="statement not covered" >        count += 's';</span>
+      if (this.quantity &gt; 1) {
+        count += 's';
       }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      return count;</span>
+      return count;
     },
   },
 };
@@ -336,7 +336,7 @@ img {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Aug 01 2020 02:35:37 GMT+0700 (Indochina Time)
+                at Sun Aug 02 2020 13:22:20 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

@@ -1,9 +1,17 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
+import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
+// eslint-disable-next-line no-unused-vars
+import VueAgile from 'vue-agile';
 import About from '@/views/User/Home/About.vue';
 
 const localVue = createLocalVue();
+localVue.use(BootstrapVue);
 localVue.use(Vuex);
+
+jest.mock('vue-agile', () => ({
+  VueAgile: jest.fn(),
+}));
 
 describe('About.vue', () => {
   // eslint-disable-next-line no-unused-vars

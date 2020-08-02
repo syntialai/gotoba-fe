@@ -10,7 +10,7 @@ const $route = {
 };
 const $router = { go: jest.fn() };
 
-describe('NotFound.vue', () => {
+describe('NavigationBack.vue', () => {
   let wrapper;
 
   beforeEach(() => {

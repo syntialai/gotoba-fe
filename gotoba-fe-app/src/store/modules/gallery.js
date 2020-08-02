@@ -69,7 +69,8 @@ const mutations = {
   },
 
   [Types.REMOVE_GALLERY_PHOTO](state, sku) {
-    state.galleryData.filter((item) => item.sku !== sku);
+    const filteredData = state.galleryData.filter((item) => item.sku !== sku);
+    state.galleryData = filteredData;
   },
 };
 

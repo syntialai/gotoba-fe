@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -176,9 +176,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -188,18 +188,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -254,9 +254,9 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { mapActions, mapGetters } from 'vuex';</span>
-<span class="cstat-no" title="statement not covered" >import { toCapitalize } from '../../utils/filter';</span>
-<span class="cstat-no" title="statement not covered" >import RestaurantCard from '../../components/Admin/Card/RestaurantCard.vue';</span>
+import { mapActions, mapGetters } from 'vuex';
+import { toCapitalize } from '../../utils/filter';
+import RestaurantCard from '../../components/Admin/Card/RestaurantCard.vue';
 &nbsp;
 export default {
   name: 'RestaurantDetail',
@@ -265,19 +265,19 @@ export default {
   },
   computed: {
     ...mapGetters(['restaurantData']),
-<span class="fstat-no" title="function not covered" >    hoursOpen() {</span>
-<span class="cstat-no" title="statement not covered" >      let hoursOpenStr = '';</span>
+    hoursOpen() {
+      let hoursOpenStr = '';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      Object.entries(this.restaurantData.hoursOpen)</span></span>
+      Object.entries(this.restaurantData.hoursOpen)
         .forEach(([key, value]) =&gt; {
-<span class="cstat-no" title="statement not covered" >          hoursOpenStr += `${toCapitalize(key)}\t\t${value[0]} - ${value[1]}\n`;</span>
+          hoursOpenStr += `${toCapitalize(key)}\t\t${value[0]} - ${value[1]}\n`;
         });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      return hoursOpenStr;</span>
+      return hoursOpenStr;
     },
   },
-<span class="fstat-no" title="function not covered" >  created() {</span>
-<span class="cstat-no" title="statement not covered" >    this.getRestaurantDataBySku(this.$route.params.sku);</span>
+  created() {
+    this.getRestaurantDataBySku(this.$route.params.sku);
   },
   methods: {
     ...mapActions(['getRestaurantDataBySku']),
@@ -297,7 +297,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Aug 01 2020 02:35:37 GMT+0700 (Indochina Time)
+                at Sun Aug 02 2020 13:22:20 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

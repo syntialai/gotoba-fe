@@ -16,9 +16,7 @@ const actions = {
 
     api.GetBistroType()
       .then((res) => {
-        if (!res.error) {
-          commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data.map((item) => item.name));
-        }
+        commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data.map((item) => item.name));
       })
       .catch((err) => {
         console.log(err);
@@ -88,7 +86,7 @@ const actions = {
     api.GetRestaurantMenuById(id)
       .then((res) => {
         if (!res.error) {
-          commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
+          commit(Types.SET_RESTAURANT_MENU_BY_ID, res.data);
         }
         console.log(res);
       })
@@ -99,19 +97,6 @@ const actions = {
 
   setRestaurantMenu({ commit }, res) {
     commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
-  },
-
-  removeRestaurantMenu({ commit }, sku, id) {
-    commit(Types.REMOVE_RESTAURANT_MENU);
-
-    api.RemoveRestaurantMenu(sku, id)
-      .then((res) => {
-        commit(Types.REMOVE_RESTAURANT_MENU);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   },
 };
 

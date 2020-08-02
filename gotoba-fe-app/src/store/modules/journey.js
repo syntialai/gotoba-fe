@@ -28,7 +28,6 @@ const actions = {
       .then((res) => {
         if (!res.error) {
           commit(Types.SET_JOURNEY_DATA, res.data);
-          console.log(res.data);
         }
       })
       .catch((err) => {
@@ -42,7 +41,6 @@ const actions = {
     api.GetItineraryBySku(sku)
       .then((res) => {
         if (!res.error) {
-          console.log(res);
           commit(Types.SET_JOURNEY_DATA_BY_SKU, res.data);
         }
       })
@@ -75,8 +73,9 @@ const actions = {
 
     api.RemoveItinerary(sku)
       .then((res) => {
-        commit(Types.REMOVE_ITINERARY, res);
-        console.log(`Successfully delete itinerary with sku: ${sku}`);
+        if (!res.error) {
+          commit(Types.REMOVE_ITINERARY, sku);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -100,6 +99,10 @@ const mutations = {
   },
   [Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU](state, res) {
     state.journeyDataByMerchantSku = res;
+  },
+  [Types.REMOVE_ITINERARY](state, sku) {
+    const filteredData = state.journeyData.filter((item) => item.sku !== sku);
+    state.journeyData = filteredData;
   },
 };
 

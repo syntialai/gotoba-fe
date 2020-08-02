@@ -5,7 +5,7 @@
       class="bg-transparent pr-1"
     >
       <b-navbar-brand class="d-flex align-items-center">
-        <div class="logo" v-if="title === 'Home' || title === 'Order List'">
+        <div class="logo" v-if="isTitleHome">
           <img
             src="@/assets/img/logo/gotoba-logo-half-white.png"
             class="d-inline-block align-top p-1"
@@ -37,6 +37,9 @@ export default {
   },
   computed: {
     ...mapGetters(['userRole']),
+    isTitleHome() {
+      return this.title === 'Home' || this.title === 'Order List';
+    },
   },
 };
 </script>

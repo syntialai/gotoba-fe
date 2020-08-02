@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import * as Types from '../types';
 import api from '../../api/api';
-import { isPassed } from '../../utils/filter';
+import { isPassed, sortDate } from '../../utils/filter';
 
 const state = {
   ticketDatas: [],
@@ -18,7 +18,6 @@ const actions = {
   getTicketData({ commit }) {
     api.GetTickets()
       .then((res) => {
-        console.log(res);
         commit(Types.SET_TICKET_DATA, res.data);
         commit(Types.SET_TICKET_PROMOTION, res.data);
       })
@@ -36,7 +35,6 @@ const actions = {
 
     api.GetTicketBySku(sku)
       .then((res) => {
-        console.log(res.data);
         commit(Types.SET_TICKET_BY_SKU, res.data);
       })
       .catch((err) => {
@@ -51,7 +49,6 @@ const actions = {
 
     api.GetTicketByMerchant(merchantSku)
       .then((res) => {
-        console.log(res);
         commit(Types.SET_TICKET_BY_MERCHANT, res.data);
         commit(Types.SET_TICKET_RESTAURANT_BY_MERCHANT, res.data);
         commit(Types.SET_TICKET_ITINERARY_BY_MERCHANT, res.data);
@@ -67,7 +64,7 @@ const actions = {
     api.GetRestaurantTicket()
       .then((res) => {
         console.log(res);
-        commit(Types.SET_TICKET_RESTAURANT, res);
+        commit(Types.SET_TICKET_RESTAURANT, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -79,8 +76,7 @@ const actions = {
 
     api.GetJourneyTicket()
       .then((res) => {
-        console.log(res);
-        commit(Types.SET_TICKET_JOURNEY, res);
+        commit(Types.SET_TICKET_JOURNEY, res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -91,8 +87,7 @@ const actions = {
     const tickets = getters.ticketDatas;
 
     const filterPromoTickets = tickets
-      .filter((ticket) => !isPassed(ticket.expiredDate) && ticket.discount > 0)
-      .sort((a, b) => b.expiredDate - a.expiredDate);
+      .filter((ticket) => !isPassed(new Date(ticket.expiredDate)) && ticket.discount > 0);
 
     commit(Types.SET_TICKET_PROMOTION, filterPromoTickets);
   },
@@ -102,8 +97,8 @@ const actions = {
 
     api.RemoveTicket(sku)
       .then((res) => {
-        commit(Types.REMOVE_TICKET, res);
         console.log(res);
+        commit(Types.REMOVE_TICKET, sku);
       })
       .catch((err) => {
         console.log(err);
@@ -147,10 +142,11 @@ const mutations = {
   },
   [Types.SET_TICKET_PROMOTION](state, res) {
     const filterPromoTickets = res
-      .filter((ticket) => !isPassed(ticket.expiredDate) && ticket.discount > 0)
-      .sort((a, b) => b.expiredDate - a.expiredDate);
+      .filter((ticket) => !isPassed(new Date(ticket.expiredDate)) && ticket.discount > 0);
 
-    state.ticketPromotion = filterPromoTickets;
+    const sortedTicket = sortDate(filterPromoTickets, 'expiredDate');
+
+    state.ticketPromotion = sortedTicket;
   },
 };
 

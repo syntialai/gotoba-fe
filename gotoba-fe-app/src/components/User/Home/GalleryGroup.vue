@@ -38,10 +38,10 @@ export default {
       const width = window.innerWidth - 32;
       const margin = 8;
 
-      if (width >= 768 - 32) {
+      if (width >= (768 - 32)) {
         return (width - margin * 4) / 5;
       }
-      if (width >= 425 - 32) {
+      if (width >= (425 - 32)) {
         return (width - margin * 3) / 4;
       }
       return (width - margin * 2) / 3;

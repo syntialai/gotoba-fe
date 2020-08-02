@@ -64,8 +64,9 @@ const mutations = {
     state.newSchedule = [];
   },
   [Types.SET_NEW_SCHEDULE_DETAIL](state, res) {
+    console.log(res);
     state.newSchedule[res.index].schedule.push(
-      ...res.schedule,
+      res.schedule,
     );
   },
   [Types.SET_SELECTED_DATE](state, date) {

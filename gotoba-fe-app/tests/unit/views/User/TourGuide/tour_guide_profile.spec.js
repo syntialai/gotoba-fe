@@ -12,6 +12,7 @@ const $route = {
 };
 
 describe('TourGuideProfile.vue', () => {
+  // eslint-disable-next-line no-unused-vars
   let wrapper;
   let getters;
   let actions;
@@ -50,7 +51,6 @@ describe('TourGuideProfile.vue', () => {
   afterEach(() => {
     jest.resetModules();
     jest.clearAllMocks();
-    wrapper.destroy();
   });
 
   it('Check getTourGuideBySku and actions to be called when created', () => {

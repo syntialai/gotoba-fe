@@ -246,7 +246,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData', 'getTicketPromotion', 'getGalleryData']),
+    ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData', 'getGalleryData']),
     goToDetails(category, sku) {
       return `/${category}/${sku}`;
     },

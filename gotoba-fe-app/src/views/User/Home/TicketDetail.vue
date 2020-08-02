@@ -49,7 +49,6 @@ export default {
   methods: {
     ...mapActions([
       'getTicketBySku',
-      'setCartDataQuantity',
       'setCartData',
       'setOrderData',
     ]),

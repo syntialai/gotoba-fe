@@ -118,8 +118,8 @@ export const sortTime = (list) => list.sort((a, b) => {
 /**
  * Sort by Date Function
  */
-export const sortDate = (list) => list.sort((a, b) => {
-  const aDate = new Date(a.date);
-  const bDate = new Date(b.date);
+export const sortDate = (list, params = 'date') => list.sort((a, b) => {
+  const aDate = new Date(a[params]);
+  const bDate = new Date(b[params]);
   return aDate - bDate;
 });

@@ -1,5 +1,11 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
+// eslint-disable-next-line no-unused-vars
+import VueAgile from 'vue-agile';
 import GalleryHome from '@/components/User/Home/GalleryHome.vue';
+
+jest.mock('vue-agile', () => ({
+  VueAgile: jest.fn(),
+}));
 
 describe('GalleryHome.vue', () => {
   const expectedData = {
@@ -19,15 +25,44 @@ describe('GalleryHome.vue', () => {
     ],
   };
   let wrapper;
-  let windowSpy;
 
   beforeEach(() => {
     wrapper = shallowMount(GalleryHome, {
       propsData: {
         ...data,
       },
-      localVue,
-      stubs: ['agile'],
+      data() {
+        return {
+          asNavForMain: [],
+          asNavForThumbnails: [],
+          optionsMain: {
+            dots: false,
+            fade: true,
+            navButtons: false,
+          },
+          optionsThumbnails: {
+            autoplay: true,
+            centerMode: true,
+            dots: false,
+            navButtons: false,
+            slidesToShow: 3,
+            responsive: [
+              {
+                breakpoint: 600,
+                settings: {
+                  slidesToShow: 3,
+                },
+              },
+              {
+                breakpoint: 1000,
+                settings: {
+                  navButtons: false,
+                },
+              },
+            ],
+          },
+        };
+      },
     });
   });
 

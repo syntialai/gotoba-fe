@@ -1,9 +1,15 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
+// eslint-disable-next-line no-unused-vars
+import VueGallery from 'vue-gallery';
 import Vuex from 'vuex';
 import Gallery from '@/views/User/Gallery/Gallery.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+
+jest.mock('vue-gallery', () => ({
+  VueGallery: jest.fn(),
+}));
 
 describe('Gallery.vue', () => {
   // eslint-disable-next-line no-unused-vars

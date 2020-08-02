@@ -1,7 +1,12 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
+// eslint-disable-next-line no-unused-vars
+import VueGallery from 'vue-gallery';
+import flushPromises from 'flush-promises';
 import GalleryGroup from '@/components/User/Home/GalleryGroup.vue';
 
-jest.mock('vue-gallery');
+jest.mock('vue-gallery', () => ({
+  VueGallery: jest.fn(),
+}));
 
 describe('GalleryGroup.vue', () => {
   const expectedData = {
@@ -10,9 +15,9 @@ describe('GalleryGroup.vue', () => {
       'http://localhost:8800/image/img.png',
     ],
     getHeight: [
-      (768 - 64) / 5,
-      (425 - 56) / 4,
-      (320 - 48) / 3,
+      (768 - 32 - 8 * 4) / 5,
+      (425 - 32 - 8 * 3) / 4,
+      (320 - 32 - 8 * 2) / 3,
     ],
   };
   const data = {
@@ -33,8 +38,11 @@ describe('GalleryGroup.vue', () => {
       propsData: {
         ...data,
       },
-      localVue,
-      stubs: ['vue-gallery'],
+      data() {
+        return {
+          index: null,
+        };
+      },
     });
     windowSpy = jest.spyOn(global, 'window', 'get');
   });
@@ -44,31 +52,32 @@ describe('GalleryGroup.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check imageUrl computed return image url from data image', () => {
-    expect(wrapper.vm.imageUrl).toMatch(expectedData.imageUrl);
+  it('Check images computed return mapped galleryData', () => {
+    expect(wrapper.vm.images).toStrictEqual(expectedData.images);
   });
 
-  it('Check getHeight computed return image width case #1', () => {
+  it('Check getHeight computed return image width case #1', async () => {
     windowSpy.mockImplementation(() => ({
       innerWidth: 768,
     }));
+    await flushPromises();
 
-    expect(wrapper.vm.getHeight).toMatch(expectedData.getHeight[0]);
-  })
+    expect(wrapper.vm.getHeight).toBe(expectedData.getHeight[0]);
+  });
 
   it('Check getHeight computed return image width case #2', () => {
     windowSpy.mockImplementation(() => ({
       innerWidth: 425,
     }));
 
-    expect(wrapper.vm.getHeight).toMatch(expectedData.getHeight[1]);
-  })
+    expect(wrapper.vm.getHeight).toBe(expectedData.getHeight[1]);
+  });
 
   it('Check getHeight computed return image width case default', () => {
     windowSpy.mockImplementation(() => ({
       innerWidth: 320,
     }));
 
-    expect(wrapper.vm.getHeight).toMatch(expectedData.getHeight[2]);
+    expect(wrapper.vm.getHeight).toBe(expectedData.getHeight[2]);
   });
 });
