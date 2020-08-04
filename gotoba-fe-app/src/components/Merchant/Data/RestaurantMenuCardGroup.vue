@@ -36,10 +36,5 @@ export default {
       default: false,
     },
   },
-  methods: {
-    openModal() {
-      this.$emit('showMenuModal', true);
-    },
-  },
 };
 </script>

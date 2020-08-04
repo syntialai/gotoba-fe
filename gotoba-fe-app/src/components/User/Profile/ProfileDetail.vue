@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-detail">
+  <div class="profile-detail" v-if="data">
     <card-profile-detail
       class="mb-2 mt-2"
       v-bind="data"
@@ -53,11 +53,6 @@ export default {
     ...mapGetters(['userRole']),
     isMerchant() {
       return this.userRole === 'ROLE_MERCHANT';
-    },
-  },
-  methods: {
-    openModal() {
-      this.$emit('showPromotionModal', true);
     },
   },
 };

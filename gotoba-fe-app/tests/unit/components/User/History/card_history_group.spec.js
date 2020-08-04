@@ -10,6 +10,11 @@ describe('CardHistoryGroup.vue', () => {
           orderSku: 'ORD_0001_0001_0001',
           id: 1,
         },
+        {
+          createdAt: '2020-07-31T01:00:00.000Z',
+          orderSku: 'ORD_0001_0001_0002',
+          id: 2,
+        },
       ],
     },
   };
@@ -18,6 +23,11 @@ describe('CardHistoryGroup.vue', () => {
       createdAt: '2020-07-31T00:00:00.000Z',
       orderSku: 'ORD_0001_0001_0001',
       id: 1,
+    },
+    {
+      createdAt: '2020-07-31T01:00:00.000Z',
+      orderSku: 'ORD_0001_0001_0002',
+      id: 2,
     },
   ];
   let wrapper;

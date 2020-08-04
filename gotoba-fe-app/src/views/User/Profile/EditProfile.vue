@@ -113,7 +113,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import api from '../../../api/api';
 
 export default {
@@ -158,13 +158,13 @@ export default {
               sku: res.data.sku,
               image: res.data.image,
             });
-            alert('updated profile', true);
+            setAlert('updated profile', true);
             return;
           }
-          alert('update profile', false);
+          setAlert('update profile', false);
         })
         .catch((err) => {
-          alert('update profile', false);
+          setAlert('update profile', false);
           console.log(err);
         });
     },

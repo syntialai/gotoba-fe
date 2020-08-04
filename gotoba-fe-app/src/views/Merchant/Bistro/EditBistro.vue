@@ -1,7 +1,7 @@
 <template>
   <div class="edit-bistro mt-2 p-3">
-    <ValidationObserver v-slot="validate">
-      <b-form @submit.stop.prevent="validate(updateBistro)">
+    <ValidationObserver>
+      <b-form @submit.stop.prevent="updateBistro">
         <ValidationProvider
           name="Restaurant Image"
           rules="required"
@@ -10,14 +10,14 @@
           <b-form-group>
             <div class="d-flex justify-content-center">
               <b-avatar
-                :src="image"
+                :src="bistro.image"
                 alt="Bistro-profile"
                 class="my-3"
                 size="100"
               ></b-avatar>
             </div>
             <b-form-file
-              v-model="image"
+              v-model="bistro.image"
               @change="loadImage"
               :state="getValidationState(validationContext)"
               accept="image/jpeg, image/jpg, image/png"
@@ -30,7 +30,7 @@
             </b-form-invalid-feedback>
             <b-button
               block
-              v-if="image !== bistro.image && image !== null"
+              v-if="bistro.image !== null"
               size="sm"
               class="custom-btn-gray mt-2"
               @click="removePhoto"
@@ -133,6 +133,31 @@
         </ValidationProvider>
 
         <ValidationProvider
+          name="Bistro rating"
+          :rules="{ numeric: true, min: 1, max: 5 }"
+          v-slot="validationContext"
+        >
+          <b-form-group
+              id="bistro-rating-group"
+              label="Rating"
+              label-for="bistro-rating"
+            >
+              <b-form-spinbutton
+                id="bistro-rating"
+                v-model="bistro.rating"
+                :min="1"
+                :max="5"
+                required
+                :state="getValidationState(validationContext)"
+                aria-describedby="bistro-rating-feedback-msg"
+              ></b-form-spinbutton>
+              <b-form-invalid-feedback id="bistro-rating-feedback-msg">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+        </ValidationProvider>
+
+        <ValidationProvider
           name="Bistro phone number"
           :rules="{ numeric: true, min: 10, max: 13 }"
           v-slot="validationContext"
@@ -214,7 +239,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import api from '../../../api/api';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
@@ -224,6 +249,9 @@ export default {
   name: 'EditBistro',
   computed: {
     ...mapGetters(['restaurantData', 'bistroType', 'userSku', 'locationSet']),
+    imageUrl() {
+      return api.imageUrl(this.restaurantData[0].image);
+    },
   },
   created() {
     this.getRestaurantDataByMerchantSku(this.userSku);
@@ -231,7 +259,6 @@ export default {
     if (this.locationSet.location) {
       Object.assign(this.bistro, this.locationSet);
     }
-    console.log(this.bistro);
   },
   data() {
     return {
@@ -272,7 +299,6 @@ export default {
     updateBistro() {
       const data = this.bistro;
 
-
       if (!this.open
         || !this.close
         || data.name === ''
@@ -288,23 +314,24 @@ export default {
         return;
       }
 
-      Object.keys(this.data.hoursOpen)
+      data.merchantSku = this.userSku;
+
+      Object.keys(data.hoursOpen)
         .forEach((key) => {
-          this.data.hoursOpen[key] = [
+          data.hoursOpen[key] = [
             this.open,
             this.close,
           ];
         });
 
-      console.log(data);
-      if (this.restaurantData) {
-        api.EditRestaurant(this.restaurantData.sku, data)
+      if (this.restaurantData[0]) {
+        api.EditRestaurant(this.restaurantData[0].sku, data)
           .then((res) => {
-            alert('updated your bistro', true);
+            setAlert('updated your bistro', true);
             console.log(res);
           })
           .catch((err) => {
-            alert('update your bistro', false);
+            setAlert('update your bistro', false);
             console.log(err);
           });
 
@@ -314,11 +341,11 @@ export default {
       api.PostRestaurant(this.userSku, data)
         .then((res) => {
           console.log(res);
-          alert('added your bistro', true);
+          setAlert('added your bistro', true);
           this.$router.push('/merchant/bistro');
         })
         .catch((err) => {
-          alert('add your bistro', false);
+          setAlert('add your bistro', false);
           console.log(err);
         });
     },
@@ -329,7 +356,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res.toString();
+            this.bistro.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -338,7 +365,7 @@ export default {
     },
 
     removePhoto() {
-      this.image = null;
+      this.bistro.image = null;
     },
   },
   mounted() {
@@ -368,7 +395,10 @@ export default {
   },
   watch: {
     restaurantData() {
-      this.bistro = { ...this.restaurantData };
+      this.bistro = { ...this.restaurantData[0] };
+      this.bistro.image = this.imageUrl;
+      this.bistro.location = this.bistro.address;
+      [this.open, this.close] = this.bistro.hoursOpen.monday;
     },
   },
 };

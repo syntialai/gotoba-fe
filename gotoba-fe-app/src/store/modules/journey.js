@@ -84,9 +84,9 @@ const actions = {
 };
 
 const getters = {
-  journeyData: (state) => state.journeyData,
+  journeyData: (state) => state.journeyData.filter((item) => item.status === 'active'),
   journeyDataBySku: (state) => state.journeyDataBySku,
-  journeyDataByMerchantSku: (state) => state.journeyDataByMerchantSku,
+  journeyDataByMerchantSku: (state) => state.journeyDataByMerchantSku.filter((item) => item.status === 'active'),
 };
 
 const mutations = {

@@ -45,7 +45,7 @@
 <script>
 import { mapActions } from 'vuex';
 import { formatDate } from '../../../utils/filter';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import api from '../../../api/api';
 import OrderItems from '../../User/OrderItems.vue';
 
@@ -85,17 +85,17 @@ export default {
           if (this.item.category === 'restaurant') {
             this.addRestaurantOrderCount();
             this.getMerchantOrderData();
-            alert('accepted order', true);
+            setAlert('accepted order', true);
             return;
           }
           this.addItineraryOrderCount();
           this.getMerchantOrderData();
-          alert('accepted order', true);
+          setAlert('accepted order', true);
           return;
         }
-        alert('accept order', false);
+        setAlert('accept order', false);
       } catch (err) {
-        alert('accept order', false);
+        setAlert('accept order', false);
       }
     },
     async rejectOrder() {
@@ -103,12 +103,12 @@ export default {
         const res = await api.RejectOrder(this.item.sku);
         if (!res.error) {
           this.getMerchantOrderData();
-          alert('rejected order', true);
+          setAlert('rejected order', true);
           return;
         }
-        alert('reject order', false);
+        setAlert('reject order', false);
       } catch (err) {
-        alert('reject order', false);
+        setAlert('reject order', false);
       }
     },
   },

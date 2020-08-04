@@ -36,8 +36,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import api from '../../../api/api';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import { toCapitalize } from '../../../utils/filter';
 
 export default {
@@ -53,6 +54,7 @@ export default {
     id: String,
   },
   methods: {
+    ...mapActions(['getMerchantData', 'getUserData']),
     toCapitalize,
     getStatus(status) {
       if (status === 'active') {
@@ -71,14 +73,16 @@ export default {
 
         this.callAlert(res);
       } catch (err) {
-        alert('change user status', false);
+        setAlert('change user status', false);
       }
     },
     callAlert(res) {
       if (!res.error) {
-        alert('changed user status', true);
+        setAlert('changed user status', true);
+        this.getUserData();
+        this.getMerchantData();
       } else {
-        alert('change user status', false);
+        setAlert('change user status', false);
       }
     },
     confirmModal(status, sku) {

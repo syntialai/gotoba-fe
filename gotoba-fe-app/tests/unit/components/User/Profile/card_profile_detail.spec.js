@@ -41,4 +41,8 @@ describe('CardProfileDetail.vue', () => {
   it('Check showOnMap computed return link to show-on-map', () => {
     expect(wrapper.vm.showOnMap).toMatch(`${$route.path}/show-on-map`);
   });
+
+  it('Check link computed return link to edit', () => {
+    expect(wrapper.vm.link).toMatch(`${$route.path}/edit`);
+  });
 });

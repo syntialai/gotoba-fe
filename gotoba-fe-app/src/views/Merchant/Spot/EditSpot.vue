@@ -1,7 +1,7 @@
 <template>
   <div class="edit-spot mt-2 p-3">
-    <ValidationObserver v-slot="validate">
-      <b-form @submit.stop.prevent="validate(updateSpot)">
+    <ValidationObserver>
+      <b-form @submit.stop.prevent="updateSpot">
         <ValidationProvider
           name="Spot Image"
           rules="required"
@@ -10,14 +10,14 @@
           <b-form-group>
             <div class="d-flex justify-content-center">
               <b-avatar
-                :src="image"
+                :src="spot.image"
                 alt="Spot-profile"
                 class="my-3"
                 size="100"
               ></b-avatar>
             </div>
             <b-form-file
-              v-model="image"
+              v-model="spot.image"
               @change="loadImage"
               :state="getValidationState(validationContext)"
               accept="image/jpeg, image/jpg, image/png"
@@ -30,7 +30,7 @@
             </b-form-invalid-feedback>
             <b-button
               block
-              v-if="journeyDataBySku.image && journeyDataBySku.image !== null"
+              v-if="spot.image !== null"
               size="sm"
               class="custom-btn-gray mt-2"
               @click="removePhoto"
@@ -50,7 +50,7 @@
           >
             <b-form-input
               id="spot-name"
-              v-model="journeyDataBySku.name"
+              v-model="spot.name"
               type="text"
               class="border-gray"
               required
@@ -75,7 +75,7 @@
             >
               <b-form-input
                 id="spot-title"
-                v-model="journeyDataBySku.title"
+                v-model="spot.title"
                 type="text"
                 class="border-gray"
                 required
@@ -100,7 +100,7 @@
           >
             <b-form-input
               id="spot-location"
-              v-model="journeyDataBySku.location"
+              v-model="spot.location"
               list="location-list"
               type="text"
               class="border-gray"
@@ -139,7 +139,7 @@
           >
             <b-form-input
               id="spot-price"
-              v-model="journeyDataBySku.price"
+              v-model="spot.price"
               type="text"
               class="border-gray"
               required
@@ -164,7 +164,7 @@
           >
             <b-form-input
               id="spot-full-address"
-              v-model="journeyDataBySku.address"
+              v-model="spot.address"
               type="text"
               class="border-gray"
               required
@@ -182,27 +182,17 @@
           label="Hours Open"
           label-for="spot-hours-open"
         >
-          <ul class="list-unstyled">
-            <li
-              v-for="(dayOpen, index) of journeyDataBySku.hoursOpen"
-              :key="dayOpen.day"
-            >
-              <div class="d-flex justify-content-between">
-                <div class="day">{{ dayOpen.day }}</div>
-                <div class="time">
-                  <b-form-timepicker
-                    v-model="journeyDataBySku.hoursOpen[index].openTime"
-                    locale="en"
-                  ></b-form-timepicker>
-                  -
-                  <b-form-timepicker
-                    v-model="journeyDataBySku.hoursOpen[index].closeTime"
-                    locale="en"
-                  ></b-form-timepicker>
-                </div>
-              </div>
-            </li>
-          </ul>
+          <div class="d-flex justify-content-between">
+            <b-form-timepicker
+              v-model="open"
+              locale="en"
+            ></b-form-timepicker>
+            -
+            <b-form-timepicker
+              v-model="close"
+              locale="en"
+            ></b-form-timepicker>
+          </div>
         </b-form-group>
 
         <ValidationProvider
@@ -217,7 +207,7 @@
             >
               <b-form-textarea
                 id="spot-description"
-                v-model="journeyDataBySku.description"
+                v-model="spot.description"
                 rows="5"
                 max-rows="6"
                 class="border-gray"
@@ -246,34 +236,46 @@ import { mapActions, mapGetters } from 'vuex';
 import previewImage from '../../../utils/fileHelper';
 import getValidationState from '../../../utils/validation';
 import api from '../../../api/api';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import getLocation from '../../../utils/location';
 
 export default {
   name: 'EditSpot',
   computed: {
     ...mapGetters(['journeyDataBySku', 'userSku']),
+    imageUrl() {
+      return api.imageUrl(this.journeyDataBySku.image);
+    },
   },
   created() {
     this.getJourneyDataBySku(this.$route.params.sku);
   },
   data() {
     return {
-      // spot: {
-      //   name: '',
-      //   title: '',
-      //   image: null,
-      //   location: '',
-      //   longitude: 0.0,
-      //   latitude: 0.0,
-      //   createdBy: '',
-      //   price: '',
-      //   address: '',
-      //   description: '',
-      //   hoursOpen: [],
-      // },
-      // image: '',
+      spot: {
+        name: '',
+        title: '',
+        image: null,
+        location: '',
+        longitude: 0.0,
+        latitude: 0.0,
+        createdBy: '',
+        price: '',
+        address: '',
+        description: '',
+        hoursOpen: {
+          monday: [],
+          tuesday: [],
+          wednesday: [],
+          thursday: [],
+          friday: [],
+          saturday: [],
+          sunday: [],
+        },
+      },
       locationList: null,
+      open: null,
+      close: null,
     };
   },
   methods: {
@@ -283,30 +285,30 @@ export default {
 
     updateSpot() {
       const data = { ...this.spot };
+
       data.createdBy = this.userSku;
 
-      if (data.sku) {
-        api.EditItinerary(data.sku, data)
-          .then((res) => {
-            alert('updated your spot', true);
-            console.log(res);
-          })
-          .catch((err) => {
-            alert('update your spot', false);
-            console.log(err);
-          });
+      Object.keys(data.hoursOpen)
+        .forEach((key) => {
+          data.hoursOpen[key] = [
+            this.open,
+            this.close,
+          ];
+        });
 
+      if (data.title === ''
+        || data.image === null
+        || data.description === '') {
         return;
       }
 
-      api.PostItinerary(data)
+      api.EditItinerary(data.sku, data)
         .then((res) => {
+          setAlert('updated your spot', true);
           console.log(res);
-          alert('updated your spot', true);
-          this.$route.push('/merchant/spot');
         })
         .catch((err) => {
-          alert('update your spot', false);
+          setAlert('update your spot', false);
           console.log(err);
         });
     },
@@ -317,22 +319,22 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res.toString();
+            this.spot.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
-            alert('to show photo', false);
+            setAlert('to show photo', false);
           });
       }
     },
 
     removePhoto() {
-      this.image = null;
+      this.spot.image = null;
     },
 
     locationSuggestions() {
-      if (this.journeyDataBySku.location) {
-        api.GetSearchLocationResult(this.journeyDataBySku.location)
+      if (this.spot.location) {
+        api.GetSearchLocationResult(this.spot.location)
           .then((res) => {
             this.locationList = res.map((item) => item.display_name);
             console.log(this.locationList);
@@ -346,13 +348,13 @@ export default {
   },
   mounted() {
     getLocation((position) => {
-      this.journeyDataBySku.longitude = position.coords.longitude;
-      this.journeyDataBySku.latitude = position.coords.latitude;
+      this.spot.longitude = position.coords.longitude;
+      this.spot.latitude = position.coords.latitude;
 
-      api.ReverseGeocoding(this.journeyDataBySku.longitude, this.journeyDataBySku.latitude)
+      api.ReverseGeocoding(this.spot.longitude, this.spot.latitude)
         .then((res) => {
-          this.journeyDataBySku.address = res.display_name;
-          this.journeyDataBySku.location = `${res.address.suburb}, ${res.address.city}`;
+          this.spot.address = res.display_name;
+          this.spot.location = `${res.address.suburb}, ${res.address.city}`;
         })
         .catch((err) => {
           console.log(err);
@@ -360,6 +362,14 @@ export default {
     }, (err) => {
       console.log(err);
     });
+  },
+  watch: {
+    journeyDataBySku() {
+      this.spot = { ...this.journeyDataBySku };
+      this.spot.image = this.imageUrl;
+      this.spot.location = this.spot.address;
+      [this.open, this.close] = this.spot.hoursOpen.monday;
+    },
   },
 };
 </script>

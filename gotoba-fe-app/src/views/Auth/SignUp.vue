@@ -230,7 +230,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { alert } from '../../utils/tool';
+import { setAlert } from '../../utils/tool';
 import api from '../../api/api';
 import getValidationState from '../../utils/validation';
 
@@ -276,39 +276,51 @@ export default {
         role: this.role,
       };
 
-      const dataLogin = {
-        username: this.username,
-        password: this.password,
-      };
-
       try {
         const res = await api.Signup(data);
 
         if (!res.error) {
-          const loginRes = await api.Login(dataLogin);
-          this.showLoading = false;
-
-          if (!loginRes.error) {
-            this.setUserInfo({
-              name: loginRes.name,
-              sku: loginRes.sku_user,
-              role: loginRes.role,
-              image: loginRes.image,
-            });
-
-            this.checkRole();
-            return;
-          }
-
-          alert('log your account. Please try to log in', false);
+          this.login();
           return;
         }
 
         this.showLoading = false;
-        alert('sign your account. Please try again later', false);
+        setAlert('sign your account. Please try again later', false);
       } catch (err) {
         this.showLoading = false;
-        alert('sign up. Please try again later', false);
+        setAlert('sign up. Please try again later', false);
+      }
+    },
+    async login() {
+      const data = {
+        username: this.username,
+        password: this.password,
+      };
+
+      this.showLoading = true;
+
+      try {
+        const res = await api.Login(data);
+        console.log(res);
+        this.showLoading = false;
+
+        if (!res.error) {
+          this.setUserInfo({
+            name: res.name,
+            sku: res.sku_user,
+            role: res.role,
+            image: res.image,
+          });
+
+          this.checkRole(res.role);
+          return;
+        }
+
+        setAlert('log in. Check your username/password', false);
+      } catch (err) {
+        this.showLoading = false;
+        setAlert('log in. Please try again later', false);
+        console.log(err);
       }
     },
     checkRole() {

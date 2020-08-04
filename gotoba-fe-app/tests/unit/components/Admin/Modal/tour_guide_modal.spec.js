@@ -4,7 +4,7 @@ import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import TourGuideModal from '@/components/Admin/Modal/TourGuideModal.vue';
 import api from '@/api/api';
-import { alert } from '@/utils/tool';
+import { setAlert } from '@/utils/tool';
 import previewImage from '@/utils/fileHelper';
 
 const localVue = createLocalVue();
@@ -14,14 +14,16 @@ localVue.use(Vuex);
 jest.mock('@/api/api', () => ({
   PostTourGuide: jest.fn(),
   EditTourGuide: jest.fn(),
-  imageUrl: jest.fn().mockImplementation(() => 'http://localhost:8800/image/image/image.png'),
+  GetSearchLocationResult: jest.fn(),
+  imageUrl: jest.fn()
+    .mockImplementation(() => 'http://localhost:8800/image/img.png'),
 }));
 jest.mock('@/utils/tool');
 jest.mock('@/utils/fileHelper', () => jest.fn());
 
 const $route = {
   params: {
-    sku: 'PHOT_0001_0001',
+    sku: 'TOUR_0001_0001',
   },
 };
 
@@ -137,6 +139,7 @@ describe('TourGuideModal.vue', () => {
     actions = {
       setTourGuideBySku: jest.fn(),
       getTourGuideBySku: jest.fn(),
+      getTourGuideData: jest.fn(),
     };
     store = new Vuex.Store({ getters, actions });
     wrapper = shallowMount(TourGuideModal, {
@@ -146,6 +149,7 @@ describe('TourGuideModal.vue', () => {
       data() {
         return {
           tourGuide: data.tourGuide,
+          locationList: null,
         };
       },
       localVue,
@@ -173,7 +177,7 @@ describe('TourGuideModal.vue', () => {
 
   it('Check submitTourGuide method to call api PostTourGuide', async () => {
     wrapper.setData({
-      tourGuide: data.tourGuideChanged,
+      tourGuide: data.data,
     });
     wrapper.vm.submitTourGuide();
     await flushPromises();
@@ -181,8 +185,10 @@ describe('TourGuideModal.vue', () => {
     expect(api.PostTourGuide).toHaveBeenCalledTimes(1);
     expect(api.PostTourGuide).toHaveBeenCalledWith(expectedData.data);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('added tour guide', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('added tour guide', true);
+
+    expect(actions.getTourGuideData).toHaveBeenCalledTimes(1);
   });
 
   it('Check loadImage method to success change image data', async () => {
@@ -191,7 +197,7 @@ describe('TourGuideModal.vue', () => {
 
     expect(previewImage).toHaveBeenCalledTimes(1);
     expect(previewImage).toHaveBeenCalledWith(event.target.files[0]);
-    expect(wrapper.vm.tourGuideData.image).toMatch(expectedData.image);
+    expect(wrapper.vm.tourGuide.image).toMatch(expectedData.image);
   });
 
   it('Check removePhoto method to remove tourGuideData image data', async () => {
@@ -209,6 +215,7 @@ describe('TourGuideModal.vue', () => {
 describe('TourGuideModal.vue with title props', () => {
   const expectedData = {
     data: {
+      sku: 'HANN_0001',
       name: 'Hannah Marcella',
       age: 20,
       occupation: 'Tour Guide',
@@ -224,7 +231,7 @@ describe('TourGuideModal.vue with title props', () => {
       gender: 'female',
       image: '/img.png',
     },
-    imageUrl: 'http://localhost:8800/image/image/image.png',
+    imageUrl: 'http://localhost:8800/image/img.png',
   };
   const data = {
     tourGuide: {
@@ -243,6 +250,7 @@ describe('TourGuideModal.vue with title props', () => {
       description: '',
     },
     tourGuide2: {
+      sku: 'HANN_0001',
       name: 'Hannah Marcella',
       age: 20,
       occupation: 'Tour Guide',
@@ -258,7 +266,25 @@ describe('TourGuideModal.vue with title props', () => {
       gender: 'female',
       image: '/img.png',
     },
+    tourGuideWatch: {
+      sku: 'HANN_0001',
+      name: 'Hannah Marcella',
+      age: 20,
+      occupation: 'Tour Guide',
+      location: 'City of Medan, North Sumatra, Indonesia',
+      rating: 4.9,
+      language: 'English,Indonesia',
+      availableLocation: 'Parapat,Silangit',
+      phone: '081333336666',
+      email: 'hannah.marcella@gmail.com',
+      whatsapp: '081333336666',
+      experience: '1 year experienced in tour guiding',
+      description: 'I\'m a young tour guide that experienced',
+      gender: 'female',
+      image: '/img.png',
+    },
     tourGuideChanged: {
+      sku: 'HANN_0001',
       name: 'Hannah Marcella',
       age: 20,
       occupation: 'Tour Guide',
@@ -272,7 +298,7 @@ describe('TourGuideModal.vue with title props', () => {
       experience: '1 year experienced in tour guiding',
       description: 'I\'m a young tour guide that experienced',
       gender: 'female',
-      image: 'http://localhost:8800/image/image/image.png',
+      image: 'http://localhost:8800/image/img.png',
     },
   };
   let getters;
@@ -309,7 +335,8 @@ describe('TourGuideModal.vue with title props', () => {
       },
       data() {
         return {
-          ...data,
+          tourGuide: data.tourGuide,
+          locationList: null,
         };
       },
       localVue,
@@ -338,12 +365,12 @@ describe('TourGuideModal.vue with title props', () => {
   it('Check watcher to change tourGuide data when title is Edit', async () => {
     store.hotUpdate({
       getters: {
-        tourGuideData: () => data.tourGuide2,
+        tourGuideData: () => data.tourGuideWatch,
       },
     });
     await flushPromises();
     expect(wrapper.vm.title).toMatch('Edit');
-    expect(wrapper.vm.$data.tourGuide).toStrictEqual(expectedData.tourGuideData);
+    expect(wrapper.vm.$data.tourGuide).toStrictEqual(data.tourGuideChanged);
     expect(wrapper.vm.$data.tourGuide.image).toMatch(expectedData.imageUrl);
   });
 
@@ -355,10 +382,13 @@ describe('TourGuideModal.vue with title props', () => {
     await flushPromises();
 
     expect(api.EditTourGuide).toHaveBeenCalledTimes(1);
-    expect(api.EditTourGuide).toHaveBeenCalledWith($route.params.sku, expectedData.data);
+    expect(api.EditTourGuide).toHaveBeenCalledWith(
+      $route.params.sku,
+      expectedData.data,
+    );
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('updated tour guide', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('updated tour guide', true);
   });
 });
 
@@ -407,7 +437,8 @@ describe('TourGuideModal.vue check function returned', () => {
       },
       data() {
         return {
-          ...data,
+          tourGuide: data.tourGuide,
+          locationList: null,
         };
       },
       localVue,
@@ -559,16 +590,16 @@ describe('TourGuideModal.vue check error api promise', () => {
 
   it('Check submitTourGuide method to call api PostTourGuide and show error', async () => {
     wrapper.setData({
-      tourGuide: data.tourGuide2,
+      tourGuide: expectedData.tourGuideData,
     });
     wrapper.vm.submitTourGuide();
     await flushPromises();
 
     expect(api.PostTourGuide).toHaveBeenCalledTimes(1);
-    expect(api.PostTourGuide).toHaveBeenCalledWith(expectedData.data);
+    expect(api.PostTourGuide).toHaveBeenCalledWith(expectedData.tourGuideData);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('add tour guide', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('add tour guide', false);
   });
 
   it('Check submitTourGuide method to call api EditTourGuide and show error', async () => {
@@ -578,15 +609,73 @@ describe('TourGuideModal.vue check error api promise', () => {
     wrapper.setData({
       tourGuide: data.tourGuide2,
     });
+    await flushPromises();
+
     wrapper.vm.submitTourGuide();
     await flushPromises();
 
     expect(api.EditTourGuide).toHaveBeenCalledTimes(1);
-    expect(api.EditTourGuide).toHaveBeenCalledWith($route.params.sku, expectedData.data);
+    expect(api.EditTourGuide).toHaveBeenCalledWith(
+      $route.params.sku,
+      data.tourGuide2,
+    );
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('update tour guide', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('update tour guide', false);
   });
+
+  it('Check locationSuggestions method to called when tourGuide.location is exist',
+    async () => {
+      wrapper.setData({
+        tourGuide: { ...expectedData.tourGuideData },
+      });
+      api.GetSearchLocationResult.mockResolvedValue([{
+        display_name: 'Medan',
+      }, {
+        display_name: 'Medan City',
+      }]);
+
+      wrapper.vm.locationSuggestions();
+      await flushPromises();
+
+      expect(api.GetSearchLocationResult).toHaveBeenCalledTimes(1);
+      expect(api.GetSearchLocationResult).toHaveBeenCalledWith(
+        expectedData.tourGuideData.location,
+      );
+      expect(wrapper.vm.$data.locationList).toStrictEqual(['Medan', 'Medan City']);
+    });
+
+  it('Check locationSuggestions method to called when tourGuideData.location is exist and catch error',
+    async () => {
+      wrapper.setData({
+        tourGuide: { ...data.tourGuide2 },
+      });
+      api.GetSearchLocationResult.mockRejectedValue(new Error());
+
+      wrapper.vm.locationSuggestions();
+      await flushPromises();
+
+      expect(api.GetSearchLocationResult).toHaveBeenCalledTimes(1);
+      expect(api.GetSearchLocationResult).toHaveBeenCalledWith(
+        data.tourGuide2.location,
+      );
+      expect(wrapper.vm.$data.locationList).toBe(null);
+    });
+
+  it('Check locationSuggestions method to called when tourGuideData.location is not exist and catch error',
+    async () => {
+      wrapper.setData({
+        tourGuide: {
+          location: null,
+        },
+      });
+      api.GetSearchLocationResult.mockRejectedValue(new Error());
+
+      wrapper.vm.locationSuggestions();
+      await flushPromises();
+
+      expect(api.GetSearchLocationResult).not.toHaveBeenCalled();
+    });
 });
 
 describe('TourGuideModal.vue check catch error while making a request', () => {
@@ -645,9 +734,20 @@ describe('TourGuideModal.vue check catch error while making a request', () => {
       description: '',
     },
     tourGuide2: {
-      title: 'Image',
-      image: '/image/image.png',
-      description: 'Gallery mock',
+      name: 'Hannah Marcella',
+      age: 20,
+      occupation: 'Tour Guide',
+      location: 'City of Medan, North Sumatra, Indonesia',
+      rating: 4.9,
+      language: ['English', 'Indonesia'],
+      availableLocation: ['Parapat', 'Silangit'],
+      phone: '081333336666',
+      email: 'hannah.marcella@gmail.com',
+      whatsapp: '081333336666',
+      experience: '1 year experienced in tour guiding',
+      description: 'I\'m a young tour guide that experienced',
+      gender: 'female',
+      image: '/img.png',
     },
   };
   let getters;
@@ -695,7 +795,7 @@ describe('TourGuideModal.vue check catch error while making a request', () => {
 
   it('Check submitTourGuide method to call api PostTourGuide and show error', async () => {
     wrapper.setData({
-      tourGuide: data.tourGuide2,
+      tourGuide: expectedData.tourGuideData,
     });
     wrapper.vm.submitTourGuide();
     await flushPromises();
@@ -703,8 +803,8 @@ describe('TourGuideModal.vue check catch error while making a request', () => {
     expect(api.PostTourGuide).toHaveBeenCalledTimes(1);
     expect(api.PostTourGuide).toHaveBeenCalledWith(expectedData.tourGuideData);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('add tour guide', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('add tour guide', false);
   });
 
   it('Check submitTourGuide method to call api EditTourGuide and show error', async () => {
@@ -720,8 +820,8 @@ describe('TourGuideModal.vue check catch error while making a request', () => {
     expect(api.EditTourGuide).toHaveBeenCalledTimes(1);
     expect(api.EditTourGuide).toHaveBeenCalledWith($route.params.sku, expectedData.data);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('update tour guide', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('update tour guide', false);
   });
 
   it('Check loadImage method to fail change image data and show alert', async () => {
@@ -731,7 +831,7 @@ describe('TourGuideModal.vue check catch error while making a request', () => {
     expect(previewImage).toHaveBeenCalledTimes(1);
     expect(previewImage).toHaveBeenCalledWith(event.target.files[0]);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('to show tour guide', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('to show tour guide', false);
   });
 });

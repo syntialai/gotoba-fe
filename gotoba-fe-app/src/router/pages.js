@@ -11,13 +11,10 @@ const ABOUT = () => import('../views/User/Home/About.vue');
 const HOME_MORE = () => import('../views/User/Home/HomeMore.vue');
 const RESTAURANT = () => import('../views/User/Restaurant/Restaurant.vue');
 const RESTAURANT_PROFILE = () => import('../views/User/Restaurant/RestaurantProfile.vue');
-const RESTAURANT_REVIEW = () => import('../views/User/Restaurant/RestaurantReview.vue');
 const JOURNEY = () => import('../views/User/Journey/Journey.vue');
 const JOURNEY_PROFILE = () => import('../views/User/Journey/JourneyProfile.vue');
-const JOURNEY_REVIEW = () => import('../views/User/Journey/JourneyReview.vue');
 const TOUR_GUIDE = () => import('../views/User/TourGuide/TourGuide.vue');
 const TOUR_GUIDE_PROFILE = () => import('../views/User/TourGuide/TourGuideProfile.vue');
-const TOUR_GUIDE_REVIEW = () => import('../views/User/TourGuide/TourGuideReview.vue');
 const PROMOTION = () => import('../views/User/Home/Promotion.vue');
 const TICKET_DETAIL = () => import('../views/User/Home/TicketDetail.vue');
 const GALLERY = () => import('../views/User/Gallery/Gallery.vue');
@@ -28,7 +25,6 @@ const TICKET_VALID = () => import('../views/User/Ticket/ValidTicket.vue');
 const TICKET_EXPIRED = () => import('../views/User/Ticket/ExpiredTicket.vue');
 const PAYMENT = () => import('../views/User/Payment/Payment.vue');
 const PAYMENT_ORDER = () => import('../views/User/Payment/PaymentOrder.vue');
-const REVIEW = () => import('../views/User/Review/Review.vue');
 const EDIT_PROFILE = () => import('../views/User/Profile/EditProfile.vue');
 const HISTORY = () => import('../views/User/History/History.vue');
 const TERMS_AND_CONDITION = () => import('../views/User/TermsAndCondition.vue');
@@ -59,11 +55,8 @@ const MERCHANT_PROFILE = () => import('../views/Merchant/Profile/Profile.vue');
 const MERCHANT_SPOT = () => import('../views/Merchant/Spot/Spot.vue');
 const MERCHANT_SPOT_DETAIL = () => import('../views/Merchant/Spot/SpotDetail.vue');
 const MERCHANT_SPOT_EDIT = () => import('../views/Merchant/Spot/EditSpot.vue');
-const MERCHANT_SPOT_PROMOTION = () => import('../views/Merchant/Spot/SpotPromotion.vue');
 const MERCHANT_BISTRO = () => import('../views/Merchant/Bistro/Bistro.vue');
 const MERCHANT_BISTRO_EDIT = () => import('../views/Merchant/Bistro/EditBistro.vue');
-const MERCHANT_BISTRO_REVIEW = () => import('../views/Merchant/Bistro/BistroReview.vue');
-const MERCHANT_BISTRO_PROMOTION = () => import('../views/Merchant/Bistro/BistroPromotion.vue');
 const MERCHANT_SCANNER = () => import('../views/Merchant/Scanner/QrScanner.vue');
 const MERCHANT_SCAN_RESULT = () => import('../views/Merchant/Scanner/ScanResult.vue');
 const MERCHANT_EDIT_PROFILE = () => import('../views/Merchant/Profile/EditProfile.vue');
@@ -82,13 +75,10 @@ export const Pages = {
   HOME_MORE,
   RESTAURANT,
   RESTAURANT_PROFILE,
-  RESTAURANT_REVIEW,
   JOURNEY,
   JOURNEY_PROFILE,
-  JOURNEY_REVIEW,
   TOUR_GUIDE,
   TOUR_GUIDE_PROFILE,
-  TOUR_GUIDE_REVIEW,
   PROMOTION,
   TICKET_DETAIL,
   GALLERY,
@@ -99,7 +89,6 @@ export const Pages = {
   TICKET_EXPIRED,
   PAYMENT,
   PAYMENT_ORDER,
-  REVIEW,
   EDIT_PROFILE,
   HISTORY,
   TERMS_AND_CONDITION,
@@ -134,11 +123,8 @@ export const Merchant = {
   MERCHANT_SPOT,
   MERCHANT_SPOT_DETAIL,
   MERCHANT_SPOT_EDIT,
-  MERCHANT_SPOT_PROMOTION,
   MERCHANT_BISTRO,
   MERCHANT_BISTRO_EDIT,
-  MERCHANT_BISTRO_REVIEW,
-  MERCHANT_BISTRO_PROMOTION,
   MERCHANT_SCANNER,
   MERCHANT_SCAN_RESULT,
   MERCHANT_EDIT_PROFILE,

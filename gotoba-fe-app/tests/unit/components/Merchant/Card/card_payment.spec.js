@@ -3,7 +3,7 @@ import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import { formatDate } from '@/utils/filter';
 import api from '@/api/api';
-import { alert } from '@/utils/tool';
+import { setAlert } from '@/utils/tool';
 import CardPayment from '@/components/Merchant/Card/CardPayment.vue';
 import flushPromises from 'flush-promises';
 
@@ -102,8 +102,8 @@ describe('CardPayment.vue', () => {
     expect(actions.addRestaurantOrderCount).toHaveBeenCalledTimes(1);
     expect(actions.getMerchantOrderData).toHaveBeenCalledTimes(1);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('accepted order', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('accepted order', true);
   });
 
   it('Check acceptOrder function to call api, alert and actions - itinerary', async () => {
@@ -123,8 +123,8 @@ describe('CardPayment.vue', () => {
     expect(actions.addItineraryOrderCount).toHaveBeenCalledTimes(1);
     expect(actions.getMerchantOrderData).toHaveBeenCalledTimes(1);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('accepted order', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('accepted order', true);
   });
 
   it('Check acceptOrder function to call api and alert but not call actions', async () => {
@@ -137,8 +137,8 @@ describe('CardPayment.vue', () => {
 
     expect(actions.getMerchantOrderData).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('accept order', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('accept order', false);
   });
 
   it('Check acceptOrder function to call api and alert but not call actions - error', async () => {
@@ -151,8 +151,8 @@ describe('CardPayment.vue', () => {
 
     expect(actions.getMerchantOrderData).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('accept order', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('accept order', false);
   });
 
   it('Check rejectOrder function to call api and actions', async () => {
@@ -166,8 +166,8 @@ describe('CardPayment.vue', () => {
 
     expect(actions.getMerchantOrderData).toHaveBeenCalledTimes(1);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('rejected order', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('rejected order', true);
   });
 
   it('Check rejectOrder function to call api and not call actions', async () => {
@@ -180,8 +180,8 @@ describe('CardPayment.vue', () => {
 
     expect(actions.getMerchantOrderData).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('reject order', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('reject order', false);
   });
 
   it('Check rejectOrder function to call api and not call actions - error', async () => {
@@ -194,7 +194,7 @@ describe('CardPayment.vue', () => {
 
     expect(actions.getMerchantOrderData).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('reject order', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('reject order', false);
   });
 });

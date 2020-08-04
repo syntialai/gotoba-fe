@@ -15,7 +15,7 @@ describe('tool.js: alert', () => {
 
   it('Check alert method to call store', () => {
     const spyOnDispatch = jest.spyOn(index, 'dispatch');
-    tool.alert('Alert message', true);
+    tool.setAlert('Alert message', true);
 
     expect(spyOnDispatch).toHaveBeenCalledTimes(3);
   });

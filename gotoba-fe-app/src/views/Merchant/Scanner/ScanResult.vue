@@ -34,7 +34,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import { isPassed } from '../../../utils/filter';
 import api from '../../../api/api';
 import CardScanResult from '../../../components/Merchant/Card/CardScanResult.vue';
@@ -76,13 +76,13 @@ export default {
         const res = await api.RedeemOrder(this.orderDataBySku.sku);
         if (!res.error) {
           this.setOrderDataBySku(data);
-          alert('used ticket', true);
+          setAlert('used ticket', true);
           return;
         }
         console.log(res, data);
-        alert('use ticket. Please try again later', false);
+        setAlert('use ticket. Please try again later', false);
       } catch (err) {
-        alert('use ticket. Please try again later', false);
+        setAlert('use ticket. Please try again later', false);
       }
     },
   },

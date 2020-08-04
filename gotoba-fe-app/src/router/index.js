@@ -51,17 +51,17 @@ function checkUserRole(to, from, next) {
   }
 }
 
-// function checkRole(to, from, next) {
-//   const role = index.getters.userRole;
+function checkRole(to, from, next) {
+  const role = index.getters.userRole;
 
-//   if (role === 'ROLE_USER' || !role) {
-//     next();
-//   } else if (role === 'ROLE_MERCHANT') {
-//     next('/merchant');
-//   } else if (role === 'ROLE_ADMIN') {
-//     next('/admin');
-//   }
-// }
+  if (role === 'ROLE_USER' || !role) {
+    next();
+  } else if (role === 'ROLE_MERCHANT') {
+    next('/merchant');
+  } else if (role === 'ROLE_ADMIN') {
+    next('/admin');
+  }
+}
 
 const routes = [
   {
@@ -72,6 +72,7 @@ const routes = [
       {
         path: '',
         name: 'Home',
+        beforeEnter: checkRole,
         component: Home,
         meta: {
           layout: 'background-blue',
@@ -80,6 +81,7 @@ const routes = [
       {
         path: 'itinerary',
         name: 'Itinerary',
+        beforeEnter: checkRole,
         component: Pages.ITINERARY,
         meta: {
           layout: 'background-blue',
@@ -512,24 +514,6 @@ const routes = [
     },
   },
   {
-    path: '/merchant/bistro/review',
-    name: 'Bistro Review',
-    beforeEnter: checkMerchantRole,
-    component: Merchant.MERCHANT_BISTRO_REVIEW,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
-    path: '/merchant/bistro/promotion/:sku',
-    name: 'Bistro Promotion',
-    beforeEnter: checkMerchantRole,
-    component: Merchant.MERCHANT_BISTRO_PROMOTION,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
     path: '/merchant/scan',
     name: 'Scan',
     beforeEnter: checkMerchantRole,
@@ -561,15 +545,6 @@ const routes = [
     name: 'Edit Spot',
     beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_SPOT_EDIT,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
-    path: '/merchant/spot/promotion/:sku',
-    name: 'Spot Promotion',
-    beforeEnter: checkMerchantRole,
-    component: Merchant.MERCHANT_SPOT_PROMOTION,
     meta: {
       layout: 'default-back',
     },

@@ -113,7 +113,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import api from '../../../api/api';
 
 export default {
@@ -149,7 +149,7 @@ export default {
 
       const data = { ...this.merchant };
 
-      api.EditMerchant(this.userSku, data)
+      api.EditUser(this.userSku, data)
         .then((res) => {
           if (!res.error) {
             this.setUserInfo({
@@ -158,13 +158,13 @@ export default {
               sku: res.data.sku,
               image: res.data.image,
             });
-            alert('updated profile', true);
+            setAlert('updated profile', true);
             return;
           }
-          alert('update profile', false);
+          setAlert('update profile', false);
         })
         .catch((err) => {
-          alert('update profile', false);
+          setAlert('update profile', false);
           console.log(err);
         });
     },

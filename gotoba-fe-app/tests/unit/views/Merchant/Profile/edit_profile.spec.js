@@ -3,7 +3,7 @@ import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import flushPromises from 'flush-promises';
 import api from '@/api/api';
-import { alert } from '@/utils/tool';
+import { setAlert } from '@/utils/tool';
 import previewImage from '@/utils/fileHelper';
 import EditProfile from '@/views/Merchant/Profile/EditProfile.vue';
 
@@ -12,7 +12,7 @@ localVue.use(BootstrapVue);
 localVue.use(Vuex);
 
 jest.mock('@/api/api', () => ({
-  EditMerchant: jest.fn(),
+  EditUser: jest.fn(),
   imageUrl: jest.fn().mockImplementation(() => 'http://localhost:8800/image/img.png'),
 }));
 jest.mock('@/utils/tool');
@@ -59,7 +59,7 @@ describe('EditProfile.vue', () => {
 
   beforeEach(() => {
     previewImage.mockResolvedValue('image.png');
-    api.EditMerchant.mockResolvedValue({
+    api.EditUser.mockResolvedValue({
       code: 200,
       status: 'OK',
       data: {
@@ -120,12 +120,12 @@ describe('EditProfile.vue', () => {
     expect(wrapper.vm.$data.merchant.image).toMatch(expectedData.merchant.image);
   });
 
-  it('Check updateProfile method to call EditMerchant api and alert', async () => {
+  it('Check updateProfile method to call EditUser api and alert', async () => {
     wrapper.vm.updateProfile();
     await flushPromises();
 
-    expect(api.EditMerchant).toHaveBeenCalledTimes(1);
-    expect(api.EditMerchant).toHaveBeenCalledWith(expectedData.userSku, expectedData.merchant2);
+    expect(api.EditUser).toHaveBeenCalledTimes(1);
+    expect(api.EditUser).toHaveBeenCalledWith(expectedData.userSku, expectedData.merchant2);
 
     expect(actions.setUserInfo).toHaveBeenCalledTimes(1);
     expect(actions.setUserInfo.mock.calls[0][1]).toStrictEqual({
@@ -135,8 +135,8 @@ describe('EditProfile.vue', () => {
       image: '/image/img',
     });
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('updated profile', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('updated profile', true);
   });
 
   it('Check loadImage method to success change image data', async () => {
@@ -190,7 +190,7 @@ describe('EditProfile.vue - Error state', () => {
   let wrapper;
 
   beforeEach(() => {
-    api.EditMerchant.mockResolvedValue({
+    api.EditUser.mockResolvedValue({
       status: 400,
       error: 'Bad Request',
     });
@@ -235,17 +235,17 @@ describe('EditProfile.vue - Error state', () => {
     expect(previewImage).not.toHaveBeenCalled();
   });
 
-  it('Check updateProfile method to call EditMerchant api and call error alert', async () => {
+  it('Check updateProfile method to call EditUser api and call error alert', async () => {
     wrapper.vm.updateProfile();
     await flushPromises();
 
-    expect(api.EditMerchant).toHaveBeenCalledTimes(1);
-    expect(api.EditMerchant).toHaveBeenCalledWith(expectedData.userSku, expectedData.merchant);
+    expect(api.EditUser).toHaveBeenCalledTimes(1);
+    expect(api.EditUser).toHaveBeenCalledWith(expectedData.userSku, expectedData.merchant);
 
     expect(actions.setUserInfo).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('update profile', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('update profile', false);
   });
 });
 
@@ -284,7 +284,7 @@ describe('EditProfile.vue - Catch error', () => {
 
   beforeEach(() => {
     previewImage.mockRejectedValue(new Error());
-    api.EditMerchant.mockRejectedValue(new Error());
+    api.EditUser.mockRejectedValue(new Error());
     console.log = jest.fn();
 
     actions = {
@@ -334,13 +334,13 @@ describe('EditProfile.vue - Catch error', () => {
     wrapper.vm.updateProfile();
     await flushPromises();
 
-    expect(api.EditMerchant).toHaveBeenCalledTimes(1);
-    expect(api.EditMerchant).toHaveBeenCalledWith(expectedData.userSku, expectedData.merchant);
+    expect(api.EditUser).toHaveBeenCalledTimes(1);
+    expect(api.EditUser).toHaveBeenCalledWith(expectedData.userSku, expectedData.merchant);
 
     expect(actions.setUserInfo).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('update profile', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('update profile', false);
 
     expect(console.log).toHaveBeenCalledTimes(1);
   });
@@ -354,6 +354,6 @@ describe('EditProfile.vue - Catch error', () => {
     wrapper.vm.updateProfile();
     await flushPromises();
 
-    expect(api.EditMerchant).not.toHaveBeenCalled();
+    expect(api.EditUser).not.toHaveBeenCalled();
   });
 });

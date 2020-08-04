@@ -4,7 +4,7 @@ import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import Login from '@/views/Auth/Login.vue';
 import api from '@/api/api';
-import { alert } from '@/utils/tool';
+import { setAlert } from '@/utils/tool';
 
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
@@ -204,8 +204,8 @@ describe('Login.vue error promise', () => {
     expect(spyCheckRole).not.toHaveBeenCalled();
 
     expect(wrapper.vm.$data.showLoading).toBe(false);
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith(
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith(
       'log in. Check your username/password',
       false
     );
@@ -327,8 +327,8 @@ describe('Login.vue catch error', () => {
     expect(spyCheckRole).not.toHaveBeenCalled();
 
     expect(wrapper.vm.$data.showLoading).toBe(false);
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith(
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith(
       'log in. Please try again later',
       false
     );

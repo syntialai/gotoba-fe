@@ -138,7 +138,7 @@ export default {
         ],
       };
 
-      if (data.destination === null || data.time === null) {
+      if (this.locationKeyword === null || this.context.formatted === null) {
         return;
       }
 

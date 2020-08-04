@@ -11,10 +11,9 @@
       >EDIT</b-button>
     </div>
 
-    <!-- <itinerary-modal
+    <itinerary-modal
       title="Edit"
-      :itinerary="journeyDataBySku"
-    /> -->
+    />
 
     <itinerary-card
       v-if="journeyDataBySku"
@@ -22,7 +21,7 @@
     />
 
     <div
-      v-if="journeyDataBySku"
+      v-if="journeyDataBySku.sku"
       class="more-itinerary-info bg-white p-3"
     >
       <div class="full-address d-flex justify-content-between py-2">
@@ -59,13 +58,13 @@
 import { mapActions, mapGetters } from 'vuex';
 import { toCapitalize } from '../../utils/filter';
 import ItineraryCard from '../../components/Admin/Card/ItineraryCard.vue';
-// import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
+import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
 
 export default {
   name: 'ItineraryDetail',
   components: {
     ItineraryCard,
-    // ItineraryModal,
+    ItineraryModal,
   },
   computed: {
     ...mapGetters(['journeyDataBySku']),
@@ -86,15 +85,11 @@ export default {
   methods: {
     ...mapActions(['getJourneyDataBySku', 'removeItinerary']),
     deleteItinerary() {
-      const confirmModalValue = this.confirmModal(this.journeyDataBySku.title);
-
-      if (confirmModalValue) {
-        this.removeItinerary(this.journeyDataBySku.sku);
-        this.$router.push('/admin/itinerary');
-      }
+      this.removeItinerary(this.journeyDataBySku.sku);
+      this.$router.push('/admin/itinerary');
     },
-    confirmModal(object) {
-      this.$bvModal.msgBoxConfirm(`${object} will be removed permanently from this system.`, {
+    confirmModal() {
+      this.$bvModal.msgBoxConfirm('Itinerary will be removed permanently from this system.', {
         title: 'Are you sure?',
         size: 'sm',
         okVariant: 'danger',
@@ -105,7 +100,11 @@ export default {
         hideHeaderClose: false,
         centered: true,
       })
-        .then((value) => value)
+        .then((value) => {
+          if (value) {
+            this.deleteItinerary();
+          }
+        })
         .catch(
           (err) => console.log(err),
         );

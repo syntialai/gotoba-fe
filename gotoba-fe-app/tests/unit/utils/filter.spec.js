@@ -134,11 +134,26 @@ describe('filter.js : sortDate', () => {
       { date: new Date(2020, 8, 1).toString() },
       { date: new Date(2020, 8, 31).toString() },
     ];
-    actualData = filter.sortTime([
+    actualData = filter.sortDate([
       { date: new Date(2020, 8, 1).toString() },
       { date: new Date(2020, 8, 31).toString() },
       { date: new Date(2020, 7, 31).toString() },
     ]);
+
+    expect(actualData).toStrictEqual(expectedData);
+  });
+
+  it('Check function to return sorted array by date - with params', () => {
+    expectedData = [
+      { expiredDate: new Date(2020, 7, 31).toString() },
+      { expiredDate: new Date(2020, 8, 1).toString() },
+      { expiredDate: new Date(2020, 8, 31).toString() },
+    ];
+    actualData = filter.sortDate([
+      { expiredDate: new Date(2020, 8, 1).toString() },
+      { expiredDate: new Date(2020, 8, 31).toString() },
+      { expiredDate: new Date(2020, 7, 31).toString() },
+    ], 'expiredDate');
 
     expect(actualData).toStrictEqual(expectedData);
   });

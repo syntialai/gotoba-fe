@@ -203,6 +203,9 @@ describe('TicketDetail.vue', () => {
     api.EditOrderDetail.mockResolvedValue({
       code: 200,
       status: 'OK',
+      data: {
+        sku: 'ORD_0001',
+      },
     });
     wrapper.setData({
       orderSku: 'ORD_0001',

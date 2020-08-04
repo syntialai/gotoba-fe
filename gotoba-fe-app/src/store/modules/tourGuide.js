@@ -30,6 +30,7 @@ const actions = {
       .then((res) => {
         if (!res.error) {
           commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res.data);
+          console.log(res.data);
         }
       })
       .catch((err) => {
@@ -49,7 +50,6 @@ const actions = {
         if (!res.error) {
           commit(Types.REMOVE_TOUR_GUIDE, sku);
         }
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -70,7 +70,7 @@ const mutations = {
   [Types.SET_TOUR_GUIDE_DATA_BY_SKU](state, res) {
     const tourGuide = { ...res };
 
-    if (Object.keys(res).length > 0) {
+    if (res && Object.keys(res).length > 0) {
       tourGuide.availableLocation = res.availableLocation.join(', ');
       tourGuide.language = res.language.join(', ');
     }

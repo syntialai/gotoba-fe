@@ -4,7 +4,7 @@
 
     <navigation-close class="margin-0" />
 
-    <div class="overlay position-relative text-shadow-black mx-3 py-5">
+    <div class="overlay position-relative text-shadow-black m-3 pb-3">
       <h2 class="text-white">About Lake Toba</h2>
     </div>
 

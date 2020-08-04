@@ -3,7 +3,7 @@ import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import flushPromises from 'flush-promises';
 import api from '@/api/api';
-import { alert } from '@/utils/tool';
+import { setAlert } from '@/utils/tool';
 import previewImage from '@/utils/fileHelper';
 import EditProfile from '@/views/User/Profile/EditProfile.vue';
 
@@ -135,8 +135,8 @@ describe('EditProfile.vue', () => {
       image: '/image/img',
     });
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('updated profile', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('updated profile', true);
   });
 
   it('Check loadImage method to success change image data', async () => {
@@ -244,8 +244,8 @@ describe('EditProfile.vue - Error state', () => {
 
     expect(actions.setUserInfo).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('update profile', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('update profile', false);
   });
 });
 
@@ -339,8 +339,8 @@ describe('EditProfile.vue - Catch error', () => {
 
     expect(actions.setUserInfo).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('update profile', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('update profile', false);
 
     expect(console.log).toHaveBeenCalledTimes(1);
   });

@@ -150,7 +150,7 @@
               <b-form-input
                 id="itinerary-price"
                 v-model="itinerary.price"
-                type="text"
+                type="number"
                 class="border-gray"
                 required
                 :state="getValidationState(validationContext)"
@@ -192,27 +192,17 @@
             label="Hours Open"
             label-for="itinerary-hours-open"
           >
-            <ul class="list-unstyled">
-              <li
-                v-for="(dayOpen, index) of itinerary.hoursOpen"
-                :key="dayOpen.day"
-              >
-                <div class="d-flex justify-content-between">
-                  <div class="day">{{ dayOpen.day }}</div>
-                  <div class="time">
-                    <b-form-timepicker
-                      v-model="itinerary.hoursOpen[index].openTime"
-                      locale="en"
-                    ></b-form-timepicker>
-                    -
-                    <b-form-timepicker
-                      v-model="itinerary.hoursOpen[index].closeTime"
-                      locale="en"
-                    ></b-form-timepicker>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            <div class="d-flex justify-content-between">
+              <b-form-timepicker
+                v-model="open"
+                locale="en"
+              ></b-form-timepicker>
+              -
+              <b-form-timepicker
+                v-model="close"
+                locale="en"
+              ></b-form-timepicker>
+            </div>
           </b-form-group>
 
           <ValidationProvider
@@ -248,29 +238,48 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import getValidationState from '../../../utils/validation';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import previewImage from '../../../utils/fileHelper';
-import getLocation from '../../../utils/location';
 import api from '../../../api/api';
 
 export default {
   name: 'ItineraryModal',
   computed: {
-    ...mapGetters(['journeyDataBySku', 'journeyData', 'userSku']),
+    ...mapGetters(['journeyDataBySku', 'userSku']),
+    imageUrl() {
+      return api.imageUrl(this.journeyDataBySku.image);
+    },
   },
   created() {
-    if (this.title === 'Edit') {
-      this.getJourneyDataBySku(this.$route.params.sku);
-    } else {
+    if (this.title !== 'Edit') {
       this.setJourneyDataBySku({});
     }
   },
   data() {
     return {
       itinerary: {
-        latitude: 0,
+        name: '',
+        title: '',
+        image: null,
+        location: '',
         longitude: 0,
+        latitude: 0,
+        price: 0,
+        address: '',
+        description: '',
+        createdBy: '',
+        hoursOpen: {
+          monday: [],
+          tuesday: [],
+          wednesday: [],
+          thursday: [],
+          friday: [],
+          saturday: [],
+          sunday: [],
+        },
       },
+      open: null,
+      close: null,
       locationList: null,
     };
   },
@@ -281,15 +290,30 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setJourneyDataBySku', 'getJourneyDataBySku', 'getJourneyData']),
+    ...mapActions([
+      'setJourneyDataBySku',
+      'getJourneyDataBySku',
+      'getJourneyData',
+      'getJourneyDataByMerchantSku',
+    ]),
 
     getValidationState,
 
     submitItinerary() {
-      const data = { ...this.journeyDataBySku };
+      const data = { ...this.itinerary };
       data.createdBy = this.userSku;
 
-      if (data.title === '' || data.image === null || data.description === '') {
+      Object.keys(data.hoursOpen)
+        .forEach((key) => {
+          data.hoursOpen[key] = [
+            this.open,
+            this.close,
+          ];
+        });
+
+      if (data.title === ''
+        || data.image === null
+        || data.description === '') {
         return;
       }
 
@@ -297,14 +321,15 @@ export default {
         api.PostItinerary(data)
           .then((res) => {
             if (!res.error) {
-              alert('added itinerary', true);
+              setAlert('added itinerary', true);
               this.getJourneyData();
+              this.getJourneyDataByMerchantSku(this.userSku);
               return;
             }
-            alert('add itinerary', false);
+            setAlert('add itinerary', false);
           })
           .catch((err) => {
-            alert('add itinerary', false);
+            setAlert('add itinerary', false);
             console.log(err);
           });
 
@@ -314,13 +339,13 @@ export default {
       api.EditItinerary(this.journeyDataBySku.sku, data)
         .then((res) => {
           if (!res.error) {
-            alert('updated itinerary', true);
+            setAlert('updated itinerary', true);
             return;
           }
-          alert('update itinerary', false);
+          setAlert('update itinerary', false);
         })
         .catch((err) => {
-          alert('update itinerary', true);
+          setAlert('update itinerary', false);
           console.log(err);
         });
     },
@@ -331,7 +356,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.journeyDataBySku.image = res.toString();
+            this.itinerary.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -343,8 +368,8 @@ export default {
     },
 
     locationSuggestions() {
-      if (this.journeyDataBySku.location) {
-        api.GetSearchLocationResult(this.journeyDataBySku.location)
+      if (this.itinerary.location.length >= 3) {
+        api.GetSearchLocationResult(this.itinerary.location)
           .then((res) => {
             this.locationList = res.map((item) => item.display_name);
             console.log(this.locationList);
@@ -357,21 +382,19 @@ export default {
     },
   },
   mounted() {
-    getLocation((position) => {
-      this.itinerary.longitude = position.coords.longitude;
-      this.itinerary.latitude = position.coords.latitude;
-
-      api.ReverseGeocoding(this.itinerary.longitude, this.itinerary.latitude)
-        .then((res) => {
-          this.itinerary.address = res.display_name;
-          this.itinerary.location = `${res.address.suburb}, ${res.address.city}`;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, (err) => {
-      console.log(err);
-    });
+    this.itinerary = { ...this.journeyDataBySku };
+    this.itinerary.image = this.imageUrl;
+    this.itinerary.location = this.itinerary.address;
+    this.itinerary.hoursOpen = {
+      monday: [],
+      tuesday: [],
+      wednesday: [],
+      thursday: [],
+      friday: [],
+      saturday: [],
+      sunday: [],
+    };
+    console.log(this.itinerary);
   },
 };
 </script>

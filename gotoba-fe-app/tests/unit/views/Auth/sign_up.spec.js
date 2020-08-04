@@ -2,9 +2,9 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
-import Signup from '@/views/Auth/Signup.vue';
+import SignUp from '@/views/Auth/SignUp.vue';
 import api from '@/api/api';
-import { alert } from '@/utils/tool';
+import { setAlert } from '@/utils/tool';
 
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
@@ -22,7 +22,7 @@ const $route = {
   user: '/',
 };
 
-describe('Signup.vue success', () => {
+describe('SignUp.vue success', () => {
   const expectedData = {
     data: {
       nickname: 'Syntia',
@@ -83,7 +83,7 @@ describe('Signup.vue success', () => {
       setUserInfo: jest.fn(),
     };
     store = new Vuex.Store({ actions });
-    wrapper = shallowMount(Signup, {
+    wrapper = shallowMount(SignUp, {
       mocks: {
         $route,
         $router: {
@@ -131,25 +131,27 @@ describe('Signup.vue success', () => {
     expect(wrapper.vm.$data.showLoading).toBe(false);
   });
 
-  it('Check checkRole method to navigate to user home', () => {
+  it('Check checkRole method to navigate to user home', async () => {
     wrapper.vm.checkRole();
+    await flushPromises();
 
     expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.$router.push).toHaveBeenCalledWith($route.user);
   });
 
-  it('Check checkRole method to navigate to merchant home', () => {
+  it('Check checkRole method to navigate to merchant home', async () => {
     wrapper.setData({
       role: 'ROLE_MERCHANT',
     });
     wrapper.vm.checkRole();
+    await flushPromises();
 
     expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
     expect(wrapper.vm.$router.push).toHaveBeenCalledWith($route.merchant);
   });
 });
 
-describe('Signup.vue error promise', () => {
+describe('SignUp.vue error promise', () => {
   const expectedData = {
     data: {
       nickname: 'Syntia',
@@ -185,7 +187,7 @@ describe('Signup.vue error promise', () => {
       setUserInfo: jest.fn(),
     };
     store = new Vuex.Store({ actions });
-    wrapper = shallowMount(Signup, {
+    wrapper = shallowMount(SignUp, {
       mocks: {
         $route,
         $router: {
@@ -230,10 +232,10 @@ describe('Signup.vue error promise', () => {
     expect(actions.setUserInfo).not.toHaveBeenCalled();
 
     expect(wrapper.vm.$data.showLoading).toBe(false);
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith(
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith(
       'sign your account. Please try again later',
-      false
+      false,
     );
   });
 
@@ -260,15 +262,15 @@ describe('Signup.vue error promise', () => {
     expect(actions.setUserInfo).not.toHaveBeenCalled();
 
     expect(wrapper.vm.$data.showLoading).toBe(false);
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith(
-      'log your account. Please try to log in',
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith(
+      'log in. Check your username/password',
       false,
     );
   });
 });
 
-describe('Signup.vue check function returned', () => {
+describe('SignUp.vue check function returned', () => {
   const data = {
     nickname: 'Syntia',
     username: 'syntiaaa00',
@@ -286,10 +288,10 @@ describe('Signup.vue check function returned', () => {
 
   beforeEach(() => {
     actions = {
-      Signup: jest.fn(),
+      SignUp: jest.fn(),
     };
     store = new Vuex.Store({ actions });
-    wrapper = shallowMount(Signup, {
+    wrapper = shallowMount(SignUp, {
       mocks: {
         $route,
         $router: {
@@ -327,7 +329,7 @@ describe('Signup.vue check function returned', () => {
   });
 });
 
-describe('Signup.vue catch error', () => {
+describe('SignUp.vue catch error', () => {
   const expectedData = {
     data: {
       nickname: 'Syntia',
@@ -360,12 +362,13 @@ describe('Signup.vue catch error', () => {
 
   beforeEach(() => {
     api.Signup.mockRejectedValue(new Error());
+    api.Login.mockRejectedValue(new Error());
 
     actions = {
       setUserInfo: jest.fn(),
     };
     store = new Vuex.Store({ actions });
-    wrapper = shallowMount(Signup, {
+    wrapper = shallowMount(SignUp, {
       mocks: {
         $route,
         $router: {
@@ -405,10 +408,26 @@ describe('Signup.vue catch error', () => {
     expect(api.Login).not.toHaveBeenCalled();
 
     expect(wrapper.vm.$data.showLoading).toBe(false);
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith(
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith(
       'sign up. Please try again later',
-      false
+      false,
+    );
+  });
+
+  it('Check login function to not catch error', async () => {
+    wrapper.vm.login();
+    expect(wrapper.vm.$data.showLoading).toBe(true);
+    await flushPromises();
+
+    expect(api.Login).toHaveBeenCalledTimes(1);
+    expect(api.Login).toHaveBeenCalledWith(expectedData.dataLogin);
+
+    expect(wrapper.vm.$data.showLoading).toBe(false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith(
+      'log in. Please try again later',
+      false,
     );
   });
 });

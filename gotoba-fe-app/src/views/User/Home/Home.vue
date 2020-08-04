@@ -78,7 +78,7 @@
           <div
             class="responsive-card"
             v-for="ticket in ticketPromotion"
-            :key="ticket.title"
+            :key="ticket.sku"
           >
             <router-link
               :to="goToDetails('ticket', ticket.sku)"

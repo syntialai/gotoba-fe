@@ -37,7 +37,6 @@ describe('App.vue', () => {
   afterEach(() => {
     jest.resetModules();
     jest.clearAllMocks();
-    wrapper.destroy();
   });
 
   it('Check layout computed to return route component name if meta.layout is defined', () => {

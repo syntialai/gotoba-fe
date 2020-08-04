@@ -39,13 +39,13 @@ export default {
     CardProfileTourGuide,
   },
   computed: {
-    ...mapGetters(['tourGuideData', 'tourGuideReview']),
+    ...mapGetters(['tourGuideData']),
   },
   created() {
     this.getTourGuideBySku(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getTourGuideBySku', 'getTourGuideReview']),
+    ...mapActions(['getTourGuideBySku']),
   },
 };
 </script>

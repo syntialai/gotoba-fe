@@ -2,7 +2,7 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import api from '@/api/api';
-import { alert } from '@/utils/tool';
+import { setAlert } from '@/utils/tool';
 import ScanResult from '@/views/Merchant/Scanner/ScanResult.vue';
 import flushPromises from 'flush-promises';
 
@@ -149,8 +149,8 @@ describe('ScanResult.vue', () => {
       expectedData.orderDataBySku,
     );
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('used ticket', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('used ticket', true);
   });
 
   it('Check useTicket method to not call actions', async () => {
@@ -163,8 +163,8 @@ describe('ScanResult.vue', () => {
 
     expect(actions.setOrderDataBySku).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('use ticket. Please try again later', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('use ticket. Please try again later', false);
   });
 
   it('Check useTicket method to not call actions - error', async () => {
@@ -175,7 +175,7 @@ describe('ScanResult.vue', () => {
 
     expect(actions.setOrderDataBySku).not.toHaveBeenCalled();
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('use ticket. Please try again later', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('use ticket. Please try again later', false);
   });
 });

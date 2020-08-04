@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:8800/';
 axios.defaults.timeout = 10000;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 axios.interceptors.request.use(
   (config) => config,
@@ -231,25 +231,6 @@ export default {
   },
   RemoveTourGuide(sku) {
     return fetchDelete(`/tour-guide/delete/${sku}`);
-  },
-
-  /**
-   * Review
-   */
-  GetReviewBySku(sku) {
-    return fetchGet(`/review/${sku}`);
-  },
-  GetReviewBySkuAndRating(sku, rate) {
-    return fetchGet(`/review/${sku}/${rate}`);
-  },
-  GetReviewBySkuAndId(sku, id) {
-    return fetchGet(`/review/${sku}/id/${id}`);
-  },
-  PostItineraryReview(sku, userSku, params) {
-    return fetchPost(`/review/${sku}/user/${userSku}/add/wisata`, params);
-  },
-  PostRestaurantReview(sku, userSku, params) {
-    return fetchPost(`/review/${sku}/user/${userSku}/add/restaurant`, params);
   },
 
   /**

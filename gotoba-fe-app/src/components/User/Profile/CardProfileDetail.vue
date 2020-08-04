@@ -31,7 +31,7 @@
               </b-button>
             </div>
             <div class="edit-btn" v-if="add">
-              <b-button to="/merchant/bistro/edit" variant="light">
+              <b-button :to="link" variant="light">
                 <p class="icon-gradient m-0">
                   <b-icon icon="pencil-square"></b-icon>
                 </p>
@@ -69,6 +69,9 @@ export default {
     },
     showOnMap() {
       return `${this.$route.path}/show-on-map`;
+    },
+    link() {
+      return `${this.$route.path}/edit`;
     },
   },
 };

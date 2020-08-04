@@ -90,7 +90,7 @@
 <script>
 import { mapActions } from 'vuex';
 import api from '../../api/api';
-import { alert } from '../../utils/tool';
+import { setAlert } from '../../utils/tool';
 import getValidationState from '../../utils/validation';
 
 export default {
@@ -136,10 +136,10 @@ export default {
           return;
         }
 
-        alert('log in. Check your username/password', false);
+        setAlert('log in. Check your username/password', false);
       } catch (err) {
         this.showLoading = false;
-        alert('log in. Please try again later', false);
+        setAlert('log in. Please try again later', false);
         console.log(err);
       }
     },

@@ -31,9 +31,9 @@ describe('Journey modules', () => {
       journeyDataByMerchantSku: [],
     },
     getters: {
-      journeyData: [{ sku: 'JOUR_0001' }],
-      journeyDataBySku: { sku: 'JOUR_0001' },
-      journeyDataByMerchantSku: [{ sku: 'JOUR_0002', merchantSku: 'MERC_0001' }],
+      journeyData: [{ sku: 'JOUR_0001', status: 'active' }],
+      journeyDataBySku: { sku: 'JOUR_0001', status: 'active' },
+      journeyDataByMerchantSku: [{ sku: 'JOUR_0002', merchantSku: 'MERC_0001', status: 'active' }],
     },
   };
 

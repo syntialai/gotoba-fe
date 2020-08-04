@@ -1,7 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 // eslint-disable-next-line no-unused-vars
 import VueGallery from 'vue-gallery';
-import flushPromises from 'flush-promises';
 import GalleryGroup from '@/components/User/Home/GalleryGroup.vue';
 
 jest.mock('vue-gallery', () => ({
@@ -30,8 +29,11 @@ describe('GalleryGroup.vue', () => {
       },
     ],
   };
+  const windowSpy = jest.spyOn(global, 'window', 'get')
+    .mockImplementation(() => ({
+      innerWidth: 768,
+    }));
   let wrapper;
-  let windowSpy;
 
   beforeEach(() => {
     wrapper = shallowMount(GalleryGroup, {
@@ -44,7 +46,6 @@ describe('GalleryGroup.vue', () => {
         };
       },
     });
-    windowSpy = jest.spyOn(global, 'window', 'get');
   });
 
   afterEach(() => {
@@ -56,18 +57,17 @@ describe('GalleryGroup.vue', () => {
     expect(wrapper.vm.images).toStrictEqual(expectedData.images);
   });
 
-  it('Check getHeight computed return image width case #1', async () => {
+  it('Check getHeight computed return image width case #1', () => {
     windowSpy.mockImplementation(() => ({
-      innerWidth: 768,
+      innerWidth: 425,
     }));
-    await flushPromises();
 
     expect(wrapper.vm.getHeight).toBe(expectedData.getHeight[0]);
   });
 
   it('Check getHeight computed return image width case #2', () => {
     windowSpy.mockImplementation(() => ({
-      innerWidth: 425,
+      innerWidth: 320,
     }));
 
     expect(wrapper.vm.getHeight).toBe(expectedData.getHeight[1]);

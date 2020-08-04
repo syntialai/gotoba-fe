@@ -98,7 +98,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
@@ -155,15 +155,15 @@ export default {
         api.PostGalleryPhoto(data)
           .then((res) => {
             if (!res.error) {
-              alert('added photo', true);
+              setAlert('added photo', true);
               this.getGalleryData();
               return;
             }
-            alert('to add photo', false);
+            setAlert('to add photo', false);
           })
           .catch((err) => {
             console.log(err);
-            alert('to add photo', false);
+            setAlert('to add photo', false);
           });
 
         return;
@@ -172,15 +172,15 @@ export default {
       api.EditGalleryPhoto(this.$route.params.sku, data)
         .then((res) => {
           if (!res.error) {
-            alert('updated photo', true);
+            setAlert('updated photo', true);
             this.getGalleryPhoto(this.$route.params.sku);
             return;
           }
-          alert('to update photo', false);
+          setAlert('to update photo', false);
         })
         .catch((err) => {
           console.log(err);
-          alert('to update photo', false);
+          setAlert('to update photo', false);
         });
     },
 
@@ -194,7 +194,7 @@ export default {
           })
           .catch((err) => {
             console.log(err);
-            alert('to show photo', false);
+            setAlert('to show photo', false);
           });
       }
     },

@@ -4,7 +4,7 @@ import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import PhotoModal from '@/components/Admin/Modal/PhotoModal.vue';
 import api from '@/api/api';
-import { alert } from '@/utils/tool';
+import { setAlert } from '@/utils/tool';
 import previewImage from '@/utils/fileHelper';
 
 const localVue = createLocalVue();
@@ -14,7 +14,8 @@ localVue.use(Vuex);
 jest.mock('@/api/api', () => ({
   PostGalleryPhoto: jest.fn(),
   EditGalleryPhoto: jest.fn(),
-  imageUrl: jest.fn().mockImplementation(() => 'http://localhost:8800/image/image/image.png'),
+  imageUrl: jest.fn()
+    .mockImplementation(() => 'http://localhost:8800/image/image/image.png'),
 }));
 jest.mock('@/utils/tool');
 jest.mock('@/utils/fileHelper', () => jest.fn());
@@ -126,8 +127,8 @@ describe('PhotoModal.vue', () => {
     expect(api.PostGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.PostGalleryPhoto).toHaveBeenCalledWith(expectedData.data);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('added photo', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('added photo', true);
   });
 
   it('Check loadImage method to success change image data', async () => {
@@ -269,8 +270,8 @@ describe('PhotoModal.vue with title props', () => {
     expect(api.EditGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.EditGalleryPhoto).toHaveBeenCalledWith($route.params.sku, expectedData.data);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('updated photo', true);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('updated photo', true);
   });
 });
 
@@ -430,8 +431,8 @@ describe('PhotoModal.vue check error api promise', () => {
     expect(api.PostGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.PostGalleryPhoto).toHaveBeenCalledWith(expectedData.data);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('to add photo', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('to add photo', false);
   });
 
   it('Check submitPhoto method to call api EditGalleryPhoto and show error', async () => {
@@ -447,8 +448,8 @@ describe('PhotoModal.vue check error api promise', () => {
     expect(api.EditGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.EditGalleryPhoto).toHaveBeenCalledWith($route.params.sku, expectedData.data);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('to update photo', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('to update photo', false);
   });
 });
 
@@ -538,8 +539,8 @@ describe('PhotoModal.vue check catch error while making a request', () => {
     expect(api.PostGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.PostGalleryPhoto).toHaveBeenCalledWith(expectedData.data);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('to add photo', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('to add photo', false);
   });
 
   it('Check submitPhoto method to call api EditGalleryPhoto and show error', async () => {
@@ -555,8 +556,8 @@ describe('PhotoModal.vue check catch error while making a request', () => {
     expect(api.EditGalleryPhoto).toHaveBeenCalledTimes(1);
     expect(api.EditGalleryPhoto).toHaveBeenCalledWith($route.params.sku, expectedData.data);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('to update photo', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('to update photo', false);
   });
 
   it('Check loadImage method to fail change image data and show alert', async () => {
@@ -566,7 +567,7 @@ describe('PhotoModal.vue check catch error while making a request', () => {
     expect(previewImage).toHaveBeenCalledTimes(1);
     expect(previewImage).toHaveBeenCalledWith(event.target.files[0]);
 
-    expect(alert).toHaveBeenCalledTimes(1);
-    expect(alert).toHaveBeenCalledWith('to show photo', false);
+    expect(setAlert).toHaveBeenCalledTimes(1);
+    expect(setAlert).toHaveBeenCalledWith('to show photo', false);
   });
 });
