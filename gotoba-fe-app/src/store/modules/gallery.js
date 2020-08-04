@@ -34,13 +34,18 @@ const actions = {
       });
   },
 
+  setGalleryPhoto({ commit }, res) {
+    commit(Types.SET_GALLERY_PHOTO, res);
+  },
+
   removeGalleryPhoto({ commit }, sku) {
     commit(Types.REMOVE_GALLERY_PHOTO);
 
     api.RemoveGalleryPhoto(sku)
       .then((res) => {
-        commit(Types.REMOVE_GALLERY_PHOTO, res);
-        console.log(`Successfully delete photo with sku: ${sku}`);
+        if (!res.error) {
+          commit(Types.REMOVE_GALLERY_PHOTO, sku);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -61,6 +66,11 @@ const mutations = {
 
   [Types.SET_GALLERY_PHOTO](state, res) {
     state.galleryPhoto = res;
+  },
+
+  [Types.REMOVE_GALLERY_PHOTO](state, sku) {
+    const filteredData = state.galleryData.filter((item) => item.sku !== sku);
+    state.galleryData = filteredData;
   },
 };
 

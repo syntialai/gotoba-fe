@@ -1,9 +1,15 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
+import Vuex from 'vuex';
 import Sidebar from '@/components/Admin/Sidebar/Sidebar.vue';
 
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
+localVue.use(Vuex);
+
+const $router = {
+  push: jest.fn(),
+};
 
 describe('Sidebar.vue', () => {
   const expectedData = {
@@ -13,7 +19,7 @@ describe('Sidebar.vue', () => {
     },
     max: {
       minimized: false,
-      pictSize: 80,
+      pictSize: 60,
     },
   };
   const sidebarData = {
@@ -58,15 +64,25 @@ describe('Sidebar.vue', () => {
     ],
   };
   
+  let actions;
+  let store;
   let wrapper;
   let setPictSize;
 
   beforeEach(() => {
-    wrapper = mount(Sidebar, {
-      localVue,
+    actions = {
+      setLogOut: jest.fn(),
+    };
+    store = new Vuex.Store({ actions });
+    wrapper = shallowMount(Sidebar, {
       data() { 
         return { ...sidebarData };
       },
+      mocks: {
+        $router,
+      },
+      localVue,
+      store,
       stubs: [
         'font-awesome-icon',
         'router-link',
@@ -98,5 +114,13 @@ describe('Sidebar.vue', () => {
     expect(setPictSize).toHaveBeenCalledTimes(2);
     expect(wrapper.vm.$data.pictSize).toBe(expectedData.min.pictSize);
     expect(wrapper.vm.$data.minimized).toBe(expectedData.min.minimized);
+  });
+
+  it('Check logout method to call actions setLogOut and call router', () => {
+    wrapper.vm.logout();
+
+    expect(actions.setLogOut).toHaveBeenCalledTimes(1);
+    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
+    expect(wrapper.vm.$router.push).toHaveBeenCalledWith('/login');
   });
 });

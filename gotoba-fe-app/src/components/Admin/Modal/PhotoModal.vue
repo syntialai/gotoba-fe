@@ -47,10 +47,10 @@
               label="Photo"
               label-for="photo-image"
             >
-              <div v-if="image === null">
+              <div v-if="!photo.image || photo.image === null">
                 <b-form-file
                   id="photo-image"
-                  v-model="image"
+                  v-model="photo.image"
                   @change="loadImage"
                   accept="image/jpeg, image/jpg, image/png"
                   required
@@ -64,7 +64,7 @@
               </div>
               <div v-else>
                 <b-img
-                  :src="image"
+                  :src="photo.image"
                   center
                   :width="100"
                 ></b-img>
@@ -97,40 +97,45 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { alert } from '../../../utils/tool';
+import { mapGetters, mapActions } from 'vuex';
+import { setAlert } from '../../../utils/tool';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
 
 export default {
   name: 'PhotoModal',
-  data() {
-    return {
-      photo: { ...this.photos },
-      image: this.photos.image || null,
-    };
-  },
   computed: {
     ...mapGetters(['galleryPhoto']),
+    imageUrl() {
+      return api.imageUrl(this.galleryPhoto.image);
+    },
+  },
+  created() {
+    if (this.title === 'Edit') {
+      this.getGalleryPhoto(this.$route.params.sku);
+    } else {
+      this.setGalleryPhoto({});
+    }
   },
   props: {
     title: {
       type: String,
       default: 'Add',
     },
-    photos: {
-      type: Object,
-      default: () => (
-        {
-          title: '',
-          image: null,
-          description: '',
-        }
-      ),
-    },
+  },
+  data() {
+    return {
+      photo: {
+        title: '',
+        description: '',
+        image: null,
+      },
+    };
   },
   methods: {
+    ...mapActions(['getGalleryPhoto', 'setGalleryPhoto', 'getGalleryData']),
+
     getValidationState,
 
     submitPhoto() {
@@ -138,7 +143,7 @@ export default {
         name: this.photo.title,
         title: this.photo.title,
         description: this.photo.description,
-        image: this.image,
+        image: this.photo.image,
         show: true,
       };
 
@@ -149,12 +154,16 @@ export default {
       if (this.title === 'Add') {
         api.PostGalleryPhoto(data)
           .then((res) => {
-            console.log(res);
-            alert('added photo', true);
+            if (!res.error) {
+              setAlert('added photo', true);
+              this.getGalleryData();
+              return;
+            }
+            setAlert('to add photo', false);
           })
           .catch((err) => {
             console.log(err);
-            alert('to add photo', false);
+            setAlert('to add photo', false);
           });
 
         return;
@@ -162,12 +171,16 @@ export default {
 
       api.EditGalleryPhoto(this.$route.params.sku, data)
         .then((res) => {
-          console.log(res);
-          alert('updated photo', true);
+          if (!res.error) {
+            setAlert('updated photo', true);
+            this.getGalleryPhoto(this.$route.params.sku);
+            return;
+          }
+          setAlert('to update photo', false);
         })
         .catch((err) => {
           console.log(err);
-          alert('to update photo', false);
+          setAlert('to update photo', false);
         });
     },
 
@@ -177,16 +190,25 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res.toString();
+            this.photo.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
+            setAlert('to show photo', false);
           });
       }
     },
 
     removePhoto() {
-      this.image = null;
+      this.photo.image = null;
+    },
+  },
+  watch: {
+    galleryPhoto() {
+      if (this.title === 'Edit') {
+        this.photo = { ...this.galleryPhoto };
+        this.photo.image = this.imageUrl;
+      }
     },
   },
 };

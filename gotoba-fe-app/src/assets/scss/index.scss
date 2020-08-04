@@ -2,18 +2,13 @@
 
 @import
   'abstracts/variables',
-  'abstracts/functions',
   'abstracts/mixins';
-
-@import
-  'vendors/normalize';
 
 @import
   'base/base',
   'base/color',
   'base/elevation',
-  'base/fonts',
-  'base/helpers';
+  'base/fonts';
 
 @import
   'layout/footer',
@@ -25,12 +20,11 @@
   'components/icon',
   'components/form',
   'components/navigation',
-  'components/sidebar';
+  'components/sidebar',
+  'components/image',
+  'components/card',
+  'components/table';
 
 @import
   'pages/home',
   'pages/timeline';
-
-@import
-  'themes/default',
-  'themes/dark';

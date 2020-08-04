@@ -47,7 +47,7 @@
               label="Photo"
               label-for="tour-guide-image"
             >
-              <div v-if="tourGuide.image === null">
+              <div v-if="!tourGuide.image || tourGuide.image === null">
                 <b-form-file
                   id="photo-image"
                   v-model="tourGuide.image"
@@ -63,7 +63,11 @@
                 </b-form-invalid-feedback>
               </div>
               <div v-else>
-                <b-img :src="tourGuide.image" center :width="100"></b-img>
+                <b-img
+                  :src="tourGuide.image"
+                  center
+                  :width="100"
+                ></b-img>
                 <b-button
                   size="sm"
                   class="custom-btn-gray mt-2"
@@ -188,7 +192,7 @@
                 v-model="tourGuide.location"
                 list="location-list"
                 required
-                @change="locationSuggestions"
+                @input="locationSuggestions"
                 :state="getValidationState(validationContext)"
                 aria-describedby="tour-guide-location-feedback-msg"
               ></b-form-input>
@@ -271,7 +275,7 @@
             >
               <b-form-input
                 id="tour-guide-phone-number"
-                v-model="tourGuide.phoneNumber"
+                v-model="tourGuide.phone"
                 type="text"
                 class="border-gray"
                 required
@@ -366,16 +370,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 
 export default {
   name: 'TourGuideModal',
   computed: {
     ...mapGetters(['tourGuideData']),
+    imageUrl() {
+      return api.imageUrl(this.tourGuideData.image);
+    },
+  },
+  created() {
+    if (this.title === 'Edit') {
+      this.getTourGuideBySku(this.$route.params.sku);
+    } else {
+      this.setTourGuideBySku({});
+    }
   },
   data() {
     return {
@@ -388,15 +402,46 @@ export default {
         location: '',
         language: [],
         availableLocation: [],
-        phoneNumber: '',
+        phone: '',
         email: '',
         whatsapp: '',
         experience: '',
         description: '',
       },
       locationOptions: [
-        { text: 'Parapat', value: 'Parapat' },
-        { text: 'Silangit', value: 'Silangit' },
+        { text: 'Asahan', value: 'Asahan' },
+        { text: 'Batu Bara', value: 'Batu Bara' },
+        { text: 'Dairi', value: 'Dairi' },
+        { text: 'Deli Serdang', value: 'Deli Serdang' },
+        { text: 'Humbang Hasundutan', value: 'Humbang Hasundutan' },
+        { text: 'Karo', value: 'Karo' },
+        { text: 'Labuhanbatu', value: 'Labuhanbatu' },
+        { text: 'Labuhanbatu Selatan', value: 'Labuhanbatu Selatan' },
+        { text: 'Labuhanbatu Utara', value: 'Labuhanbatu Utara' },
+        { text: 'Langkat', value: 'Langkat' },
+        { text: 'Mandailing Natal', value: 'Mandailing Natal' },
+        { text: 'Nias', value: 'Nias' },
+        { text: 'Nias Barat', value: 'Nias Barat' },
+        { text: 'Nias Selatan', value: 'Nias Selatan' },
+        { text: 'Nias Utara', value: 'Nias Utara' },
+        { text: 'Padang Lawas', value: 'Padang Lawas' },
+        { text: 'Padang Lawas Utara', value: 'Padang Lawas Utara' },
+        { text: 'Pakpak Barat', value: 'Pakpak Barat' },
+        { text: 'Samosir', value: 'Samosir' },
+        { text: 'Serdang Bedagai', value: 'Serdang Bedagai' },
+        { text: 'Simalungun', value: 'Simalungun' },
+        { text: 'Tapanuli Selatan', value: 'Tapanuli Selatan' },
+        { text: 'Tapanuli Tengah', value: 'Tapanuli Tengah' },
+        { text: 'Tapanuli Utara', value: 'Tapanuli Utara' },
+        { text: 'Toba', value: 'Toba' },
+        { text: 'Binjai', value: 'Binjai' },
+        { text: 'Gunungsitoli', value: 'Gunungsitoli' },
+        { text: 'Medan', value: 'Medan' },
+        { text: 'Padangsidempuan', value: 'Padangsidempuan' },
+        { text: 'Pematangsiantar', value: 'Pematangsiantar' },
+        { text: 'Sibolga', value: 'Sibolga' },
+        { text: 'Tanjungbalai', value: 'Tanjungbalai' },
+        { text: 'Tebing Tinggi', value: 'Tebing Tinggi' },
       ],
       locationList: null,
     };
@@ -408,20 +453,40 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setTourGuideBySku', 'getTourGuideBySku', 'getTourGuideData']),
     getValidationState,
 
     submitTourGuide() {
       const data = { ...this.tourGuide };
 
-      console.log(data);
+      if (data.name === ''
+          || data.image === null
+          || data.age === 0
+          || data.occupation === ''
+          || data.location === ''
+          || data.language === []
+          || data.availableLocation === []
+          || data.phone === ''
+          || data.email === ''
+          || data.whatsapp === ''
+          || data.experience === ''
+          || data.description === '') {
+        return;
+      }
+
       if (this.title === 'Add') {
         api.PostTourGuide(data)
           .then((res) => {
-            alert('added tour guide', true);
+            if (!res.error) {
+              setAlert('added tour guide', true);
+              this.getTourGuideData();
+              return;
+            }
+            setAlert('add tour guide', false);
             console.log(res);
           })
           .catch((err) => {
-            alert('add tour guide', false);
+            setAlert('add tour guide', false);
             console.log(err);
           });
 
@@ -430,11 +495,14 @@ export default {
 
       api.EditTourGuide(this.$route.params.sku, data)
         .then((res) => {
-          alert('updated tour guide', true);
-          console.log(res);
+          if (!res.error) {
+            setAlert('updated tour guide', true);
+            return;
+          }
+          setAlert('update tour guide', false);
         })
         .catch((err) => {
-          alert('update tour guide', true);
+          setAlert('update tour guide', false);
           console.log(err);
         });
     },
@@ -445,10 +513,11 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.tourGuide.image = res;
+            this.tourGuide.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
+            setAlert('to show tour guide', false);
           });
       }
     },
@@ -462,12 +531,22 @@ export default {
         api.GetSearchLocationResult(this.tourGuide.location)
           .then((res) => {
             this.locationList = res.map((item) => item.display_name);
-            console.log(this.locationList);
+            console.log(this.tourGuide.location, this.locationList);
           })
           .catch((err) => {
             console.log(err);
             this.locationList = null;
           });
+      }
+    },
+  },
+  watch: {
+    tourGuideData() {
+      if (this.tourGuideData && this.tourGuideData.sku) {
+        this.tourGuide = { ...this.tourGuideData };
+        this.tourGuide.image = this.imageUrl;
+        this.tourGuide.language = this.tourGuideData.language.split(',');
+        this.tourGuide.availableLocation = this.tourGuideData.availableLocation.split(',');
       }
     },
   },

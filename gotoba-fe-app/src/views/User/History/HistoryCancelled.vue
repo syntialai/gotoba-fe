@@ -1,6 +1,9 @@
 <template>
   <div class="history-cancelled">
-    <card-history-group :histories="cancelledPaymentData" />
+    <card-history-group
+      v-if="cancelledPaymentData"
+      :histories="cancelledPaymentData"
+    />
   </div>
 </template>
 
@@ -14,10 +17,10 @@ export default {
     CardHistoryGroup,
   },
   computed: {
-    ...mapGetters(['cancelledPaymentData', 'userData']),
+    ...mapGetters(['cancelledPaymentData', 'userSku']),
   },
   created() {
-    this.getCancelledPayment(this.userData.sku);
+    this.getCancelledPayment(this.userSku);
   },
   methods: {
     ...mapActions(['getCancelledPayment']),

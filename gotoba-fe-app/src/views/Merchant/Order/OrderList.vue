@@ -7,23 +7,13 @@
         to="/merchant/order-list/" exact
         exact-active-class="active"
       >
-        <div class="d-flex flex-column">
-          <span class="tab-icon icon">
-            <font-awesome-icon icon="utensils"></font-awesome-icon>
-          </span>
-          <span class="tab-title">RESTAURANT</span>
-        </div>
+        <span class="tab-title">NEW ORDER</span>
       </b-nav-item>
       <b-nav-item
-        to="/merchant/order-list/itinerary" exact
+        to="/merchant/order-list/recent" exact
         exact-active-class="active"
       >
-        <div class="d-flex flex-column">
-          <span class="tab-icon icon">
-            <font-awesome-icon icon="route"></font-awesome-icon>
-          </span>
-          <span class="tab-title">ITINERARY</span>
-        </div>
+        <span class="tab-title">RECENT</span>
       </b-nav-item>
     </b-nav>
 
@@ -32,6 +22,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import CardInfo from '../../../components/Merchant/Card/CardInfo.vue';
 
 export default {
@@ -40,14 +31,27 @@ export default {
     CardInfo,
   },
   computed: {
+    ...mapGetters([
+      'merchantOrderCount',
+    ]),
     cardInfo() {
       return {
         info1: 'Ordered Restaurant Ticket',
-        value1: 2,
+        value1: this.merchantOrderCount.restaurant,
         info2: 'Ordered Itinerary Ticket',
-        value2: 5,
+        value2: this.merchantOrderCount.itinerary,
       };
     },
+  },
+  created() {
+    this.getMerchantOrderData();
+    this.getMerchantOrderCount();
+  },
+  methods: {
+    ...mapActions([
+      'getMerchantOrderCount',
+      'getMerchantOrderData',
+    ]),
   },
 };
 </script>

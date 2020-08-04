@@ -2,7 +2,7 @@
   <div class="admin">
     <sidebar />
 
-    <div style="margin: 0 20px 0 80px">
+    <div class="admin-view">
       <search class="py-3 mb-4" />
 
       <menu-info class="pt-2" />
@@ -30,3 +30,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.admin-view {
+  margin: 0 20px 0 80px;
+}
+</style>

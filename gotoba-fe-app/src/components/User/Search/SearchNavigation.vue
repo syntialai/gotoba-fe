@@ -16,7 +16,7 @@
             v-model="keywords"
             type="search"
             autocomplete="off"
-            debounce="500"
+            debounce="1000"
             @keyup.enter="$emit('search')"
             placeholder="Search for place, eat, ..."
           ></b-form-input>
@@ -27,20 +27,25 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'SearchNavigation',
   computed: {
+    ...mapGetters(['searchKeywords']),
     keywords: {
       get() {
-        return this.$store.state.searchKeywords;
+        return this.searchKeywords;
       },
       set(value) {
-        this.$store.dispatch('setSearchKeywords', value);
+        return this.setSearchKeywords(value);
       },
     },
   },
   methods: {
+    ...mapActions(['setSearchKeywords']),
     goBack() {
+      this.setSearchKeywords('');
       this.$router.go(-1);
     },
   },

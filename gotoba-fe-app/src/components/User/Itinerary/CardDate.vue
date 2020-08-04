@@ -1,7 +1,6 @@
 <template>
   <div
-    id="card-date"
-    :class="'bg-color-'
+    :class="'card-date bg-color-'
       + (active? 'primary' : 'white')
       + ' border-black-10 border-square-5 align-center m-2'
     "
@@ -27,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss">
-#card-date {
+.card-date {
   padding: 8px 16px;
 }
 </style>

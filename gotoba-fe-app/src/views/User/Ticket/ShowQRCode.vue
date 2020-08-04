@@ -8,14 +8,17 @@
       QR Code
     </div>
 
-    <q-r-code-info v-bind="ticketData" />
+    <q-r-code-info
+      v-if="orderDataBySku"
+      :ticket="orderDataBySku"
+    />
 
     <div class="close">
       <b-button
         block
         variant="link"
         class="text-white font-size-32"
-        href="/my-tickets"
+        to="/my-tickets"
       >
         <p><b-icon icon="x"></b-icon></p>
       </b-button>
@@ -33,20 +36,13 @@ export default {
     QRCodeInfo,
   },
   computed: {
-    ...mapGetters(['ticketData']),
-    // ticket() {
-    //   return {
-    //     title: 'QR Code',
-    //     date: new Date(2000, 3, 12),
-    //     qrCodeValue: 'Test',
-    //   };
-    // },
+    ...mapGetters(['orderDataBySku']),
   },
   created() {
-    this.getTicketBySku(this.$route.params.sku);
+    this.getOrderDataBySku(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getTicketBySku']),
+    ...mapActions(['getOrderDataBySku']),
   },
 };
 </script>

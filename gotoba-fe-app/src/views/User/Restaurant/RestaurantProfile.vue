@@ -1,11 +1,37 @@
 <template>
   <div class="restaurant-profile">
-    <profile-detail :data="restaurantData" />
+    <div v-if="isExist">
+      <profile-detail
+        :data="restaurantData"
+        :promotions="[]"
+      />
+      <div class="menus">
+        <div class="menu" v-if="restaurantMenus">
+          <restaurant-menu-card-group
+            :restaurantMenu="restaurantMenus"
+          />
+        </div>
+      </div>
+    </div>
 
-    <restaurant-menu-card-group
-      v-if="restaurantMenu"
-      :restaurantMenu="restaurantMenu"
-    />
+    <div v-else class="vh-100 d-flex">
+      <div class="align-self-center align-center">
+        <div class="image-no-data">
+          <img
+            src="@/assets/img/illustrate/no-data.png"
+            alt="No-Data"
+            width="50%"
+          >
+        </div>
+        <div class="info-no-data m-3">
+          <div class="font-color-black-60">
+            <div class="semibold">
+              The restaurant can't be found.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,14 +47,26 @@ export default {
     RestaurantMenuCardGroup,
   },
   computed: {
-    ...mapGetters(['restaurantData', 'restaurantMenu']),
+    ...mapGetters(['restaurantData', 'restaurantMenus']),
+    isExist() {
+      return this.restaurantData;
+    },
   },
   created() {
-    this.getRestaurantDataByMerchantSku(this.$route.params.sku);
-    this.getRestaurantMenu(this.$route.params.sku);
+    this.getRestaurantDataBySku(this.$route.params.sku);
   },
   methods: {
-    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantMenu']),
+    ...mapActions([
+      'getRestaurantDataBySku',
+      'getRestaurantMenu',
+    ]),
+  },
+  watch: {
+    restaurantData() {
+      if (this.restaurantData) {
+        this.getRestaurantMenu(this.restaurantData.merchantSku);
+      }
+    },
   },
 };
 </script>

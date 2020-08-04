@@ -1,6 +1,6 @@
 <template>
   <div class="default-back">
-    <navigation-back :title="currentRouteName" />
+    <navigation-back />
 
     <slot />
   </div>
@@ -13,11 +13,6 @@ export default {
   name: 'DefaultBack',
   components: {
     NavigationBack,
-  },
-  computed: {
-    currentRouteName() {
-      return this.$route.name;
-    },
   },
 };
 </script>

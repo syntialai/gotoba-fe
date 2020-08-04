@@ -2,13 +2,13 @@
   <div class="tour-guide-detail">
     <div class="btn d-flex justify-content-between my-3">
       <b-button
+        class="custom-btn-red"
+        @click="confirmModal"
+      >DELETE</b-button>
+      <b-button
         class="custom-btn-primary"
         v-b-modal.add-tour-guide-modal
       >EDIT</b-button>
-      <b-button
-        class="custom-btn-red"
-        @click="deleteTourGuide"
-      >DELETE</b-button>
     </div>
 
     <tour-guide-modal title="Edit" />
@@ -20,9 +20,9 @@
 
     <div
       v-if="tourGuideData"
-      class="more-tour-guide-info"
+      class="more-tour-guide-info bg-white p-3"
     >
-      <div class="language d-flex justify-content-between">
+      <div class="language d-flex justify-content-between py-1">
         <div class="language-label font-color-black-60">
           Language
         </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="available-location d-flex justify-content-between">
+      <div class="available-location d-flex justify-content-between py-1">
         <div class="available-location-label font-color-black-60">
           Available location
         </div>
@@ -40,16 +40,16 @@
         </div>
       </div>
 
-      <div class="phone-number d-flex justify-content-between">
+      <div class="phone-number d-flex justify-content-between py-1">
         <div class="phone-number-label font-color-black-60">
           Phone Number
         </div>
         <div class="phone-number-value font-color-black-87 semibold pl-4">
-          {{ tourGuideData.phoneNumber }}
+          {{ tourGuideData.phone }}
         </div>
       </div>
 
-      <div class="email d-flex justify-content-between">
+      <div class="email d-flex justify-content-between py-1">
         <div class="email-label font-color-black-60">
           Email
         </div>
@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <div class="whatsapp-number d-flex justify-content-between">
+      <div class="whatsapp-number d-flex justify-content-between py-1">
         <div class="whatsapp-number-label font-color-black-60">
           Whatsapp
         </div>
@@ -68,7 +68,7 @@
       </div>
 
       <div class="experience">
-        <div class="experience-label font-color-black-60">
+        <div class="experience-label font-color-black-60 py-1">
           Experience
         </div>
         <div class="experience-value font-color-black-87 semibold p-3">
@@ -77,7 +77,7 @@
       </div>
 
       <div class="description">
-        <div class="description-label font-color-black-60">
+        <div class="description-label font-color-black-60 py-1">
           Description
         </div>
         <div class="description-value font-color-black-87 semibold p-3">
@@ -108,15 +108,11 @@ export default {
   methods: {
     ...mapActions(['getTourGuideBySku', 'removeTourGuide']),
     deleteTourGuide() {
-      const confirmModalValue = this.confirmModal(this.tourGuideData.name);
-
-      if (confirmModalValue) {
-        this.removeTourGuide(this.tourGuide.sku);
-        this.$router.push('/admin/tour-guide');
-      }
+      this.removeTourGuide(this.tourGuideData.sku);
+      this.$router.push('/admin/tour-guide');
     },
-    confirmModal(object) {
-      this.$bvModal.msgBoxConfirm(`${object} will be removed permanently from this system.`, {
+    confirmModal() {
+      this.$bvModal.msgBoxConfirm('Tour Guide will be removed permanently from this system.', {
         title: 'Are you sure?',
         size: 'sm',
         okVariant: 'danger',
@@ -127,7 +123,11 @@ export default {
         hideHeaderClose: false,
         centered: true,
       })
-        .then((value) => value)
+        .then((value) => {
+          if (value) {
+            this.deleteTourGuide();
+          }
+        })
         .catch(
           (err) => console.log(err),
         );

@@ -1,6 +1,6 @@
 <template>
   <div class="privacy-policy">
-    <div class="container pl-2 pr-2">
+    <div class="content px-3">
       <h5 class="font-color-blue-secondary">Privacy Policy</h5>
       <p>
         At gotoba, accessible from gotoba.surge,sh, one of our main

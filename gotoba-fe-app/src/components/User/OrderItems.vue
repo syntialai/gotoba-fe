@@ -2,51 +2,76 @@
   <div class="items">
     <b-card no-body
       block
-      class="pr-2"
-      :img-src="image"
-      :img-alt="name"
+      class="pr-2 border-none pt-3"
+      :img-src="imageUrl"
       img-left
+      :img-height="80"
+      :img-width="80"
     >
-      <b-card-body>
-        <b-card-title class="font-color-black-87">
-          {{ name }}
-        </b-card-title>
-        <b-card-text>
-          <span
-            :class="['normal-price font-color-black-60 ' + { strikethrough: discount }]"
-          >
-            {{ formatPrice(price) }}
-          </span>
-          <span v-if="discount" class="discount-price font-color-red semibold">
-            {{ formatPrice(discountPrice) }}
-          </span>
-        </b-card-text>
+      <b-card-body class="ml-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="info">
+            <b-card-title class="font-color-black-87 font-size-16">
+              {{ name }}
+            </b-card-title>
+            <b-card-text>
+              <span
+                :class="{
+                  'strikethrough': discountPrice > 0,
+                  'normal-price font-color-black-60': price > 0
+                }"
+              >
+                {{ prices }}
+              </span>
+              <span v-if="discountPrice > 0" class="discount-price font-color-red semibold">
+                {{ discounts }}
+              </span>
+            </b-card-text>
+          </div>
+          <div class="quantity font-color-blue-primary mb-3 w-25 align-right semibold">
+            {{ quantities }}
+          </div>
+        </div>
       </b-card-body>
     </b-card>
   </div>
 </template>
 
 <script>
+import api from '../../api/api';
 import { formatPrice } from '../../utils/filter';
 
 export default {
-  name: 'Order Items',
+  name: 'OrderItems',
   props: {
     name: String,
     image: String,
-    price: String,
+    price: Number,
     discountPrice: {
       type: Number,
       default: 0,
     },
+    quantity: Number,
   },
-  data() {
-    return {
-      discount: this.discountPrice !== 0,
-    };
-  },
-  methods: {
-    formatPrice,
+  computed: {
+    imageUrl() {
+      return api.imageUrl(this.image);
+    },
+    prices() {
+      return formatPrice(this.price);
+    },
+    discounts() {
+      return formatPrice(this.price - this.discountPrice);
+    },
+    quantities() {
+      let count = `${this.quantity} pc`;
+
+      if (this.quantity > 1) {
+        count += 's';
+      }
+
+      return count;
+    },
   },
 };
 </script>

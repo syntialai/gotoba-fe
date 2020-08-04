@@ -19,7 +19,7 @@ export default {
 @import "~@/assets/scss/abstracts/variables";
 
 body, .background {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -28,24 +28,31 @@ body, .background {
   top: 0;
   background: $blue-gradient;
   width: 100%;
-  height: 150px;
+  max-width: 1000px;
+  height: 160px;
 }
 
 @media screen and (min-width: 425px) {
   .background {
-    height: 180px;
+    height: 32%;
   }
 }
 
-@media screen and (min-width: 630px) {
+@media screen and (min-width: 550px) {
   .background {
-    height: 210px;
+    height: 35%;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .background {
+    height: 38%;
   }
 }
 
 @media screen and (min-width: 768px) {
   .background {
-    height: 240px;
+    height: 40%;
   }
 }
 

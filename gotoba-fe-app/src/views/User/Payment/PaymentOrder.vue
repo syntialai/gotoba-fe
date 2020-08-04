@@ -1,64 +1,59 @@
 <template>
-  <div class="payment-order">
+  <div class="payment-order p-2" v-if="paymentDataBySku">
     <div class="information p-2">
       <div class="image-waiting p-4 w-100">
-        <img src="@/assets/img/Waiting.png" alt="Waiting" :width="imageWidth">
+        <img
+          src="@/assets/img/illustrate/Waiting.png"
+          alt="Waiting"
+          width="100%"
+        >
       </div>
 
       <div class="align-center font-color-black-60">
         <div class="thank-you mb-3">
           Thank you for shopping at gotoba!
         </div>
-        <div class="do-payment mt-2 mb-1">
-          Do payment before
-        </div>
-        <div class="payment-deadline font-color-black-87 bold mb-3">
-          {{ paymentTime }}
-        </div>
         <div class="complete-payment mb-1">
-          Have you completed the payment? Upload your payment bill or
-          Check your payment status at
-          <a :href="['/history/' + paymentId]">History</a>
+          Check your payment/order status at
+          <router-link :to="goToHistory">
+            History
+          </router-link>
         </div>
       </div>
     </div>
 
-    <div class="order-bank font-color-black-60 p-2">
-      <div class="transfer-info">
-        <div class="transfer-label">
-          Transfer to bank account:
-        </div>
-        <div class="d-flex justify-content-between">
-          <div class="bank-number">
-            <img :src="bankImg" alt="bank" />
-            <div class="number semibold font-color-black-87">
-              {{ bankNumber }}
-            </div>
-          </div>
-          <div class="copy">
-            <a href="">COPY</a>
-          </div>
-        </div>
-      </div>
-      <div class="how-to-pay">
-        <a href="">How to Pay?</a>
-      </div>
-    </div>
-
-    <div class="payment-details">
+    <div class="payment-details my-3 mx-2">
       <div class="title w-100 border-bottom-gray-young">
-        <span class="font-color-black-87">Payment details:</span>
+        <span class="font-color-black-87">
+          Payment details:
+        </span>
       </div>
-      <payment-detail price="" discount="" />
+      <payment-detail
+        :price="orderTotal.price"
+        :discount="orderTotal.discount"
+        :total="total"
+      />
     </div>
 
-    <b-button class="w-100 btn custom-btn-primary">SHOW ORDER DETAILS</b-button>
-    <b-button class="w-100 btn btn-light">BACK TO HOME</b-button>
+    <div class="p-3 px-2">
+      <b-button
+        class="w-100 custom-btn-primary my-2"
+        :to="goToHistory"
+      >
+        SHOW ORDER DETAILS
+      </b-button>
+      <b-button
+        class="w-100 custom-btn-gray"
+        to="/"
+      >
+        BACK TO HOME
+      </b-button>
+    </div>
   </div>
 </template>
 
 <script>
-import { formatPrice } from '../../../utils/filter';
+import { mapGetters, mapActions } from 'vuex';
 import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
 
 export default {
@@ -66,21 +61,20 @@ export default {
   components: {
     PaymentDetail,
   },
-  props: {
-    paymentId: String,
-    paymentTime: String,
-    paymentMethod: String,
-    bankImg: String,
-    bankNumber: String,
-    totalPayment: String,
-  },
   computed: {
-    imageWidth() {
-      return window.innerWidth - 64;
+    ...mapGetters(['orderTotal', 'paymentDataBySku']),
+    goToHistory() {
+      return `/history/details/${this.paymentDataBySku.sku}`;
+    },
+    total() {
+      return this.orderTotal.price - this.orderTotal.discount;
     },
   },
+  created() {
+    this.getPaymentBySku(this.$route.params.sku);
+  },
   methods: {
-    formatPrice,
+    ...mapActions(['getPaymentBySku']),
   },
 };
 </script>

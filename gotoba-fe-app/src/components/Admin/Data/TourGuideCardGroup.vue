@@ -5,7 +5,6 @@
         v-for="tourGuide of tourGuideRange"
         :key="tourGuide.sku"
         :tourGuide="tourGuide"
-        @click="goToDetails(tourGuide.sku)"
       />
     </b-card-group>
   </div>
@@ -27,11 +26,6 @@ export default {
   computed: {
     tourGuideRange() {
       return this.tourGuides.slice(this.start - 1, this.end);
-    },
-  },
-  methods: {
-    goToDetails(sku) {
-      this.$router.push(`/admin/tour-guide/${sku}`);
     },
   },
 };

@@ -28,10 +28,5 @@ export default {
       return this.itineraries.slice(this.start - 1, this.end);
     },
   },
-  methods: {
-    goToDetails(sku) {
-      this.$router.push(`/admin/itinerary/${sku}`);
-    },
-  },
 };
 </script>

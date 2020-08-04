@@ -39,15 +39,18 @@
               </font-awesome-layers>
             </l-icon>
           </l-marker>
+          <l-marker
+            v-if="locationSelected"
+            :lat-lng="locationSelected"
+          ></l-marker>
         </div>
         <l-control-zoom position="topright"></l-control-zoom>
       </l-map>
 
-      <l-control position="topleft">
-
-      </l-control>
-
-      <l-control position="bottomcenter">
+      <l-control
+        v-if="location.name && location.address"
+        position="bottomcenter"
+      >
         <div
           class="set-dest fixed-bottom box-shadow bg-white border-square-20 p-3"
         >
@@ -134,10 +137,17 @@ export default {
   methods: {
     ...mapActions(['getLocationData', 'setLocationKeyword']),
     setLocation(e) {
+      this.locationSelected = [e.latlng.lat, e.latlng.lng];
+
       api.ReverseGeocoding(e.latlng.lng, e.latlng.lat)
         .then((res) => {
           this.location.address = res.display_name;
-          this.location.name = res.address.name || res.address.village;
+          this.location.name = `${res.address.name
+          || res.address.village
+          || res.address.suburb
+          || res.address.town
+          || ''}, ${res.address.state_district
+          || res.address.state}`;
         })
         .catch((err) => {
           console.log(err);

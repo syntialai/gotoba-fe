@@ -7,8 +7,6 @@ localVue.use(Vuex);
 
 const $route = '/tour-guide/TOUR_0001';
 
-const $router = { push: jest.fn() };
-
 describe('TourGuide.vue', () => {
   let wrapper;
   let getters;
@@ -35,10 +33,6 @@ describe('TourGuide.vue', () => {
     });
 
     wrapper = shallowMount(TourGuide, {
-      mocks: {
-        $route,
-        $router,
-      },
       store,
       localVue,
     });
@@ -47,17 +41,9 @@ describe('TourGuide.vue', () => {
   afterEach(() => {
     jest.resetModules();
     jest.clearAllMocks();
-    wrapper.destroy();
   });
 
   it('Check getTourGuideData actions to be called when created', () => {
     expect(actions.getTourGuideData).toHaveBeenCalled();
-  });
-
-  it('Check goToProfile method to navigate to TourGuide details', () => {
-    wrapper.vm.goToProfile('TOUR_0001');
-
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith($route);
   });
 });

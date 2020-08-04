@@ -8,7 +8,7 @@
           </div>
         </b-nav-item>
         <b-nav-item class="nav-title semibold font-size-20 p-1 m-0">
-          {{ title }}
+          {{ currentRouteName }}
         </b-nav-item>
       </b-navbar-nav>
     </b-navbar>
@@ -18,8 +18,10 @@
 <script>
 export default {
   name: 'NavigationBack',
-  props: {
-    title: String,
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
+    },
   },
   methods: {
     goBack() {

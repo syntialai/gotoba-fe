@@ -51,17 +51,17 @@ function checkUserRole(to, from, next) {
   }
 }
 
-// function checkRole(to, from, next) {
-//   const role = index.getters.userRole;
+function checkRole(to, from, next) {
+  const role = index.getters.userRole;
 
-//   if (role === 'ROLE_USER' || !role) {
-//     next();
-//   } else if (role === 'ROLE_MERCHANT') {
-//     next('/merchant');
-//   } else if (role === 'ROLE_ADMIN') {
-//     next('/admin');
-//   }
-// }
+  if (role === 'ROLE_USER' || !role) {
+    next();
+  } else if (role === 'ROLE_MERCHANT') {
+    next('/merchant');
+  } else if (role === 'ROLE_ADMIN') {
+    next('/admin');
+  }
+}
 
 const routes = [
   {
@@ -72,6 +72,7 @@ const routes = [
       {
         path: '',
         name: 'Home',
+        beforeEnter: checkRole,
         component: Home,
         meta: {
           layout: 'background-blue',
@@ -80,6 +81,7 @@ const routes = [
       {
         path: 'itinerary',
         name: 'Itinerary',
+        beforeEnter: checkRole,
         component: Pages.ITINERARY,
         meta: {
           layout: 'background-blue',
@@ -114,6 +116,7 @@ const routes = [
       {
         path: 'cart',
         name: 'Cart',
+        beforeEnter: checkUserRole,
         component: Pages.CART,
         meta: {
           layout: 'background-blue',
@@ -150,20 +153,9 @@ const routes = [
     },
   },
   {
-    path: '/notification',
-    name: 'Notification',
-    component: Pages.NOTIFICATION,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
-    path: '/notification/:title',
-    name: 'Notification Detail',
-    component: Pages.NOTIFICATION_DETAIL,
-    meta: {
-      layout: 'default-back',
-    },
+    path: '/about',
+    name: 'About',
+    component: Pages.ABOUT,
   },
   {
     path: '/search',
@@ -288,6 +280,9 @@ const routes = [
     path: '/itinerary/add/show-on-map',
     name: 'Set Destination',
     component: Pages.ADD_DESTINATION,
+    meta: {
+      layout: 'default-back',
+    },
   },
   {
     path: '/my-tickets/:sku',
@@ -339,16 +334,16 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'History Success',
-        component: Pages.HISTORY_SUCCESS,
+        name: 'History',
+        component: Pages.HISTORY_PENDING,
         meta: {
           layout: 'default-back',
         },
       },
       {
-        path: 'pending',
-        name: 'History Pending',
-        component: Pages.HISTORY_PENDING,
+        path: 'done',
+        name: 'History Success',
+        component: Pages.HISTORY_SUCCESS,
         meta: {
           layout: 'default-back',
         },
@@ -392,25 +387,12 @@ const routes = [
     },
   },
   {
-    path: '/faq/payment/transfer',
-    name: 'Payment Guide',
-    component: Pages.PAYMENT_GUIDE,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
     path: '/admin',
     name: 'Admin',
     beforeEnter: checkAdminRole,
-    redirect: '/admin/dashboard',
+    redirect: '/admin/user',
     component: Admin.ADMIN_VIEW,
     children: [
-      {
-        path: 'dashboard',
-        name: 'Dashboard',
-        component: Admin.DASHBOARD,
-      },
       {
         path: 'user',
         name: 'User',
@@ -474,6 +456,24 @@ const routes = [
         path: 'order-list',
         name: 'Order List',
         component: Merchant.MERCHANT_ORDER_LIST,
+        children: [
+          {
+            path: '',
+            name: 'Order List',
+            component: Merchant.MERCHANT_ORDER_NEW,
+            meta: {
+              layout: 'background-blue',
+            },
+          },
+          {
+            path: 'recent',
+            name: 'Order List',
+            component: Merchant.MERCHANT_ORDER_RECENT,
+            meta: {
+              layout: 'background-blue',
+            },
+          },
+        ],
         meta: {
           layout: 'background-blue',
         },
@@ -514,24 +514,6 @@ const routes = [
     },
   },
   {
-    path: '/merchant/bistro/review',
-    name: 'Bistro Review',
-    beforeEnter: checkMerchantRole,
-    component: Merchant.MERCHANT_BISTRO_REVIEW,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
-    path: '/merchant/bistro/promotion/:sku',
-    name: 'Bistro Promotion',
-    beforeEnter: checkMerchantRole,
-    component: Merchant.MERCHANT_BISTRO_PROMOTION,
-    meta: {
-      layout: 'default-back',
-    },
-  },
-  {
     path: '/merchant/scan',
     name: 'Scan',
     beforeEnter: checkMerchantRole,
@@ -545,6 +527,9 @@ const routes = [
     name: 'Scan Result',
     beforeEnter: checkMerchantRole,
     component: Merchant.MERCHANT_SCAN_RESULT,
+    meta: {
+      layout: 'default-back',
+    },
   },
   {
     path: '/merchant/spot/:sku',
@@ -565,19 +550,19 @@ const routes = [
     },
   },
   {
-    path: '/merchant/spot/promotion/:sku',
-    name: 'Spot Promotion',
+    path: '/merchant/profile/edit',
+    name: 'Edit Profile',
     beforeEnter: checkMerchantRole,
-    component: Merchant.MERCHANT_SPOT_PROMOTION,
+    component: Merchant.MERCHANT_EDIT_PROFILE,
     meta: {
       layout: 'default-back',
     },
   },
   {
-    path: '/merchant/profile/edit',
-    name: 'Edit Profile',
+    path: '/merchant/set-location/:category',
+    name: 'Set Location',
     beforeEnter: checkMerchantRole,
-    component: Merchant.MERCHANT_EDIT_PROFILE,
+    component: Merchant.MERCHANT_ADD_LOCATION,
     meta: {
       layout: 'default-back',
     },

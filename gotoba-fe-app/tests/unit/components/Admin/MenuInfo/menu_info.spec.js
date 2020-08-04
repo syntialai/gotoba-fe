@@ -22,11 +22,6 @@ describe('MenuInfo.vue', () => {
   });
 
   it('Check menu computed get path name', async () => {
-    // const spy = jest.spyOn(wrapper.vm, 'menu');
-
-    // await wrapper.vm.$nextTick();
-
-    // expect(spy).toHaveBeenCalledTimes(1);
     const name = 'dashboard';
     expect(wrapper.vm.menu).toMatch(name);
   });

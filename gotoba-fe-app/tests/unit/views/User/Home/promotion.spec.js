@@ -5,11 +5,15 @@ import Promotion from '@/views/User/Home/Promotion.vue';
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-const $route = '/ticket/TICK__0001';
-
-const $router = { push: jest.fn() };
-
 describe('Promotion.vue', () => {
+  const expectedData = [
+    {
+      image: '',
+      title: 'Promotion 1',
+      sku: 'TICK_0001',
+      price: 100000,
+    },
+  ];
   let wrapper;
   let getters;
   let actions;
@@ -28,6 +32,7 @@ describe('Promotion.vue', () => {
     };
     actions = {
       getTicketPromotion: jest.fn(),
+      getTicketData: jest.fn(),
     };
     store = new Vuex.Store({
       actions,
@@ -35,10 +40,6 @@ describe('Promotion.vue', () => {
     });
 
     wrapper = shallowMount(Promotion, {
-      mocks: {
-        $route,
-        $router,
-      },
       store,
       localVue,
     });
@@ -47,17 +48,14 @@ describe('Promotion.vue', () => {
   afterEach(() => {
     jest.resetModules();
     jest.clearAllMocks();
-    wrapper.destroy();
   });
 
-  it('Check getTicketPromotion actions to be called when created', () => {
-    expect(actions.getTicketPromotion).toHaveBeenCalled();
+  it('Check ticketPromotion getters from vuex', () => {
+    expect(wrapper.vm.ticketPromotion).toStrictEqual(expectedData);
   });
 
-  it('Check goToDetails method to navigate to Ticket details', () => {
-    wrapper.vm.goToDetails('TICK__0001');
-
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith($route);
+  it('Check getTicketData and getTicketPromotion actions to be called when created', () => {
+    expect(actions.getTicketData).toHaveBeenCalledTimes(1);
+    expect(actions.getTicketPromotion).toHaveBeenCalledTimes(1);
   });
 });

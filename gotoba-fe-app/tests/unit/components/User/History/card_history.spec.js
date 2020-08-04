@@ -1,14 +1,27 @@
 import { shallowMount } from '@vue/test-utils';
+import { formatDate } from '@/utils/filter';
 import CardHistory from '@/components/User/History/CardHistory.vue';
 
-const $route = { path: '/history/pending' };
+const $route = {
+  path: '/history/pending',
+};
 
-const $router = { push: jest.fn() };
+jest.mock('@/utils/filter');
+formatDate.mockImplementation(() => 'Friday, 31 Jul 2020');
 
 describe('CardHistory.vue', () => {
-  const expectedData = '/history/pending/ORD_0001_0001_0001';
+  const expectedData = {
+    goToDetails: '/history/details/ORD_0001_0001_0001',
+    dateFormat: '31 Jul 2020',
+  };
   const history = {
-    orderSku: 'ORD_0001_0001_0001',
+    history: [
+      {
+        orderSku: 'ORD_0001_0001_0001',
+        id: 1,
+      },
+    ],
+    date: '2020-07-31',
   };
   let wrapper;
 
@@ -16,11 +29,11 @@ describe('CardHistory.vue', () => {
     wrapper = shallowMount(CardHistory, {
       mocks: {
         $route,
-        $router,
       },
       propsData: {
-        history: history,
+        history,
       },
+      stubs: ['router-link'],
     });
   });
 
@@ -29,10 +42,13 @@ describe('CardHistory.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check openDetails method navigate to History Details when called', async () => {
-    wrapper.vm.openDetails();
+  it('Check date computed to return date from props', () => {
+    expect(wrapper.vm.dateFormat).toMatch(expectedData.dateFormat);
+  });
 
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith(expectedData);
+  it('Check goToDetails method navigate to History Details when called', () => {
+    const goToDetails = wrapper.vm.goToDetails('ORD_0001_0001_0001');
+
+    expect(goToDetails).toMatch(expectedData.goToDetails);
   });
 });

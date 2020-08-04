@@ -10,8 +10,6 @@ const $route = {
   ticket: '/ticket/TICK__0001',
 };
 
-const $router = { push: jest.fn() };
-
 describe('Restaurant.vue', () => {
   let wrapper;
   let getters;
@@ -47,37 +45,31 @@ describe('Restaurant.vue', () => {
     });
 
     wrapper = shallowMount(Restaurant, {
-      mocks: {
-        $route,
-        $router,
-      },
       store,
       localVue,
+      stubs: ['router-link'],
     });
   });
 
   afterEach(() => {
     jest.resetModules();
     jest.clearAllMocks();
-    wrapper.destroy();
   });
 
   it('Check getTicketRestaurant and getRestaurantData actions to be called when created', () => {
-    expect(actions.getRestaurantData).toHaveBeenCalled();
-    expect(actions.getTicketRestaurant).toHaveBeenCalled();
+    expect(actions.getRestaurantData).toHaveBeenCalledTimes(1);
+    expect(actions.getTicketRestaurant).toHaveBeenCalledTimes(1);
   });
 
-  it('Check goToProfile method to navigate to Restaurant details', () => {
-    wrapper.vm.goToProfile('REST_0001');
+  it('Check goToProfile method to return link to Restaurant details', () => {
+    const goToProfile = wrapper.vm.goToProfile('REST_0001');
 
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith($route.restaurant);
+    expect(goToProfile).toMatch($route.restaurant);
   });
 
-  it('Check goToDetails method to navigate to Ticket details', () => {
-    wrapper.vm.goToDetails('TICK__0001');
+  it('Check goToDetails method to return link to Ticket details', () => {
+    const goToTicket = wrapper.vm.goToDetails('TICK__0001');
 
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith($route.ticket);
+    expect(goToTicket).toMatch($route.ticket);
   });
 });

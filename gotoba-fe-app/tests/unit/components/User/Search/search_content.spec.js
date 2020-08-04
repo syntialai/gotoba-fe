@@ -1,9 +1,12 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
+import Vuex from 'vuex';
 import SearchContent from '@/components/User/Search/SearchContent.vue';
+import flushPromises from 'flush-promises';
 
 const localVue = createLocalVue();
 localVue.use(BootstrapVue);
+localVue.use(Vuex);
 
 const $route = {
   path: '/search',
@@ -15,19 +18,27 @@ const $router = { push: jest.fn() };
 
 describe('SearchContent.vue', () => {
   const searchData = {
+    title: 'History',
     keywords: ['danau toba'],
   };
   
+  let actions;
+  let store;
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(SearchContent, {
+    actions = {
+      setSearchKeywords: jest.fn(),
+    };
+    store = new Vuex.Store({ actions });
+    wrapper = shallowMount(SearchContent, {
       propsData : { ...searchData },
       mocks: {
         $route,
         $router,
       },
       localVue,
+      store,
     });
   });
 
@@ -36,10 +47,11 @@ describe('SearchContent.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('check searchItem method navigate to search by query to when called 1 times', async () => {
+  it('check searchItem method call vuex actions', async () => {
     wrapper.vm.searchItem(searchData.keywords[0]);
+    await flushPromises();
 
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith($route);
+    expect(actions.setSearchKeywords).toHaveBeenCalledTimes(1);
+    expect(actions.setSearchKeywords.mock.calls[0][1]).toBe(searchData.keywords[0]);
   });
 });

@@ -1,5 +1,5 @@
 <template>
-  <div class="search-result-category">
+  <div class="search-result-category" v-if="searchResults.length > 0">
     <div class="category-title d-flex align-items-center mt-2">
       <font-awesome-icon
         :icon="categoryIcon"
@@ -16,12 +16,13 @@
         v-for="item in searchResults"
         :key="item.sku"
         :sku="item.sku"
-        :title="item.title"
+        :title="item.name"
+        :imageSrc="item.image"
         :category="category"
         :icon1="info.icon1"
         :icon2="info.icon2"
         :value1="item.address"
-        :value2="category === 'journey'? item.price : item.bistroType"
+        :value2="category === 'journey'? item.price.toString() : item.bistroType"
         :rating="item.rating"
       />
     </div>

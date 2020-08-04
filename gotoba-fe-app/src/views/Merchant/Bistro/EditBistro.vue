@@ -1,7 +1,7 @@
 <template>
   <div class="edit-bistro mt-2 p-3">
-    <ValidationObserver v-slot="validate">
-      <b-form @submit.stop.prevent="validate(updateBistro)">
+    <ValidationObserver>
+      <b-form @submit.stop.prevent="updateBistro">
         <ValidationProvider
           name="Restaurant Image"
           rules="required"
@@ -10,14 +10,14 @@
           <b-form-group>
             <div class="d-flex justify-content-center">
               <b-avatar
-                :src="image"
+                :src="bistro.image"
                 alt="Bistro-profile"
                 class="my-3"
                 size="100"
               ></b-avatar>
             </div>
             <b-form-file
-              v-model="image"
+              v-model="bistro.image"
               @change="loadImage"
               :state="getValidationState(validationContext)"
               accept="image/jpeg, image/jpg, image/png"
@@ -30,7 +30,7 @@
             </b-form-invalid-feedback>
             <b-button
               block
-              v-if="image !== bistro.image && image !== null"
+              v-if="bistro.image !== null"
               size="sm"
               class="custom-btn-gray mt-2"
               @click="removePhoto"
@@ -73,32 +73,37 @@
             label="Location"
             label-for="bistro-location"
           >
-            <b-form-input
-              id="bistro-location"
-              v-model="bistro.location"
-              list="location-list"
-              type="text"
-              class="border-gray"
-              required
-              @change="locationSuggestions"
-              :state="getValidationState(validationContext)"
-              aria-describedby="edit-location-feedback-msg"
-            ></b-form-input>
-            <b-form-invalid-feedback id="edit-location-feedback-msg">
-              {{ validationContext.errors[0] }}
-            </b-form-invalid-feedback>
+            <b-input-group>
+              <b-form-input
+                id="bistro-location"
+                v-model="bistro.location"
+                type="text"
+                class="border-gray"
+                required
+                disabled
+                :state="getValidationState(validationContext)"
+                aria-describedby="edit-location-feedback-msg"
+              ></b-form-input>
+              <b-input-group-append>
+                <b-button
+                  to="/merchant/set-location/bistro"
+                  variant="outline-secondary"
+                  class="d-flex align-items-center"
+                >
+                  <font-awesome-icon
+                    class="icon-accent-green"
+                    icon="map-marked-alt"
+                  ></font-awesome-icon>
+                  <div class="font-size-12 ml-2">
+                    Select via Map
+                  </div>
+                </b-button>
+              </b-input-group-append>
 
-            <datalist
-              id="location-list"
-              v-if="locationList"
-            >
-              <option
-                v-for="location in locationList"
-                :key="location"
-              >
-                {{ location }}
-              </option>
-            </datalist>
+              <b-form-invalid-feedback id="edit-location-feedback-msg">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-input-group>
           </b-form-group>
         </ValidationProvider>
 
@@ -108,7 +113,7 @@
           v-slot="validationContext"
         >
           <b-form-group
-            v-if="bistroType"
+            v-if="bistroType && bistroType.length > 0"
             id="bistro-type-group"
             label="Bistro Type"
             label-for="bistro-type"
@@ -125,6 +130,31 @@
               {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
           </b-form-group>
+        </ValidationProvider>
+
+        <ValidationProvider
+          name="Bistro rating"
+          :rules="{ numeric: true, min: 1, max: 5 }"
+          v-slot="validationContext"
+        >
+          <b-form-group
+              id="bistro-rating-group"
+              label="Rating"
+              label-for="bistro-rating"
+            >
+              <b-form-spinbutton
+                id="bistro-rating"
+                v-model="bistro.rating"
+                :min="1"
+                :max="5"
+                required
+                :state="getValidationState(validationContext)"
+                aria-describedby="bistro-rating-feedback-msg"
+              ></b-form-spinbutton>
+              <b-form-invalid-feedback id="bistro-rating-feedback-msg">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
         </ValidationProvider>
 
         <ValidationProvider
@@ -176,35 +206,24 @@
           </b-form-group>
         </ValidationProvider>
 
-
         <b-form-group
           id="bistro-hours-open-group"
           label="Hours Open"
           label-for="bistro-hours-open"
         >
-          <ul class="list-unstyled">
-            <li
-              v-for="(dayOpen, index) of bistro.hoursOpen"
-              :key="dayOpen.day"
-            >
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <div class="day semibold">{{ dayOpen.day }}</div>
-                <div
-                  class="time ml-3 d-flex justify-content-between"
-                >
-                  <b-form-timepicker
-                    v-model="bistro.hoursOpen[index].openTime"
-                    locale="en"
-                  ></b-form-timepicker>
-                  <div class="mx-2">-</div>
-                  <b-form-timepicker
-                    v-model="bistro.hoursOpen[index].closeTime"
-                    locale="en"
-                  ></b-form-timepicker>
-                </div>
-              </div>
-            </li>
-          </ul>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <b-form-timepicker
+              v-model="open"
+              locale="en"
+              required
+            ></b-form-timepicker>
+            <div class="mx-2">-</div>
+            <b-form-timepicker
+              v-model="close"
+              locale="en"
+              required
+            ></b-form-timepicker>
+          </div>
         </b-form-group>
 
         <b-button
@@ -220,7 +239,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import api from '../../../api/api';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
@@ -229,144 +248,90 @@ import getLocation from '../../../utils/location';
 export default {
   name: 'EditBistro',
   computed: {
-    ...mapGetters(['restaurantData', 'bistroType', 'userSku']),
+    ...mapGetters(['restaurantData', 'bistroType', 'userSku', 'locationSet']),
+    imageUrl() {
+      return api.imageUrl(this.restaurantData[0].image);
+    },
   },
   created() {
     this.getRestaurantDataByMerchantSku(this.userSku);
     this.getRestaurantBistroType();
+    if (this.locationSet.location) {
+      Object.assign(this.bistro, this.locationSet);
+    }
   },
   data() {
     return {
+      open: '',
+      close: '',
       bistro: {
         name: '',
         image: null,
         location: '',
-        longitude: 10.905354,
-        latitude: 42.905354,
+        longitude: 0,
+        latitude: 0,
         rating: 0.0,
         bistroType: '',
         phone: '',
         address: '',
-        hoursOpen: [
-          {
-            day: 'Monday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Tuesday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Wednesday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Thursday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Friday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Saturday', openTime: '', closeTime: '',
-          },
-          {
-            day: 'Sunday', openTime: '', closeTime: '',
-          },
-        ],
+        hoursOpen: {
+          monday: [],
+          tuesday: [],
+          wednesday: [],
+          thursday: [],
+          friday: [],
+          saturday: [],
+          sunday: [],
+        },
       },
-      bistroTypeOptions: [
-        'All-day cafe',
-        'All-you-can-eat restaurant',
-        'Automat',
-        'Automated restaurant',
-        'Bakery',
-        'Bar',
-        'Bar mleczny',
-        'Bistro',
-        'Bouchon',
-        'Brasserie',
-        'Breastaurant',
-        'Bridge restaurant',
-        'Cafe (British)',
-        'Café gourmand',
-        'Cafeteria',
-        'Cakery',
-        'Cantina',
-        'Carvery',
-        'Chifa',
-        'Chiringuito',
-        'Chuckwagon',
-        'Churrascaria',
-        'Coffeehouse',
-        'Coney Island (restaurant)',
-        'Concession stand',
-        'Cosplay restaurant',
-        'Diner',
-        'Dining car',
-        'Dining room',
-        'Dinner theater',
-        'Dinner train',
-        'Drive-in',
-        'Drive-through',
-        'Farm Stall',
-        'Fast food restaurant',
-        'Fast casual restaurant',
-        'Fish and chip shop',
-        'Floating restaurant',
-        'Food booth',
-        'Food cart',
-        'Food court',
-        'Food truck',
-        'Gastropub',
-        'Ghost restaurant',
-        'Greasy spoon',
-        'Hawker centre ',
-        'Health food',
-        'Ice cream cart',
-        'Ice cream van',
-        'Juke joint',
-        'Kopi tiam',
-        'Milk bar',
-        'Mobile catering',
-        'Mystery dinner',
-        'Pancake house',
-        'Pie and mash',
-        'Pizza delivery',
-        'Pop-up restaurant',
-        'Ramen shop',
-        'Raw bar',
-        'Revolving restaurant',
-        'Sandwich bar',
-        'Seafood restaurant',
-        'Snack bar',
-        'Soda shop',
-        'Soup kitchen',
-        'Steakhouse',
-        'Strausse',
-        'Supper club',
-        'Take-out',
-        'Tower restaurant',
-        'Truck stop',
-        'Underground restaurant',
-      ],
       image: null,
-      locationList: null,
     };
   },
   methods: {
-    ...mapActions(['getRestaurantDataByMerchantSku', 'getRestaurantBistroType']),
+    ...mapActions([
+      'getRestaurantDataByMerchantSku',
+      'getRestaurantBistroType',
+      'setLocation',
+    ]),
 
     getValidationState,
 
     updateBistro() {
       const data = this.bistro;
 
-      console.log(data);
-      if (this.restaurantData) {
-        api.EditRestaurant(this.restaurantData.sku, data)
+      if (!this.open
+        || !this.close
+        || data.name === ''
+        || data.image === null
+        || data.location === ''
+        || data.longitude === 0
+        || data.latitude === 0
+        || data.rating === 0
+        || data.bistroType === ''
+        || data.phone === ''
+        || data.address === ''
+      ) {
+        return;
+      }
+
+      data.merchantSku = this.userSku;
+
+      Object.keys(data.hoursOpen)
+        .forEach((key) => {
+          data.hoursOpen[key] = [
+            this.open,
+            this.close,
+          ];
+        });
+
+      if (this.restaurantData[0]) {
+        api.EditRestaurant(this.restaurantData[0].sku, data)
           .then((res) => {
-            alert('updated your bistro', true);
+            setAlert('updated your bistro', true);
             console.log(res);
           })
           .catch((err) => {
-            alert('update your bistro', false);
+            setAlert('update your bistro', false);
             console.log(err);
           });
 
@@ -376,11 +341,11 @@ export default {
       api.PostRestaurant(this.userSku, data)
         .then((res) => {
           console.log(res);
-          alert('added your bistro', true);
+          setAlert('added your bistro', true);
           this.$router.push('/merchant/bistro');
         })
         .catch((err) => {
-          alert('add your bistro', false);
+          setAlert('add your bistro', false);
           console.log(err);
         });
     },
@@ -391,7 +356,7 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res.toString();
+            this.bistro.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
@@ -400,43 +365,41 @@ export default {
     },
 
     removePhoto() {
-      this.image = null;
-    },
-
-    locationSuggestions() {
-      if (this.bistro.location) {
-        api.GetSearchLocationResult(this.bistro.location)
-          .then((res) => {
-            this.locationList = res.map((item) => item.display_name);
-            console.log(this.locationList);
-          })
-          .catch((err) => {
-            console.log(err);
-            this.locationList = null;
-          });
-      }
+      this.bistro.image = null;
     },
   },
   mounted() {
-    if (this.restaurantData) {
-      this.bistro = { ...this.restaurantData };
+    if (!this.locationSet.location) {
+      getLocation((position) => {
+        this.bistro.longitude = position.coords.longitude;
+        this.bistro.latitude = position.coords.latitude;
+
+        api.ReverseGeocoding(this.bistro.longitude, this.bistro.latitude)
+          .then((res) => {
+            this.bistro.address = res.display_name;
+            this.bistro.location = `${res.address.suburb}, ${res.address.city}`;
+            this.setLocation({
+              longitude: this.bistro.longitude,
+              latitude: this.bistro.latitude,
+              address: this.bistro.address,
+              location: this.bistro.location,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, (err) => {
+        console.log(err);
+      });
     }
-
-    getLocation((position) => {
-      this.bistro.longitude = position.coords.longitude;
-      this.bistro.latitude = position.coords.latitude;
-
-      api.ReverseGeocoding(this.bistro.longitude, this.bistro.latitude)
-        .then((res) => {
-          this.bistro.address = res.display_name;
-          this.bistro.location = `${res.address.suburb}, ${res.address.city}`;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, (err) => {
-      console.log(err);
-    });
+  },
+  watch: {
+    restaurantData() {
+      this.bistro = { ...this.restaurantData[0] };
+      this.bistro.image = this.imageUrl;
+      this.bistro.location = this.bistro.address;
+      [this.open, this.close] = this.bistro.hoursOpen.monday;
+    },
   },
 };
 </script>

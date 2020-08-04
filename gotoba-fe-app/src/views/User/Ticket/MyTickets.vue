@@ -23,7 +23,18 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
   name: 'MyTickets',
+  computed: {
+    ...mapGetters(['approvedOrderData', 'userSku']),
+  },
+  created() {
+    this.getApprovedOrderData(this.userSku);
+  },
+  methods: {
+    ...mapActions(['getApprovedOrderData']),
+  },
 };
 </script>

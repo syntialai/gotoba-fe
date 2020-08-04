@@ -5,7 +5,6 @@ import * as Types from '../types';
 const state = {
   tourGuideDatas: [],
   tourGuideData: {},
-  tourGuideReview: [],
 };
 
 const actions = {
@@ -31,25 +30,16 @@ const actions = {
       .then((res) => {
         if (!res.error) {
           commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res.data);
+          console.log(res.data);
         }
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   },
 
-  getTourGuideReview({ commit }, sku) {
-    commit(Types.SET_TOUR_GUIDE_REVIEW);
-
-    api.GetReviewBySku(sku)
-      .then((res) => {
-        commit(Types.SET_TOUR_GUIDE_REVIEW, res);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  setTourGuideBySku({ commit }, res) {
+    commit(Types.SET_TOUR_GUIDE_DATA_BY_SKU, res);
   },
 
   removeTourGuide({ commit }, sku) {
@@ -57,8 +47,9 @@ const actions = {
 
     api.RemoveTourGuide(sku)
       .then((res) => {
-        commit(Types.REMOVE_TOUR_GUIDE, res);
-        console.log(`Successfully delete tour guide with sku: ${sku}`);
+        if (!res.error) {
+          commit(Types.REMOVE_TOUR_GUIDE, sku);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -69,7 +60,6 @@ const actions = {
 const getters = {
   tourGuideDatas: (state) => state.tourGuideDatas,
   tourGuideData: (state) => state.tourGuideData,
-  tourGuideReview: (state) => state.tourGuideReview,
 };
 
 const mutations = {
@@ -80,13 +70,16 @@ const mutations = {
   [Types.SET_TOUR_GUIDE_DATA_BY_SKU](state, res) {
     const tourGuide = { ...res };
 
-    tourGuide.availableLocation = res.availableLocation.join(', ');
-    tourGuide.language = res.language.join(', ');
+    if (res && Object.keys(res).length > 0) {
+      tourGuide.availableLocation = res.availableLocation.join(', ');
+      tourGuide.language = res.language.join(', ');
+    }
 
     state.tourGuideData = tourGuide;
   },
-  [Types.SET_TOUR_GUIDE_REVIEW](state, res) {
-    state.tourGuideReview = res;
+  [Types.REMOVE_TOUR_GUIDE](state, sku) {
+    const filteredData = state.tourGuideDatas.filter((item) => item.sku !== sku);
+    state.tourGuideDatas = filteredData;
   },
 };
 

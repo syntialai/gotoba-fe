@@ -4,9 +4,20 @@ import api from '../../api/api';
 
 const state = {
   journeyData: [],
-  journeyDataBySku: {},
+  journeyDataBySku: {
+    name: '',
+    title: '',
+    image: null,
+    location: '',
+    longitude: 0,
+    latitude: 0,
+    price: 0,
+    address: '',
+    description: '',
+    createdBy: '',
+    hoursOpen: [],
+  },
   journeyDataByMerchantSku: [],
-  journeyReview: [],
 };
 
 const actions = {
@@ -18,7 +29,6 @@ const actions = {
         if (!res.error) {
           commit(Types.SET_JOURNEY_DATA, res.data);
         }
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +41,6 @@ const actions = {
     api.GetItineraryBySku(sku)
       .then((res) => {
         if (!res.error) {
-          console.log(res);
           commit(Types.SET_JOURNEY_DATA_BY_SKU, res.data);
         }
       })
@@ -40,33 +49,19 @@ const actions = {
       });
   },
 
+  setJourneyDataBySku({ commit }, res) {
+    commit(Types.SET_JOURNEY_DATA_BY_SKU, res);
+  },
+
   getJourneyDataByMerchantSku({ commit }, merchantSku) {
-    commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU);
+    commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, []);
 
     api.GetItineraryByMerchantSku(merchantSku)
       .then((res) => {
         if (!res.error) {
           commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, res.data);
           console.log(res);
-          return;
         }
-
-        commit(Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU, []);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
-  getJourneyReview({ commit }, sku) {
-    commit(Types.SET_JOURNEY_REVIEW);
-
-    api.GetReviewBySku(sku)
-      .then((res) => {
-        if (!res.error) {
-          commit(Types.SET_JOURNEY_REVIEW, res);
-        }
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -78,8 +73,9 @@ const actions = {
 
     api.RemoveItinerary(sku)
       .then((res) => {
-        commit(Types.REMOVE_ITINERARY, res);
-        console.log(`Successfully delete itinerary with sku: ${sku}`);
+        if (!res.error) {
+          commit(Types.REMOVE_ITINERARY, sku);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -88,10 +84,9 @@ const actions = {
 };
 
 const getters = {
-  journeyData: (state) => state.journeyData,
+  journeyData: (state) => state.journeyData.filter((item) => item.status === 'active'),
   journeyDataBySku: (state) => state.journeyDataBySku,
-  journeyDataByMerchantSku: (state) => state.journeyDataByMerchantSku,
-  journeyReview: (state) => state.journeyReview,
+  journeyDataByMerchantSku: (state) => state.journeyDataByMerchantSku.filter((item) => item.status === 'active'),
 };
 
 const mutations = {
@@ -105,8 +100,9 @@ const mutations = {
   [Types.SET_JOURNEY_DATA_BY_MERCHANT_SKU](state, res) {
     state.journeyDataByMerchantSku = res;
   },
-  [Types.SET_JOURNEY_REVIEW](state, res) {
-    state.journeyReview = res;
+  [Types.REMOVE_ITINERARY](state, sku) {
+    const filteredData = state.journeyData.filter((item) => item.sku !== sku);
+    state.journeyData = filteredData;
   },
 };
 

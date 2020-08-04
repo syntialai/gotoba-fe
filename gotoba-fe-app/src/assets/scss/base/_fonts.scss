@@ -11,27 +11,39 @@ body {
 }
 
 .align-left {
-  text-align: left;
+  text-align: left!important;
 }
 
 .align-center {
-  text-align: center;
+  text-align: center!important;
 }
 
 .align-right {
-  text-align: right;
+  text-align: right!important;
+}
+
+.regular {
+  font-weight: 400!important;
 }
 
 .semibold {
-  font-weight: 600;
+  font-weight: 600!important;
 }
 
 .bold {
-  font-weight: bold;
+  font-weight: bold!important;
 }
 
 .strikethrough {
-  text-decoration: line-through;
+  text-decoration: line-through!important;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+.text-shadow-black {
+  text-shadow: $text-shadow-black!important;
 }
 
 @include font-size();

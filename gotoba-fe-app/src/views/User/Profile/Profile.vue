@@ -2,7 +2,7 @@
   <div class="profile">
     <card-profile-user
       :name="userName"
-      image=""
+      :image="userImage"
     />
 
     <profile-menu-group
@@ -14,14 +14,13 @@
       title="About"
       :menus="menuAbout"
       :logOut="true"
-      class="mt-3 mb-5"
+      class="mt-3 margin-80"
     />
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import { alert } from '../../../utils/tool';
+import { mapGetters } from 'vuex';
 import CardProfileUser from '../../../components/User/Profile/CardProfileUser.vue';
 import ProfileMenuGroup from '../../../components/User/Profile/ProfileMenuGroup.vue';
 
@@ -32,13 +31,7 @@ export default {
     ProfileMenuGroup,
   },
   computed: {
-    ...mapGetters(['userName', 'userLoginStatus', 'userRole']),
-  },
-  created() {
-    if (!this.userLoginStatus || this.userRole !== 'ROLE_USER') {
-      alert('You should log in first', false);
-      this.$router.push('/login');
-    }
+    ...mapGetters(['userName', 'userImage']),
   },
   data() {
     return {
@@ -62,9 +55,6 @@ export default {
         },
       ],
     };
-  },
-  methods: {
-    ...mapActions(['setLogOut']),
   },
 };
 </script>

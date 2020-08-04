@@ -1,21 +1,21 @@
 <template>
-  <div class="payment-detail font-color-black-60">
-    <div class="d-flex justify-content-between">
+  <div class="payment-detail font-color-black-60 mb-3">
+    <div class="d-flex justify-content-between pt-3 pb-1">
       <div class="details-name">Price (estimated)</div>
       <div class="details-value semibold">
-        {{ formatPrice(this.price, true) }}
+        {{ prices }}
       </div>
     </div>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between pb-3">
       <div class="details-name">Promo discount</div>
       <div class="details-value semibold">
-        {{ formatPrice(this.discount, true) }}
+        {{ discounts }}
       </div>
     </div>
-    <div class="d-flex justify-content-between bold border-top-gray-young">
+    <div class="d-flex justify-content-between bold border-top-gray-young pt-2">
       <div class="details-name">Total Payment</div>
       <div class="details-value font-color-blue-secondary">
-        {{ formatPrice(this.price - this.discount, true) }}
+        {{ totals }}
       </div>
     </div>
   </div>
@@ -29,9 +29,18 @@ export default {
   props: {
     price: Number,
     discount: Number,
+    total: Number,
   },
-  methods: {
-    formatPrice,
+  computed: {
+    prices() {
+      return formatPrice(this.price, true);
+    },
+    discounts() {
+      return formatPrice(this.discount, true);
+    },
+    totals() {
+      return formatPrice(this.total, true);
+    },
   },
 };
 </script>

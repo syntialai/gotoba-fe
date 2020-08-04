@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="container">
+    <div class="home-content px-3">
       <div id="category" class="my-3 p-2">
         <b-button-group
           class="d-flex justify-content-around box-shadow bg-white border-square-10"
@@ -22,6 +22,45 @@
         </b-button-group>
       </div>
 
+      <div class="carousel my-3 box-shadow">
+        <b-carousel
+          id="toba-carousel"
+          :interval="3000"
+          controls
+          indicators
+          img-width="768"
+          img-height="512"
+          class="text-shadow-black"
+        >
+          <b-carousel-slide
+            caption="Lake Toba"
+            text="Extraordinary natural wonder of the world in North Sumatra"
+            img-src="@/assets/img/toba/danau-toba.jpg"
+          ></b-carousel-slide>
+          <b-carousel-slide
+            caption="Samosir Island"
+            text="The world’s largest island within an island, located in Lake Toba"
+            img-src="@/assets/img/toba/samosir-island.jpg"
+          ></b-carousel-slide>
+          <b-carousel-slide
+            caption="Sipiso Piso Waterfall"
+            text="Find one of the beautiful waterfall near Lake Toba"
+            img-src="@/assets/img/toba/sipiso-piso.jpg"
+          ></b-carousel-slide>
+          <b-carousel-slide
+            caption="Tuktuk Siadong"
+            text="Find a great laid back place to chill out for a few days"
+            img-src="@/assets/img/toba/tuk-tuk.jpg"
+          ></b-carousel-slide>
+          <b-carousel-slide
+            caption="Lake Toba"
+            :text="'Surrounded by stunning mountains, waterfalls, hot springs, and many'
+            + 'cultural villages. Join us!'"
+            img-src="@/assets/img/toba/danau-toba-night.jpg"
+          ></b-carousel-slide>
+        </b-carousel>
+      </div>
+
       <div class="ongoing-promo content-group" v-if="ticketPromotion">
         <div class="title font-color-blue-primary">
           <span class="title-icon pr-2">
@@ -36,12 +75,23 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <card-home
-            v-for="ticket in promotions"
+          <div
+            class="responsive-card"
+            v-for="ticket in ticketPromotion"
             :key="ticket.sku"
-            v-bind="ticket"
-            @click="goToDetails('promotion', ticket.sku)"
-          />
+          >
+            <router-link
+              :to="goToDetails('ticket', ticket.sku)"
+            >
+              <card-ticket-promotion
+                :name="ticket.title"
+                :image="ticket.image"
+                :price="ticket.price"
+                :discount="ticket.discount"
+                :sku="ticket.sku"
+              />
+            </router-link>
+          </div>
         </div>
       </div>
 
@@ -53,7 +103,7 @@
           <span class="title-text font-weight-bold">Recommended Nearby Places</span>
         </div>
         <div class="d-flex justify-content-between">
-          <span class="title-description semibold mt-2 mb-2">
+          <span class="title-description semibold my-2">
             Best Journey of Lake Toba
           </span>
           <span class="show-all font-size-14">
@@ -61,15 +111,22 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <card-home
+          <div
+            class="responsive-card"
             v-for="journey in journeyData"
             :key="journey.sku"
-            :name="journey.name"
-            :image="journey.image"
-            :location="journey.location"
-            :rating="journey.rating"
-            @click="goToDetails('journey', journey.sku)"
-          />
+          >
+            <router-link
+              :to="goToDetails('journey', journey.sku)"
+            >
+              <card-home
+                :name="journey.name"
+                :image="journey.image"
+                :location="journey.address"
+                :rating="journey.rating"
+              />
+            </router-link>
+          </div>
         </div>
       </div>
 
@@ -89,29 +146,41 @@
           </span>
         </div>
         <div class="d-flex content-card overflow-auto mt-1">
-          <card-home
+          <div
+            class="responsive-card"
             v-for="restaurant in restaurantDatas"
             :key="restaurant.sku"
-            :name="restaurant.name"
-            :image="restaurant.image"
-            :location="restaurant.location"
-            :rating="restaurant.rating"
-            @click="goToDetails('restaurant', restaurant.sku)"
-          />
+          >
+            <router-link
+              :to="goToDetails('restaurant', restaurant.sku)"
+            >
+              <card-home
+                :name="restaurant.name"
+                :image="restaurant.image"
+                :location="restaurant.location"
+                :rating="restaurant.rating"
+              />
+            </router-link>
+          </div>
         </div>
       </div>
 
-      <div class="gallery content-group" v-if="galleryData">
+      <div class="gallery content-group mb-3" v-if="galleryData">
         <div class="title mb-1 pt-3 d-flex align-items-center">
           <font-awesome-icon
               :icon="['far', 'images']"
               class="icon-gradient font-size-24 pr-2"
             />
-          <h6 class="font-color-blue-primary m-0">Our Gallery</h6>
+          <h6 class="font-color-blue-primary bold m-0">Our Gallery</h6>
         </div>
 
-        <div class="info font-color-black-60 font-size-14 mb-3">
-          Show every moment captured around Lake Toba
+        <div class="d-flex justify-content-between">
+          <div class="info font-color-black-60 font-size-14 mb-3">
+            Show every moment captured around Lake Toba
+          </div>
+          <div class="show-all">
+            <router-link to="/gallery">Show all</router-link>
+          </div>
         </div>
 
         <gallery-home :galleryData="galleryData" />
@@ -124,6 +193,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import CardTicketPromotion from '../../../components/User/Home/CardTicketPromotion.vue';
 import CardHome from '../../../components/User/Home/CardHome.vue';
 import GalleryHome from '../../../components/User/Home/GalleryHome.vue';
 import TheFooter from '../../../components/Partial/TheFooter.vue';
@@ -135,6 +205,7 @@ export default {
   name: 'Home',
   components: {
     CardHome,
+    CardTicketPromotion,
     GalleryHome,
     TheFooter,
     OngoingPromoIcon,
@@ -149,7 +220,6 @@ export default {
     this.getRestaurantData();
     this.getJourneyData();
     this.getTicketData();
-    this.getTicketPromotion();
   },
   data() {
     return {
@@ -176,9 +246,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData', 'getTicketPromotion', 'getGalleryData']),
+    ...mapActions(['getRestaurantData', 'getJourneyData', 'getTicketData', 'getGalleryData']),
     goToDetails(category, sku) {
-      this.$router.push(`/${category}/${sku}`);
+      return `/${category}/${sku}`;
     },
   },
 };

@@ -1,16 +1,17 @@
 <template>
-  <div class="expired-ticket pt-2 pb-2">
-    <card-ticket
-      v-for="ticket in expiredTickets"
-      :key="ticket.title"
-      :ticket="ticket"
-    />
+  <div class="expired-ticket bg-white vh-100 pt-2 pb-2">
+    <div class="card-ticket-group">
+      <card-ticket
+        v-for="ticket in approvedOrderData.expired"
+        :key="ticket.title"
+        :ticket="ticket"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import { isToday } from '../../../utils/filter';
+import { mapGetters } from 'vuex';
 import CardTicket from '../../../components/User/Ticket/CardTicket.vue';
 
 export default {
@@ -19,16 +20,7 @@ export default {
     CardTicket,
   },
   computed: {
-    ...mapGetters(['ticketDatas', 'userInfo']),
-    expiredTickets() {
-      return this.ticketDatas.map((ticket) => !isToday(ticket.expiredDate));
-    },
-  },
-  created() {
-    this.getTicketData(this.userInfo.sku);
-  },
-  methods: {
-    ...mapActions(['getTicketData']),
+    ...mapGetters(['approvedOrderData']),
   },
 };
 </script>

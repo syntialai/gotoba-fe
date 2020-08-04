@@ -1,5 +1,6 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import BootstrapVue from 'bootstrap-vue';
+import flushPromises from 'flush-promises';
 import ShowDataCount from '@/components/Admin/Data/ShowDataCount.vue';
 
 const localVue = createLocalVue();
@@ -16,7 +17,7 @@ describe('ShowDataCount.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(ShowDataCount, {
+    wrapper = shallowMount(ShowDataCount, {
       propsData: { ...props },
       data() {
         return data;
@@ -34,10 +35,8 @@ describe('ShowDataCount.vue', () => {
   });
 
   it('Check updateQuantity method emit to update:perPage when called', async () => {
-    // wrapper.setData({ ...data });
-
     wrapper.vm.updateSelected();
-    await wrapper.vm.$nextTick()
+    await flushPromises();
 
     expect(wrapper.emitted()['update:perPage']).toBeTruthy();
     expect(wrapper.emitted()['update:perPage'].length).toBe(1);
