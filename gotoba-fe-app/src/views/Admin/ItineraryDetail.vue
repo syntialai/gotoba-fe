@@ -11,7 +11,9 @@
       >EDIT</b-button>
     </div>
 
-    <itinerary-modal title="Edit" :itinerary="itinerary" />
+    <itinerary-modal
+      title="Edit"
+    />
 
     <itinerary-card
       v-if="journeyDataBySku"
@@ -19,10 +21,10 @@
     />
 
     <div
-      v-if="journeyDataBySku"
-      class="more-itinerary-info"
+      v-if="journeyDataBySku.sku"
+      class="more-itinerary-info bg-white p-3"
     >
-      <div class="full-address d-flex justify-content-between">
+      <div class="full-address d-flex justify-content-between py-2">
         <div class="full-address-label font-color-black-60">
           Full Address
         </div>
@@ -31,21 +33,21 @@
         </div>
       </div>
 
-      <div class="hours-open d-flex justify-content-between">
+      <div class="hours-open d-flex justify-content-between pt-1">
         <div class="hours-open-label font-color-black-60">
-          Hours
+          Hours Open
         </div>
-        <div class="hours-open-value font-color-black-87 semibold pl-4">
+        <div class="hours-open-value font-color-black-87 semibold pl-4 white-space-pre">
           {{ hoursOpen }}
         </div>
       </div>
 
       <div class="phone-number d-flex justify-content-between">
         <div class="phone-number-label font-color-black-60">
-          Phone Number
+          Created by
         </div>
         <div class="phone-number-value font-color-black-87 semibold pl-4">
-          {{ journeyDataBySku.phone }}
+          {{ journeyDataBySku.createdBy }}
         </div>
       </div>
     </div>
@@ -54,6 +56,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { toCapitalize } from '../../utils/filter';
 import ItineraryCard from '../../components/Admin/Card/ItineraryCard.vue';
 import ItineraryModal from '../../components/Admin/Modal/ItineraryModal.vue';
 
@@ -70,7 +73,7 @@ export default {
 
       Object.entries(this.journeyDataBySku.hoursOpen)
         .forEach(([key, value]) => {
-          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
+          hoursOpenStr += `${toCapitalize(key)}\t = ${value[0]} - ${value[1]}\n`;
         });
 
       return hoursOpenStr;
@@ -82,15 +85,11 @@ export default {
   methods: {
     ...mapActions(['getJourneyDataBySku', 'removeItinerary']),
     deleteItinerary() {
-      const confirmModalValue = this.confirmModal(this.journeyDataBySku.title);
-
-      if (confirmModalValue) {
-        this.removeItinerary(this.journeyDataBySku.sku);
-        this.$router.push('/admin/itinerary');
-      }
+      this.removeItinerary(this.journeyDataBySku.sku);
+      this.$router.push('/admin/itinerary');
     },
-    confirmModal(object) {
-      this.$bvModal.msgBoxConfirm(`${object} will be removed permanently from this system.`, {
+    confirmModal() {
+      this.$bvModal.msgBoxConfirm('Itinerary will be removed permanently from this system.', {
         title: 'Are you sure?',
         size: 'sm',
         okVariant: 'danger',
@@ -101,7 +100,11 @@ export default {
         hideHeaderClose: false,
         centered: true,
       })
-        .then((value) => value)
+        .then((value) => {
+          if (value) {
+            this.deleteItinerary();
+          }
+        })
         .catch(
           (err) => console.log(err),
         );
@@ -109,3 +112,10 @@ export default {
   },
 };
 </script>
+
+
+<style lang="scss">
+.white-space-pre {
+  white-space: pre-wrap;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery-home p-3 bg-white">
+  <div class="gallery-home">
     <agile
       class="main"
       ref="main"
@@ -12,7 +12,7 @@
         :key="index"
         :class="`slide--${index}`"
       >
-        <img :src="slide" alt="image-preview" />
+        <img :src="slide" alt="image-preview" class="w-100 object-fit_cover" />
       </div>
     </agile>
     <agile
@@ -36,6 +36,7 @@
 
 <script>
 import { VueAgile } from 'vue-agile';
+import api from '../../../api/api';
 
 export default {
   name: 'GalleryHome',
@@ -47,7 +48,7 @@ export default {
   },
   computed: {
     slides() {
-      return this.galleryData.map((data) => data.image);
+      return this.galleryData.map((data) => api.imageUrl(data.image));
     },
   },
   data() {

@@ -1,19 +1,42 @@
 <template>
   <div class="scan-result">
-    <card-scan-result class="mt-3" :result="ticketData" />
+    <div v-if="orderDataBySku && isMerchant">
+      <card-scan-result
+        class="mt-3"
+        v-if="orderDataBySku"
+        :result="orderDataBySku"
+      />
 
-    <b-button
-      block
-      :disabled="ticketData.status !== 'Available'"
-      class="m-3"
-    >
-      USE TICKET
-    </b-button>
+      <b-button
+        block
+        :disabled="!orderDataBySku.redeem"
+        @click="useTicket"
+        class="m-3"
+      >
+        USE TICKET
+      </b-button>
+    </div>
+    <div v-else class="align-center p-3">
+      <img
+        class="ticket-size mt-5 mb-3"
+        src="@/assets/img/illustrate/no-access.png"
+        width="100%"
+      >
+      <div class="font-size-32 font-color-blue-primary">
+        Oops!
+      </div>
+      <div class="mt-1">
+        This is not your ticket.. Try scan another promotion QR code.
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { setAlert } from '../../../utils/tool';
+import { isPassed } from '../../../utils/filter';
+import api from '../../../api/api';
 import CardScanResult from '../../../components/Merchant/Card/CardScanResult.vue';
 
 export default {
@@ -22,10 +45,63 @@ export default {
     CardScanResult,
   },
   computed: {
-    ...mapGetters(['ticketData']),
+    ...mapGetters([
+      'ticketData',
+      'userSku',
+      'orderDataBySku',
+    ]),
+    isMerchant() {
+      return this.orderDataBySku.merchantSku === this.userSku;
+    },
+    canUse() {
+      return this.orderDataBySku.redeem && !isPassed(new Date(this.orderDataBySku.expiredDate));
+    },
+  },
+  created() {
+    this.getOrderDataBySku(this.ticketData.sku);
   },
   methods: {
-    ...mapActions([]),
+    ...mapActions([
+      'getJourneyDataBySku',
+      'getRestaurantDataByMerchantSku',
+      'setTicketBySku',
+      'getOrderDataBySku',
+      'setOrderDataBySku',
+    ]),
+    async useTicket() {
+      const data = { ...this.orderDataBySku };
+      data.redeem = false;
+
+      try {
+        const res = await api.RedeemOrder(this.orderDataBySku.sku);
+        if (!res.error) {
+          this.setOrderDataBySku(data);
+          setAlert('used ticket', true);
+          return;
+        }
+        console.log(res, data);
+        setAlert('use ticket. Please try again later', false);
+      } catch (err) {
+        setAlert('use ticket. Please try again later', false);
+      }
+    },
+  },
+  watch: {
+    orderDataBySku() {
+      if (this.orderDataBySku && this.orderDataBySku.wisataSku) {
+        this.getJourneyDataBySku(this.orderDataBySku.wisataSku);
+      } else if (this.orderDataBySku) {
+        this.getRestaurantDataByMerchantSku(this.orderDataBySku.merchantSku);
+      }
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@media screen and (min-width: 500px) {
+  .ticket-size {
+    width: 75%;
+  }
+}
+</style>

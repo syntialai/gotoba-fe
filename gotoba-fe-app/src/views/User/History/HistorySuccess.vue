@@ -1,6 +1,9 @@
 <template>
   <div class="history-success">
-    <card-history-group :histories="acceptedPaymentData" />
+    <card-history-group
+      v-if="acceptedPaymentData"
+      :histories="acceptedPaymentData"
+    />
   </div>
 </template>
 
@@ -14,10 +17,10 @@ export default {
     CardHistoryGroup,
   },
   computed: {
-    ...mapGetters(['acceptedPaymentData', 'userData']),
+    ...mapGetters(['acceptedPaymentData', 'userSku']),
   },
   created() {
-    this.getAcceptedPayment(this.userData.sku);
+    this.getAcceptedPayment(this.userSku);
   },
   methods: {
     ...mapActions(['getAcceptedPayment']),

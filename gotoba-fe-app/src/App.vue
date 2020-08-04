@@ -44,5 +44,7 @@ export default {
 
 #app {
   background-color: $bg-color;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 </style>

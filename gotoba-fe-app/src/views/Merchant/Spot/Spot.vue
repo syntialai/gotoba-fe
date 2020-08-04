@@ -35,13 +35,17 @@ export default {
     SpotCardGroup,
   },
   computed: {
-    ...mapGetters(['journeyDataByMerchantSku', 'userSku']),
+    ...mapGetters([
+      'journeyDataByMerchantSku',
+      'merchantOrderCount',
+      'userSku',
+    ]),
     cardInfo() {
       return {
-        value1: this.itineraries.length || 0,
+        value1: this.itineraries.length,
         info1: 'Spots Active',
-        value2: 5,
-        info2: 'Recent Reviews',
+        value2: this.merchantOrderCount.itinerary,
+        info2: 'Recent Orders',
       };
     },
     itineraries() {
@@ -50,9 +54,13 @@ export default {
   },
   created() {
     this.getJourneyDataByMerchantSku(this.userSku);
+    this.getMerchantOrderCount();
   },
   methods: {
-    ...mapActions(['getJourneyDataByMerchantSku']),
+    ...mapActions([
+      'getJourneyDataByMerchantSku',
+      'getMerchantOrderCount',
+    ]),
   },
 };
 </script>

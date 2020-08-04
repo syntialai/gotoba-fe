@@ -1,12 +1,11 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
+import BootstrapVue from 'bootstrap-vue';
 import Vuex from 'vuex';
 import Bistro from '@/views/Merchant/Bistro/Bistro.vue';
 
 const localVue = createLocalVue();
+localVue.use(BootstrapVue);
 localVue.use(Vuex);
-
-const $route = '/merchant/bistro/edit';
-const $router = { push: jest.fn() };
 
 describe('Bistro.vue', () => {
   let wrapper;
@@ -42,10 +41,6 @@ describe('Bistro.vue', () => {
     });
 
     wrapper = shallowMount(Bistro, {
-      mocks: {
-        $route,
-        $router,
-      },
       store,
       localVue,
     });
@@ -63,12 +58,5 @@ describe('Bistro.vue', () => {
 
     expect(actions.getRestaurantDataByMerchantSku.mock.calls[0][1]).toEqual('HEND_0001');
     expect(actions.getRestaurantMenu.mock.calls[0][1]).toEqual('HEND_0001');
-  });
-
-  it('Check toEditBistro method navigate to Edit Bistro when called', () => {
-    wrapper.vm.toEditBistro();
-
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith($route);
   });
 });

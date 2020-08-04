@@ -4,20 +4,19 @@
       <div class="title w-100 border-bottom-gray-young">
         <h5>Order Item(s)</h5>
       </div>
-      <div class="order-items-group">
+      <div class="order-items-group" v-if="orderData && orderData.length > 0">
         <div class="order-item-detail"
-          v-for="item in items"
-          :key="item.name"
+          v-for="item in orderData"
+          :key="item.title"
         >
-          <div class="order-item-info">
-            <order-items
-              :name="item.name"
-              :image="item.image"
-              :price="item.price"
-              :discountPrice="item.discountPrice"
-            />
+          <order-items
+            :name="item.title"
+            :image="item.image"
+            :price="item.price"
+            :discountPrice="item.discount"
+            :quantity="item.quantity"
+          />
           </div>
-        </div>
       </div>
     </div>
 
@@ -25,29 +24,30 @@
       <div class="title w-100 border-bottom-gray-young">
         <h5>Payment Details</h5>
       </div>
-      <payment-detail :price="orderTotal.price" :discount="orderTotal.discount" />
-    </div>
-
-    <div class="payment-method mt-3 p-3 bg-white">
-      <div class="title w-100 border-bottom-gray-young">
-        <h5>Payment Method</h5>
-      </div>
-      <payment-method />
+      <payment-detail
+        :price="orderTotal.price"
+        :discount="orderTotal.discount"
+        :total="total"
+      />
     </div>
 
     <bottom-nav-payment
       :totalItem="orderTotal.item"
-      :totalPrice="orderTotal.price - orderTotal.discount"
+      :totalPrice="total"
       innerButton="BUY NOW"
+      :buttonFunc="pay"
+      :loading="loading"
+      class="fixed-bottom"
     />
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
+import api from '../../../api/api';
+import { toast } from '../../../utils/tool';
 import OrderItems from '../../../components/User/OrderItems.vue';
 import PaymentDetail from '../../../components/User/Payment/PaymentDetail.vue';
-import PaymentMethod from '../../../components/User/Payment/PaymentMethod.vue';
 import BottomNavPayment from '../../../components/User/Payment/BottomNavPayment.vue';
 
 export default {
@@ -55,19 +55,51 @@ export default {
   components: {
     OrderItems,
     PaymentDetail,
-    PaymentMethod,
     BottomNavPayment,
   },
   computed: {
-    ...mapGetters(['orderData', 'orderTotal']),
+    ...mapGetters(['orderData', 'orderTotal', 'userSku']),
+    total() {
+      return this.orderTotal.price - this.orderTotal.discount;
+    },
   },
   data() {
     return {
-      items: {},
+      loading: false,
     };
   },
   methods: {
-    ...mapActions(['setOrderData']),
+    async pay() {
+      const data = {
+        total: this.total,
+        status: 'WAITING',
+        merchantSku: this.orderData.map((item) => item.merchantSku).toString(),
+        orderSku: this.orderData.map((item) => item.sku).toString(),
+      };
+
+      this.loading = true;
+
+      try {
+        const paymentRes = await api.PostPayment(this.userSku, data);
+        this.orderData.forEach(async (order) => {
+          await api.CheckoutOrder(order.sku);
+        });
+
+        if (!paymentRes.error) {
+          api.GetPaymentByOrder(data.orderSku)
+            .then((res) => {
+              this.loading = false;
+              this.goToThanksPage(res.data.sku);
+            });
+        }
+      } catch (err) {
+        this.loading = false;
+        toast('Error while checkout item!');
+      }
+    },
+    goToThanksPage(sku) {
+      this.$router.push(`/order/thankyou/${sku}`);
+    },
   },
 };
 </script>

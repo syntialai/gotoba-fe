@@ -204,7 +204,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import getValidationState from '../../../utils/validation';
 import previewImage from '../../../utils/fileHelper';
 import api from '../../../api/api';
@@ -213,6 +213,13 @@ export default {
   name: 'PromotionModal',
   computed: {
     ...mapGetters(['ticketData']),
+  },
+  created() {
+    if (this.title === 'Edit') {
+      this.getTicketBySku(this.$route.params.sku);
+    } else {
+      this.setTicketBySku({});
+    }
   },
   data() {
     return {
@@ -234,6 +241,8 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setTicketBySku', 'getTicketBySku']),
+
     getValidationState,
 
     submitPromotion() {

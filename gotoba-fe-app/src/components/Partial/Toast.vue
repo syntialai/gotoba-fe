@@ -1,9 +1,10 @@
 <template>
   <div class="toast">
     <b-toast
-      v-model="showToast"
+      v-model="show"
       variant="dark"
       no-close-button
+      auto-hide-delay="3000"
     >
       <div class="message">
         {{ toastMessage }}
@@ -13,12 +14,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Toast',
   computed: {
-    ...mapGetters(['showToast', 'toastMessage']),
+    ...mapGetters(['toastMessage', 'showToast']),
+    show: {
+      get() {
+        return this.showToast;
+      },
+      set(value) {
+        this.setShowToast(value);
+      },
+    },
+  },
+  methods: {
+    ...mapActions(['setShowToast']),
   },
 };
 </script>

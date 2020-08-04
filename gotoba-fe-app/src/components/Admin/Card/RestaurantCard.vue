@@ -1,6 +1,8 @@
 <template>
   <div class="restaurant-card">
-    <data-card :data="restaurantData" otherIcon="hamburger" />
+    <router-link :to="goToRestaurantDetail">
+      <data-card :data="restaurantData" otherIcon="hamburger" />
+    </router-link>
   </div>
 </template>
 
@@ -19,10 +21,14 @@ export default {
     restaurantData() {
       return {
         image: this.restaurant.image,
-        location: this.restaurant.location,
+        location: this.restaurant.address,
         other: this.restaurant.bistroType,
         rating: this.restaurant.rating || null,
+        name: this.restaurant.name,
       };
+    },
+    goToRestaurantDetail() {
+      return `/admin/restaurant/${this.restaurant.sku}`;
     },
   },
 };

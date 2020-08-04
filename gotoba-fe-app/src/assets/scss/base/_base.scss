@@ -5,14 +5,14 @@ body {
   color: $black-60!important;
 }
 
-.container {
-  margin: 0 auto;
-}
-
 a {
   color: $blue-primary;
 }
 
 li {
   list-style-type: none;
+}
+
+.margin-80 {
+  margin-bottom: 80px;
 }

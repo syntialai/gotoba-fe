@@ -7,7 +7,7 @@
     <div class="logo my-4 position-relative">
       <b-img
         center
-        src="@/assets/img/logo/gotoba-logo-full.png"
+        src="@/assets/img/logo/gotoba-logo-full-transparent.png"
         alt="gotoba"
         width="250"
       ></b-img>

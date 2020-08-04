@@ -1,6 +1,6 @@
 <template>
   <div class="select-destination-autocomplete w-100 bg-white"
-    v-if="locationData && open && locationKeyword.length >= 3"
+    v-if="locationOpen && locationKeyword.length >= 3"
   >
     <ul id="location-list" class="p-2">
       <li>
@@ -41,13 +41,8 @@ export default {
   components: {
     CardLocation,
   },
-  data() {
-    return {
-      open: true,
-    };
-  },
   computed: {
-    ...mapGetters(['locationKeyword', 'locationData']),
+    ...mapGetters(['locationKeyword', 'locationData', 'locationOpen']),
     matches() {
       return this.locationData.filter(
         (item) => item.name.substr(
@@ -64,13 +59,13 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setLocationKeyword']),
+    ...mapActions(['setLocationKeyword', 'setLocationOpen']),
     showOnMap() {
       this.$router.replace('/itinerary/add/show-on-map');
     },
     select(name) {
       this.setLocationKeyword(name);
-      this.open = false;
+      this.setLocationOpen(false);
     },
   },
 };

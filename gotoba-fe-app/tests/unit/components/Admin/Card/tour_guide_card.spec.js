@@ -5,14 +5,16 @@ describe('TourGuideCard.vue', () => {
   const expectedData = {
     image: '/tour-guide/img.png',
     location: 'Parapat',
-    other: 'Female',
+    other: 25,
     rating: 5.0,
+    name: 'Tour Guide',
   };
   const tourGuide = {
     image: '/tour-guide/img.png',
     location: 'Parapat',
-    gender: 'Female',
+    age: 25,
     rating: 5.0,
+    name: 'Tour Guide',
   };
 
   let wrapper;
@@ -22,7 +24,7 @@ describe('TourGuideCard.vue', () => {
       propsData: {
         tourGuide,
       },
-      stubs: ['data-card'],
+      stubs: ['data-card', 'router-link'],
     });
   });
 
@@ -33,5 +35,5 @@ describe('TourGuideCard.vue', () => {
 
   it('Check tourGuideData computed return true object', () => {
     expect(wrapper.vm.tourGuideData).toStrictEqual(expectedData);
-  })
+  });
 });

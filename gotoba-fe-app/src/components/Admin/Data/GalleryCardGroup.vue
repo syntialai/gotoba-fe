@@ -1,19 +1,21 @@
 <template>
   <div class="gallery-data">
-    <b-card-group column>
-      <gallery-card
+    <b-card-group class="d-flex flex-wrap">
+      <div class="responsive-card-admin"
         v-for="photo of photos"
         :key="photo.title"
-        :image="getImage(photo.image)"
-        :info="photo.title"
-        :sku="photo.sku"
-      />
+      >
+        <gallery-card
+          :image="photo.image"
+          :info="photo.title"
+          :sku="photo.sku"
+        />
+      </div>
     </b-card-group>
   </div>
 </template>
 
 <script>
-import api from '../../../api/api';
 import GalleryCard from '../Card/GalleryCard.vue';
 
 export default {
@@ -29,12 +31,6 @@ export default {
   computed: {
     galleryRange() {
       return this.photos.slice(this.start - 1, this.end);
-    },
-  },
-  methods: {
-    async getImage(url) {
-      const res = await api.GetImage(url);
-      return res.data;
     },
   },
 };

@@ -2,17 +2,16 @@
   <div class="qr-code-info bg-white box-shadow border-square-30 m-4 p-4">
     <div class="d-block align-center">
       <div class="qr-code-title font-color-blue-primary bold">
-        {{ title }}
+        {{ ticket.title }}
       </div>
       <div class="qr-code-valid-date font-color-black-60">
-        {{ formatDate(date) }}
+        {{ validDate }}
       </div>
     </div>
 
-    <q-r-code
-      :qrCodeValue="qrCodeValue"
-      class="d-flex justify-content-center m-4"
-    />
+    <div class="d-flex justify-content-center m-4">
+      <vue-qrcode :value="qrCodeValue" :width="200" />
+    </div>
 
     <div class="info align-center">
       Please show this QR Code to Staff to make payment
@@ -21,21 +20,24 @@
 </template>
 
 <script>
-import QRCode from './QRCode.vue';
+import VueQrcode from 'vue-qrcode';
 import { formatDate } from '../../../utils/filter';
 
 export default {
   name: 'QRCodeInfo',
   components: {
-    QRCode,
+    VueQrcode,
   },
   props: {
-    title: String,
-    date: Date,
-    qrCodeValue: String,
+    ticket: Object,
   },
-  methods: {
-    formatDate,
+  computed: {
+    validDate() {
+      return formatDate(new Date(this.ticket.expiredDate));
+    },
+    qrCodeValue() {
+      return this.ticket.sku;
+    },
   },
 };
 </script>

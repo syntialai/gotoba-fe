@@ -1,6 +1,8 @@
 <template>
   <div class="tour-guide-card">
-    <data-card :data="tourGuide" :otherIcon="tourGuide.gender" />
+    <router-link :to="goToTourGuideDetail">
+      <data-card :data="tourGuideData" :otherIcon="tourGuide.gender" />
+    </router-link>
   </div>
 </template>
 
@@ -18,11 +20,15 @@ export default {
   computed: {
     tourGuideData() {
       return {
+        name: this.tourGuide.name,
         image: this.tourGuide.image,
         location: this.tourGuide.location,
-        other: this.tourGuide.age.toString(),
+        other: this.tourGuide.age,
         rating: this.tourGuide.rating,
       };
+    },
+    goToTourGuideDetail() {
+      return `/admin/tour-guide/${this.tourGuide.sku}`;
     },
   },
 };

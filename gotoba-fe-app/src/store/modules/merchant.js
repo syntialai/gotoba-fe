@@ -25,8 +25,7 @@ const actions = {
 
     api.GetMerchantBySku(merchantSku)
       .then((res) => {
-        commit(Types.SET_MERCHANT_DATA_BY_SKU, res);
-        console.log(res);
+        commit(Types.SET_MERCHANT_DATA_BY_SKU, res.data);
       })
       .catch((err) => {
         console.log(err);

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:8800/';
 axios.defaults.timeout = 10000;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 axios.interceptors.request.use(
   (config) => config,
@@ -75,18 +75,21 @@ export default {
   Signup(params) {
     return fetchPost('/auth/signup', params);
   },
+  CheckToken() {
+    return fetchGet('/auth/validate');
+  },
   Logout() {
     return fetchPost('/auth/logout');
   },
-  GetImage(imageUrl) {
-    return fetchGet(`/image${imageUrl}`);
+  imageUrl(url) {
+    return `${axios.defaults.baseURL}image${url}`;
   },
 
   /**
    * User
    */
   GetUsers() {
-    return fetchGet('/user/');
+    return fetchGet('/user/customer/');
   },
   GetActiveUsers() {
     return fetchGet('/user/active');
@@ -99,6 +102,12 @@ export default {
   },
   GetUserByUsername(username) {
     return fetchGet(`/user/username/${username}`);
+  },
+  ActivateUser(sku) {
+    return fetchPut(`/user/activate/${sku}`);
+  },
+  BlockUser(sku) {
+    return fetchPut(`/user/block/${sku}`);
   },
   EditUser(sku, params) {
     return fetchPut(`/user/edit/${sku}`, params);
@@ -225,41 +234,22 @@ export default {
   },
 
   /**
-   * Review
-   */
-  GetReviewBySku(sku) {
-    return fetchGet(`/review/${sku}`);
-  },
-  GetReviewBySkuAndRating(sku, rate) {
-    return fetchGet(`/review/${sku}/${rate}`);
-  },
-  GetReviewBySkuAndId(sku, id) {
-    return fetchGet(`/review/${sku}/id/${id}`);
-  },
-  PostItineraryReview(sku, userSku, params) {
-    return fetchPost(`/review/${sku}/user/${userSku}/add/wisata`, params);
-  },
-  PostRestaurantReview(sku, userSku, params) {
-    return fetchPost(`/review/${sku}/user/${userSku}/add/restaurant`, params);
-  },
-
-  /**
    * Travelling Schedule
    */
   GetTravellingSchedule(userSku) {
     return fetchGet(`/schedule/${userSku}`);
   },
-  GetTravellingScheduleById(id) {
-    return fetchGet(`/schedule/detail/${id}`);
+  GetTravellingScheduleBySku(sku) {
+    return fetchGet(`/schedule/detail/${sku}`);
   },
   PostTravellingSchedule(userSku, params) {
     return fetchPost(`/schedule/${userSku}/add/`, params);
   },
-  EditTravellingSchedule(id, params) {
-    return fetchPut(`/schedule/edit/${id}`, params);
+  EditTravellingSchedule(sku, params) {
+    return fetchPut(`/schedule/edit/${sku}`, params);
   },
-  RemoveTravellingSchedule(id) {
-    return fetchPut(`/schedule/delete/${id}`);
+  RemoveTravellingSchedule(sku) {
+    return fetchDelete(`/schedule/delete/${sku}`);
   },
 
   /**
@@ -284,6 +274,9 @@ export default {
   /**
    * Ticket
    */
+  GetTickets() {
+    return fetchGet('/ticket/');
+  },
   GetTicketByMerchant(merchantSku) {
     return fetchGet(`/ticket/merchant/${merchantSku}`);
   },
@@ -318,8 +311,26 @@ export default {
   GetOrderDetailByMerchant(merchantSku) {
     return fetchGet(`/order/merchant/${merchantSku}`);
   },
-  GetOrderDetailByUser(userSku) {
-    return fetchGet(`/order/user/${userSku}`);
+  GetOrderDetailByUser(userSku, status) {
+    return fetchGet(`/order/user/${userSku}/status/${status}`);
+  },
+  GetOrderDetailByNotCart(userSku) {
+    return fetchGet(`/order/notCart/userSku/${userSku}`);
+  },
+  CheckoutOrder(sku) {
+    return fetchPut(`/order/checkout/${sku}`);
+  },
+  ApproveOrder(sku) {
+    return fetchPut(`/order/approve/${sku}`);
+  },
+  RejectOrder(sku) {
+    return fetchPut(`/order/reject/${sku}`);
+  },
+  CancelOrder(sku) {
+    return fetchPut(`/order/cancel/${sku}`);
+  },
+  RedeemOrder(sku) {
+    return fetchPut(`/order/redeem/${sku}`);
   },
   PostOrderDetail(userSku, params) {
     return fetchPost(`/order/user/${userSku}/add`, params);
@@ -327,12 +338,18 @@ export default {
   EditOrderDetail(sku, params) {
     return fetchPut(`/order/edit/${sku}`, params);
   },
+  RemoveOrder(sku) {
+    return fetchDelete(`/order/delete/${sku}`);
+  },
 
   /**
    * Payment
    */
   GetPayment(sku) {
-    return fetchGet(`/pay/${sku}`);
+    return fetchGet(`/pay/sku/${sku}`);
+  },
+  GetPaymentByOrder(orderSku) {
+    return fetchGet(`/pay/orderSku/${orderSku}`);
   },
   GetPaymentByMerchant(merchantSku) {
     return fetchGet(`/pay/merchant/${merchantSku}`);
@@ -342,9 +359,6 @@ export default {
   },
   GetJourneyPaymentByMerchant(merchantSku) {
     return fetchGet(`/pay/merchant/${merchantSku}/category/journey`);
-  },
-  GetHotelPaymentByMerchant(merchantSku) {
-    return fetchGet(`/pay/merchant/${merchantSku}/category/hotel`);
   },
   GetAcceptedPaymentByUser(userSku) {
     return fetchGet(`/pay/user/${userSku}/status/ACCEPTED`);

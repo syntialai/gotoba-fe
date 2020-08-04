@@ -1,16 +1,16 @@
 <template>
-  <div class="rating">
+  <div class="rating d-flex align-items-center">
     <full-star
-      v-for="i in rate"
-        :key="i"
-        color="yellow"
-        :fontSize="fontSize"
+      v-for="i in rating"
+      :key="i"
+      color="yellow"
+      :fontSize="fontSize"
     ></full-star>
-    <half-star v-if="rate - parseInt(rate) > 0"></half-star>
+    <half-star v-if="rate - parseInt(rate, 10) > 0"></half-star>
     <full-star
-      v-for="i in (5 - rate)"
-        :key="i"
-        color="gray-young"
+      v-for="i in (5 - ceilRating)"
+      :key="i"
+      color="gray-young"
     ></full-star>
   </div>
 </template>
@@ -28,13 +28,21 @@ export default {
   components: {
     'half-star': {
       name: 'halfStar',
+      props: {
+        fontSize: {
+          type: Number,
+          default: 16,
+        },
+      },
       template: `
-        <font-awesome-layers :class="['fa-4x font-size-' + fontSize]">
-          <font-awesome-icon icon="star" class="icon-gray" />
+        <font-awesome-layers
+          :class="['fa-stack p-0 font-size-' + fontSize]"
+        >
+          <font-awesome-icon icon="star" class="icon-gray fa-stack-1x m-0" />
           <font-awesome-icon 
             icon="star-half"
-            class="fa-inverse icon-yellow"
-            transform="shrink-6" />
+            class="fa-inverse icon-yellow fa-stack-1x m-0"
+            transform="shrink-2" />
         </font-awesome-layers>
       `,
     },
@@ -55,9 +63,22 @@ export default {
       `,
     },
   },
+  computed: {
+    rating() {
+      return parseInt(this.rate, 10);
+    },
+    ceilRating() {
+      return Math.ceil(this.rate);
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 @import '@/assets/scss/index';
+
+.fa-stack {
+  width: 1em;
+  height: 1em;
+}
 </style>

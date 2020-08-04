@@ -5,7 +5,6 @@ import api from '../../api/api';
 const state = {
   searchKeywords: '',
   searchSuggestions: [],
-  searchSuggestionShow: false,
   searchWisataResults: [],
   searchRestaurantResults: [],
 };
@@ -17,10 +16,6 @@ const actions = {
 
   setSearchSuggestions({ commit }, value) {
     commit(Types.SET_SEARCH_SUGGESTIONS_VALUE, value);
-  },
-
-  setSearchShowStatus({ commit }, value) {
-    commit(Types.SET_SEARCH_SUGGESTIONS_SHOW_STATUS, value);
   },
 
   async getSearchWisataResults({ commit }) {
@@ -45,7 +40,6 @@ const actions = {
 const getters = {
   searchKeywords: (state) => state.searchKeywords,
   searchSuggestions: (state) => state.searchSuggestions,
-  searchSuggestionShow: (state) => state.searchSuggestionShow,
   searchWisataResults: (state) => state.searchWisataResults,
   searchRestaurantResults: (state) => state.searchRestaurantResults,
 };
@@ -58,10 +52,6 @@ const mutations = {
 
   [Types.SET_SEARCH_SUGGESTIONS_VALUE](state, value) {
     state.searchSuggestions = value;
-  },
-
-  [Types.SET_SEARCH_SUGGESTIONS_SHOW_STATUS](state, value) {
-    state.searchSuggestionShow = value;
   },
 
   [Types.SET_SEARCH_WISATA_RESULTS](state, res) {

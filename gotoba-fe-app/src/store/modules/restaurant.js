@@ -7,7 +7,6 @@ const state = {
   restaurantDatas: [],
   restaurantMenu: {},
   restaurantMenus: [],
-  restaurantReview: [],
   bistroType: [],
 };
 
@@ -17,10 +16,7 @@ const actions = {
 
     api.GetBistroType()
       .then((res) => {
-        if (!res.error) {
-          commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data);
-        }
-        console.log(res);
+        commit(Types.SET_RESTAURANT_BISTRO_TYPE, res.data.map((item) => item.name));
       })
       .catch((err) => {
         console.log(err);
@@ -48,7 +44,7 @@ const actions = {
     api.GetRestaurantBySku(sku)
       .then((res) => {
         if (!res.error) {
-          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res.data);
         }
       })
       .catch((err) => {
@@ -62,7 +58,7 @@ const actions = {
     api.GetRestaurantByMerchantSku(merchantSku)
       .then((res) => {
         if (!res.error) {
-          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res);
+          commit(Types.SET_RESTAURANT_DATA_BY_SKU, res.data);
         }
       })
       .catch((err) => {
@@ -76,7 +72,7 @@ const actions = {
     api.GetRestaurantMenus(sku)
       .then((res) => {
         if (!res.error) {
-          commit(Types.SET_RESTAURANT_MENU, res);
+          commit(Types.SET_RESTAURANT_MENU, res.data);
         }
       })
       .catch((err) => {
@@ -87,10 +83,10 @@ const actions = {
   getRestaurantMenuById({ commit }, id) {
     commit(Types.SET_RESTAURANT_MENU_BY_ID);
 
-    api.GetRestaurantMenus(id)
+    api.GetRestaurantMenuById(id)
       .then((res) => {
         if (!res.error) {
-          commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
+          commit(Types.SET_RESTAURANT_MENU_BY_ID, res.data);
         }
         console.log(res);
       })
@@ -99,32 +95,8 @@ const actions = {
       });
   },
 
-  getRestaurantReview({ commit }, sku) {
-    commit(Types.SET_RESTAURANT_REVIEW);
-
-    api.GetRestaurantMenus(sku)
-      .then((res) => {
-        if (!res.error) {
-          commit(Types.SET_RESTAURANT_REVIEW, res);
-        }
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-
-  removeRestaurantMenu({ commit }, sku, id) {
-    commit(Types.REMOVE_RESTAURANT_MENU);
-
-    api.RemoveRestaurantMenu(sku, id)
-      .then((res) => {
-        commit(Types.REMOVE_RESTAURANT_MENU);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  setRestaurantMenu({ commit }, res) {
+    commit(Types.SET_RESTAURANT_MENU_BY_ID, res);
   },
 };
 
@@ -134,7 +106,6 @@ const getters = {
   restaurantDatas: (state) => state.restaurantDatas,
   restaurantMenu: (state) => state.restaurantMenu,
   restaurantMenus: (state) => state.restaurantMenus,
-  restaurantReview: (state) => state.restaurantReview,
 };
 
 const mutations = {
@@ -153,9 +124,6 @@ const mutations = {
   },
   [Types.SET_RESTAURANT_MENU_BY_ID](state, res) {
     state.restaurantMenu = res;
-  },
-  [Types.SET_RESTAURANT_REVIEW](state, res) {
-    state.restaurantReview = res;
   },
 };
 

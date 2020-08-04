@@ -14,7 +14,7 @@
         <b-form @submit.stop.prevent="validate(submitItinerary)">
           <ValidationProvider
             name="Name"
-            rules="required|alpha_dash"
+            rules="required"
             v-slot="validationContext"
           >
             <b-form-group
@@ -72,7 +72,7 @@
               label="Photo"
               label-for="itinerary-image"
             >
-              <div v-if="itinerary.image === null">
+              <div v-if="!itinerary.image || itinerary.image === ''">
                 <b-form-file
                   id="itinerary-image"
                   v-model="itinerary.image"
@@ -100,7 +100,7 @@
 
           <ValidationProvider
             name="Location"
-            rules="required|alpha_dash"
+            rules="required"
             v-slot="validationContext"
           >
             <b-form-group
@@ -139,7 +139,7 @@
 
           <ValidationProvider
             name="Price"
-            :rules="{ required: true, numeric: true, min_value: 0 }"
+            :rules="{ required: true, numeric: true, min: 0 }"
             v-slot="validationContext"
           >
             <b-form-group
@@ -150,8 +150,7 @@
               <b-form-input
                 id="itinerary-price"
                 v-model="itinerary.price"
-                :formatter="formatPrice"
-                type="text"
+                type="number"
                 class="border-gray"
                 required
                 :state="getValidationState(validationContext)"
@@ -165,7 +164,7 @@
 
           <ValidationProvider
             name="Address"
-            rules="required|alpha_dash"
+            rules="required"
             v-slot="validationContext"
           >
             <b-form-group
@@ -187,6 +186,24 @@
               </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
+
+          <b-form-group
+            id="itinerary-hours-open-group"
+            label="Hours Open"
+            label-for="itinerary-hours-open"
+          >
+            <div class="d-flex justify-content-between">
+              <b-form-timepicker
+                v-model="open"
+                locale="en"
+              ></b-form-timepicker>
+              -
+              <b-form-timepicker
+                v-model="close"
+                locale="en"
+              ></b-form-timepicker>
+            </div>
+          </b-form-group>
 
           <ValidationProvider
             name="Description"
@@ -219,17 +236,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { formatPrice } from '../../../utils/filter';
+import { mapGetters, mapActions } from 'vuex';
 import getValidationState from '../../../utils/validation';
+import { setAlert } from '../../../utils/tool';
 import previewImage from '../../../utils/fileHelper';
-import getLocation from '../../../utils/location';
 import api from '../../../api/api';
 
 export default {
   name: 'ItineraryModal',
   computed: {
-    ...mapGetters(['journeyData', 'userSku']),
+    ...mapGetters(['journeyDataBySku', 'userSku']),
+    imageUrl() {
+      return api.imageUrl(this.journeyDataBySku.image);
+    },
+  },
+  created() {
+    if (this.title !== 'Edit') {
+      this.setJourneyDataBySku({});
+    }
   },
   data() {
     return {
@@ -244,8 +268,18 @@ export default {
         address: '',
         description: '',
         createdBy: '',
-        hoursOpen: [],
+        hoursOpen: {
+          monday: [],
+          tuesday: [],
+          wednesday: [],
+          thursday: [],
+          friday: [],
+          saturday: [],
+          sunday: [],
+        },
       },
+      open: null,
+      close: null,
       locationList: null,
     };
   },
@@ -256,7 +290,12 @@ export default {
     },
   },
   methods: {
-    formatPrice,
+    ...mapActions([
+      'setJourneyDataBySku',
+      'getJourneyDataBySku',
+      'getJourneyData',
+      'getJourneyDataByMerchantSku',
+    ]),
 
     getValidationState,
 
@@ -264,27 +303,49 @@ export default {
       const data = { ...this.itinerary };
       data.createdBy = this.userSku;
 
-      if (data.title === '' || data.image === null || data.description === '') {
+      Object.keys(data.hoursOpen)
+        .forEach((key) => {
+          data.hoursOpen[key] = [
+            this.open,
+            this.close,
+          ];
+        });
+
+      if (data.title === ''
+        || data.image === null
+        || data.description === '') {
         return;
       }
 
       if (this.title === 'Add') {
         api.PostItinerary(data)
           .then((res) => {
-            console.log(res);
+            if (!res.error) {
+              setAlert('added itinerary', true);
+              this.getJourneyData();
+              this.getJourneyDataByMerchantSku(this.userSku);
+              return;
+            }
+            setAlert('add itinerary', false);
           })
           .catch((err) => {
+            setAlert('add itinerary', false);
             console.log(err);
           });
 
         return;
       }
 
-      api.EditItinerary(this.itinerary.sku, data)
+      api.EditItinerary(this.journeyDataBySku.sku, data)
         .then((res) => {
-          console.log(res);
+          if (!res.error) {
+            setAlert('updated itinerary', true);
+            return;
+          }
+          setAlert('update itinerary', false);
         })
         .catch((err) => {
+          setAlert('update itinerary', false);
           console.log(err);
         });
     },
@@ -307,7 +368,7 @@ export default {
     },
 
     locationSuggestions() {
-      if (this.itinerary.location) {
+      if (this.itinerary.location.length >= 3) {
         api.GetSearchLocationResult(this.itinerary.location)
           .then((res) => {
             this.locationList = res.map((item) => item.display_name);
@@ -321,21 +382,19 @@ export default {
     },
   },
   mounted() {
-    getLocation((position) => {
-      this.itinerary.longitude = position.coords.longitude;
-      this.itinerary.latitude = position.coords.latitude;
-
-      api.ReverseGeocoding(this.itinerary.longitude, this.itinerary.latitude)
-        .then((res) => {
-          this.itinerary.address = res.display_name;
-          this.itinerary.location = `${res.address.suburb}, ${res.address.city}`;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, (err) => {
-      console.log(err);
-    });
+    this.itinerary = { ...this.journeyDataBySku };
+    this.itinerary.image = this.imageUrl;
+    this.itinerary.location = this.itinerary.address;
+    this.itinerary.hoursOpen = {
+      monday: [],
+      tuesday: [],
+      wednesday: [],
+      thursday: [],
+      friday: [],
+      saturday: [],
+      sunday: [],
+    };
+    console.log(this.itinerary);
   },
 };
 </script>

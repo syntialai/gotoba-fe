@@ -1,8 +1,8 @@
 <template>
-  <div class="gallery-group m-3">
+  <div class="gallery-group">
     <vue-gallery :images="images" :index="index" @close="index = null" />
 
-    <div class="image-group d-flex justify-content-between flex-wrap">
+    <div class="image-group d-flex flex-wrap">
       <div
         class="responsive-image"
         v-for="(image, imageIndex) in images"
@@ -26,6 +26,7 @@
 
 <script>
 import VueGallery from 'vue-gallery';
+import api from '../../../api/api';
 
 export default {
   name: 'GalleryGroup',
@@ -37,16 +38,16 @@ export default {
       const width = window.innerWidth - 32;
       const margin = 8;
 
-      if (width >= 768 - 32) {
+      if (width >= (768 - 32)) {
         return (width - margin * 4) / 5;
       }
-      if (width >= 425 - 32) {
+      if (width >= (425 - 32)) {
         return (width - margin * 3) / 4;
       }
       return (width - margin * 2) / 3;
     },
     images() {
-      return this.galleryData.map((data) => data.image);
+      return this.galleryData.map((data) => api.imageUrl(data.image));
     },
   },
   data() {
@@ -68,18 +69,18 @@ img {
 
 .responsive-image {
   box-sizing: border-box;
-  width: 33.33333%;
+  width: 50%;
 }
 
 @media screen and (min-width: 425px) {
   .responsive-image {
-    width: 25%;
+    width: 33.33333%;
   }
 }
 
 @media screen and (min-width: 768px) {
   .responsive-image {
-    width: 20%;
+    width: 25%;
   }
 }
 </style>

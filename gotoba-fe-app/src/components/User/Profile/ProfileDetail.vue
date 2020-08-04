@@ -1,8 +1,9 @@
 <template>
-  <div class="profile-detail">
+  <div class="profile-detail" v-if="data">
     <card-profile-detail
       class="mb-2 mt-2"
       v-bind="data"
+      :add="isMerchant"
     />
 
     <about-profile-detail
@@ -10,35 +11,15 @@
       :data="data"
     />
 
-    <div class="rating-and-reviews mb-2 p-3 bg-white">
-      <div
-        class="title d-flex w-100 border-bottom-gray-young justify-content-between"
-      >
-        <h5>Ratings and Reviews</h5>
-        <b-icon
-          icon="arrow-right-short"
-          class="icon-black-60"
-          href=""
-        ></b-icon>
-      </div>
-
-      <rating-profile-detail />
-
-      <!-- <div class="recent-reviews mt-3">
-        <div class="title bold font-color-blue-secondary">Recent reviews</div>
-        <div class="recent-reviews-group mt-3" v-if="recentReviews > 0">
-          <user-review-detail
-            v-for="review in recentReviews"
-            :key="review.userName"
-            v-bind="review"
-          />
-        </div>
-      </div> -->
-    </div>
-
-    <div class="promotion mb-2" v-if="promotions.length > 0">
-      <div class="title border-bottom-gray-young">
+    <div class="promotion mb-2 bg-white p-3" v-if="promotions.length > 0">
+      <div class="title d-flex justify-content-between border-bottom-gray-young mb-3">
         <h5>Promotions</h5>
+        <div class="add" v-if="isMerchant">
+          <b-button
+            variant="link"
+            @click="openModal"
+          >Add</b-button>
+        </div>
       </div>
       <div class="promotion-group">
         <card-promotion
@@ -52,10 +33,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import CardProfileDetail from './CardProfileDetail.vue';
 import AboutProfileDetail from './AboutProfileDetail.vue';
-import RatingProfileDetail from './RatingProfileDetail.vue';
-// import UserReviewDetail from '../Review/UserReviewDetail.vue';
 import CardPromotion from '../CardPromotion.vue';
 
 export default {
@@ -63,39 +43,16 @@ export default {
   components: {
     CardProfileDetail,
     AboutProfileDetail,
-    RatingProfileDetail,
-    // UserReviewDetail,
     CardPromotion,
   },
   props: {
     data: Object,
+    promotions: Array,
   },
   computed: {
-    // recentReviews() {
-    //   const reviews = this.data.reviews.slice(0);
-    //   reviews.sort((a, b) => b.createdAt - a.createdAt);
-    //   return reviews.slice(0, 3);
-    // },
-    promotions() {
-      return [];
-    },
-  },
-  methods: {
-    hoursOpen(hours) {
-      let hoursOpenStr = '';
-
-      Object.entries(hours)
-        .forEach(([key, value]) => {
-          hoursOpenStr += `${key} = ${value[0]} - ${value[1]}\n`;
-        });
-
-      return hoursOpenStr;
-    },
-    aboutData() {
-      const newData = { ...this.data };
-      newData.hoursOpen = this.hoursOpen(newData.hoursOpen);
-
-      return newData;
+    ...mapGetters(['userRole']),
+    isMerchant() {
+      return this.userRole === 'ROLE_MERCHANT';
     },
   },
 };

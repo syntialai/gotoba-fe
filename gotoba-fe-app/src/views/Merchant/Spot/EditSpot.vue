@@ -1,7 +1,7 @@
 <template>
   <div class="edit-spot mt-2 p-3">
-    <ValidationObserver v-slot="validate">
-      <b-form @submit.stop.prevent="validate(updateSpot)">
+    <ValidationObserver>
+      <b-form @submit.stop.prevent="updateSpot">
         <ValidationProvider
           name="Spot Image"
           rules="required"
@@ -10,14 +10,14 @@
           <b-form-group>
             <div class="d-flex justify-content-center">
               <b-avatar
-                :src="image"
+                :src="spot.image"
                 alt="Spot-profile"
                 class="my-3"
                 size="100"
               ></b-avatar>
             </div>
             <b-form-file
-              v-model="image"
+              v-model="spot.image"
               @change="loadImage"
               :state="getValidationState(validationContext)"
               accept="image/jpeg, image/jpg, image/png"
@@ -30,7 +30,7 @@
             </b-form-invalid-feedback>
             <b-button
               block
-              v-if="image !== spot.image && image !== null"
+              v-if="spot.image !== null"
               size="sm"
               class="custom-btn-gray mt-2"
               @click="removePhoto"
@@ -182,27 +182,17 @@
           label="Hours Open"
           label-for="spot-hours-open"
         >
-          <ul class="list-unstyled">
-            <li
-              v-for="(dayOpen, index) of spot.hoursOpen"
-              :key="dayOpen.day"
-            >
-              <div class="d-flex justify-content-between">
-                <div class="day">{{ dayOpen.day }}</div>
-                <div class="time">
-                  <b-form-timepicker
-                    v-model="spot.hoursOpen[index].openTime"
-                    locale="en"
-                  ></b-form-timepicker>
-                  -
-                  <b-form-timepicker
-                    v-model="spot.hoursOpen[index].closeTime"
-                    locale="en"
-                  ></b-form-timepicker>
-                </div>
-              </div>
-            </li>
-          </ul>
+          <div class="d-flex justify-content-between">
+            <b-form-timepicker
+              v-model="open"
+              locale="en"
+            ></b-form-timepicker>
+            -
+            <b-form-timepicker
+              v-model="close"
+              locale="en"
+            ></b-form-timepicker>
+          </div>
         </b-form-group>
 
         <ValidationProvider
@@ -246,13 +236,16 @@ import { mapActions, mapGetters } from 'vuex';
 import previewImage from '../../../utils/fileHelper';
 import getValidationState from '../../../utils/validation';
 import api from '../../../api/api';
-import { alert } from '../../../utils/tool';
+import { setAlert } from '../../../utils/tool';
 import getLocation from '../../../utils/location';
 
 export default {
   name: 'EditSpot',
   computed: {
     ...mapGetters(['journeyDataBySku', 'userSku']),
+    imageUrl() {
+      return api.imageUrl(this.journeyDataBySku.image);
+    },
   },
   created() {
     this.getJourneyDataBySku(this.$route.params.sku);
@@ -270,10 +263,19 @@ export default {
         price: '',
         address: '',
         description: '',
-        hoursOpen: [],
+        hoursOpen: {
+          monday: [],
+          tuesday: [],
+          wednesday: [],
+          thursday: [],
+          friday: [],
+          saturday: [],
+          sunday: [],
+        },
       },
-      image: '',
       locationList: null,
+      open: null,
+      close: null,
     };
   },
   methods: {
@@ -283,30 +285,30 @@ export default {
 
     updateSpot() {
       const data = { ...this.spot };
+
       data.createdBy = this.userSku;
 
-      if (data.sku) {
-        api.EditItinerary(data.sku, data)
-          .then((res) => {
-            alert('updated your spot', true);
-            console.log(res);
-          })
-          .catch((err) => {
-            alert('update your spot', false);
-            console.log(err);
-          });
+      Object.keys(data.hoursOpen)
+        .forEach((key) => {
+          data.hoursOpen[key] = [
+            this.open,
+            this.close,
+          ];
+        });
 
+      if (data.title === ''
+        || data.image === null
+        || data.description === '') {
         return;
       }
 
-      api.PostItinerary(data)
+      api.EditItinerary(data.sku, data)
         .then((res) => {
+          setAlert('updated your spot', true);
           console.log(res);
-          alert('updated your spot', true);
-          this.$route.push('/merchant/spot');
         })
         .catch((err) => {
-          alert('update your spot', false);
+          setAlert('update your spot', false);
           console.log(err);
         });
     },
@@ -317,16 +319,17 @@ export default {
       if (files && files[0]) {
         previewImage(files[0])
           .then((res) => {
-            this.image = res.toString();
+            this.spot.image = res.toString();
           })
           .catch((err) => {
             console.log(err);
+            setAlert('to show photo', false);
           });
       }
     },
 
     removePhoto() {
-      this.image = null;
+      this.spot.image = null;
     },
 
     locationSuggestions() {
@@ -344,10 +347,6 @@ export default {
     },
   },
   mounted() {
-    if (this.journeyDataBySku) {
-      this.spot = { ...this.journeyDataBySku };
-    }
-
     getLocation((position) => {
       this.spot.longitude = position.coords.longitude;
       this.spot.latitude = position.coords.latitude;
@@ -363,6 +362,14 @@ export default {
     }, (err) => {
       console.log(err);
     });
+  },
+  watch: {
+    journeyDataBySku() {
+      this.spot = { ...this.journeyDataBySku };
+      this.spot.image = this.imageUrl;
+      this.spot.location = this.spot.address;
+      [this.open, this.close] = this.spot.hoursOpen.monday;
+    },
   },
 };
 </script>

@@ -1,12 +1,13 @@
 <template>
   <div class="spot-card-group">
     <ul class="list-unstyled">
-      <card-spot
+      <router-link
         v-for="itinerary of itineraries"
         :key="itinerary.sku"
-        :itinerary="itinerary"
-        @click="toSpotDetail(itinerary.sku)"
-      />
+        :to="goToSpotDetail(itinerary.sku)"
+      >
+        <card-spot :itinerary="itinerary" />
+      </router-link>
     </ul>
   </div>
 </template>
@@ -23,8 +24,8 @@ export default {
     itineraries: Array,
   },
   methods: {
-    toSpotDetail(sku) {
-      this.$router.push(`/merchant/spot/${sku}`);
+    goToSpotDetail(sku) {
+      return `/merchant/spot/${sku}`;
     },
   },
 };

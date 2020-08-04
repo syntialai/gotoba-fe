@@ -1,26 +1,29 @@
 <template>
   <div class="restaurant">
-    <div class="restaurant-profiles bg-white p-3">
-      <h6>Nearby Eats</h6>
+    <div class="restaurant-profiles bg-white p-3" v-if="restaurantDatas">
+      <h6 class="mb-3">Nearby Eats</h6>
       <div class="restaurant-group d-flex flex-wrap">
-        <card-home
+        <div class="responsive-card"
           v-for="restaurant in restaurantDatas"
           :key="restaurant.sku"
-          v-bind="restaurant"
-          @click="goToProfile(restaurant.sku)"
-        />
+        >
+          <router-link :to="goToProfile(restaurant.sku)">
+            <card-home v-bind="restaurant" />
+          </router-link>
+        </div>
       </div>
     </div>
 
-    <div class="restaurant-ticket bg-white p-3 my-3">
+    <div class="restaurant-ticket bg-white p-3" v-if="ticketRestaurant">
       <h6>Ticket for Restaurant</h6>
       <div class="ticket-group">
-        <card-home-long
+        <router-link
           v-for="ticket in ticketRestaurant"
           :key="ticket.sku"
-          :data="ticket"
-          @click="goToDetails(ticket.sku)"
-        />
+          :to="goToDetails(ticket.sku)"
+        >
+          <card-home-long :data="ticket" />
+        </router-link>
       </div>
     </div>
   </div>
@@ -47,10 +50,10 @@ export default {
   methods: {
     ...mapActions(['getRestaurantData', 'getTicketRestaurant']),
     goToProfile(restaurantSku) {
-      this.$router.push(`/restaurant/${restaurantSku}`);
+      return `/restaurant/${restaurantSku}`;
     },
     goToDetails(ticketSku) {
-      this.$router.push(`/ticket/${ticketSku}`);
+      return `/ticket/${ticketSku}`;
     },
   },
 };

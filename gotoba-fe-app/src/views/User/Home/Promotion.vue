@@ -1,13 +1,12 @@
 <template>
   <div class="promotion">
-    <div class="promotion-profiles bg-white p-3 my-3">
+    <div class="promotion-profiles bg-white p-3">
       <h6>Recent Promotion</h6>
       <div class="promotion-group">
         <card-home-long
           v-for="ticket in ticketPromotion"
           :key="ticket.sku"
           :data="ticket"
-          @click="goToDetails(ticket.sku)"
         />
       </div>
     </div>
@@ -27,13 +26,11 @@ export default {
     ...mapGetters(['ticketPromotion']),
   },
   created() {
+    this.getTicketData();
     this.getTicketPromotion();
   },
   methods: {
-    ...mapActions(['getTicketPromotion']),
-    goToDetails(ticketSku) {
-      this.$router.push(`/ticket/${ticketSku}`);
-    },
+    ...mapActions(['getTicketPromotion', 'getTicketData']),
   },
 };
 </script>

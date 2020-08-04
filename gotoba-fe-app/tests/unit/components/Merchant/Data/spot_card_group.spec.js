@@ -1,7 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import SpotCardGroup from '@/components/Merchant/Data/SpotCardGroup.vue';
-
-const $router = { push: jest.fn() };
+import flushPromises from 'flush-promises';
 
 describe('SpotCardGroup.vue', () => {
   const expectedData = '/merchant/spot/WIS_0001_0001_0001';
@@ -14,12 +13,10 @@ describe('SpotCardGroup.vue', () => {
 
   beforeEach(() => {
     wrapper = shallowMount(SpotCardGroup, {
-      mocks: {
-        $router,
-      },
       propsData: {
         itineraries: itineraries,
       },
+      stubs: ['router-link'],
     });
   });
 
@@ -28,10 +25,8 @@ describe('SpotCardGroup.vue', () => {
     jest.clearAllMocks();
   });
 
-  it('Check toSpotDetail method navigate to Spot Details when called with param', async () => {
-    wrapper.vm.toSpotDetail(itineraries[0].sku);
-
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith(expectedData);
+  it('Check goToSpotDetail method return link to Spot Details by sku', () => {
+    const goToSpotDetail = wrapper.vm.goToSpotDetail(itineraries[0].sku);
+    expect(goToSpotDetail).toMatch(expectedData);
   });
 });

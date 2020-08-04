@@ -1,17 +1,17 @@
 <template>
   <div class="timeline">
-    <ul class="timeline">
+    <ul class="timeline" v-if="sortedTimeline">
       <li
-        v-for="timeline in getTimeline"
-        :key="timeline.destination"
-        class="active"
+        v-for="(timeline, index) in sortedTimeline"
+        :key="index"
+        :class="{ 'active': index === sortedTimeline.length - 1 }"
       >
         <div class="d-flex justify-content-between w-100">
           <div class="timeline-place font-color-black-87 semibold">
             {{ timeline.destination }}
           </div>
           <div class="timeline-time">
-            {{ timeline.formattedTime }}
+            {{ timeline.time }}
           </div>
         </div>
       </li>
@@ -55,6 +55,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { sortTime } from '../../utils/filter';
 import SelectDestinationAutocomplete from '../User/Itinerary/SelectDestinationAutocomplete.vue';
 
 export default {
@@ -70,7 +71,11 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['locationKeyword', 'newSchedule', 'selectedDate']),
+    ...mapGetters([
+      'locationKeyword',
+      'newSchedule',
+      'selectedDate',
+    ]),
     location: {
       get() {
         return this.locationKeyword;
@@ -79,42 +84,70 @@ export default {
         this.setLocationKeyword(value);
       },
     },
+    date() {
+      return new Date(
+        this.selectedDate.year,
+        this.selectedDate.month,
+        this.selectedDate.date,
+      ).toString();
+    },
+    getSavedTimeline() {
+      const timeline = this.timelines.find((item) => item.date === this.date);
+
+      if (timeline) {
+        return timeline.schedule;
+      }
+      return [];
+    },
     getTimeline() {
-      return [...this.timelines, ...this.newSchedule].sort((a, b) => b.time < a.time);
+      const selected = this.newSchedule.find((item) => item.date === this.date);
+
+      if (selected) {
+        return [
+          ...this.getSavedTimeline,
+          ...selected.schedule,
+        ];
+      }
+
+      return this.getSavedTimeline;
+    },
+    sortedTimeline() {
+      return sortTime(this.getTimeline);
     },
   },
   data() {
     return {
       time: null,
-      schedules: [],
       context: null,
     };
   },
   methods: {
-    ...mapActions(['setLocationKeyword', 'addNewSchedule']),
+    ...mapActions([
+      'setLocationKeyword',
+      'addNewSchedule',
+      'setLocationOpen',
+    ]),
     addSchedule() {
       const data = {
-        destination: this.locationKeyword,
-        time: new Date(
-          this.selectedDate.date,
-          this.selectedDate.month,
-          this.selectedDate.year,
-          this.context.hours,
-          this.context.minutes,
-          this.context.seconds,
-          0,
-        ),
-        formattedTime: this.context.formatted,
+        date: this.date,
+        schedule: [
+          {
+            destination: this.locationKeyword,
+            time: this.context.formatted,
+          },
+        ],
       };
 
-      if (data.destination === null || data.time === null) {
+      if (this.locationKeyword === null || this.context.formatted === null) {
         return;
       }
 
       this.addNewSchedule(data);
+
       this.time = null;
       this.context = null;
       this.setLocationKeyword('');
+      this.setLocationOpen(true);
     },
     onContext(context) {
       this.context = context;

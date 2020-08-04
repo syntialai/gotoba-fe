@@ -10,10 +10,10 @@ const state = {
 };
 
 const actions = {
-  showAlert({ commit }, status) {
+  setShowAlert({ commit }, status) {
     commit(Types.SHOW_ALERT, status);
   },
-  showToast({ commit }, status) {
+  setShowToast({ commit }, status) {
     commit(Types.SHOW_TOAST, status);
   },
   setAlertMessage({ commit }, message) {
